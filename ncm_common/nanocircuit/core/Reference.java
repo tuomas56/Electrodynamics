@@ -11,6 +11,8 @@ public class Reference
 	public static final int BLOCK_MAGNETITE_META = 0;
 	public static final int BLOCK_NICKEL_META = 1;
 	
+	public static final int BLOCK_STORAGE_LODESTONE_META = 0;
+	
 	public static final int ITEM_MAGNETITE_CHUNK_META = 0;
 	public static final int ITEM_MAGNETITE_DUST_META = 1;
 	public static final int ITEM_LODESTONE_DUST_META = 2;
@@ -18,4 +20,8 @@ public class Reference
 	public static final int ITEM_IRON_ROD_META = 4;
 	public static final int ITEM_IRON_FANBLADE_META = 5;
 	public static final int ITEM_FERRITE_MAGNET_META = 6;
+	
+	public static final int ITEM_BASIC_PCB_META = 0;
+	
+	public static final int GUI_CONVECTION_OVEN_ID = 0;
 }

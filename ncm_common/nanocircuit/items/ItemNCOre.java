@@ -1,7 +1,7 @@
 package nanocircuit.items;
 
-import net.minecraft.src.ItemBlock;
-import net.minecraft.src.ItemStack;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import nanocircuit.core.Reference;
 
 public class ItemNCOre extends ItemBlock

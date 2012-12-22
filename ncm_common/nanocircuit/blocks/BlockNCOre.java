@@ -3,10 +3,13 @@ package nanocircuit.blocks;
 import java.util.List;
 import java.util.Random;
 
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-import net.minecraft.src.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
+import net.minecraft.creativetab.CreativeTabs;
 
 import nanocircuit.core.Reference;
 import nanocircuit.NanoCircuitMod;
@@ -20,7 +23,7 @@ public class BlockNCOre extends Block
         super(i, Material.rock);
         setHardness(3F);
         setResistance(5F);
-        setCreativeTab(net.minecraft.src.CreativeTabs.tabBlock);
+        setCreativeTab(NanoCircuitMod.tabsNCM);
     }
     
 	@Override
@@ -49,11 +52,11 @@ public class BlockNCOre extends Block
         {
         	if(NanoCircuitMod.instance.isIC2Installed)
         	{
-        		//Drop 1-2 (+fortune) chunks
-        		return 1 + random.nextInt(2) + random.nextInt(fortune);
+        		//Drop 1-2 (add fortune-1) chunks
+        		return 1 + random.nextInt(2) + random.nextInt(fortune+1);
         	}
-        	//Drop 4-5 (+fortune+1) dusts
-            return 4 + random.nextInt(2) + random.nextInt(fortune + 1);
+        	//Drop 4-5 (add fortune-1) dusts
+            return 4 + random.nextInt(2) + random.nextInt(fortune+1);
         }
         else
         {
@@ -79,14 +82,16 @@ public class BlockNCOre extends Block
     }
 	
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int unknown, CreativeTabs tab, List subItems) {
-		for (int ix = 0; ix < 2; ix++) {
+	public void getSubBlocks(int unknown, CreativeTabs tab, List subItems) 
+	{
+		for (int ix = 0; ix < 2; ix++) 
+		{
 			subItems.add(new ItemStack(this, 1, ix));
 		}
 	}
 	
 	@Override
-	public String getTextureFile () 
+	public String getTextureFile() 
 	{
 		return Reference.BLOCK_TEXTURE;
 	}

@@ -2,11 +2,14 @@ package nanocircuit.items;
 
 import java.util.List;
 
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-import net.minecraft.src.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.creativetab.CreativeTabs;
 
+import nanocircuit.NanoCircuitMod;
 import nanocircuit.core.Reference;
 
 public class ItemComponent extends Item
@@ -16,7 +19,7 @@ public class ItemComponent extends Item
 		super(i);
         setMaxDamage(0);
         setHasSubtypes(true);
-        setCreativeTab(CreativeTabs.tabMaterials);
+        setCreativeTab(NanoCircuitMod.tabsNCM);
 	}
 	
 	@Override
