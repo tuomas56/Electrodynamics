@@ -2,7 +2,7 @@
 
 This mod is **in development** and is open source for your enjoyment.
 
-Nano Circuit Mod is copyrighted by [CyanideX](https://github.com/Cyanide89 "CyanideX GitHub profile").
+Nano Circuit Mod is copyrighted by [CyanideX](https://github.com/CyanideX "CyanideX GitHub profile").
 
 This mod is not to be used in any modpacks.
 
