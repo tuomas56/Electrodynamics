@@ -14,11 +14,12 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraft.creativetab.CreativeTabs;
 
 import nanocircuit.core.Config;
-import nanocircuit.creativetab.CreativeTabNanoCircuit;
 import nanocircuit.core.CommonProxy;
 import nanocircuit.core.Reference;
 import nanocircuit.core.Reflect;
@@ -40,7 +41,15 @@ public class NanoCircuitMod
 	
 	public boolean isIC2Installed = false;
 	
-	public static CreativeTabs tabsNCM = new CreativeTabNanoCircuit(CreativeTabs.getNextID(), Reference.MOD_ID);
+	public static CreativeTabs tabsNCM = 
+			new CreativeTabs(CreativeTabs.getNextID(), Reference.MOD_ID)
+			{
+				@SideOnly(Side.CLIENT)
+				public int getTabIconItemIndex() 
+				{
+					return ItemManager.itemPcb.shiftedIndex;
+				}
+			};
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event)
