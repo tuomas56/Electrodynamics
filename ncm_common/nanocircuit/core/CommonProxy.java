@@ -21,7 +21,7 @@ public class CommonProxy implements IGuiHandler
 	{
 		switch(ID)
 		{
-			case Reference.GUI_CONVECTION_OVEN_ID:
+			case Reference.GUI_ID.CONVECTION_OVEN:
 				return new ContainerConvectionOven(player.inventory, (TileConvectionOven)world.getBlockTileEntity(x, y, z));	
 		}
 		return null;

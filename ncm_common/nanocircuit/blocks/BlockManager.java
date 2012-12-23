@@ -31,10 +31,10 @@ public class BlockManager
 		GameRegistry.registerBlock(blockStorage, nanocircuit.items.ItemStorage.class);
 		blockOre.setBlockName("tile.ncmOre");
 		blockStorage.setBlockName("tile.ncmStorage");
-		MinecraftForge.setBlockHarvestLevel(blockOre, Reference.BLOCK_MAGNETITE_META, "pickaxe", 2);
-		MinecraftForge.setBlockHarvestLevel(blockOre, Reference.BLOCK_NICKEL_META, "pickaxe", 2);
-		OreDictionary.registerOre("oreMagnetite", new ItemStack(blockOre, 1, Reference.BLOCK_MAGNETITE_META));
-		OreDictionary.registerOre("oreNickel", new ItemStack(blockOre, 1, Reference.BLOCK_NICKEL_META));
+		MinecraftForge.setBlockHarvestLevel(blockOre, Reference.ORE_META.MAGNETITE, "pickaxe", 2);
+		MinecraftForge.setBlockHarvestLevel(blockOre, Reference.ORE_META.NICKEL, "pickaxe", 2);
+		OreDictionary.registerOre("oreMagnetite", new ItemStack(blockOre, 1, Reference.ORE_META.MAGNETITE));
+		OreDictionary.registerOre("oreNickel", new ItemStack(blockOre, 1, Reference.ORE_META.NICKEL));
 		
 		blockDoor = new BlockCleanDoor(Config.doorBlockID);
 		GameRegistry.registerBlock(blockDoor);
@@ -64,7 +64,7 @@ public class BlockManager
 	
 	public static void initRecipes()
 	{	
-		GameRegistry.addShapelessRecipe(new ItemStack(ItemManager.itemComponent, 9, Reference.ITEM_LODESTONE_INGOT_META), new ItemStack(blockStorage, 1, Reference.BLOCK_STORAGE_LODESTONE_META));
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemManager.itemComponent, 9, Reference.COMPONENT_META.LODESTONE_INGOT), new ItemStack(blockStorage, 1, Reference.STORAGE_META.LODESTONE));
 	}
 	
 	public static void initTiles()

@@ -39,7 +39,7 @@ public class ItemPCB extends Item
     {
         switch (itemstack.getItemDamage())
         {
-            case Reference.ITEM_BASIC_PCB_META:
+            case Reference.PCB_META.BASIC_PCB:
                 return "item.basicPCB";
         }
 

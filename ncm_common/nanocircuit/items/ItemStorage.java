@@ -27,7 +27,7 @@ public class ItemStorage extends ItemBlock
     {
         switch (itemstack.getItemDamage())
         {
-            case Reference.BLOCK_STORAGE_LODESTONE_META:
+            case Reference.STORAGE_META.LODESTONE:
                 return "tile.strgLodestone";
         }
 

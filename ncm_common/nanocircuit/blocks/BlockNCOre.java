@@ -35,7 +35,7 @@ public class BlockNCOre extends Block
 	@Override
     public int idDropped(int meta, Random random, int j)
     {
-		if(meta == Reference.BLOCK_MAGNETITE_META)
+		if(meta == Reference.ORE_META.MAGNETITE)
 		{
 			return ItemManager.itemComponent.shiftedIndex;
 		}
@@ -48,7 +48,7 @@ public class BlockNCOre extends Block
 	@Override
     public int quantityDropped(int meta, int fortune, Random random)
     {
-        if (meta == Reference.BLOCK_MAGNETITE_META)
+        if (meta == Reference.ORE_META.MAGNETITE)
         {
         	if(NanoCircuitMod.instance.isIC2Installed)
         	{
@@ -67,13 +67,13 @@ public class BlockNCOre extends Block
 	@Override
     public int damageDropped(int meta)
     {
-		if(meta == Reference.BLOCK_MAGNETITE_META)
+		if(meta == Reference.ORE_META.MAGNETITE)
 		{
 			if(NanoCircuitMod.instance.isIC2Installed)
 			{
-				return Reference.ITEM_MAGNETITE_CHUNK_META;
+				return Reference.COMPONENT_META.MAGNETITE_CHUNK;
 			}
-			return Reference.ITEM_MAGNETITE_DUST_META;
+			return Reference.COMPONENT_META.MAGNETITE_DUST;
 		}
 		else
 		{
@@ -84,7 +84,7 @@ public class BlockNCOre extends Block
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int unknown, CreativeTabs tab, List subItems) 
 	{
-		for (int ix = 0; ix < 2; ix++) 
+		for (int ix = 0; ix < Reference.ORE_META.AMOUNT; ix++) 
 		{
 			subItems.add(new ItemStack(this, 1, ix));
 		}

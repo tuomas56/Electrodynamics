@@ -17,7 +17,7 @@ public class ClientProxy extends CommonProxy
 	{
 		switch(ID)
 		{
-			case Reference.GUI_CONVECTION_OVEN_ID:
+			case Reference.GUI_ID.CONVECTION_OVEN:
 				return new GuiConvectionOven(player.inventory, (TileConvectionOven)world.getBlockTileEntity(x, y, z));	
 		}
 		return null;

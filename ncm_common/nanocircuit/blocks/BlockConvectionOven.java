@@ -33,7 +33,7 @@ public class BlockConvectionOven extends BlockContainer
             {
                     return false;
             }
-            player.openGui(NanoCircuitMod.instance, Reference.GUI_CONVECTION_OVEN_ID, world, x, y, z);
+            player.openGui(NanoCircuitMod.instance, Reference.GUI_ID.CONVECTION_OVEN, world, x, y, z);
             return true;
     }
    

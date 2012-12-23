@@ -32,7 +32,7 @@ public class ItemComponent extends Item
 	@Override
     public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
-		for(int i = 0; i < Reference.ITEM_FERRITE_MAGNET_META+1; i++)
+		for(int i = 0; i < Reference.COMPONENT_META.AMOUNT; i++)
 			par3List.add(new ItemStack(par1, 1, i));
     }
 	
@@ -41,25 +41,25 @@ public class ItemComponent extends Item
     {
         switch (itemstack.getItemDamage())
         {
-            case Reference.ITEM_MAGNETITE_CHUNK_META:
+            case Reference.COMPONENT_META.MAGNETITE_CHUNK:
                 return "item.chunkMagnetite";
                 
-            case Reference.ITEM_MAGNETITE_DUST_META:
+            case Reference.COMPONENT_META.MAGNETITE_DUST:
                 return "item.dustMagnetite";
                 
-            case Reference.ITEM_LODESTONE_DUST_META:
+            case Reference.COMPONENT_META.LODESTONE_DUST:
                 return "item.dustLodestone";
                 
-            case Reference.ITEM_LODESTONE_INGOT_META:
+            case Reference.COMPONENT_META.LODESTONE_INGOT:
                 return "item.ingotLodestone";    
                 
-            case Reference.ITEM_IRON_ROD_META:
+            case Reference.COMPONENT_META.IRON_ROD:
                 return "item.rodIron";    
                 
-            case Reference.ITEM_IRON_FANBLADE_META:
+            case Reference.COMPONENT_META.IRON_FANBLADE:
                 return "item.fanbladeIron";    
                 
-            case Reference.ITEM_FERRITE_MAGNET_META:
+            case Reference.COMPONENT_META.FERRITE_MAGNET:
                 return "item.magnetFerrite";       
         }
 

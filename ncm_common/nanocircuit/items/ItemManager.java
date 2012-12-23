@@ -45,8 +45,8 @@ public class ItemManager
 	public static void initRecipes()
 	{
 		ItemStack ironIngot = new ItemStack(Item.ingotIron, 1);
-		ItemStack ironRod = new ItemStack(itemComponent, 1, Reference.ITEM_IRON_ROD_META);
-		ItemStack ironFanblade = new ItemStack(itemComponent, 1, Reference.ITEM_IRON_FANBLADE_META);
+		ItemStack ironRod = new ItemStack(itemComponent, 1, Reference.COMPONENT_META.IRON_ROD);
+		ItemStack ironFanblade = new ItemStack(itemComponent, 1, Reference.COMPONENT_META.IRON_FANBLADE);
 		
 		//IRON ROD RECIPE (user-friendly, can be crafted both ways
 		GameRegistry.addRecipe(ironRod, "  I", " I ", "I  ", 'I', ironIngot);
@@ -58,11 +58,11 @@ public class ItemManager
 		//CLEAN DOOR RECIPE
 		GameRegistry.addRecipe(new ItemStack(itemDoor), "IGI", "IGI", "IGI", 'I', ironIngot, 'G', new ItemStack(Block.glass));
 		
-		GameRegistry.addRecipe(new ItemStack(BlockManager.blockStorage, 1, Reference.BLOCK_STORAGE_LODESTONE_META), "III", "III", "III", 'I', new ItemStack(itemComponent, 1, Reference.ITEM_LODESTONE_INGOT_META));
+		GameRegistry.addRecipe(new ItemStack(BlockManager.blockStorage, 1, Reference.STORAGE_META.LODESTONE), "III", "III", "III", 'I', new ItemStack(itemComponent, 1, Reference.COMPONENT_META.LODESTONE_INGOT));
 		
-		FurnaceRecipes.smelting().addSmelting(itemComponent.shiftedIndex, Reference.ITEM_LODESTONE_DUST_META, new ItemStack(itemComponent, 1, Reference.ITEM_LODESTONE_INGOT_META), 0.1f);
+		FurnaceRecipes.smelting().addSmelting(itemComponent.shiftedIndex, Reference.COMPONENT_META.LODESTONE_DUST, new ItemStack(itemComponent, 1, Reference.COMPONENT_META.LODESTONE_INGOT), 0.1f);
 		
 		//IC2 Compat - macerating magnetite chunks
-		IC2.addMaceratorRecipe(new ItemStack(itemComponent, 1, Reference.ITEM_MAGNETITE_CHUNK_META), new ItemStack(itemComponent, 2, Reference.ITEM_MAGNETITE_DUST_META));
+		IC2.addMaceratorRecipe(new ItemStack(itemComponent, 1, Reference.COMPONENT_META.MAGNETITE_CHUNK), new ItemStack(itemComponent, 2, Reference.COMPONENT_META.MAGNETITE_DUST));
 	}
 }

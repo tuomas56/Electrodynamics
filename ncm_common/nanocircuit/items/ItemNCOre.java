@@ -27,10 +27,10 @@ public class ItemNCOre extends ItemBlock
     {
         switch (itemstack.getItemDamage())
         {
-            case Reference.BLOCK_MAGNETITE_META:
+            case Reference.ORE_META.MAGNETITE:
                 return "tile.oreMagnetite";
 
-            case Reference.BLOCK_NICKEL_META:
+            case Reference.ORE_META.NICKEL:
                 return "tile.oreNickel";
         }
 

@@ -20,8 +20,8 @@ public class WorldGenNCOre implements IWorldGenerator
 	
 	public WorldGenNCOre()
 	{
-		magnetiteGen = new WorldGenMinable(BlockManager.blockOre.blockID, Reference.BLOCK_MAGNETITE_META, 8);
-		nickelGen = new WorldGenMinable(BlockManager.blockOre.blockID, Reference.BLOCK_NICKEL_META, 8);
+		magnetiteGen = new WorldGenMinable(BlockManager.blockOre.blockID, Reference.ORE_META.MAGNETITE, 8);
+		nickelGen = new WorldGenMinable(BlockManager.blockOre.blockID, Reference.ORE_META.NICKEL, 8);
 	}
 	
     @Override
