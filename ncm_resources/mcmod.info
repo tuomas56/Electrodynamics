@@ -1,7 +1,7 @@
 [
 {
-	"modid": "NCM",
-	"name": "Nano Circuit Mod",
+	"modid": "NCCore",
+	"name": "Nano Circuit",
 	"description": "Compact your world, comrade!",
 	"version": "0.0.1 Alpha 1",
 	"credits": "Forge team for Forge, Eloraam for RP2!",
@@ -9,6 +9,36 @@
 
 	"url": "http://www.minecraftforum.net/topic/1321755-nano-circuit-mod-wip-redesigned/",
 	"authors": [ "CyanideX Hawkye Xhamolk_ Odiefrom Mrabow" ],
+	"dependencies": [
+		"mod_MinecraftForge"
+	]
+},
+{
+	"modid": "NCWorld",
+	"name": "NC World",
+	"description": "Compact your world, comrade! (WorldGen)",
+	"version": "0.0.1 Alpha 1",
+	"credits": "Forge team for Forge, Eloraam for RP2!",
+	"logoFile": "logo.png",
+
+	"url": "http://www.minecraftforum.net/topic/1321755-nano-circuit-mod-wip-redesigned/",
+	"authors": [ "CyanideX Hawkye Xhamolk_ Odiefrom Mrabow" ],
+	"parent": "NCCore",
+	"dependencies": [
+		"mod_MinecraftForge"
+	]
+},
+{
+	"modid": "NCMachine",
+	"name": "NC Machine",
+	"description": "Compact your world, comrade! (Machines)",
+	"version": "0.0.1 Alpha 1",
+	"credits": "Forge team for Forge, Eloraam for RP2!",
+	"logoFile": "logo.png",
+
+	"url": "http://www.minecraftforum.net/topic/1321755-nano-circuit-mod-wip-redesigned/",
+	"authors": [ "CyanideX Hawkye Xhamolk_ Odiefrom Mrabow" ],
+	"parent": "NCCore",
 	"dependencies": [
 		"mod_MinecraftForge"
 	]
