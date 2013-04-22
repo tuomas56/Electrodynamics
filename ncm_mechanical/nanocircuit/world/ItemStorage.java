@@ -4,33 +4,27 @@ import nanocircuit.core.Reference;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemStorage extends ItemBlock 
-{
-	public ItemStorage(int i)
-    {
-        super(i);
-        setHasSubtypes(true);
-        setUnlocalizedName("ncStorage");
-    }
+public class ItemStorage extends ItemBlock {
+	public ItemStorage(int i) {
+		super( i );
+		setHasSubtypes( true );
+		setUnlocalizedName( "ncStorage" );
+	}
 
-    public int getPlacedBlockMetadata(int i)
-    {
-        return i;
-    }
+	public int getPlacedBlockMetadata(int i) {
+		return i;
+	}
 
-    public int getMetadata(int i)
-    {
-        return i;
-    }
+	public int getMetadata(int i) {
+		return i;
+	}
 
-    public String getUnlocalizedName(ItemStack itemstack)
-    {
-        switch (itemstack.getItemDamage())
-        {
-            case Reference.STORAGE_META.LODESTONE:
-                return "tile.strgLodestone";
-        }
+	public String getUnlocalizedName(ItemStack itemstack) {
+		switch( itemstack.getItemDamage() ) {
+			case Reference.STORAGE_META.LODESTONE:
+				return "tile.strgLodestone";
+		}
 
-        throw new IndexOutOfBoundsException();
-    }
+		throw new IndexOutOfBoundsException();
+	}
 }
