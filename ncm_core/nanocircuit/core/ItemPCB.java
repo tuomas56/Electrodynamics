@@ -10,6 +10,7 @@ import nanocircuit.core.Reference;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.util.Icon;
 
 public class ItemPCB extends Item
 {
@@ -22,9 +23,10 @@ public class ItemPCB extends Item
 	}
 	
 	@Override
-	public int getIconFromDamage(int meta)
+	public Icon getIconFromDamage(int meta)
 	{
-		return 8 + meta;
+		//return 8 + meta;
+		return null;
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -35,7 +37,7 @@ public class ItemPCB extends Item
     }
 	
 	@Override
-    public String getItemNameIS(ItemStack itemstack)
+    public String getUnlocalizedName(ItemStack itemstack)
     {
         switch (itemstack.getItemDamage())
         {
@@ -46,10 +48,6 @@ public class ItemPCB extends Item
         throw new IndexOutOfBoundsException();
     }
 	
-	@Override
-    public String getTextureFile()
-    {
-        return Reference.ITEM_TEXTURE;
-    }
+	// Texture: Reference.ITEM_TEXTURE;
 
 }

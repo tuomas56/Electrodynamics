@@ -14,6 +14,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import nanocircuit.NanoCircuitCore;
 import nanocircuit.core.Reference;
 import nanocircuit.core.Config;
+import net.minecraft.util.Icon;
 
 public class BlockOre extends Block
 {
@@ -27,9 +28,10 @@ public class BlockOre extends Block
     }
     
 	@Override
-    public int getBlockTextureFromSideAndMetadata(int i, int j)
+    public Icon getIcon(int side, int metadata)
     {
-        return j;
+        //return metadata;
+	    return null;
     }
     
 	@Override
@@ -37,7 +39,7 @@ public class BlockOre extends Block
     {
 		if(meta == Reference.ORE_META.MAGNETITE)
 		{
-			return NanoCircuitCore.itemComponent.shiftedIndex;
+			return NanoCircuitCore.itemComponent.itemID;
 		}
 		else
 		{
@@ -90,10 +92,6 @@ public class BlockOre extends Block
 		}
 	}
 	
-	@Override
-	public String getTextureFile() 
-	{
-		return Reference.BLOCK_TEXTURE;
-	}
+	// Texture File: Reference.BLOCK_TEXTURE;
 
 }

@@ -13,6 +13,7 @@ import net.minecraft.creativetab.CreativeTabs;
 
 import nanocircuit.core.Reference;
 import nanocircuit.NanoCircuitCore;
+import net.minecraft.util.Icon;
 
 public class BlockStorage extends Block
 {
@@ -25,9 +26,10 @@ public class BlockStorage extends Block
     }
     
 	@Override
-    public int getBlockTextureFromSideAndMetadata(int i, int j)
+    public Icon getIcon(int side, int metadata)
     {
-        return 18 + j;
+        //return 18 + metadata;
+	    return null;
     }
     
 	@Override
@@ -56,11 +58,6 @@ public class BlockStorage extends Block
 			subItems.add(new ItemStack(this, 1, ix));
 		}
 	}
-	
-	@Override
-	public String getTextureFile() 
-	{
-		return Reference.BLOCK_TEXTURE;
-	}
-	
+
+	// Texture File: return Reference.BLOCK_TEXTURE;
 }

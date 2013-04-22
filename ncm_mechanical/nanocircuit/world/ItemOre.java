@@ -10,7 +10,7 @@ public class ItemOre extends ItemBlock
     {
         super(i);
         setHasSubtypes(true);
-        setItemName("ncOre");
+        setUnlocalizedName("ncOre");
     }
 
     public int getPlacedBlockMetadata(int i)
@@ -23,7 +23,7 @@ public class ItemOre extends ItemBlock
         return i;
     }
 
-    public String getItemNameIS(ItemStack itemstack)
+    public String getUnlocalizedName(ItemStack itemstack)
     {
         switch (itemstack.getItemDamage())
         {

@@ -1,25 +1,16 @@
 package nanocircuit;
 
-import java.io.File;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.*;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
 import nanocircuit.core.Config;
@@ -30,9 +21,6 @@ import nanocircuit.world.WorldGenOre;
 import nanocircuit.world.BlockOre;
 import nanocircuit.world.BlockStorage;
 
-import nanocircuit.NanoCircuitCore;
-
-import net.minecraft.item.Item;
 import net.minecraft.item.crafting.FurnaceRecipes;
 
 @Mod
@@ -87,8 +75,8 @@ public class NanoCircuitWorld
 		blockStorage = new BlockStorage(Config.BLOCK_ID.storageBlock);
 		GameRegistry.registerBlock(blockOre, nanocircuit.world.ItemOre.class, "ore");
 		GameRegistry.registerBlock(blockStorage, nanocircuit.world.ItemStorage.class, "storage");
-		blockOre.setBlockName("tile.ncmOre");
-		blockStorage.setBlockName("tile.ncmStorage");
+		blockOre.setUnlocalizedName("tile.ncmOre");
+		blockStorage.setUnlocalizedName("tile.ncmStorage");
 		MinecraftForge.setBlockHarvestLevel(blockOre, Reference.ORE_META.MAGNETITE, "pickaxe", 2);
 		MinecraftForge.setBlockHarvestLevel(blockOre, Reference.ORE_META.NICKEL, "pickaxe", 2);
 		OreDictionary.registerOre("oreMagnetite", new ItemStack(blockOre, 1, Reference.ORE_META.MAGNETITE));
@@ -108,7 +96,7 @@ public class NanoCircuitWorld
 	public void initRecipes()
 	{
 		GameRegistry.addRecipe(new ItemStack(this.blockStorage, 1, Reference.STORAGE_META.LODESTONE), "III", "III", "III", 'I', new ItemStack(NanoCircuitCore.itemComponent, 1, Reference.COMPONENT_META.LODESTONE_INGOT));
-		FurnaceRecipes.smelting().addSmelting(NanoCircuitCore.itemComponent.shiftedIndex, Reference.COMPONENT_META.LODESTONE_DUST, new ItemStack(NanoCircuitCore.itemComponent, 1, Reference.COMPONENT_META.LODESTONE_INGOT), 0.1f);
+		FurnaceRecipes.smelting().addSmelting(NanoCircuitCore.itemComponent.itemID, Reference.COMPONENT_META.LODESTONE_DUST, new ItemStack(NanoCircuitCore.itemComponent, 1, Reference.COMPONENT_META.LODESTONE_INGOT), 0.1f);
 	}
 	
 }

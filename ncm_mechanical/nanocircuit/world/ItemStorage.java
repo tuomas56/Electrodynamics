@@ -10,7 +10,7 @@ public class ItemStorage extends ItemBlock
     {
         super(i);
         setHasSubtypes(true);
-        setItemName("ncStorage");
+        setUnlocalizedName("ncStorage");
     }
 
     public int getPlacedBlockMetadata(int i)
@@ -23,7 +23,7 @@ public class ItemStorage extends ItemBlock
         return i;
     }
 
-    public String getItemNameIS(ItemStack itemstack)
+    public String getUnlocalizedName(ItemStack itemstack)
     {
         switch (itemstack.getItemDamage())
         {
