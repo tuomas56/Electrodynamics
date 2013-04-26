@@ -12,12 +12,12 @@ This mod is not to be used in any modpacks.
 
 #Main Development Team
 
-CyanideX  Hawkye  Xhamolk_  Odiefrom  Mrabow
+CyanideX  Hawkye  Xhamolk_  Odiefrom  Mrabow Dmillerw
 
 
 ##Extended Description
 
-Nano Circuit Mod aims to be the first [RedPower 2](http://www.eloraam.com/ "Eloraam.com") addon; however, without expressed permission from Eloraam, NCM will not be released with any association.
+*Info currently being updated*
 
 \- *Nano Circuit Mod Wiki* ( [http://nanocircuitmod.wikispaces.com/](http://nanocircuitmod.wikispaces.com/) )
 
