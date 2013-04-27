@@ -1,5 +1,6 @@
 package nanocircuit;
 
+import nanocircuit.core.configuration.ConfigurationSettings;
 import nanocircuit.core.lib.BlockIDs;
 import nanocircuit.core.lib.ModInfo;
 import nanocircuit.world.block.BlockHandler;
@@ -31,8 +32,13 @@ public class NanoCircuitWorld {
 
 	@Init
 	public void init(FMLInitializationEvent event) {
-		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, Ore.NICKEL.ordinal(), 8, 64));
-		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, Ore.MAGNETITE.ordinal(), 8, 64));
+		if (ConfigurationSettings.MAGNETITE_ENABLED) {
+			GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, Ore.NICKEL.ordinal(), ConfigurationSettings.NICKEL_SPAWN_AMOUNT, ConfigurationSettings.NICKEL_MAX_Y_LEVEL));
+		}
+		
+		if (ConfigurationSettings.NICKEL_ENABLED) {
+			GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, Ore.MAGNETITE.ordinal(), ConfigurationSettings.MAGNETITE_SPAWN_AMOUNT, ConfigurationSettings.MAGNETITE_MAX_Y_LEVEL));
+		}
 	}
 
 }
