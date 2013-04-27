@@ -9,7 +9,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import nanocircuit.core.lib.ModInfo;
-import nanocircuit.world.*;
 import nanocircuit.world.core.CommonProxy;
 
 @Mod(modid = "NC:World", name = "NanoCircuit World", version = ModInfo.VERSION, dependencies = "required-after:NCCore")
