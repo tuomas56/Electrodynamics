@@ -2,6 +2,7 @@ package nanocircuit.world.lib;
 
 import nanocircuit.core.core.CoreConfiguration;
 import nanocircuit.core.lib.Component;
+import nanocircuit.core.lib.ModInfo;
 import nanocircuit.world.core.WorldConfiguration;
 import net.minecraft.item.ItemStack;
 
@@ -27,7 +28,7 @@ public enum Ore {
 	}
 
 	public String getTextureFile() {
-		return "nccore:ore/" + unlocalizedName;
+		return ModInfo.ICON_PREFIX + "ore/" + unlocalizedName;
 	}
 
 	public String getUnlocalizedName() {

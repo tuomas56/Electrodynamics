@@ -22,7 +22,7 @@ public enum Component {
 	}
 
 	public String getTextureFile() {
-		return "nccore:component/" + unlocalizedName;
+		return ModInfo.ICON_PREFIX + "component/" + unlocalizedName;
 	}
 
 	public String getUnlocalizedName() {

@@ -2,12 +2,14 @@ package nanocircuit.core.lib;
 
 public class ModInfo {
 	
+	public static final String GENERIC_MOD_ID = "NanoCircuits";
+	
 	public static final String DEPENDENCIES = "after:IC2";
 	public static final String VERSION = "@VERSION@";
 
-	//TODO Need a more modular way to do this, to ensure on the fly name changes change this as well
-	public static final String RESOURCES_BASE = "/mods/" + "nc:core" + "/textures";
+	public static final String RESOURCES_BASE = "/mods/" + GENERIC_MOD_ID.toLowerCase() + "/textures";
+	public static final String ICON_PREFIX = GENERIC_MOD_ID.toLowerCase()+":";
 	
-	public static final String CORE_CONFIG = "NanoCircuits.cfg";
+	public static final String CORE_CONFIG = GENERIC_MOD_ID + ".cfg";
 	
 }
