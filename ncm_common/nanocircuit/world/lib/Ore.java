@@ -1,5 +1,6 @@
 package nanocircuit.world.lib;
 
+import nanocircuit.world.core.WorldConfiguration;
 import net.minecraft.item.ItemStack;
 
 public enum Ore {
@@ -38,9 +39,7 @@ public enum Ore {
 	}
 
 	public ItemStack toItemStack() {
-		//TODO Rewrite - dmillerw
-//		return new ItemStack( NanoCircuitWorld.blockOre, 1, this.ordinal() );
-		return null;
+		return new ItemStack(WorldConfiguration.getBlockID("blockOre"), 1, this.ordinal() );
 	}
 
 	public static Ore get(int ordinal) {

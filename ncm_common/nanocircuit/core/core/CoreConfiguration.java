@@ -28,15 +28,15 @@ public class CoreConfiguration {
 		}
 	}
 	
-	public int getBlockID(String id) {
+	public static int getBlockID(String id) {
 		return blockIDMapping.get(id);
 	}
 	
-	public int getItemID(String id) {
+	public static int getItemID(String id) {
 		return itemIDMapping.get(id);
 	}
 	
-	public int getShiftedItemID(String id) {
+	public static int getShiftedItemID(String id) {
 		return getItemID(id) + 256;
 	}
 	
