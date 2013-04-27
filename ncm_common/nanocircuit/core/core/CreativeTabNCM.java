@@ -13,8 +13,8 @@ public class CreativeTabNCM extends CreativeTabs {
 	public int itemMeta = 0;
 	
 	public CreativeTabNCM(String label) {
-		super(label.trim().replace(" ", "_"));
-		LanguageRegistry.instance().addStringLocalization(label.trim().replace(" ", "_"), label.trim());
+		super(label.toLowerCase().replace(" ", "_"));
+		LanguageRegistry.instance().addStringLocalization("itemGroup."+label.toLowerCase().replace(" ", "_"), label);
 	}
 	
 	public CreativeTabNCM setIcon(int id, int meta) {

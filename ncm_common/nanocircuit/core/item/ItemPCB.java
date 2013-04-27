@@ -21,7 +21,7 @@ public class ItemPCB extends Item {
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
 		//TODO Rewrite - dmillerw
-		return itemstack.getItemName();
+		return "";
 	}
 
 }
