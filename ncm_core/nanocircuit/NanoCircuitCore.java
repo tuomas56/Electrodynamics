@@ -16,28 +16,24 @@ import net.minecraft.item.ItemStack;
 
 import java.io.File;
 
-@Mod
-		(
-				modid = "NCCore",
-				name = "NanoCircuit Core",
-				version = Reference.VERSION,
-				dependencies = "after:IC2"
-		)
-@NetworkMod
-		(
-				clientSideRequired = false,
-				serverSideRequired = false
-		)
+@Mod(
+	modid = "NCCore",
+	name = "NanoCircuit Core",
+	version = Reference.VERSION,
+	dependencies = "after:IC2"
+)
+@NetworkMod(
+	clientSideRequired = false,
+	serverSideRequired = false
+)
 public class NanoCircuitCore {
-
 	@Instance("NCCore")
 	public static NanoCircuitCore instance;
 
-	@SidedProxy
-			(
-					clientSide = "nanocircuit.core.ClientProxy",
-					serverSide = "nanocircuit.core.CommonProxy"
-			)
+	@SidedProxy(
+		clientSide = "nanocircuit.core.ClientProxy",
+		serverSide = "nanocircuit.core.CommonProxy"
+	)
 	public static CommonProxy proxy;
 
 	public static CreativeTabs tabsNCM =
