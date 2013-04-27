@@ -40,8 +40,7 @@ public enum Ore {
 	}
 
 	public ItemStack toItemStack() {
-		return new ItemStack(WorldConfiguration.getBlockID("blockOre"), 1,
-				this.ordinal());
+		return new ItemStack(WorldConfiguration.getBlockID("blockOre"), 1, this.ordinal());
 	}
 
 	public static Ore get(int ordinal) {
