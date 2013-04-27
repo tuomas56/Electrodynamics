@@ -7,6 +7,7 @@ import nanocircuit.world.lib.Ore;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -18,8 +19,11 @@ public class BlockHandler {
 		blockOre = new BlockOre(BlockIDs.BLOCK_ORE_ID).setUnlocalizedName(Strings.BLOCK_ORE_NAME);
 		GameRegistry.registerBlock(blockOre, ItemBlockOre.class, Strings.BLOCK_ORE_NAME);
 		for (int i=0; i<Ore.values().length; i++) {
-			LanguageRegistry.addName(new ItemStack(blockOre, 1, i), Ore.get(i).getLocalizedName("en_US"));
+			ItemStack ore = new ItemStack(blockOre, 1, i);
+			
+			LanguageRegistry.addName(ore, Ore.get(i).getLocalizedName("en_US"));
 			MinecraftForge.setBlockHarvestLevel(blockOre, i, "pickaxe", Ore.get(i).harvestLevel);
+			OreDictionary.registerOre(Ore.get(i).getUnlocalizedName(), ore);
 		}
 	}
 	
