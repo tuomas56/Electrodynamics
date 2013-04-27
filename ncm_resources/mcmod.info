@@ -42,5 +42,20 @@
 	"dependencies": [
 		"mod_MinecraftForge"
 	]
+},
+{
+	"modid": "NCLogic",
+	"name": "NanoCircuit Logic",
+	"description": "Compact your world, comrade! (Logic)",
+	"version": "@VERSION@",
+	"credits": "Forge team for Forge, Eloraam for RP2!",
+	"logoFile": "logo.png",
+
+	"url": "http://www.minecraftforum.net/topic/1321755-nano-circuit-mod-wip-redesigned/",
+	"authors": [ "CyanideX",  "Hawkye",  "Xhamolk_",  "Odiefrom",  "Mrabow", "dmillerw" ],
+	"parent": "NCCore",
+	"dependencies": [
+		"mod_MinecraftForge"
+	]
 }
 ]
