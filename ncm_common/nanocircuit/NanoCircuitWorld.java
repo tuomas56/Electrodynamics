@@ -33,11 +33,11 @@ public class NanoCircuitWorld {
 	@Init
 	public void init(FMLInitializationEvent event) {
 		if (ConfigurationSettings.MAGNETITE_ENABLED) {
-			GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, Ore.NICKEL.ordinal(), ConfigurationSettings.NICKEL_SPAWN_AMOUNT, ConfigurationSettings.NICKEL_MAX_Y_LEVEL));
+			GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, Ore.NICKEL.ordinal(), ConfigurationSettings.NICKEL_SPAWN_AMOUNT, ConfigurationSettings.NICKEL_MAX_Y_LEVEL, ConfigurationSettings.NICKEL_SPAWN_RARITY));
 		}
 		
 		if (ConfigurationSettings.NICKEL_ENABLED) {
-			GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, Ore.MAGNETITE.ordinal(), ConfigurationSettings.MAGNETITE_SPAWN_AMOUNT, ConfigurationSettings.MAGNETITE_MAX_Y_LEVEL));
+			GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, Ore.MAGNETITE.ordinal(), ConfigurationSettings.MAGNETITE_SPAWN_AMOUNT, ConfigurationSettings.MAGNETITE_MAX_Y_LEVEL, ConfigurationSettings.MAGNETITE_SPAWN_RARITY));
 		}
 	}
 

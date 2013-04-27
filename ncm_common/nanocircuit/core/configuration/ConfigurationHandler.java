@@ -20,10 +20,12 @@ public class ConfigurationHandler {
 			ConfigurationSettings.MAGNETITE_ENABLED = config.get(CATEGORY_SETTINGS, ConfigurationSettings.MAGNETITE_ENABLED_CONFIGNAME, ConfigurationSettings.MAGNETITE_ENABLED_DEFAULT).getBoolean(ConfigurationSettings.MAGNETITE_ENABLED_DEFAULT);
 			ConfigurationSettings.MAGNETITE_MAX_Y_LEVEL = config.get(CATEGORY_SETTINGS, ConfigurationSettings.MAGNETITE_MAX_Y_LEVEL_CONFIGNAME, ConfigurationSettings.MAGNETITE_MAX_Y_LEVEL_DEFAULT).getInt(ConfigurationSettings.MAGNETITE_MAX_Y_LEVEL_DEFAULT);
 			ConfigurationSettings.MAGNETITE_SPAWN_AMOUNT = config.get(CATEGORY_SETTINGS, ConfigurationSettings.MAGNETITE_SPAWN_AMOUNT_CONFIGNAME, ConfigurationSettings.MAGNETITE_SPAWN_AMOUNT_DEFAULT).getInt(ConfigurationSettings.MAGNETITE_SPAWN_AMOUNT_DEFAULT);
-			
+			ConfigurationSettings.MAGNETITE_SPAWN_RARITY = config.get(CATEGORY_SETTINGS, ConfigurationSettings.MAGNETITE_SPAWN_RARITY_CONFIGNAME, ConfigurationSettings.MAGNETITE_SPAWN_RARITY_DEFAULT).getInt(ConfigurationSettings.MAGNETITE_SPAWN_RARITY_DEFAULT);
+
 			ConfigurationSettings.NICKEL_ENABLED = config.get(CATEGORY_SETTINGS, ConfigurationSettings.NICKEL_ENABLED_CONFIGNAME, ConfigurationSettings.NICKEL_ENABLED_DEFAULT).getBoolean(ConfigurationSettings.NICKEL_ENABLED_DEFAULT);
 			ConfigurationSettings.NICKEL_MAX_Y_LEVEL = config.get(CATEGORY_SETTINGS, ConfigurationSettings.NICKEL_MAX_Y_LEVEL_CONFIGNAME, ConfigurationSettings.NICKEL_MAX_Y_LEVEL_DEFAULT).getInt(ConfigurationSettings.NICKEL_MAX_Y_LEVEL_DEFAULT);
 			ConfigurationSettings.NICKEL_SPAWN_AMOUNT = config.get(CATEGORY_SETTINGS, ConfigurationSettings.NICKEL_SPAWN_AMOUNT_CONFIGNAME, ConfigurationSettings.NICKEL_SPAWN_AMOUNT_DEFAULT).getInt(ConfigurationSettings.NICKEL_SPAWN_AMOUNT_DEFAULT);
+			ConfigurationSettings.NICKEL_SPAWN_RARITY = config.get(CATEGORY_SETTINGS, ConfigurationSettings.NICKEL_SPAWN_RARITY_CONFIGNAME, ConfigurationSettings.NICKEL_SPAWN_RARITY_DEFAULT).getInt(ConfigurationSettings.NICKEL_SPAWN_RARITY_DEFAULT);
 			
 			/* Block IDs */
 			BlockIDs.BLOCK_ORE_ID = config.getBlock(Strings.BLOCK_ORE_NAME, BlockIDs.BLOCK_ORE_DEFAULT_ID).getInt(BlockIDs.BLOCK_ORE_DEFAULT_ID);

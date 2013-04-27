@@ -13,19 +13,20 @@ public class WorldGenOre implements IWorldGenerator {
 	private int blockMeta;
 	private int blockAmount;
 	private int yMax;
-
+	private int rarity;
 	private int dimension;
 	
-	public WorldGenOre(int blockID, int blockMeta, int blockAmount, int yMax) {
+	public WorldGenOre(int blockID, int blockMeta, int blockAmount, int yMax, int rarity) {
 		this.blockID = blockID;
 		this.blockMeta = blockMeta;
 		this.blockAmount = blockAmount;
 		this.yMax = yMax;
+		this.rarity = rarity;
 		this.dimension = 0;
 	}
 
-	public WorldGenOre(int blockID, int blockMeta, int blockAmount, int yMax, int dimension) {
-		this(blockID, blockMeta, blockAmount, yMax);
+	public WorldGenOre(int blockID, int blockMeta, int blockAmount, int yMax, int rarity, int dimension) {
+		this(blockID, blockMeta, blockAmount, yMax, rarity);
 		this.dimension = dimension;
 	}
 	
@@ -35,7 +36,7 @@ public class WorldGenOre implements IWorldGenerator {
 	}
 
 	private void generate(World world, Random rand, int chunkX, int chunkZ) {
-        for(int k = 0; k < 10; k++){
+        for(int i=0; i<rarity; i++){
         	int firstBlockXCoord = chunkX + rand.nextInt(16);
         	int firstBlockYCoord = rand.nextInt(yMax);
         	int firstBlockZCoord = chunkZ + rand.nextInt(16);
