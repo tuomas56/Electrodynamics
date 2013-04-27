@@ -23,7 +23,7 @@ public class BlockHandler {
 			
 			LanguageRegistry.addName(ore, Ore.get(i).getLocalizedName("en_US"));
 			MinecraftForge.setBlockHarvestLevel(blockOre, i, "pickaxe", Ore.get(i).harvestLevel);
-			OreDictionary.registerOre(Ore.get(i).getUnlocalizedName(), ore);
+			OreDictionary.registerOre(Ore.get(i).oreDictionaryName, ore);
 		}
 	}
 	

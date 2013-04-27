@@ -15,6 +15,8 @@ public enum Ore {
 	private String unlocalizedName;
 	private String localizedName; // temporary
 	
+	public String oreDictionaryName;
+	
 	public int harvestLevel = 2;
 	public int droppedID;
 	public int droppedMeta;
@@ -23,11 +25,17 @@ public enum Ore {
 	private Ore(String unlocalizedName, String localizedName, int dropID, int dropMeta, int dropCount) {
 		this.unlocalizedName = unlocalizedName;
 		this.localizedName = localizedName;
+		this.oreDictionaryName = unlocalizedName;
 		this.droppedID = dropID;
 		this.droppedMeta = dropMeta;
 		this.droppedCount = dropCount;
 	}
 
+	private Ore(String unlocalizedName, String localizedName, String alt, int dropID, int dropMeta, int dropCount) {
+		this(unlocalizedName, localizedName, dropID, dropMeta, dropCount);
+		this.oreDictionaryName = alt;
+	}
+	
 	public String getTextureFile() {
 		return ModInfo.ICON_PREFIX + "ore/" + unlocalizedName;
 	}
