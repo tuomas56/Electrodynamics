@@ -5,7 +5,7 @@
 	
 	<target name="clean">
 		<delete file="${dir.forge}\mcp\src\minecraft\mcmod.info" />
-		<delete dir="${dir.forge}\mcp\src\minecraft\com" />
+		<delete dir="${dir.forge}\mcp\src\minecraft\${dir.src.root}" />
 		<delete dir="${dir.forge}\mcp\reobf\minecraft" />
 	</target>
 	
@@ -61,7 +61,7 @@
 		<!-- Build the jar -->
 		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
 		<jar destfile="${dir.share}\${release.minecraft.version}\${release.mod.version}\${release.mod.name}-universal-${release.mod.version}.jar">
-			<fileset dir="${dir.forge}\mcp\src\minecraft\com\"	includes="mcmod.info" />
+			<fileset dir="${dir.forge}\mcp\src\minecraft\${dir.src.root}\"	includes="mcmod.info" />
 			<fileset dir="${dir.forge}\mcp\reobf\minecraft" />
 			<fileset dir="${dir.source}\${dir.rsc}" />
 		</jar>
