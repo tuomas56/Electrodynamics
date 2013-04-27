@@ -1,11 +1,9 @@
 package nanocircuit;
 
-import java.io.File;
-
+import nanocircuit.core.lib.BlockIDs;
 import nanocircuit.core.lib.ModInfo;
 import nanocircuit.world.block.BlockHandler;
 import nanocircuit.world.core.CommonProxy;
-import nanocircuit.world.core.WorldConfiguration;
 import nanocircuit.world.core.WorldGenOre;
 import nanocircuit.world.lib.Ore;
 import cpw.mods.fml.common.Mod;
@@ -28,16 +26,13 @@ public class NanoCircuitWorld {
 
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
-		WorldConfiguration.initializeDefaults();
-		WorldConfiguration.handleConfig(new File(event.getModConfigurationDirectory(), ModInfo.CORE_CONFIG));
-	
 		BlockHandler.initializeBlocks();
 	}
 
 	@Init
 	public void init(FMLInitializationEvent event) {
-		GameRegistry.registerWorldGenerator(new WorldGenOre(WorldConfiguration.getBlockID("blockOre"), Ore.NICKEL.ordinal(), 8, 64));
-		GameRegistry.registerWorldGenerator(new WorldGenOre(WorldConfiguration.getBlockID("blockOre"), Ore.MAGNETITE.ordinal(), 8, 64));
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, Ore.NICKEL.ordinal(), 8, 64));
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, Ore.MAGNETITE.ordinal(), 8, 64));
 	}
 
 }

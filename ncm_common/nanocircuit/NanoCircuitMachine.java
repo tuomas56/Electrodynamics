@@ -1,10 +1,7 @@
 package nanocircuit;
 
-import java.io.File;
-
 import nanocircuit.core.lib.ModInfo;
 import nanocircuit.machine.core.CommonProxy;
-import nanocircuit.machine.core.MachineConfiguration;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -24,8 +21,7 @@ public class NanoCircuitMachine {
 
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
-		MachineConfiguration.initializeDefaults();
-		MachineConfiguration.handleConfig(new File(event.getModConfigurationDirectory(), ModInfo.CORE_CONFIG));
+
 	}
 
 	@Init

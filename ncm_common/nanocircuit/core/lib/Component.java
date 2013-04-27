@@ -1,17 +1,16 @@
 package nanocircuit.core.lib;
 
-import nanocircuit.core.core.CoreConfiguration;
 import net.minecraft.item.ItemStack;
 
 public enum Component {
 
-	FAN_BLADE("fanBlade", "Fan Blade"), 
-	LODESTONE_DUST("lodestoneDust", "Lodestone Dust"),
-	LODESTONE_INGOT("lodestoneIngot", "Lodestone Ingot"),
-	MAGNET("magnet", "Magnet"),
-	MAGNETITE_CHUNK("magnetiteChunk", "Magnetite Chunk"),
-	MAGNETITE_DUST("magnetiteDust", "Magnetite Dust"),
-	METAL_BAR("metalBar", "Metal Bar");
+	FAN_BLADE(Strings.FAN_BLADE_NAME, "Fan Blade"), 
+	LODESTONE_DUST(Strings.LODESTONE_DUST_NAME, "Lodestone Dust"),
+	LODESTONE_INGOT(Strings.LODESTONE_INGOT_NAME, "Lodestone Ingot"),
+	MAGNET(Strings.MAGNET_NAME, "Magnet"),
+	MAGNETITE_CHUNK(Strings.MAGNETITE_CHUNK_NAME, "Magnetite Chunk"),
+	MAGNETITE_DUST(Strings.MAGNETITE_DUST_NAME, "Magnetite Dust"),
+	METAL_BAR(Strings.METAL_BAR, "Metal Bar");
 
 	private String unlocalizedName;
 	private String localizedName; // temporary
@@ -34,7 +33,7 @@ public enum Component {
 	}
 
 	public ItemStack toItemStack() {
-		return new ItemStack(CoreConfiguration.getShiftedItemID("itemComponent"), 1, this.ordinal());
+		return new ItemStack(ItemIDs.ITEM_COMPONENT_ID + 256, 1, this.ordinal());
 	}
 
 	public static Component get(int ordinal) {

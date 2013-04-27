@@ -1,15 +1,16 @@
 package nanocircuit.world.lib;
 
-import nanocircuit.core.core.CoreConfiguration;
+import nanocircuit.core.lib.BlockIDs;
 import nanocircuit.core.lib.Component;
+import nanocircuit.core.lib.ItemIDs;
 import nanocircuit.core.lib.ModInfo;
-import nanocircuit.world.core.WorldConfiguration;
+import nanocircuit.core.lib.Strings;
 import net.minecraft.item.ItemStack;
 
 public enum Ore {
 
-	MAGNETITE("oreMagnetite", "Magnetite Ore", CoreConfiguration.getShiftedItemID("itemComponent"), Component.valueOf("MAGNETITE_CHUNK").ordinal(), 1), 
-	NICKEL("oreNickel", "Nickel Ore", CoreConfiguration.getBlockID("blockOre"), 1, 1);
+	MAGNETITE(Strings.ORE_MAGNETITE_NAME, "Magnetite Ore", ItemIDs.ITEM_COMPONENT_ID + 256, Component.valueOf("MAGNETITE_CHUNK").ordinal(), 1), 
+	NICKEL(Strings.ORE_NICKEL_NAME, "Nickel Ore", BlockIDs.BLOCK_ORE_ID, 1, 1);
 
 	private String unlocalizedName;
 	private String localizedName; // temporary
@@ -40,7 +41,7 @@ public enum Ore {
 	}
 
 	public ItemStack toItemStack() {
-		return new ItemStack(WorldConfiguration.getBlockID("blockOre"), 1, this.ordinal());
+		return new ItemStack(BlockIDs.BLOCK_ORE_ID, 1, this.ordinal());
 	}
 
 	public static Ore get(int ordinal) {
