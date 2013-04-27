@@ -11,6 +11,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import nanocircuit.core.lib.ModInfo;
+import nanocircuit.world.block.BlockHandler;
 import nanocircuit.world.core.CommonProxy;
 import nanocircuit.world.core.WorldConfiguration;
 
@@ -26,6 +27,8 @@ public class NanoCircuitWorld {
 	public void preInit(FMLPreInitializationEvent event) {
 		WorldConfiguration.initializeDefaults();
 		WorldConfiguration.handleConfig(new File(event.getModConfigurationDirectory(), ModInfo.CORE_CONFIG));
+	
+		BlockHandler.initializeBlocks();
 	}
 
 	@Init

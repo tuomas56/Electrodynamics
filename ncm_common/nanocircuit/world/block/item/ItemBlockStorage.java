@@ -4,8 +4,8 @@ import nanocircuit.world.lib.StorageBlock;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemStorage extends ItemBlock {
-	public ItemStorage(int i) {
+public class ItemBlockStorage extends ItemBlock {
+	public ItemBlockStorage(int i) {
 		super( i );
 		setHasSubtypes( true );
 		setUnlocalizedName( "ncmStorage" );

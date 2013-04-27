@@ -1,10 +1,13 @@
 package nanocircuit.core.item;
 
 import nanocircuit.core.core.CreativeTabNCM;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.util.Icon;
 
 public class ItemPCB extends Item {
+	
+	private Icon texture;
 	
 	public ItemPCB(int id) {
 		super(id);
@@ -14,7 +17,12 @@ public class ItemPCB extends Item {
 
 	@Override
 	public Icon getIconFromDamage(int meta) {
-		return null;
+		return texture;
 	}
 
+	@Override
+	public void registerIcons(IconRegister register) {
+		this.texture = register.registerIcon("nccore:misc/pcb");
+	}
+	
 }
