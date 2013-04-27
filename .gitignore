@@ -4,3 +4,6 @@
 *.jar
 *.war
 *.ear
+
+# To ignore dev changes to properties file #
+build.properties
