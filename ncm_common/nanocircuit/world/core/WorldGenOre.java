@@ -1,45 +1,47 @@
 package nanocircuit.world.core;
 
-import cpw.mods.fml.common.IWorldGenerator;
+import java.util.Random;
+
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
-import net.minecraft.world.gen.feature.WorldGenerator;
-
-import java.util.Random;
+import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenOre implements IWorldGenerator {
 	
-	WorldGenMinable nickelGen;
-	WorldGenMinable magnetiteGen;
+	private int blockID;
+	private int blockMeta;
+	private int blockAmount;
+	private int yMax;
 
-	public WorldGenOre() {
-		//TODO Rewrite - dmillerw
-//		magnetiteGen = new WorldGenMinable( NanoCircuitWorld.blockOre.blockID, Reference.ModInfo.MAGNETITE, 8 );
-//		nickelGen = new WorldGenMinable( NanoCircuitWorld.blockOre.blockID, Reference.ModInfo.NICKEL, 8 );
+	private int dimension;
+	
+	public WorldGenOre(int blockID, int blockMeta, int blockAmount, int yMax) {
+		this.blockID = blockID;
+		this.blockMeta = blockMeta;
+		this.blockAmount = blockAmount;
+		this.yMax = yMax;
+		this.dimension = 0;
 	}
 
+	public WorldGenOre(int blockID, int blockMeta, int blockAmount, int yMax, int dimension) {
+		this(blockID, blockMeta, blockAmount, yMax);
+		this.dimension = dimension;
+	}
+	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-		chunkX = chunkX << 4;
-		chunkZ = chunkZ << 4;
-		BiomeGenBase biomegenbase = world.getWorldChunkManager().getBiomeGenAt( chunkX, chunkZ );
-
-		//Don't generate ores in Nether and End
-		if( biomegenbase.biomeID != BiomeGenBase.sky.biomeID && biomegenbase.biomeID != BiomeGenBase.hell.biomeID ) {
-			this.genStandardOre( chunkX, chunkZ, world, random, 20, this.magnetiteGen, 0, 64 );
-			this.genStandardOre( chunkX, chunkZ, world, random, 20, this.nickelGen, 0, 64 );
-		}
+		if (world.provider.dimensionId == dimension) generate(world, random, chunkX, chunkZ);
 	}
 
-	protected void genStandardOre(int chunkX, int chunkZ, World world, Random random, int rarity, WorldGenerator worldGen, int above_bedrock, int range) {
-		for( int i = 0; i < rarity; ++i ) {
-			int randx = chunkX + random.nextInt( 16 );
-			int randy = random.nextInt( range - above_bedrock ) + above_bedrock;
-			int randz = chunkZ + random.nextInt( 16 );
-			worldGen.generate( world, random, randx, randy, randz );
-		}
+	private void generate(World world, Random rand, int chunkX, int chunkZ) {
+        for(int k = 0; k < 10; k++){
+        	int firstBlockXCoord = chunkX + rand.nextInt(16);
+        	int firstBlockYCoord = rand.nextInt(yMax);
+        	int firstBlockZCoord = chunkZ + rand.nextInt(16);
+        	
+        	(new WorldGenMinable(blockID, blockMeta, blockAmount, 1)).generate(world, rand, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
+        }
 	}
 
 }
