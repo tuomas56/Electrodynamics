@@ -12,10 +12,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import nanocircuit.core.Config;
 import nanocircuit.core.Reference;
-import nanocircuit.world.BlockOre;
-import nanocircuit.world.BlockStorage;
-import nanocircuit.world.CommonProxy;
-import nanocircuit.world.WorldGenOre;
+import nanocircuit.world.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.MinecraftForge;
@@ -67,18 +64,32 @@ public class NanoCircuitWorld {
 	public void initBlocks() {
 		blockOre = new BlockOre( Config.BLOCK_ID.oreBlock );
 		blockStorage = new BlockStorage( Config.BLOCK_ID.storageBlock );
-		GameRegistry.registerBlock( blockOre, nanocircuit.world.ItemOre.class, "ore" );
-		GameRegistry.registerBlock( blockStorage, nanocircuit.world.ItemStorage.class, "storage" );
-		blockOre.setUnlocalizedName( "tile.ncmOre" );
-		blockStorage.setUnlocalizedName( "tile.ncmStorage" );
-		MinecraftForge.setBlockHarvestLevel( blockOre, Reference.ORE_META.MAGNETITE, "pickaxe", 2 );
-		MinecraftForge.setBlockHarvestLevel( blockOre, Reference.ORE_META.NICKEL, "pickaxe", 2 );
-		OreDictionary.registerOre( "oreMagnetite", new ItemStack( blockOre, 1, Reference.ORE_META.MAGNETITE ) );
-		OreDictionary.registerOre( "oreNickel", new ItemStack( blockOre, 1, Reference.ORE_META.NICKEL ) );
 
-		LanguageRegistry.instance().addStringLocalization( "tile.oreMagnetite.name", "en_US", "Magnetite Ore" );
-		LanguageRegistry.instance().addStringLocalization( "tile.oreNickel.name", "en_US", "Nickel Ore" );
-		LanguageRegistry.instance().addStringLocalization( "tile.strgLodestone.name", "en_US", "Lodestone Block" );
+		String language = "en_US"; // temporary. Will change after localizations are implemented.
+
+		// Register all properties of Ores.
+		GameRegistry.registerBlock( blockOre, nanocircuit.world.ItemOre.class, "ore" );
+		for( Ores ore : Ores.values() ) {
+			ItemStack itemOre = ore.toItemStack();
+
+			// Register Harvest Level
+			MinecraftForge.setBlockHarvestLevel( blockOre, ore.ordinal(), "pickaxe", ore.getHarvestLevel() );
+
+			// Register Localization
+			LanguageRegistry.instance().addNameForObject( itemOre, language, ore.getLocalizedName( language ) );
+
+			// Register ores in the Ore Dictionary
+			OreDictionary.registerOre( ore.getUnlocalizedName(), itemOre );
+		}
+
+		// Register all properties of StorageBlocks
+		GameRegistry.registerBlock( blockStorage, nanocircuit.world.ItemStorage.class, "storage" );
+		for( StorageBlocks sb : StorageBlocks.values() ) {
+			ItemStack storageBlock = sb.toItemStack();
+
+			// Register Localization
+			LanguageRegistry.instance().addNameForObject( storageBlock, language, sb.getLocalizedName( language ) );
+		}
 	}
 
 	public void initWorld() {
@@ -87,7 +98,7 @@ public class NanoCircuitWorld {
 	}
 
 	public void initRecipes() {
-		GameRegistry.addRecipe( new ItemStack( this.blockStorage, 1, Reference.STORAGE_META.LODESTONE ), "III", "III", "III", 'I', new ItemStack( NanoCircuitCore.itemComponent, 1, Reference.COMPONENT_META.LODESTONE_INGOT ) );
+		GameRegistry.addRecipe( StorageBlocks.LODESTONE.toItemStack(), "III", "III", "III", 'I', new ItemStack( NanoCircuitCore.itemComponent, 1, Reference.COMPONENT_META.LODESTONE_INGOT ) );
 		FurnaceRecipes.smelting().addSmelting( NanoCircuitCore.itemComponent.itemID, Reference.COMPONENT_META.LODESTONE_DUST, new ItemStack( NanoCircuitCore.itemComponent, 1, Reference.COMPONENT_META.LODESTONE_INGOT ), 0.1f );
 	}
 

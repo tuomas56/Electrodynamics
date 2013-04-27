@@ -7,8 +7,8 @@ import nanocircuit.core.Config;
 import nanocircuit.core.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 
 import java.util.List;
@@ -18,15 +18,10 @@ public class BlockOre extends Block {
 
 	public BlockOre(int i) {
 		super( i, Material.rock );
+		setUnlocalizedName( "tile.ncmOre" );
 		setHardness( 3F );
 		setResistance( 5F );
 		setCreativeTab( NanoCircuitCore.tabsNCM );
-	}
-
-	@Override
-	public Icon getIcon(int side, int metadata) {
-		//return metadata;
-		return null;
 	}
 
 	@Override
@@ -65,12 +60,31 @@ public class BlockOre extends Block {
 	}
 
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings("unchecked")
 	public void getSubBlocks(int unknown, CreativeTabs tab, List subItems) {
-		for( int ix = 0; ix < Reference.ORE_META.AMOUNT; ix++ ) {
-			subItems.add( new ItemStack( this, 1, ix ) );
+		for( Ores ore : Ores.values() ) {
+			subItems.add( ore.toItemStack() );
 		}
 	}
 
-	// Texture File: Reference.BLOCK_TEXTURE;
+	// Textures
+
+	@SideOnly(Side.CLIENT)
+	private Icon[] textures;
+
+	@Override
+	public Icon getIcon(int side, int metadata) {
+		return textures[metadata];
+	}
+
+	@Override
+	public void registerIcons(IconRegister registry) {
+		int count = Ores.values().length;
+
+		textures = new Icon[count];
+		for( int i = 0; i < count; i++ ) {
+			textures[i] = registry.registerIcon( Ores.get( i ).getTextureFile() );
+		}
+	}
 
 }

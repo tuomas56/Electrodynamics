@@ -5,8 +5,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import nanocircuit.NanoCircuitCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 
 import java.util.List;
@@ -18,12 +18,6 @@ public class BlockStorage extends Block {
 		setHardness( 3F );
 		setResistance( 5F );
 		setCreativeTab( NanoCircuitCore.tabsNCM );
-	}
-
-	@Override
-	public Icon getIcon(int side, int metadata) {
-		//return 18 + metadata;
-		return null;
 	}
 
 	@Override
@@ -42,11 +36,31 @@ public class BlockStorage extends Block {
 	}
 
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings("unchecked")
 	public void getSubBlocks(int unknown, CreativeTabs tab, List subItems) {
-		for( int ix = 0; ix < 1; ix++ ) {
-			subItems.add( new ItemStack( this, 1, ix ) );
+		for( StorageBlocks sb : StorageBlocks.values() ) {
+			subItems.add( sb.toItemStack() );
 		}
 	}
 
-	// Texture File: return Reference.BLOCK_TEXTURE;
+	// Textures
+
+	@SideOnly(Side.CLIENT)
+	private Icon[] textures;
+
+	@Override
+	public Icon getIcon(int side, int metadata) {
+		return textures[metadata];
+	}
+
+	@Override
+	public void registerIcons(IconRegister registry) {
+		int count = StorageBlocks.values().length;
+
+		textures = new Icon[count];
+		for( int i = 0; i < count; i++ ) {
+			textures[i] = registry.registerIcon( StorageBlocks.get( i ).getTextureFile() );
+		}
+	}
+
 }
