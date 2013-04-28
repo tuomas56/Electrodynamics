@@ -2,7 +2,7 @@ package nanocircuit.core.configuration;
 
 public class ConfigurationSettings {
 
-	/* World settings */
+	/* Magnetite spawn settings */
 	public static boolean MAGNETITE_ENABLED;
 	public static final String MAGNETITE_ENABLED_CONFIGNAME = "magnetite.enabled";
 	public static final boolean MAGNETITE_ENABLED_DEFAULT = true;
@@ -19,6 +19,7 @@ public class ConfigurationSettings {
 	public static final String MAGNETITE_SPAWN_RARITY_CONFIGNAME = "magnetite.spawn_rarity";
 	public static final int MAGNETITE_SPAWN_RARITY_DEFAULT = 8;
 
+	/* Nickel spawn settings */
 	public static boolean NICKEL_ENABLED;
 	public static final String NICKEL_ENABLED_CONFIGNAME = "nickel.enabled";
 	public static final boolean NICKEL_ENABLED_DEFAULT = true;
@@ -35,4 +36,9 @@ public class ConfigurationSettings {
 	public static final String NICKEL_SPAWN_RARITY_CONFIGNAME = "nickle.spawn_rarity";
 	public static final int NICKEL_SPAWN_RARITY_DEFAULT = 8;
 
+	/* Magnetized armor ability settings */
+	public static double MAGNETIC_RANGE;
+	public static final String MAGNETIC_RANGE_CONFIGNAME = "magnetic_armor.range";
+	public static final double MAGNETIC_RANGE_DEFAULT = 3D;
+	
 }

@@ -2,6 +2,7 @@ package nanocircuit.core.item;
 
 import java.util.List;
 
+import nanocircuit.core.configuration.ConfigurationSettings;
 import nanocircuit.core.core.CreativeTabNCM;
 import nanocircuit.core.lib.Component;
 import net.minecraft.entity.item.EntityItem;
@@ -37,7 +38,7 @@ public class ItemMagnetizedArmor extends Item {
 	public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack itemStack) {
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) return;
 		
-		List<EntityItem> nearbyItems = world.getEntitiesWithinAABB(EntityItem.class, player.boundingBox.expand(4.5D, 0.5D, 4.5D));
+		List<EntityItem> nearbyItems = world.getEntitiesWithinAABB(EntityItem.class, player.boundingBox.expand(ConfigurationSettings.MAGNETIC_RANGE, ConfigurationSettings.MAGNETIC_RANGE, ConfigurationSettings.MAGNETIC_RANGE));
 		
 		for (EntityItem item : nearbyItems) {
 			if (item != null) {
