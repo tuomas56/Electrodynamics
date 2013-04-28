@@ -10,4 +10,8 @@ public class ItemIDs {
 	public static int ITEM_PCB_ID;
 	public static final int ITEM_PCB_DEFAULT_ID = 5101;
 	
+	/* itemMagnetizedArmor */
+	public static int ITEM_MAG_ARMOR_ID;
+	public static final int ITEM_MAG_ARMOR_DEFAULT_ID = 5102;
+	
 }

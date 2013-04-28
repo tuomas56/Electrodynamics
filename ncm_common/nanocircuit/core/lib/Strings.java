@@ -5,6 +5,7 @@ public class Strings {
 	/* Internal item names */
 	public static final String ITEM_COMPONENT_NAME = "itemComponent";
 	public static final String ITEM_PCB_NAME = "itemPCB";
+	public static final String ITEM_MAG_ARMOR_NAME = "itemMagnetizedArmor";
 	
 	/* Internal component names */
 	public static final String FAN_BLADE_NAME = "fanBlade";

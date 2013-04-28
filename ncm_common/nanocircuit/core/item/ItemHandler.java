@@ -12,6 +12,7 @@ public class ItemHandler {
 
 	public static Item itemComponent;
 	public static Item itemPCB;
+	public static Item itemMagArmor;
 	
 	public static void initializeItems() {
 		itemComponent = new ItemComponent(ItemIDs.ITEM_COMPONENT_ID).setUnlocalizedName(Strings.ITEM_COMPONENT_NAME);
@@ -23,6 +24,10 @@ public class ItemHandler {
 		itemPCB = new ItemPCB(ItemIDs.ITEM_PCB_ID).setUnlocalizedName(Strings.ITEM_PCB_NAME);
 		GameRegistry.registerItem(itemPCB, Strings.ITEM_PCB_NAME);
 		LanguageRegistry.addName(itemPCB, "PCB");
+		
+		itemMagArmor = new ItemMagnetizedArmor(ItemIDs.ITEM_MAG_ARMOR_ID).setUnlocalizedName(Strings.ITEM_MAG_ARMOR_NAME);
+		GameRegistry.registerItem(itemMagArmor, Strings.ITEM_MAG_ARMOR_NAME);
+		LanguageRegistry.addName(itemMagArmor, "Magnetized Chest Plate");
 	}
 	
 }
