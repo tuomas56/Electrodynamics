@@ -15,7 +15,7 @@ public class ConfigurationSettings {
 	public static final String MAGNETITE_SPAWN_AMOUNT_CONFIGNAME = "magnetite.spawn_amount";
 	public static final int MAGNETITE_SPAWN_AMOUNT_DEFAULT = 8;
 	
-	public static final int MAGNETITE_SPAWN_RARITY;
+	public static int MAGNETITE_SPAWN_RARITY;
 	public static final String MAGNETITE_SPAWN_RARITY_CONFIGNAME = "magnetite.spawn_rarity";
 	public static final int MAGNETITE_SPAWN_RARITY_DEFAULT = 8;
 

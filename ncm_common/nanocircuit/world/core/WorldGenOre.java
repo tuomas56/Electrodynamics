@@ -15,7 +15,6 @@ public class WorldGenOre implements IWorldGenerator {
 	private int yMax;
 	private int rarity;
 	private int dimension;
-	private int rarity;
 	
 	public WorldGenOre(int blockID, int blockMeta, int blockAmount, int yMax, int rarity) {
 		this.blockID = blockID;
