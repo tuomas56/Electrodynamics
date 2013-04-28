@@ -17,10 +17,10 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "NCWorld", name = "NanoCircuit World", version = ModInfo.VERSION, dependencies = "required-after:NCCore")
+@Mod(modid = "NC|World", name = "NanoCircuit - World", version = ModInfo.VERSION, dependencies = "required-after:NC|Core")
 @NetworkMod(clientSideRequired = false, serverSideRequired = false)
 public class NanoCircuitWorld {
-	@Instance("NCWorld")
+	@Instance("NC|World")
 	public static NanoCircuitWorld instance;
 	@SidedProxy(clientSide = "nanocircuit.world.core.ClientProxy", serverSide = "nanocircuit.world.core.CommonProxy")
 	public static CommonProxy proxy;

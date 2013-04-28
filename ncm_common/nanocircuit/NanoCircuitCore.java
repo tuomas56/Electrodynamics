@@ -15,10 +15,10 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
-@Mod(modid = "NCCore", name = "NanoCircuit Core", version = ModInfo.VERSION, dependencies = "after:IC2")
+@Mod(modid = "NC|Core", name = "NanoCircuit - Core", version = ModInfo.VERSION, dependencies = "after:IC2")
 @NetworkMod(clientSideRequired = false, serverSideRequired = false)
 public class NanoCircuitCore {
-	@Instance("NCCore")
+	@Instance("NC|Core")
 	public static NanoCircuitCore instance;
 	@SidedProxy(clientSide = "nanocircuit.core.core.ClientProxy", serverSide = "nanocircuit.core.core.CommonProxy")
 	public static CommonProxy proxy;

@@ -11,10 +11,10 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
-@Mod(modid = "NCMachine", name = "NanoCircuit Machine", version = ModInfo.VERSION, dependencies = "required-after:NCCore;required-after:NCWorld")
+@Mod(modid = "NC|Machine", name = "NanoCircuit - Machine", version = ModInfo.VERSION, dependencies = "required-after:NC|Core;required-after:NC|World")
 @NetworkMod(clientSideRequired = false, serverSideRequired = false)
 public class NanoCircuitMachine {
-	@Instance("NCMachine")
+	@Instance("NC|Machine")
 	public static NanoCircuitMachine instance;
 	@SidedProxy(clientSide = "nanocircuit.machine.core.ClientProxy", serverSide = "nanocircuit.machine.core.CommonProxy")
 	public static CommonProxy proxy;
