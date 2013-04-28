@@ -8,9 +8,11 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.Packet28EntityVelocity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 
 public class ItemMagnetizedArmor extends Item {
@@ -35,10 +37,12 @@ public class ItemMagnetizedArmor extends Item {
 	public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack itemStack) {
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) return;
 		
-		List<EntityItem> nearbyItems = world.getEntitiesWithinAABB(EntityItem.class, player.boundingBox.expand(2.5D, 0.5D, 2.5D));
+		List<EntityItem> nearbyItems = world.getEntitiesWithinAABB(EntityItem.class, player.boundingBox.expand(4.5D, 0.5D, 4.5D));
 		
 		for (EntityItem item : nearbyItems) {
 			if (item != null) {
+				if (item.delayBeforeCanPickup > 0) return;
+				
 				double d0 = 8.0D;
 				double d1 = (player.posX - item.posX) / d0;
 	            double d2 = (player.posY + (double)player.getEyeHeight() - item.posY) / d0;
@@ -51,6 +55,8 @@ public class ItemMagnetizedArmor extends Item {
 	                item.motionX += d1 / d4 * d5 * 0.1D;
 	                item.motionY += d2 / d4 * d5 * 0.1D;
 	                item.motionZ += d3 / d4 * d5 * 0.1D;
+	                
+	                PacketDispatcher.sendPacketToAllInDimension(new Packet28EntityVelocity(item), world.provider.dimensionId);
 	            }
 			}
 		}
