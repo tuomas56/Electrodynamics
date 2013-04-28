@@ -12,7 +12,12 @@ This mod is not to be used in any modpacks.
 
 #Main Development Team
 
-CyanideX, Hawkye, Xhamolk_, Odiefrom, Mrabow, dmillerw
+CyanideX, Hawkye, Xhamolk_, dmillerw, Odiefrom, Mrabow
+
+#Extended Credits
+Forge Dev Team
+Eloraam
+Chickenbones
 
 
 ##Extended Description
