@@ -5,7 +5,10 @@ public class Strings {
 	/* Internal item names */
 	public static final String ITEM_COMPONENT_NAME = "itemComponent";
 	public static final String ITEM_PCB_NAME = "itemPCB";
-	public static final String ITEM_MAG_ARMOR_NAME = "itemMagnetizedArmor";
+	public static final String ITEM_TESLA_HAT_NAME = "itemTeslaHat";
+	public static final String ITEM_TESLA_CHEST_NAME = "itemTeslaChest";
+	public static final String ITEM_TESLA_LEGS_NAME = "itemTeslaLegs";
+	public static final String ITEM_TESLA_BOOTS_NAME = "itemTeslaBoots";
 	
 	/* Internal component names */
 	public static final String FAN_BLADE_NAME = "fanBlade";

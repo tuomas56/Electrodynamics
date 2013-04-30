@@ -1,5 +1,9 @@
 package nanocircuit.core.item;
 
+import nanocircuit.core.item.tesla.ItemArmorTeslaBoots;
+import nanocircuit.core.item.tesla.ItemArmorTeslaChest;
+import nanocircuit.core.item.tesla.ItemArmorTeslaHelm;
+import nanocircuit.core.item.tesla.ItemArmorTeslaLegs;
 import nanocircuit.core.lib.Component;
 import nanocircuit.core.lib.ItemIDs;
 import nanocircuit.core.lib.Strings;
@@ -12,7 +16,10 @@ public class ItemHandler {
 
 	public static Item itemComponent;
 	public static Item itemPCB;
-	public static Item itemMagArmor;
+	public static Item itemTeslaHelm;
+	public static Item itemTeslaChest;
+	public static Item itemTeslaLegs;
+	public static Item itemTeslaBoots;
 	
 	public static void initializeItems() {
 		itemComponent = new ItemComponent(ItemIDs.ITEM_COMPONENT_ID).setUnlocalizedName(Strings.ITEM_COMPONENT_NAME);
@@ -25,9 +32,21 @@ public class ItemHandler {
 		GameRegistry.registerItem(itemPCB, Strings.ITEM_PCB_NAME);
 		LanguageRegistry.addName(itemPCB, "PCB");
 		
-		itemMagArmor = new ItemMagnetizedArmor(ItemIDs.ITEM_MAG_ARMOR_ID).setUnlocalizedName(Strings.ITEM_MAG_ARMOR_NAME);
-		GameRegistry.registerItem(itemMagArmor, Strings.ITEM_MAG_ARMOR_NAME);
-		LanguageRegistry.addName(itemMagArmor, "Magnetized Chest Plate");
+		itemTeslaHelm = new ItemArmorTeslaHelm(ItemIDs.ITEM_TESLA_HELM_ID).setUnlocalizedName(Strings.ITEM_TESLA_HAT_NAME);
+		GameRegistry.registerItem(itemTeslaHelm, Strings.ITEM_TESLA_HAT_NAME);
+		LanguageRegistry.addName(itemTeslaHelm, "Tesla Helmet");
+		
+		itemTeslaChest = new ItemArmorTeslaChest(ItemIDs.ITEM_TESLA_CHEST_ID).setUnlocalizedName(Strings.ITEM_TESLA_CHEST_NAME);
+		GameRegistry.registerItem(itemTeslaChest, Strings.ITEM_TESLA_CHEST_NAME);
+		LanguageRegistry.addName(itemTeslaChest, "Tesla Chestplate");
+		
+		itemTeslaLegs = new ItemArmorTeslaLegs(ItemIDs.ITEM_TESLA_LEGS_ID).setUnlocalizedName(Strings.ITEM_TESLA_LEGS_NAME);
+		GameRegistry.registerItem(itemTeslaLegs, Strings.ITEM_TESLA_LEGS_NAME);
+		LanguageRegistry.addName(itemTeslaLegs, "Tesla Leggings");
+		
+		itemTeslaBoots = new ItemArmorTeslaBoots(ItemIDs.ITEM_TESLA_BOOTS_ID).setUnlocalizedName(Strings.ITEM_TESLA_BOOTS_NAME);
+		GameRegistry.registerItem(itemTeslaBoots, Strings.ITEM_TESLA_BOOTS_NAME);
+		LanguageRegistry.addName(itemTeslaBoots, "Tesla Boots");
 	}
 	
 }

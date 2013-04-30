@@ -1,13 +1,17 @@
-package nanocircuit.core.item;
+package nanocircuit.core.item.tesla;
 
 import java.util.List;
 
 import nanocircuit.core.configuration.ConfigurationSettings;
 import nanocircuit.core.core.CreativeTabNCM;
-import nanocircuit.core.lib.Component;
+import nanocircuit.core.item.ItemHandler;
+import nanocircuit.core.lib.ModInfo;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.item.EnumArmorMaterial;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet28EntityVelocity;
 import net.minecraft.util.Icon;
@@ -16,10 +20,12 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 
-public class ItemMagnetizedArmor extends Item {
+public class ItemArmorTeslaChest extends ItemArmor {
 
-	public ItemMagnetizedArmor(int id) {
-		super(id);
+	private Icon texture;
+	
+	public ItemArmorTeslaChest(int id) {
+		super(id, EnumArmorMaterial.IRON, 2, 1);
 		setCreativeTab(CreativeTabNCM.item);
 		setMaxStackSize(1);
 		setMaxDamage(0);
@@ -27,11 +33,11 @@ public class ItemMagnetizedArmor extends Item {
 	
 	@Override
 	public Icon getIconFromDamage(int damage) {
-		return ItemHandler.itemComponent.getIconFromDamage(Component.MAGNET.ordinal());
+		return texture;
 	}
 	
-	public boolean isValidArmor(ItemStack stack, int armorType) {
-		return (armorType == 1) && (stack.getItem() == ItemHandler.itemMagArmor);
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
+		return stack.getItem() == ItemHandler.itemTeslaChest ? ModInfo.RESOURCES_BASE + "/armor/tesla_1.png" : null;
 	}
 	
 	@SuppressWarnings({ "unchecked" })
@@ -62,5 +68,10 @@ public class ItemMagnetizedArmor extends Item {
 			}
 		}
     }
+	
+	@Override
+	public void registerIcons(IconRegister register) {
+		texture = register.registerIcon(ModInfo.ICON_PREFIX + "tesla/itemArmorTeslaChest");
+	}
 	
 }
