@@ -59,9 +59,9 @@ public class ItemArmorTeslaChest extends ItemArmor {
 
 	            if (d5 > 0.0D) {
 	                d5 *= d5;
-	                item.motionX += d1 / d4 * d5 * 0.1D;
-	                item.motionY += d2 / d4 * d5 * 0.1D;
-	                item.motionZ += d3 / d4 * d5 * 0.1D;
+	                item.motionX += d1 / d4 * d5 * ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED;
+	                item.motionY += d2 / d4 * d5 * ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED;
+	                item.motionZ += d3 / d4 * d5 * ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED;
 	                
 	                PacketDispatcher.sendPacketToAllInDimension(new Packet28EntityVelocity(item), world.provider.dimensionId);
 	            }

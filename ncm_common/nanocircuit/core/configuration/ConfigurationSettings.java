@@ -41,4 +41,8 @@ public class ConfigurationSettings {
 	public static final String MAGNETIC_RANGE_CONFIGNAME = "magnetic_armor.range";
 	public static final double MAGNETIC_RANGE_DEFAULT = 3D;
 	
+	public static double MAGNETIC_ATTRACTION_SPEED;
+	public static final String MAGNETIC_ATTRACTION_SPEED_CONFIGNAME = "magnetic_armor.speed";
+	public static final double MAGNETIC_ATTRACTION_SPEED_DEFAULT = 0.1D;
+	
 }
