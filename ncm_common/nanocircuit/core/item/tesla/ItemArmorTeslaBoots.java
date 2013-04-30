@@ -28,12 +28,12 @@ public class ItemArmorTeslaBoots extends ItemArmor {
 	
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
-		return stack.getItem() == ItemHandler.itemTeslaBoots ? ModInfo.RESOURCES_BASE + "/armor/tesla_2.png" : null;
+		return stack.getItem() == ItemHandler.itemTeslaBoots ? ModInfo.RESOURCES_BASE + "/armor/tesla_1.png" : null;
 	}
 	
 	@Override
 	public void registerIcons(IconRegister register) {
-		texture = register.registerIcon(ModInfo.ICON_PREFIX + "tesla/itemArmorTeslaBoots");
+		texture = register.registerIcon(ModInfo.ICON_PREFIX + "tesla/boots");
 	}
 	
 }

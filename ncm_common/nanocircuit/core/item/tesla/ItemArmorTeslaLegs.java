@@ -15,7 +15,7 @@ public class ItemArmorTeslaLegs extends ItemArmor {
 	private Icon texture;
 	
 	public ItemArmorTeslaLegs(int id) {
-		super(id, EnumArmorMaterial.IRON, 2, 3);
+		super(id, EnumArmorMaterial.IRON, 2, 2);
 		setCreativeTab(CreativeTabNCM.item);
 		setMaxStackSize(1);
 		setMaxDamage(0);
@@ -32,7 +32,7 @@ public class ItemArmorTeslaLegs extends ItemArmor {
 	
 	@Override
 	public void registerIcons(IconRegister register) {
-		texture = register.registerIcon(ModInfo.ICON_PREFIX + "tesla/itemArmorTeslaLeggings");
+		texture = register.registerIcon(ModInfo.ICON_PREFIX + "tesla/leggings");
 	}
 	
 }

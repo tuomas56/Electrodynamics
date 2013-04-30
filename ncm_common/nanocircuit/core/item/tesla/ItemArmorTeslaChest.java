@@ -71,7 +71,7 @@ public class ItemArmorTeslaChest extends ItemArmor {
 	
 	@Override
 	public void registerIcons(IconRegister register) {
-		texture = register.registerIcon(ModInfo.ICON_PREFIX + "tesla/itemArmorTeslaChest");
+		texture = register.registerIcon(ModInfo.ICON_PREFIX + "tesla/chestplate");
 	}
 	
 }

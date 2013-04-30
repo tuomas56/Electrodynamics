@@ -32,7 +32,7 @@ public class ItemArmorTeslaHelm extends ItemArmor {
 	
 	@Override
 	public void registerIcons(IconRegister register) {
-		texture = register.registerIcon(ModInfo.ICON_PREFIX + "tesla/itemArmorTeslaHelmet");
+		texture = register.registerIcon(ModInfo.ICON_PREFIX + "tesla/helmet");
 	}
 	
 }
