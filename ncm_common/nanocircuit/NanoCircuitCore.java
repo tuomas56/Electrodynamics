@@ -5,6 +5,7 @@ import java.io.File;
 import nanocircuit.core.client.render.RenderThermalOverlay;
 import nanocircuit.core.configuration.ConfigurationHandler;
 import nanocircuit.core.core.CommonProxy;
+import nanocircuit.core.core.helper.HeatHelper;
 import nanocircuit.core.item.ItemHandler;
 import nanocircuit.core.lib.ModInfo;
 import net.minecraftforge.common.MinecraftForge;
@@ -34,6 +35,7 @@ public class NanoCircuitCore {
 
 	@Init
 	public void init(FMLInitializationEvent event) {
+		HeatHelper.initializeMapping();
 		MinecraftForge.EVENT_BUS.register(new RenderThermalOverlay());
 	}
 

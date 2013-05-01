@@ -2,9 +2,13 @@ package nanocircuit.core.lib;
 
 public enum HeatValue {
 
-	COLD(0, 0, 0),
-	NORMAL(0, 0, 0),
-	HOT(0, 0, 0);
+	VERY_HOT(255, 238, 238),
+	HOT(174, 22, 19),
+	WARM(213, 195, 0),
+	TEPID(41, 255, 63),
+	COOL(92, 255, 255),
+	COLD(14, 65, 255),
+	FREEZING(0, 0, 0);
 	
 	public int r;
 	public int g;
