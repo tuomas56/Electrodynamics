@@ -1,8 +1,8 @@
-#ElectroDynamics
+#Electrodynamics
 
 This mod is **in development** and is open source for your enjoyment.
 
-Electro Dynamics is copyrighted by [CyanideX](https://github.com/CyanideX "CyanideX GitHub profile").
+Electrodynamics is copyrighted by [CyanideX](https://github.com/CyanideX "CyanideX GitHub profile").
 
 This mod is not to be used in any modpacks.
 
