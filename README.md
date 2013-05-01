@@ -28,4 +28,4 @@ Chickenbones
 
 ##Planned Features
 
-[Website](no link yet)
+[Website](http://electrodynamicsmod.com/ "Electrodynamics")
