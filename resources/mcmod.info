@@ -1,7 +1,7 @@
 [
 {
-	"modid": "NC|Core",
-	"name": "NanoCircuit - Core",
+	"modid": "ED|Core",
+	"name": "Electrodynamics - Core",
 	"description": "Compact your world, comrade!",
 	"credits": "Forge team for Forge, Eloraam for RP2!",
 	"url": "http://www.minecraftforum.net/topic/1321755-nano-circuit-mod-wip-redesigned/",
@@ -11,8 +11,8 @@
 	]
 },
 {
-	"modid": "NC|World",
-	"name": "NanoCircuit - World",
+	"modid": "ED|World",
+	"name": "Electrodynamics - World",
 	"description": "Compact your world, comrade! (WorldGen)",
 	"credits": "Forge team for Forge, Eloraam for RP2!",
 	"url": "http://www.minecraftforum.net/topic/1321755-nano-circuit-mod-wip-redesigned/",
@@ -23,8 +23,8 @@
 	]
 },
 {
-	"modid": "NC|Machine",
-	"name": "NanoCircuit - Machine",
+	"modid": "ED|Machine",
+	"name": "Electrodynamics - Machine",
 	"description": "Compact your world, comrade! (Machines)",
 	"credits": "Forge team for Forge, Eloraam for RP2!",
 	"url": "http://www.minecraftforum.net/topic/1321755-nano-circuit-mod-wip-redesigned/",
@@ -35,8 +35,8 @@
 	]
 },
 {
-	"modid": "NC|Logic",
-	"name": "NanoCircuit - Logic",
+	"modid": "ED|Logic",
+	"name": "Electrodynamics - Logic",
 	"description": "Compact your world, comrade! (Logic)",
 	"credits": "Forge team for Forge, Eloraam for RP2!",
 	"url": "http://www.minecraftforum.net/topic/1321755-nano-circuit-mod-wip-redesigned/",
