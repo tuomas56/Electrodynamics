@@ -16,8 +16,8 @@ public class CreativeTabED extends CreativeTabs {
 	public int itemMeta = 0;
 	
 	static {
-		item = new CreativeTabED("NCM Items").setIcon(ItemIDs.ITEM_PCB_ID + 256, 0);
-		block = new CreativeTabED("NCM Blocks").setIcon(BlockIDs.BLOCK_ORE_ID, Ore.NICKEL.ordinal());
+		item = new CreativeTabED("ED Items").setIcon(ItemIDs.ITEM_PCB_ID + 256, 0);
+		block = new CreativeTabED("ED Blocks").setIcon(BlockIDs.BLOCK_ORE_ID, Ore.NICKEL.ordinal());
 	}
 	
 	public CreativeTabED(String label) {
