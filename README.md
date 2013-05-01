@@ -1,8 +1,8 @@
-#NCM
+#ElectroDynamics
 
 This mod is **in development** and is open source for your enjoyment.
 
-Nano Circuit Mod is copyrighted by [CyanideX](https://github.com/CyanideX "CyanideX GitHub profile").
+Electro Dynamics is copyrighted by [CyanideX](https://github.com/CyanideX "CyanideX GitHub profile").
 
 This mod is not to be used in any modpacks.
 
@@ -25,8 +25,6 @@ Chickenbones
 ##Extended Description
 
 *Info currently being updated*
-
-\- *Nano Circuit Mod Wiki* ( [http://nanocircuitmod.wikispaces.com/](http://nanocircuitmod.wikispaces.com/) )
 
 ##Planned Features
 
