@@ -17,10 +17,10 @@ import electrodynamics.world.core.CommonProxy;
 import electrodynamics.world.core.WorldGenOre;
 import electrodynamics.world.lib.Ore;
 
-@Mod(modid = "NC|World", name = "NanoCircuit - World", version = ModInfo.VERSION, dependencies = "required-after:NC|Core")
+@Mod(modid = "ED|World", name = "Electrodynamics - World", version = ModInfo.VERSION, dependencies = "required-after:ED|Core")
 @NetworkMod(clientSideRequired = false, serverSideRequired = false)
 public class ElectroDynamicsWorld {
-	@Instance("NC|World")
+	@Instance("ED|World")
 	public static ElectroDynamicsWorld instance;
 	@SidedProxy(clientSide = "electrodynamics.world.core.ClientProxy", serverSide = "electrodynamics.world.core.CommonProxy")
 	public static CommonProxy proxy;

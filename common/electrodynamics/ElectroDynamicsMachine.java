@@ -14,10 +14,10 @@ import cpw.mods.fml.relauncher.Side;
 import electrodynamics.core.lib.ModInfo;
 import electrodynamics.machine.core.CommonProxy;
 
-@Mod(modid = "NC|Machine", name = "NanoCircuit - Machine", version = ModInfo.VERSION, dependencies = "required-after:NC|Core;required-after:NC|World")
+@Mod(modid = "ED|Machine", name = "Electrodynamics - Machine", version = ModInfo.VERSION, dependencies = "required-after:ED|Core;required-after:ED|World")
 @NetworkMod(clientSideRequired = false, serverSideRequired = false)
 public class ElectroDynamicsMachine {
-	@Instance("NC|Machine")
+	@Instance("ED|Machine")
 	public static ElectroDynamicsMachine instance;
 	@SidedProxy(clientSide = "electrodynamics.machine.core.ClientProxy", serverSide = "electrodynamics.machine.core.CommonProxy")
 	public static CommonProxy proxy;

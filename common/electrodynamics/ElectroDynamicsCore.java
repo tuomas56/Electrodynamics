@@ -18,10 +18,10 @@ import electrodynamics.core.core.helper.HeatHelper;
 import electrodynamics.core.item.ItemHandler;
 import electrodynamics.core.lib.ModInfo;
 
-@Mod(modid = "NC|Core", name = "NanoCircuit - Core", version = ModInfo.VERSION, dependencies = "after:IC2")
+@Mod(modid = "ED|Core", name = "Electrodynamics - Core", version = ModInfo.VERSION, dependencies = "after:IC2")
 @NetworkMod(clientSideRequired = false, serverSideRequired = false)
 public class ElectroDynamicsCore {
-	@Instance("NC|Core")
+	@Instance("ED|Core")
 	public static ElectroDynamicsCore instance;
 	@SidedProxy(clientSide = "electrodynamics.core.core.ClientProxy", serverSide = "electrodynamics.core.core.CommonProxy")
 	public static CommonProxy proxy;

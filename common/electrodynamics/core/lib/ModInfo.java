@@ -2,7 +2,7 @@ package electrodynamics.core.lib;
 
 public class ModInfo {
 	
-	public static final String GENERIC_MOD_ID = "ElectroDynamics";
+	public static final String GENERIC_MOD_ID = "Electrodynamics";
 	
 	public static final String DEPENDENCIES = "after:IC2";
 	public static final String VERSION = "@VERSION@";

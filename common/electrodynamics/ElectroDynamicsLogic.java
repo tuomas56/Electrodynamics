@@ -11,10 +11,10 @@ import cpw.mods.fml.common.network.NetworkMod;
 import electrodynamics.core.lib.ModInfo;
 import electrodynamics.logic.core.CommonProxy;
 
-@Mod(modid = "NC|Logic", name = "NanoCircuit - Logic", version = ModInfo.VERSION, dependencies = "required-after:NC|Core;required-after:NC|World;required-after:NC|Machine")
+@Mod(modid = "ED|Logic", name = "Electrodynamics - Logic", version = ModInfo.VERSION, dependencies = "required-after:ED|Core;required-after:ED|World;required-after:ED|Machine")
 @NetworkMod(clientSideRequired = false, serverSideRequired = false)
 public class ElectroDynamicsLogic {
-	@Instance("NC|Logic")
+	@Instance("ED|Logic")
 	public static ElectroDynamicsLogic instance;
 	@SidedProxy(clientSide = "electrodynamics.logic.core.ClientProxy", serverSide = "electrodynamics.logic.core.CommonProxy")
 	public static CommonProxy proxy;
