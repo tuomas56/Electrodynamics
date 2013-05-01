@@ -1,9 +1,11 @@
 package nanocircuit.core.client.render;
 
 import nanocircuit.core.configuration.ConfigurationSettings;
+import nanocircuit.core.item.ItemHandler;
 import nanocircuit.core.util.RenderUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.ForgeDirection;
@@ -17,9 +19,13 @@ public class RenderThermalOverlay {
 	public void onWorldRenderLast(RenderWorldLastEvent event) {
 		GL11.glPushMatrix();
 		Entity entity = event.context.mc.renderViewEntity;
+		EntityPlayer player = (EntityPlayer) entity;
 		RenderUtil.translateToWorldCoords(entity, event.partialTicks);
 
-		renderMobSpawnOverlay(entity);
+		if (player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].itemID == ItemHandler.itemTeslaHelm.itemID) {
+			renderMobSpawnOverlay(entity);
+		}
+		
 		GL11.glPopMatrix();
 	}
 
