@@ -36,13 +36,17 @@ public class ConfigurationSettings {
 	public static final String NICKEL_SPAWN_RARITY_CONFIGNAME = "nickle.spawn_rarity";
 	public static final int NICKEL_SPAWN_RARITY_DEFAULT = 8;
 
-	/* Magnetized armor ability settings */
+	/* Tesla armor ability settings */
 	public static double MAGNETIC_RANGE;
-	public static final String MAGNETIC_RANGE_CONFIGNAME = "magnetic_armor.range";
+	public static final String MAGNETIC_RANGE_CONFIGNAME = "tesla_armor.range";
 	public static final double MAGNETIC_RANGE_DEFAULT = 3D;
 	
 	public static double MAGNETIC_ATTRACTION_SPEED;
-	public static final String MAGNETIC_ATTRACTION_SPEED_CONFIGNAME = "magnetic_armor.speed";
+	public static final String MAGNETIC_ATTRACTION_SPEED_CONFIGNAME = "tesla_armor.speed";
 	public static final double MAGNETIC_ATTRACTION_SPEED_DEFAULT = 0.1D;
+	
+	public static double THERMAL_VIEW_RANGE;
+	public static final String THERMAL_VIEW_RANGE_CONFIGNAME = "tesla_armor.thermal_view_range";
+	public static final double THERMAL_VIEW_RANGE_DEFAULT = 16D;
 	
 }

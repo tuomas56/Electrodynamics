@@ -2,10 +2,12 @@ package nanocircuit;
 
 import java.io.File;
 
+import nanocircuit.core.client.render.RenderThermalOverlay;
 import nanocircuit.core.configuration.ConfigurationHandler;
 import nanocircuit.core.core.CommonProxy;
 import nanocircuit.core.item.ItemHandler;
 import nanocircuit.core.lib.ModInfo;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -32,7 +34,7 @@ public class NanoCircuitCore {
 
 	@Init
 	public void init(FMLInitializationEvent event) {
-
+		MinecraftForge.EVENT_BUS.register(new RenderThermalOverlay());
 	}
 
 }
