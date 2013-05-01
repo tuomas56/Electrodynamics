@@ -37,6 +37,7 @@ public class ElectroDynamicsCore {
 	public void init(FMLInitializationEvent event) {
 		HeatHelper.initializeMapping();
 		MinecraftForge.EVENT_BUS.register(new RenderThermalOverlay());
+		proxy.registerTileEntities();
 	}
 
 }

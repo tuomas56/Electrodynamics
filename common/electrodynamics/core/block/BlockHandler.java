@@ -1,4 +1,4 @@
-package electrodynamics.world.block;
+package electrodynamics.core.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -8,12 +8,14 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import electrodynamics.core.lib.BlockIDs;
 import electrodynamics.core.lib.Strings;
+import electrodynamics.world.block.BlockOre;
 import electrodynamics.world.block.item.ItemBlockOre;
 import electrodynamics.world.lib.Ore;
 
 public class BlockHandler {
 
 	public static Block blockOre;
+	public static Block blockHoloPad;
 	
 	public static void initializeBlocks() {
 		blockOre = new BlockOre(BlockIDs.BLOCK_ORE_ID).setUnlocalizedName(Strings.BLOCK_ORE_NAME);
@@ -25,6 +27,10 @@ public class BlockHandler {
 			MinecraftForge.setBlockHarvestLevel(blockOre, i, "pickaxe", Ore.get(i).harvestLevel);
 			OreDictionary.registerOre(Ore.get(i).oreDictionaryName, ore);
 		}
+		
+		blockHoloPad = new BlockHoloPad(BlockIDs.BLOCK_HOLO_PAD_ID).setUnlocalizedName(Strings.BLOCK_HOLO_PAD_NAME);
+		GameRegistry.registerBlock(blockHoloPad, Strings.BLOCK_HOLO_PAD_NAME);
+		LanguageRegistry.addName(blockHoloPad, "Holo Pad");
 	}
 	
 }

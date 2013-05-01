@@ -21,6 +21,7 @@ public class Strings {
 	
 	/* Internal block names */
 	public static final String BLOCK_ORE_NAME = "blockOre";
+	public static final String BLOCK_HOLO_PAD_NAME = "blockHoloPad";
 	
 	/* Internal ore names */
 	public static final String ORE_MAGNETITE_NAME = "oreMagnetite";
