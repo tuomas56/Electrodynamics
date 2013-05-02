@@ -26,8 +26,6 @@ public class KeybindingHandler extends KeyBindingRegistry.KeyHandler {
 	
 	@Override
 	public void keyDown(EnumSet<TickType> types, KeyBinding key, boolean tickEnd, boolean isRepeat) {
-		System.out.println(key.keyDescription + " pressed");
-		
 		if (tickEnd) {
 			if (FMLClientHandler.instance().getClient().inGameHasFocus) {
 				EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;

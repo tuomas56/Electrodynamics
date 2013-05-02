@@ -17,10 +17,6 @@ public abstract class PacketED {
 
 	public boolean isChunkPacket;
 	
-	public PacketED() {
-		
-	}
-	
 	public PacketED(PacketTypeHandler type, boolean chunk) {
 		this.packetType = type;
 		this.isChunkPacket = chunk;

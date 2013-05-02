@@ -26,8 +26,6 @@ public enum PacketTypeHandler {
 		
 		PacketED packet = null;
 		
-		System.out.println("Received " + values()[id].toString());
-		
 		try {
 			packet = values()[id].clazz.newInstance();
 		} catch(Exception ex) {
