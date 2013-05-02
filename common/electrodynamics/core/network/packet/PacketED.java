@@ -13,9 +13,9 @@ import electrodynamics.core.network.PacketTypeHandler;
 
 public abstract class PacketED {
 
-	public PacketTypeHandler packetType;
+	public final PacketTypeHandler packetType;
 
-	public boolean isChunkPacket;
+	public final boolean isChunkPacket;
 	
 	public PacketED(PacketTypeHandler type, boolean chunk) {
 		this.packetType = type;
