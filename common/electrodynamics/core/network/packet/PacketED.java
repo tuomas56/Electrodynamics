@@ -11,6 +11,7 @@ import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 import electrodynamics.core.network.PacketTypeHandler;
 
+// Note: subclass of PacketED *must* provide a constructor with no parameters.
 public abstract class PacketED {
 
 	public final PacketTypeHandler packetType;
