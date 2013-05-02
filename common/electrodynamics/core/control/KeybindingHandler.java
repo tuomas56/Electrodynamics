@@ -33,22 +33,24 @@ public class KeybindingHandler extends KeyBindingRegistry.KeyHandler {
 				if (player != null) {
 					ItemStack currentItem = player.getCurrentEquippedItem();
 					
-					//If player is holding an item that handles key presses
 					if (currentItem != null) {
 						if (currentItem.getItem() instanceof IKeyBoundServer) {
 							PacketDispatcher.sendPacketToServer(PacketTypeHandler.fillPacket(new PacketKeyPress(key.keyDescription)));
+							return;
 						} else if (currentItem.getItem() instanceof IKeyBoundClient) {
 							((IKeyBoundClient)currentItem.getItem()).doKeybindingAction(player, currentItem, key.keyDescription);
+							return;
 						}
-					}
-					
-					//If player is wearing armor that handles key presses
-					for (ItemStack armor : player.inventory.armorInventory) {
-						if (armor != null) {
-							if (armor.getItem() instanceof IKeyBoundServer) {
-								PacketDispatcher.sendPacketToServer(PacketTypeHandler.fillPacket(new PacketKeyPress(key.keyDescription)));
-							} else if (armor.getItem() instanceof IKeyBoundClient) {
-								((IKeyBoundClient)armor.getItem()).doKeybindingAction(player, armor, key.keyDescription);
+					} else {
+						for (ItemStack armor : player.inventory.armorInventory) {
+							if (armor != null) {
+								if (armor.getItem() instanceof IKeyBoundServer) {
+									PacketDispatcher.sendPacketToServer(PacketTypeHandler.fillPacket(new PacketKeyPress(key.keyDescription)));
+									return;
+								} else if (armor.getItem() instanceof IKeyBoundClient) {
+									((IKeyBoundClient)armor.getItem()).doKeybindingAction(player, armor, key.keyDescription);
+									return;
+								}
 							}
 						}
 					}

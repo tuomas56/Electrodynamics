@@ -1,14 +1,14 @@
 package electrodynamics.core.item.tesla;
 
-import electrodynamics.core.core.CreativeTabED;
-import electrodynamics.core.item.ItemHandler;
-import electrodynamics.core.lib.ModInfo;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import electrodynamics.core.core.CreativeTabED;
+import electrodynamics.core.item.ItemHandler;
+import electrodynamics.core.lib.ModInfo;
 
 public class ItemArmorTeslaBoots extends ItemArmor {
 
@@ -35,5 +35,5 @@ public class ItemArmorTeslaBoots extends ItemArmor {
 	public void registerIcons(IconRegister register) {
 		texture = register.registerIcon(ModInfo.ICON_PREFIX + "tesla/boots");
 	}
-	
+
 }
