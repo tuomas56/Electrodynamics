@@ -21,6 +21,7 @@ public class ModuleManager {
 	
 	public static void preInit() {
 		registerModule(Module.CORE, new EDModuleCore());
+		registerModule(Module.WORLD, new EDModuleWorld());
 		
 		Configuration config = new Configuration(new File(Electrodynamics.instance.configFolder, MODULE_CONFIG_FILE));
 		config.load();
@@ -36,10 +37,15 @@ public class ModuleManager {
 			if (module == Module.CORE || isEnabled(config, module)) {
 				EDModule instance = modules.get(module);
 				
-				if (instance.canLoad()) {
-					loadedModules.add(module);
+				if (instance != null) {
+					if (instance.canLoad()) {
+						loadedModules.add(module);
+						EDLogger.info("Loading module " + module.toString());
+					} else {
+						EDLogger.fine("Module " + module.toString() + " decided not to load. Reason: " + instance.failLoadReason());
+					}
 				} else {
-					EDLogger.fine("Module " + module.toString() + " decided not to load. Reason: " + instance.failLoadReason());
+					EDLogger.warn("Module " + module.toString() + " is missing a mapping!");
 				}
 			}
 		}
@@ -125,10 +131,7 @@ public class ModuleManager {
 	}
 	
 	public static enum Module {
-		CORE,
-		WORLD,
-		MACHINE,
-		LOGIC
+		CORE, WORLD;
 	}
 	
 }
