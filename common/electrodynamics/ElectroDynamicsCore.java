@@ -18,9 +18,10 @@ import electrodynamics.core.core.CommonProxy;
 import electrodynamics.core.core.helper.HeatHelper;
 import electrodynamics.core.item.ItemHandler;
 import electrodynamics.core.lib.ModInfo;
+import electrodynamics.core.network.PacketHandler;
 
 @Mod(modid = "ED|Core", name = "Electrodynamics - Core", version = ModInfo.VERSION, dependencies = "after:IC2")
-@NetworkMod(clientSideRequired = false, serverSideRequired = false)
+@NetworkMod(channels = {ModInfo.GENERIC_MOD_ID}, clientSideRequired = false, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class ElectroDynamicsCore {
 	@Instance("ED|Core")
 	public static ElectroDynamicsCore instance;
@@ -30,6 +31,8 @@ public class ElectroDynamicsCore {
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigurationHandler.handleConfig(new File(event.getModConfigurationDirectory(), ModInfo.CORE_CONFIG));
+		
+		proxy.registerKeyBindings();
 		
 		ItemHandler.initializeItems();
 		CoreBlockHandler.initializeBlocks();

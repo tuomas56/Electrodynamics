@@ -2,6 +2,7 @@ package electrodynamics.core.configuration;
 
 import java.io.File;
 
+import electrodynamics.ElectroDynamicsCore;
 import electrodynamics.core.core.EDLogger;
 import electrodynamics.core.lib.BlockIDs;
 import electrodynamics.core.lib.ItemIDs;
@@ -13,6 +14,7 @@ public class ConfigurationHandler {
 
 	public static final String CATEGORY_SETTINGS = "user.settings";
 	public static final String CATEGORY_TESLA = "tesla_armor.settings";
+	public static final String CATEGORY_KEYS = "user.keybindings";
 	
 	public static void handleConfig(File file) {
 		Configuration config = new Configuration(file);
@@ -32,6 +34,9 @@ public class ConfigurationHandler {
 			ConfigurationSettings.MAGNETIC_RANGE = config.get(CATEGORY_TESLA, ConfigurationSettings.MAGNETIC_RANGE_CONFIGNAME, ConfigurationSettings.MAGNETIC_RANGE_DEFAULT).getDouble(ConfigurationSettings.MAGNETIC_RANGE_DEFAULT);
 			ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED = config.get(CATEGORY_TESLA, ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_CONFIGNAME, ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_DEFAULT).getDouble(ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_DEFAULT);
 			ConfigurationSettings.THERMAL_VIEW_RANGE = config.get(CATEGORY_TESLA, ConfigurationSettings.THERMAL_VIEW_RANGE_CONFIGNAME, ConfigurationSettings.THERMAL_VIEW_RANGE_DEFAULT).getDouble(ConfigurationSettings.THERMAL_VIEW_RANGE_DEFAULT);
+			
+			/* Key Bindings */
+			ElectroDynamicsCore.proxy.setKeyBinding(ConfigurationSettings.MAGNET_TOGGLE_NAME, config.get(CATEGORY_KEYS, ConfigurationSettings.MAGNET_TOGGLE_CONFIGNAME, ConfigurationSettings.MAGNET_TOGGLE_DEFAULT).getInt(ConfigurationSettings.MAGNET_TOGGLE_DEFAULT), false);
 			
 			/* Block IDs */
 			BlockIDs.BLOCK_ORE_ID = config.getBlock(Strings.BLOCK_ORE_NAME, BlockIDs.BLOCK_ORE_DEFAULT_ID).getInt(BlockIDs.BLOCK_ORE_DEFAULT_ID);

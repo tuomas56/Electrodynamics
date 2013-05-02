@@ -10,4 +10,12 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(TileEntityHoloPad.class, Strings.BLOCK_HOLO_PAD_NAME);
 	}
 	
+	public void setKeyBinding(String name, int value, boolean repeats) {
+		
+	}
+	
+	public void registerKeyBindings() {
+		
+	}
+	
 }

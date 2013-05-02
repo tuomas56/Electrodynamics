@@ -1,7 +1,66 @@
 package electrodynamics.core.control;
 
-public class KeybindingHandler {
+import java.util.EnumSet;
 
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.registry.KeyBindingRegistry;
+import cpw.mods.fml.common.TickType;
+import cpw.mods.fml.common.network.PacketDispatcher;
+import electrodynamics.core.lib.ModInfo;
+import electrodynamics.core.network.PacketTypeHandler;
+import electrodynamics.core.network.packet.PacketKeyPress;
+
+public class KeybindingHandler extends KeyBindingRegistry.KeyHandler {
+
+	public KeybindingHandler() {
+		super(KeyBindingHelper.getBindings(), KeyBindingHelper.getIsRepeating());
+	}
 	
+	@Override
+	public String getLabel() {
+		return ModInfo.GENERIC_MOD_ID + ": " + this.getClass().getSimpleName();
+	}
 	
+	@Override
+	public void keyDown(EnumSet<TickType> types, KeyBinding key, boolean tickEnd, boolean isRepeat) {
+		System.out.println(key.keyDescription + " pressed");
+		
+		if (tickEnd) {
+			if (FMLClientHandler.instance().getClient().inGameHasFocus) {
+				EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
+				
+				if (player != null) {
+					ItemStack currentItem = player.getCurrentEquippedItem();
+					
+					//If player is holding an item that handles key presses
+					if (currentItem != null) {
+						if (currentItem.getItem() instanceof IKeyBound) {
+							PacketDispatcher.sendPacketToServer(PacketTypeHandler.fillPacket(new PacketKeyPress(key.keyDescription)));
+						}
+					}
+					
+					//If player is wearing armor that handles key presses
+					for (ItemStack armor : player.inventory.armorInventory) {
+						if (armor != null && armor.getItem() instanceof IKeyBound) {
+							PacketDispatcher.sendPacketToServer(PacketTypeHandler.fillPacket(new PacketKeyPress(key.keyDescription)));
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void keyUp(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd) {
+		
+	}
+	
+	@Override
+	public EnumSet<TickType> ticks() {
+		return EnumSet.of(TickType.CLIENT);
+	}
+
 }

@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
@@ -40,8 +41,15 @@ public class PacketKeyPress extends PacketED {
 		
 		EntityPlayer playerEntity = (EntityPlayer)player;
 		
+		//If held item handles key press
 		if (playerEntity.getCurrentEquippedItem() != null && playerEntity.getCurrentEquippedItem().getItem() instanceof IKeyBound) {
 			((IKeyBound)playerEntity.getCurrentEquippedItem().getItem()).doKeybindingAction(playerEntity, playerEntity.getCurrentEquippedItem(), key);
+		}
+		
+		for (ItemStack armor : playerEntity.inventory.armorInventory) {
+			if (armor != null && armor.getItem() instanceof IKeyBound) {
+				((IKeyBound)armor.getItem()).doKeybindingAction(playerEntity, armor, key);
+			}
 		}
 	}
 	
