@@ -68,25 +68,28 @@ public class RenderThermalOverlay {
 				
 	            ModelBase entLivingModel = getModelForEntity(entLiving);
 	            
-	            //TODO need to get better control over the model rendering
-	            float limbYaw = EntityRenderUtil.getLimbYaw(entLiving, partial);
-	            float limbSwing = EntityRenderUtil.getLimbSwing(entLiving, partial);
-	            float rotBody = EntityRenderUtil.interpolateRotation(entLiving.prevRenderYawOffset, entLiving.renderYawOffset, partial);
-	            float rotHead = EntityRenderUtil.interpolateRotation(entLiving.prevRotationYawHead, entLiving.rotationYawHead, partial);
-	            float pitch = EntityRenderUtil.getPitch(entLiving, partial);
-	            float rotation2 = EntityRenderUtil.handleRotationFloat(entLiving, partial);
-	            
-	            if (entLiving.isChild()) {
-	            	limbSwing *= 3.0F;
-	            }
+	            if (entLivingModel != null) {
+	            	//TODO FUCKING OPTIFINE BREAKS THIS
+		            //TODO need to get better control over the model rendering
+		            float limbYaw = EntityRenderUtil.getLimbYaw(entLiving, partial);
+		            float limbSwing = EntityRenderUtil.getLimbSwing(entLiving, partial);
+		            float rotBody = EntityRenderUtil.interpolateRotation(entLiving.prevRenderYawOffset, entLiving.renderYawOffset, partial);
+		            float rotHead = EntityRenderUtil.interpolateRotation(entLiving.prevRotationYawHead, entLiving.rotationYawHead, partial);
+		            float pitch = EntityRenderUtil.getPitch(entLiving, partial);
+		            float rotation2 = EntityRenderUtil.handleRotationFloat(entLiving, partial);
+		            
+		            if (entLiving.isChild()) {
+		            	limbSwing *= 3.0F;
+		            }
 
-	            if (limbYaw > 1.0F) {
-	            	limbYaw = 1.0F;
+		            if (limbYaw > 1.0F) {
+		            	limbYaw = 1.0F;
+		            }
+		            
+		            GL11.glRotatef(rotBody, 0, 1, 0);
+		            entLivingModel.setLivingAnimations(entLiving, limbYaw, limbSwing, partial);
+		            entLivingModel.render(entLiving, limbYaw, limbSwing, rotation2, rotBody - rotHead, pitch, 0.0625F);
 	            }
-	            
-	            GL11.glRotatef(rotBody, 0, 1, 0);
-	            entLivingModel.setLivingAnimations(entLiving, limbYaw, limbSwing, partial);
-	            entLivingModel.render(entLiving, limbYaw, limbSwing, rotation2, rotBody - rotHead, pitch, 0.0625F);
 	            
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 				GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -103,7 +106,7 @@ public class RenderThermalOverlay {
 		try {
 			RenderLiving livingRender = (RenderLiving) RenderManager.instance.getEntityRenderObject(entity);
 			Class livingRenderClass = RenderLiving.class;
-			Field modelBaseField = livingRenderClass.getDeclaredField("mainModel");
+			Field modelBaseField = getMainModelField(livingRenderClass);
 			modelBaseField.setAccessible(true);
 			ModelBase livingModel = (ModelBase) modelBaseField.get(livingRender);
 			
@@ -113,6 +116,28 @@ public class RenderThermalOverlay {
 		}
 		
 		return null;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	private Field getMainModelField(Class clazz) {
+		Field modelBaseField = null;
+		
+		//Last changed, 5-2-13
+		final String MAIN_MODEL_MAPPING = "field_77045_g";
+		
+		try {
+			//Try to get the de-obfuscated version first
+			modelBaseField = clazz.getDeclaredField("mainModel");
+		} catch(Exception ex) {
+			try {
+				//If exception encountered, it doesn't exist, get field name
+				modelBaseField = clazz.getDeclaredField(MAIN_MODEL_MAPPING);
+			} catch(Exception ex2) {
+				EDLogger.warn("Couldn't get the model for rendering a nearby thermal entity. Please report this to dmillerw to ensure the mapping gets updated.");
+			}
+		}
+		
+		return modelBaseField;
 	}
 	
 }

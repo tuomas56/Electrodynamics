@@ -36,10 +36,8 @@ public class KeybindingHandler extends KeyBindingRegistry.KeyHandler {
 					if (currentItem != null) {
 						if (currentItem.getItem() instanceof IKeyBoundServer) {
 							PacketDispatcher.sendPacketToServer(PacketTypeHandler.fillPacket(new PacketKeyPress(key.keyDescription)));
-							return;
 						} else if (currentItem.getItem() instanceof IKeyBoundClient) {
 							((IKeyBoundClient)currentItem.getItem()).doKeybindingAction(player, currentItem, key.keyDescription);
-							return;
 						}
 					}
 
@@ -47,10 +45,8 @@ public class KeybindingHandler extends KeyBindingRegistry.KeyHandler {
 						if (armor != null) {
 							if (armor.getItem() instanceof IKeyBoundServer) {
 								PacketDispatcher.sendPacketToServer(PacketTypeHandler.fillPacket(new PacketKeyPress(key.keyDescription)));
-								return;
 							} else if (armor.getItem() instanceof IKeyBoundClient) {
 								((IKeyBoundClient)armor.getItem()).doKeybindingAction(player, armor, key.keyDescription);
-								return;
 							}
 						}
 					}
