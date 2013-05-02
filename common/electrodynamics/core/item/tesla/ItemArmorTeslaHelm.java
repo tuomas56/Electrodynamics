@@ -8,6 +8,8 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.core.configuration.ConfigurationSettings;
@@ -47,6 +49,12 @@ public class ItemArmorTeslaHelm extends ItemArmor implements IKeyBoundClient {
 	@Override
 	public void doKeybindingAction(EntityPlayer player, ItemStack stack, String key) {
 		if (key.equals(ConfigurationSettings.THERMAL_VIEW_TOGGLE_NAME)) {
+			if (FMLClientHandler.instance().hasOptifine()) {
+				player.addChatMessage(EnumChatFormatting.RED + "OPTIFINE DETECTED: " + EnumChatFormatting.RESET + "The thermal render is currently broken when used with Optifine.");
+				player.addChatMessage("This feature will remain disabled.");
+				return;
+			}
+			
 			this.thermalEnabled = !thermalEnabled;
 			player.addChatMessage("Thermal View: " + (thermalEnabled == true ? EnumChatFormatting.GREEN + "ON" : EnumChatFormatting.RED + "OFF"));
 		}
