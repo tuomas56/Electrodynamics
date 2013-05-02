@@ -9,10 +9,10 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
-import electrodynamics.core.block.BlockHandler;
 import electrodynamics.core.configuration.ConfigurationSettings;
 import electrodynamics.core.lib.BlockIDs;
 import electrodynamics.core.lib.ModInfo;
+import electrodynamics.world.block.WorldBlockHandler;
 import electrodynamics.world.core.CommonProxy;
 import electrodynamics.world.core.WorldGenOre;
 import electrodynamics.world.lib.Ore;
@@ -27,7 +27,7 @@ public class ElectroDynamicsWorld {
 
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
-		BlockHandler.initializeBlocks();
+		WorldBlockHandler.initializeBlocks();
 	}
 
 	@Init

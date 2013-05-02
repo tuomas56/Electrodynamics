@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
+import electrodynamics.codechicken.LightningBolt;
 import electrodynamics.core.configuration.ConfigurationSettings;
 import electrodynamics.core.core.CreativeTabED;
 import electrodynamics.core.item.ItemHandler;
@@ -48,7 +49,9 @@ public class ItemArmorTeslaChest extends ItemArmor {
 		
 		for (EntityItem item : nearbyItems) {
 			if (item != null) {
-				if (item.delayBeforeCanPickup > 0) return;
+				if (item.delayBeforeCanPickup > 0) {
+					return;
+				}
 				
 				double d0 = 8.0D;
 				double d1 = (player.posX - item.posX) / d0;
@@ -64,6 +67,11 @@ public class ItemArmorTeslaChest extends ItemArmor {
 	                item.motionZ += d3 / d4 * d5 * ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED;
 	                
 	                PacketDispatcher.sendPacketToAllInDimension(new Packet28EntityVelocity(item), world.provider.dimensionId);
+	            
+	                LightningBolt bolt = new LightningBolt(world, player.posX, player.posY + 1, player.posZ, item.posX, item.posY, item.posZ, world.rand.nextLong(), 1);
+	                bolt.defaultFractal();
+	                bolt.setRandomType(4, 7);
+	                bolt.finalizeBolt();
 	            }
 			}
 		}

@@ -11,6 +11,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import electrodynamics.core.block.CoreBlockHandler;
 import electrodynamics.core.client.render.RenderThermalOverlay;
 import electrodynamics.core.configuration.ConfigurationHandler;
 import electrodynamics.core.core.CommonProxy;
@@ -31,6 +32,7 @@ public class ElectroDynamicsCore {
 		ConfigurationHandler.handleConfig(new File(event.getModConfigurationDirectory(), ModInfo.CORE_CONFIG));
 		
 		ItemHandler.initializeItems();
+		CoreBlockHandler.initializeBlocks();
 	}
 
 	@Init
