@@ -20,7 +20,7 @@ import electrodynamics.network.PacketHandler;
 public class Electrodynamics {
 	@Instance("ED")
 	public static Electrodynamics instance;
-	@SidedProxy(clientSide = "electrodynamics.core.core.ClientProxy", serverSide = "electrodynamics.core.core.CommonProxy")
+	@SidedProxy(clientSide = "electrodynamics.core.ClientProxy", serverSide = "electrodynamics.core.CommonProxy")
 	public static CommonProxy proxy;
 
 	public File configFolder;

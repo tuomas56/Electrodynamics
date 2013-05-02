@@ -1,47 +1,11 @@
 [
 {
-	"modid": "ED|Core",
+	"modid": "ED",
 	"name": "Electrodynamics - Core",
 	"description": "Compact your world, comrade!",
 	"credits": "Forge team for Forge, Eloraam for RP2!",
-	"url": "http://www.minecraftforum.net/topic/1321755-nano-circuit-mod-wip-redesigned/",
+	"url": "http://www.electrodynamicsmod.com",
 	"authors": [ "CyanideX",  "Hawkye",  "Xhamolk_",  "dmillerw", "Odiefrom",  "Mrabow" ],
-	"dependencies": [
-		"mod_MinecraftForge"
-	]
-},
-{
-	"modid": "ED|World",
-	"name": "Electrodynamics - World",
-	"description": "Compact your world, comrade! (WorldGen)",
-	"credits": "Forge team for Forge, Eloraam for RP2!",
-	"url": "http://www.minecraftforum.net/topic/1321755-nano-circuit-mod-wip-redesigned/",
-	"authors": [ "CyanideX",  "Hawkye",  "Xhamolk_",  "dmillerw", "Odiefrom",  "Mrabow" ],
-	"parent": "NCCore",
-	"dependencies": [
-		"mod_MinecraftForge"
-	]
-},
-{
-	"modid": "ED|Machine",
-	"name": "Electrodynamics - Machine",
-	"description": "Compact your world, comrade! (Machines)",
-	"credits": "Forge team for Forge, Eloraam for RP2!",
-	"url": "http://www.minecraftforum.net/topic/1321755-nano-circuit-mod-wip-redesigned/",
-	"authors": [ "CyanideX",  "Hawkye",  "Xhamolk_",  "dmillerw", "Odiefrom",  "Mrabow" ],
-	"parent": "NCCore",
-	"dependencies": [
-		"mod_MinecraftForge"
-	]
-},
-{
-	"modid": "ED|Logic",
-	"name": "Electrodynamics - Logic",
-	"description": "Compact your world, comrade! (Logic)",
-	"credits": "Forge team for Forge, Eloraam for RP2!",
-	"url": "http://www.minecraftforum.net/topic/1321755-nano-circuit-mod-wip-redesigned/",
-	"authors": [ "CyanideX",  "Hawkye",  "Xhamolk_",  "dmillerw", "Odiefrom",  "Mrabow" ],
-	"parent": "NCCore",
 	"dependencies": [
 		"mod_MinecraftForge"
 	]
