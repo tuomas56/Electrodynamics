@@ -16,6 +16,7 @@ public class BlockHoloPad extends BlockContainer {
 		setHardness(2F);
 		setCreativeTab(CreativeTabED.block);
 		setBlockBounds(0F, 0F, 0F, 1F, 0.5F, 1F);
+		setLightOpacity(1);
 	}
 
 	@Override
