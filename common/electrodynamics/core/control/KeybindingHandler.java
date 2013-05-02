@@ -41,19 +41,20 @@ public class KeybindingHandler extends KeyBindingRegistry.KeyHandler {
 							((IKeyBoundClient)currentItem.getItem()).doKeybindingAction(player, currentItem, key.keyDescription);
 							return;
 						}
-					} else {
-						for (ItemStack armor : player.inventory.armorInventory) {
-							if (armor != null) {
-								if (armor.getItem() instanceof IKeyBoundServer) {
-									PacketDispatcher.sendPacketToServer(PacketTypeHandler.fillPacket(new PacketKeyPress(key.keyDescription)));
-									return;
-								} else if (armor.getItem() instanceof IKeyBoundClient) {
-									((IKeyBoundClient)armor.getItem()).doKeybindingAction(player, armor, key.keyDescription);
-									return;
-								}
+					}
+
+					for (ItemStack armor : player.inventory.armorInventory) {
+						if (armor != null) {
+							if (armor.getItem() instanceof IKeyBoundServer) {
+								PacketDispatcher.sendPacketToServer(PacketTypeHandler.fillPacket(new PacketKeyPress(key.keyDescription)));
+								return;
+							} else if (armor.getItem() instanceof IKeyBoundClient) {
+								((IKeyBoundClient)armor.getItem()).doKeybindingAction(player, armor, key.keyDescription);
+								return;
 							}
 						}
 					}
+					
 				}
 			}
 		}
