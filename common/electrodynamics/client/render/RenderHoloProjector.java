@@ -7,6 +7,8 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.client.FMLClientHandler;
+
 import electrodynamics.tileentity.TileEntityHoloPad;
 
 public class RenderHoloProjector extends TileEntitySpecialRenderer {
@@ -22,10 +24,7 @@ public class RenderHoloProjector extends TileEntitySpecialRenderer {
 		
 		GL11.glTranslated(x + .5, y + 2.35 + updown, z + .5);
 		
-		if (tile.worldObj.getPlayerEntityByName(((TileEntityHoloPad)tile).username) != null) {
-			EntityPlayer player = tile.worldObj.getPlayerEntityByName(((TileEntityHoloPad)tile).username);
-			RenderManager.instance.getEntityRenderObject(player).doRender(player, 0, 0, 0, 0, partial);
-		}
+		RenderManager.instance.getEntityRenderObject(this.tileEntityRenderer.entityLivingPlayer).doRender(this.tileEntityRenderer.entityLivingPlayer, 0, 0, 0, 0, partial);
 		
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
