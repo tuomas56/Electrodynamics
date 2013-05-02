@@ -19,12 +19,12 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import electrodynamics.codechicken.LightningBolt;
 import electrodynamics.core.configuration.ConfigurationSettings;
-import electrodynamics.core.control.IKeyBound;
+import electrodynamics.core.control.IKeyBoundServer;
 import electrodynamics.core.core.CreativeTabED;
 import electrodynamics.core.item.ItemHandler;
 import electrodynamics.core.lib.ModInfo;
 
-public class ItemArmorTeslaChest extends ItemArmor implements IKeyBound {
+public class ItemArmorTeslaChest extends ItemArmor implements IKeyBoundServer {
 
 	private Icon texture;
 

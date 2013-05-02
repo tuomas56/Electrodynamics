@@ -55,4 +55,9 @@ public class ConfigurationSettings {
 	public static final String MAGNET_TOGGLE_CONFIGNAME = "tesla_armor.magnet.toggle";
 	public static final int MAGNET_TOGGLE_DEFAULT = 34;
 	
+	public static int THERMAL_VIEW_TOGGLE;
+	public static final String THERMAL_VIEW_TOGGLE_NAME = "tesla_armor.thermal_view.toggle";
+	public static final String THERMAL_VIEW_TOGGLE_CONFIGNAME = "tesla_armor.thermal_view.toggle";
+	public static final int THERMAL_VIEW_TOGGLE_DEFAULT = 35;
+	
 }

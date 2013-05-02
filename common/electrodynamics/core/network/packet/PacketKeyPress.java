@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
-import electrodynamics.core.control.IKeyBound;
+import electrodynamics.core.control.IKeyBoundServer;
 import electrodynamics.core.network.PacketTypeHandler;
 
 public class PacketKeyPress extends PacketED {
@@ -42,13 +42,13 @@ public class PacketKeyPress extends PacketED {
 		EntityPlayer playerEntity = (EntityPlayer)player;
 		
 		//If held item handles key press
-		if (playerEntity.getCurrentEquippedItem() != null && playerEntity.getCurrentEquippedItem().getItem() instanceof IKeyBound) {
-			((IKeyBound)playerEntity.getCurrentEquippedItem().getItem()).doKeybindingAction(playerEntity, playerEntity.getCurrentEquippedItem(), key);
+		if (playerEntity.getCurrentEquippedItem() != null && playerEntity.getCurrentEquippedItem().getItem() instanceof IKeyBoundServer) {
+			((IKeyBoundServer)playerEntity.getCurrentEquippedItem().getItem()).doKeybindingAction(playerEntity, playerEntity.getCurrentEquippedItem(), key);
 		}
 		
 		for (ItemStack armor : playerEntity.inventory.armorInventory) {
-			if (armor != null && armor.getItem() instanceof IKeyBound) {
-				((IKeyBound)armor.getItem()).doKeybindingAction(playerEntity, armor, key);
+			if (armor != null && armor.getItem() instanceof IKeyBoundServer) {
+				((IKeyBoundServer)armor.getItem()).doKeybindingAction(playerEntity, armor, key);
 			}
 		}
 	}

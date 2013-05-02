@@ -37,6 +37,7 @@ public class ConfigurationHandler {
 			
 			/* Key Bindings */
 			ElectroDynamicsCore.proxy.setKeyBinding(ConfigurationSettings.MAGNET_TOGGLE_NAME, config.get(CATEGORY_KEYS, ConfigurationSettings.MAGNET_TOGGLE_CONFIGNAME, ConfigurationSettings.MAGNET_TOGGLE_DEFAULT).getInt(ConfigurationSettings.MAGNET_TOGGLE_DEFAULT), false);
+			ElectroDynamicsCore.proxy.setKeyBinding(ConfigurationSettings.THERMAL_VIEW_TOGGLE_NAME, config.get(CATEGORY_KEYS, ConfigurationSettings.THERMAL_VIEW_TOGGLE_CONFIGNAME, ConfigurationSettings.THERMAL_VIEW_TOGGLE_DEFAULT).getInt(ConfigurationSettings.THERMAL_VIEW_TOGGLE_DEFAULT), false);
 			
 			/* Block IDs */
 			BlockIDs.BLOCK_ORE_ID = config.getBlock(Strings.BLOCK_ORE_NAME, BlockIDs.BLOCK_ORE_DEFAULT_ID).getInt(BlockIDs.BLOCK_ORE_DEFAULT_ID);

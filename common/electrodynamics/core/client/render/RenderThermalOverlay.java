@@ -14,6 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 import electrodynamics.core.configuration.ConfigurationSettings;
 import electrodynamics.core.item.ItemHandler;
+import electrodynamics.core.item.tesla.ItemArmorTeslaHelm;
 import electrodynamics.core.util.RenderUtil;
 
 public class RenderThermalOverlay {
@@ -26,7 +27,9 @@ public class RenderThermalOverlay {
 		RenderUtil.translateToWorldCoords(entity, event.partialTicks);
 
 		if (player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].itemID == ItemHandler.itemTeslaHelm.itemID) {
-			renderEntityHighlight(entity, event.partialTicks);
+			if (((ItemArmorTeslaHelm)player.inventory.armorInventory[3].getItem()).thermalEnabled) {
+				renderEntityHighlight(entity, event.partialTicks);
+			}
 		}
 		
 		GL11.glPopMatrix();
