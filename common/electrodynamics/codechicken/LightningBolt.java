@@ -132,28 +132,20 @@ public class LightningBolt extends EntityFX {
 		} else {
 			mainalpha = 1.0F - boltage * 0.3F;
 		}
-		
+
 		int renderlength = (int) ((this.main.particleAge + partialframe + (int) (this.main.length * 3.0F)) / (int) (this.main.length * 3.0F) * this.main.numsegments0);
 		for (Iterator<Segment> iterator = this.main.segments.iterator(); iterator.hasNext();) {
-			LightningBoltCommon.Segment rendersegment = (LightningBoltCommon.Segment) iterator
-					.next();
+			LightningBoltCommon.Segment rendersegment = (LightningBoltCommon.Segment) iterator.next();
 			if (rendersegment.segmentno <= renderlength) {
-				float width = 0.03F
-						* (getRelativeViewVector(rendersegment.startpoint.point)
-								.length() / 10.0F + 1.0F)
-						* (1.0F + rendersegment.light) * 0.5F;
+				float width = 0.03F * (getRelativeViewVector(rendersegment.startpoint.point).length() / 10.0F + 1.0F) * (1.0F + rendersegment.light) * 0.5F;
 				if (width > 0.05F)
 					width = 0.05F;
 				if (pass == 1)
 					width += 0.025F;
 				else if (pass == 1)
 					width += 0.05F;
-				EDVector3 diff1 = EDVector3.crossProduct(playervec,
-						rendersegment.prevdiff).scale(
-						width / rendersegment.sinprev);
-				EDVector3 diff2 = EDVector3.crossProduct(playervec,
-						rendersegment.nextdiff).scale(
-						width / rendersegment.sinnext);
+				EDVector3 diff1 = EDVector3.crossProduct(playervec, rendersegment.prevdiff).scale(width / rendersegment.sinprev);
+				EDVector3 diff2 = EDVector3.crossProduct(playervec, rendersegment.nextdiff).scale(width / rendersegment.sinnext);
 				EDVector3 startvec = rendersegment.startpoint.point;
 				EDVector3 endvec = rendersegment.endpoint.point;
 				float rx1 = (float) (startvec.x - interpPosX);
@@ -162,56 +154,36 @@ public class LightningBolt extends EntityFX {
 				float rx2 = (float) (endvec.x - interpPosX);
 				float ry2 = (float) (endvec.y - interpPosY);
 				float rz2 = (float) (endvec.z - interpPosZ);
-				tessellator.setColorRGBA_F(this.particleRed,
-						this.particleGreen, this.particleBlue, mainalpha
-								* rendersegment.light);
-				tessellator.addVertexWithUV(rx2 - diff2.x, ry2 - diff2.y, rz2
-						- diff2.z, 0.5D, 0.0D);
-				tessellator.addVertexWithUV(rx1 - diff1.x, ry1 - diff1.y, rz1
-						- diff1.z, 0.5D, 0.0D);
-				tessellator.addVertexWithUV(rx1 + diff1.x, ry1 + diff1.y, rz1
-						+ diff1.z, 0.5D, 1.0D);
-				tessellator.addVertexWithUV(rx2 + diff2.x, ry2 + diff2.y, rz2
-						+ diff2.z, 0.5D, 1.0D);
+				tessellator.setColorRGBA_F(this.particleRed, this.particleGreen, this.particleBlue, mainalpha * rendersegment.light);
+				tessellator.addVertexWithUV(rx2 - diff2.x, ry2 - diff2.y, rz2 - diff2.z, 0.5D, 0.0D);
+				tessellator.addVertexWithUV(rx1 - diff1.x, ry1 - diff1.y, rz1 - diff1.z, 0.5D, 0.0D);
+				tessellator.addVertexWithUV(rx1 + diff1.x, ry1 + diff1.y, rz1 + diff1.z, 0.5D, 1.0D);
+				tessellator.addVertexWithUV(rx2 + diff2.x, ry2 + diff2.y, rz2 + diff2.z, 0.5D, 1.0D);
 				if (rendersegment.next == null) {
-					EDVector3 roundend = rendersegment.endpoint.point.copy()
-							.add(rendersegment.diff.copy().normalize()
-									.scale(width));
+					EDVector3 roundend = rendersegment.endpoint.point.copy().add(rendersegment.diff.copy().normalize().scale(width));
 					float rx3 = (float) (roundend.x - interpPosX);
 					float ry3 = (float) (roundend.y - interpPosY);
 					float rz3 = (float) (roundend.z - interpPosZ);
-					tessellator.addVertexWithUV(rx3 - diff2.x, ry3 - diff2.y,
-							rz3 - diff2.z, 0.0D, 0.0D);
-					tessellator.addVertexWithUV(rx2 - diff2.x, ry2 - diff2.y,
-							rz2 - diff2.z, 0.5D, 0.0D);
-					tessellator.addVertexWithUV(rx2 + diff2.x, ry2 + diff2.y,
-							rz2 + diff2.z, 0.5D, 1.0D);
-					tessellator.addVertexWithUV(rx3 + diff2.x, ry3 + diff2.y,
-							rz3 + diff2.z, 0.0D, 1.0D);
+					tessellator.addVertexWithUV(rx3 - diff2.x, ry3 - diff2.y, rz3 - diff2.z, 0.0D, 0.0D);
+					tessellator.addVertexWithUV(rx2 - diff2.x, ry2 - diff2.y, rz2 - diff2.z, 0.5D, 0.0D);
+					tessellator.addVertexWithUV(rx2 + diff2.x, ry2 + diff2.y, rz2 + diff2.z, 0.5D, 1.0D);
+					tessellator.addVertexWithUV(rx3 + diff2.x, ry3 + diff2.y, rz3 + diff2.z, 0.0D, 1.0D);
 				}
 				if (rendersegment.prev == null) {
-					EDVector3 roundend = rendersegment.startpoint.point.copy()
-							.sub(rendersegment.diff.copy().normalize()
-									.scale(width));
+					EDVector3 roundend = rendersegment.startpoint.point.copy().sub(rendersegment.diff.copy().normalize().scale(width));
 					float rx3 = (float) (roundend.x - interpPosX);
 					float ry3 = (float) (roundend.y - interpPosY);
 					float rz3 = (float) (roundend.z - interpPosZ);
-					tessellator.addVertexWithUV(rx1 - diff1.x, ry1 - diff1.y,
-							rz1 - diff1.z, 0.5D, 0.0D);
-					tessellator.addVertexWithUV(rx3 - diff1.x, ry3 - diff1.y,
-							rz3 - diff1.z, 0.0D, 0.0D);
-					tessellator.addVertexWithUV(rx3 + diff1.x, ry3 + diff1.y,
-							rz3 + diff1.z, 0.0D, 1.0D);
-					tessellator.addVertexWithUV(rx1 + diff1.x, ry1 + diff1.y,
-							rz1 + diff1.z, 0.5D, 1.0D);
+					tessellator.addVertexWithUV(rx1 - diff1.x, ry1 - diff1.y, rz1 - diff1.z, 0.5D, 0.0D);
+					tessellator.addVertexWithUV(rx3 - diff1.x, ry3 - diff1.y, rz3 - diff1.z, 0.0D, 0.0D);
+					tessellator.addVertexWithUV(rx3 + diff1.x, ry3 + diff1.y, rz3 + diff1.z, 0.0D, 1.0D);
+					tessellator.addVertexWithUV(rx1 + diff1.x, ry1 + diff1.y, rz1 + diff1.z, 0.5D, 1.0D);
 				}
 			}
 		}
 	}
 
-	public void renderParticle(Tessellator tessellator, float partialframe,
-			float cosyaw, float cospitch, float sinyaw, float sinsinpitch,
-			float cossinpitch) {
+	public void renderParticle(Tessellator tessellator, float partialframe, float cosyaw, float cospitch, float sinyaw, float sinsinpitch, float cossinpitch) {
 		EntityPlayer renderentity = ModLoader.getMinecraftInstance().thePlayer;
 		int visibleDistance = 100;
 		if (!ModLoader.getMinecraftInstance().gameSettings.fancyGraphics)
@@ -224,8 +196,7 @@ public class LightningBolt extends EntityFX {
 			tessellator.draw();
 		GL11.glPushMatrix();
 
-		Minecraft.getMinecraft().renderEngine
-				.bindTexture(ModInfo.RESOURCES_BASE + "/misc/bolt_large.png");
+		Minecraft.getMinecraft().renderEngine.bindTexture(ModInfo.RESOURCES_BASE + "/misc/bolt_large.png");
 
 		GL11.glDepthMask(false);
 		GL11.glEnable(3042);
@@ -284,8 +255,7 @@ public class LightningBolt extends EntityFX {
 
 		tessellator.startDrawingQuads();
 		tessellator.setBrightness(brightness);
-		renderBolt(tessellator, partialframe, cosyaw, cospitch, sinyaw,
-				cossinpitch, 0);
+		renderBolt(tessellator, partialframe, cosyaw, cospitch, sinyaw, cossinpitch, 0);
 		tessellator.draw();
 
 		brightness = 983280;
@@ -332,8 +302,7 @@ public class LightningBolt extends EntityFX {
 
 		tessellator.startDrawingQuads();
 		tessellator.setBrightness(brightness);
-		renderBolt(tessellator, partialframe, cosyaw, cospitch, sinyaw,
-				cossinpitch, 1);
+		renderBolt(tessellator, partialframe, cosyaw, cospitch, sinyaw, cossinpitch, 1);
 		tessellator.draw();
 
 		brightness = 983280;
@@ -380,8 +349,7 @@ public class LightningBolt extends EntityFX {
 
 		tessellator.startDrawingQuads();
 		tessellator.setBrightness(brightness);
-		renderBolt(tessellator, partialframe, cosyaw, cospitch, sinyaw,
-				cossinpitch, 2);
+		renderBolt(tessellator, partialframe, cosyaw, cospitch, sinyaw, cossinpitch, 2);
 		tessellator.draw();
 
 		GL11.glDisable(3042);
@@ -395,11 +363,11 @@ public class LightningBolt extends EntityFX {
 	public int getRenderPass() {
 		return 2;
 	}
-	
-	public void setRandomType(int ... types) {
+
+	public void setRandomType(int... types) {
 		this.setType(getRandomType(types));
 	}
-	
+
 	public int getRandomType(int[] types) {
 		return types[this.rand.nextInt(types.length)];
 	}
