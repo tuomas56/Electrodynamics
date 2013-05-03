@@ -1,13 +1,10 @@
 package electrodynamics.module;
 
-import java.util.EnumSet;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import electrodynamics.block.BlockHandler;
 import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.lib.BlockIDs;
 import electrodynamics.lib.Ore;
-import electrodynamics.module.ModuleManager.Module;
 import electrodynamics.world.WorldGenOre;
 
 public class EDModuleWorld extends EDModule {
@@ -31,21 +28,6 @@ public class EDModuleWorld extends EDModule {
 	@Override
 	public void postInit() {
 		
-	}
-
-	@Override
-	public EnumSet<Module> dependencies() {
-		return EnumSet.of(Module.CORE);
-	}
-
-	@Override
-	public boolean canLoad() {
-		return true;
-	}
-
-	@Override
-	public String failLoadReason() {
-		return "";
 	}
 
 }

@@ -15,6 +15,7 @@ public class BlockHandler {
 
 	public static Block blockHoloPad;
 	public static Block blockOre;
+	public static Block blockRedWire;
 	
 	public static void createBlockHoloPad() {
 		blockHoloPad = new BlockHoloPad(BlockIDs.BLOCK_HOLO_PAD_ID).setUnlocalizedName(Strings.BLOCK_HOLO_PAD_NAME);
@@ -32,6 +33,12 @@ public class BlockHandler {
 			MinecraftForge.setBlockHarvestLevel(blockOre, i, "pickaxe", Ore.get(i).harvestLevel);
 			OreDictionary.registerOre(Ore.get(i).oreDictionaryName, ore);
 		}
+	}
+	
+	public static void createBlockRedWire() {
+		blockRedWire = new BlockRedstoneWire(BlockIDs.BLOCK_RED_WIRE_ID).setUnlocalizedName(Strings.BLOCK_RED_WIRE_NAME);
+		GameRegistry.registerBlock(blockRedWire, Strings.BLOCK_RED_WIRE_NAME);
+		LanguageRegistry.addName(blockRedWire, "Red Wire");
 	}
 	
 }

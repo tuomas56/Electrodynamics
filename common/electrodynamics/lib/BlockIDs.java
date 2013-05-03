@@ -10,4 +10,8 @@ public class BlockIDs {
 	public static int BLOCK_HOLO_PAD_ID;
 	public static final int BLOCK_HOLO_PAD_DEFAULT_ID = 501;
 	
+	/* blockRedWire */
+	public static int BLOCK_RED_WIRE_ID;
+	public static final int BLOCK_RED_WIRE_DEFAULT_ID = 502;
+	
 }

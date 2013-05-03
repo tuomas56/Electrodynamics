@@ -22,6 +22,7 @@ public class ModuleManager {
 	public static void preInit() {
 		registerModule(Module.CORE, new EDModuleCore());
 		registerModule(Module.WORLD, new EDModuleWorld());
+		registerModule(Module.LOGIC, new EDModuleLogic());
 		
 		Configuration config = new Configuration(new File(Electrodynamics.instance.configFolder, MODULE_CONFIG_FILE));
 		config.load();
@@ -131,7 +132,7 @@ public class ModuleManager {
 	}
 	
 	public static enum Module {
-		CORE, WORLD;
+		CORE, WORLD, LOGIC;
 	}
 	
 }

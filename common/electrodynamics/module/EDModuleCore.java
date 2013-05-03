@@ -1,7 +1,6 @@
 package electrodynamics.module;
 
 import java.io.File;
-import java.util.EnumSet;
 
 import net.minecraftforge.common.MinecraftForge;
 
@@ -12,7 +11,6 @@ import electrodynamics.configuration.ConfigurationHandler;
 import electrodynamics.core.helper.HeatHelper;
 import electrodynamics.item.ItemHandler;
 import electrodynamics.lib.ModInfo;
-import electrodynamics.module.ModuleManager.Module;
 
 public class EDModuleCore extends EDModule {
 
@@ -37,21 +35,6 @@ public class EDModuleCore extends EDModule {
 	@Override
 	public void postInit() {
 		
-	}
-
-	@Override
-	public EnumSet<Module> dependencies() {
-		return null;
-	}
-
-	@Override
-	public boolean canLoad() {
-		return true;
-	}
-
-	@Override
-	public String failLoadReason() {
-		return "If this fails to load, you've got a problem.";
 	}
 
 }

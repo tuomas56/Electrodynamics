@@ -43,6 +43,7 @@ public class ConfigurationHandler {
 			/* Block IDs */
 			BlockIDs.BLOCK_ORE_ID = config.getBlock(Strings.BLOCK_ORE_NAME, BlockIDs.BLOCK_ORE_DEFAULT_ID).getInt(BlockIDs.BLOCK_ORE_DEFAULT_ID);
 			BlockIDs.BLOCK_HOLO_PAD_ID = config.getBlock(Strings.BLOCK_HOLO_PAD_NAME, BlockIDs.BLOCK_HOLO_PAD_DEFAULT_ID).getInt(BlockIDs.BLOCK_HOLO_PAD_DEFAULT_ID);
+			BlockIDs.BLOCK_RED_WIRE_ID = config.getBlock(Strings.BLOCK_RED_WIRE_NAME, BlockIDs.BLOCK_RED_WIRE_DEFAULT_ID).getInt(BlockIDs.BLOCK_RED_WIRE_DEFAULT_ID);
 			
 			/* Item IDs */
 			ItemIDs.ITEM_COMPONENT_ID = config.getItem(Strings.ITEM_COMPONENT_NAME, ItemIDs.ITEM_COMPONENT_DEFAULT_ID).getInt(ItemIDs.ITEM_COMPONENT_DEFAULT_ID);

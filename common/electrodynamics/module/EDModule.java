@@ -12,10 +12,16 @@ public abstract class EDModule {
 	
 	public abstract void postInit();
 	
-	public abstract EnumSet<Module> dependencies();
+	public EnumSet<Module> dependencies() {
+		return EnumSet.of(Module.CORE);
+	}
 	
-	public abstract boolean canLoad();
+	public boolean canLoad() {
+		return true;
+	}
 	
-	public abstract String failLoadReason();
+	public String failLoadReason() {
+		return "Generic Fail Reason";
+	}
 	
 }
