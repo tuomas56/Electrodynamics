@@ -1,11 +1,11 @@
-package electrodynamics.client.fx;
+package electrodynamics.entity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
@@ -18,11 +18,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.lib.ModInfo;
 
 //TODO Improve
-public class FXBeam extends EntityFX {
+public class EntityBeam extends Entity {
 	public int particle = 16;
 
-	private double offset = 0.0D;
-	
 	boolean updated = false;
 	double movX = 0.0D;
 	double movY = 0.0D;
@@ -38,6 +36,13 @@ public class FXBeam extends EntityFX {
 	private double tY = 0.0D;
 	private double tZ = 0.0D;
 
+	public float particleRed;
+	public float particleGreen;
+	public float particleBlue;
+	public float particleAlpha;
+	public float particleAge;
+	public float particleMaxAge;
+	
 	private float endMod = 1.0F;
 
 	private boolean reverse = false;
@@ -48,8 +53,8 @@ public class FXBeam extends EntityFX {
 
 	private float prevSize = 0.0F;
 
-	public FXBeam(World world, double x, double y, double z, double tx, double ty, double tz, int age) {
-		super(world, x, y, z, 0, 0, 0);
+	public EntityBeam(World world, double x, double y, double z, double tx, double ty, double tz, int age) {
+		super(world);
 
 		this.setPosition(x, y, z);
 		
@@ -79,30 +84,11 @@ public class FXBeam extends EntityFX {
 		this.boundingBox.setBounds(this.posX, this.posY, this.posZ, this.tX, this.tY, this.tZ);
 	}
 
-	public FXBeam(World world, EntityPlayer player, double x1, double y1, double z1, double x2, double y2, double z2, int age) {
-		this(world, x1, y1, z1, x2, y2, z2, age);
-		if (player.entityId != Minecraft.getMinecraft().renderViewEntity.entityId) {
-			this.offset = (player.height / 2.0F + 0.25D);
-		}
-		float xd = (float) (this.posX - this.tX);
-		float yd = (float) (this.posY + offset - this.tY);
-		float zd = (float) (this.posZ - this.tZ);
-		
-		this.length = MathHelper.sqrt_float(xd * xd + yd * yd + zd * zd);
-		double var7 = MathHelper.sqrt_double(xd * xd + zd * zd);
-		this.rotYaw = ((float) (Math.atan2(xd, zd) * 180.0D / 3.141592653589793D));
-		this.rotPitch = ((float) (Math.atan2(yd, var7) * 180.0D / 3.141592653589793D));
-		this.prevYaw = this.rotYaw;
-		this.prevPitch = this.rotPitch;
-		
-		this.boundingBox.setBounds(this.posX, this.posY, this.posZ, this.tX, this.tY, this.tZ);
-	}
-	
-	public FXBeam(World world, double x, double y, double z, Entity entity, int age) {
+	public EntityBeam(World world, double x, double y, double z, Entity entity, int age) {
 		this(world, x, y, z, entity.posX, entity.posY, entity.posZ, age);
 	}
 
-	public FXBeam(World world, TileEntity tile, double x, double y, double z, int age) {
+	public EntityBeam(World world, TileEntity tile, double x, double y, double z, int age) {
 		this(world, tile.xCoord + 0.5, tile.yCoord + 0.5, tile.zCoord + 0.5, x, y, z, age);
 	}
 	
@@ -280,4 +266,18 @@ public class FXBeam extends EntityFX {
 		this.prevSize = size;
 	}
 
+	@Override
+	protected void entityInit() {
+		
+	}
+
+	@Override
+	protected void readEntityFromNBT(NBTTagCompound nbttagcompound) {
+		
+	}
+
+	@Override
+	protected void writeEntityToNBT(NBTTagCompound nbttagcompound) {
+		
+	}
 }
