@@ -39,6 +39,7 @@ public class PlayerUtil {
 		return getPointedEntity(world, entityplayer, range, padding, false);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static Entity getPointedEntity(World world, EntityPlayer entityplayer, double range, float padding, boolean nonCollide) {
 		Entity pointedEntity = null;
 		double d = range;
@@ -73,6 +74,7 @@ public class PlayerUtil {
 		return pointedEntity;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static Entity getPointedEntity(World world, EntityPlayer entityplayer, double range, Class clazz) {
 		Entity pointedEntity = null;
 		double d = range;

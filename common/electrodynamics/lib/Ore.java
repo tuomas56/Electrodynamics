@@ -4,8 +4,8 @@ import net.minecraft.item.ItemStack;
 
 public enum Ore {
 
-	MAGNETITE(Strings.ORE_MAGNETITE_NAME, "Magnetite Ore", ItemIDs.ITEM_COMPONENT_ID + 256, Component.valueOf("MAGNETITE_CHUNK").ordinal(), 1), 
-	NICKEL(Strings.ORE_NICKEL_NAME, "Nickel Ore", BlockIDs.BLOCK_ORE_ID, 1, 1);
+	MAGNETITE(Strings.ORE_MAGNETITE_NAME, "Magnetite Ore", BlockIDs.BLOCK_ORE_ID, 0, 1, ItemIDs.ITEM_COMPONENT_ID, Component.MAGNETITE_DUST.ordinal(), 1), 
+	NICKEL(Strings.ORE_NICKEL_NAME, "Nickel Ore", BlockIDs.BLOCK_ORE_ID, 1, 1, BlockIDs.BLOCK_ORE_ID, 1, 1);
 
 	private String unlocalizedName;
 	private String localizedName; // temporary
@@ -13,21 +13,29 @@ public enum Ore {
 	public String oreDictionaryName;
 	
 	public int harvestLevel = 2;
+	
 	public int droppedID;
 	public int droppedMeta;
 	public int droppedCount;
 
-	private Ore(String unlocalizedName, String localizedName, int dropID, int dropMeta, int dropCount) {
+	public int altDroppedID;
+	public int altDroppedMeta;
+	public int altDroppedCount;
+	
+	private Ore(String unlocalizedName, String localizedName, int dropID, int dropMeta, int dropCount, int altID, int altMeta, int altCount) {
 		this.unlocalizedName = unlocalizedName;
 		this.localizedName = localizedName;
 		this.oreDictionaryName = unlocalizedName;
 		this.droppedID = dropID;
 		this.droppedMeta = dropMeta;
 		this.droppedCount = dropCount;
+		this.altDroppedID = altID;
+		this.altDroppedMeta = altMeta;
+		this.altDroppedCount = altCount;
 	}
 
-	private Ore(String unlocalizedName, String localizedName, String alt, int dropID, int dropMeta, int dropCount) {
-		this(unlocalizedName, localizedName, dropID, dropMeta, dropCount);
+	private Ore(String unlocalizedName, String localizedName, String alt, int dropID, int dropMeta, int dropCount, int altID, int altMeta, int altCount) {
+		this(unlocalizedName, localizedName, dropID, dropMeta, dropCount, altID, altMeta, altCount);
 		this.oreDictionaryName = alt;
 	}
 	

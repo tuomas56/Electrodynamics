@@ -1,5 +1,6 @@
 package electrodynamics.tileentity;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import electrodynamics.client.fx.FXBeam;
@@ -29,7 +30,8 @@ public class TileEntityLaserEmitter extends TileEntity {
 			laser.setEndMod(1.0F);
 			laser.setPulse(true);
 			
-			this.worldObj.spawnEntityInWorld(laser);
+			Minecraft.getMinecraft().effectRenderer.addEffect(laser);
+//			this.worldObj.spawnEntityInWorld(laser);
 		}
 		laser.keepAlive();
 	}
