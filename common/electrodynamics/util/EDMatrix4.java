@@ -1,4 +1,4 @@
-package electrodynamics.codechicken;
+package electrodynamics.util;
 
 public class EDMatrix4
 {

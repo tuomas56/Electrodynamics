@@ -1,4 +1,4 @@
-package electrodynamics.codechicken;
+package electrodynamics.client.fx;
 
 import java.util.Iterator;
 
@@ -13,58 +13,59 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import electrodynamics.codechicken.LightningBoltCommon.Segment;
+import electrodynamics.client.fx.FXLightningBoltCommon.Segment;
 import electrodynamics.lib.ModInfo;
+import electrodynamics.util.EDVector3;
 
-public class LightningBolt extends EntityFX {
+public class FXLightningBolt extends EntityFX {
 	private int type = 0;
-	private LightningBoltCommon main;
+	private FXLightningBoltCommon main;
 
-	public LightningBolt(World world, EDVector3 jammervec, EDVector3 targetvec, long seed) {
+	public FXLightningBolt(World world, EDVector3 jammervec, EDVector3 targetvec, long seed) {
 		super(world, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
-		this.main = new LightningBoltCommon(world, jammervec, targetvec, seed);
+		this.main = new FXLightningBoltCommon(world, jammervec, targetvec, seed);
 		setupFromMain();
 	}
 
-	public LightningBolt(World world, Entity detonator, Entity target, long seed) {
+	public FXLightningBolt(World world, Entity detonator, Entity target, long seed) {
 		super(world, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
-		this.main = new LightningBoltCommon(world, detonator, target, seed);
+		this.main = new FXLightningBoltCommon(world, detonator, target, seed);
 		setupFromMain();
 	}
 
-	public LightningBolt(World world, Entity detonator, Entity target, long seed, int speed) {
+	public FXLightningBolt(World world, Entity detonator, Entity target, long seed, int speed) {
 		super(world, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
-		this.main = new LightningBoltCommon(world, detonator, target, seed, speed);
+		this.main = new FXLightningBoltCommon(world, detonator, target, seed, speed);
 		setupFromMain();
 	}
 
-	public LightningBolt(World world, TileEntity detonator, Entity target, long seed) {
+	public FXLightningBolt(World world, TileEntity detonator, Entity target, long seed) {
 		super(world, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
-		this.main = new LightningBoltCommon(world, detonator, target, seed);
+		this.main = new FXLightningBoltCommon(world, detonator, target, seed);
 		setupFromMain();
 	}
 
-	public LightningBolt(World world, double x1, double y1, double z1, double x, double y, double z, long seed, int duration, float multi) {
+	public FXLightningBolt(World world, double x1, double y1, double z1, double x, double y, double z, long seed, int duration, float multi) {
 		super(world, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
-		this.main = new LightningBoltCommon(world, x1, y1, z1, x, y, z, seed, duration, multi);
+		this.main = new FXLightningBoltCommon(world, x1, y1, z1, x, y, z, seed, duration, multi);
 		setupFromMain();
 	}
 
-	public LightningBolt(World world, double x1, double y1, double z1, double x, double y, double z, long seed, int duration, float multi, int speed) {
+	public FXLightningBolt(World world, double x1, double y1, double z1, double x, double y, double z, long seed, int duration, float multi, int speed) {
 		super(world, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
-		this.main = new LightningBoltCommon(world, x1, y1, z1, x, y, z, seed, duration, multi, speed);
+		this.main = new FXLightningBoltCommon(world, x1, y1, z1, x, y, z, seed, duration, multi, speed);
 		setupFromMain();
 	}
 
-	public LightningBolt(World world, double x1, double y1, double z1, double x, double y, double z, long seed, int duration) {
+	public FXLightningBolt(World world, double x1, double y1, double z1, double x, double y, double z, long seed, int duration) {
 		super(world, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
-		this.main = new LightningBoltCommon(world, x1, y1, z1, x, y, z, seed, duration, 1.0F);
+		this.main = new FXLightningBoltCommon(world, x1, y1, z1, x, y, z, seed, duration, 1.0F);
 		setupFromMain();
 	}
 
-	public LightningBolt(World world, TileEntity detonator, double x, double y, double z, long seed) {
+	public FXLightningBolt(World world, TileEntity detonator, double x, double y, double z, long seed) {
 		super(world, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
-		this.main = new LightningBoltCommon(world, detonator, x, y, z, seed);
+		this.main = new FXLightningBoltCommon(world, detonator, x, y, z, seed);
 		setupFromMain();
 	}
 
@@ -135,7 +136,7 @@ public class LightningBolt extends EntityFX {
 
 		int renderlength = (int) ((this.main.particleAge + partialframe + (int) (this.main.length * 3.0F)) / (int) (this.main.length * 3.0F) * this.main.numsegments0);
 		for (Iterator<Segment> iterator = this.main.segments.iterator(); iterator.hasNext();) {
-			LightningBoltCommon.Segment rendersegment = (LightningBoltCommon.Segment) iterator.next();
+			FXLightningBoltCommon.Segment rendersegment = (FXLightningBoltCommon.Segment) iterator.next();
 			if (rendersegment.segmentno <= renderlength) {
 				float width = 0.03F * (getRelativeViewVector(rendersegment.startpoint.point).length() / 10.0F + 1.0F) * (1.0F + rendersegment.light) * 0.5F;
 				if (width > 0.05F)
@@ -196,7 +197,7 @@ public class LightningBolt extends EntityFX {
 			tessellator.draw();
 		GL11.glPushMatrix();
 
-		Minecraft.getMinecraft().renderEngine.bindTexture(ModInfo.RESOURCES_BASE + "/misc/bolt_large.png");
+		Minecraft.getMinecraft().renderEngine.bindTexture(ModInfo.RESOURCES_BASE + "/misc/bolt_small.png");
 
 		GL11.glDepthMask(false);
 		GL11.glEnable(3042);

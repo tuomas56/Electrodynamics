@@ -1,4 +1,4 @@
-package electrodynamics.codechicken;
+package electrodynamics.util;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;

@@ -1,4 +1,4 @@
-package electrodynamics.codechicken;
+package electrodynamics.client.fx;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,12 +7,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
+import electrodynamics.util.EDVector3;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-public class LightningBoltCommon {
+public class FXLightningBoltCommon {
 	ArrayList<Segment> segments;
 	EDVector3 start;
 	EDVector3 end;
@@ -35,7 +37,7 @@ public class LightningBoltCommon {
 	public static final int fadetime = 20;
 	public int damage;
 
-	public LightningBoltCommon(World world, EDVector3 jammervec, EDVector3 targetvec, long seed) {
+	public FXLightningBoltCommon(World world, EDVector3 jammervec, EDVector3 targetvec, long seed) {
 		this.segments = new ArrayList<Segment>();
 		this.splitparents = new HashMap<Integer, Integer>();
 		this.start = jammervec;
@@ -54,31 +56,31 @@ public class LightningBoltCommon {
 		this.segments.add(new Segment(this.start, this.end));
 	}
 
-	public LightningBoltCommon(World world, Entity detonator, Entity target, long seed) {
+	public FXLightningBoltCommon(World world, Entity detonator, Entity target, long seed) {
 		this(world, new EDVector3(detonator), new EDVector3(target), seed);
 	}
 
-	public LightningBoltCommon(World world, Entity detonator, Entity target, long seed, int speed) {
+	public FXLightningBoltCommon(World world, Entity detonator, Entity target, long seed, int speed) {
 		this(world, new EDVector3(detonator), new EDVector3(target.posX, target.posY + target.getEyeHeight() - 0.699999988079071D, target.posZ), seed);
 		this.increment = speed;
 		this.multiplier = 0.4F;
 	}
 
-	public LightningBoltCommon(World world, TileEntity detonator, Entity target, long seed) {
+	public FXLightningBoltCommon(World world, TileEntity detonator, Entity target, long seed) {
 		this(world, new EDVector3(detonator), new EDVector3(target), seed);
 	}
 
-	public LightningBoltCommon(World world, TileEntity detonator, double x, double y, double z, long seed) {
+	public FXLightningBoltCommon(World world, TileEntity detonator, double x, double y, double z, long seed) {
 		this(world, new EDVector3(detonator), new EDVector3(x, y, z), seed);
 	}
 
-	public LightningBoltCommon(World world, double x1, double y1, double z1, double x, double y, double z, long seed, int duration, float multi) {
+	public FXLightningBoltCommon(World world, double x1, double y1, double z1, double x, double y, double z, long seed, int duration, float multi) {
 		this(world, new EDVector3(x1, y1, z1), new EDVector3(x, y, z), seed);
 		this.particleMaxAge = (duration + this.rand.nextInt(duration) - duration / 2);
 		this.multiplier = multi;
 	}
 
-	public LightningBoltCommon(World world, double x1, double y1, double z1, double x, double y, double z, long seed, int duration, float multi, int speed) {
+	public FXLightningBoltCommon(World world, double x1, double y1, double z1, double x, double y, double z, long seed, int duration, float multi, int speed) {
 		this(world, new EDVector3(x1, y1, z1), new EDVector3(x, y, z), seed);
 		this.particleMaxAge = (duration + this.rand.nextInt(duration) - duration / 2);
 		this.multiplier = multi;
@@ -212,8 +214,8 @@ public class LightningBoltCommon {
 	}
 
 	public class Segment {
-		public LightningBoltCommon.BoltPoint startpoint;
-		public LightningBoltCommon.BoltPoint endpoint;
+		public FXLightningBoltCommon.BoltPoint startpoint;
+		public FXLightningBoltCommon.BoltPoint endpoint;
 		public EDVector3 diff;
 		public Segment prev;
 		public Segment next;
@@ -254,7 +256,7 @@ public class LightningBoltCommon {
 			return this.startpoint.point.toString() + " " + this.endpoint.point.toString();
 		}
 
-		public Segment(LightningBoltCommon.BoltPoint start, LightningBoltCommon.BoltPoint end, float light, int segmentnumber, int splitnumber) {
+		public Segment(FXLightningBoltCommon.BoltPoint start, FXLightningBoltCommon.BoltPoint end, float light, int segmentnumber, int splitnumber) {
 			this.startpoint = start;
 			this.endpoint = end;
 			this.light = light;
@@ -264,26 +266,26 @@ public class LightningBoltCommon {
 		}
 
 		public Segment(EDVector3 start, EDVector3 end) {
-			this(new LightningBoltCommon.BoltPoint(start, new EDVector3(0.0D, 0.0D, 0.0D)), new LightningBoltCommon.BoltPoint(end, new EDVector3(0.0D, 0.0D, 0.0D)), 1.0F, 0, 0);
+			this(new FXLightningBoltCommon.BoltPoint(start, new EDVector3(0.0D, 0.0D, 0.0D)), new FXLightningBoltCommon.BoltPoint(end, new EDVector3(0.0D, 0.0D, 0.0D)), 1.0F, 0, 0);
 		}
 	}
 
 	public class SegmentLightSorter implements Comparator<Segment> {
-		final LightningBoltCommon this$0;
+		final FXLightningBoltCommon this$0;
 
-		public int compare(LightningBoltCommon.Segment o1, LightningBoltCommon.Segment o2) {
+		public int compare(FXLightningBoltCommon.Segment o1, FXLightningBoltCommon.Segment o2) {
 			return Float.compare(o2.light, o1.light);
 		}
 
 		public SegmentLightSorter() {
-			this.this$0 = LightningBoltCommon.this;
+			this.this$0 = FXLightningBoltCommon.this;
 		}
 	}
 
 	public class SegmentSorter implements Comparator<Segment> {
-		final LightningBoltCommon this$0;
+		final FXLightningBoltCommon this$0;
 
-		public int compare(LightningBoltCommon.Segment o1, LightningBoltCommon.Segment o2) {
+		public int compare(FXLightningBoltCommon.Segment o1, FXLightningBoltCommon.Segment o2) {
 			int comp = Integer.valueOf(o1.splitno).compareTo(Integer.valueOf(o2.splitno));
 			if (comp == 0) {
 				return Integer.valueOf(o1.segmentno).compareTo(Integer.valueOf(o2.segmentno));
@@ -292,7 +294,7 @@ public class LightningBoltCommon {
 		}
 
 		public SegmentSorter() {
-			this.this$0 = LightningBoltCommon.this;
+			this.this$0 = FXLightningBoltCommon.this;
 		}
 	}
 }
