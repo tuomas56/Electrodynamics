@@ -1,5 +1,10 @@
 package electrodynamics.item.tesla;
 
+import org.lwjgl.opengl.GL11;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,6 +50,33 @@ public class ItemArmorTeslaHelm extends ItemArmor implements IKeyBoundClient {
 		texture = register.registerIcon(ModInfo.ICON_PREFIX + "tesla/helmet");
 	}
 
+	@SideOnly(Side.CLIENT)
+    public void renderHelmetOverlay(ItemStack stack, EntityPlayer player, ScaledResolution resolution, float partialTicks, boolean hasScreen, int mouseX, int mouseY) {
+		if (thermalEnabled) {
+			GL11.glPushMatrix();
+			GL11.glDisable(GL11.GL_DEPTH_TEST);
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			GL11.glDepthMask(false);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			GL11.glDisable(GL11.GL_ALPHA_TEST);
+			GL11.glColor4f(50, 0, 140, 0.05F);
+			Tessellator tessellator = Tessellator.instance;
+			tessellator.startDrawingQuads();
+			tessellator.addVertex(0.0D, (double) resolution.getScaledHeight(), -90.0D);
+			tessellator.addVertex((double) resolution.getScaledWidth(), (double) resolution.getScaledHeight(), -90.0D);
+			tessellator.addVertex((double) resolution.getScaledWidth(), 0.0D, -90.0D);
+			tessellator.addVertex(0.0D, 0.0D, -90.0D);
+			tessellator.draw();
+			GL11.glDepthMask(true);
+			GL11.glEnable(GL11.GL_DEPTH_TEST);
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			GL11.glEnable(GL11.GL_ALPHA_TEST);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			GL11.glPopMatrix();
+		}
+	}
+	
 	@Override
 	public void doKeybindingAction(EntityPlayer player, ItemStack stack, String key) {
 		if (key.equals(ConfigurationSettings.THERMAL_VIEW_TOGGLE_NAME)) {

@@ -2,14 +2,9 @@ package electrodynamics.client.render;
 
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
-
-import electrodynamics.tileentity.TileEntityHoloPad;
 
 public class RenderHoloProjector extends TileEntitySpecialRenderer {
 
