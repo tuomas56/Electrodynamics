@@ -6,12 +6,15 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.src.ModLoader;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
 import org.lwjgl.opengl.GL11;
 
 import electrodynamics.lib.ModInfo;
 
+//TODO Improve
 public class FXBeam extends EntityFX {
 	public int particle = 16;
 
@@ -30,8 +33,6 @@ public class FXBeam extends EntityFX {
 	private double tY = 0.0D;
 	private double tZ = 0.0D;
 
-	private int type = 0;
-
 	private float endMod = 1.0F;
 
 	private boolean reverse = false;
@@ -42,12 +43,11 @@ public class FXBeam extends EntityFX {
 
 	private float prevSize = 0.0F;
 
-	public FXBeam(World par1World, double x, double y, double z, double tx, double ty, double tz, float red, float green, float blue, int age) {
-		super(par1World, x, y, z, 0.0D, 0.0D, 0.0D);
+	public FXBeam(World world, double x, double y, double z, double tx, double ty, double tz, int age) {
+		super(world, x, y, z, 0.0D, 0.0D, 0.0D);
 
-		this.particleRed = red;
-		this.particleGreen = green;
-		this.particleBlue = blue;
+		//Defaults to white
+		this.particleRed = (this.particleGreen = this.particleBlue = 1.0F);
 
 		setSize(0.02F, 0.02F);
 		this.noClip = true;
@@ -68,39 +68,18 @@ public class FXBeam extends EntityFX {
 		this.prevPitch = this.rotPitch;
 
 		this.particleMaxAge = age;
+		
+		this.boundingBox.setBounds(this.posX, this.posY, this.posZ, this.tX, this.tY, this.tZ);
 	}
 
-	public FXBeam(World par1World, double x, double y, double z, Entity entity, float red, float green, float blue, int age) {
-		super(par1World, x, y, z, 0.0D, 0.0D, 0.0D);
-
-		this.particleRed = red;
-		this.particleGreen = green;
-		this.particleBlue = blue;
-
-		setSize(0.02F, 0.02F);
-		this.noClip = true;
-		this.motionX = 0.0D;
-		this.motionY = 0.0D;
-		this.motionZ = 0.0D;
-
-		this.targetEntity = entity;
-
-		this.tX = this.targetEntity.posX;
-		this.tY = (this.targetEntity.posY + this.targetEntity.getEyeHeight() - this.targetEntity.height / 2.0F);
-		this.tZ = this.targetEntity.posZ;
-		float xd = (float) (this.posX - this.tX);
-		float yd = (float) (this.posY - this.tY);
-		float zd = (float) (this.posZ - this.tZ);
-		this.length = MathHelper.sqrt_float(xd * xd + yd * yd + zd * zd);
-		double var7 = MathHelper.sqrt_double(xd * xd + zd * zd);
-		this.rotYaw = ((float) (Math.atan2(xd, zd) * 180.0D / 3.141592653589793D));
-		this.rotPitch = ((float) (Math.atan2(yd, var7) * 180.0D / 3.141592653589793D));
-		this.prevYaw = this.rotYaw;
-		this.prevPitch = this.rotPitch;
-
-		this.particleMaxAge = age;
+	public FXBeam(World world, double x, double y, double z, Entity entity, int age) {
+		this(world, x, y, z, entity.posX, entity.posY, entity.posZ, age);
 	}
 
+	public FXBeam(World world, TileEntity tile, double x, double y, double z, int age) {
+		this(world, tile.xCoord + 0.5, tile.yCoord + 0.5, tile.zCoord + 0.5, x, y, z, age);
+	}
+	
 	public void updateBeam(double xs, double ys, double zs, double x, double y, double z) {
 		this.movX = xs;
 		this.movY = ys;
@@ -109,25 +88,26 @@ public class FXBeam extends EntityFX {
 		this.tY = y;
 		this.tZ = z;
 		
-		if (this.particleRed >= 255) {
-			this.particleRed = 0;
-		} else {
-			this.particleRed++;
-		}
-		
-		while (this.particleMaxAge - this.particleAge < 4)
-			this.particleMaxAge += 1;
+		while (this.particleMaxAge - this.particleAge < 4) this.particleMaxAge += 1;
 		this.updated = true;
 	}
 
+	public void keepAlive() {
+		while (this.particleMaxAge - this.particleAge < 4) this.particleMaxAge += 1;
+	}
+	
 	public void onUpdate() {
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
+		
 		if (this.updated) {
 			this.posX = this.movX;
 			this.posY = this.movY;
 			this.posZ = this.movZ;
+			
+			this.boundingBox.setBounds(this.posX, this.posY, this.posZ, this.tX, this.tY, this.tZ);
+			
 			this.updated = false;
 		}
 
@@ -162,10 +142,6 @@ public class FXBeam extends EntityFX {
 		this.particleBlue = b;
 	}
 
-	public void setType(int type) {
-		this.type = type;
-	}
-
 	public void setEndMod(float endMod) {
 		this.endMod = endMod;
 	}
@@ -182,13 +158,19 @@ public class FXBeam extends EntityFX {
 		this.rotationspeed = rotationspeed;
 	}
 
+	public void setSize(float f1, float f2) {
+		super.setSize(f1, f2);
+	}
+	
+	public void setTargetEntity(Entity entity) {
+		this.targetEntity = entity;
+	}
+	
 	public void renderParticle(Tessellator tessellator, float f, float f1, float f2, float f3, float f4, float f5) {
 		EntityLiving renderentity = ModLoader.getMinecraftInstance().renderViewEntity;
 		int visibleDistance = 50;
-		if (!ModLoader.getMinecraftInstance().gameSettings.fancyGraphics)
-			visibleDistance = 25;
-		if (renderentity.getDistance(this.posX, this.posY, this.posZ) > visibleDistance)
-			this.particleMaxAge = 0;
+		if (!ModLoader.getMinecraftInstance().gameSettings.fancyGraphics) visibleDistance = 25;
+		if (renderentity.getDistance(this.posX, this.posY, this.posZ) > visibleDistance) this.particleMaxAge = 0;
 		
 		tessellator.draw();
 
@@ -207,16 +189,7 @@ public class FXBeam extends EntityFX {
 		if ((this.pulse) && (this.particleMaxAge - this.particleAge <= 4)) {
 			op = 0.4F - (4 - (this.particleMaxAge - this.particleAge)) * 0.1F;
 		}
-		switch (this.type) {
-		default:
-			Minecraft.getMinecraft().renderEngine.bindTexture(ModInfo.RESOURCES_BASE + "/misc/beam.png");
-			break;
-		case 1:
-			Minecraft.getMinecraft().renderEngine.bindTexture(ModInfo.RESOURCES_BASE + "/misc/beam1.png");
-			break;
-		case 2:
-			Minecraft.getMinecraft().renderEngine.bindTexture(ModInfo.RESOURCES_BASE + "/misc/beam2.png");
-		}
+		Minecraft.getMinecraft().renderEngine.bindTexture(ModInfo.RESOURCES_BASE + "/misc/beam1.png");
 
 		GL11.glTexParameterf(3553, 10242, 10497.0F);
 		GL11.glTexParameterf(3553, 10243, 10497.0F);
@@ -224,8 +197,9 @@ public class FXBeam extends EntityFX {
 		GL11.glDisable(2884);
 
 		float var11 = slide + f;
-		if (this.reverse)
+		if (this.reverse) {
 			var11 *= -1.0F;
+		}
 		float var12 = -var11 * 0.2F - MathHelper.floor_float(-var11 * 0.1F);
 
 		GL11.glEnable(3042);

@@ -16,6 +16,7 @@ public class BlockHandler {
 	public static Block blockHoloPad;
 	public static Block blockOre;
 	public static Block blockRedWire;
+	public static Block blockLaserEmitter;
 	
 	public static void createBlockHoloPad() {
 		blockHoloPad = new BlockHoloPad(BlockIDs.BLOCK_HOLO_PAD_ID).setUnlocalizedName(Strings.BLOCK_HOLO_PAD_NAME);
@@ -39,6 +40,12 @@ public class BlockHandler {
 		blockRedWire = new BlockRedstoneWire(BlockIDs.BLOCK_RED_WIRE_ID).setUnlocalizedName(Strings.BLOCK_RED_WIRE_NAME);
 		GameRegistry.registerBlock(blockRedWire, Strings.BLOCK_RED_WIRE_NAME);
 		LanguageRegistry.addName(blockRedWire, "Red Wire");
+	}
+	
+	public static void createBlockLaserEmitter() {
+		blockLaserEmitter = new BlockLaserEmitter(505).setUnlocalizedName("blockLaserEmitter");
+		GameRegistry.registerBlock(blockLaserEmitter, "blockLaserEmitter");
+		LanguageRegistry.addName(blockLaserEmitter, "Laser Emitter");
 	}
 	
 }

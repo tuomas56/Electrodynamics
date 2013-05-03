@@ -23,6 +23,7 @@ public class EDModuleCore extends EDModule {
 		
 		ItemHandler.initializeItems();
 		BlockHandler.createBlockHoloPad();
+		BlockHandler.createBlockLaserEmitter();
 	}
 
 	@Override
