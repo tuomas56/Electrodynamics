@@ -9,6 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -17,6 +18,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.core.CreativeTabED;
+import electrodynamics.item.ItemHandler;
 import electrodynamics.tileentity.TileEntityTable;
 
 public class BlockTable extends BlockContainer {
@@ -30,6 +32,7 @@ public class BlockTable extends BlockContainer {
 		super(id, Material.wood);
 		setHardness(1F);
 		setCreativeTab(CreativeTabED.block);
+		//TODO update
 		setBlockBounds(0, 0, 0, 1, 0.87F, 1);
 	}
 
@@ -91,6 +94,26 @@ public class BlockTable extends BlockContainer {
 		super.breakBlock(world, x, y, z, i1, i2);
 	}
 
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
+		if (world.isRemote) return false;
+		if (player.isSneaking()) return false;
+		
+		TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
+		
+		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ItemHandler.itemStoneHammer) {
+			table.handleSmash();
+		} else {
+			if (table.displayedItem != null) {
+				player.dropPlayerItem(table.displayedItem);
+				table.displayedItem = null;
+				world.markBlockForUpdate(x, y, z);
+			}
+		}
+		
+		return true;
+	}
+	
 	@Override
 	public Icon getIcon(int side, int meta) {
 		return Block.planks.getIcon(0, 0);

@@ -1,5 +1,7 @@
 package electrodynamics.tileentity;
 
+import electrodynamics.lib.BlockIDs;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
@@ -66,6 +68,13 @@ public class TileEntityTable extends TileEntity {
 	 
 	 public int getRotation() {
 		 return this.itemRotation;
+	 }
+
+	 public void handleSmash() {
+		 if (this.type == 0 && displayedItem.getItem().itemID == Block.stoneSingleSlab.blockID) {
+			 this.displayedItem = null;
+			 this.worldObj.setBlock(xCoord, yCoord, zCoord, BlockIDs.BLOCK_TABLE_ID, 1, 2);
+		 }
 	 }
 	 
 }

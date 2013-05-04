@@ -20,18 +20,23 @@ public class ItemHandler {
 	public static Item itemTeslaChest;
 	public static Item itemTeslaLegs;
 	public static Item itemTeslaBoots;
+	public static Item itemStoneHammer;
 	
-	public static void initializeItems() {
+	public static void createNewComponentItem() {
 		itemComponent = new ItemComponent(ItemIDs.ITEM_COMPONENT_ID).setUnlocalizedName(Strings.ITEM_COMPONENT_NAME);
 		GameRegistry.registerItem(itemComponent, Strings.ITEM_COMPONENT_NAME);
 		for (int i=0; i<Component.values().length; i++) {
 			LanguageRegistry.addName(new ItemStack(itemComponent, 1, i), Component.values()[i].getLocalizedName("en_US"));
 		}
-		
+	}
+	
+	public static void createNewItemPCB() {
 		itemPCB = new ItemPCB(ItemIDs.ITEM_PCB_ID).setUnlocalizedName(Strings.ITEM_PCB_NAME);
 		GameRegistry.registerItem(itemPCB, Strings.ITEM_PCB_NAME);
 		LanguageRegistry.addName(itemPCB, "PCB");
-		
+	}
+	
+	public static void createNewPowerArmor() {
 		itemTeslaHelm = new ItemArmorTeslaHelm(ItemIDs.ITEM_TESLA_HELM_ID).setUnlocalizedName(Strings.ITEM_TESLA_HAT_NAME);
 		GameRegistry.registerItem(itemTeslaHelm, Strings.ITEM_TESLA_HAT_NAME);
 		LanguageRegistry.addName(itemTeslaHelm, "Tesla Helmet");
@@ -47,6 +52,12 @@ public class ItemHandler {
 		itemTeslaBoots = new ItemArmorTeslaBoots(ItemIDs.ITEM_TESLA_BOOTS_ID).setUnlocalizedName(Strings.ITEM_TESLA_BOOTS_NAME);
 		GameRegistry.registerItem(itemTeslaBoots, Strings.ITEM_TESLA_BOOTS_NAME);
 		LanguageRegistry.addName(itemTeslaBoots, "Tesla Boots");
+	}
+	
+	public static void createNewStoneHammer() {
+		itemStoneHammer = new ItemStoneHammer(ItemIDs.ITEM_STONE_HAMMER_ID).setUnlocalizedName(Strings.ITEM_STONE_HAMMER_NAME);
+		GameRegistry.registerItem(itemStoneHammer, Strings.ITEM_STONE_HAMMER_NAME);
+		LanguageRegistry.addName(itemStoneHammer, "Stone Hammer");
 	}
 	
 }

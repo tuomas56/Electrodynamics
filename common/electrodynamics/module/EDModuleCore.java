@@ -22,7 +22,11 @@ public class EDModuleCore extends EDModule {
 		
 		Electrodynamics.proxy.registerKeyBindings();
 		
-		ItemHandler.initializeItems();
+		ItemHandler.createNewComponentItem();
+		ItemHandler.createNewItemPCB();
+		ItemHandler.createNewPowerArmor();
+		ItemHandler.createNewStoneHammer();
+		
 		BlockHandler.createBlockHoloPad();
 		BlockHandler.createNewBlockTable();
 	}
