@@ -14,17 +14,10 @@ import electrodynamics.lib.Strings;
 
 public class BlockHandler {
 
-	public static Block blockHoloPad;
 	public static Block blockOre;
 	public static Block blockRedWire;
 	public static Block blockLaserEmitter;
 	public static Block blockTable;
-	
-	public static void createBlockHoloPad() {
-		blockHoloPad = new BlockHoloPad(BlockIDs.BLOCK_HOLO_PAD_ID).setUnlocalizedName(Strings.BLOCK_HOLO_PAD_NAME);
-		GameRegistry.registerBlock(blockHoloPad, Strings.BLOCK_HOLO_PAD_NAME);
-		LanguageRegistry.addName(blockHoloPad, "Holo Pad");
-	}
 	
 	public static void createBlockOre() {
 		blockOre = new BlockOre(BlockIDs.BLOCK_ORE_ID).setUnlocalizedName(Strings.BLOCK_ORE_NAME);

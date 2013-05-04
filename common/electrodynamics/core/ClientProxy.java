@@ -7,12 +7,10 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import electrodynamics.client.fx.FXBeam;
 import electrodynamics.client.render.entity.RenderBeam;
 import electrodynamics.client.render.item.RenderItemTable;
-import electrodynamics.client.render.tileentity.RenderHoloProjector;
 import electrodynamics.client.render.tileentity.RenderTable;
 import electrodynamics.control.KeyBindingHelper;
 import electrodynamics.control.KeybindingHandler;
 import electrodynamics.lib.BlockIDs;
-import electrodynamics.tileentity.TileEntityHoloPad;
 import electrodynamics.tileentity.TileEntityTable;
 
 public class ClientProxy extends CommonProxy {
@@ -20,7 +18,6 @@ public class ClientProxy extends CommonProxy {
 	public void registerTileEntities() {
 		super.registerTileEntities();
 
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHoloPad.class, new RenderHoloProjector());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTable.class, new RenderTable());
 	}
 	
