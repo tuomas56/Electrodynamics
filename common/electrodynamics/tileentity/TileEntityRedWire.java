@@ -1,6 +1,5 @@
 package electrodynamics.tileentity;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,16 +17,16 @@ public class TileEntityRedWire extends TileEntity implements IPayloadReceiver {
 	/** If this block is being powered from somewhere */
 	public boolean isPowered;
 	
+	/** The previous powered state of the wire. Can be the same as isPowered */
+	public boolean prevIsPowered;
+	
 	/** Sides that should prevent redstone interaction */
 	public boolean[] activeMasks;
 	
 	public TileEntityRedWire() {
 		activeMasks = new boolean[ForgeDirection.VALID_DIRECTIONS.length];
 		isPowered = false;
-	}
-	
-	public void updateEntity() {
-		System.out.println(FMLCommonHandler.instance().getEffectiveSide() + ": " + isPowered);
+		prevIsPowered = false;
 	}
 	
 	public void writeToNBT(NBTTagCompound nbt) {
@@ -60,6 +59,7 @@ public class TileEntityRedWire extends TileEntity implements IPayloadReceiver {
 		for (int i=0; i<6; i++) {
 			activeMasks[i] = data[i] == 1 ? true : false;
 		}
+		prevIsPowered = isPowered;
 		isPowered = data[6] == 1 ? true : false;
 	}
 	
@@ -88,6 +88,8 @@ public class TileEntityRedWire extends TileEntity implements IPayloadReceiver {
 	}
 	
 	public void scanAndUpdate() {
+		prevIsPowered = isPowered;
+		
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			if (!activeMasks[dir.ordinal()]) {
 				if (isProvidingAnyPower(this.worldObj, xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ, dir)) {

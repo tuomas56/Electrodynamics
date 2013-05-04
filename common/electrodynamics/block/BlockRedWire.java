@@ -35,8 +35,10 @@ public class BlockRedWire extends BlockContainer {
 	}
 	
 	public void onNeighborBlockChange(World world, int x, int y, int z, int blockID) {
+		TileEntityRedWire redWire = (TileEntityRedWire) world.getBlockTileEntity(x, y, z);
+		
 		if (!world.isRemote) {
-			((TileEntityRedWire)world.getBlockTileEntity(x, y, z)).scanAndUpdate();
+			redWire.scanAndUpdate();
 		}
 		
 		world.markBlockForUpdate(x, y, z);
@@ -45,8 +47,11 @@ public class BlockRedWire extends BlockContainer {
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entity, ItemStack stack) {
 		super.onBlockPlacedBy(world, x, y, z, entity, stack);
 		
+		TileEntityRedWire redWire = (TileEntityRedWire) world.getBlockTileEntity(x, y, z);
+		
 		if (!world.isRemote) {
-			((TileEntityRedWire)world.getBlockTileEntity(x, y, z)).updateMasks();
+			redWire.updateMasks();
+			redWire.scanAndUpdate();
 		}
 		
 		world.markBlockForUpdate(x, y, z);
