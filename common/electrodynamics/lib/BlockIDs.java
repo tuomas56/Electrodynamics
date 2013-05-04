@@ -14,4 +14,8 @@ public class BlockIDs {
 	public static int BLOCK_TABLE_ID;
 	public static final int BLOCK_TABLE_DEFAULT_ID = 502;
 	
+	/* blockLaserEmitter */
+	public static int BLOCK_LASER_EMITTER_ID;
+	public static final int BLOCK_LASER_EMITTER_DEFAULT_ID = 503;
+	
 }

@@ -5,13 +5,13 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import electrodynamics.client.fx.FXBeam;
 import electrodynamics.lib.Strings;
 import electrodynamics.tileentity.TileEntityLaserEmitter;
-import electrodynamics.tileentity.TileEntityRedstoneWire;
+import electrodynamics.tileentity.TileEntityRedWire;
 import electrodynamics.tileentity.TileEntityTable;
 
 public class CommonProxy {
 
 	public void registerTileEntities() {
-		GameRegistry.registerTileEntity(TileEntityRedstoneWire.class, Strings.BLOCK_RED_WIRE_NAME);
+		GameRegistry.registerTileEntity(TileEntityRedWire.class, Strings.BLOCK_RED_WIRE_NAME);
 		GameRegistry.registerTileEntity(TileEntityTable.class, Strings.BLOCK_TABLE_NAME);
 		GameRegistry.registerTileEntity(TileEntityLaserEmitter.class, "blockLaserEmitter");
 	}

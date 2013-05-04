@@ -32,15 +32,15 @@ public class BlockHandler {
 	}
 	
 	public static void createBlockRedWire() {
-		blockRedWire = new BlockRedstoneWire(BlockIDs.BLOCK_RED_WIRE_ID).setUnlocalizedName(Strings.BLOCK_RED_WIRE_NAME);
+		blockRedWire = new BlockRedWire(BlockIDs.BLOCK_RED_WIRE_ID).setUnlocalizedName(Strings.BLOCK_RED_WIRE_NAME);
 		GameRegistry.registerBlock(blockRedWire, Strings.BLOCK_RED_WIRE_NAME);
 		LanguageRegistry.addName(blockRedWire, "Red Wire");
 	}
 	
 	public static void createNewLaserEmitter() {
-		blockLaserEmitter = new BlockLaserEmitter(555).setUnlocalizedName("blockLaserEmitter");
-		GameRegistry.registerBlock(blockLaserEmitter, "blockLaserEmitter");
-		LanguageRegistry.addName(blockLaserEmitter, "LE");
+		blockLaserEmitter = new BlockLaserEmitter(BlockIDs.BLOCK_LASER_EMITTER_ID).setUnlocalizedName(Strings.BLOCK_LASER_EMITTER);
+		GameRegistry.registerBlock(blockLaserEmitter, Strings.BLOCK_LASER_EMITTER);
+		LanguageRegistry.addName(blockLaserEmitter, "Laser Emitter");
 	}
 	
 	public static void createNewBlockTable() {
