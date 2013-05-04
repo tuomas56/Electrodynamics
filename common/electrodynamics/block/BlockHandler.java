@@ -37,6 +37,12 @@ public class BlockHandler {
 		LanguageRegistry.addName(blockRedWire, "Red Wire");
 	}
 	
+	public static void createNewLaserEmitter() {
+		blockLaserEmitter = new BlockLaserEmitter(555).setUnlocalizedName("blockLaserEmitter");
+		GameRegistry.registerBlock(blockLaserEmitter, "blockLaserEmitter");
+		LanguageRegistry.addName(blockLaserEmitter, "LE");
+	}
+	
 	public static void createNewBlockTable() {
 		blockTable = new BlockTable(BlockIDs.BLOCK_TABLE_ID).setUnlocalizedName(Strings.BLOCK_TABLE_NAME);
 		GameRegistry.registerBlock(blockTable, ItemBlockTable.class, Strings.BLOCK_TABLE_NAME);
