@@ -7,6 +7,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import electrodynamics.block.item.ItemBlockOre;
+import electrodynamics.block.item.ItemBlockTable;
 import electrodynamics.lib.BlockIDs;
 import electrodynamics.lib.Ore;
 import electrodynamics.lib.Strings;
@@ -17,6 +18,7 @@ public class BlockHandler {
 	public static Block blockOre;
 	public static Block blockRedWire;
 	public static Block blockLaserEmitter;
+	public static Block blockTable;
 	
 	public static void createBlockHoloPad() {
 		blockHoloPad = new BlockHoloPad(BlockIDs.BLOCK_HOLO_PAD_ID).setUnlocalizedName(Strings.BLOCK_HOLO_PAD_NAME);
@@ -42,10 +44,12 @@ public class BlockHandler {
 		LanguageRegistry.addName(blockRedWire, "Red Wire");
 	}
 	
-	public static void createBlockLaserEmitter() {
-		blockLaserEmitter = new BlockLaserEmitter(505).setUnlocalizedName("blockLaserEmitter");
-		GameRegistry.registerBlock(blockLaserEmitter, "blockLaserEmitter");
-		LanguageRegistry.addName(blockLaserEmitter, "Laser Emitter");
+	public static void createNewBlockTable() {
+		blockTable = new BlockTable(BlockIDs.BLOCK_TABLE_ID).setUnlocalizedName(Strings.BLOCK_TABLE_NAME);
+		GameRegistry.registerBlock(blockTable, ItemBlockTable.class, Strings.BLOCK_TABLE_NAME);
+		for (int i=0; i<BlockTable.blockNames.length; i++) {
+			LanguageRegistry.addName(new ItemStack(blockTable, 1, i), BlockTable.blockNames[i]);
+		}
 	}
 	
 }

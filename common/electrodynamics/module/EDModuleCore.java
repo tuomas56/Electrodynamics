@@ -6,7 +6,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import electrodynamics.Electrodynamics;
 import electrodynamics.block.BlockHandler;
-import electrodynamics.client.render.RenderThermalOverlay;
+import electrodynamics.client.render.misc.RenderThermalOverlay;
 import electrodynamics.configuration.ConfigurationHandler;
 import electrodynamics.core.helper.HeatHelper;
 import electrodynamics.item.ItemHandler;
@@ -17,13 +17,14 @@ public class EDModuleCore extends EDModule {
 	//TODO Neatening up
 	@Override
 	public void preInit() {
+		//Temp
 		ConfigurationHandler.handleConfig(new File(Electrodynamics.instance.configFolder, ModInfo.CORE_CONFIG));
 		
 		Electrodynamics.proxy.registerKeyBindings();
 		
 		ItemHandler.initializeItems();
 		BlockHandler.createBlockHoloPad();
-		BlockHandler.createBlockLaserEmitter();
+		BlockHandler.createNewBlockTable();
 	}
 
 	@Override
@@ -31,6 +32,7 @@ public class EDModuleCore extends EDModule {
 		HeatHelper.initializeMapping();
 		MinecraftForge.EVENT_BUS.register(new RenderThermalOverlay());
 		Electrodynamics.proxy.registerTileEntities();
+		Electrodynamics.proxy.registerRenders();
 	}
 
 	@Override

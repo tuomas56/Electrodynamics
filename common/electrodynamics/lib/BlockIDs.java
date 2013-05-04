@@ -14,4 +14,8 @@ public class BlockIDs {
 	public static int BLOCK_RED_WIRE_ID;
 	public static final int BLOCK_RED_WIRE_DEFAULT_ID = 502;
 	
+	/* blockTable */
+	public static int BLOCK_TABLE_ID;
+	public static final int BLOCK_TABLE_DEFAULT_ID = 503;
+	
 }

@@ -1,14 +1,19 @@
 package electrodynamics.core;
 
+import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import electrodynamics.client.fx.FXBeam;
-import electrodynamics.client.render.RenderBeam;
-import electrodynamics.client.render.RenderHoloProjector;
+import electrodynamics.client.render.entity.RenderBeam;
+import electrodynamics.client.render.item.RenderItemTable;
+import electrodynamics.client.render.tileentity.RenderHoloProjector;
+import electrodynamics.client.render.tileentity.RenderTable;
 import electrodynamics.control.KeyBindingHelper;
 import electrodynamics.control.KeybindingHandler;
+import electrodynamics.lib.BlockIDs;
 import electrodynamics.tileentity.TileEntityHoloPad;
+import electrodynamics.tileentity.TileEntityTable;
 
 public class ClientProxy extends CommonProxy {
 
@@ -16,12 +21,18 @@ public class ClientProxy extends CommonProxy {
 		super.registerTileEntities();
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHoloPad.class, new RenderHoloProjector());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTable.class, new RenderTable());
 	}
 	
 	public void registerEntities() {
 		super.registerEntities();
 		
 		RenderingRegistry.registerEntityRenderingHandler(FXBeam.class, new RenderBeam());
+	}
+	
+	@Override
+	public void registerRenders() {
+		MinecraftForgeClient.registerItemRenderer(BlockIDs.BLOCK_TABLE_ID, new RenderItemTable());
 	}
 	
 	@Override

@@ -1,4 +1,4 @@
-package electrodynamics.client.render;
+package electrodynamics.client.render.entity;
 
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.Tessellator;

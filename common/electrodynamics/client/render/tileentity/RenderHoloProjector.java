@@ -1,4 +1,4 @@
-package electrodynamics.client.render;
+package electrodynamics.client.render.tileentity;
 
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

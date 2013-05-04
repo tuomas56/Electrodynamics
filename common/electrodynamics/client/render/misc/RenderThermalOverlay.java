@@ -1,4 +1,4 @@
-package electrodynamics.client.render;
+package electrodynamics.client.render.misc;
 
 import java.lang.reflect.Field;
 import java.util.List;
