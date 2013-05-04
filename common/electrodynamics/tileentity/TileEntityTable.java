@@ -71,9 +71,11 @@ public class TileEntityTable extends TileEntity {
 	 }
 
 	 public void handleSmash() {
-		 if (this.type == 0 && displayedItem.getItem().itemID == Block.stoneSingleSlab.blockID) {
-			 this.displayedItem = null;
-			 this.worldObj.setBlock(xCoord, yCoord, zCoord, BlockIDs.BLOCK_TABLE_ID, 1, 2);
+		 if (displayedItem != null) {
+			 if (this.type == 0 && displayedItem.getItem().itemID == Block.stoneSingleSlab.blockID) {
+				 this.displayedItem = null;
+				 this.worldObj.setBlock(xCoord, yCoord, zCoord, BlockIDs.BLOCK_TABLE_ID, 1, 2);
+			 }
 		 }
 	 }
 	 

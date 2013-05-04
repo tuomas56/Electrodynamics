@@ -27,7 +27,6 @@ public class EDModuleCore extends EDModule {
 		ItemHandler.createNewPowerArmor();
 		ItemHandler.createNewStoneHammer();
 		
-		BlockHandler.createBlockHoloPad();
 		BlockHandler.createNewBlockTable();
 	}
 
