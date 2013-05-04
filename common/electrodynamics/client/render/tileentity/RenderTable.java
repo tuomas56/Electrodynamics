@@ -5,9 +5,12 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemMinecart;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
@@ -32,31 +35,57 @@ public class RenderTable extends TileEntitySpecialRenderer {
 		ItemStack itemstack = table.displayedItem;
 
 		if (itemstack != null) {
-			GL11.glRotatef(180, 1, 0, 0);
-			GL11.glTranslated(0, -0.62, 0);
-			
-			if (!(itemstack.getItem() instanceof ItemBlock)) {
-				GL11.glRotatef(90, 1, 0, 0);
-				GL11.glTranslated(0, -0.18, 0);
+			if (itemstack.getItem() instanceof ItemMinecart) {
+				renderMinecart(table.worldObj, itemstack, table.type);
+			} else {
+				renderItem(table.worldObj, itemstack, table.type);
 			}
-			
-			if (table.type == 0) {
-				if ((itemstack.getItem() instanceof ItemBlock)) {
-					GL11.glTranslated(0, -0.2, 0);
-				} else {
-					GL11.glTranslated(0, 0, 0.18);
-				}
-			}
-			
-			EntityItem entityitem = new EntityItem(table.worldObj, 0.0D, 0.0D, 0.0D, itemstack);
-			entityitem.getEntityItem().stackSize = 1;
-			entityitem.hoverStart = 0.0F;
-			RenderItem.renderInFrame = true;
-            RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
-            RenderItem.renderInFrame = false;
 		}
 	}
 
+	private void renderMinecart(World world, ItemStack stack, byte type) {
+		int minecartType = ((ItemMinecart)stack.getItem()).minecartType;
+		
+		GL11.glRotatef(180, 1, 0, 0);
+		GL11.glScaled(.4, .4, .4);
+		GL11.glTranslated(0, -1.2, 0);
+		
+		if (type == 0) {
+			GL11.glTranslated(0, -0.5, 0);
+		}
+		
+		EntityMinecart minecart = EntityMinecart.createMinecart(world, 0, 0, 0, minecartType);
+		
+		RenderItem.renderInFrame = true;
+        RenderManager.instance.renderEntityWithPosYaw(minecart, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+        RenderItem.renderInFrame = false;
+	}
+	
+	private void renderItem(World world, ItemStack stack, byte type) {
+		GL11.glRotatef(180, 1, 0, 0);
+		GL11.glTranslated(0, -0.62, 0);
+		
+		if (!(stack.getItem() instanceof ItemBlock)) {
+			GL11.glRotatef(90, 1, 0, 0);
+			GL11.glTranslated(0, -0.18, 0);
+		}
+		
+		if (type == 0) {
+			if ((stack.getItem() instanceof ItemBlock)) {
+				GL11.glTranslated(0, -0.2, 0);
+			} else {
+				GL11.glTranslated(0, 0, 0.18);
+			}
+		}
+		
+		GL11.glScalef(1.25F, 1.25F, 1.25F);
+		
+		EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, stack);
+		entityitem.getEntityItem().stackSize = 1;
+		entityitem.hoverStart = 0.0F;
+        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+	}
+	
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partial) {
 		GL11.glPushMatrix();
