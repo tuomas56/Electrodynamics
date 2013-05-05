@@ -25,9 +25,13 @@ public class Strings {
 	public static final String BLOCK_RED_WIRE_NAME = "blockRedWire";
 	public static final String BLOCK_TABLE_NAME = "blockTable";
 	public static final String BLOCK_LASER_EMITTER = "blockLaserEmitter";
+	public static final String BLOCK_MACHINE = "blockMachine";
 	
 	/* Internal ore names */
 	public static final String ORE_MAGNETITE_NAME = "oreMagnetite";
 	public static final String ORE_NICKEL_NAME = "oreNickel";
+	
+	/* Internal machine names */
+	public static final String MACHINE_SINTERING_FURNACE = "machineSinteringFurnace";
 	
 }

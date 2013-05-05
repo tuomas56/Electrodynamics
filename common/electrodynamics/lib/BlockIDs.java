@@ -18,4 +18,8 @@ public class BlockIDs {
 	public static int BLOCK_LASER_EMITTER_ID;
 	public static final int BLOCK_LASER_EMITTER_DEFAULT_ID = 503;
 	
+	/* blockMachine */
+	public static int BLOCK_MACHINE_ID;
+	public static final int BLOCK_MACHINE_DEFAULT_ID = 504;
+	
 }

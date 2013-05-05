@@ -6,17 +6,20 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import electrodynamics.client.render.block.RenderBlockRedWire;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.tileentity.TileEntityRedWire;
 
 public class BlockRedWire extends BlockContainer {
 
 	/** Do wire blocks provide power. Set to false during updates to avoid looping */
-	public static boolean wiresProvidePower = true;
+	public boolean wiresProvidePower = true;
+	
+	public static final float wireMinSize = 0.40F;
+	public static final float wireMaxSize = 0.6F;
 	
 	public BlockRedWire(int id) {
 		super(id, Material.circuits);
@@ -26,12 +29,7 @@ public class BlockRedWire extends BlockContainer {
 	@Override
 	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int side) {
 		TileEntityRedWire redWire = (TileEntityRedWire) world.getBlockTileEntity(x, y, z);
-		
-		if (redWire.activeMasks[side]) {
-			return Block.obsidian.getIcon(0, 0);
-		} else {
-			return redWire.isPowered ? Block.blockRedstone.getIcon(0, 0) : Block.stone.getIcon(0, 0);
-		}
+		return redWire.isPowered ? Block.blockRedstone.getIcon(0, 0) : Block.stone.getIcon(0, 0);
 	}
 	
 	public void onNeighborBlockChange(World world, int x, int y, int z, int blockID) {
@@ -57,10 +55,11 @@ public class BlockRedWire extends BlockContainer {
 		world.markBlockForUpdate(x, y, z);
 	}
 	
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-		return null;
+	@Override
+	public int getRenderType() {
+		return RenderBlockRedWire.renderID;
 	}
-
+	
 	public boolean isOpaqueCube() {
 		return false;
 	}

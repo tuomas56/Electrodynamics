@@ -6,6 +6,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import electrodynamics.block.item.ItemBlockMachine;
 import electrodynamics.block.item.ItemBlockOre;
 import electrodynamics.block.item.ItemBlockTable;
 import electrodynamics.lib.BlockIDs;
@@ -18,6 +19,7 @@ public class BlockHandler {
 	public static Block blockRedWire;
 	public static Block blockLaserEmitter;
 	public static Block blockTable;
+	public static Block blockMachine;
 	
 	public static void createBlockOre() {
 		blockOre = new BlockOre(BlockIDs.BLOCK_ORE_ID).setUnlocalizedName(Strings.BLOCK_ORE_NAME);
@@ -49,6 +51,11 @@ public class BlockHandler {
 		for (int i=0; i<BlockTable.blockNames.length; i++) {
 			LanguageRegistry.addName(new ItemStack(blockTable, 1, i), BlockTable.blockNames[i]);
 		}
+	}
+	
+	public static void createNewBlockMachine() {
+		blockMachine = new BlockMachine(BlockIDs.BLOCK_MACHINE_ID).setUnlocalizedName(Strings.BLOCK_MACHINE);
+		GameRegistry.registerBlock(blockMachine, ItemBlockMachine.class, Strings.BLOCK_MACHINE);
 	}
 	
 }
