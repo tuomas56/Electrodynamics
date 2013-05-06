@@ -17,6 +17,8 @@ import electrodynamics.lib.ItemIDs;
 import electrodynamics.lib.Machine;
 import electrodynamics.lib.Strings;
 import electrodynamics.module.ModuleManager.Module;
+import electrodynamics.tileentity.TileEntitySinteringFurnace;
+import electrodynamics.tileentity.TileEntityTable;
 
 public class EDModuleMachine extends EDModule {
 
@@ -43,7 +45,8 @@ public class EDModuleMachine extends EDModule {
 
 	@Override
 	public void init() {
-		
+		GameRegistry.registerTileEntity(TileEntitySinteringFurnace.class, Strings.MACHINE_SINTERING_FURNACE);
+		GameRegistry.registerTileEntity(TileEntityTable.class, Strings.BLOCK_TABLE_NAME);
 	}
 
 	@Override

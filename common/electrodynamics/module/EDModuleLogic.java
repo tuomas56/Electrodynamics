@@ -9,6 +9,7 @@ import electrodynamics.item.ItemPCB;
 import electrodynamics.lib.BlockIDs;
 import electrodynamics.lib.ItemIDs;
 import electrodynamics.lib.Strings;
+import electrodynamics.tileentity.TileEntityRedWire;
 
 public class EDModuleLogic extends EDModule {
 
@@ -27,7 +28,7 @@ public class EDModuleLogic extends EDModule {
 
 	@Override
 	public void init() {
-		
+		GameRegistry.registerTileEntity(TileEntityRedWire.class, Strings.BLOCK_RED_WIRE_NAME);
 	}
 
 	@Override

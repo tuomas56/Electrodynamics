@@ -3,6 +3,8 @@ package electrodynamics.module;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import electrodynamics.Electrodynamics;
+import electrodynamics.configuration.ConfigurationHandler;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemComponent;
 import electrodynamics.item.tesla.ItemArmorTeslaBoots;
@@ -17,6 +19,8 @@ public class EDModuleCore extends EDModule {
 
 	@Override
 	public void preInit() {
+		ConfigurationHandler.handleConfig(Electrodynamics.instance.configFolder);
+		
 		/* ITEM */
 		EDItems.itemComponent = new ItemComponent(ItemIDs.ITEM_COMPONENT_ID).setUnlocalizedName(Strings.ITEM_COMPONENT_NAME);
 		GameRegistry.registerItem(EDItems.itemComponent, Strings.ITEM_COMPONENT_NAME);
@@ -43,7 +47,7 @@ public class EDModuleCore extends EDModule {
 
 	@Override
 	public void init() {
-
+		
 	}
 
 	@Override

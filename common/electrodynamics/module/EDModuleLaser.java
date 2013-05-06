@@ -1,11 +1,14 @@
 package electrodynamics.module;
 
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import electrodynamics.block.BlockLaserEmitter;
 import electrodynamics.block.EDBlocks;
+import electrodynamics.entity.EntityBeam;
 import electrodynamics.lib.BlockIDs;
 import electrodynamics.lib.Strings;
+import electrodynamics.tileentity.TileEntityLaserEmitter;
 
 public class EDModuleLaser extends EDModule {
 
@@ -18,7 +21,9 @@ public class EDModuleLaser extends EDModule {
 
 	@Override
 	public void init() {
+		GameRegistry.registerTileEntity(TileEntityLaserEmitter.class, Strings.BLOCK_LASER_EMITTER);
 		
+		EntityRegistry.registerGlobalEntityID(EntityBeam.class, "entityBeam", 150);
 	}
 
 	@Override
