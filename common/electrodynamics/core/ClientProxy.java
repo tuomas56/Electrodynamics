@@ -1,5 +1,6 @@
 package electrodynamics.core;
 
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
@@ -44,6 +45,13 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerKeyBindings() {
 		KeyBindingRegistry.registerKeyBinding(new KeybindingHandler());
+	}
+	
+	@Override
+	public void addBlockDestroyParticles(int x, int y, int z, int blockID, int meta)
+	{
+		Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(x, y+1, z, blockID, meta);
+		
 	}
 	
 }

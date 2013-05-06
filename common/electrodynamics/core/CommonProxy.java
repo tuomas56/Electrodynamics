@@ -18,4 +18,9 @@ public class CommonProxy {
 		
 	}
 	
+	public void addBlockDestroyParticles(int x, int y, int z, int blockID, int meta)
+	{
+		
+	}
+	
 }
