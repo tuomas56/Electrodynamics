@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet28EntityVelocity;
@@ -21,7 +22,7 @@ import electrodynamics.client.fx.FXLightningBolt;
 import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.control.IKeyBoundServer;
 import electrodynamics.core.CreativeTabED;
-import electrodynamics.item.ItemHandler;
+import electrodynamics.item.EDItems;
 import electrodynamics.lib.ModInfo;
 
 public class ItemArmorTeslaChest extends ItemArmor implements IKeyBoundServer {
@@ -43,7 +44,8 @@ public class ItemArmorTeslaChest extends ItemArmor implements IKeyBoundServer {
 	}
 
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
-		return stack.getItem() == ItemHandler.itemTeslaChest ? ModInfo.RESOURCES_BASE + "/armor/tesla_1.png" : null;
+		Item thisArmor = EDItems.itemTeslaChest;
+		return stack.getItem() == thisArmor ? ModInfo.RESOURCES_BASE + "/armor/tesla_1.png" : null;
 	}
 
 	@SuppressWarnings({ "unchecked" })

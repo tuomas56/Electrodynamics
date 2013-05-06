@@ -19,7 +19,7 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.core.CreativeTabED;
-import electrodynamics.item.ItemHandler;
+import electrodynamics.item.EDItems;
 import electrodynamics.network.PacketTypeHandler;
 import electrodynamics.network.packet.PacketClearTable;
 import electrodynamics.tileentity.TileEntityTable;
@@ -117,7 +117,7 @@ public class BlockTable extends BlockContainer {
 		
 		TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
 		
-		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ItemHandler.itemStoneHammer) {
+		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == EDItems.itemSteelHammer) {
 			table.handleSmash();
 		} else {
 			if (table.displayedItem != null) {

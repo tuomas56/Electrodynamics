@@ -4,13 +4,19 @@ import java.util.EnumSet;
 
 import electrodynamics.module.ModuleManager.Module;
 
-public abstract class EDModule {
+public class EDModule {
 
-	public abstract void preInit();
+	public void preInit() {
+		
+	}
 	
-	public abstract void init();
+	public void init() {
+		
+	}
 	
-	public abstract void postInit();
+	public void postInit() {
+		
+	}
 	
 	public EnumSet<Module> dependencies() {
 		return EnumSet.of(Module.CORE);

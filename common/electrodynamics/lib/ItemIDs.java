@@ -27,7 +27,7 @@ public class ItemIDs {
 	public static final int ITEM_TESLA_BOOTS_DEFAULT_ID = 5105;
 	
 	/* itemStoneHammer */
-	public static int ITEM_STONE_HAMMER_ID;
-	public static final int ITEM_STONE_HAMMER_DEFAULT_ID = 5106;
+	public static int ITEM_STEEL_HAMMER_ID;
+	public static final int ITEM_STEEL_HAMMER_DEFAULT_ID = 5106;
 	
 }

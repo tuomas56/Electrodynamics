@@ -9,7 +9,7 @@ public class Strings {
 	public static final String ITEM_TESLA_CHEST_NAME = "itemTeslaChest";
 	public static final String ITEM_TESLA_LEGS_NAME = "itemTeslaLegs";
 	public static final String ITEM_TESLA_BOOTS_NAME = "itemTeslaBoots";
-	public static final String ITEM_STONE_HAMMER_NAME = "itemStoneHammer";
+	public static final String ITEM_STEEL_HAMMER_NAME = "itemSteelHammer";
 	
 	/* Internal component names */
 	public static final String FAN_BLADE_NAME = "fanBlade";

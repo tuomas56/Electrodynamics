@@ -1,41 +1,49 @@
 package electrodynamics.module;
 
-import java.io.File;
-
-import net.minecraftforge.common.MinecraftForge;
-
-import electrodynamics.Electrodynamics;
-import electrodynamics.block.BlockHandler;
-import electrodynamics.client.render.misc.RenderThermalOverlay;
-import electrodynamics.configuration.ConfigurationHandler;
-import electrodynamics.core.helper.HeatHelper;
-import electrodynamics.item.ItemHandler;
-import electrodynamics.lib.ModInfo;
+import net.minecraft.item.ItemStack;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
+import electrodynamics.item.EDItems;
+import electrodynamics.item.ItemComponent;
+import electrodynamics.item.tesla.ItemArmorTeslaBoots;
+import electrodynamics.item.tesla.ItemArmorTeslaChest;
+import electrodynamics.item.tesla.ItemArmorTeslaHelm;
+import electrodynamics.item.tesla.ItemArmorTeslaLegs;
+import electrodynamics.lib.Component;
+import electrodynamics.lib.ItemIDs;
+import electrodynamics.lib.Strings;
 
 public class EDModuleCore extends EDModule {
 
-	//TODO Neatening up
 	@Override
 	public void preInit() {
-		//Temp
-		ConfigurationHandler.handleConfig(new File(Electrodynamics.instance.configFolder, ModInfo.CORE_CONFIG));
+		/* ITEM */
+		EDItems.itemComponent = new ItemComponent(ItemIDs.ITEM_COMPONENT_ID).setUnlocalizedName(Strings.ITEM_COMPONENT_NAME);
+		GameRegistry.registerItem(EDItems.itemComponent, Strings.ITEM_COMPONENT_NAME);
+		for (int i=0; i<Component.values().length; i++) {
+			LanguageRegistry.addName(new ItemStack(EDItems.itemComponent, 1, i), Component.values()[i].getLocalizedName("en_US"));
+		}
 		
-		Electrodynamics.proxy.registerKeyBindings();
+		EDItems.itemTeslaHelm = new ItemArmorTeslaHelm(ItemIDs.ITEM_TESLA_HELM_ID).setUnlocalizedName(Strings.ITEM_TESLA_HAT_NAME);
+		GameRegistry.registerItem(EDItems.itemTeslaHelm, Strings.ITEM_TESLA_HAT_NAME);
+		LanguageRegistry.addName(EDItems.itemTeslaHelm, "Tesla Helmet");
 		
-		ItemHandler.createNewComponentItem();
-		ItemHandler.createNewItemPCB();
-		ItemHandler.createNewPowerArmor();
-		ItemHandler.createNewStoneHammer();
+		EDItems.itemTeslaChest = new ItemArmorTeslaChest(ItemIDs.ITEM_TESLA_CHEST_ID).setUnlocalizedName(Strings.ITEM_TESLA_CHEST_NAME);
+		GameRegistry.registerItem(EDItems.itemTeslaChest, Strings.ITEM_TESLA_CHEST_NAME);
+		LanguageRegistry.addName(EDItems.itemTeslaChest, "Tesla Chestplate");
 		
-		BlockHandler.createNewBlockTable();
+		EDItems.itemTeslaLegs = new ItemArmorTeslaLegs(ItemIDs.ITEM_TESLA_LEGS_ID).setUnlocalizedName(Strings.ITEM_TESLA_LEGS_NAME);
+		GameRegistry.registerItem(EDItems.itemTeslaLegs, Strings.ITEM_TESLA_LEGS_NAME);
+		LanguageRegistry.addName(EDItems.itemTeslaLegs, "Tesla Leggings");
+		
+		EDItems.itemTeslaBoots = new ItemArmorTeslaBoots(ItemIDs.ITEM_TESLA_BOOTS_ID).setUnlocalizedName(Strings.ITEM_TESLA_BOOTS_NAME);
+		GameRegistry.registerItem(EDItems.itemTeslaBoots, Strings.ITEM_TESLA_BOOTS_NAME);
+		LanguageRegistry.addName(EDItems.itemTeslaBoots, "Tesla Boots");
 	}
 
 	@Override
 	public void init() {
-		HeatHelper.initializeMapping();
-		MinecraftForge.EVENT_BUS.register(new RenderThermalOverlay());
-		Electrodynamics.proxy.registerTileEntities();
-		Electrodynamics.proxy.registerRenders();
+
 	}
 
 	@Override

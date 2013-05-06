@@ -19,6 +19,15 @@ public class ModuleManager {
 	
 	private static EnumSet<Module> loadedModules = EnumSet.noneOf(Module.class);
 	
+	public static EDModule getModule(Module m) {
+		if (loadedModules.contains(m)) {
+			return modules.get(m);
+		}
+		
+		EDLogger.warn("Something tried to call for a module that's disabled.");
+		return null;
+	}
+	
 	public static void preInit() {
 		registerModule(Module.CORE, new EDModuleCore());
 		registerModule(Module.WORLD, new EDModuleWorld());

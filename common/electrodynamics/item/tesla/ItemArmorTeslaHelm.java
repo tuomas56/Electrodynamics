@@ -1,24 +1,26 @@
 package electrodynamics.item.tesla;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.control.IKeyBoundClient;
 import electrodynamics.core.CreativeTabED;
-import electrodynamics.item.ItemHandler;
+import electrodynamics.item.EDItems;
 import electrodynamics.lib.ModInfo;
 
 public class ItemArmorTeslaHelm extends ItemArmor implements IKeyBoundClient {
@@ -41,7 +43,8 @@ public class ItemArmorTeslaHelm extends ItemArmor implements IKeyBoundClient {
 	}
 	
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
-		return stack.getItem() == ItemHandler.itemTeslaHelm ? ModInfo.RESOURCES_BASE + "/armor/tesla_1.png" : null;
+		Item thisArmor = EDItems.itemTeslaHelm;
+		return stack.getItem() == thisArmor ? ModInfo.RESOURCES_BASE + "/armor/tesla_1.png" : null;
 	}
 	
 	@Override

@@ -3,11 +3,12 @@ package electrodynamics.item.tesla;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumArmorMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import electrodynamics.core.CreativeTabED;
-import electrodynamics.item.ItemHandler;
+import electrodynamics.item.EDItems;
 import electrodynamics.lib.ModInfo;
 
 public class ItemArmorTeslaBoots extends ItemArmor {
@@ -28,7 +29,8 @@ public class ItemArmorTeslaBoots extends ItemArmor {
 	
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
-		return stack.getItem() == ItemHandler.itemTeslaBoots ? ModInfo.RESOURCES_BASE + "/armor/tesla_1.png" : null;
+		Item thisArmor = EDItems.itemTeslaBoots;
+		return stack.getItem() == thisArmor ? ModInfo.RESOURCES_BASE + "/armor/tesla_1.png" : null;
 	}
 	
 	@Override
