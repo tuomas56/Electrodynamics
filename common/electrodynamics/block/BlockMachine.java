@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.core.EDLogger;
 import electrodynamics.lib.Machine;
+import electrodynamics.util.PlayerUtil;
 import electrodynamics.tileentity.TileEntityMachine;
 
 public class BlockMachine extends BlockContainer {
@@ -41,7 +42,7 @@ public class BlockMachine extends BlockContainer {
 
 		if(tile != null)
 		{
-			((TileEntityMachine)tile).rotation = (int)Math.floor((double)((entityLiving.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+			((TileEntityMachine)tile).rotation = PlayerUtil.determine3DOrientation_F(world, i, j, k, entityLiving);
 		}
 	}
 	

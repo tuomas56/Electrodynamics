@@ -1,5 +1,6 @@
 package electrodynamics.tileentity;
 
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
@@ -8,20 +9,21 @@ import net.minecraft.tileentity.TileEntity;
 
 public abstract class TileEntityMachine extends TileEntity {
 	
-	public int rotation;
+	public ForgeDirection rotation;
 	
 	@Override
 	public void writeToNBT(NBTTagCompound tag)
 	{
 		super.writeToNBT(tag);
-		tag.setInteger("rotation", rotation);
+		tag.setByte("direction", (byte)rotation.ordinal());
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		rotation = tag.getInteger("rotation");
+		
+		rotation = ForgeDirection.VALID_DIRECTIONS[tag.getByte("direction")];
 	}
 	
 	@Override

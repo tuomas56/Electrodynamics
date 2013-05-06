@@ -28,17 +28,19 @@ public class RenderSinteringFurnace extends TileEntitySpecialRenderer {
 		
 		switch(((TileEntityMachine)tile).rotation)
 		{
-			case 0:
+			case NORTH:
 				GL11.glRotatef(270, 0, 1, 0);
 				break;
-			case 1:
-				//GL11.glRotatef(0, 0, 1, 0);
-				break;
-			case 2:
+			case SOUTH:
 				GL11.glRotatef(90, 0, 1, 0);
 				break;
-			case 3:
+			case WEST:
 				GL11.glRotatef(180, 0, 1, 0);
+				break;
+			case EAST:
+				//GL11.glRotatef(0, 0, 1, 0);
+				break;
+			default:
 				break;
 		}
 
