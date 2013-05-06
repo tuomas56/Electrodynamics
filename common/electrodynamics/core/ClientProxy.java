@@ -25,6 +25,8 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	public void initClient() {
+		KeyBindingRegistry.registerKeyBinding(new KeybindingHandler());
+		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySinteringFurnace.class, new RenderSinteringFurnace());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTable.class, new RenderTable());
 
