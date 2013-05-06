@@ -10,8 +10,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -112,7 +110,6 @@ public class EntityBeam extends Entity {
 		while (this.particleMaxAge - this.particleAge < 4) this.particleMaxAge += 1;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void onUpdate() {
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
