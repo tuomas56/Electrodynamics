@@ -6,7 +6,7 @@ import java.io.DataInputStream;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import electrodynamics.lib.ModInfo;
-import electrodynamics.network.packet.PacketClearTable;
+import electrodynamics.network.packet.PacketTableUpdate;
 import electrodynamics.network.packet.PacketED;
 import electrodynamics.network.packet.PacketKeyPress;
 import electrodynamics.network.packet.PacketPayload;
@@ -15,7 +15,7 @@ public enum PacketTypeHandler {
 
 	KEY(PacketKeyPress.class),
 	PAYLOAD(PacketPayload.class),
-	TABLE_CLEAR(PacketClearTable.class);
+	TABLE_CLEAR(PacketTableUpdate.class);
 	
 	private Class<? extends PacketED> clazz;
 	

@@ -21,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.item.EDItems;
 import electrodynamics.network.PacketTypeHandler;
-import electrodynamics.network.packet.PacketClearTable;
+import electrodynamics.network.packet.PacketTableUpdate;
 import electrodynamics.tileentity.TileEntityTable;
 
 public class BlockTable extends BlockContainer {
@@ -68,6 +68,7 @@ public class BlockTable extends BlockContainer {
 				}
 				
 				table.displayedItem = toAdd;
+				PacketDispatcher.sendPacketToAllInDimension(PacketTypeHandler.fillPacket(new PacketTableUpdate(x, y, z, toAdd)), world.provider.dimensionId);
 				world.markBlockForUpdate(x, y, z);
 			}
 		}
@@ -124,7 +125,7 @@ public class BlockTable extends BlockContainer {
 				player.dropPlayerItem(table.displayedItem);
 				table.displayedItem = null;
 				
-				PacketDispatcher.sendPacketToAllInDimension(PacketTypeHandler.fillPacket(new PacketClearTable(x, y, z)), world.provider.dimensionId);
+				PacketDispatcher.sendPacketToAllInDimension(PacketTypeHandler.fillPacket(new PacketTableUpdate(x, y, z, null)), world.provider.dimensionId);
 				
 				world.markBlockForUpdate(x, y, z);
 			}
