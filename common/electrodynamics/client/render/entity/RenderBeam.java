@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 
 import org.lwjgl.opengl.GL11;
 
-import electrodynamics.client.fx.FXBeam;
+import electrodynamics.entity.EntityBeam;
 
 public class RenderBeam extends Render {
 
@@ -21,17 +21,15 @@ public class RenderBeam extends Render {
 		
 		Tessellator tessellator = Tessellator.instance;
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GL11.glDepthMask(false);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glAlphaFunc(GL11.GL_GREATER, 0.003921569F);
         tessellator.startDrawingQuads();
 
-        ((FXBeam)entity).renderParticle(tessellator, f0, f1, f5, f2, f3, f4);
+        ((EntityBeam)entity).renderParticle(tessellator, f0, f1, f5, f2, f3, f4);
 
         tessellator.draw();
         GL11.glDisable(GL11.GL_BLEND);
-        GL11.glDepthMask(true);
         GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 	}
 
