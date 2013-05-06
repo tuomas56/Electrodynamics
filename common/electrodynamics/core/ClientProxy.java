@@ -21,37 +21,37 @@ import electrodynamics.tileentity.TileEntityTable;
 public class ClientProxy extends CommonProxy {
 
 	public void preInitClient() {
-		
+
 	}
-	
+
 	public void initClient() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySinteringFurnace.class, new RenderSinteringFurnace());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTable.class, new RenderTable());
-		
+
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockTable.blockID, new RenderItemTable());
-		//TODO make modular, fit all machines
+		// TODO make modular, fit all machines
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockMachine.blockID, new RenderItemSinteringFurnace());
-		
+
 		RenderingRegistry.registerBlockHandler(new RenderBlockRedWire());
-		
+
 		RenderingRegistry.registerEntityRenderingHandler(EntityBeam.class, new RenderBeam());
 	}
-	
+
 	@Override
 	public void setKeyBinding(String name, int value, boolean repeats) {
 		KeyBindingHelper.addKeyBinding(name, value, repeats);
 	}
-	
+
 	@Override
 	public void registerKeyBindings() {
 		KeyBindingRegistry.registerKeyBinding(new KeybindingHandler());
 	}
-	
+
 	@Override
-	public void addBlockDestroyParticles(int x, int y, int z, int blockID, int meta)
-	{
-		Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(x, y+1, z, blockID, meta);
-		
+	public void addBlockDestroyParticles(int x, int y, int z, int blockID, int meta) {
+		if (blockID > 0) {
+			Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(x, y + 1, z, blockID, meta);
+		}
 	}
-	
+
 }

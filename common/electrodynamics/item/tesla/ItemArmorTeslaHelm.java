@@ -15,6 +15,7 @@ import net.minecraft.util.Icon;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.configuration.ConfigurationSettings;
@@ -28,13 +29,17 @@ public class ItemArmorTeslaHelm extends ItemArmor implements IKeyBoundClient {
 	private Icon texture;
 	
 	@SideOnly(Side.CLIENT)
-	public boolean thermalEnabled = false;
+	public boolean thermalEnabled;
 	
 	public ItemArmorTeslaHelm(int id) {
 		super(id, EnumArmorMaterial.IRON, 2, 0);
 		setCreativeTab(CreativeTabED.item);
 		setMaxStackSize(1);
 		setMaxDamage(0);
+		
+		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
+			thermalEnabled = true;
+		}
 	}
 	
 	@Override
