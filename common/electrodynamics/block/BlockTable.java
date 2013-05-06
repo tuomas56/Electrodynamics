@@ -15,10 +15,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.item.ItemHandler;
+import electrodynamics.network.PacketTypeHandler;
+import electrodynamics.network.packet.PacketClearTable;
 import electrodynamics.tileentity.TileEntityTable;
 
 public class BlockTable extends BlockContainer {
@@ -32,7 +35,6 @@ public class BlockTable extends BlockContainer {
 		super(id, Material.wood);
 		setHardness(1F);
 		setCreativeTab(CreativeTabED.block);
-		//TODO update
 		setBlockBounds(0, 0, 0, 1, 0.87F, 1);
 	}
 
@@ -47,12 +49,26 @@ public class BlockTable extends BlockContainer {
 	}
 
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+		if (world.isRemote) return;
+		
 		if (entity instanceof EntityItem) {
 			TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
 
 			if (table.displayedItem == null) {
-				table.displayedItem = ((EntityItem) entity).getEntityItem();
-				entity.setDead();
+				EntityItem item = (EntityItem) entity;
+				ItemStack toAdd = null;
+				
+				if (item.getEntityItem().stackSize > 1) {
+					toAdd = item.getEntityItem().copy();
+					toAdd.stackSize = 1;
+					item.getEntityItem().stackSize--;
+				} else {
+					toAdd = item.getEntityItem();
+					item.setDead();
+				}
+				
+				table.displayedItem = toAdd;
+				world.markBlockForUpdate(x, y, z);
 			}
 		}
 	}
@@ -107,6 +123,9 @@ public class BlockTable extends BlockContainer {
 			if (table.displayedItem != null) {
 				player.dropPlayerItem(table.displayedItem);
 				table.displayedItem = null;
+				
+				PacketDispatcher.sendPacketToAllInDimension(PacketTypeHandler.fillPacket(new PacketClearTable(x, y, z)), world.provider.dimensionId);
+				
 				world.markBlockForUpdate(x, y, z);
 			}
 		}
