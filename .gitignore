@@ -7,3 +7,6 @@
 
 # To ignore dev changes to properties file #
 build.properties
+
+# Windows image cache #
+Thumbs.db

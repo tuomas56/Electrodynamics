@@ -1,5 +1,6 @@
 package electrodynamics.tileentity;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.lib.BlockIDs;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -75,6 +76,10 @@ public class TileEntityTable extends TileEntity {
 			 if (this.type == 0 && displayedItem.getItem().itemID == Block.stoneSingleSlab.blockID) {
 				 this.displayedItem = null;
 				 this.worldObj.setBlock(xCoord, yCoord, zCoord, BlockIDs.BLOCK_TABLE_ID, 1, 2);
+			 }
+			 else if (this.type == 1)
+			 {
+				 Electrodynamics.instance.proxy.addBlockDestroyParticles(xCoord, yCoord, zCoord, displayedItem.getItem().itemID, displayedItem.getItemDamage());
 			 }
 		 }
 	 }

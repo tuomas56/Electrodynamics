@@ -4,7 +4,7 @@ import java.util.EnumSet;
 
 import electrodynamics.module.ModuleManager.Module;
 
-public class EDModule {
+public abstract class EDModule {
 
 	public void preInit() {
 		
