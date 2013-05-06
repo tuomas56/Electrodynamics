@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
-import electrodynamics.client.fx.FXLightningBolt;
+import electrodynamics.Electrodynamics;
 import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.control.IKeyBoundServer;
 import electrodynamics.core.CreativeTabED;
@@ -75,11 +75,7 @@ public class ItemArmorTeslaChest extends ItemArmor implements IKeyBoundServer {
 					item.motionZ += d3 / d4 * d5 * ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED;
 
 					PacketDispatcher.sendPacketToAllInDimension(new Packet28EntityVelocity(item), world.provider.dimensionId);
-
-					FXLightningBolt bolt = new FXLightningBolt(world, player.posX, player.posY + 1, player.posZ, item.posX, item.posY, item.posZ, world.rand.nextLong(), 1);
-					bolt.defaultFractal();
-					bolt.setRandomType(4, 7);
-					bolt.finalizeBolt();
+					Electrodynamics.proxy.addLightningFX(world, d1, d2, d3, item.posX, item.posY, item.posZ, world.rand.nextLong(), 1);
 				}
 			}
 		}
