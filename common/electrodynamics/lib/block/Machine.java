@@ -2,11 +2,11 @@ package electrodynamics.lib.block;
 
 import net.minecraft.tileentity.TileEntity;
 import electrodynamics.lib.core.Strings;
-import electrodynamics.tileentity.TileEntitySinteringFurnace;
+import electrodynamics.tileentity.TileEntitySinteringOven;
 
 public enum Machine {
 
-	SINTERING_FURNACE(Strings.MACHINE_SINTERING_FURNACE, "Sintering Furnace", 0, TileEntitySinteringFurnace.class);
+	SINTERING_FURNACE(Strings.MACHINE_SINTERING_FURNACE, "Sintering Furnace", 0, TileEntitySinteringOven.class);
 	
 	public String unlocalizedName;
 	public String localizedName;
