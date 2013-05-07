@@ -1,11 +1,13 @@
 package electrodynamics.tileentity;
 
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityMachine extends TileEntity {
 
@@ -36,4 +38,8 @@ public abstract class TileEntityMachine extends TileEntity {
 		return new Packet132TileEntityData(xCoord, yCoord, zCoord, 0, comp);
 	}
 
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
+		return false;
+	}
+	
 }

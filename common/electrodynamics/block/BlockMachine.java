@@ -3,6 +3,7 @@ package electrodynamics.block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -19,33 +20,31 @@ public class BlockMachine extends BlockContainer {
 		setHardness(1F);
 		setCreativeTab(CreativeTabED.block);
 	}
-	
+
 	@Override
 	public int getRenderType() {
 		return -1;
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
-	
+
 	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityLiving, ItemStack itemStack) 
-	{
+	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityLiving, ItemStack itemStack) {
 		TileEntity tile = world.getBlockTileEntity(i, j, k);
 
-		if(tile != null)
-		{
-			((TileEntityMachine)tile).rotation = PlayerUtil.determine3DOrientation_F(world, i, j, k, entityLiving);
+		if (tile != null) {
+			((TileEntityMachine) tile).rotation = PlayerUtil.determine3DOrientation_F(world, i, j, k, entityLiving);
 		}
 	}
-	
+
 	@Override
 	public TileEntity createTileEntity(World world, int meta) {
 		try {
@@ -55,11 +54,21 @@ public class BlockMachine extends BlockContainer {
 			return null;
 		}
 	}
+
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
+		TileEntity tile = world.getBlockTileEntity(x, y, z);
+		
+		if (tile instanceof TileEntityMachine) {
+			((TileEntityMachine)tile).onBlockActivated(world, x, y, z, player, side, hX, hY, hZ);
+		}
+		
+		return false;
+	}
 	
 	/* IGNORE */
 	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return null;
 	}
-	
+
 }

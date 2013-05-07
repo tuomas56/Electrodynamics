@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import electrodynamics.client.model.ModelSinteringFurnace;
 import electrodynamics.lib.core.Models;
 import electrodynamics.tileentity.TileEntityMachine;
+import electrodynamics.tileentity.TileEntitySinteringOven;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -19,9 +20,6 @@ public class RenderSinteringFurnace extends TileEntitySpecialRenderer {
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partial) {
-		//To be determined by data in the tile entity
-		int doorAngle = 45;
-		
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_LIGHTING);
 
@@ -48,7 +46,7 @@ public class RenderSinteringFurnace extends TileEntitySpecialRenderer {
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_SINT_FURNACE);
 
-		modelSinteringFurnace.rotateDoor(doorAngle);
+		modelSinteringFurnace.rotateDoor(((TileEntitySinteringOven)tile).doorAngle);
 		modelSinteringFurnace.renderAll(0.0625F);
 		
 		GL11.glEnable(GL11.GL_LIGHTING);
