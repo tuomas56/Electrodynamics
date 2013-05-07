@@ -1,7 +1,7 @@
 package electrodynamics.lib.block;
 
 public class BlockIDs {
-
+	
 	/* blockOre */
 	public static int BLOCK_ORE_ID;
 	public static final int BLOCK_ORE_DEFAULT_ID = 500;
@@ -26,12 +26,8 @@ public class BlockIDs {
 	public static int BLOCK_DECORATIVE_ID;
 	public static final int BLOCK_DECORATIVE_DEFAULT_ID = 505;
 	
-	/* blockDecorativeSlab */
-	public static int BLOCK_DECORATIVE_SLAB_ID;
-	public static final int BLOCK_DECORATIVE_SLAB_DEFAULT_ID = 506;
-	
 	/* blockWormseed */
 	public static int BLOCK_WORMSEED_ID;
-	public static final int BLOCK_WORMSEED_DEFAULT_ID = 507;
+	public static final int BLOCK_WORMSEED_DEFAULT_ID = 506;
 	
 }

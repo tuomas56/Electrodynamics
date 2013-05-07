@@ -20,7 +20,6 @@ public class Strings {
 	public static final String BLOCK_LASER_EMITTER = "blockLaserEmitter";
 	public static final String BLOCK_MACHINE = "blockMachine";
 	public static final String BLOCK_DECORATIVE = "blockDecorative";
-	public static final String BLOCK_DECORATIVE_SLAB = "blockDecorativeSlab";
 	public static final String BLOCK_WORMSEED = "blockWormseed";
 	
 	/* Internal component names */

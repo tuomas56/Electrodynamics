@@ -22,9 +22,7 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 	}
 
 	public Icon getIcon(int meta, int side) {
-		ForgeDirection fDir = ForgeDirection.getOrientation(side);
-		
-		if (fDir == ForgeDirection.UP || fDir == ForgeDirection.DOWN) {
+		if (side == ForgeDirection.UP.ordinal() || side == ForgeDirection.DOWN.ordinal()) {
 			return textures[1];
 		}
 		

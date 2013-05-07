@@ -7,10 +7,10 @@ import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import electrodynamics.block.BlockDecorative;
-import electrodynamics.block.BlockDecorativeSlab;
 import electrodynamics.block.BlockOre;
 import electrodynamics.block.BlockWormseed;
 import electrodynamics.block.EDBlocks;
+import electrodynamics.block.item.ItemBlockDecorative;
 import electrodynamics.block.item.ItemBlockOre;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemDust;
@@ -39,14 +39,10 @@ public class EDModuleWorld extends EDModule {
 		}
 		
 		EDBlocks.blockDecorative = new BlockDecorative(BlockIDs.BLOCK_DECORATIVE_ID).setUnlocalizedName(Strings.BLOCK_DECORATIVE);
-		GameRegistry.registerBlock(EDBlocks.blockDecorative, Strings.BLOCK_DECORATIVE);
+		GameRegistry.registerBlock(EDBlocks.blockDecorative, ItemBlockDecorative.class, Strings.BLOCK_DECORATIVE);
 		for (int i=0; i<BlockDecorative.blockNames.length; i++) {
 			LanguageRegistry.addName(new ItemStack(EDBlocks.blockDecorative, 1, i), BlockDecorative.blockNames[i]);
 		}
-		
-		EDBlocks.blockDecorativeSlab = new BlockDecorativeSlab(BlockIDs.BLOCK_DECORATIVE_SLAB_ID).setUnlocalizedName(Strings.BLOCK_DECORATIVE_SLAB);
-		GameRegistry.registerBlock(EDBlocks.blockDecorativeSlab, Strings.BLOCK_DECORATIVE_SLAB);
-		LanguageRegistry.addName(EDBlocks.blockDecorativeSlab, "Limestone Slab");
 		
 		EDBlocks.blockWormseed = new BlockWormseed(BlockIDs.BLOCK_WORMSEED_ID).setUnlocalizedName(Strings.BLOCK_WORMSEED);
 		GameRegistry.registerBlock(EDBlocks.blockWormseed, Strings.BLOCK_WORMSEED);
