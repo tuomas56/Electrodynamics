@@ -7,13 +7,19 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import electrodynamics.lib.ModInfo;
 import electrodynamics.network.packet.PacketED;
+import electrodynamics.network.packet.PacketJump;
 import electrodynamics.network.packet.PacketKeyPress;
+import electrodynamics.network.packet.PacketLightningFX;
 import electrodynamics.network.packet.PacketPayload;
+import electrodynamics.network.packet.PacketTableUpdate;
 
 public enum PacketTypeHandler {
 
 	KEY(PacketKeyPress.class),
-	PAYLOAD(PacketPayload.class);
+	PAYLOAD(PacketPayload.class),
+	TABLE_CLEAR(PacketTableUpdate.class),
+	JUMP(PacketJump.class),
+	LIGHTNING(PacketLightningFX.class);
 	
 	private Class<? extends PacketED> clazz;
 	

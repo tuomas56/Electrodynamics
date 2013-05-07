@@ -16,7 +16,7 @@ import electrodynamics.util.PlayerUtil;
 
 public class BlockLaserEmitter extends BlockContainer {
 
-	protected BlockLaserEmitter(int id) {
+	public BlockLaserEmitter(int id) {
 		super(id, Material.iron);
 		setHardness(2F);
 		setResistance(1F);

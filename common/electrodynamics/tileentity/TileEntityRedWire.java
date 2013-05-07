@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import electrodynamics.block.BlockHandler;
+import electrodynamics.block.EDBlocks;
 import electrodynamics.network.IPayloadReceiver;
 import electrodynamics.network.PacketTypeHandler;
 import electrodynamics.network.packet.PacketPayload;
@@ -124,7 +124,7 @@ public class TileEntityRedWire extends TileEntity implements IPayloadReceiver {
 				}
 				
 				if (isPowered != prevIsPowered) {
-					this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, BlockHandler.blockRedWire.blockID);
+					this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, EDBlocks.blockRedWire.blockID);
 				}
 			}
 		}
@@ -157,7 +157,7 @@ public class TileEntityRedWire extends TileEntity implements IPayloadReceiver {
 	 * coordinates
 	 */
 	public boolean shouldConnect(World world, int x, int y, int z, ForgeDirection side) {
-		return (isProvidingAnyPower(world, x, y, z, side.getOpposite()) || world.getBlockId(x, y, z) == BlockHandler.blockRedWire.blockID);
+		return (isProvidingAnyPower(world, x, y, z, side.getOpposite()) || world.getBlockId(x, y, z) == EDBlocks.blockRedWire.blockID);
 	}
 
 	public boolean isConnected(ForgeDirection side) {

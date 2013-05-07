@@ -1,5 +1,7 @@
 package electrodynamics.entity;
 
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
@@ -176,6 +178,11 @@ public class EntityBeam extends Entity {
 	
 	public void setTargetEntity(Entity entity) {
 		this.targetEntity = entity;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Entity> getEntitiesIntersectingLaser() {
+		return this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox);
 	}
 	
 	@SideOnly(Side.CLIENT)

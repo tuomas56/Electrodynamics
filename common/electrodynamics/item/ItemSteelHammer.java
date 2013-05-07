@@ -6,11 +6,11 @@ import net.minecraft.util.Icon;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.lib.ModInfo;
 
-public class ItemStoneHammer extends Item {
+public class ItemSteelHammer extends Item {
 
 	private Icon texture;
 	
-	public ItemStoneHammer(int id) {
+	public ItemSteelHammer(int id) {
 		super(id);
 		setMaxStackSize(1);
 		setMaxDamage(500);
@@ -24,7 +24,7 @@ public class ItemStoneHammer extends Item {
 	
 	@Override
 	public void registerIcons(IconRegister register) {
-		texture = register.registerIcon(ModInfo.ICON_PREFIX + "tool/stoneHammer");
+		texture = register.registerIcon(ModInfo.ICON_PREFIX + "tool/steelHammer");
 	}
 	
 }
