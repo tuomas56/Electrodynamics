@@ -17,7 +17,7 @@ import electrodynamics.network.PacketHandler;
 
 import java.io.File;
 
-@Mod(modid = "ED", name = "Electrodynamics", version = ModInfo.VERSION, dependencies = "after:IC2")
+@Mod(modid = "ED", name = "Electrodynamics", version = ModInfo.VERSION, dependencies = ModInfo.DEPENDENCIES)
 @NetworkMod(channels = { ModInfo.GENERIC_MOD_ID }, clientSideRequired = false, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class Electrodynamics {
 	@Instance("ED")
