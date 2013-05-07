@@ -38,7 +38,7 @@ public class TickHandlerMBS implements ITickHandler {
 		if( chunk != null ) {
 			MultiBlockStructure mbs = MBSManager.findMatchFor( chunk );
 			if( mbs != null )
-				mbs.initialize( chunk );
+				mbs.initialize( chunk, 0 ); // temporary - will get rid of this.
 		}
 	}
 
