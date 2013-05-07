@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.core.EDLogger;
-import electrodynamics.lib.Machine;
+import electrodynamics.lib.block.Machine;
 import electrodynamics.util.PlayerUtil;
 import electrodynamics.tileentity.TileEntityMachine;
 

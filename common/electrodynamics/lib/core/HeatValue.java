@@ -1,4 +1,4 @@
-package electrodynamics.lib;
+package electrodynamics.lib.core;
 
 public enum HeatValue {
 

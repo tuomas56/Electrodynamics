@@ -3,9 +3,9 @@ package electrodynamics.core;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import electrodynamics.lib.BlockIDs;
-import electrodynamics.lib.ItemIDs;
-import electrodynamics.lib.Ore;
+import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.lib.block.Ore;
+import electrodynamics.lib.item.ItemIDs;
 
 public class CreativeTabED extends CreativeTabs {
 

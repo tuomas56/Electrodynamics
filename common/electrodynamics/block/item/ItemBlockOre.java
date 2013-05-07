@@ -1,6 +1,6 @@
 package electrodynamics.block.item;
 
-import electrodynamics.lib.Ore;
+import electrodynamics.lib.block.Ore;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 

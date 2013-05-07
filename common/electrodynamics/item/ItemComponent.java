@@ -11,7 +11,7 @@ import net.minecraft.util.Icon;
 import java.util.List;
 
 import electrodynamics.core.CreativeTabED;
-import electrodynamics.lib.Component;
+import electrodynamics.lib.item.Component;
 
 public class ItemComponent extends Item {
 	

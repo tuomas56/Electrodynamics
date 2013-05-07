@@ -1,6 +1,7 @@
-package electrodynamics.lib;
+package electrodynamics.lib.block;
 
 import net.minecraft.tileentity.TileEntity;
+import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntitySinteringFurnace;
 
 public enum Machine {

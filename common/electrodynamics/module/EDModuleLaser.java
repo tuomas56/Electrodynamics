@@ -6,8 +6,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import electrodynamics.block.BlockLaserEmitter;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.entity.EntityBeam;
-import electrodynamics.lib.BlockIDs;
-import electrodynamics.lib.Strings;
+import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityLaserEmitter;
 
 public class EDModuleLaser extends EDModule {

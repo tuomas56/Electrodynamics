@@ -6,9 +6,9 @@ import electrodynamics.block.BlockRedWire;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemPCB;
-import electrodynamics.lib.BlockIDs;
-import electrodynamics.lib.ItemIDs;
-import electrodynamics.lib.Strings;
+import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.lib.core.Strings;
+import electrodynamics.lib.item.ItemIDs;
 import electrodynamics.tileentity.TileEntityRedWire;
 
 public class EDModuleLogic extends EDModule {

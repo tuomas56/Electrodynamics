@@ -1,5 +1,7 @@
-package electrodynamics.lib;
+package electrodynamics.lib.item;
 
+import electrodynamics.lib.core.ModInfo;
+import electrodynamics.lib.core.Strings;
 import net.minecraft.item.ItemStack;
 
 public enum Component {

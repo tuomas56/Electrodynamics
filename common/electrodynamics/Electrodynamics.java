@@ -11,7 +11,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import electrodynamics.core.CommonProxy;
-import electrodynamics.lib.ModInfo;
+import electrodynamics.lib.core.ModInfo;
 import electrodynamics.module.ModuleManager;
 import electrodynamics.network.PacketHandler;
 

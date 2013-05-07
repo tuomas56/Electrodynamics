@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import electrodynamics.lib.ModInfo;
+import electrodynamics.lib.core.ModInfo;
 
 //TODO Improve
 public class EntityBeam extends Entity {

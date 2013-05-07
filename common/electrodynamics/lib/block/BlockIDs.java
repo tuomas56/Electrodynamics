@@ -1,4 +1,4 @@
-package electrodynamics.lib;
+package electrodynamics.lib.block;
 
 public class BlockIDs {
 

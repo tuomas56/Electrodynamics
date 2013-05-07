@@ -11,9 +11,9 @@ import electrodynamics.item.tesla.ItemArmorTeslaBoots;
 import electrodynamics.item.tesla.ItemArmorTeslaChest;
 import electrodynamics.item.tesla.ItemArmorTeslaHelm;
 import electrodynamics.item.tesla.ItemArmorTeslaLegs;
-import electrodynamics.lib.Component;
-import electrodynamics.lib.ItemIDs;
-import electrodynamics.lib.Strings;
+import electrodynamics.lib.core.Strings;
+import electrodynamics.lib.item.Component;
+import electrodynamics.lib.item.ItemIDs;
 
 public class EDModuleCore extends EDModule {
 

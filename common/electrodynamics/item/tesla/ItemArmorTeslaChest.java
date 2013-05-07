@@ -22,7 +22,7 @@ import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.control.IKeyBoundServer;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.item.EDItems;
-import electrodynamics.lib.ModInfo;
+import electrodynamics.lib.core.ModInfo;
 import electrodynamics.network.PacketTypeHandler;
 import electrodynamics.network.packet.PacketLightningFX;
 

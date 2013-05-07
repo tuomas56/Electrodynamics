@@ -8,9 +8,14 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import electrodynamics.block.BlockOre;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.block.item.ItemBlockOre;
-import electrodynamics.lib.BlockIDs;
-import electrodynamics.lib.Ore;
-import electrodynamics.lib.Strings;
+import electrodynamics.item.EDItems;
+import electrodynamics.item.ItemDust;
+import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.lib.block.Ore;
+import electrodynamics.lib.core.Strings;
+import electrodynamics.lib.item.Dust;
+import electrodynamics.lib.item.Grinding;
+import electrodynamics.lib.item.ItemIDs;
 import electrodynamics.world.gen.WorldGenOre;
 
 public class EDModuleWorld extends EDModule {
@@ -25,6 +30,15 @@ public class EDModuleWorld extends EDModule {
 			LanguageRegistry.addName(ore, Ore.get(i).getLocalizedName("en_US"));
 			MinecraftForge.setBlockHarvestLevel(EDBlocks.blockOre, i, "pickaxe", Ore.get(i).harvestLevel);
 			OreDictionary.registerOre(Ore.get(i).oreDictionaryName, ore);
+		}
+		
+		EDItems.itemDust = new ItemDust(ItemIDs.ITEM_DUST_ID).setUnlocalizedName(Strings.ITEM_DUST_NAME);
+		GameRegistry.registerItem(EDItems.itemDust, Strings.ITEM_DUST_NAME);
+		for (Dust dust : Dust.values()) {
+			LanguageRegistry.addName(new ItemStack(EDItems.itemDust, 1, dust.ordinal()), dust.localizedName);
+		}
+		for (Grinding grind : Grinding.values()) {
+			LanguageRegistry.addName(new ItemStack(EDItems.itemDust, 1, grind.ordinal() + Dust.values().length), grind.localizedName);
 		}
 	}
 

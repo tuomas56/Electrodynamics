@@ -9,7 +9,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import electrodynamics.Electrodynamics;
-import electrodynamics.lib.BlockIDs;
+import electrodynamics.lib.block.BlockIDs;
 
 public class TileEntityTable extends TileEntity {
 

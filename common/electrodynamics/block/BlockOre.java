@@ -12,8 +12,8 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.core.CreativeTabED;
-import electrodynamics.lib.BlockIDs;
-import electrodynamics.lib.Ore;
+import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.lib.block.Ore;
 
 public class BlockOre extends Block {
 

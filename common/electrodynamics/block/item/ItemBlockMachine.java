@@ -2,7 +2,7 @@ package electrodynamics.block.item;
 
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import electrodynamics.lib.Machine;
+import electrodynamics.lib.block.Machine;
 
 public class ItemBlockMachine extends ItemBlock {
 

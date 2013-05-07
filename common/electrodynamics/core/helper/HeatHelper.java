@@ -3,7 +3,7 @@ package electrodynamics.core.helper;
 import java.util.HashMap;
 import java.util.Map;
 
-import electrodynamics.lib.HeatValue;
+import electrodynamics.lib.core.HeatValue;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;

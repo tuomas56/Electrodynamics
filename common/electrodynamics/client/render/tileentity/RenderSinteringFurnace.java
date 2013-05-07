@@ -3,7 +3,7 @@ package electrodynamics.client.render.tileentity;
 import org.lwjgl.opengl.GL11;
 
 import electrodynamics.client.model.ModelSinteringFurnace;
-import electrodynamics.lib.Models;
+import electrodynamics.lib.core.Models;
 import electrodynamics.tileentity.TileEntityMachine;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

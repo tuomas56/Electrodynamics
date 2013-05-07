@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import electrodynamics.client.fx.FXLightningBoltCommon.Segment;
-import electrodynamics.lib.ModInfo;
+import electrodynamics.lib.core.ModInfo;
 import electrodynamics.util.EDVector3;
 
 public class FXLightningBolt extends EntityFX {

@@ -1,4 +1,4 @@
-package electrodynamics.lib;
+package electrodynamics.lib.item;
 
 public class ItemIDs {
 
@@ -26,8 +26,12 @@ public class ItemIDs {
 	public static int ITEM_TESLA_BOOTS_ID;
 	public static final int ITEM_TESLA_BOOTS_DEFAULT_ID = 5105;
 	
-	/* itemStoneHammer */
+	/* itemSteelHammer */
 	public static int ITEM_STEEL_HAMMER_ID;
 	public static final int ITEM_STEEL_HAMMER_DEFAULT_ID = 5106;
+	
+	/* itemDust */
+	public static int ITEM_DUST_ID;
+	public static final int ITEM_DUST_DEFAULT_ID = 5107;
 	
 }

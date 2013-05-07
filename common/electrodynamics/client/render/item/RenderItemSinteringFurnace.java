@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import electrodynamics.client.model.ModelSinteringFurnace;
-import electrodynamics.lib.Models;
+import electrodynamics.lib.core.Models;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 

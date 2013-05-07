@@ -22,7 +22,7 @@ import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.control.IKeyBoundClient;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.item.EDItems;
-import electrodynamics.lib.ModInfo;
+import electrodynamics.lib.core.ModInfo;
 
 public class ItemArmorTeslaHelm extends ItemArmor implements IKeyBoundClient {
 

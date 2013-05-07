@@ -4,9 +4,9 @@ import java.io.File;
 
 import electrodynamics.Electrodynamics;
 import electrodynamics.core.EDLogger;
-import electrodynamics.lib.BlockIDs;
-import electrodynamics.lib.ItemIDs;
-import electrodynamics.lib.Strings;
+import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.lib.core.Strings;
+import electrodynamics.lib.item.ItemIDs;
 
 import net.minecraftforge.common.Configuration;
 
@@ -55,6 +55,7 @@ public class ConfigurationHandler {
 			ItemIDs.ITEM_TESLA_LEGS_ID = config.getItem(Strings.ITEM_TESLA_LEGS_NAME, ItemIDs.ITEM_TESLA_LEGS_DEFAULT_ID).getInt(ItemIDs.ITEM_TESLA_LEGS_DEFAULT_ID);
 			ItemIDs.ITEM_TESLA_BOOTS_ID = config.getItem(Strings.ITEM_TESLA_BOOTS_NAME, ItemIDs.ITEM_TESLA_BOOTS_DEFAULT_ID).getInt(ItemIDs.ITEM_TESLA_BOOTS_DEFAULT_ID);
 			ItemIDs.ITEM_STEEL_HAMMER_ID = config.getItem(Strings.ITEM_STEEL_HAMMER_NAME, ItemIDs.ITEM_STEEL_HAMMER_DEFAULT_ID).getInt(ItemIDs.ITEM_STEEL_HAMMER_DEFAULT_ID);
+			ItemIDs.ITEM_DUST_ID = config.getItem(Strings.ITEM_DUST_NAME, ItemIDs.ITEM_DUST_DEFAULT_ID).getInt(ItemIDs.ITEM_DUST_DEFAULT_ID);
 		} catch (Exception e) {
 			EDLogger.warn("Had trouble reading/writing to the configuration file.");
 		} finally {

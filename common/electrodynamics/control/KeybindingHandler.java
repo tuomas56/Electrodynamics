@@ -9,7 +9,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;
-import electrodynamics.lib.ModInfo;
+import electrodynamics.lib.core.ModInfo;
 import electrodynamics.network.PacketTypeHandler;
 import electrodynamics.network.packet.PacketKeyPress;
 

@@ -13,4 +13,6 @@ public class EDItems {
 	public static Item itemTeslaLegs;
 	public static Item itemTeslaBoots;
 	
+	public static Item itemDust;
+	
 }

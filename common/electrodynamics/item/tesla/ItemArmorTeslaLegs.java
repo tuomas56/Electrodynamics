@@ -11,7 +11,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.item.EDItems;
-import electrodynamics.lib.ModInfo;
+import electrodynamics.lib.core.ModInfo;
 
 public class ItemArmorTeslaLegs extends ItemArmor {
 

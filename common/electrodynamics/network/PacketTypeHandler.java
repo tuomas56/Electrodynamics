@@ -5,7 +5,7 @@ import java.io.DataInputStream;
 
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import electrodynamics.lib.ModInfo;
+import electrodynamics.lib.core.ModInfo;
 import electrodynamics.network.packet.PacketED;
 import electrodynamics.network.packet.PacketJump;
 import electrodynamics.network.packet.PacketKeyPress;
