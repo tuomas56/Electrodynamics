@@ -4,7 +4,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import electrodynamics.lib.block.BlockIDs;
-import electrodynamics.lib.block.Ore;
+import electrodynamics.lib.block.Machine;
+import electrodynamics.lib.item.Component;
 import electrodynamics.lib.item.ItemIDs;
 
 public class CreativeTabED extends CreativeTabs {
@@ -16,8 +17,8 @@ public class CreativeTabED extends CreativeTabs {
 	public int itemMeta = 0;
 	
 	static {
-		item = new CreativeTabED("ED Items").setIcon(ItemIDs.ITEM_PCB_ID + 256, 0);
-		block = new CreativeTabED("ED Blocks").setIcon(BlockIDs.BLOCK_ORE_ID, Ore.NICKEL.ordinal());
+		item = new CreativeTabED("ED Items").setIcon(ItemIDs.ITEM_COMPONENT_ID + 256, Component.PCB.ordinal());
+		block = new CreativeTabED("ED Blocks").setIcon(BlockIDs.BLOCK_MACHINE_ID, Machine.SINTERING_FURNACE.ordinal());
 	}
 	
 	public CreativeTabED(String label) {

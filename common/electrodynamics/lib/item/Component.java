@@ -17,8 +17,9 @@ public enum Component {
 	SAP(Strings.SAP, "Sap"),
 	TWINE(Strings.TWINE, "Piece of Twine"),
 	LITHIUM_CLAY(Strings.LITHIUM_CLAY, "Dried Lithium Clay"),
-	WORMWOOD_LEAF(Strings.WORMWOOD_LEAF, "Wormwood Leaf");
-
+	WORMWOOD_LEAF(Strings.WORMWOOD_LEAF, "Wormwood Leaf"),
+	PCB(Strings.PCB, "PCB");
+	
 	private String unlocalizedName;
 	private String localizedName; // temporary
 

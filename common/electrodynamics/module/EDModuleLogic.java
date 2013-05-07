@@ -4,11 +4,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import electrodynamics.block.BlockRedWire;
 import electrodynamics.block.EDBlocks;
-import electrodynamics.item.EDItems;
-import electrodynamics.item.ItemPCB;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.core.Strings;
-import electrodynamics.lib.item.ItemIDs;
 import electrodynamics.tileentity.TileEntityRedWire;
 
 public class EDModuleLogic extends EDModule {
@@ -21,9 +18,6 @@ public class EDModuleLogic extends EDModule {
 		LanguageRegistry.addName(EDBlocks.blockRedWire, "Red Wire");
 		
 		/* ITEM */
-		EDItems.itemPCB = new ItemPCB(ItemIDs.ITEM_PCB_ID).setUnlocalizedName(Strings.ITEM_PCB_NAME);
-		GameRegistry.registerItem(EDItems.itemPCB, Strings.ITEM_PCB_NAME);
-		LanguageRegistry.addName(EDItems.itemPCB, "PCB");
 	}
 
 	@Override

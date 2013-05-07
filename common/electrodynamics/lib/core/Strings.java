@@ -5,7 +5,6 @@ public class Strings {
 
 	/* Internal item names */
 	public static final String ITEM_COMPONENT_NAME = "itemComponent";
-	public static final String ITEM_PCB_NAME = "itemPCB";
 	public static final String ITEM_TESLA_HAT_NAME = "itemTeslaHat";
 	public static final String ITEM_TESLA_CHEST_NAME = "itemTeslaChest";
 	public static final String ITEM_TESLA_LEGS_NAME = "itemTeslaLegs";
@@ -35,6 +34,7 @@ public class Strings {
 	public static final String TWINE = "itemTwine";
 	public static final String LITHIUM_CLAY = "lithiumDriedClay";
 	public static final String WORMWOOD_LEAF = "wormwoodLeaf";
+	public static final String PCB = "pcb";
 	
 	/* Internal ore names */
 	public static final String ORE_COBALTITE_NAME = "oreCobaltite";
