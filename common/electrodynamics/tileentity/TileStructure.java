@@ -11,17 +11,21 @@ public abstract class TileStructure extends TileEntity {
 	protected int targetX, targetY, targetZ;
 
 	// Whether if this TE is part of the structure.
-	protected boolean isPartOfStructure = false;
+	protected boolean isValidStructure = false;
 
 	public void validateStructure(int rotation, int x, int y, int z) {
 		this.targetX = x;
 		this.targetY = y;
 		this.targetZ = z;
-		this.isPartOfStructure = true;
+		this.isValidStructure = true;
 	}
 
 	public void invalidateStructure() {
-		isPartOfStructure = false;
+		isValidStructure = false;
+	}
+
+	public boolean isValidStructure() {
+		return isValidStructure;
 	}
 
 	public boolean isCentralTileEntity() {
@@ -29,7 +33,7 @@ public abstract class TileStructure extends TileEntity {
 	}
 
 	public TileStructure getCentralTileEntity() {
-		if( isPartOfStructure ) {
+		if( isValidStructure ) {
 			if( this.isCentralTileEntity() ) {
 				return this;
 			}
@@ -44,7 +48,7 @@ public abstract class TileStructure extends TileEntity {
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT( nbt );
 		NBTTagCompound tag = nbt.getCompoundTag( "structure" );
-		isPartOfStructure = tag.getBoolean( "isPart" );
+		isValidStructure = tag.getBoolean( "isPart" );
 		targetX = tag.getInteger( "targetX" );
 		targetY = tag.getInteger( "targetY" );
 		targetZ = tag.getInteger( "targetZ" );
@@ -54,7 +58,7 @@ public abstract class TileStructure extends TileEntity {
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT( nbt );
 		NBTTagCompound tag = new NBTTagCompound();
-		tag.setBoolean( "isPart", isPartOfStructure );
+		tag.setBoolean( "isPart", isValidStructure );
 		tag.setInteger( "targetX", targetX );
 		tag.setInteger( "targetY", targetY );
 		tag.setInteger( "targetZ", targetZ );
