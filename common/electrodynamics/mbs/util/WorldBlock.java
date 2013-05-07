@@ -2,6 +2,7 @@ package electrodynamics.mbs.util;
 
 
 import net.minecraft.block.Block;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 
 public class WorldBlock {
@@ -26,6 +27,10 @@ public class WorldBlock {
 
 	public boolean isAirBlock() {
 		return access.isAirBlock( x, y, z );
+	}
+
+	public TileEntity getTileEntity() {
+		return access.getBlockTileEntity( x, y, z );
 	}
 
 }

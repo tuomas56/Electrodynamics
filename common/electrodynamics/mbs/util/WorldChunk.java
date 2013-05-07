@@ -3,11 +3,13 @@ package electrodynamics.mbs.util;
 import electrodynamics.mbs.WorldCoordinate;
 import net.minecraft.world.IBlockAccess;
 
+import java.util.Iterator;
+
 /**
  * The representation of a 3D portion of the world, of fixed size.
  * This is unrelated to Minecraft's Chunk.
  */
-public class WorldChunk {
+public class WorldChunk implements Iterable<WorldBlock> {
 
 	private IBlockAccess access;
 	private int x;
@@ -55,5 +57,45 @@ public class WorldChunk {
 		int depth = Math.max( start.z, end.z );
 
 		return new WorldChunk( start.getBlockAccess(), x, y, z, width, height, depth );
+	}
+
+	public WorldCoordinate getBaseCoordinates() {
+		return new WorldCoordinate( access, x, y, z );
+	}
+
+	@Override
+	public Iterator<WorldBlock> iterator() {
+		return new WorldChunkIterator();
+	}
+
+	private class WorldChunkIterator implements Iterator<WorldBlock> {
+
+		int i = 0;
+		int j = 0;
+		int k = 0;
+
+		@Override
+		public boolean hasNext() {
+			return i < width && j < height && k < depth;
+		}
+
+		@Override
+		public WorldBlock next() {
+			WorldBlock block = getBlockAt( i++, j, k );
+			if( i >= width ) {
+				j++;
+				i = 0;
+			}
+			if( j >= height ) {
+				k++;
+				j = 0;
+			}
+			return block;
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException( "remove" );
+		}
 	}
 }

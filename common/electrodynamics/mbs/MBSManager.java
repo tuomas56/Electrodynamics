@@ -15,7 +15,7 @@ public class MBSManager {
 
 	public static MultiBlockStructure findMatchFor(WorldChunk chunk) {
 		for( MultiBlockStructure mbs : structures ) {
-			if( mbs.check( chunk ) )
+			if( mbs.check( chunk ) != -1 )
 				return mbs;
 		}
 		return null;
