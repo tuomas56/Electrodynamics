@@ -2,11 +2,6 @@ package electrodynamics.configuration;
 
 public class ConfigurationSettings {
 
-	/* Ore settings */
-	public static boolean ALTERNATE_ORE_DROPS;
-	public static final String ALERNATE_ORE_DROPS_CONFIGNAME = "ore.alternate_drops";
-	public static final boolean ALTERNATE_ORE_DROPS_DEFAULT = false;
-	
 	/* Magnetite spawn settings */
 	public static boolean MAGNETITE_ENABLED;
 	public static final String MAGNETITE_ENABLED_CONFIGNAME = "magnetite.enabled";

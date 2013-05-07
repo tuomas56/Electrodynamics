@@ -28,8 +28,13 @@ public class Strings {
 	public static final String BLOCK_MACHINE = "blockMachine";
 	
 	/* Internal ore names */
+	public static final String ORE_COBALTITE_NAME = "oreCobaltite";
+	public static final String ORE_CHALCOPYRITE_NAME = "oreChalcopyrite";
+	public static final String ORE_GALENA_ORE = "oreGalena";
+	public static final String ORE_LITHIUM_CLAY = "clayLithium";
 	public static final String ORE_MAGNETITE_NAME = "oreMagnetite";
 	public static final String ORE_NICKEL_NAME = "oreNickel";
+	public static final String ORE_WOLFRAMITE_NAME = "oreWolframite";
 	
 	/* Internal machine names */
 	public static final String MACHINE_SINTERING_FURNACE = "machineSinteringFurnace";

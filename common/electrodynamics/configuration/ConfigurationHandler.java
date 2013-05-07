@@ -21,8 +21,6 @@ public class ConfigurationHandler {
 		
 		try {
 			/* Settings */
-			ConfigurationSettings.ALTERNATE_ORE_DROPS = config.get(CATEGORY_SETTINGS, ConfigurationSettings.ALERNATE_ORE_DROPS_CONFIGNAME, ConfigurationSettings.ALTERNATE_ORE_DROPS_DEFAULT).getBoolean(ConfigurationSettings.ALTERNATE_ORE_DROPS_DEFAULT);
-			
 			ConfigurationSettings.MAGNETITE_ENABLED = config.get(CATEGORY_SETTINGS, ConfigurationSettings.MAGNETITE_ENABLED_CONFIGNAME, ConfigurationSettings.MAGNETITE_ENABLED_DEFAULT).getBoolean(ConfigurationSettings.MAGNETITE_ENABLED_DEFAULT);
 			ConfigurationSettings.MAGNETITE_MAX_Y_LEVEL = config.get(CATEGORY_SETTINGS, ConfigurationSettings.MAGNETITE_MAX_Y_LEVEL_CONFIGNAME, ConfigurationSettings.MAGNETITE_MAX_Y_LEVEL_DEFAULT).getInt(ConfigurationSettings.MAGNETITE_MAX_Y_LEVEL_DEFAULT);
 			ConfigurationSettings.MAGNETITE_SPAWN_AMOUNT = config.get(CATEGORY_SETTINGS, ConfigurationSettings.MAGNETITE_SPAWN_AMOUNT_CONFIGNAME, ConfigurationSettings.MAGNETITE_SPAWN_AMOUNT_DEFAULT).getInt(ConfigurationSettings.MAGNETITE_SPAWN_AMOUNT_DEFAULT);

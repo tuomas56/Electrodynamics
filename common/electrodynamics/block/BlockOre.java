@@ -10,8 +10,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.core.CreativeTabED;
+import electrodynamics.lib.BlockIDs;
 import electrodynamics.lib.Ore;
 
 public class BlockOre extends Block {
@@ -27,17 +27,17 @@ public class BlockOre extends Block {
 
 	@Override
 	public int idDropped(int meta, Random random, int j) {
-		return ConfigurationSettings.ALTERNATE_ORE_DROPS == true ? Ore.get(meta).altDroppedID : Ore.get(meta).droppedID;
+		return BlockIDs.BLOCK_ORE_ID;
 	}
 
 	@Override
 	public int quantityDropped(int meta, int fortune, Random random) {
-		return ConfigurationSettings.ALTERNATE_ORE_DROPS == true ? Ore.get(meta).altDroppedCount : Ore.get(meta).droppedCount;
+		return 1;
 	}
 
 	@Override
 	public int damageDropped(int meta) {
-		return ConfigurationSettings.ALTERNATE_ORE_DROPS == true ? Ore.get(meta).altDroppedMeta : Ore.get(meta).droppedMeta;
+		return meta;
 	}
 
 	@SideOnly(Side.CLIENT)
