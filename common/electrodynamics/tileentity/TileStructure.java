@@ -1,6 +1,7 @@
 package electrodynamics.tileentity;
 
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -12,11 +13,15 @@ public abstract class TileStructure extends TileEntity {
 	// Whether if this TE is part of the structure.
 	protected boolean isPartOfStructure = false;
 
-	public void setCentralCoordinates(int x, int y, int z) {
+	public void validateStructure(int rotation, int x, int y, int z) {
 		this.targetX = x;
 		this.targetY = y;
 		this.targetZ = z;
 		this.isPartOfStructure = true;
+	}
+
+	public void invalidateStructure() {
+		isPartOfStructure = false;
 	}
 
 	public boolean isCentralTileEntity() {
@@ -32,6 +37,8 @@ public abstract class TileStructure extends TileEntity {
 		}
 		return null;
 	}
+
+	public abstract boolean onBlockActivatedBy(EntityPlayer player, int side, float xOff, float yOff, float zOff);
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {

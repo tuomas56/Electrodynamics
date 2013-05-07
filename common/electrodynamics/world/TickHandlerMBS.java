@@ -5,7 +5,6 @@ import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 import electrodynamics.block.BlockStructure;
 import electrodynamics.mbs.MBSManager;
-import electrodynamics.mbs.MultiBlockStructure;
 import electrodynamics.mbs.WorldCoordinate;
 import electrodynamics.mbs.util.WorldChunk;
 import net.minecraft.world.IBlockAccess;
@@ -36,9 +35,7 @@ public class TickHandlerMBS implements ITickHandler {
 
 		WorldChunk chunk = getWorldChunk( coords );
 		if( chunk != null ) {
-			MultiBlockStructure mbs = MBSManager.findMatchFor( chunk );
-			if( mbs != null )
-				mbs.initialize( chunk, 0 ); // temporary - will get rid of this.
+			MBSManager.updateStructuresAt( chunk );
 		}
 	}
 
@@ -71,9 +68,10 @@ public class TickHandlerMBS implements ITickHandler {
 	private WorldChunk getWorldChunk(WorldCoordinate coords) {
 		int[] measures = new int[] { 0, 0, 0, 0, 0, 0 };
 		int[] newMeasures;
+		int i = 0; // to prevent infinite loops. max dimensions: 25x25x25
 
 		// get the measures by recursion
-		while( !equalArrays( measures, newMeasures = getNewMeasures( coords, measures ) ) ) {
+		while( i++ < 25 && !equalArrays( measures, newMeasures = getNewMeasures( coords, measures ) ) ) {
 			measures = newMeasures;
 		}
 
@@ -88,34 +86,36 @@ public class TickHandlerMBS implements ITickHandler {
 		int height = measures[lowerY] + measures[upperY] + 1;
 		int depth = measures[lowerZ] + measures[upperZ] + 1;
 
+		int[] array = measures.clone();
+
 		// check X-axis (lower)
 		if( containsStructureBlock( coords, -measures[lowerX] - 1, -measures[lowerY], -measures[lowerZ], 1, height, depth ) ) {
-			measures[lowerX]++;
+			array[lowerX]++;
 		}
 		// check X-axis (upper)
 		if( containsStructureBlock( coords, measures[upperX] + 1, -measures[lowerY], -measures[lowerZ], 1, height, depth ) ) {
-			measures[upperX]++;
+			array[upperX]++;
 		}
 
 		// check Y-axis (lower)
 		if( containsStructureBlock( coords, -measures[lowerX], -measures[lowerY] - 1, -measures[lowerZ], width, 1, depth ) ) {
-			measures[lowerY]++;
+			array[lowerY]++;
 		}
 		// check Y-axis (upper)
 		if( containsStructureBlock( coords, -measures[lowerX], measures[upperY] + 1, -measures[lowerZ], width, 1, depth ) ) {
-			measures[upperY]++;
+			array[upperY]++;
 		}
 
 		// check Z-axis (lower)
 		if( containsStructureBlock( coords, -measures[lowerX], -measures[lowerY], -measures[lowerZ] - 1, width, height, 1 ) ) {
-			measures[lowerY]++;
+			array[lowerZ]++;
 		}
 		// check Z-axis (upper)
 		if( containsStructureBlock( coords, -measures[lowerX], -measures[lowerY], measures[upperZ] + 1, width, height, 1 ) ) {
-			measures[upperY]++;
+			array[upperZ]++;
 		}
 
-		return measures;
+		return array;
 	}
 
 	private boolean equalArrays(int[] array1, int[] array2) {

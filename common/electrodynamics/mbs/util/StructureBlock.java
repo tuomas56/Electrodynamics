@@ -26,15 +26,15 @@ public abstract class StructureBlock {
 		}
 	};
 
-	public static StructureBlock sdas(Block block) {
+	public static StructureBlock wrapBlock(Block block) {
 		return new GenericStructureBlock( block.blockID, 0 );
 	}
 
-	public static StructureBlock sdas(Block block, int metadata) {
+	public static StructureBlock wrapBlock(Block block, int metadata) {
 		return new GenericStructureBlock( block.blockID, metadata & 0xF );
 	}
 
-	public static StructureBlock sdas(ItemStack itemStack) {
+	public static StructureBlock wrapBlock(ItemStack itemStack) {
 		if( itemStack != null && itemStack.itemID < Block.blocksList.length ) {
 			int metadata = itemStack.getItem().getMetadata( itemStack.getItemDamage() );
 			return new GenericStructureBlock( itemStack.itemID, metadata );
@@ -53,7 +53,8 @@ public abstract class StructureBlock {
 
 		@Override
 		public boolean isMatchingBlock(WorldBlock worldBlock) {
-			return worldBlock.getBlock().blockID == blockID
+			return worldBlock.getBlock() != null
+					&& worldBlock.getBlock().blockID == blockID
 					&& worldBlock.getMetadata() == blockMetadata;
 		}
 	}

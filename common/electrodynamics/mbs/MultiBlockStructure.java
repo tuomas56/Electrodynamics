@@ -6,7 +6,7 @@ import electrodynamics.mbs.util.WorldChunk;
 import electrodynamics.tileentity.TileStructure;
 import net.minecraft.tileentity.TileEntity;
 
-public abstract class MultiBlockStructure {
+public class MultiBlockStructure {
 
 	private int width;
 	private int height;
@@ -52,17 +52,17 @@ public abstract class MultiBlockStructure {
 				for( int z = 0; z < depth; z++ ) {
 					WorldBlock worldBlock = chunk.getBlockAt( x, y, z );
 
-					if( angles[0] && !pattern.getBlockAt( x, y, z ).isMatchingBlock( worldBlock ) )
+					if( angles[0] && !getPattern().getBlockAt( x, y, z ).isMatchingBlock( worldBlock ) )
 						angles[0] = false;
 
 					if( !isSymmetricXZ ) {
-						if( angles[1] && !pattern.getBlockAt( depth - x, y, z ).isMatchingBlock( worldBlock ) )
+						if( angles[1] && !getPattern().getBlockAt( depth - z - 1, y, x ).isMatchingBlock( worldBlock ) )
 							angles[1] = false;
 
-						if( angles[2] && !pattern.getBlockAt( width - x, y, depth - z ).isMatchingBlock( worldBlock ) )
+						if( angles[2] && !getPattern().getBlockAt( width - x - 1, y, depth - z - 1 ).isMatchingBlock( worldBlock ) )
 							angles[2] = false;
 
-						if( angles[3] && !pattern.getBlockAt( x, y, width - z ).isMatchingBlock( worldBlock ) )
+						if( angles[3] && !getPattern().getBlockAt( x, y, depth - z - 1 ).isMatchingBlock( worldBlock ) )
 							angles[3] = false;
 					}
 				}
@@ -90,31 +90,31 @@ public abstract class MultiBlockStructure {
 		WorldCoordinate coords = getCentralCoordinate( chunk, rotation );
 		WorldBlock block = chunk.getBlockAt( coords.x, coords.y, coords.z );
 		if( block == null ) {
-			coords.translate( 0, -1, 0 );
+			coords = coords.translate( 0, -1, 0 );
 			block = chunk.getBlockAt( coords.x, coords.y, coords.z );
 		}
 		if( block == null || block.getTileEntity() == null ) {
 			throw new IllegalStateException( "Can't assign central TileEntity for MBS." );
 		}
 
-		setCentralCoordinatesToTileEntities( chunk, coords.x, coords.y, coords.z );
+		validateTileEntities( chunk, rotation, coords.x, coords.y, coords.z );
 	}
 
 	protected WorldCoordinate getCentralCoordinate(WorldChunk chunk, int rotation) {
-		WorldCoordinate coords = chunk.getBaseCoordinates();
+		WorldCoordinate coords = new WorldCoordinate( chunk.getBlockAccess(), 0, 0, 0 );
 		int centerX = width / 2;
-		int centerY = -height / 2;
+		int centerY = height / 2;
 		int centerZ = depth / 2;
 		return coords.translate( centerX, centerY, centerZ );
 	}
 
-	protected void setCentralCoordinatesToTileEntities(WorldChunk chunk, int x, int y, int z) {
+	protected void validateTileEntities(WorldChunk chunk, int rotation, int x, int y, int z) {
 		TileEntity tile;
 		for( WorldBlock worldBlock : chunk ) {
 			if( worldBlock != null ) {
 				tile = worldBlock.getTileEntity();
 				if( tile != null && tile instanceof TileStructure ) {
-					((TileStructure) tile).setCentralCoordinates( x, y, z );
+					((TileStructure) tile).validateStructure( rotation, x, y, z );
 				}
 			}
 		}

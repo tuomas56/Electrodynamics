@@ -8,6 +8,8 @@ import java.util.Iterator;
 /**
  * The representation of a 3D portion of the world, of fixed size.
  * This is unrelated to Minecraft's Chunk.
+ * <p/>
+ * Used to iterate through the blocks contained in this chunk and compare them with the MBS patterns.
  */
 public class WorldChunk implements Iterable<WorldBlock> {
 
@@ -47,14 +49,18 @@ public class WorldChunk implements Iterable<WorldBlock> {
 		return new WorldBlock( access, this.x + x, this.y + y, this.z + z );
 	}
 
+	public IBlockAccess getBlockAccess() {
+		return access;
+	}
+
 	public static WorldChunk getChunk(WorldCoordinate start, WorldCoordinate end) {
 		int x = Math.min( start.x, end.x );
 		int y = Math.min( start.y, end.y );
 		int z = Math.min( start.z, end.z );
 
-		int width = Math.max( start.x, end.x );
-		int height = Math.max( start.y, end.y );
-		int depth = Math.max( start.z, end.z );
+		int width = Math.max( start.x, end.x ) - x + 1;
+		int height = Math.max( start.y, end.y ) - y + 1;
+		int depth = Math.max( start.z, end.z ) - z + 1;
 
 		return new WorldChunk( start.getBlockAccess(), x, y, z, width, height, depth );
 	}

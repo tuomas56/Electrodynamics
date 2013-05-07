@@ -86,12 +86,12 @@ public class Pattern {
 				throw new IllegalArgumentException( "Wrong mappings for this pattern." );
 			}
 			int height = layers.size();
-			char[][][] pattern = (char[][][]) layers.toArray();
+			char[][][] pattern = layers.toArray( new char[height][width][depth] );
 			return new Pattern( width, height, depth, pattern, mappings );
 		}
 
 		private void addKey(char key) {
-			if( !keys.contains( key ) )
+			if( !keys.contains( key ) && key != '-' && key != ' ' )
 				keys.add( key );
 		}
 
