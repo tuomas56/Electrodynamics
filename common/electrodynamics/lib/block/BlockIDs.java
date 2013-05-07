@@ -22,4 +22,12 @@ public class BlockIDs {
 	public static int BLOCK_MACHINE_ID;
 	public static final int BLOCK_MACHINE_DEFAULT_ID = 504;
 	
+	/* blockDecorative */
+	public static int BLOCK_DECORATIVE_ID;
+	public static final int BLOCK_DECORATIVE_DEFAULT_ID = 505;
+	
+	/* blockWormseed */
+	public static int BLOCK_WORMSEED_ID;
+	public static final int BLOCK_WORMSEED_DEFAULT_ID = 506;
+	
 }

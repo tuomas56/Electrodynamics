@@ -12,7 +12,8 @@ public enum Ore {
 	LITHIUM_CLAY( Strings.ORE_LITHIUM_CLAY, "Lithium-Rich Clay", 0 ),
 	MAGNETITE( Strings.ORE_MAGNETITE_NAME, "Magnetite Ore" ),
 	NICKEL( Strings.ORE_NICKEL_NAME, "Nickel Ore" ),
-	WOLFRAMITE( Strings.ORE_WOLFRAMITE_NAME, "Wolframite Ore" );
+	WOLFRAMITE( Strings.ORE_WOLFRAMITE_NAME, "Wolframite Ore" ),
+	LIMESTONE_BLOCK(Strings.ORE_LIMESTONE_BLOCK, "Limestone", 0);
 
 	private String unlocalizedName;
 	private String localizedName; // temporary
@@ -38,7 +39,7 @@ public enum Ore {
 	}
 
 	public String getTextureFile() {
-		return ModInfo.ICON_PREFIX + "ore/" + unlocalizedName;
+		return ModInfo.ICON_PREFIX + "world/ore/" + unlocalizedName;
 	}
 
 	public String getUnlocalizedName() {

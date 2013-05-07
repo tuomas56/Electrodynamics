@@ -1,11 +1,14 @@
 package electrodynamics.module;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import electrodynamics.block.BlockDecorative;
 import electrodynamics.block.BlockOre;
+import electrodynamics.block.BlockWormseed;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.block.item.ItemBlockOre;
 import electrodynamics.item.EDItems;
@@ -16,6 +19,7 @@ import electrodynamics.lib.core.Strings;
 import electrodynamics.lib.item.Dust;
 import electrodynamics.lib.item.Grinding;
 import electrodynamics.lib.item.ItemIDs;
+import electrodynamics.world.gen.WorldGenFlower;
 import electrodynamics.world.gen.WorldGenOre;
 
 public class EDModuleWorld extends EDModule {
@@ -31,6 +35,16 @@ public class EDModuleWorld extends EDModule {
 			MinecraftForge.setBlockHarvestLevel(EDBlocks.blockOre, i, "pickaxe", Ore.get(i).harvestLevel);
 			OreDictionary.registerOre(Ore.get(i).oreDictionaryName, ore);
 		}
+		
+		EDBlocks.blockDecorative = new BlockDecorative(BlockIDs.BLOCK_DECORATIVE_ID).setUnlocalizedName(Strings.BLOCK_DECORATIVE);
+		GameRegistry.registerBlock(EDBlocks.blockDecorative, Strings.BLOCK_DECORATIVE);
+		for (int i=0; i<BlockDecorative.blockNames.length; i++) {
+			LanguageRegistry.addName(new ItemStack(EDBlocks.blockDecorative, 1, i), BlockDecorative.blockNames[i]);
+		}
+		
+		EDBlocks.blockWormseed = new BlockWormseed(BlockIDs.BLOCK_WORMSEED_ID).setUnlocalizedName(Strings.BLOCK_WORMSEED);
+		GameRegistry.registerBlock(EDBlocks.blockWormseed, Strings.BLOCK_WORMSEED);
+		LanguageRegistry.addName(EDBlocks.blockWormseed, "Wormseed");
 		
 		EDItems.itemDust = new ItemDust(ItemIDs.ITEM_DUST_ID).setUnlocalizedName(Strings.ITEM_DUST_NAME);
 		GameRegistry.registerItem(EDItems.itemDust, Strings.ITEM_DUST_NAME);
@@ -59,6 +73,9 @@ public class EDModuleWorld extends EDModule {
 		//Wolframite
 		//TODO Write world-gen code for spawn near lava
 		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 6, 4, 6, 16, 4));
+		//Wormseed
+		GameRegistry.registerWorldGenerator(new WorldGenFlower(BlockIDs.BLOCK_WORMSEED_ID, BiomeGenBase.biomeList));
+//		GameRegistry.registerWorldGenerator(new WorldGenFlower(BlockIDs.BLOCK_WORMSEED_ID, BiomeGenBase.plains, BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsEdge));
 	}
 
 	@Override

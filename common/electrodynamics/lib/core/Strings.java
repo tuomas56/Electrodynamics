@@ -1,5 +1,6 @@
 package electrodynamics.lib.core;
 
+//TODO add wormwood tea and peeling spud
 public class Strings {
 
 	/* Internal item names */
@@ -18,15 +19,21 @@ public class Strings {
 	public static final String BLOCK_TABLE_NAME = "blockTable";
 	public static final String BLOCK_LASER_EMITTER = "blockLaserEmitter";
 	public static final String BLOCK_MACHINE = "blockMachine";
+	public static final String BLOCK_DECORATIVE = "blockDecorative";
+	public static final String BLOCK_WORMSEED = "blockWormseed";
 	
 	/* Internal component names */
 	public static final String FAN_BLADE_NAME = "fanBlade";
-	public static final String LODESTONE_DUST_NAME = "lodestoneDust";
 	public static final String LODESTONE_INGOT_NAME = "lodestoneIngot";
 	public static final String MAGNET_NAME = "magnet";
 	public static final String MAGNETITE_CHUNK_NAME = "magnetiteChunk";
 	public static final String MAGNETITE_DUST_NAME = "magnetiteDust";
 	public static final String METAL_BAR = "metalBar";
+	public static final String ARSENIC = "arsenic";
+	public static final String LODESTONE_PEBBLE = "lodestonePebble";
+	public static final String SAP = "itemSap";
+	public static final String TWINE = "itemTwine";
+	public static final String LITHIUM_CLAY = "lithiumDriedClay";
 	
 	/* Internal ore names */
 	public static final String ORE_COBALTITE_NAME = "oreCobaltite";
@@ -36,6 +43,7 @@ public class Strings {
 	public static final String ORE_MAGNETITE_NAME = "oreMagnetite";
 	public static final String ORE_NICKEL_NAME = "oreNickel";
 	public static final String ORE_WOLFRAMITE_NAME = "oreWolframite";
+	public static final String ORE_LIMESTONE_BLOCK = "blockLimestone";
 	
 	/* Internal dust names */
 	public static final String DUST_CLAY = "dustClay";
@@ -53,6 +61,7 @@ public class Strings {
 	public static final String DUST_SULFUR = "dustSulfur";
 	public static final String DUST_TELLURIUM = "dustTellurium";
 	public static final String DUST_TUNGSTEN = "dustTungsten";
+	public static final String DUST_LODESTONE = "dustLodestone";
 	
 	/* Internal grinding names */
 	public static final String GROUND_CHARCOPYRITE = "grindingsCharcopyrite";

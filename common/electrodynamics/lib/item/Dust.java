@@ -20,7 +20,8 @@ public enum Dust {
 	SILICON_SMALL(Strings.DUST_SILICON_SMALL, "Small Pile of Silicon Dust"),
 	SULFUR(Strings.DUST_SULFUR, "Sulfur Dust"),
 	TELLURIUM(Strings.DUST_TELLURIUM, "Tellurium Dust"),
-	TUNGSTEN(Strings.DUST_TUNGSTEN, "Tungsten Dust");
+	TUNGSTEN(Strings.DUST_TUNGSTEN, "Tungsten Dust"),
+	LODESTONE(Strings.DUST_LODESTONE, "Lodestone Dust");
 	
 	public String unlocalizedName;
 	public String localizedName;

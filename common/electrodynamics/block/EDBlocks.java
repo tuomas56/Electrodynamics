@@ -9,5 +9,7 @@ public class EDBlocks {
 	public static Block blockRedWire;
 	public static Block blockTable;
 	public static Block blockLaserEmitter;
+	public static Block blockDecorative;
+	public static Block blockWormseed;
 	
 }
