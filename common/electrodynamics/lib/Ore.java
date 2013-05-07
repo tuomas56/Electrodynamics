@@ -23,6 +23,11 @@ public enum Ore {
 		this.unlocalizedName = unlocalizedName;
 		this.localizedName = localizedName;
 		this.oreDictionaryName = unlocalizedName;
+		
+		//Ugly, but it works
+		if (unlocalizedName.equals(Strings.ORE_LITHIUM_CLAY)) {
+			this.harvestLevel = 0;
+		}
 	}
 
 	private Ore(String unlocalizedName, String localizedName, String alt) {

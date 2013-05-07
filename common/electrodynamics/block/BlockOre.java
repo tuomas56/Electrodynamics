@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.core.CreativeTabED;
@@ -25,6 +26,17 @@ public class BlockOre extends Block {
 		setCreativeTab(CreativeTabED.block);
 	}
 
+	@Override
+	public float getBlockHardness(World world, int x, int y, int z) {
+		int meta = world.getBlockMetadata(x, y, z);
+		
+		switch(meta) {
+		case 3: return 0.8F;
+		case 6: return 4F;
+		default: return 3F;
+		}
+	}
+	
 	@Override
 	public int idDropped(int meta, Random random, int j) {
 		return BlockIDs.BLOCK_ORE_ID;
