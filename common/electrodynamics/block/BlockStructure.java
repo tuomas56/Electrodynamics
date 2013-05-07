@@ -1,5 +1,6 @@
 package electrodynamics.block;
 
+import electrodynamics.tileentity.TileStructure;
 import electrodynamics.world.TickHandlerMBS;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -28,6 +29,9 @@ public abstract class BlockStructure extends BlockContainer {
 			scheduleUpdate( world, x, y, z );
 		}
 	}
+
+	@Override
+	public abstract TileStructure createNewTileEntity(World world);
 
 	protected void scheduleUpdate(World world, int x, int y, int z) {
 		TickHandlerMBS.instance().scheduleTask( world, x, y, z );
