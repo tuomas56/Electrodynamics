@@ -1,5 +1,6 @@
 package electrodynamics.world.gen;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -13,12 +14,20 @@ import cpw.mods.fml.common.IWorldGenerator;
 public class WorldGenFlower implements IWorldGenerator {
 
 	public int flowerID;
+	public int flowerMeta;
 	
 	public List<BiomeGenBase> validBiomes;
 	
-	public WorldGenFlower(int id, BiomeGenBase ... validBiomes) {
+	public WorldGenFlower(int id, int meta, BiomeGenBase ... validBiomes) {
 		this.flowerID = id;
+		this.flowerMeta = meta;
 		this.validBiomes = Arrays.asList(validBiomes);
+	}
+	
+	public WorldGenFlower(int id, int meta, ArrayList<BiomeGenBase> validBiomes) {
+		this.flowerID = id;
+		this.flowerMeta = meta;
+		this.validBiomes = validBiomes;
 	}
 	
 	@Override

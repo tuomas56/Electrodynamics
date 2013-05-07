@@ -1,7 +1,7 @@
 package electrodynamics.module;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -19,6 +19,7 @@ import electrodynamics.lib.core.Strings;
 import electrodynamics.lib.item.Dust;
 import electrodynamics.lib.item.Grinding;
 import electrodynamics.lib.item.ItemIDs;
+import electrodynamics.util.BiomeHelper;
 import electrodynamics.world.gen.WorldGenFlower;
 import electrodynamics.world.gen.WorldGenOre;
 
@@ -74,8 +75,8 @@ public class EDModuleWorld extends EDModule {
 		//TODO Write world-gen code for spawn near lava
 		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 6, 4, 6, 16, 4));
 		//Wormseed
-		GameRegistry.registerWorldGenerator(new WorldGenFlower(BlockIDs.BLOCK_WORMSEED_ID, BiomeGenBase.biomeList));
-//		GameRegistry.registerWorldGenerator(new WorldGenFlower(BlockIDs.BLOCK_WORMSEED_ID, BiomeGenBase.plains, BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsEdge));
+		GameRegistry.registerWorldGenerator(new WorldGenFlower(BlockIDs.BLOCK_WORMSEED_ID, 0, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MOUNTAIN)));
+		GameRegistry.registerWorldGenerator(new WorldGenFlower(BlockIDs.BLOCK_WORMSEED_ID, 1, BiomeHelper.getBiomesForTypes(Type.DESERT, Type.WASTELAND)));
 	}
 
 	@Override
