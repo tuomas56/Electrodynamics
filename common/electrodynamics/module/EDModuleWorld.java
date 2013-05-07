@@ -11,6 +11,7 @@ import electrodynamics.block.item.ItemBlockOre;
 import electrodynamics.lib.BlockIDs;
 import electrodynamics.lib.Ore;
 import electrodynamics.lib.Strings;
+import electrodynamics.world.gen.WorldGenOre;
 
 public class EDModuleWorld extends EDModule {
 
@@ -29,7 +30,21 @@ public class EDModuleWorld extends EDModule {
 
 	@Override
 	public void init() {
-		
+		//Cobaltite
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 0, 8, 16, 64, 4));
+		//Chalcopyrite
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 1, 8, 32, 78, 8));
+		//Galena
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 2, 4, 16, 32, 6));
+		//Lithium
+		//TODO Write world-gen code for this
+		//Magnetite
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 4, 8, 16, 32, 4));
+		//Nickel
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 5, 8, 16, 64, 8));
+		//Wolframite
+		//TODO Write world-gen code for spawn near lava
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 6, 4, 6, 16, 4));
 	}
 
 	@Override

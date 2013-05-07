@@ -1,7 +1,8 @@
-package electrodynamics.world;
+package electrodynamics.world.gen;
 
 import java.util.Random;
 
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -13,6 +14,7 @@ public class WorldGenOre implements IWorldGenerator {
 	private int blockMeta;
 	private int blockAmount;
 	private int yMax;
+	private int yMin = 0;
 	private int rarity;
 	private int dimension;
 	
@@ -25,9 +27,15 @@ public class WorldGenOre implements IWorldGenerator {
 		this.dimension = 0;
 	}
 
-	public WorldGenOre(int blockID, int blockMeta, int blockAmount, int yMax, int rarity, int dimension) {
+	public WorldGenOre(int blockID, int blockMeta, int blockAmount, int yMin, int yMax, int rarity, int dimension) {
 		this(blockID, blockMeta, blockAmount, yMax, rarity);
 		this.dimension = dimension;
+		this.yMin = yMin;
+	}
+	
+	public WorldGenOre(int blockID, int blockMeta, int blockAmount, int yMin, int yMax, int rarity) {
+		this(blockID, blockMeta, blockAmount, yMax, rarity);
+		this.yMin = yMin;
 	}
 	
 	@Override
@@ -37,9 +45,9 @@ public class WorldGenOre implements IWorldGenerator {
 
 	private void generate(World world, Random rand, int chunkX, int chunkZ) {
         for(int i=0; i<rarity; i++){
-        	int firstBlockXCoord = chunkX + rand.nextInt(16);
-        	int firstBlockYCoord = rand.nextInt(yMax);
-        	int firstBlockZCoord = chunkZ + rand.nextInt(16);
+        	int firstBlockXCoord = chunkX * rand.nextInt(16);
+        	int firstBlockYCoord = MathHelper.getRandomIntegerInRange(rand, yMin, yMax);
+        	int firstBlockZCoord = chunkZ * rand.nextInt(16);
         	
         	(new WorldGenMinable(blockID, blockMeta, blockAmount, 1)).generate(world, rand, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
         }
