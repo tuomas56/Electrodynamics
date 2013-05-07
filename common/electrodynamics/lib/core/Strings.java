@@ -34,6 +34,7 @@ public class Strings {
 	public static final String SAP = "itemSap";
 	public static final String TWINE = "itemTwine";
 	public static final String LITHIUM_CLAY = "lithiumDriedClay";
+	public static final String WORMWOOD_LEAF = "wormwoodLeaf";
 	
 	/* Internal ore names */
 	public static final String ORE_COBALTITE_NAME = "oreCobaltite";
