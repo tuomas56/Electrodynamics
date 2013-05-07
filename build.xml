@@ -2,6 +2,7 @@
 <project name="Foundry">
 	
 	<property file="build.properties" />
+	<property file="version.properties" />
 	
 	<target name="clean">
 		<delete file="${dir.forge}\mcp\src\minecraft\mcmod.info" />
