@@ -1,4 +1,6 @@
-package electrodynamics.lib.core;
+package electrodynamics.lib.client;
+
+import electrodynamics.lib.core.ModInfo;
 
 public class Models {
 
@@ -9,6 +11,6 @@ public class Models {
 	public static final String TEX_TABLE_WOOD = TEXTURE_BASE + "/tableWood.png";
 	public static final String TEX_TABLE_STONE = TEXTURE_BASE + "/tableStone.png";
 	public static final String TEX_SINT_FURNACE = TEXTURE_BASE + "/basicSinteringOven.png";
-	public static final String TEX_SINT_FURNACE_ACTIVE = TEXTURE_BASE + "/basicSinteringOven_on.png";
+	public static final String TEX_BASIC_SIEVE = TEXTURE_BASE + "/basicSieve.png";
 	
 }

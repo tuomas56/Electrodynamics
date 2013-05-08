@@ -13,8 +13,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.Electrodynamics;
 import electrodynamics.core.EDLogger;
+import electrodynamics.lib.client.Sound;
 import electrodynamics.lib.core.ModInfo;
-import electrodynamics.lib.core.Sound;
 
 public class SoundHandler {
 

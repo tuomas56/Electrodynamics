@@ -85,5 +85,6 @@ public class Strings {
 	
 	/* Internal machine names */
 	public static final String MACHINE_SINTERING_FURNACE = "machineSinteringFurnace";
+	public static final String MACHINE_BASIC_SIEVE = "machineBasicSieve";
 	
 }

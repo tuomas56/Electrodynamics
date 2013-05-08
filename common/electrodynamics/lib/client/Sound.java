@@ -1,4 +1,6 @@
-package electrodynamics.lib.core;
+package electrodynamics.lib.client;
+
+import electrodynamics.lib.core.ModInfo;
 
 public class Sound extends ModInfo {
 
