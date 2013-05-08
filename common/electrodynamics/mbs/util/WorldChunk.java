@@ -1,6 +1,5 @@
 package electrodynamics.mbs.util;
 
-import electrodynamics.mbs.WorldCoordinate;
 import net.minecraft.world.IBlockAccess;
 
 import java.util.Iterator;
