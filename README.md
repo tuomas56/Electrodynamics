@@ -12,7 +12,7 @@ This mod is not to be used in any modpacks.
 
 #Main Development Team
 
-CyanideX, Hawkye, Xhamolk_, dmillerw, Odiefrom, Mrabow
+CyanideX, dmillerw, Xhamolk_, Mrabow, Hawkye, Odiefrom.
 
 #Extended Credits
 
