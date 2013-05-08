@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 public class RecipeManager {
 
 	public static ArrayList<RecipeSmashingTable> smashingTableRecipes = new ArrayList<RecipeSmashingTable>();
+	public static ArrayList<RecipeBasicSieve> sieveRecipes = new ArrayList<RecipeBasicSieve>();
 	
 	public static void registerSmashingTableRecipe(RecipeSmashingTable recipe) {
 		smashingTableRecipes.add(recipe);
@@ -27,6 +28,23 @@ public class RecipeManager {
 		
 		for (RecipeSmashingTable recipe : smashingTableRecipes) {
 			if (recipe.inputItem.isItemEqual(in)) {
+				return recipe;
+			}
+		}
+		
+		return null;
+	}
+	
+	public static void registerSieveRecipe(RecipeBasicSieve recipe) {
+		sieveRecipes.add(recipe);
+	}
+	
+	
+	public static RecipeBasicSieve getSieveRecipe(ItemStack in) {
+		if (in == null) return null;
+		
+		for (RecipeBasicSieve recipe : sieveRecipes) {
+			if (recipe.itemInput.isItemEqual(in)) {
 				return recipe;
 			}
 		}
