@@ -5,6 +5,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.Icon;
@@ -95,9 +96,15 @@ public class BlockOre extends Block {
 	@Override
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
 		if (ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND) {
-			if (this.soundDelay < System.currentTimeMillis()) {
-				this.soundDelay = (System.currentTimeMillis() + 5000 + (rand.nextInt(10)) * 1000);
-				world.playSound(x, y, z, "electrodynamics.block.voidstoneAmbient", 1F, 1.1F, false);
+			//Hard coded limit of ten blocks for sound to play.
+			final int DISTANCE_LIMIT = 10;
+			double distanceToPlayer = Minecraft.getMinecraft().thePlayer.getDistanceSq(x, y, z);
+			
+			if (distanceToPlayer <= DISTANCE_LIMIT) {
+				if (this.soundDelay < System.currentTimeMillis()) {
+					this.soundDelay = (System.currentTimeMillis() + 5000 + (rand.nextInt(10)) * 1000);
+					world.playSound(x, y, z, "electrodynamics.block.voidstoneAmbient", 1F, 1.1F, false);
+				}
 			}
 		}
 	}
