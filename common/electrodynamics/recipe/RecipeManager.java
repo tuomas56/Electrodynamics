@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import electrodynamics.lib.block.Ore;
 import electrodynamics.lib.item.Component;
+import electrodynamics.lib.item.Dust;
 import electrodynamics.lib.item.Grinding;
 
 import net.minecraft.block.Block;
@@ -72,6 +73,17 @@ public class RecipeManager {
 		RecipeManager.registerSmashingTableRecipe(new ItemStack(Block.oreIron), Grinding.IRON.toItemStack(), 1);
 		RecipeManager.registerSmashingTableRecipe(new ItemStack(Block.oreLapis), Grinding.LAPIS.toItemStack(), 1);
 		RecipeManager.registerSmashingTableRecipe(new ItemStack(Block.oreRedstone), Grinding.REDSTONE.toItemStack(), 1);
+	}
+	
+	public static void initializeSieveRecipes() {
+		RecipeManager.registerSieveRecipe(new RecipeBasicSieve(Grinding.COBALTITE.toItemStack(), 1) {
+			@Override
+			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
+				outputs.add(new WeightedRecipeOutput(Component.ARSENIC.toItemStack(), 5));
+				outputs.add(new WeightedRecipeOutput(Dust.COBALT.toItemStack(), 100));
+				outputs.add(new WeightedRecipeOutput(Dust.SULFUR.toItemStack(), 5));
+			}
+		});
 	}
 	
 }

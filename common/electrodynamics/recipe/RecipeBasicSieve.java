@@ -23,4 +23,16 @@ public class RecipeBasicSieve {
 		this(itemInput, new ArrayList<WeightedRecipeOutput>(Arrays.asList(itemOutputs)), processingTime);
 	}
 	
+	public RecipeBasicSieve(ItemStack itemInput, int processingTime) {
+		this.itemInput = itemInput;
+		this.processingTime = processingTime;
+		this.itemOutputs = new ArrayList<WeightedRecipeOutput>();
+		
+		setOutput(this.itemOutputs);
+	}
+	
+	public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
+		
+	}
+	
 }
