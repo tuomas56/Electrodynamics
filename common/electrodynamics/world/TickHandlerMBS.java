@@ -4,9 +4,9 @@ package electrodynamics.world;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 import electrodynamics.mbs.MBSManager;
-import electrodynamics.mbs.WorldCoordinate;
 import electrodynamics.mbs.util.MBSUtil;
 import electrodynamics.mbs.util.WorldChunk;
+import electrodynamics.mbs.util.WorldCoordinate;
 import net.minecraft.world.IBlockAccess;
 
 import java.util.EnumSet;
@@ -33,7 +33,7 @@ public class TickHandlerMBS implements ITickHandler {
 		WorldCoordinate coords = queue.poll();
 		queueEmpty = queue.isEmpty();
 
-		WorldChunk chunk = getWorldChunk( coords );
+		WorldChunk chunk = MBSUtil.getChunkSurrounding( coords );
 		if( chunk != null ) {
 			MBSManager.updateStructuresAt( chunk );
 		}
@@ -58,91 +58,5 @@ public class TickHandlerMBS implements ITickHandler {
 		queueEmpty = false;
 	}
 
-	private final int lowerX = 0;
-	private final int upperX = 1;
-	private final int lowerY = 2;
-	private final int upperY = 3;
-	private final int lowerZ = 4;
-	private final int upperZ = 5;
-
-	private WorldChunk getWorldChunk(WorldCoordinate coords) {
-		int[] measures = new int[] { 0, 0, 0, 0, 0, 0 };
-		int[] newMeasures;
-		int i = 0; // to prevent infinite loops. max dimensions: 25x25x25
-
-		// get the measures by recursion
-		while( i++ < 25 && !equalArrays( measures, newMeasures = getNewMeasures( coords, measures ) ) ) {
-			measures = newMeasures;
-		}
-
-		WorldCoordinate start = coords.translate( -measures[lowerX], -measures[lowerY], -measures[lowerZ] );
-		WorldCoordinate end = coords.translate( measures[upperX], measures[upperY], measures[upperZ] );
-
-		return WorldChunk.getChunk( start, end );
-	}
-
-	private int[] getNewMeasures(WorldCoordinate coords, int[] measures) {
-		int width = measures[lowerX] + measures[upperX] + 1;
-		int height = measures[lowerY] + measures[upperY] + 1;
-		int depth = measures[lowerZ] + measures[upperZ] + 1;
-
-		int[] array = measures.clone();
-
-		// check X-axis (lower)
-		if( containsStructureBlock( coords, -measures[lowerX] - 1, -measures[lowerY], -measures[lowerZ], 1, height, depth ) ) {
-			array[lowerX]++;
-		}
-		// check X-axis (upper)
-		if( containsStructureBlock( coords, measures[upperX] + 1, -measures[lowerY], -measures[lowerZ], 1, height, depth ) ) {
-			array[upperX]++;
-		}
-
-		// check Y-axis (lower)
-		if( containsStructureBlock( coords, -measures[lowerX], -measures[lowerY] - 1, -measures[lowerZ], width, 1, depth ) ) {
-			array[lowerY]++;
-		}
-		// check Y-axis (upper)
-		if( containsStructureBlock( coords, -measures[lowerX], measures[upperY] + 1, -measures[lowerZ], width, 1, depth ) ) {
-			array[upperY]++;
-		}
-
-		// check Z-axis (lower)
-		if( containsStructureBlock( coords, -measures[lowerX], -measures[lowerY], -measures[lowerZ] - 1, width, height, 1 ) ) {
-			array[lowerZ]++;
-		}
-		// check Z-axis (upper)
-		if( containsStructureBlock( coords, -measures[lowerX], -measures[lowerY], measures[upperZ] + 1, width, height, 1 ) ) {
-			array[upperZ]++;
-		}
-
-		return array;
-	}
-
-	private boolean equalArrays(int[] array1, int[] array2) {
-		if( array1.length != array2.length )
-			return false;
-		for( int i = 0; i < array1.length; i++ ) {
-			if( array1[i] != array2[i] ) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private boolean containsStructureBlock(WorldCoordinate coords, int deltaX, int deltaY, int deltaZ, int width, int height, int depth) {
-		for( int i = 0; i < width; i++ ) {
-			int x = coords.x + deltaX + i;
-			for( int j = 0; j < height; j++ ) {
-				int y = coords.y + deltaY + j;
-				for( int k = 0; k < depth; k++ ) {
-					int z = coords.z + deltaZ + k;
-
-					if( MBSUtil.isStructureBlock( coords.getBlockAccess(), x, y, z ) )
-						return true;
-				}
-			}
-		}
-		return false;
-	}
 
 }

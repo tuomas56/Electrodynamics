@@ -1,5 +1,6 @@
-package electrodynamics.mbs.util;
+package electrodynamics.mbs;
 
+import electrodynamics.mbs.util.WorldBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 

@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 /**
@@ -45,14 +44,6 @@ public abstract class BlockStructure extends BlockContainer {
 
 	protected void scheduleUpdate(World world, int x, int y, int z) {
 		TickHandlerMBS.instance().scheduleTask( world, x, y, z );
-	}
-
-	public static boolean isStructureBlock(IBlockAccess world, int x, int y, int z) {
-		return isStrutureBlock( world.getBlockId( x, y, z ) );
-	}
-
-	public static boolean isStrutureBlock(int blockID) {
-		return blockID != 0 && Block.blocksList[blockID] instanceof BlockStructure;
 	}
 
 }

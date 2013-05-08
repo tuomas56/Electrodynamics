@@ -1,4 +1,4 @@
-package electrodynamics.mbs;
+package electrodynamics.mbs.util;
 
 
 import net.minecraft.world.IBlockAccess;

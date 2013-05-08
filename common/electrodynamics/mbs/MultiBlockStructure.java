@@ -3,6 +3,7 @@ package electrodynamics.mbs;
 
 import electrodynamics.mbs.util.WorldBlock;
 import electrodynamics.mbs.util.WorldChunk;
+import electrodynamics.mbs.util.WorldCoordinate;
 import electrodynamics.tileentity.TileStructure;
 import net.minecraft.tileentity.TileEntity;
 
