@@ -13,6 +13,7 @@ public enum Grinding {
 	MAGNETITE(Strings.GROUND_MAGNETITE, "Ground Magnetite"),
 	NICKEL(Strings.GROUND_NICKEL, "Ground Nickel"),
 	TUNGSTEN(Strings.GROUND_TUNGSTEN, "Ground Tungsten"),
+	VOIDSTONE(Strings.GROUND_VOIDSTONE, "Ground Voidstone"),
 	DIAMOND(Strings.GROUND_DIAMOND, "Ground Diamond"),
 	EMERALD(Strings.GROUND_EMERALD, "Ground Emerald"), 
 	GOLD(Strings.GROUND_GOLD, "Ground Gold"), 

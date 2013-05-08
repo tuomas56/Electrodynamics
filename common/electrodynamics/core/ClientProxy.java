@@ -9,6 +9,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.client.fx.FXLightningBolt;
 import electrodynamics.client.render.block.RenderBlockRedWire;
+import electrodynamics.client.render.block.RenderBlockOre;
 import electrodynamics.client.render.entity.RenderBeam;
 import electrodynamics.client.render.item.RenderItemSinteringOven;
 import electrodynamics.client.render.item.RenderItemTable;
@@ -37,6 +38,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockMachine.blockID, new RenderItemSinteringOven());
 
 		RenderingRegistry.registerBlockHandler(new RenderBlockRedWire());
+		RenderingRegistry.registerBlockHandler(new RenderBlockOre());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityBeam.class, new RenderBeam());
 	}

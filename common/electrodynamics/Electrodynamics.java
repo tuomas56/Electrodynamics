@@ -29,7 +29,7 @@ public class Electrodynamics {
 
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
-		this.configFolder = new File( event.getModConfigurationDirectory(), ModInfo.GENERIC_MOD_ID );
+		this.configFolder = new File( event.getModConfigurationDirectory(), ModInfo.GENERIC_MOD_ID);
 
 		ModuleManager.preInit();
 		proxy.preInitClient();

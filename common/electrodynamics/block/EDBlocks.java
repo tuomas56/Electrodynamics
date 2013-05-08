@@ -11,5 +11,6 @@ public class EDBlocks {
 	public static Block blockLaserEmitter;
 	public static Block blockDecorative;
 	public static Block blockWormseed;
+	public static Block blockLithiumClay;
 	
 }

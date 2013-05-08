@@ -11,13 +11,17 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.block.Ore;
 
 public class BlockOre extends Block {
 
-	private Icon[] textures;
+	public Icon[] textures;
+	
+	/** Textures specifically for Voidstone. <br /> 0 = transparent, 1 = fake star field */
+	public Icon[] voidstoneTextures;
 	
 	public BlockOre(int i) {
 		super(i, Material.rock);
@@ -62,16 +66,25 @@ public class BlockOre extends Block {
 
 	@Override
 	public Icon getIcon(int side, int metadata) {
-		return textures[metadata];
+		return (metadata == Ore.VOIDSTONE.ordinal() ? ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS == true ? voidstoneTextures[0] : voidstoneTextures[1] : textures[metadata]);
 	}
 
 	@Override
+	public int getRenderType() {
+		return ConfigurationSettings.VOIDSTONE_RENDER_ID;
+	}
+	
+	@Override
 	public void registerIcons(IconRegister registry) {
 		textures = new Icon[Ore.values().length];
+		voidstoneTextures = new Icon[2];
 		
 		for (int i = 0; i < Ore.values().length; i++) {
 			textures[i] = registry.registerIcon(Ore.get(i).getTextureFile());
 		}
+		
+		voidstoneTextures[1] = registry.registerIcon(Ore.VOIDSTONE.getTextureFile() + "Fast");
+		voidstoneTextures[0] = registry.registerIcon(Ore.VOIDSTONE.getTextureFile() + "Fancy");
 	}
 
 }

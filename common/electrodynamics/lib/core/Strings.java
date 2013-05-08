@@ -45,6 +45,7 @@ public class Strings {
 	public static final String ORE_NICKEL_NAME = "oreNickel";
 	public static final String ORE_WOLFRAMITE_NAME = "oreWolframite";
 	public static final String ORE_LIMESTONE_BLOCK = "blockLimestone";
+	public static final String ORE_VOIDSTONE = "oreVoidstone";
 	
 	/* Internal dust names */
 	public static final String DUST_CLAY = "dustClay";
@@ -63,6 +64,7 @@ public class Strings {
 	public static final String DUST_TELLURIUM = "dustTellurium";
 	public static final String DUST_TUNGSTEN = "dustTungsten";
 	public static final String DUST_LODESTONE = "dustLodestone";
+	public static final String DUST_VOIDSTONE = "dustVoidstone";
 	
 	/* Internal grinding names */
 	public static final String GROUND_CHARCOPYRITE = "grindingsCharcopyrite";
@@ -72,6 +74,7 @@ public class Strings {
 	public static final String GROUND_MAGNETITE = "grindingsMagnetite";
 	public static final String GROUND_NICKEL = "grindingsNickel";
 	public static final String GROUND_TUNGSTEN = "grindingsTungsten";
+	public static final String GROUND_VOIDSTONE = "grindingsVoidstone";
 	public static final String GROUND_DIAMOND = "grindingsDiamond";
 	public static final String GROUND_EMERALD = "grindingsEmerald";
 	public static final String GROUND_GOLD = "grindingsGold";

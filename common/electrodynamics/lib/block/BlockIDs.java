@@ -30,4 +30,8 @@ public class BlockIDs {
 	public static int BLOCK_WORMSEED_ID;
 	public static final int BLOCK_WORMSEED_DEFAULT_ID = 506;
 	
+	/* blockLithiumClay */
+	public static int BLOCK_LITHIUM_CLAY_ID;
+	public static final int BLOCK_LITHIUM_CLAY_DEFAULT_ID = 507;
+	
 }

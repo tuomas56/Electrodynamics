@@ -1,5 +1,7 @@
 package electrodynamics.module;
 
+import java.io.File;
+
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -11,6 +13,7 @@ import electrodynamics.item.tesla.ItemArmorTeslaBoots;
 import electrodynamics.item.tesla.ItemArmorTeslaChest;
 import electrodynamics.item.tesla.ItemArmorTeslaHelm;
 import electrodynamics.item.tesla.ItemArmorTeslaLegs;
+import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.lib.item.Component;
 import electrodynamics.lib.item.ItemIDs;
@@ -19,7 +22,7 @@ public class EDModuleCore extends EDModule {
 
 	@Override
 	public void preInit() {
-		ConfigurationHandler.handleConfig(Electrodynamics.instance.configFolder);
+		ConfigurationHandler.handleConfig(new File(Electrodynamics.instance.configFolder, ModInfo.GENERIC_MOD_ID + ".cfg"));
 		
 		/* ITEM */
 		EDItems.itemComponent = new ItemComponent(ItemIDs.ITEM_COMPONENT_ID).setUnlocalizedName(Strings.ITEM_COMPONENT_NAME);

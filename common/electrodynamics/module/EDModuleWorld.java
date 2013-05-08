@@ -5,6 +5,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import electrodynamics.block.BlockDecorative;
+import electrodynamics.block.BlockLithiumClay;
 import electrodynamics.block.BlockOre;
 import electrodynamics.block.BlockWormseed;
 import electrodynamics.block.EDBlocks;
@@ -51,6 +52,10 @@ public class EDModuleWorld extends EDModule {
 		GameRegistry.registerBlock( EDBlocks.blockWormseed, Strings.BLOCK_WORMSEED );
 		LanguageRegistry.addName( EDBlocks.blockWormseed, "Wormseed" );
 
+		EDBlocks.blockLithiumClay = new BlockLithiumClay(BlockIDs.BLOCK_LITHIUM_CLAY_ID).setUnlocalizedName(Strings.ORE_LITHIUM_CLAY);
+		GameRegistry.registerBlock(EDBlocks.blockLithiumClay, Strings.ORE_LITHIUM_CLAY);
+		LanguageRegistry.addName(EDBlocks.blockLithiumClay, "Lithium-Rich Clay");
+		
 		EDItems.itemDust = new ItemDust( ItemIDs.ITEM_DUST_ID ).setUnlocalizedName( Strings.ITEM_DUST_NAME );
 		GameRegistry.registerItem( EDItems.itemDust, Strings.ITEM_DUST_NAME );
 		for( Dust dust : Dust.values() ) {
@@ -63,31 +68,31 @@ public class EDModuleWorld extends EDModule {
 
 	@Override
 	public void init() {
-		//Cobaltite
-		GameRegistry.registerWorldGenerator( new WorldGenOre( BlockIDs.BLOCK_ORE_ID, 0, 8, 16, 64, 4 ) );
-		//Chalcopyrite
-		GameRegistry.registerWorldGenerator( new WorldGenOre( BlockIDs.BLOCK_ORE_ID, 1, 8, 32, 78, 8 ) );
-		//Galena
-		GameRegistry.registerWorldGenerator( new WorldGenOre( BlockIDs.BLOCK_ORE_ID, 2, 4, 16, 32, 6 ) );
-		//Lithium
-		//TODO Write world-gen code for this
-		//Magnetite
-		GameRegistry.registerWorldGenerator( new WorldGenOre( BlockIDs.BLOCK_ORE_ID, 4, 8, 16, 32, 4 ) );
-		//Nickel
-		GameRegistry.registerWorldGenerator( new WorldGenOre( BlockIDs.BLOCK_ORE_ID, 5, 8, 16, 64, 8 ) );
-		//Wolframite
-		//TODO Write world-gen code for spawn near lava
-		GameRegistry.registerWorldGenerator( new WorldGenOre( BlockIDs.BLOCK_ORE_ID, 6, 4, 6, 16, 4 ) );
-		//Wormseed
-		GameRegistry.registerWorldGenerator( new WorldGenFlower( BlockIDs.BLOCK_WORMSEED_ID, 0, BiomeHelper.getBiomesForTypes( Type.PLAINS, Type.SWAMP, Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MOUNTAIN ) ) );
-		GameRegistry.registerWorldGenerator( new WorldGenFlower( BlockIDs.BLOCK_WORMSEED_ID, 1, BiomeHelper.getBiomesForTypes( Type.DESERT, Type.WASTELAND ) ) );
+		// Cobaltite
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 0, 8, 16, 64, 4));
+		// Chalcopyrite
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 1, 8, 32, 78, 8));
+		// Galena
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 2, 4, 16, 32, 6));
+		// Lithium
+		// TODO Write world-gen code for this
+		// Magnetite
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 4, 8, 16, 32, 4));
+		// Nickel
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 5, 8, 16, 64, 8));
+		// Wolframite
+		// TODO Write world-gen code for spawn near lava
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 6, 4, 6, 16, 4));
+		// Wormseed
+		GameRegistry.registerWorldGenerator(new WorldGenFlower(BlockIDs.BLOCK_WORMSEED_ID, 0, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MOUNTAIN)));
+		GameRegistry.registerWorldGenerator(new WorldGenFlower(BlockIDs.BLOCK_WORMSEED_ID, 1, BiomeHelper.getBiomesForTypes(Type.DESERT, Type.WASTELAND)));
 	}
 
 	@Override
 	public void postInit() {
 		// Might need some side-sensitivity for these tick handlers.
-		TickRegistry.registerTickHandler( TickHandlerMBS.instance(), Side.SERVER );
-		TickRegistry.registerTickHandler( TickHandlerMBS.instance(), Side.CLIENT );
+		TickRegistry.registerTickHandler(TickHandlerMBS.instance(), Side.SERVER);
+		TickRegistry.registerTickHandler(TickHandlerMBS.instance(), Side.CLIENT);
 	}
 
 }

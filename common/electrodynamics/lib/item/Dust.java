@@ -21,7 +21,8 @@ public enum Dust {
 	SULFUR(Strings.DUST_SULFUR, "Sulfur Dust"),
 	TELLURIUM(Strings.DUST_TELLURIUM, "Tellurium Dust"),
 	TUNGSTEN(Strings.DUST_TUNGSTEN, "Tungsten Dust"),
-	LODESTONE(Strings.DUST_LODESTONE, "Lodestone Dust");
+	LODESTONE(Strings.DUST_LODESTONE, "Lodestone Dust"),
+	VOIDSTONE(Strings.DUST_VOIDSTONE, "Voidstone Dust");
 	
 	public String unlocalizedName;
 	public String localizedName;

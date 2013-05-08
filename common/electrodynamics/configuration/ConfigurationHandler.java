@@ -2,6 +2,8 @@ package electrodynamics.configuration;
 
 import java.io.File;
 
+import cpw.mods.fml.client.registry.RenderingRegistry;
+
 import electrodynamics.Electrodynamics;
 import electrodynamics.core.EDLogger;
 import electrodynamics.lib.block.BlockIDs;
@@ -15,6 +17,7 @@ public class ConfigurationHandler {
 	public static final String CATEGORY_SETTINGS = "user.settings";
 	public static final String CATEGORY_TESLA = "tesla_armor.settings";
 	public static final String CATEGORY_KEYS = "user.keybindings";
+	public static final String CATEGORY_GRAPHICS = "user.graphics";
 	
 	public static void handleConfig(File file) {
 		Configuration config = new Configuration(file);
@@ -35,6 +38,10 @@ public class ConfigurationHandler {
 			ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED = config.get(CATEGORY_TESLA, ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_CONFIGNAME, ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_DEFAULT).getDouble(ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_DEFAULT);
 			ConfigurationSettings.THERMAL_VIEW_RANGE = config.get(CATEGORY_TESLA, ConfigurationSettings.THERMAL_VIEW_RANGE_CONFIGNAME, ConfigurationSettings.THERMAL_VIEW_RANGE_DEFAULT).getDouble(ConfigurationSettings.THERMAL_VIEW_RANGE_DEFAULT);
 			
+			/* Graphical Settings */
+			ConfigurationSettings.VOIDSTONE_RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
+			ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS = config.get(CATEGORY_GRAPHICS, ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS_NAME, ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS_DEFAULT).getBoolean(ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS_DEFAULT);
+			
 			/* Key Bindings */
 			Electrodynamics.proxy.setKeyBinding(ConfigurationSettings.MAGNET_TOGGLE_NAME, config.get(CATEGORY_KEYS, ConfigurationSettings.MAGNET_TOGGLE_CONFIGNAME, ConfigurationSettings.MAGNET_TOGGLE_DEFAULT).getInt(ConfigurationSettings.MAGNET_TOGGLE_DEFAULT), false);
 			Electrodynamics.proxy.setKeyBinding(ConfigurationSettings.THERMAL_VIEW_TOGGLE_NAME, config.get(CATEGORY_KEYS, ConfigurationSettings.THERMAL_VIEW_TOGGLE_CONFIGNAME, ConfigurationSettings.THERMAL_VIEW_TOGGLE_DEFAULT).getInt(ConfigurationSettings.THERMAL_VIEW_TOGGLE_DEFAULT), false);
@@ -48,6 +55,7 @@ public class ConfigurationHandler {
 			BlockIDs.BLOCK_MACHINE_ID = config.getBlock(Strings.BLOCK_MACHINE, BlockIDs.BLOCK_MACHINE_DEFAULT_ID).getInt(BlockIDs.BLOCK_MACHINE_DEFAULT_ID);
 			BlockIDs.BLOCK_DECORATIVE_ID = config.getBlock(Strings.BLOCK_DECORATIVE, BlockIDs.BLOCK_DECORATIVE_DEFAULT_ID).getInt(BlockIDs.BLOCK_DECORATIVE_DEFAULT_ID);
 			BlockIDs.BLOCK_WORMSEED_ID = config.getBlock(Strings.BLOCK_WORMSEED, BlockIDs.BLOCK_WORMSEED_DEFAULT_ID).getInt(BlockIDs.BLOCK_WORMSEED_DEFAULT_ID);
+			BlockIDs.BLOCK_LITHIUM_CLAY_ID = config.getBlock(Strings.ORE_LITHIUM_CLAY, BlockIDs.BLOCK_LITHIUM_CLAY_DEFAULT_ID).getInt(BlockIDs.BLOCK_LITHIUM_CLAY_DEFAULT_ID);
 			
 			/* Item IDs */
 			ItemIDs.ITEM_COMPONENT_ID = config.getItem(Strings.ITEM_COMPONENT_NAME, ItemIDs.ITEM_COMPONENT_DEFAULT_ID).getInt(ItemIDs.ITEM_COMPONENT_DEFAULT_ID);
