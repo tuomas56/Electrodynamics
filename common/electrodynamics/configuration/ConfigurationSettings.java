@@ -72,4 +72,9 @@ public class ConfigurationSettings {
 	public static final String VOIDSTONE_FANCY_GRAPHICS_NAME = "graphics.voidstone.fancy";
 	public static boolean VOIDSTONE_FANCY_GRAPHICS_DEFAULT = true;
 	
+	/* Audio settings */
+	public static boolean VOIDSTONE_AMBIENT_SOUND;
+	public static final String VOIDSTONE_AMBIENT_SOUND_NAME = "sound.voidstone.ambient";
+	public static final boolean VOIDSTONE_AMBIENT_SOUND_DEFAULT = true;
+	
 }

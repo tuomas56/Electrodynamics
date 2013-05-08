@@ -5,8 +5,6 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.SoundPoolEntry;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.Icon;
@@ -96,9 +94,11 @@ public class BlockOre extends Block {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-		if (this.soundDelay < System.currentTimeMillis()) {
-			this.soundDelay = (System.currentTimeMillis() + 1200L + rand.nextInt(100));
-			world.playSound(x + 0.5D, y + 0.5F, z + 0.5D, "block.voidstoneAmbient", 0.3F, 0.9F + rand.nextFloat(), false);
+		if (ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND) {
+			if (this.soundDelay < System.currentTimeMillis()) {
+				this.soundDelay = (System.currentTimeMillis() + 5000 + (rand.nextInt(10)) * 1000);
+				world.playSound(x, y, z, "electrodynamics.block.voidstoneAmbient", 1F, 1.1F, false);
+			}
 		}
 	}
 	

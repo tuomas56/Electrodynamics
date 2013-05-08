@@ -18,6 +18,7 @@ public class ConfigurationHandler {
 	public static final String CATEGORY_TESLA = "tesla_armor.settings";
 	public static final String CATEGORY_KEYS = "user.keybindings";
 	public static final String CATEGORY_GRAPHICS = "user.graphics";
+	public static final String CATEGORY_SOUND = "user.sound";
 	
 	public static void handleConfig(File file) {
 		Configuration config = new Configuration(file);
@@ -41,6 +42,9 @@ public class ConfigurationHandler {
 			/* Graphical Settings */
 			ConfigurationSettings.VOIDSTONE_RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 			ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS = config.get(CATEGORY_GRAPHICS, ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS_NAME, ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS_DEFAULT).getBoolean(ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS_DEFAULT);
+			
+			/* Audio settings */
+			ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND = config.get(CATEGORY_SOUND, ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND_NAME, ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND_DEFAULT).getBoolean(ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND_DEFAULT);
 			
 			/* Key Bindings */
 			Electrodynamics.proxy.setKeyBinding(ConfigurationSettings.MAGNET_TOGGLE_NAME, config.get(CATEGORY_KEYS, ConfigurationSettings.MAGNET_TOGGLE_CONFIGNAME, ConfigurationSettings.MAGNET_TOGGLE_DEFAULT).getInt(ConfigurationSettings.MAGNET_TOGGLE_DEFAULT), false);
