@@ -35,7 +35,7 @@ public class RenderBlockOre extends BlockRenderer implements ISimpleBlockRenderi
 				Tessellator t = Tessellator.instance;
 				t.setBrightness(160);
 
-				//Effect
+
 			}
 		}
 

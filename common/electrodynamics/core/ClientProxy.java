@@ -13,7 +13,7 @@ import electrodynamics.client.render.block.RenderBlockOre;
 import electrodynamics.client.render.entity.RenderBeam;
 import electrodynamics.client.render.item.RenderItemSinteringOven;
 import electrodynamics.client.render.item.RenderItemTable;
-import electrodynamics.client.render.tileentity.RenderSinteringFurnace;
+import electrodynamics.client.render.tileentity.RenderSinteringOven;
 import electrodynamics.client.render.tileentity.RenderTable;
 import electrodynamics.control.KeyBindingHelper;
 import electrodynamics.control.KeybindingHandler;
@@ -30,7 +30,7 @@ public class ClientProxy extends CommonProxy {
 	public void initClient() {
 		KeyBindingRegistry.registerKeyBinding(new KeybindingHandler());
 		
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySinteringOven.class, new RenderSinteringFurnace());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySinteringOven.class, new RenderSinteringOven());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTable.class, new RenderTable());
 
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockTable.blockID, new RenderItemTable());

@@ -77,12 +77,16 @@ public class EDModuleWorld extends EDModule {
 		// Lithium
 		// TODO Write world-gen code for this
 		// Magnetite
-		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 4, 8, 16, 32, 4));
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 3, 8, 16, 32, 4));
 		// Nickel
-		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 5, 8, 16, 64, 8));
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 4, 8, 16, 64, 8));
 		// Wolframite
 		// TODO Write world-gen code for spawn near lava
-		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 6, 4, 6, 16, 4));
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 5, 4, 6, 16, 4));
+		// Limestone
+		// TODO Write world-gen code for limestone
+		// Voidstone
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 7, 1, 0, 4, 1));
 		// Wormseed
 		GameRegistry.registerWorldGenerator(new WorldGenFlower(BlockIDs.BLOCK_WORMSEED_ID, 0, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MOUNTAIN)));
 		GameRegistry.registerWorldGenerator(new WorldGenFlower(BlockIDs.BLOCK_WORMSEED_ID, 1, BiomeHelper.getBiomesForTypes(Type.DESERT, Type.WASTELAND)));

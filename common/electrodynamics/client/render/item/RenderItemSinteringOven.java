@@ -3,17 +3,17 @@ package electrodynamics.client.render.item;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import electrodynamics.client.model.ModelSinteringFurnace;
+import electrodynamics.client.model.ModelSinteringOven;
 import electrodynamics.lib.core.Models;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
 public class RenderItemSinteringOven implements IItemRenderer {
 
-	private ModelSinteringFurnace modelSinteringFurnace;
+	private ModelSinteringOven modelSinteringOven;
 	
 	public RenderItemSinteringOven() {
-		this.modelSinteringFurnace = new ModelSinteringFurnace();
+		this.modelSinteringOven = new ModelSinteringOven();
 	}
 	
 	@Override
@@ -54,7 +54,7 @@ public class RenderItemSinteringOven implements IItemRenderer {
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180, 1, 0, 0);
 		GL11.glRotatef(-90, 0, 1, 0);
-		modelSinteringFurnace.renderAll(0.0625F);
+		modelSinteringOven.renderAll(0.0625F);
 		GL11.glPopMatrix();
 	}
 	

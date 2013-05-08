@@ -20,7 +20,7 @@ public class BlockOre extends Block {
 
 	public Icon[] textures;
 	
-	/** Textures specifically for Voidstone. <br /> 0 = transparent, 1 = fake star field */
+	/** Textures specifically for Voidstone. <br /> 0 = transparent, 1 = fake star field, 2 = glowing animation */
 	public Icon[] voidstoneTextures;
 	
 	public BlockOre(int i) {

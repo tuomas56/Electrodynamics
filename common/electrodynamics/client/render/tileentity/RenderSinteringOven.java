@@ -1,21 +1,22 @@
 package electrodynamics.client.render.tileentity;
 
-import org.lwjgl.opengl.GL11;
-
-import electrodynamics.client.model.ModelSinteringFurnace;
-import electrodynamics.lib.core.Models;
-import electrodynamics.tileentity.TileEntityMachine;
-import electrodynamics.tileentity.TileEntitySinteringOven;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
-public class RenderSinteringFurnace extends TileEntitySpecialRenderer {
+import org.lwjgl.opengl.GL11;
 
-	private ModelSinteringFurnace modelSinteringFurnace;
+import electrodynamics.client.model.ModelSinteringOven;
+import electrodynamics.lib.core.Models;
+import electrodynamics.tileentity.TileEntityMachine;
+import electrodynamics.tileentity.TileEntitySinteringOven;
 
-	public RenderSinteringFurnace() {
-		this.modelSinteringFurnace = new ModelSinteringFurnace();
+public class RenderSinteringOven extends TileEntitySpecialRenderer {
+
+	private ModelSinteringOven modelSinteringOven;
+
+	public RenderSinteringOven() {
+		this.modelSinteringOven = new ModelSinteringOven();
 	}
 
 	@Override
@@ -46,8 +47,8 @@ public class RenderSinteringFurnace extends TileEntitySpecialRenderer {
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_SINT_FURNACE);
 
-		modelSinteringFurnace.rotateDoor(((TileEntitySinteringOven)tile).doorAngle);
-		modelSinteringFurnace.renderAll(0.0625F);
+		modelSinteringOven.rotateDoor(((TileEntitySinteringOven)tile).doorAngle);
+		modelSinteringOven.renderAll(0.0625F);
 		
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
