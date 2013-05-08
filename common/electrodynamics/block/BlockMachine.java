@@ -1,7 +1,10 @@
 package electrodynamics.block;
 
+import java.util.List;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -10,8 +13,8 @@ import net.minecraft.world.World;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.core.EDLogger;
 import electrodynamics.lib.block.Machine;
-import electrodynamics.util.PlayerUtil;
 import electrodynamics.tileentity.TileEntityMachine;
+import electrodynamics.util.PlayerUtil;
 
 public class BlockMachine extends BlockContainer {
 
@@ -63,6 +66,14 @@ public class BlockMachine extends BlockContainer {
 		}
 		
 		return false;
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void getSubBlocks(int id, CreativeTabs tab, List list) {
+		for (Machine machine : Machine.values()) {
+			list.add(new ItemStack(id, 1, machine.ordinal()));
+		}
 	}
 	
 	/* IGNORE */

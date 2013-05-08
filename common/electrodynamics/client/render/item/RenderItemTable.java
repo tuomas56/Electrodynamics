@@ -6,7 +6,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import electrodynamics.client.model.ModelStoneTable;
 import electrodynamics.client.model.ModelTable;
 import electrodynamics.client.model.ModelWoodTable;
-import electrodynamics.lib.core.Models;
+import electrodynamics.lib.client.Models;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 

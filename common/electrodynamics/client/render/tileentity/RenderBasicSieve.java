@@ -6,17 +6,16 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import electrodynamics.client.model.ModelSinteringOven;
+import electrodynamics.client.model.ModelBasicSieve;
 import electrodynamics.lib.client.Models;
 import electrodynamics.tileentity.TileEntityMachine;
-import electrodynamics.tileentity.TileEntitySinteringOven;
 
-public class RenderSinteringOven extends TileEntitySpecialRenderer {
+public class RenderBasicSieve extends TileEntitySpecialRenderer {
 
-	private ModelSinteringOven modelSinteringOven;
+	private ModelBasicSieve modelBasicSieve;
 
-	public RenderSinteringOven() {
-		this.modelSinteringOven = new ModelSinteringOven();
+	public RenderBasicSieve() {
+		this.modelBasicSieve = new ModelBasicSieve();
 	}
 
 	@Override
@@ -45,10 +44,9 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 			break;
 		}
 
-		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_SINT_FURNACE);
+		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_BASIC_SIEVE);
 
-		modelSinteringOven.rotateDoor(((TileEntitySinteringOven)tile).doorAngle);
-		modelSinteringOven.renderAll(0.0625F);
+		modelBasicSieve.renderAll(0.0625F);
 		
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
