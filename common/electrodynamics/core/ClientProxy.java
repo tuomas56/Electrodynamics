@@ -20,6 +20,7 @@ import electrodynamics.control.KeyBindingHelper;
 import electrodynamics.control.KeybindingHandler;
 import electrodynamics.core.handler.SoundHandler;
 import electrodynamics.entity.EntityBeam;
+import electrodynamics.lib.client.FXType;
 import electrodynamics.tileentity.TileEntitySinteringOven;
 import electrodynamics.tileentity.TileEntityTable;
 
@@ -55,10 +56,18 @@ public class ClientProxy extends CommonProxy {
 		KeyBindingRegistry.registerKeyBinding(new KeybindingHandler());
 	}
 
+	public void handleFXPacket(FXType type, double x, double y, double z, int[] extraInfo) {
+		switch (type) {
+			case BLOCK_BREAK: {
+				addBlockDestroyParticles((int)x, (int)y, (int)z, extraInfo[0], extraInfo[1]);
+			}
+		}
+	}
+	
 	@Override
 	public void addBlockDestroyParticles(int x, int y, int z, int blockID, int meta) {
 		if (blockID > 0) {
-			Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(x, y + 1, z, blockID, meta);
+			Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(x, y, z, blockID, meta);
 		}
 	}
 

@@ -1,5 +1,6 @@
 package electrodynamics.core;
 
+import electrodynamics.lib.client.FXType;
 import net.minecraft.world.World;
 
 public class CommonProxy {
@@ -20,6 +21,10 @@ public class CommonProxy {
 
 	}
 
+	public void handleFXPacket(FXType type, double x, double y, double z, int[] extraInfo) {
+		
+	}
+	
 	public void addBlockDestroyParticles(int x, int y, int z, int blockID, int meta) {
 
 	}

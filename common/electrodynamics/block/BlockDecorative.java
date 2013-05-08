@@ -15,8 +15,8 @@ public class BlockDecorative extends Block {
 
 	private Icon[] textures;
 	
-	public static String[] blockNames = new String[] {"Limestone Brick", "Brittle Limestone", "Smooth Limestone", "Limestone Bricks"};
-	public static String[] blockSubNames = new String[] {"brickLimestone", "brittleLimestone", "smoothLimestone", "bricksLimestone"};
+	public static String[] blockNames = new String[] {"Limestone", "Limestone Brick", "Brittle Limestone", "Smooth Limestone", "Limestone Bricks"};
+	public static String[] blockSubNames = new String[] {"blockLimestone", "brickLimestone", "brittleLimestone", "smoothLimestone", "bricksLimestone"};
 	
 	public BlockDecorative(int id) {
 		super(id, Material.rock);
