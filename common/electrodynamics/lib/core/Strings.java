@@ -74,7 +74,7 @@ public class Strings {
 	public static final String GROUND_LITHIUM = "grindingsLithium";
 	public static final String GROUND_MAGNETITE = "grindingsMagnetite";
 	public static final String GROUND_NICKEL = "grindingsNickel";
-	public static final String GROUND_TUNGSTEN = "grindingsTungsten";
+	public static final String GROUND_WOLFRAMITE = "grindingsWolframite";
 	public static final String GROUND_VOIDSTONE = "grindingsVoidstone";
 	public static final String GROUND_DIAMOND = "grindingsDiamond";
 	public static final String GROUND_EMERALD = "grindingsEmerald";

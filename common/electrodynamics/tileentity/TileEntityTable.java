@@ -10,9 +10,10 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
-import electrodynamics.Electrodynamics;
 import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.lib.client.FXType;
 import electrodynamics.network.PacketTypeHandler;
+import electrodynamics.network.packet.PacketFX;
 import electrodynamics.network.packet.PacketTableUpdate;
 import electrodynamics.recipe.RecipeManager;
 import electrodynamics.recipe.RecipeSmashingTable;
@@ -114,7 +115,8 @@ public class TileEntityTable extends TileEntity {
 				
 				if (recipe != null) {
 					if (displayedItem.getItem() instanceof ItemBlock) {
-						Electrodynamics.proxy.addBlockDestroyParticles(xCoord, yCoord, zCoord, displayedItem.getItem().itemID, displayedItem.getItemDamage());
+						PacketFX packet = new PacketFX(FXType.BLOCK_BREAK, xCoord, yCoord, zCoord, new int[] {displayedItem.itemID, displayedItem.getItemDamage()});
+						PacketDispatcher.sendPacketToAllAround(xCoord, yCoord + 2, zCoord, 64D, this.worldObj.provider.dimensionId, PacketTypeHandler.fillPacket(packet));
 					}
 					
 					setItem(recipe.outputItem);

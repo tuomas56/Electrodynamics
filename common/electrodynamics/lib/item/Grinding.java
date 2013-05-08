@@ -6,14 +6,15 @@ import electrodynamics.lib.core.Strings;
 
 public enum Grinding {
 
+	//Mod Ores
 	CHARCOPYRITE(Strings.GROUND_CHARCOPYRITE, "Ground Charcopyrite"),
-	COLBALTITE(Strings.GROUND_COBALTITE, "Ground Cobaltite"),
+	COBALTITE(Strings.GROUND_COBALTITE, "Ground Cobaltite"),
 	GALENA(Strings.GROUND_GALENA, "Ground Galena"),
-	LITHIUM(Strings.GROUND_LITHIUM, "Ground Lithium"),
 	MAGNETITE(Strings.GROUND_MAGNETITE, "Ground Magnetite"),
 	NICKEL(Strings.GROUND_NICKEL, "Ground Nickel"),
-	TUNGSTEN(Strings.GROUND_TUNGSTEN, "Ground Tungsten"),
+	WOLFRAMITE(Strings.GROUND_WOLFRAMITE, "Ground Wolframite"),
 	VOIDSTONE(Strings.GROUND_VOIDSTONE, "Ground Voidstone"),
+	LITHIUM(Strings.GROUND_LITHIUM, "Ground Lithium"),
 	DIAMOND(Strings.GROUND_DIAMOND, "Ground Diamond"),
 	EMERALD(Strings.GROUND_EMERALD, "Ground Emerald"), 
 	GOLD(Strings.GROUND_GOLD, "Ground Gold"), 
