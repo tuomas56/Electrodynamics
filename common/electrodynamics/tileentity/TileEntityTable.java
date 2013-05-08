@@ -22,9 +22,9 @@ public class TileEntityTable extends TileEntity {
 	/** Type of table. 0 is Display Table, 1 is Smashing Table */
 	public byte type;
 
-	/** Rotation of the item rendering on the table */
-	public byte itemRotation;
-
+	/** Item that was displayed previously. Can be null */
+	public ItemStack prevDisplayedItem;
+	
 	/** Item to be displayed on the display table */
 	public ItemStack displayedItem;
 
@@ -34,12 +34,6 @@ public class TileEntityTable extends TileEntity {
 
 	public TileEntityTable(byte type) {
 		this.type = type;
-	}
-
-	public void updateEntity() {
-		if (displayedItem != null) {
-
-		}
 	}
 
 	public void writeToNBT(NBTTagCompound nbt) {
@@ -70,31 +64,63 @@ public class TileEntityTable extends TileEntity {
 		this.readFromNBT(pkt.customParam1);
 	}
 
-	public void setRotation(int rotation) {
-		this.itemRotation = Byte.valueOf((byte) (rotation % 4));
+	public void setItem(ItemStack item) {
+		prevDisplayedItem = displayedItem;
+		displayedItem = item;
 	}
-
-	public int getRotation() {
-		return this.itemRotation;
+	
+	public ItemStack getItem() {
+		return displayedItem;
 	}
-
+	
+	public void update() {
+		if (itemChanged()) {
+			PacketDispatcher.sendPacketToAllInDimension(PacketTypeHandler.fillPacket(new PacketTableUpdate(xCoord, yCoord, zCoord, this.displayedItem)), this.worldObj.provider.dimensionId);
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
+	}
+	
+	public boolean itemChanged() {
+		if (prevDisplayedItem == null && displayedItem == null) {
+			return false;
+		}
+		
+		if (prevDisplayedItem != null && displayedItem == null) {
+			return true;
+		}
+		
+		if (prevDisplayedItem == null && displayedItem != null) {
+			return true;
+		}
+		
+		if (!ItemStack.areItemStacksEqual(prevDisplayedItem, displayedItem)) {
+			return true;
+		}
+		
+		return true;
+	}
+	
+	public boolean hasRecipe() {
+		return !(RecipeManager.getSmashingTableRecipe(displayedItem) == null);
+	}
+	
 	public void handleSmash(EntityPlayer player, ItemStack hammer) {
 		if (displayedItem != null) {
 			if (this.type == 0 && displayedItem.getItem().itemID == Block.stoneSingleSlab.blockID) {
 				this.displayedItem = null;
 				this.worldObj.setBlock(xCoord, yCoord, zCoord, BlockIDs.BLOCK_TABLE_ID, 1, 2);
 			} else if (this.type == 1) {
-				RecipeSmashingTable recipe = RecipeManager.getRecipe(displayedItem);
+				RecipeSmashingTable recipe = RecipeManager.getSmashingTableRecipe(displayedItem);
 				
 				if (recipe != null) {
 					if (displayedItem.getItem() instanceof ItemBlock) {
 						Electrodynamics.proxy.addBlockDestroyParticles(xCoord, yCoord, zCoord, displayedItem.getItem().itemID, displayedItem.getItemDamage());
 					}
 					
-					this.displayedItem = recipe.outputItem;
+					setItem(recipe.outputItem);
 					hammer.damageItem(recipe.hammerDamage, player);
-					PacketDispatcher.sendPacketToAllInDimension(PacketTypeHandler.fillPacket(new PacketTableUpdate(xCoord, yCoord, zCoord, recipe.outputItem)), this.worldObj.provider.dimensionId);
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+					
+					update();
 				}
 			}
 		}
