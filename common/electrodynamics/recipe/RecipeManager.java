@@ -16,7 +16,9 @@ public class RecipeManager {
 		smashingTableRecipes.add(new RecipeSmashingTable(in, out, damage));
 	}
 	
-	public static RecipeSmashingTable getRecipe(ItemStack in) {
+	public static RecipeSmashingTable getSmashingTableRecipe(ItemStack in) {
+		if (in == null) return null;
+		
 		for (RecipeSmashingTable recipe : smashingTableRecipes) {
 			if (recipe.inputItem.isItemEqual(in)) {
 				return recipe;

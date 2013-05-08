@@ -12,13 +12,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.item.EDItems;
-import electrodynamics.network.PacketTypeHandler;
-import electrodynamics.network.packet.PacketTableUpdate;
 import electrodynamics.tileentity.TileEntityTable;
 import electrodynamics.util.BlockUtil;
 
@@ -96,16 +93,17 @@ public class BlockTable extends BlockContainer {
 		
 		TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
 		
-		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == EDItems.itemSteelHammer) {
+		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == EDItems.itemSteelHammer && table.hasRecipe()) {
 			table.handleSmash(player, player.getCurrentEquippedItem());
 		} else {
-			if (table.displayedItem != null) {
-				BlockUtil.dropItemFromBlock(world, x, y, z, table.displayedItem, this.random);
-				table.displayedItem = null;
+			if (table.getItem() != null) {
+				BlockUtil.dropItemFromBlock(world, x, y, z, table.displayedItem.copy(), this.random);
+				table.setItem(null);
 			} else {
 				if (player.getCurrentEquippedItem() != null) {
-					table.displayedItem = player.getCurrentEquippedItem().copy();
-					table.displayedItem.stackSize = 1;
+					ItemStack toDisplay = player.getCurrentEquippedItem().copy();
+					toDisplay.stackSize = 1;
+					table.setItem(toDisplay);
 					
 					if (player.getCurrentEquippedItem().stackSize > 1) {
 						player.getCurrentEquippedItem().stackSize--;
@@ -115,8 +113,7 @@ public class BlockTable extends BlockContainer {
 				}
 			}
 			
-			PacketDispatcher.sendPacketToAllInDimension(PacketTypeHandler.fillPacket(new PacketTableUpdate(x, y, z, table.displayedItem)), world.provider.dimensionId);
-			world.markBlockForUpdate(x, y, z);
+			table.update();
 		}
 		
 		return true;
