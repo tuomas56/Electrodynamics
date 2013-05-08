@@ -91,13 +91,13 @@ public class Pattern {
 		}
 
 		private void addKey(char key) {
-			if( !keys.contains( key ) && key != '-' && key != ' ' )
-				keys.add( key );
+			if( !getKeys().contains( key ) && key != '-' && key != ' ' )
+				getKeys().add( key );
 		}
 
 		// must make sure that there is a value for every registered key.
 		private boolean checkMappings(Map<Character, StructureBlock> mappings) {
-			for( char key : keys ) {
+			for( char key : getKeys() ) {
 				if( !mappings.containsKey( key ) || mappings.get( key ) == null )
 					return false;
 			}
