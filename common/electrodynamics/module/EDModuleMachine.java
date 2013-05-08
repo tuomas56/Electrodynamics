@@ -48,6 +48,7 @@ public class EDModuleMachine extends EDModule {
 	@Override
 	public void init() {
 		RecipeManager.initializeSmashingRecipes();
+		RecipeManager.initializeSieveRecipes();
 		
 		GameRegistry.registerTileEntity(TileEntitySinteringOven.class, Strings.MACHINE_SINTERING_FURNACE);
 		GameRegistry.registerTileEntity(TileEntityTable.class, Strings.BLOCK_TABLE_NAME);
