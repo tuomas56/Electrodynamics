@@ -43,27 +43,23 @@ public class MultiBlockStructure {
 		if( !compareDimensions( chunk ) )
 			return -1;
 
-		// Compare each block.
+		// Optimization Checks
+		boolean rotated = !isSymmetricXZ && width != depth && width == chunk.getDepth();
 
-		boolean[] angles = new boolean[] { true, true, true, true };
+		// Compare each block.
+		boolean[] angles = new boolean[] { true, true };
 
 		for( int x = 0; x < width; x++ ) {
 			for( int y = 0; y < height; y++ ) {
 				for( int z = 0; z < depth; z++ ) {
-					WorldBlock worldBlock = chunk.getBlockAt( x, y, z );
+					WorldBlock worldBlock = rotated ? chunk.getBlockAt( z, y, x ) : chunk.getBlockAt( x, y, z );
 
 					if( angles[0] && !getPattern().getBlockAt( x, y, z ).isMatchingBlock( worldBlock ) )
 						angles[0] = false;
 
 					if( !isSymmetricXZ ) {
-						if( angles[1] && !getPattern().getBlockAt( depth - z - 1, y, x ).isMatchingBlock( worldBlock ) )
+						if( angles[1] && !getPattern().getBlockAt( width - x - 1, y, depth - z - 1 ).isMatchingBlock( worldBlock ) )
 							angles[1] = false;
-
-						if( angles[2] && !getPattern().getBlockAt( width - x - 1, y, depth - z - 1 ).isMatchingBlock( worldBlock ) )
-							angles[2] = false;
-
-						if( angles[3] && !getPattern().getBlockAt( x, y, depth - z - 1 ).isMatchingBlock( worldBlock ) )
-							angles[3] = false;
 					}
 				}
 			}
@@ -71,11 +67,13 @@ public class MultiBlockStructure {
 
 		if( isSymmetricXZ )
 			return angles[0] ? 0 : -1;
-		for( int i = 0; i < 4; i++ ) {
-			if( angles[i] )
-				return i;
+		else {
+			int retValue = angles[0] ? 0 : angles[1] ? 1 : -1;
+			if( retValue != -1 && rotated ) {
+				retValue += 2;
+			}
+			return retValue;
 		}
-		return -1;
 	}
 
 	protected boolean compareDimensions(WorldChunk chunk) {
@@ -102,9 +100,9 @@ public class MultiBlockStructure {
 
 	protected WorldCoordinate getCentralCoordinate(WorldChunk chunk, int rotation) {
 		WorldCoordinate coords = new WorldCoordinate( chunk.getBlockAccess(), 0, 0, 0 );
-		int centerX = width / 2;
-		int centerY = height / 2;
-		int centerZ = depth / 2;
+		int centerX = chunk.getWidth() / 2;
+		int centerY = chunk.getHeight() / 2;
+		int centerZ = chunk.getDepth() / 2;
 		return coords.translate( centerX, centerY, centerZ );
 	}
 

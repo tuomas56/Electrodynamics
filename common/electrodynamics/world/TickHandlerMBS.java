@@ -3,9 +3,9 @@ package electrodynamics.world;
 
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
-import electrodynamics.block.BlockStructure;
 import electrodynamics.mbs.MBSManager;
 import electrodynamics.mbs.WorldCoordinate;
+import electrodynamics.mbs.util.MBSUtil;
 import electrodynamics.mbs.util.WorldChunk;
 import net.minecraft.world.IBlockAccess;
 
@@ -137,8 +137,7 @@ public class TickHandlerMBS implements ITickHandler {
 				for( int k = 0; k < depth; k++ ) {
 					int z = coords.z + deltaZ + k;
 
-					int id = coords.getBlockAccess().getBlockId( x, y, z );
-					if( BlockStructure.isStrutureBlock( id ) )
+					if( MBSUtil.isStructureBlock( coords.getBlockAccess(), x, y, z ) )
 						return true;
 				}
 			}

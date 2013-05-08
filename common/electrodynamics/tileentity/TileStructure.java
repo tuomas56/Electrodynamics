@@ -13,7 +13,11 @@ public abstract class TileStructure extends TileEntity {
 	// Whether if this TE is part of the structure.
 	protected boolean isValidStructure = false;
 
+	// The orientation of the MBS as a whole (relative to the MBS's pattern design).
+	protected int rotation;
+
 	public void validateStructure(int rotation, int x, int y, int z) {
+		this.rotation = rotation;
 		this.targetX = x;
 		this.targetY = y;
 		this.targetZ = z;
