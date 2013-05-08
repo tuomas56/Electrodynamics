@@ -3,6 +3,7 @@ package electrodynamics.core;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -17,6 +18,7 @@ import electrodynamics.client.render.tileentity.RenderSinteringOven;
 import electrodynamics.client.render.tileentity.RenderTable;
 import electrodynamics.control.KeyBindingHelper;
 import electrodynamics.control.KeybindingHandler;
+import electrodynamics.core.handler.SoundHandler;
 import electrodynamics.entity.EntityBeam;
 import electrodynamics.tileentity.TileEntitySinteringOven;
 import electrodynamics.tileentity.TileEntityTable;
@@ -24,7 +26,7 @@ import electrodynamics.tileentity.TileEntityTable;
 public class ClientProxy extends CommonProxy {
 
 	public void preInitClient() {
-
+		MinecraftForge.EVENT_BUS.register(new SoundHandler());
 	}
 
 	public void initClient() {

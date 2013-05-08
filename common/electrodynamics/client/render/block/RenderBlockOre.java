@@ -15,34 +15,44 @@ public class RenderBlockOre extends BlockRenderer implements ISimpleBlockRenderi
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		renderer.setRenderBoundsFromBlock(block);
+		
+		if ((metadata == Ore.VOIDSTONE.ordinal() && ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS)) {
+			Tessellator t = Tessellator.instance;
+			t.setBrightness(320);
 
-		if (metadata == Ore.VOIDSTONE.ordinal()) {
-			drawFaces(renderer, block, ((BlockOre) block).voidstoneTextures[1], false);
+			block.setBlockBounds(0.2F, 0.2F, 0.2F, 0.8F, 0.8F, 0.8F);
+			drawFaces(renderer, block, ((BlockOre) block).voidstoneTextures[2], false);
+			
+			block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+			renderer.setRenderBoundsFromBlock(block);
+			drawFaces(renderer, block, ((BlockOre) block).voidstoneTextures[0], false);
 		} else {
 			drawFaces(renderer, block, ((BlockOre) block).textures[metadata], false);
 		}
+		
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-		int metadata = world.getBlockMetadata(x, y, z);
-		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-		renderer.setRenderBoundsFromBlock(block);
-		renderer.renderStandardBlock(block, x, y, z);
+		int bb = setBrightness(world, x, y, z, block);
+	    int metadata = world.getBlockMetadata(x, y, z);
+	    
+	    if ((metadata == Ore.VOIDSTONE.ordinal() && ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS)) {
+	      Tessellator t = Tessellator.instance;
+	      t.setBrightness(320);
 
-		if ((metadata == Ore.VOIDSTONE.ordinal())) {
-			if (ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS) {
-				Tessellator t = Tessellator.instance;
-				t.setBrightness(160);
+	      block.setBlockBounds(0.2F, 0.2F, 0.2F, 0.8F, 0.8F, 0.8F);
+	      renderAllSides(world, x, y, z, block, renderer, ((BlockOre)block).voidstoneTextures[2]);
+	    }
 
-
-			}
-		}
-
-		renderer.clearOverrideBlockTexture();
-		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-		renderer.setRenderBoundsFromBlock(block);
-		return true;
+	    block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+	    renderer.setRenderBoundsFromBlock(block);
+	    renderer.renderStandardBlock(block, x, y, z);
+	    renderer.clearOverrideBlockTexture();
+	    block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+	    renderer.setRenderBoundsFromBlock(block);
+	    return true;
 	}
 
 	public boolean shouldRender3DInInventory() {

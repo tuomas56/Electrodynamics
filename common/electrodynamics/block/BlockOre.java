@@ -5,6 +5,8 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.SoundPoolEntry;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.Icon;
@@ -22,6 +24,9 @@ public class BlockOre extends Block {
 	
 	/** Textures specifically for Voidstone. <br /> 0 = transparent, 1 = fake star field, 2 = glowing animation */
 	public Icon[] voidstoneTextures;
+
+	@SideOnly(Side.CLIENT)
+	public long soundDelay;
 	
 	public BlockOre(int i) {
 		super(i, Material.rock);
@@ -77,14 +82,24 @@ public class BlockOre extends Block {
 	@Override
 	public void registerIcons(IconRegister registry) {
 		textures = new Icon[Ore.values().length];
-		voidstoneTextures = new Icon[2];
+		voidstoneTextures = new Icon[3];
 		
 		for (int i = 0; i < Ore.values().length; i++) {
 			textures[i] = registry.registerIcon(Ore.get(i).getTextureFile());
 		}
 		
+		voidstoneTextures[2] = registry.registerIcon(Ore.VOIDSTONE.getTextureFile() + "Effect");
 		voidstoneTextures[1] = registry.registerIcon(Ore.VOIDSTONE.getTextureFile() + "Fast");
 		voidstoneTextures[0] = registry.registerIcon(Ore.VOIDSTONE.getTextureFile() + "Fancy");
 	}
 
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
+		if (this.soundDelay < System.currentTimeMillis()) {
+			this.soundDelay = (System.currentTimeMillis() + 1200L + rand.nextInt(100));
+			world.playSound(x + 0.5D, y + 0.5F, z + 0.5D, "block.voidstoneAmbient", 0.3F, 0.9F + rand.nextFloat(), false);
+		}
+	}
+	
 }
