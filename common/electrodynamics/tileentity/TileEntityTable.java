@@ -102,6 +102,10 @@ public class TileEntityTable extends TileEntity {
 	}
 	
 	public boolean hasRecipe() {
+		if (type == 0 && displayedItem.getItem().itemID == Block.stoneSingleSlab.blockID) {
+			return true;
+		}
+		
 		return !(RecipeManager.getSmashingTableRecipe(displayedItem) == null);
 	}
 	
