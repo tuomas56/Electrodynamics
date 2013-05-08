@@ -2,6 +2,7 @@ package electrodynamics.module;
 
 import java.util.EnumSet;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -17,6 +18,7 @@ import electrodynamics.lib.block.Machine;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.lib.item.ItemIDs;
 import electrodynamics.module.ModuleManager.Module;
+import electrodynamics.recipe.RecipeManager;
 import electrodynamics.tileentity.TileEntitySinteringOven;
 import electrodynamics.tileentity.TileEntityTable;
 
@@ -45,6 +47,7 @@ public class EDModuleMachine extends EDModule {
 
 	@Override
 	public void init() {
+		RecipeManager.registerSmashingTableRecipe(new ItemStack(Block.stone), new ItemStack(Block.cobblestone), 1);
 		GameRegistry.registerTileEntity(TileEntitySinteringOven.class, Strings.MACHINE_SINTERING_FURNACE);
 		GameRegistry.registerTileEntity(TileEntityTable.class, Strings.BLOCK_TABLE_NAME);
 	}

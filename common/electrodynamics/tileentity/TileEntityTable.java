@@ -1,6 +1,8 @@
 package electrodynamics.tileentity;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,6 +12,10 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import electrodynamics.Electrodynamics;
 import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.network.PacketTypeHandler;
+import electrodynamics.network.packet.PacketTableUpdate;
+import electrodynamics.recipe.RecipeManager;
+import electrodynamics.recipe.RecipeSmashingTable;
 
 public class TileEntityTable extends TileEntity {
 
@@ -72,14 +78,23 @@ public class TileEntityTable extends TileEntity {
 		return this.itemRotation;
 	}
 
-	public void handleSmash() {
+	public void handleSmash(EntityPlayer player, ItemStack hammer) {
 		if (displayedItem != null) {
 			if (this.type == 0 && displayedItem.getItem().itemID == Block.stoneSingleSlab.blockID) {
 				this.displayedItem = null;
 				this.worldObj.setBlock(xCoord, yCoord, zCoord, BlockIDs.BLOCK_TABLE_ID, 1, 2);
 			} else if (this.type == 1) {
-				if (displayedItem.getItem() instanceof ItemBlock) {
-					Electrodynamics.proxy.addBlockDestroyParticles(xCoord, yCoord, zCoord, displayedItem.getItem().itemID, displayedItem.getItemDamage());
+				RecipeSmashingTable recipe = RecipeManager.getRecipe(displayedItem);
+				
+				if (recipe != null) {
+					if (displayedItem.getItem() instanceof ItemBlock) {
+						Electrodynamics.proxy.addBlockDestroyParticles(xCoord, yCoord, zCoord, displayedItem.getItem().itemID, displayedItem.getItemDamage());
+					}
+					
+					this.displayedItem = recipe.outputItem;
+					hammer.damageItem(recipe.hammerDamage, player);
+					PacketDispatcher.sendPacketToAllInDimension(PacketTypeHandler.fillPacket(new PacketTableUpdate(xCoord, yCoord, zCoord, recipe.outputItem)), this.worldObj.provider.dimensionId);
+					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				}
 			}
 		}

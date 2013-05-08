@@ -35,6 +35,7 @@ public class Strings {
 	public static final String LITHIUM_CLAY = "lithiumDriedClay";
 	public static final String WORMWOOD_LEAF = "wormwoodLeaf";
 	public static final String PCB = "pcb";
+	public static final String VOIDSTONE_MAGNET = "voidstoneMagnet";
 	
 	/* Internal ore names */
 	public static final String ORE_COBALTITE_NAME = "oreCobaltite";

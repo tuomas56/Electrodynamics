@@ -18,7 +18,8 @@ public enum Component {
 	TWINE(Strings.TWINE, "Piece of Twine"),
 	LITHIUM_CLAY(Strings.LITHIUM_CLAY, "Dried Lithium Clay"),
 	WORMWOOD_LEAF(Strings.WORMWOOD_LEAF, "Wormwood Leaf"),
-	PCB(Strings.PCB, "PCB");
+	PCB(Strings.PCB, "PCB"),
+	VOIDSTONE_MAGNET(Strings.VOIDSTONE_MAGNET, "Voidstone Magnet");
 	
 	private String unlocalizedName;
 	private String localizedName; // temporary

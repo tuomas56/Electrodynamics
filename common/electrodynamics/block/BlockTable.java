@@ -7,11 +7,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
@@ -23,6 +20,7 @@ import electrodynamics.item.EDItems;
 import electrodynamics.network.PacketTypeHandler;
 import electrodynamics.network.packet.PacketTableUpdate;
 import electrodynamics.tileentity.TileEntityTable;
+import electrodynamics.util.BlockUtil;
 
 public class BlockTable extends BlockContainer {
 
@@ -48,31 +46,34 @@ public class BlockTable extends BlockContainer {
 		return -1;
 	}
 
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-		if (world.isRemote) return;
-		
-		if (entity instanceof EntityItem) {
-			TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
-
-			if (table.displayedItem == null) {
-				EntityItem item = (EntityItem) entity;
-				ItemStack toAdd = null;
-				
-				if (item.getEntityItem().stackSize > 1) {
-					toAdd = item.getEntityItem().copy();
-					toAdd.stackSize = 1;
-					item.getEntityItem().stackSize--;
-				} else {
-					toAdd = item.getEntityItem();
-					item.setDead();
-				}
-				
-				table.displayedItem = toAdd;
-				PacketDispatcher.sendPacketToAllInDimension(PacketTypeHandler.fillPacket(new PacketTableUpdate(x, y, z, toAdd)), world.provider.dimensionId);
-				world.markBlockForUpdate(x, y, z);
-			}
-		}
-	}
+//	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+//		if (world.isRemote) return;
+//		
+//		if (entity instanceof EntityItem) {
+//			TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
+//
+//			if (table.displayedItem == null) {
+//				EntityItem item = (EntityItem) entity;
+//				
+//				if (item.delayBeforeCanPickup == 0) {
+//					ItemStack toAdd = null;
+//					
+//					if (item.getEntityItem().stackSize > 1) {
+//						toAdd = item.getEntityItem().copy();
+//						toAdd.stackSize = 1;
+//						item.getEntityItem().stackSize--;
+//					} else {
+//						toAdd = item.getEntityItem();
+//						item.setDead();
+//					}
+//					
+//					table.displayedItem = toAdd;
+//					PacketDispatcher.sendPacketToAllInDimension(PacketTypeHandler.fillPacket(new PacketTableUpdate(x, y, z, toAdd)), world.provider.dimensionId);
+//					world.markBlockForUpdate(x, y, z);
+//				}
+//			}
+//		}
+//	}
 
 	public void breakBlock(World world, int x, int y, int z, int i1, int i2) {
 		TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
@@ -81,31 +82,8 @@ public class BlockTable extends BlockContainer {
 			ItemStack itemstack = table.displayedItem;
 
 			if (itemstack != null) {
-				float f = this.random.nextFloat() * 0.8F + 0.1F;
-				float f1 = this.random.nextFloat() * 0.8F + 0.1F;
-				EntityItem entityitem;
-
-				for (float f2 = this.random.nextFloat() * 0.8F + 0.1F; itemstack.stackSize > 0; world.spawnEntityInWorld(entityitem)) {
-					int k1 = this.random.nextInt(21) + 10;
-
-					if (k1 > itemstack.stackSize) {
-						k1 = itemstack.stackSize;
-					}
-
-					itemstack.stackSize -= k1;
-					entityitem = new EntityItem(world, (double) ((float) x + f), (double) ((float) y + f1), (double) ((float) z + f2), new ItemStack(itemstack.itemID, k1, itemstack.getItemDamage()));
-					float f3 = 0.05F;
-					entityitem.motionX = (double) ((float) this.random.nextGaussian() * f3);
-					entityitem.motionY = (double) ((float) this.random.nextGaussian() * f3 + 0.2F);
-					entityitem.motionZ = (double) ((float) this.random.nextGaussian() * f3);
-
-					if (itemstack.hasTagCompound()) {
-						entityitem.getEntityItem().setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
-					}
-				}
+				BlockUtil.dropItemFromBlock(world, x, y, z, itemstack, this.random);
 			}
-
-			world.func_96440_m(x, y, z, i1);
 		}
 
 		super.breakBlock(world, x, y, z, i1, i2);
@@ -113,22 +91,32 @@ public class BlockTable extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
-		if (world.isRemote) return false;
+		if (world.isRemote) return true;
 		if (player.isSneaking()) return false;
 		
 		TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
 		
 		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == EDItems.itemSteelHammer) {
-			table.handleSmash();
+			table.handleSmash(player, player.getCurrentEquippedItem());
 		} else {
 			if (table.displayedItem != null) {
-				player.dropPlayerItem(table.displayedItem);
+				BlockUtil.dropItemFromBlock(world, x, y, z, table.displayedItem, this.random);
 				table.displayedItem = null;
-				
-				PacketDispatcher.sendPacketToAllInDimension(PacketTypeHandler.fillPacket(new PacketTableUpdate(x, y, z, null)), world.provider.dimensionId);
-				
-				world.markBlockForUpdate(x, y, z);
+			} else {
+				if (player.getCurrentEquippedItem() != null) {
+					table.displayedItem = player.getCurrentEquippedItem().copy();
+					table.displayedItem.stackSize = 1;
+					
+					if (player.getCurrentEquippedItem().stackSize > 1) {
+						player.getCurrentEquippedItem().stackSize--;
+					} else {
+						player.inventory.mainInventory[player.inventory.currentItem] = null;
+					}
+				}
 			}
+			
+			PacketDispatcher.sendPacketToAllInDimension(PacketTypeHandler.fillPacket(new PacketTableUpdate(x, y, z, table.displayedItem)), world.provider.dimensionId);
+			world.markBlockForUpdate(x, y, z);
 		}
 		
 		return true;
