@@ -1,6 +1,5 @@
 package electrodynamics.tileentity;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -10,12 +9,13 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.client.FXType;
 import electrodynamics.network.PacketTypeHandler;
 import electrodynamics.network.packet.PacketFX;
 import electrodynamics.network.packet.PacketTableUpdate;
-import electrodynamics.recipe.RecipeManager;
+import electrodynamics.recipe.CraftingManager;
 import electrodynamics.recipe.RecipeSmashingTable;
 
 public class TileEntityTable extends TileEntity {
@@ -106,7 +106,7 @@ public class TileEntityTable extends TileEntity {
 			return true;
 		}
 		
-		return !(RecipeManager.getSmashingTableRecipe(displayedItem) == null);
+		return !(CraftingManager.getInstance().smashingManager.getRecipe(displayedItem) == null);
 	}
 	
 	public void handleSmash(EntityPlayer player, ItemStack hammer) {
@@ -115,7 +115,7 @@ public class TileEntityTable extends TileEntity {
 				this.displayedItem = null;
 				this.worldObj.setBlock(xCoord, yCoord, zCoord, BlockIDs.BLOCK_TABLE_ID, 1, 2);
 			} else if (this.type == 1) {
-				RecipeSmashingTable recipe = RecipeManager.getSmashingTableRecipe(displayedItem);
+				RecipeSmashingTable recipe = CraftingManager.getInstance().smashingManager.getRecipe(displayedItem);
 				
 				if (recipe != null) {
 					if (displayedItem.getItem() instanceof ItemBlock) {

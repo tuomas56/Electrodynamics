@@ -14,15 +14,15 @@ public enum Grinding {
 	NICKEL(Strings.GROUND_NICKEL, "Ground Nickel"),
 	WOLFRAMITE(Strings.GROUND_WOLFRAMITE, "Ground Wolframite"),
 	VOIDSTONE(Strings.GROUND_VOIDSTONE, "Ground Voidstone"),
+	BLUESTONE(Strings.GROUND_BLUESTONE, "Ground Bluestone"),
+	GREENSTONE(Strings.GROUND_GREENSTONE, "Ground Greenstone"),
 	LITHIUM(Strings.GROUND_LITHIUM, "Ground Lithium"),
 	DIAMOND(Strings.GROUND_DIAMOND, "Ground Diamond"),
 	EMERALD(Strings.GROUND_EMERALD, "Ground Emerald"), 
 	GOLD(Strings.GROUND_GOLD, "Ground Gold"), 
 	IRON(Strings.GROUND_IRON, "Ground Iron"), 
 	LAPIS(Strings.GROUND_LAPIS, "Ground Lapis"),
-	REDSTONE(Strings.GROUND_REDSTONE, "Ground Redstone"),
-	BLUESTONE(Strings.GROUND_BLUESTONE, "Ground Bluestone"),
-	GREENSTONE(Strings.GROUND_GREENSTONE, "Ground Greenstone");
+	REDSTONE(Strings.GROUND_REDSTONE, "Ground Redstone");
 	
 	public String unlocalizedName;
 	public String localizedName;

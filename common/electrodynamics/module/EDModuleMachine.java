@@ -17,7 +17,9 @@ import electrodynamics.lib.core.Strings;
 import electrodynamics.lib.item.Component;
 import electrodynamics.lib.item.ItemIDs;
 import electrodynamics.module.ModuleManager.Module;
-import electrodynamics.recipe.RecipeManager;
+import electrodynamics.recipe.CraftingManager;
+import electrodynamics.recipe.SieveManager;
+import electrodynamics.recipe.SmashingManager;
 import electrodynamics.tileentity.TileEntityBasicSieve;
 import electrodynamics.tileentity.TileEntitySinteringOven;
 import electrodynamics.tileentity.TileEntityTable;
@@ -43,10 +45,13 @@ public class EDModuleMachine extends EDModule {
 
 	@Override
 	public void init() {
-		FurnaceRecipes.smelting().addSmelting(ItemIDs.ITEM_COMPONENT_ID + 256, Component.LITHIUM_CLAY_WET.ordinal(), Component.LITHIUM_CLAY.toItemStack(), 0F);
+		CraftingManager.getInstance().smashingManager = new SmashingManager();
+		CraftingManager.getInstance().smashingManager.initRecipes();
 		
-		RecipeManager.initializeSmashingRecipes();
-		RecipeManager.initializeSieveRecipes();
+		CraftingManager.getInstance().sieveManager = new SieveManager();
+		CraftingManager.getInstance().sieveManager.initRecipes();
+		
+		FurnaceRecipes.smelting().addSmelting(ItemIDs.ITEM_COMPONENT_ID + 256, Component.LITHIUM_CLAY_WET.ordinal(), Component.LITHIUM_CLAY.toItemStack(), 0F);
 		
 		GameRegistry.registerTileEntity(TileEntitySinteringOven.class, Strings.MACHINE_SINTERING_FURNACE);
 		GameRegistry.registerTileEntity(TileEntityTable.class, Strings.BLOCK_TABLE_NAME);

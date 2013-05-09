@@ -1,4 +1,4 @@
-package electrodynamics.recipe;
+package electrodynamics.api.crafting.util;
 
 import java.util.Random;
 
@@ -36,5 +36,5 @@ public class WeightedRecipeOutput {
 	public boolean willOutput(Random random) {
 		return (random.nextFloat() <= this.chance);
 	}
-	
+
 }

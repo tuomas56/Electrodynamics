@@ -3,6 +3,8 @@ package electrodynamics.recipe;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import electrodynamics.api.crafting.util.WeightedRecipeOutput;
+
 import net.minecraft.item.ItemStack;
 
 public class RecipeBasicSieve {
@@ -32,7 +34,11 @@ public class RecipeBasicSieve {
 	}
 	
 	public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
-		
+
+	}
+
+	public boolean isInput(ItemStack input) {
+		return (ItemStack.areItemStacksEqual(input, itemInput));
 	}
 	
 }

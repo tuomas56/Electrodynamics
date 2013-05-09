@@ -8,9 +8,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
+import electrodynamics.api.crafting.util.WeightedRecipeOutput;
 import electrodynamics.recipe.RecipeBasicSieve;
-import electrodynamics.recipe.RecipeManager;
-import electrodynamics.recipe.WeightedRecipeOutput;
+import electrodynamics.recipe.CraftingManager;
 import electrodynamics.util.InventoryUtil;
 
 public class TileEntityBasicSieve extends TileEntityMachine {
@@ -109,7 +109,7 @@ public class TileEntityBasicSieve extends TileEntityMachine {
 		if (detectedItems != null && detectedItems.size() > 0) {
 			EntityItem detected = detectedItems.get(0);
 			ItemStack detectedIS = detected.getEntityItem();
-			RecipeBasicSieve recipe = RecipeManager.getSieveRecipe(detectedIS);
+			RecipeBasicSieve recipe = CraftingManager.getInstance().sieveManager.getRecipe(detectedIS);
 			
 			if (recipe != null) {
 				ItemStack item = detectedIS.copy();
@@ -128,7 +128,7 @@ public class TileEntityBasicSieve extends TileEntityMachine {
 	}
 	
 	private void process() {
-		RecipeBasicSieve recipe = RecipeManager.getSieveRecipe(currentlyProcessing);
+		RecipeBasicSieve recipe = CraftingManager.getInstance().sieveManager.getRecipe(currentlyProcessing);
 		Random rand = new Random();
 		
 		for (WeightedRecipeOutput out : recipe.itemOutputs) {
@@ -144,7 +144,7 @@ public class TileEntityBasicSieve extends TileEntityMachine {
 	
 	private boolean canProcess() {
 		if (currentlyProcessing == null) return false;
-		if (RecipeManager.getSieveRecipe(currentlyProcessing) == null) return false;
+		if (CraftingManager.getInstance().sieveManager.getRecipe(currentlyProcessing) == null) return false;
 		
 		return true;
 	}

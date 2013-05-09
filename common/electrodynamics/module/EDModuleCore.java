@@ -65,7 +65,7 @@ public class EDModuleCore extends EDModule {
 
 	@Override
 	public void init() {
-		
+
 	}
 
 	@Override
