@@ -26,7 +26,6 @@ public class Strings {
 	
 	/* Internal component names */
 	public static final String FAN_BLADE_NAME = "fanBlade";
-	public static final String LODESTONE_INGOT_NAME = "lodestoneIngot";
 	public static final String MAGNET_NAME = "magnet";
 	public static final String MAGNETITE_CHUNK_NAME = "magnetiteChunk";
 	public static final String MAGNETITE_DUST_NAME = "magnetiteDust";
@@ -96,6 +95,7 @@ public class Strings {
 	public static final String GROUND_GREENSTONE = "grindingsGreenstone";
 	
 	/* Internal ingot names */
+	public static final String INGOT_LODESTONE = "ingotLodestone";
 	public static final String INGOT_COBALT = "ingotCobalt";
 	public static final String INGOT_COPPER = "ingotCopper";
 	public static final String INGOT_LEAD = "ingotLead";

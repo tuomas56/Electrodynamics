@@ -6,7 +6,7 @@ import electrodynamics.lib.core.Strings;
 
 public enum Ingot {
 
-	LODESTONE_INGOT(Strings.LODESTONE_INGOT_NAME, "Lodestone Ingot"),
+	LODESTONE(Strings.INGOT_LODESTONE, "Lodestone Ingot"),
 	
 	COBALT(Strings.INGOT_COBALT, "Cobolt Ingot"),
 	COPPER(Strings.INGOT_COPPER, "Copper Ingot"),
