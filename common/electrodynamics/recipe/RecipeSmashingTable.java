@@ -15,6 +15,10 @@ public class RecipeSmashingTable {
 		this.hammerDamage = damage;
 	}
 	
+	public boolean isInput(ItemStack input) {
+		return ItemStack.areItemStacksEqual(input, inputItem);
+	}
+	
 	/** Extra code to be called when the item is smashed. Can be left blank */
 	public void onSmashed() {}
 	

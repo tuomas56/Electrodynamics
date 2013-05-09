@@ -27,7 +27,7 @@ public class SmashingManager {
 		if (in == null) return null;
 		
 		for (RecipeSmashingTable recipe : smashingTableRecipes) {
-			if (recipe.inputItem.isItemEqual(in)) {
+			if (recipe.isInput(in)) {
 				return recipe;
 			}
 		}
@@ -44,8 +44,8 @@ public class SmashingManager {
 		registerRecipe(new ItemStack(Block.stone), new ItemStack(Block.cobblestone), 1);
 		registerRecipe(new ItemStack(Block.brick), new ItemStack(Item.brick, 4, 0), 1);
 		
-		//First 6 ore/grinding ordinals are equal
-		for (int i=0; i<6; i++) {
+		//First 8 ore/grinding ordinals are equal
+		for (int i=0; i<8; i++) {
 			registerRecipe(Ore.get(i).toItemStack(), Grinding.get(i).toItemStack(), 1);
 		}
 		
