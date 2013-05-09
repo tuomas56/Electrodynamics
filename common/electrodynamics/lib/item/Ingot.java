@@ -1,0 +1,38 @@
+package electrodynamics.lib.item;
+
+import net.minecraft.item.ItemStack;
+import electrodynamics.lib.core.ModInfo;
+import electrodynamics.lib.core.Strings;
+
+public enum Ingot {
+
+	LODESTONE_INGOT(Strings.LODESTONE_INGOT_NAME, "Lodestone Ingot"),
+	
+	COBALT(Strings.INGOT_COBALT, "Cobolt Ingot"),
+	COPPER(Strings.INGOT_COPPER, "Copper Ingot"),
+	LEAD(Strings.INGOT_LEAD, "Lead Ingot"), 
+	NICKEL(Strings.INGOT_NICKEL, "Nickel Ingot"),
+	TELLURIUM(Strings.INGOT_TELLURIUM, "Tellurium Ingot"),
+	TUNGSTEN(Strings.INGOT_TUNGSTEN, "Tungsten Ingot");
+	
+	public String unlocalizedName;
+	public String localizedName;
+	
+	private Ingot(String unlocalizedName, String localizedName) {
+		this.unlocalizedName = unlocalizedName;
+		this.localizedName = localizedName;
+	}
+	
+	public String getTextureFile() {
+		return ModInfo.ICON_PREFIX + "ingot/" + unlocalizedName;
+	}
+	
+	public ItemStack toItemStack() {
+		return new ItemStack(ItemIDs.ITEM_INGOT_ID + 256, 1, this.ordinal());
+	}
+	
+	public static Ingot get(int ordinal) {
+		return Ingot.values()[ordinal];
+	}
+	
+}

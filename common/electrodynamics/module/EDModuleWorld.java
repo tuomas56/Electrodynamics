@@ -1,5 +1,9 @@
 package electrodynamics.module;
 
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
@@ -13,20 +17,18 @@ import electrodynamics.block.item.ItemBlockDecorative;
 import electrodynamics.block.item.ItemBlockOre;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemDust;
+import electrodynamics.item.ItemIngot;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.block.Ore;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.lib.item.Dust;
 import electrodynamics.lib.item.Grinding;
+import electrodynamics.lib.item.Ingot;
 import electrodynamics.lib.item.ItemIDs;
 import electrodynamics.util.BiomeHelper;
 import electrodynamics.world.TickHandlerMBS;
 import electrodynamics.world.gen.WorldGenFlower;
 import electrodynamics.world.gen.WorldGenOre;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class EDModuleWorld extends EDModule {
 
@@ -63,6 +65,12 @@ public class EDModuleWorld extends EDModule {
 		}
 		for( Grinding grind : Grinding.values() ) {
 			LanguageRegistry.addName( new ItemStack( EDItems.itemDust, 1, grind.ordinal() + Dust.values().length ), grind.localizedName );
+		}
+		
+		EDItems.itemIngot = new ItemIngot(ItemIDs.ITEM_INGOT_ID).setUnlocalizedName(Strings.ITEM_INGOT_NAME);
+		GameRegistry.registerItem(EDItems.itemIngot, Strings.ITEM_INGOT_NAME);
+		for(Ingot ingot : Ingot.values()) {
+			LanguageRegistry.addName(new ItemStack(EDItems.itemIngot, 1, ingot.ordinal()), ingot.localizedName);
 		}
 	}
 

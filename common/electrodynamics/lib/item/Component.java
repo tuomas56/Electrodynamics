@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 public enum Component {
 
 	FAN_BLADE(Strings.FAN_BLADE_NAME, "Fan Blade"), 
-	LODESTONE_INGOT(Strings.LODESTONE_INGOT_NAME, "Lodestone Ingot"),
 	MAGNET(Strings.MAGNET_NAME, "Magnet"),
 	MAGNETITE_CHUNK(Strings.MAGNETITE_CHUNK_NAME, "Magnetite Chunk"),
 	MAGNETITE_DUST(Strings.MAGNETITE_DUST_NAME, "Magnetite Dust"),
@@ -17,10 +16,10 @@ public enum Component {
 	SAP(Strings.SAP, "Sap"),
 	TWINE(Strings.TWINE, "Piece of Twine"),
 	LITHIUM_CLAY(Strings.LITHIUM_CLAY, "Dried Lithium Clay"),
+	LITHIUM_CLAY_WET(Strings.LITHIUM_CLAY_WET, "Wet Lithium Clay"),
 	WORMWOOD_LEAF(Strings.WORMWOOD_LEAF, "Wormwood Leaf"),
 	PCB(Strings.PCB, "PCB"),
-	VOIDSTONE_MAGNET(Strings.VOIDSTONE_MAGNET, "Voidstone Magnet"),
-	LITHIUM_CLAY_WET(Strings.LITHIUM_CLAY_WET, "Wet Lithium Clay");
+	VOIDSTONE_MAGNET(Strings.VOIDSTONE_MAGNET, "Voidstone Magnet");
 	
 	private String unlocalizedName;
 	private String localizedName; // temporary

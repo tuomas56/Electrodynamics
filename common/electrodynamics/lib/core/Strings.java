@@ -13,6 +13,7 @@ public class Strings {
 	public static final String ITEM_STEEL_HAMMER_NAME = "itemSteelHammer";
 	public static final String ITEM_SLEDGE_HAMMER_NAME = "itemSledgeHammer";
 	public static final String ITEM_DUST_NAME = "itemDust";
+	public static final String ITEM_INGOT_NAME = "itemIngot";
 	
 	/* Internal block names */
 	public static final String BLOCK_ORE_NAME = "blockOre";
@@ -93,6 +94,14 @@ public class Strings {
 	public static final String GROUND_REDSTONE = "grindingsRedstone";
 	public static final String GROUND_BLUESTONE = "grindingsBluestone";
 	public static final String GROUND_GREENSTONE = "grindingsGreenstone";
+	
+	/* Internal ingot names */
+	public static final String INGOT_COBALT = "ingotCobalt";
+	public static final String INGOT_COPPER = "ingotCopper";
+	public static final String INGOT_LEAD = "ingotLead";
+	public static final String INGOT_NICKEL = "ingotNickel";
+	public static final String INGOT_TELLURIUM = "ingotTellurium";
+	public static final String INGOT_TUNGSTEN = "ingotTungsten";
 	
 	/* Internal machine names */
 	public static final String MACHINE_SINTERING_FURNACE = "machineSinteringFurnace";

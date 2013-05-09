@@ -71,6 +71,7 @@ public class ConfigurationHandler {
 			ItemIDs.ITEM_STEEL_HAMMER_ID = config.getItem(Strings.ITEM_STEEL_HAMMER_NAME, ItemIDs.ITEM_STEEL_HAMMER_DEFAULT_ID).getInt(ItemIDs.ITEM_STEEL_HAMMER_DEFAULT_ID);
 			ItemIDs.ITEM_SLEDGE_HAMMER_ID = config.getItem(Strings.ITEM_SLEDGE_HAMMER_NAME, ItemIDs.ITEM_SLEDGE_HAMMER_DEFAULT_ID).getInt(ItemIDs.ITEM_SLEDGE_HAMMER_DEFAULT_ID);
 			ItemIDs.ITEM_DUST_ID = config.getItem(Strings.ITEM_DUST_NAME, ItemIDs.ITEM_DUST_DEFAULT_ID).getInt(ItemIDs.ITEM_DUST_DEFAULT_ID);
+			ItemIDs.ITEM_INGOT_ID = config.getItem(Strings.ITEM_INGOT_NAME, ItemIDs.ITEM_INGOT_DEFAULT_ID).getInt(ItemIDs.ITEM_INGOT_DEFAULT_ID);
 		} catch (Exception e) {
 			EDLogger.warn("Had trouble reading/writing to the configuration file.");
 		} finally {
