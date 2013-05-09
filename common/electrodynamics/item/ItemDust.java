@@ -51,9 +51,9 @@ public class ItemDust extends Item {
 	
 	@Override
 	public void registerIcons(IconRegister register) {
-		textures = new Icon[31];
+		textures = new Icon[Dust.values().length + Grinding.values().length];
 		
-		for (int i=0; i<31; i++) {
+		for (int i=0; i<textures.length; i++) {
 			if (i < Dust.values().length) {
 				//We're loading dusts
 				textures[i] = register.registerIcon(Dust.get(i).getTextureFile());

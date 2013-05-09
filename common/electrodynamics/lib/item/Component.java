@@ -19,7 +19,8 @@ public enum Component {
 	LITHIUM_CLAY(Strings.LITHIUM_CLAY, "Dried Lithium Clay"),
 	WORMWOOD_LEAF(Strings.WORMWOOD_LEAF, "Wormwood Leaf"),
 	PCB(Strings.PCB, "PCB"),
-	VOIDSTONE_MAGNET(Strings.VOIDSTONE_MAGNET, "Voidstone Magnet");
+	VOIDSTONE_MAGNET(Strings.VOIDSTONE_MAGNET, "Voidstone Magnet"),
+	LITHIUM_CLAY_WET(Strings.LITHIUM_CLAY_WET, "Wet Lithium Clay");
 	
 	private String unlocalizedName;
 	private String localizedName; // temporary

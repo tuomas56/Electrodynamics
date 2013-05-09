@@ -20,7 +20,9 @@ public enum Grinding {
 	GOLD(Strings.GROUND_GOLD, "Ground Gold"), 
 	IRON(Strings.GROUND_IRON, "Ground Iron"), 
 	LAPIS(Strings.GROUND_LAPIS, "Ground Lapis"),
-	REDSTONE(Strings.GROUND_REDSTONE, "Ground Redstone");
+	REDSTONE(Strings.GROUND_REDSTONE, "Ground Redstone"),
+	BLUESTONE(Strings.GROUND_BLUESTONE, "Ground Bluestone"),
+	GREENSTONE(Strings.GROUND_GREENSTONE, "Ground Greenstone");
 	
 	public String unlocalizedName;
 	public String localizedName;

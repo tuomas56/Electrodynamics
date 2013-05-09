@@ -3,6 +3,7 @@ package electrodynamics.module;
 import java.util.EnumSet;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import electrodynamics.block.BlockMachine;
@@ -15,6 +16,7 @@ import electrodynamics.item.ItemSteelHammer;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.block.Machine;
 import electrodynamics.lib.core.Strings;
+import electrodynamics.lib.item.Component;
 import electrodynamics.lib.item.ItemIDs;
 import electrodynamics.module.ModuleManager.Module;
 import electrodynamics.recipe.RecipeManager;
@@ -47,6 +49,8 @@ public class EDModuleMachine extends EDModule {
 
 	@Override
 	public void init() {
+		FurnaceRecipes.smelting().addSmelting(ItemIDs.ITEM_COMPONENT_ID + 256, Component.LITHIUM_CLAY_WET.ordinal(), Component.LITHIUM_CLAY.toItemStack(), 0F);
+		
 		RecipeManager.initializeSmashingRecipes();
 		RecipeManager.initializeSieveRecipes();
 		

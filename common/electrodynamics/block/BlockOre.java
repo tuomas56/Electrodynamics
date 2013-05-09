@@ -95,15 +95,17 @@ public class BlockOre extends Block {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-		if (ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND) {
-			//Hard coded limit of ten blocks for sound to play.
-			final int DISTANCE_LIMIT = 10;
-			double distanceToPlayer = Minecraft.getMinecraft().thePlayer.getDistanceSq(x, y, z);
-			
-			if (distanceToPlayer <= DISTANCE_LIMIT) {
-				if (this.soundDelay < System.currentTimeMillis()) {
-					this.soundDelay = (System.currentTimeMillis() + 5000 + (rand.nextInt(10)) * 1000);
-					world.playSound(x, y, z, "electrodynamics.block.voidstoneAmbient", 1F, 1.1F, false);
+		if (world.getBlockMetadata(x, y, z) == Ore.VOIDSTONE.ordinal()) {
+			if (ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND) {
+				//Hard coded limit of ten blocks for sound to play.
+				final int DISTANCE_LIMIT = 10;
+				double distanceToPlayer = Minecraft.getMinecraft().thePlayer.getDistanceSq(x, y, z);
+				
+				if (distanceToPlayer <= DISTANCE_LIMIT) {
+					if (this.soundDelay < System.currentTimeMillis()) {
+						this.soundDelay = (System.currentTimeMillis() + 5000 + (rand.nextInt(10)) * 1000);
+						world.playSound(x, y, z, "electrodynamics.block.voidstoneAmbient", 1F, 1.1F, false);
+					}
 				}
 			}
 		}

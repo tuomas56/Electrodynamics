@@ -22,7 +22,11 @@ public enum Dust {
 	TELLURIUM(Strings.DUST_TELLURIUM, "Tellurium Dust"),
 	TUNGSTEN(Strings.DUST_TUNGSTEN, "Tungsten Dust"),
 	LODESTONE(Strings.DUST_LODESTONE, "Lodestone Dust"),
-	VOIDSTONE(Strings.DUST_VOIDSTONE, "Voidstone Dust");
+	VOIDSTONE(Strings.DUST_VOIDSTONE, "Voidstone Dust"),
+	IRON(Strings.DUST_IRON, "Iron Dust"),
+	GOLD(Strings.DUST_GOLD, "Gold Dust"),
+	BLUESTONE(Strings.DUST_BLUESTONE, "Bluestone Dust"),
+	GREENSTONE(Strings.DUST_GREENSTONE, "Greenstone Dust");
 	
 	public String unlocalizedName;
 	public String localizedName;

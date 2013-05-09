@@ -31,7 +31,7 @@ public class BlockLithiumClay extends Block {
 	}
 
 	public int damageDropped(int damage) {
-		return Component.LITHIUM_CLAY.ordinal();
+		return Component.LITHIUM_CLAY_WET.ordinal();
 	}
 	
 	public int quantityDropped(Random par1Random) {

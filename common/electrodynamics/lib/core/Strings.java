@@ -36,6 +36,7 @@ public class Strings {
 	public static final String WORMWOOD_LEAF = "wormwoodLeaf";
 	public static final String PCB = "pcb";
 	public static final String VOIDSTONE_MAGNET = "voidstoneMagnet";
+	public static final String LITHIUM_CLAY_WET = "lithiumWetClay";
 	
 	/* Internal ore names */
 	public static final String ORE_COBALTITE_NAME = "oreCobaltite";
@@ -47,6 +48,8 @@ public class Strings {
 	public static final String ORE_WOLFRAMITE_NAME = "oreWolframite";
 	public static final String ORE_LIMESTONE_BLOCK = "blockLimestone";
 	public static final String ORE_VOIDSTONE = "oreVoidstone";
+	public static final String ORE_BLUESTONE = "oreBluestone";
+	public static final String ORE_GREENSTONE = "oreGreenstone";
 	
 	/* Internal dust names */
 	public static final String DUST_CLAY = "dustClay";
@@ -66,6 +69,10 @@ public class Strings {
 	public static final String DUST_TUNGSTEN = "dustTungsten";
 	public static final String DUST_LODESTONE = "dustLodestone";
 	public static final String DUST_VOIDSTONE = "dustVoidstone";
+	public static final String DUST_IRON = "dustIron";
+	public static final String DUST_GOLD = "dustGold";
+	public static final String DUST_BLUESTONE = "dustBluestone";
+	public static final String DUST_GREENSTONE = "dustGreenstone";
 	
 	/* Internal grinding names */
 	public static final String GROUND_CHARCOPYRITE = "grindingsCharcopyrite";
@@ -82,6 +89,8 @@ public class Strings {
 	public static final String GROUND_IRON = "grindingsIron";
 	public static final String GROUND_LAPIS = "grindingsLapis";
 	public static final String GROUND_REDSTONE = "grindingsRedstone";
+	public static final String GROUND_BLUESTONE = "grindingsBluestone";
+	public static final String GROUND_GREENSTONE = "grindingsGreenstone";
 	
 	/* Internal machine names */
 	public static final String MACHINE_SINTERING_FURNACE = "machineSinteringFurnace";

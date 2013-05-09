@@ -12,7 +12,9 @@ public enum Ore {
 	MAGNETITE( Strings.ORE_MAGNETITE_NAME, "Magnetite Ore" ),
 	NICKEL( Strings.ORE_NICKEL_NAME, "Nickel Ore" ),
 	WOLFRAMITE( Strings.ORE_WOLFRAMITE_NAME, "Wolframite Ore" ),
-	VOIDSTONE(Strings.ORE_VOIDSTONE, "Voidstone");
+	VOIDSTONE(Strings.ORE_VOIDSTONE, "Voidstone"),
+	BLUESTONE(Strings.ORE_BLUESTONE, "Bluestone Ore"),
+	GREENSTONE(Strings.ORE_GREENSTONE, "Greenstone Ore");
 
 	private String unlocalizedName;
 	private String localizedName; // temporary
