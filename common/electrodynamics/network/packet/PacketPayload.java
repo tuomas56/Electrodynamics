@@ -11,7 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 import electrodynamics.network.IPayloadReceiver;
 import electrodynamics.network.PacketTypeHandler;
 
-public class PacketPayload extends PacketED{
+public class PacketPayload extends PacketED {
 
 	private int x;
 	private int y;

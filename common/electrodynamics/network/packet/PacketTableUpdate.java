@@ -1,25 +1,54 @@
 package electrodynamics.network.packet;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
+import electrodynamics.network.PacketTypeHandler;
 import electrodynamics.tileentity.TileEntityTable;
 
-public class PacketTableUpdate extends PacketBlockCoord {
+public class PacketTableUpdate extends PacketED {
 
+	public int x;
+	public int y;
+	public int z;
+	
 	public ItemStack tableContents;
 	
 	public PacketTableUpdate() {
-		super(0, 0, 0);
+		super(PacketTypeHandler.TABLE_UPDATE, true);
 	}
 	
 	public PacketTableUpdate(int x, int y, int z, ItemStack tableContents) {
-		super(x, y, z);
+		super(PacketTypeHandler.TABLE_UPDATE, true);
 		
+		this.x = x;
+		this.y = y;
+		this.z = z;
 		this.tableContents = tableContents;
+	}
+	
+	@Override
+	public void readData(DataInputStream data) throws IOException {
+		this.x = data.readInt();
+		this.y = data.readInt();
+		this.z = data.readInt();
+		this.tableContents = Packet.readItemStack(data);
+	}
+
+	@Override
+	public void writeData(DataOutputStream dos) throws IOException {
+		dos.writeInt(x);
+		dos.writeInt(y);
+		dos.writeInt(z);
+		Packet.writeItemStack(this.tableContents, dos);
 	}
 	
 	@Override
@@ -27,7 +56,7 @@ public class PacketTableUpdate extends PacketBlockCoord {
 		TileEntity table = ((EntityPlayer)player).worldObj.getBlockTileEntity(this.x, this.y, this.z);
 		
 		if (table != null && table instanceof TileEntityTable) {
-			((TileEntityTable)table).displayedItem = tableContents;
+			((TileEntityTable)table).setItem(tableContents);
 		}
 	}
 

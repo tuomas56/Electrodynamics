@@ -1,9 +1,13 @@
 package electrodynamics.tileentity;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
+import electrodynamics.interfaces.IHandleActivationPacket;
+import electrodynamics.network.PacketTypeHandler;
+import electrodynamics.network.packet.PacketActivate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-public class TileEntitySinteringOven extends TileEntityMachine {
+public class TileEntitySinteringOven extends TileEntityMachine implements IHandleActivationPacket {
 
 	public final int ROTATIONAL_MAX = 3;
 	
@@ -33,7 +37,14 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
 		open = !open;
 		
+		PacketDispatcher.sendPacketToServer(PacketTypeHandler.fillPacket(new PacketActivate(x, y, z)));
+		
 		return false;
+	}
+
+	@Override
+	public void activate() {
+		open = !open;
 	}
 	
 }
