@@ -111,10 +111,6 @@ public class InventoryUtil {
 			double spawnZ = z + 0.5D + (0.5D * side.offsetZ);
 			EntityItem entity = new EntityItem(world, spawnX, spawnY, spawnZ, item);
 			
-			entity.motionX = (double) ((float) (random.nextGaussian() * 0.05F) * side.offsetX);
-			entity.motionY = (double) ((float) (random.nextGaussian() * 0.05F) * side.offsetY);
-			entity.motionZ = (double) ((float) (random.nextGaussian() * 0.05F) * side.offsetZ);
-			
 			if (item.hasTagCompound()) {
 				entity.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
 			}
