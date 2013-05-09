@@ -1,5 +1,7 @@
 package electrodynamics.client.render.block;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -13,23 +15,28 @@ public class RenderBlockOre extends BlockRenderer implements ISimpleBlockRenderi
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+		GL11.glPushMatrix();
+		GL11.glDisable(GL11.GL_ALPHA_TEST);
+		
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		renderer.setRenderBoundsFromBlock(block);
 		
-		if ((metadata == Ore.VOIDSTONE.ordinal() && ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS)) {
+		if ((metadata == Ore.VOIDSTONE.ordinal())) {
 			Tessellator t = Tessellator.instance;
 			t.setBrightness(320);
 
-			block.setBlockBounds(0.2F, 0.2F, 0.2F, 0.8F, 0.8F, 0.8F);
-			drawFaces(renderer, block, ((BlockOre) block).voidstoneTextures[2], false);
+			block.setBlockBounds(0.1F, 0.1F, 0.1F, 0.9F, 0.9F, 0.9F);
+			drawFaces(renderer, block, ((BlockOre) block).voidstoneTextures[2], true);
 			
 			block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 			renderer.setRenderBoundsFromBlock(block);
-			drawFaces(renderer, block, ((BlockOre) block).voidstoneTextures[0], false);
+			drawFaces(renderer, block, ((BlockOre) block).voidstoneTextures[0], true);
 		} else {
-			drawFaces(renderer, block, ((BlockOre) block).textures[metadata], false);
+			drawFaces(renderer, block, ((BlockOre) block).textures[metadata], true);
 		}
 		
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
+		GL11.glPopMatrix();
 	}
 
 	@SuppressWarnings("unused")
