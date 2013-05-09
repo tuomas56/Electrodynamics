@@ -1,6 +1,7 @@
-package electrodynamics.api.crafting;
+package electrodynamics.api;
 
 import cpw.mods.fml.common.Loader;
+import electrodynamics.api.crafting.ICraftingManager;
 
 public class ElectrodynamicsAPI {
 
