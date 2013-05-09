@@ -11,10 +11,16 @@ import electrodynamics.block.BlockTable;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.block.item.ItemBlockMachine;
 import electrodynamics.block.item.ItemBlockTable;
+import electrodynamics.item.EDItems;
+import electrodynamics.item.ItemDust;
+import electrodynamics.item.ItemIngot;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.block.Machine;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.lib.item.Component;
+import electrodynamics.lib.item.Dust;
+import electrodynamics.lib.item.Grinding;
+import electrodynamics.lib.item.Ingot;
 import electrodynamics.lib.item.ItemIDs;
 import electrodynamics.module.ModuleManager.Module;
 import electrodynamics.recipe.CraftingManager;
@@ -41,6 +47,20 @@ public class EDModuleMachine extends EDModule {
 			LanguageRegistry.addName(new ItemStack(EDBlocks.blockMachine, 1, i), Machine.values()[i].localizedName);
 		}
 		
+		EDItems.itemDust = new ItemDust( ItemIDs.ITEM_DUST_ID ).setUnlocalizedName( Strings.ITEM_DUST_NAME );
+		GameRegistry.registerItem( EDItems.itemDust, Strings.ITEM_DUST_NAME );
+		for( Dust dust : Dust.values() ) {
+			LanguageRegistry.addName( new ItemStack( EDItems.itemDust, 1, dust.ordinal() ), dust.localizedName );
+		}
+		for( Grinding grind : Grinding.values() ) {
+			LanguageRegistry.addName( new ItemStack( EDItems.itemDust, 1, grind.ordinal() + Dust.values().length ), grind.localizedName );
+		}
+		
+		EDItems.itemIngot = new ItemIngot(ItemIDs.ITEM_INGOT_ID).setUnlocalizedName(Strings.ITEM_INGOT_NAME);
+		GameRegistry.registerItem(EDItems.itemIngot, Strings.ITEM_INGOT_NAME);
+		for(Ingot ingot : Ingot.values()) {
+			LanguageRegistry.addName(new ItemStack(EDItems.itemIngot, 1, ingot.ordinal()), ingot.localizedName);
+		}
 	}
 
 	@Override
