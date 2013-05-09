@@ -59,6 +59,8 @@ public class BlockMachine extends BlockContainer {
 	}
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
+		if (world.isRemote) return true;
+		
 		TileEntity tile = world.getBlockTileEntity(x, y, z);
 		
 		if (tile instanceof TileEntityMachine) {

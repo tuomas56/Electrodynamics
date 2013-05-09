@@ -37,7 +37,7 @@ public class TileEntitySinteringOven extends TileEntityMachine implements IHandl
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
 		open = !open;
 		
-		PacketDispatcher.sendPacketToServer(PacketTypeHandler.fillPacket(new PacketActivate(x, y, z)));
+		PacketDispatcher.sendPacketToAllInDimension(PacketTypeHandler.fillPacket(new PacketActivate(x, y, z)), world.provider.dimensionId);
 		
 		return false;
 	}
@@ -46,5 +46,5 @@ public class TileEntitySinteringOven extends TileEntityMachine implements IHandl
 	public void activate() {
 		open = !open;
 	}
-	
+
 }
