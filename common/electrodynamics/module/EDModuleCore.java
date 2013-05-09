@@ -9,6 +9,9 @@ import electrodynamics.Electrodynamics;
 import electrodynamics.configuration.ConfigurationHandler;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemComponent;
+import electrodynamics.item.hammer.ItemSledgeHammer;
+import electrodynamics.item.hammer.ItemSteelHammer;
+import electrodynamics.item.hammer.ItemStoneHammer;
 import electrodynamics.item.tesla.ItemArmorTeslaBoots;
 import electrodynamics.item.tesla.ItemArmorTeslaChest;
 import electrodynamics.item.tesla.ItemArmorTeslaHelm;
@@ -30,6 +33,18 @@ public class EDModuleCore extends EDModule {
 		for (int i=0; i<Component.values().length; i++) {
 			LanguageRegistry.addName(new ItemStack(EDItems.itemComponent, 1, i), Component.values()[i].getLocalizedName("en_US"));
 		}
+		
+		EDItems.itemStoneHammer = new ItemStoneHammer(ItemIDs.ITEM_STONE_HAMMER_ID).setUnlocalizedName(Strings.ITEM_STONE_HAMMER_NAME);
+		GameRegistry.registerItem(EDItems.itemStoneHammer, Strings.ITEM_STONE_HAMMER_NAME);
+		LanguageRegistry.addName(EDItems.itemStoneHammer, "Stone Hammer");
+		
+		EDItems.itemSteelHammer = new ItemSteelHammer(ItemIDs.ITEM_STEEL_HAMMER_ID).setUnlocalizedName(Strings.ITEM_STEEL_HAMMER_NAME);
+		GameRegistry.registerItem(EDItems.itemSteelHammer, Strings.ITEM_STEEL_HAMMER_NAME);
+		LanguageRegistry.addName(EDItems.itemSteelHammer, "Steel Hammer");
+		
+		EDItems.itemSledgeHammer = new ItemSledgeHammer(ItemIDs.ITEM_SLEDGE_HAMMER_ID).setUnlocalizedName(Strings.ITEM_SLEDGE_HAMMER_NAME);
+		GameRegistry.registerItem(EDItems.itemSledgeHammer, Strings.ITEM_SLEDGE_HAMMER_NAME);
+		LanguageRegistry.addName(EDItems.itemSledgeHammer, "Sledge Hammer");
 		
 		EDItems.itemTeslaHelm = new ItemArmorTeslaHelm(ItemIDs.ITEM_TESLA_HELM_ID).setUnlocalizedName(Strings.ITEM_TESLA_HAT_NAME);
 		GameRegistry.registerItem(EDItems.itemTeslaHelm, Strings.ITEM_TESLA_HAT_NAME);

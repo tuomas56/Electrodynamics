@@ -11,8 +11,6 @@ import electrodynamics.block.BlockTable;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.block.item.ItemBlockMachine;
 import electrodynamics.block.item.ItemBlockTable;
-import electrodynamics.item.EDItems;
-import electrodynamics.item.ItemSteelHammer;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.block.Machine;
 import electrodynamics.lib.core.Strings;
@@ -41,10 +39,6 @@ public class EDModuleMachine extends EDModule {
 			LanguageRegistry.addName(new ItemStack(EDBlocks.blockMachine, 1, i), Machine.values()[i].localizedName);
 		}
 		
-		/* ITEM */
-		EDItems.itemSteelHammer = new ItemSteelHammer(ItemIDs.ITEM_STEEL_HAMMER_ID).setUnlocalizedName(Strings.ITEM_STEEL_HAMMER_NAME);
-		GameRegistry.registerItem(EDItems.itemSteelHammer, Strings.ITEM_STEEL_HAMMER_NAME);
-		LanguageRegistry.addName(EDItems.itemSteelHammer, "Steel Hammer");
 	}
 
 	@Override

@@ -9,7 +9,9 @@ public class Strings {
 	public static final String ITEM_TESLA_CHEST_NAME = "itemTeslaChest";
 	public static final String ITEM_TESLA_LEGS_NAME = "itemTeslaLegs";
 	public static final String ITEM_TESLA_BOOTS_NAME = "itemTeslaBoots";
+	public static final String ITEM_STONE_HAMMER_NAME = "itemStoneHammer";
 	public static final String ITEM_STEEL_HAMMER_NAME = "itemSteelHammer";
+	public static final String ITEM_SLEDGE_HAMMER_NAME = "itemSledgeHammer";
 	public static final String ITEM_DUST_NAME = "itemDust";
 	
 	/* Internal block names */

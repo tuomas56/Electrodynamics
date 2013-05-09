@@ -14,8 +14,8 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import electrodynamics.api.tool.IHammer;
 import electrodynamics.core.CreativeTabED;
-import electrodynamics.item.EDItems;
 import electrodynamics.tileentity.TileEntityTable;
 import electrodynamics.util.BlockUtil;
 
@@ -93,8 +93,9 @@ public class BlockTable extends BlockContainer {
 		
 		TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
 		
-		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == EDItems.itemSteelHammer && table.hasRecipe()) {
+		if (player.getCurrentEquippedItem() != null && (player.getCurrentEquippedItem().getItem() instanceof IHammer) && table.hasRecipe()) {
 			table.handleSmash(player, player.getCurrentEquippedItem());
+			((IHammer)player.getCurrentEquippedItem().getItem()).onHammerUse(world, x, y, z, player.getCurrentEquippedItem(), player);
 		} else {
 			if (table.getItem() != null) {
 				BlockUtil.dropItemFromBlock(world, x, y, z, table.displayedItem.copy(), this.random);
