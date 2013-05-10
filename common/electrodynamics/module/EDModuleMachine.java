@@ -118,7 +118,7 @@ public class EDModuleMachine extends EDModule {
 		// Twine Mesh
 		GameRegistry.addRecipe(Component.TWINE_MESH.toItemStack(), "TTT", "TTT" ,"TTT", 'T', Component.TWINE.toItemStack());
 		// Basic Table
-		GameRegistry.addRecipe(new ItemStack(EDBlocks.blockTable), "SSS", "WWW", "T T", 'S', new ItemStack(Block.woodSingleSlab, 1, OreDictionary.WILDCARD_VALUE), 'P', new ItemStack(Block.planks, 1, OreDictionary.WILDCARD_VALUE), 'T', Item.stick);
+		GameRegistry.addRecipe(new ItemStack(EDBlocks.blockTable), "SSS", "WWW", "T T", 'S', new ItemStack(Block.woodSingleSlab, 1, OreDictionary.WILDCARD_VALUE), 'W', new ItemStack(Block.planks, 1, OreDictionary.WILDCARD_VALUE), 'T', Item.stick);
 		
 		FurnaceRecipes.smelting().addSmelting(ItemIDs.ITEM_COMPONENT_ID + 256, Component.LITHIUM_CLAY_WET.ordinal(), Component.LITHIUM_CLAY.toItemStack(), 0F);
 		

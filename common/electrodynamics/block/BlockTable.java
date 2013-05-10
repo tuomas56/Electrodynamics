@@ -21,7 +21,7 @@ import electrodynamics.util.BlockUtil;
 
 public class BlockTable extends BlockContainer {
 
-	public static String[] blockNames = new String[] { "Display Table", "Smashing Table" };
+	public static String[] blockNames = new String[] { "Basic Table", "Smashing Table" };
 	public static String[] subNames = new String[] { "blockTableDisplay", "blockTableSmash" };
 
 	public Random random = new Random();
