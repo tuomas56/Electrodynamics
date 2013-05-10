@@ -20,7 +20,9 @@ import electrodynamics.lib.block.Ore;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.util.BiomeHelper;
 import electrodynamics.world.TickHandlerMBS;
-import electrodynamics.world.gen.WorldGenFlower;
+import electrodynamics.world.gen.WorldGenClay;
+import electrodynamics.world.gen.WorldGenLimestone;
+import electrodynamics.world.gen.WorldGenPlant;
 import electrodynamics.world.gen.WorldGenOre;
 
 public class EDModuleWorld extends EDModule {
@@ -61,7 +63,7 @@ public class EDModuleWorld extends EDModule {
 		// Galena
 		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 2, 4, 16, 32, 6));
 		// Lithium
-		// TODO Write world-gen code for this
+		GameRegistry.registerWorldGenerator(new WorldGenClay(BlockIDs.BLOCK_LITHIUM_CLAY_ID, 4));
 		// Magnetite
 		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 3, 8, 16, 32, 4));
 		// Nickel
@@ -70,12 +72,12 @@ public class EDModuleWorld extends EDModule {
 		// TODO Write world-gen code for spawn near lava
 		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 5, 4, 6, 16, 4));
 		// Limestone
-		// TODO Write world-gen code for limestone
+		GameRegistry.registerWorldGenerator(new WorldGenLimestone(BlockIDs.BLOCK_DECORATIVE_ID, 10));
 		// Voidstone
 		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 7, 1, 0, 4, 1));
 		// Wormseed
-		GameRegistry.registerWorldGenerator(new WorldGenFlower(BlockIDs.BLOCK_WORMSEED_ID, 0, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MOUNTAIN)));
-		GameRegistry.registerWorldGenerator(new WorldGenFlower(BlockIDs.BLOCK_WORMSEED_ID, 1, BiomeHelper.getBiomesForTypes(Type.DESERT, Type.WASTELAND)));
+		GameRegistry.registerWorldGenerator(new WorldGenPlant(BlockIDs.BLOCK_WORMSEED_ID, 0, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MOUNTAIN)));
+		GameRegistry.registerWorldGenerator(new WorldGenPlant(BlockIDs.BLOCK_WORMSEED_ID, 1, BiomeHelper.getBiomesForTypes(Type.DESERT, Type.WASTELAND)));
 	}
 
 	@Override
