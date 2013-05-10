@@ -1,5 +1,6 @@
 package electrodynamics.module;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.BiomeDictionary.Type;
@@ -20,10 +21,12 @@ import electrodynamics.lib.block.Ore;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.util.BiomeHelper;
 import electrodynamics.world.TickHandlerMBS;
+import electrodynamics.world.gen.WorldGenBlock;
 import electrodynamics.world.gen.WorldGenClay;
 import electrodynamics.world.gen.WorldGenLimestone;
-import electrodynamics.world.gen.WorldGenPlant;
+import electrodynamics.world.gen.WorldGenNear;
 import electrodynamics.world.gen.WorldGenOre;
+import electrodynamics.world.gen.WorldGenPlant;
 
 public class EDModuleWorld extends EDModule {
 
@@ -76,11 +79,12 @@ public class EDModuleWorld extends EDModule {
 		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 4, 8, 16, 64, 8));
 		// Wolframite
 		// TODO Write world-gen code for spawn near lava
-		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 5, 4, 6, 16, 4));
+//		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 5, 4, 6, 16, 4));
+		GameRegistry.registerWorldGenerator(new WorldGenNear(BlockIDs.BLOCK_ORE_ID, Ore.WOLFRAMITE.ordinal(), 4, 4).setTarget(Block.lavaStill.blockID, 0).setYValues(6, 16));
 		// Limestone
 		GameRegistry.registerWorldGenerator(new WorldGenLimestone(BlockIDs.BLOCK_DECORATIVE_ID, 25));
 		// Voidstone
-		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, Ore.VOIDSTONE.ordinal(), 2, 1, 10, 6));
+		GameRegistry.registerWorldGenerator(new WorldGenBlock(BlockIDs.BLOCK_ORE_ID, Ore.VOIDSTONE.ordinal(), 1, 10));
 		// Wormseed
 		GameRegistry.registerWorldGenerator(new WorldGenPlant(BlockIDs.BLOCK_WORMSEED_ID, 0, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MOUNTAIN)));
 		GameRegistry.registerWorldGenerator(new WorldGenPlant(BlockIDs.BLOCK_WORMSEED_ID, 1, BiomeHelper.getBiomesForTypes(Type.DESERT, Type.WASTELAND)));
