@@ -2,16 +2,17 @@ package electrodynamics.inventory.container;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import electrodynamics.inventory.InventoryItem;
 
 public class ContainerTray extends Container {
 
-	public IInventory inventory;
+	public InventoryItem inventory;
 	
-	public ContainerTray(EntityPlayer player, IInventory inventory) {
+	public ContainerTray(EntityPlayer player, InventoryItem inventory) {
 		this.inventory = inventory;
+		inventory.parentContainer = this;
 		
 		// Tray Inventory
 		for (int i = 0; i < 3; ++i) {

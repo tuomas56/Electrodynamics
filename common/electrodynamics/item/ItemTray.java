@@ -1,6 +1,5 @@
 package electrodynamics.item;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,10 +18,6 @@ public class ItemTray extends Item implements IInventoryItem {
 		setCreativeTab(CreativeTabED.tool);
 	}
 
-	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
-		System.out.println(par1ItemStack.stackTagCompound.toString());
-	}
-	
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (!world.isRemote && player.isSneaking()) {

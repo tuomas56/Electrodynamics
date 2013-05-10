@@ -14,7 +14,7 @@ public class Strings {
 	public static final String ITEM_SLEDGE_HAMMER_NAME = "itemSledgeHammer";
 	public static final String ITEM_DUST_NAME = "itemDust";
 	public static final String ITEM_INGOT_NAME = "itemIngot";
-	public static final String ITEM_HANDHELD_SIEVE_NAME = "itemHandheldSieve";
+	public static final String ITEM_HANDHELD_SIEVE_NAME = "itemHandSieve";
 	public static final String ITEM_TRAY_NAME = "itemTray";
 	public static final String ITEM_PLASMA_RIFLE = "itemPlasmaRifle";
 	

@@ -72,7 +72,7 @@ public class EDModuleMachine extends EDModule {
 		
 		EDItems.itemHandheldSieve = new ItemHandheldSieve(ItemIDs.ITEM_HANDHELD_SIEVE_ID).setUnlocalizedName(Strings.ITEM_HANDHELD_SIEVE_NAME);
 		GameRegistry.registerItem(EDItems.itemHandheldSieve, Strings.ITEM_HANDHELD_SIEVE_NAME);
-		LanguageRegistry.addName(EDItems.itemHandheldSieve, "Handheld Sieve");
+		LanguageRegistry.addName(EDItems.itemHandheldSieve, "Wooden Handsieve");
 		
 		EDItems.itemTray = new ItemTray(ItemIDs.ITEM_TRAY_ID).setUnlocalizedName(Strings.ITEM_TRAY_NAME);
 		GameRegistry.registerItem(EDItems.itemTray, Strings.ITEM_TRAY_NAME);

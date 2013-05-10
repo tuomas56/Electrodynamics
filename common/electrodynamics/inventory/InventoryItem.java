@@ -1,6 +1,7 @@
 package electrodynamics.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,6 +15,8 @@ public class InventoryItem implements IInventory, INBTTagable {
 	
 	public NBTTagCompound parentNBT;
 	
+	public Container parentContainer;
+
 	public InventoryItem(int size, ItemStack parent) {
 		this.inventory = new ItemStack[size];
 		this.parent = parent;
