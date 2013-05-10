@@ -2,10 +2,11 @@
 {
 	"modid": "ED",
 	"name": "Electrodynamics - Core",
+	"version": "0.0.3"",
 	"description": "Compact your world, comrade!",
 	"credits": "Forge team for Forge, Eloraam for RP2!",
 	"url": "http://www.electrodynamicsmod.com",
-	"authors": [ "CyanideX",  "Hawkye",  "Xhamolk_",  "dmillerw", "Odiefrom",  "Mrabow" ],
+	"authors": [ "CyanideX", "dmillerw", "Hawkye",  "Xhamolk_", "Odiefrom",  "Mrabow" ],
 	"dependencies": [
 		"mod_MinecraftForge"
 	]
