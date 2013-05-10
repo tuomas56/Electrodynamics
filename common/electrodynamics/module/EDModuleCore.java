@@ -3,10 +3,12 @@ package electrodynamics.module;
 import java.io.File;
 
 import net.minecraft.item.ItemStack;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import electrodynamics.Electrodynamics;
 import electrodynamics.configuration.ConfigurationHandler;
+import electrodynamics.core.handler.GuiHandler;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemComponent;
 import electrodynamics.item.hammer.ItemSledgeHammer;
@@ -65,7 +67,7 @@ public class EDModuleCore extends EDModule {
 
 	@Override
 	public void init() {
-
+		NetworkRegistry.instance().registerGuiHandler(Electrodynamics.instance, new GuiHandler());
 	}
 
 	@Override
