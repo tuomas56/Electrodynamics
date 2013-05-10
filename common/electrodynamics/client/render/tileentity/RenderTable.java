@@ -68,11 +68,14 @@ public class RenderTable extends TileEntitySpecialRenderer {
 		if (!(stack.getItem() instanceof ItemBlock)) {
 			GL11.glRotatef(90, 1, 0, 0);
 			GL11.glTranslated(0, -0.18, 0);
+		} else {
+			GL11.glScaled(1.4, 1.4, 1.4);
+			GL11.glTranslated(0, 0.01, 0);
 		}
 		
 		if (type == 0) {
 			if ((stack.getItem() instanceof ItemBlock)) {
-				GL11.glTranslated(0, -0.2, 0);
+				GL11.glTranslated(0, -0.13, 0);
 			} else {
 				GL11.glTranslated(0, 0, 0.18);
 			}

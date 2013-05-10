@@ -11,20 +11,20 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
 
-public class WorldGenFlower implements IWorldGenerator {
+public class WorldGenPlant implements IWorldGenerator {
 
 	public int flowerID;
 	public int flowerMeta;
 	
 	public List<BiomeGenBase> validBiomes;
 	
-	public WorldGenFlower(int id, int meta, BiomeGenBase ... validBiomes) {
+	public WorldGenPlant(int id, int meta, BiomeGenBase ... validBiomes) {
 		this.flowerID = id;
 		this.flowerMeta = meta;
 		this.validBiomes = Arrays.asList(validBiomes);
 	}
 	
-	public WorldGenFlower(int id, int meta, ArrayList<BiomeGenBase> validBiomes) {
+	public WorldGenPlant(int id, int meta, ArrayList<BiomeGenBase> validBiomes) {
 		this.flowerID = id;
 		this.flowerMeta = meta;
 		this.validBiomes = validBiomes;
