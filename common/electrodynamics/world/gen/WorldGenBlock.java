@@ -30,7 +30,6 @@ public class WorldGenBlock implements IWorldGenerator {
 			int z = (chunkZ * 16) + random.nextInt(16);
 			
 			if (world.getBlockId(x, y, z) == Block.stone.blockID) {
-				System.out.println("genned voidsone @ " + x + ", " + y + ", " + z);
 				world.setBlock(x, y, z, this.blockID, this.blockMeta, 2);
 			}
 		}
