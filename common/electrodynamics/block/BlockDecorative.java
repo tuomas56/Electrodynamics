@@ -30,6 +30,15 @@ public class BlockDecorative extends Block {
 		return textures[metadata];
 	}
 
+	@Override
+	public int damageDropped(int meta) {
+		if (meta == 0) {
+			return 2;
+		}
+		
+		return meta;
+	}
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubBlocks(int id, CreativeTabs tab, List list) {

@@ -1,6 +1,7 @@
 package electrodynamics.module;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -56,6 +57,12 @@ public class EDModuleWorld extends EDModule {
 
 	@Override
 	public void init() {
+		FurnaceRecipes.smelting().addSmelting(BlockIDs.BLOCK_DECORATIVE_ID, 2, new ItemStack(EDBlocks.blockDecorative, 1, 0), 0F);
+		
+		GameRegistry.addRecipe(new ItemStack(EDBlocks.blockDecorative, 4, 1), "XX", "XX", 'X', EDBlocks.blockDecorative);
+		GameRegistry.addRecipe(new ItemStack(EDBlocks.blockDecorative, 4, 3), "XXX", "XXX", 'X', EDBlocks.blockDecorative);
+		GameRegistry.addRecipe(new ItemStack(EDBlocks.blockDecorative, 4, 4), "XX", "XX", 'X', new ItemStack(EDBlocks.blockDecorative, 1, 1));
+		
 		// Cobaltite
 		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 0, 8, 16, 64, 4));
 		// Chalcopyrite

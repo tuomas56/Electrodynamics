@@ -7,7 +7,7 @@ import electrodynamics.lib.core.Strings;
 public enum Grinding {
 
 	//Mod Ores
-	CHARCOPYRITE(Strings.GROUND_CHARCOPYRITE, "Ground Charcopyrite"),
+	CHALCOPYRITE(Strings.GROUND_CHARCOPYRITE, "Ground Chalcopyrite"),
 	COBALTITE(Strings.GROUND_COBALTITE, "Ground Cobaltite"),
 	GALENA(Strings.GROUND_GALENA, "Ground Galena"),
 	MAGNETITE(Strings.GROUND_MAGNETITE, "Ground Magnetite"),

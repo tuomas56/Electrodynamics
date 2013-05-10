@@ -42,7 +42,7 @@ public class SieveManager {
 			}
 		});
 		
-		registerRecipe(new RecipeBasicSieve(Grinding.CHARCOPYRITE.toItemStack(), 100) {
+		registerRecipe(new RecipeBasicSieve(Grinding.CHALCOPYRITE.toItemStack(), 100) {
 			@Override
 			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
 				outputs.add(new WeightedRecipeOutput(Dust.GOLD, 0.01F));
