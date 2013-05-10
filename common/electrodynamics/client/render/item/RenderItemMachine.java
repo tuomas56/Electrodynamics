@@ -44,7 +44,7 @@ public class RenderItemMachine implements IItemRenderer {
 				}
 				
 				case INVENTORY: {
-					renderFurnace(0F, 1.075F, 0F);
+					renderFurnace(0F, 1F, 0F);
 					break;
 				}
 				
@@ -63,7 +63,7 @@ public class RenderItemMachine implements IItemRenderer {
 				}
 				
 				case INVENTORY: {
-					renderSieve(0F, 1.075F, 0F);
+					renderSieve(0F, 1F, 0F);
 					break;
 				}
 				

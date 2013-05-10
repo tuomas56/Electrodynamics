@@ -34,9 +34,9 @@ public class EntityBeam extends Entity {
 	private float prevYaw = 0.0F;
 	private float prevPitch = 0.0F;
 	private Entity targetEntity = null;
-	private double tX = 0.0D;
-	private double tY = 0.0D;
-	private double tZ = 0.0D;
+	public double tX = 0.0D;
+	public double tY = 0.0D;
+	public double tZ = 0.0D;
 
 	public float particleRed;
 	public float particleGreen;
@@ -134,6 +134,10 @@ public class EntityBeam extends Entity {
 			this.tZ = this.targetEntity.posZ;
 		}
 
+		for (Entity entity : getEntitiesIntersectingLaser()) {
+			onEntityIntersected(entity);
+		}
+		
 		float xd = (float) (this.posX - this.tX);
 		float yd = (float) (this.posY - this.tY);
 		float zd = (float) (this.posZ - this.tZ);
@@ -183,6 +187,10 @@ public class EntityBeam extends Entity {
 	@SuppressWarnings("unchecked")
 	public List<Entity> getEntitiesIntersectingLaser() {
 		return this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox);
+	}
+	
+	public void onEntityIntersected(Entity entity) {
+		
 	}
 	
 	@SideOnly(Side.CLIENT)

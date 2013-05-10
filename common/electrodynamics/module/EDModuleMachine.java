@@ -93,6 +93,9 @@ public class EDModuleMachine extends EDModule {
 		// Steel Hammer
 		GameRegistry.addRecipe(new ItemStack(EDItems.itemSteelHammer), "I", "A", "S", 'I', Ingot.STEEL.toItemStack(), 'A', Component.SAP.toItemStack(), 'S', Item.stick);
 		
+		// Sledgehammer
+		GameRegistry.addRecipe(new ItemStack(EDItems.itemSledgeHammer), "S", "M", "M", 'S', Ingot.STEEL.toItemStack(), 'M', Component.METAL_BAR.toItemStack());
+		
 		// Sap Torches
 		GameRegistry.addRecipe(new ItemStack(Block.torchWood, 16), "W", "A", "S", 'W', new ItemStack(Block.cloth, OreDictionary.WILDCARD_VALUE), 'A', Component.SAP.toItemStack(), 'S', Item.stick);
 		

@@ -13,6 +13,7 @@ import electrodynamics.client.render.block.RenderBlockOre;
 import electrodynamics.client.render.block.RenderBlockRedWire;
 import electrodynamics.client.render.entity.RenderBeam;
 import electrodynamics.client.render.item.RenderItemMachine;
+import electrodynamics.client.render.item.RenderItemPlasmaRifle;
 import electrodynamics.client.render.item.RenderItemTable;
 import electrodynamics.client.render.tileentity.RenderBasicSieve;
 import electrodynamics.client.render.tileentity.RenderSinteringOven;
@@ -21,6 +22,8 @@ import electrodynamics.control.KeyBindingHelper;
 import electrodynamics.control.KeybindingHandler;
 import electrodynamics.core.handler.SoundHandler;
 import electrodynamics.entity.EntityBeam;
+import electrodynamics.entity.EntityPlasmaBeam;
+import electrodynamics.item.EDItems;
 import electrodynamics.lib.client.FXType;
 import electrodynamics.tileentity.TileEntityBasicSieve;
 import electrodynamics.tileentity.TileEntitySinteringOven;
@@ -41,11 +44,13 @@ public class ClientProxy extends CommonProxy {
 
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockTable.blockID, new RenderItemTable());
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockMachine.blockID, new RenderItemMachine());
+		MinecraftForgeClient.registerItemRenderer(EDItems.itemPlasmaRifle.itemID, new RenderItemPlasmaRifle());
 
 		RenderingRegistry.registerBlockHandler(new RenderBlockRedWire());
 		RenderingRegistry.registerBlockHandler(new RenderBlockOre());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityBeam.class, new RenderBeam());
+		RenderingRegistry.registerEntityRenderingHandler(EntityPlasmaBeam.class, new RenderBeam());
 	}
 
 	@Override

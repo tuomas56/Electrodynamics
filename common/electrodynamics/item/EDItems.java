@@ -13,6 +13,7 @@ public class EDItems {
 	public static Item itemSledgeHammer;
 	
 	public static Item itemHandheldSieve;
+	public static Item itemPlasmaRifle;
 	
 	public static Item itemTray;
 	

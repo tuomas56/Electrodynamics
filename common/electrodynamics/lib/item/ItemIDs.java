@@ -50,4 +50,8 @@ public class ItemIDs {
 	public static int ITEM_TRAY_ID;
 	public static final int ITEM_TRAY_DEFAULT_ID = 5111;
 	
+	/* itemPlasmaRifle */
+	public static int ITEM_PLASMA_RIFLE;
+	public static final int ITEM_PLASMA_RIFLE_ID = 5112;
+	
 }

@@ -16,6 +16,7 @@ public class Strings {
 	public static final String ITEM_INGOT_NAME = "itemIngot";
 	public static final String ITEM_HANDHELD_SIEVE_NAME = "itemHandheldSieve";
 	public static final String ITEM_TRAY_NAME = "itemTray";
+	public static final String ITEM_PLASMA_RIFLE = "itemPlasmaRifle";
 	
 	/* Internal block names */
 	public static final String BLOCK_ORE_NAME = "blockOre";

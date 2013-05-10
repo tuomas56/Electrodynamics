@@ -74,7 +74,8 @@ public class ConfigurationHandler {
 			ItemIDs.ITEM_INGOT_ID = config.getItem(Strings.ITEM_INGOT_NAME, ItemIDs.ITEM_INGOT_DEFAULT_ID).getInt(ItemIDs.ITEM_INGOT_DEFAULT_ID);
 			ItemIDs.ITEM_HANDHELD_SIEVE_ID = config.getItem(Strings.ITEM_HANDHELD_SIEVE_NAME, ItemIDs.ITEM_HANDHELD_SIEVE_DEFAULT_ID).getInt(ItemIDs.ITEM_HANDHELD_SIEVE_DEFAULT_ID);
 			ItemIDs.ITEM_TRAY_ID = config.getItem(Strings.ITEM_TRAY_NAME, ItemIDs.ITEM_TRAY_DEFAULT_ID).getInt(ItemIDs.ITEM_TRAY_DEFAULT_ID);
-		
+			ItemIDs.ITEM_PLASMA_RIFLE = config.getItem(Strings.ITEM_PLASMA_RIFLE, ItemIDs.ITEM_PLASMA_RIFLE_ID).getInt(ItemIDs.ITEM_PLASMA_RIFLE_ID);
+			
 		} catch (Exception e) {
 			EDLogger.warn("Had trouble reading/writing to the configuration file.");
 		} finally {
