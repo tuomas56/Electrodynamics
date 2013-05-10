@@ -46,4 +46,8 @@ public class ItemIDs {
 	public static int ITEM_HANDHELD_SIEVE_ID;
 	public static final int ITEM_HANDHELD_SIEVE_DEFAULT_ID = 5110;
 	
+	/* itemTray */
+	public static int ITEM_TRAY_ID;
+	public static final int ITEM_TRAY_DEFAULT_ID = 5111;
+	
 }

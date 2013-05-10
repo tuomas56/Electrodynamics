@@ -13,7 +13,8 @@ public enum Ingot {
 	LEAD(Strings.INGOT_LEAD, "Lead Ingot"), 
 	NICKEL(Strings.INGOT_NICKEL, "Nickel Ingot"),
 	TELLURIUM(Strings.INGOT_TELLURIUM, "Tellurium Ingot"),
-	TUNGSTEN(Strings.INGOT_TUNGSTEN, "Tungsten Ingot");
+	TUNGSTEN(Strings.INGOT_TUNGSTEN, "Tungsten Ingot"),
+	STEEL(Strings.INGOT_STEEL, "Steel Ingot");
 	
 	public String unlocalizedName;
 	public String localizedName;

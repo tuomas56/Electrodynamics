@@ -2,9 +2,11 @@ package electrodynamics.module;
 
 import java.util.EnumSet;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import electrodynamics.block.BlockMachine;
@@ -16,6 +18,7 @@ import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemDust;
 import electrodynamics.item.ItemHandheldSieve;
 import electrodynamics.item.ItemIngot;
+import electrodynamics.item.ItemTray;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.block.Machine;
 import electrodynamics.lib.core.Strings;
@@ -68,6 +71,10 @@ public class EDModuleMachine extends EDModule {
 		EDItems.itemHandheldSieve = new ItemHandheldSieve(ItemIDs.ITEM_HANDHELD_SIEVE_ID).setUnlocalizedName(Strings.ITEM_HANDHELD_SIEVE_NAME);
 		GameRegistry.registerItem(EDItems.itemHandheldSieve, Strings.ITEM_HANDHELD_SIEVE_NAME);
 		LanguageRegistry.addName(EDItems.itemHandheldSieve, "Handheld Sieve");
+		
+		EDItems.itemTray = new ItemTray(ItemIDs.ITEM_TRAY_ID).setUnlocalizedName(Strings.ITEM_TRAY_NAME);
+		GameRegistry.registerItem(EDItems.itemTray, Strings.ITEM_TRAY_NAME);
+		LanguageRegistry.addName(EDItems.itemTray, "Tray");
 	}
 
 	@Override
@@ -77,6 +84,15 @@ public class EDModuleMachine extends EDModule {
 		
 		CraftingManager.getInstance().sieveManager = new SieveManager();
 		CraftingManager.getInstance().sieveManager.initRecipes();
+		
+		// Stone Hammer
+		GameRegistry.addRecipe(new ItemStack(EDItems.itemStoneHammer), "C", "T", "S", 'C', Block.cobblestone, 'T', Component.TWINE.toItemStack(), 'S', Item.stick);
+		
+		// Steel Hammer
+		GameRegistry.addRecipe(new ItemStack(EDItems.itemSteelHammer), "I", "A", "S", 'I', Ingot.STEEL.toItemStack(), 'A', Component.SAP.toItemStack(), 'S', Item.stick);
+		
+		// Sap Torches
+		GameRegistry.addRecipe(new ItemStack(Block.torchWood, 16), "W", "A", "S", 'W', new ItemStack(Block.cloth, OreDictionary.WILDCARD_VALUE), 'A', Component.SAP.toItemStack(), 'S', Item.stick);
 		
 		FurnaceRecipes.smelting().addSmelting(ItemIDs.ITEM_COMPONENT_ID + 256, Component.LITHIUM_CLAY_WET.ordinal(), Component.LITHIUM_CLAY.toItemStack(), 0F);
 		

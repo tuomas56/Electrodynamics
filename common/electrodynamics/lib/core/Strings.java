@@ -15,6 +15,7 @@ public class Strings {
 	public static final String ITEM_DUST_NAME = "itemDust";
 	public static final String ITEM_INGOT_NAME = "itemIngot";
 	public static final String ITEM_HANDHELD_SIEVE_NAME = "itemHandheldSieve";
+	public static final String ITEM_TRAY_NAME = "itemTray";
 	
 	/* Internal block names */
 	public static final String BLOCK_ORE_NAME = "blockOre";
@@ -103,6 +104,7 @@ public class Strings {
 	public static final String INGOT_NICKEL = "ingotNickel";
 	public static final String INGOT_TELLURIUM = "ingotTellurium";
 	public static final String INGOT_TUNGSTEN = "ingotTungsten";
+	public static final String INGOT_STEEL = "ingotSteel";
 	
 	/* Internal machine names */
 	public static final String MACHINE_SINTERING_FURNACE = "machineSinteringFurnace";
