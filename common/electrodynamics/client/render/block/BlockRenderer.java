@@ -36,12 +36,12 @@ public class BlockRenderer {
 		tessellator.setNormal(0.0F, 1.0F, 0.0F);
 		renderblocks.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, i1);
 		tessellator.draw();
-		if (solidtop) GL11.glDisable(3008);
+		if (solidtop) GL11.glDisable(GL11.GL_ALPHA_TEST);
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, -1.0F, 0.0F);
 		renderblocks.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, i2);
 		tessellator.draw();
-		if (solidtop) GL11.glEnable(3008);
+		if (solidtop) GL11.glEnable(GL11.GL_ALPHA_TEST);
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 0.0F, -1.0F);
 		renderblocks.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, i3);
