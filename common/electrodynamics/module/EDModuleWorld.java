@@ -72,9 +72,9 @@ public class EDModuleWorld extends EDModule {
 		// TODO Write world-gen code for spawn near lava
 		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 5, 4, 6, 16, 4));
 		// Limestone
-		GameRegistry.registerWorldGenerator(new WorldGenLimestone(BlockIDs.BLOCK_DECORATIVE_ID, 10));
+		GameRegistry.registerWorldGenerator(new WorldGenLimestone(BlockIDs.BLOCK_DECORATIVE_ID, 25));
 		// Voidstone
-		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 7, 1, 0, 4, 1));
+		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, Ore.VOIDSTONE.ordinal(), 2, 1, 10, 2));
 		// Wormseed
 		GameRegistry.registerWorldGenerator(new WorldGenPlant(BlockIDs.BLOCK_WORMSEED_ID, 0, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MOUNTAIN)));
 		GameRegistry.registerWorldGenerator(new WorldGenPlant(BlockIDs.BLOCK_WORMSEED_ID, 1, BiomeHelper.getBiomesForTypes(Type.DESERT, Type.WASTELAND)));

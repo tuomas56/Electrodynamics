@@ -48,7 +48,7 @@ public class WorldGenOre implements IWorldGenerator {
         	int firstBlockXCoord = chunkX * rand.nextInt(16);
         	int firstBlockYCoord = MathHelper.getRandomIntegerInRange(rand, yMin, yMax);
         	int firstBlockZCoord = chunkZ * rand.nextInt(16);
-        	
+
         	(new WorldGenMinable(blockID, blockMeta, blockAmount, 1)).generate(world, rand, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
         }
 	}

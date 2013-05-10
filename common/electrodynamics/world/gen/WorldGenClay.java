@@ -49,5 +49,4 @@ public class WorldGenClay implements IWorldGenerator {
 			}
 		}
 	}
-
 }
