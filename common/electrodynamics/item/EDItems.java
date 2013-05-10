@@ -12,6 +12,8 @@ public class EDItems {
 	public static Item itemSteelHammer;
 	public static Item itemSledgeHammer;
 	
+	public static Item itemHandheldSieve;
+	
 	public static Item itemTeslaHelm;
 	public static Item itemTeslaChest;
 	public static Item itemTeslaLegs;

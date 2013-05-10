@@ -42,4 +42,8 @@ public class ItemIDs {
 	public static int ITEM_INGOT_ID;
 	public static final int ITEM_INGOT_DEFAULT_ID = 5109;
 	
+	/* itemHandheldSieve */
+	public static int ITEM_HANDHELD_SIEVE_ID;
+	public static final int ITEM_HANDHELD_SIEVE_DEFAULT_ID = 5110;
+	
 }

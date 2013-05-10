@@ -33,12 +33,12 @@ public class ItemArmorTeslaHelm extends ItemArmor implements IKeyBoundClient {
 	
 	public ItemArmorTeslaHelm(int id) {
 		super(id, EnumArmorMaterial.IRON, 2, 0);
-		setCreativeTab(CreativeTabED.item);
+		setCreativeTab(CreativeTabED.tool);
 		setMaxStackSize(1);
 		setMaxDamage(0);
 		
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-			thermalEnabled = true;
+			thermalEnabled = false;
 		}
 	}
 	

@@ -19,7 +19,7 @@ public class ItemArmorTeslaLegs extends ItemArmor {
 	
 	public ItemArmorTeslaLegs(int id) {
 		super(id, EnumArmorMaterial.IRON, 2, 2);
-		setCreativeTab(CreativeTabED.item);
+		setCreativeTab(CreativeTabED.tool);
 		setMaxStackSize(1);
 		setMaxDamage(0);
 	}

@@ -12,7 +12,7 @@ public class ItemHammer extends Item implements IHammer {
 	public ItemHammer(int id) {
 		super(id);
 		setMaxStackSize(1);
-		setCreativeTab(CreativeTabED.item);
+		setCreativeTab(CreativeTabED.tool);
 	}
 	
 	public ItemHammer(int id, int maxDamage) {

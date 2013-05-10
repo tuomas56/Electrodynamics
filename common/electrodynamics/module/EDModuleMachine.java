@@ -14,6 +14,7 @@ import electrodynamics.block.item.ItemBlockMachine;
 import electrodynamics.block.item.ItemBlockTable;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemDust;
+import electrodynamics.item.ItemHandheldSieve;
 import electrodynamics.item.ItemIngot;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.block.Machine;
@@ -48,6 +49,7 @@ public class EDModuleMachine extends EDModule {
 			LanguageRegistry.addName(new ItemStack(EDBlocks.blockMachine, 1, i), Machine.values()[i].localizedName);
 		}
 		
+		/* ITEM */
 		EDItems.itemDust = new ItemDust( ItemIDs.ITEM_DUST_ID ).setUnlocalizedName( Strings.ITEM_DUST_NAME );
 		GameRegistry.registerItem( EDItems.itemDust, Strings.ITEM_DUST_NAME );
 		for( Dust dust : Dust.values() ) {
@@ -62,6 +64,10 @@ public class EDModuleMachine extends EDModule {
 		for(Ingot ingot : Ingot.values()) {
 			LanguageRegistry.addName(new ItemStack(EDItems.itemIngot, 1, ingot.ordinal()), ingot.localizedName);
 		}
+		
+		EDItems.itemHandheldSieve = new ItemHandheldSieve(ItemIDs.ITEM_HANDHELD_SIEVE_ID).setUnlocalizedName(Strings.ITEM_HANDHELD_SIEVE_NAME);
+		GameRegistry.registerItem(EDItems.itemHandheldSieve, Strings.ITEM_HANDHELD_SIEVE_NAME);
+		LanguageRegistry.addName(EDItems.itemHandheldSieve, "Handheld Sieve");
 	}
 
 	@Override

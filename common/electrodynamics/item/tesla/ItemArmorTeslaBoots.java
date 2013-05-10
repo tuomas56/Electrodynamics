@@ -29,7 +29,7 @@ public class ItemArmorTeslaBoots extends ItemArmor {
 	
 	public ItemArmorTeslaBoots(int id) {
 		super(id, EnumArmorMaterial.IRON, 2, 3);
-		setCreativeTab(CreativeTabED.item);
+		setCreativeTab(CreativeTabED.tool);
 		setMaxStackSize(1);
 		setMaxDamage(0);
 		

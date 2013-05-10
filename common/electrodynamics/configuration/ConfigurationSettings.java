@@ -43,7 +43,7 @@ public class ConfigurationSettings {
 	
 	public static double MAGNETIC_ATTRACTION_SPEED;
 	public static final String MAGNETIC_ATTRACTION_SPEED_CONFIGNAME = "tesla_armor.speed";
-	public static final double MAGNETIC_ATTRACTION_SPEED_DEFAULT = 0.1D;
+	public static final double MAGNETIC_ATTRACTION_SPEED_DEFAULT = 0.8D;
 	
 	public static double THERMAL_VIEW_RANGE;
 	public static final String THERMAL_VIEW_RANGE_CONFIGNAME = "tesla_armor.thermal_view_range";

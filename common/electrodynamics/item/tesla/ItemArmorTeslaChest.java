@@ -34,7 +34,7 @@ public class ItemArmorTeslaChest extends ItemArmor implements IKeyBoundServer {
 	
 	public ItemArmorTeslaChest(int id) {
 		super(id, EnumArmorMaterial.IRON, 2, 1);
-		setCreativeTab(CreativeTabED.item);
+		setCreativeTab(CreativeTabED.tool);
 		setMaxStackSize(1);
 		setMaxDamage(0);
 	}
