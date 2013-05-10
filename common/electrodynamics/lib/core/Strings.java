@@ -26,6 +26,8 @@ public class Strings {
 	public static final String BLOCK_MACHINE = "blockMachine";
 	public static final String BLOCK_DECORATIVE = "blockDecorative";
 	public static final String BLOCK_WORMSEED = "blockWormseed";
+	public static final String BLOCK_GAS = "blockGas";
+	public static final String BLOCK_STORAGE = "blockStorage";
 	
 	/* Internal component names */
 	public static final String FAN_BLADE_NAME = "fanBlade";
@@ -37,6 +39,7 @@ public class Strings {
 	public static final String LODESTONE_PEBBLE = "lodestonePebble";
 	public static final String SAP = "itemSap";
 	public static final String TWINE = "itemTwine";
+	public static final String TWINE_MESH = "twineMesh";
 	public static final String LITHIUM_CLAY = "lithiumDriedClay";
 	public static final String WORMWOOD_LEAF = "wormwoodLeaf";
 	public static final String PCB = "pcb";
@@ -110,5 +113,26 @@ public class Strings {
 	/* Internal machine names */
 	public static final String MACHINE_SINTERING_FURNACE = "machineSinteringFurnace";
 	public static final String MACHINE_BASIC_SIEVE = "machineBasicSieve";
+	
+	/* Internal gas names */
+	public static final String GAS_AIR_CLEAN = "gasAirClean";
+	public static final String GAS_AIR_DIRTY = "gasAirDirty";
+	public static final String GAS_CO2 = "gasCarbonDioxide";
+	public static final String GAS_H2S = "gasHydrogenSulfide";
+	public static final String GAS_METHANE = "gasMethane";
+	public static final String GAS_COW_METHANE = "gasMooshroomFarts";
+	public static final String GAS_NATURAL_REFINED = "gasNaturalRefined";
+	public static final String GAS_NATURAL_UNREFINED = "gasNaturalUnrefined";
+	public static final String GAS_N = "gasNitrogen";
+	public static final String GAS_SO2 = "gasSulfurDioxide";
+	public static final String GAS_H2SO4 = "gasSulfuricAcid";
+	
+	/* Internal storage names */
+	public static final String STORAGE_COPPER = "blockCopper";
+	public static final String STORAGE_LEAD = "blockLead";
+	public static final String STORAGE_LODESTONE = "blockLodestone";
+	public static final String STORAGE_NICKEL = "blockNickel";
+	public static final String STORAGE_TELLURIUM = "blockTellurium";
+	public static final String STORAGE_TUNGSTEN = "blockTungsten";
 	
 }

@@ -10,9 +10,11 @@ import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import electrodynamics.block.BlockMachine;
+import electrodynamics.block.BlockStorage;
 import electrodynamics.block.BlockTable;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.block.item.ItemBlockMachine;
+import electrodynamics.block.item.ItemBlockStorage;
 import electrodynamics.block.item.ItemBlockTable;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemDust;
@@ -21,6 +23,7 @@ import electrodynamics.item.ItemIngot;
 import electrodynamics.item.ItemTray;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.block.Machine;
+import electrodynamics.lib.block.Storage;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.lib.item.Component;
 import electrodynamics.lib.item.Dust;
@@ -50,6 +53,12 @@ public class EDModuleMachine extends EDModule {
 		GameRegistry.registerBlock(EDBlocks.blockMachine, ItemBlockMachine.class, Strings.BLOCK_MACHINE);
 		for (int i=0; i<Machine.values().length; i++) {
 			LanguageRegistry.addName(new ItemStack(EDBlocks.blockMachine, 1, i), Machine.values()[i].localizedName);
+		}
+		
+		EDBlocks.blockStorage = new BlockStorage(BlockIDs.BLOCK_STORAGE_ID).setUnlocalizedName(Strings.BLOCK_STORAGE);
+		GameRegistry.registerBlock(EDBlocks.blockStorage, ItemBlockStorage.class, Strings.BLOCK_STORAGE);
+		for (Storage storage : Storage.values()) {
+			LanguageRegistry.addName(storage.toItemStack(), storage.localizedName);
 		}
 		
 		/* ITEM */
@@ -87,15 +96,17 @@ public class EDModuleMachine extends EDModule {
 		CraftingManager.getInstance().sieveManager = new SieveManager();
 		CraftingManager.getInstance().sieveManager.initRecipes();
 		
+		for (Storage storage : Storage.values()) {
+			GameRegistry.addRecipe(storage.toItemStack(), "XXX", "XXX", "XXX", 'X', storage.ingot.toItemStack());
+			GameRegistry.addShapelessRecipe(new ItemStack(ItemIDs.ITEM_INGOT_ID + 256, 9, storage.ingot.ordinal()), storage.toItemStack());
+		}
+		
 		// Stone Hammer
 		GameRegistry.addRecipe(new ItemStack(EDItems.itemStoneHammer), "C", "T", "S", 'C', Block.cobblestone, 'T', Component.TWINE.toItemStack(), 'S', Item.stick);
-		
 		// Steel Hammer
 		GameRegistry.addRecipe(new ItemStack(EDItems.itemSteelHammer), "I", "A", "S", 'I', Ingot.STEEL.toItemStack(), 'A', Component.SAP.toItemStack(), 'S', Item.stick);
-		
 		// Sledgehammer
 		GameRegistry.addRecipe(new ItemStack(EDItems.itemSledgeHammer), "S", "M", "M", 'S', Ingot.STEEL.toItemStack(), 'M', Component.METAL_BAR.toItemStack());
-		
 		// Sap Torches
 		GameRegistry.addRecipe(new ItemStack(Block.torchWood, 16), "W", "A", "S", 'W', new ItemStack(Block.cloth, OreDictionary.WILDCARD_VALUE), 'A', Component.SAP.toItemStack(), 'S', Item.stick);
 		

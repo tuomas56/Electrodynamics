@@ -34,4 +34,12 @@ public class BlockIDs {
 	public static int BLOCK_LITHIUM_CLAY_ID;
 	public static final int BLOCK_LITHIUM_CLAY_DEFAULT_ID = 507;
 	
+	/* blockGas */
+	public static int BLOCK_GAS_ID;
+	public static final int BLOCK_GAS_DEFAULT_ID = 508;
+	
+	/* blockStorage */
+	public static int BLOCK_STORAGE_ID;
+	public static final int BLOCK_STORAGE_DEFAULT_ID = 509;
+	
 }

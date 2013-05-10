@@ -12,5 +12,7 @@ public class EDBlocks {
 	public static Block blockDecorative;
 	public static Block blockWormseed;
 	public static Block blockLithiumClay;
+	public static Block blockGas;
+	public static Block blockStorage;
 	
 }

@@ -15,6 +15,7 @@ public enum Component {
 	LODESTONE_PEBBLE(Strings.LODESTONE_PEBBLE, "Lodestone Pebble"),
 	SAP(Strings.SAP, "Sap"),
 	TWINE(Strings.TWINE, "Piece of Twine"),
+	TWINE_MESH(Strings.TWINE_MESH, "Twine Mesh"),
 	LITHIUM_CLAY(Strings.LITHIUM_CLAY, "Dried Lithium Clay"),
 	LITHIUM_CLAY_WET(Strings.LITHIUM_CLAY_WET, "Wet Lithium Clay"),
 	WORMWOOD_LEAF(Strings.WORMWOOD_LEAF, "Wormwood Leaf"),

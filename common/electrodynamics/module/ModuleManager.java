@@ -34,6 +34,7 @@ public class ModuleManager {
 		registerModule(Module.LOGIC, new EDModuleLogic());
 		registerModule(Module.LASER, new EDModuleLaser());
 		registerModule(Module.MACHINE, new EDModuleMachine());
+		registerModule(Module.GAS,  new EDModuleGas());
 		
 		Configuration config = new Configuration(new File(Electrodynamics.instance.configFolder, MODULE_CONFIG_FILE));
 		config.load();
@@ -143,7 +144,7 @@ public class ModuleManager {
 	}
 	
 	public static enum Module {
-		CORE, WORLD, LOGIC, LASER, MACHINE;
+		CORE, WORLD, LOGIC, LASER, MACHINE, GAS;
 	}
 	
 }
