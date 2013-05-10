@@ -2,6 +2,7 @@ package electrodynamics.lib.core;
 
 public class ModInfo {
 	
+	public static final String MOD_ID = "ED";
 	public static final String GENERIC_MOD_ID = "Electrodynamics";
 	
 	public static final String DEPENDENCIES = "required-after:Forge@[7.8.0.684,)";

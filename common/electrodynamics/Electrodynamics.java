@@ -1,6 +1,7 @@
 package electrodynamics;
 
 import java.io.File;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -19,10 +20,10 @@ import electrodynamics.module.ModuleManager;
 import electrodynamics.network.PacketHandler;
 import electrodynamics.recipe.CraftingManager;
 
-@Mod(modid = "ED", name = "Electrodynamics", version = ModInfo.VERSION, dependencies = ModInfo.DEPENDENCIES)
+@Mod(modid = ModInfo.MOD_ID, name = ModInfo.GENERIC_MOD_ID, version = ModInfo.VERSION, dependencies = ModInfo.DEPENDENCIES)
 @NetworkMod(channels = { ModInfo.GENERIC_MOD_ID }, clientSideRequired = false, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class Electrodynamics implements IEDApi {
-	@Instance("ED")
+	@Instance(ModInfo.MOD_ID)
 	public static Electrodynamics instance;
 	@SidedProxy(clientSide = "electrodynamics.core.ClientProxy", serverSide = "electrodynamics.core.CommonProxy")
 	public static CommonProxy proxy;
