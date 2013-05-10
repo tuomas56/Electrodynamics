@@ -30,7 +30,7 @@ import electrodynamics.lib.item.ItemIDs;
 import electrodynamics.module.ModuleManager.Module;
 import electrodynamics.recipe.CraftingManager;
 import electrodynamics.recipe.SieveManager;
-import electrodynamics.recipe.SmashingManager;
+import electrodynamics.recipe.TableManager;
 import electrodynamics.tileentity.TileEntityBasicSieve;
 import electrodynamics.tileentity.TileEntitySinteringOven;
 import electrodynamics.tileentity.TileEntityTable;
@@ -81,8 +81,8 @@ public class EDModuleMachine extends EDModule {
 
 	@Override
 	public void init() {
-		CraftingManager.getInstance().smashingManager = new SmashingManager();
-		CraftingManager.getInstance().smashingManager.initRecipes();
+		CraftingManager.getInstance().tableManager = new TableManager();
+		CraftingManager.getInstance().tableManager.initRecipes();
 		
 		CraftingManager.getInstance().sieveManager = new SieveManager();
 		CraftingManager.getInstance().sieveManager.initRecipes();

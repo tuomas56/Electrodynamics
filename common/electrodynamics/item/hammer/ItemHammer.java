@@ -1,13 +1,14 @@
 package electrodynamics.item.hammer;
 
-import electrodynamics.api.tool.IHammer;
-import electrodynamics.core.CreativeTabED;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import electrodynamics.api.tool.ITool;
+import electrodynamics.api.tool.ToolType;
+import electrodynamics.core.CreativeTabED;
 
-public class ItemHammer extends Item implements IHammer {
+public class ItemHammer extends Item implements ITool {
 
 	public ItemHammer(int id) {
 		super(id);
@@ -21,8 +22,13 @@ public class ItemHammer extends Item implements IHammer {
 	}
 
 	@Override
-	public void onHammerUse(World world, int x, int y, int z, ItemStack stack, EntityPlayer player) {
-		stack.damageItem(1, player);
+	public ToolType getToolType() {
+		return ToolType.HAMMER;
+	}
+
+	@Override
+	public void onToolUsed(ItemStack stack, World world, int x, int y, int z, EntityPlayer player) {
+		stack.damageItem(1, player);		
 	}
 	
 }

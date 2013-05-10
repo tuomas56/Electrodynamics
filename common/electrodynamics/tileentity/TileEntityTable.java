@@ -16,7 +16,7 @@ import electrodynamics.network.PacketTypeHandler;
 import electrodynamics.network.packet.PacketFX;
 import electrodynamics.network.packet.PacketTableUpdate;
 import electrodynamics.recipe.CraftingManager;
-import electrodynamics.recipe.RecipeSmashingTable;
+import electrodynamics.recipe.RecipeTable;
 
 public class TileEntityTable extends TileEntity {
 
@@ -101,21 +101,21 @@ public class TileEntityTable extends TileEntity {
 		return true;
 	}
 	
-	public boolean hasRecipe() {
+	public boolean hasRecipe(ItemStack tool) {
 		if (type == 0 && displayedItem.getItem().itemID == Block.stoneSingleSlab.blockID) {
 			return true;
 		}
 		
-		return !(CraftingManager.getInstance().smashingManager.getRecipe(displayedItem) == null);
+		return !(CraftingManager.getInstance().tableManager.getRecipe(displayedItem, tool) == null);
 	}
 	
-	public void handleSmash(EntityPlayer player, ItemStack hammer) {
+	public void handleSmash(EntityPlayer player, ItemStack tool) {
 		if (displayedItem != null) {
 			if (this.type == 0 && displayedItem.getItem().itemID == Block.stoneSingleSlab.blockID) {
 				this.displayedItem = null;
 				this.worldObj.setBlock(xCoord, yCoord, zCoord, BlockIDs.BLOCK_TABLE_ID, 1, 2);
 			} else if (this.type == 1) {
-				RecipeSmashingTable recipe = CraftingManager.getInstance().smashingManager.getRecipe(displayedItem);
+				RecipeTable recipe = CraftingManager.getInstance().tableManager.getRecipe(displayedItem, tool);
 				
 				if (recipe != null) {
 					if (displayedItem.getItem() instanceof ItemBlock) {
@@ -124,7 +124,7 @@ public class TileEntityTable extends TileEntity {
 					}
 					
 					setItem(recipe.outputItem);
-					hammer.damageItem(recipe.hammerDamage, player);
+					tool.damageItem(recipe.hammerDamage, player);
 					
 					update();
 				}

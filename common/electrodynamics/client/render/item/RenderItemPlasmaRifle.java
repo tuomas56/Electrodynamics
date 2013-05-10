@@ -1,6 +1,5 @@
 package electrodynamics.client.render.item;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 

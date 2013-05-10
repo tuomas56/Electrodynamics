@@ -1,15 +1,14 @@
 package electrodynamics.item;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import electrodynamics.api.tool.ITool;
+import electrodynamics.api.tool.ToolType;
 import electrodynamics.core.CreativeTabED;
-import electrodynamics.util.PlayerUtil;
 
-public class ItemHandheldSieve extends Item {
+public class ItemHandheldSieve extends Item implements ITool {
  
 	public ItemHandheldSieve(int id) {
 		super(id);
@@ -17,20 +16,15 @@ public class ItemHandheldSieve extends Item {
 		setMaxDamage(500);
 		setCreativeTab(CreativeTabED.tool);
 	}
-	
+
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		Entity clickedEntity = PlayerUtil.getPointedEntity(world, player, 5, 0);
-	
-		if (clickedEntity != null) {
-			System.out.println("right clicked entity");
-			
-			if (clickedEntity instanceof EntityItem) {
-				System.out.println("right clicked item");
-			}
-		}
-		
-		return stack;
+	public ToolType getToolType() {
+		return ToolType.SIEVE;
+	}
+
+	@Override
+	public void onToolUsed(ItemStack stack, World world, int x, int y, int z, EntityPlayer player) {
+		stack.damageItem(1, player);
 	}
 	
 }

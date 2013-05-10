@@ -9,7 +9,7 @@ import electrodynamics.api.crafting.util.WeightedRecipeOutput;
 
 public class CraftingManager implements ICraftingManager {
 
-	public SmashingManager smashingManager;
+	public TableManager tableManager;
 	public SieveManager sieveManager;
 	
 	public static CraftingManager getInstance() {
@@ -17,8 +17,8 @@ public class CraftingManager implements ICraftingManager {
 	}
 	
 	@Override
-	public void registerSmashingTableRecipe(ItemStack input, ItemStack output, int damage) {
-		smashingManager.registerRecipe(input, output, damage);
+	public void registerTableRecipe(TableRecipeType type, ItemStack input, ItemStack output, int damage) {
+		tableManager.registerRecipe(type, input, output, damage);
 	}
 	
 	@Override
