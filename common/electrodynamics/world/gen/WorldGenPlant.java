@@ -47,7 +47,7 @@ public class WorldGenPlant implements IWorldGenerator {
 
 			if (world.isAirBlock(i1, j1, k1) && (!world.provider.hasNoSky || j1 < 127) && Block.blocksList[blockID].canBlockStay(world, i1, j1, k1)) {
 				if (validBiomes.contains(world.getBiomeGenForCoords(i1, k1))) {
-					world.setBlock(i1, j1, k1, blockID, 0, 2);
+					world.setBlock(i1, j1, k1, blockID, flowerMeta, 2);
 				}
 			}
 		}
