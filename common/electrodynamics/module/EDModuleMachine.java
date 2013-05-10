@@ -56,6 +56,7 @@ public class EDModuleMachine extends EDModule {
 		EDItems.itemDust = new ItemDust( ItemIDs.ITEM_DUST_ID ).setUnlocalizedName( Strings.ITEM_DUST_NAME );
 		GameRegistry.registerItem( EDItems.itemDust, Strings.ITEM_DUST_NAME );
 		for( Dust dust : Dust.values() ) {
+			dust.registerWithOreDictionary();
 			LanguageRegistry.addName( new ItemStack( EDItems.itemDust, 1, dust.ordinal() ), dust.localizedName );
 		}
 		for( Grinding grind : Grinding.values() ) {
@@ -65,6 +66,7 @@ public class EDModuleMachine extends EDModule {
 		EDItems.itemIngot = new ItemIngot(ItemIDs.ITEM_INGOT_ID).setUnlocalizedName(Strings.ITEM_INGOT_NAME);
 		GameRegistry.registerItem(EDItems.itemIngot, Strings.ITEM_INGOT_NAME);
 		for(Ingot ingot : Ingot.values()) {
+			ingot.registerWithOreDictionary();
 			LanguageRegistry.addName(new ItemStack(EDItems.itemIngot, 1, ingot.ordinal()), ingot.localizedName);
 		}
 		

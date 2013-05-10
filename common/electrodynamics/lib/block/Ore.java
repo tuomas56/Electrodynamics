@@ -3,6 +3,7 @@ package electrodynamics.lib.block;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public enum Ore {
 
@@ -67,6 +68,10 @@ public enum Ore {
 		return new ItemStack( BlockIDs.BLOCK_ORE_ID, 1, this.ordinal() );
 	}
 
+	public void registerWithOreDictionary() {
+		OreDictionary.registerOre(unlocalizedName, this.toItemStack());
+	}
+	
 	public static Ore get(int ordinal) {
 		return Ore.values()[ordinal];
 	}

@@ -1,6 +1,7 @@
 package electrodynamics.lib.item;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 
@@ -42,6 +43,10 @@ public enum Dust {
 	
 	public ItemStack toItemStack() {
 		return new ItemStack(ItemIDs.ITEM_DUST_ID + 256, 1, this.ordinal());
+	}
+	
+	public void registerWithOreDictionary() {
+		OreDictionary.registerOre(unlocalizedName, this.toItemStack());
 	}
 	
 	public static Dust get(int ordinal) {

@@ -37,7 +37,7 @@ public class EDModuleWorld extends EDModule {
 
 			LanguageRegistry.addName( ore, Ore.get( i ).getLocalizedName( "en_US" ) );
 			MinecraftForge.setBlockHarvestLevel( EDBlocks.blockOre, i, "pickaxe", Ore.get( i ).harvestLevel );
-			OreDictionary.registerOre( Ore.get( i ).oreDictionaryName, ore );
+			Ore.get(i).registerWithOreDictionary();
 		}
 
 		EDBlocks.blockDecorative = new BlockDecorative( BlockIDs.BLOCK_DECORATIVE_ID ).setUnlocalizedName( Strings.BLOCK_DECORATIVE );
