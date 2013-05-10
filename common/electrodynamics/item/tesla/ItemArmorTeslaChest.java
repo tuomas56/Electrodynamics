@@ -92,10 +92,10 @@ public class ItemArmorTeslaChest extends ItemArmor implements IKeyBoundServer {
 		if (key.equals(ConfigurationSettings.MAGNET_TOGGLE_NAME)) {
 			if (activeFor.contains(player.getEntityName())) {
 				activeFor.remove(player.getEntityName());
-				player.addChatMessage("Magnetic Attraction: " + EnumChatFormatting.RED + "OFF");
+				player.addChatMessage("Magnetic Pull: " + EnumChatFormatting.RED + "OFF");
 			} else {
 				activeFor.add(player.getEntityName());
-				player.addChatMessage("Magnetic Attraction: " + EnumChatFormatting.GREEN + "ON");
+				player.addChatMessage("Magnetic Pull: " + EnumChatFormatting.GREEN + "ON");
 			}
 		}
 	}

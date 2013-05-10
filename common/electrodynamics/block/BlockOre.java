@@ -104,7 +104,7 @@ public class BlockOre extends Block {
 				if (distanceToPlayer <= DISTANCE_LIMIT) {
 					if (this.soundDelay < System.currentTimeMillis()) {
 						this.soundDelay = (System.currentTimeMillis() + 5000 + (rand.nextInt(10)) * 1000);
-						world.playSound(x, y, z, "electrodynamics.block.voidstoneAmbient", 1F, 1.1F, false);
+						world.playSound(x, y, z, "electrodynamics.block.voidstoneAmbient", 0.75F, 1.1F, false);
 					}
 				}
 			}

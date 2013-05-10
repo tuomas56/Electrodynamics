@@ -61,8 +61,8 @@ public class ConfigurationSettings {
 	public static final int THERMAL_VIEW_TOGGLE_DEFAULT = 35;
 	
 	public static int HOVER_MODE_TOGGLE;
-	public static final String HOVER_MODE_TOGGLE_NAME = "tesla_armor.hover_mode.toggle";
-	public static final String HOVER_MODE_TOGGLE_CONFIGNAME = "tesla_armor.hover_mode.toggle";
+	public static final String HOVER_MODE_TOGGLE_NAME = "tesla_armor.jump_mode.toggle";
+	public static final String HOVER_MODE_TOGGLE_CONFIGNAME = "tesla_armor.jump_mode.toggle";
 	public static final int HOVER_MODE_TOGGLE_DEFAULT = 36;
 	
 	/* Graphical settings */

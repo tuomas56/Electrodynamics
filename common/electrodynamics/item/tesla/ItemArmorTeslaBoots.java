@@ -1,8 +1,5 @@
 package electrodynamics.item.tesla;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
@@ -11,21 +8,29 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import electrodynamics.configuration.ConfigurationSettings;
+import electrodynamics.control.IKeyBoundClient;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.item.EDItems;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.network.PacketTypeHandler;
 import electrodynamics.network.packet.PacketJump;
 
-public class ItemArmorTeslaBoots extends ItemArmor {
+public class ItemArmorTeslaBoots extends ItemArmor implements IKeyBoundClient {
 
 	private Icon texture;
 	
 	private long timeChargeStarted;
 	
-	private boolean active;
+	@SideOnly(Side.CLIENT)
+	public boolean active;
 	
 	public ItemArmorTeslaBoots(int id) {
 		super(id, EnumArmorMaterial.IRON, 2, 3);
@@ -33,7 +38,7 @@ public class ItemArmorTeslaBoots extends ItemArmor {
 		setMaxStackSize(1);
 		setMaxDamage(0);
 		
-		active = true;
+		active = false;
 	}
 	
 	@Override
@@ -69,6 +74,14 @@ public class ItemArmorTeslaBoots extends ItemArmor {
 	@Override
 	public void registerIcons(IconRegister register) {
 		texture = register.registerIcon(ModInfo.ICON_PREFIX + "tesla/boots");
+	}
+
+	@Override
+	public void doKeybindingAction(EntityPlayer player, ItemStack stack, String key) {
+		if (key.equalsIgnoreCase(ConfigurationSettings.HOVER_MODE_TOGGLE_NAME)) {
+			this.active = !active;
+			player.addChatMessage("Jump Boost: " + (active == true ? EnumChatFormatting.GREEN + "ON" : EnumChatFormatting.RED + "OFF"));
+		}
 	}
 
 }
