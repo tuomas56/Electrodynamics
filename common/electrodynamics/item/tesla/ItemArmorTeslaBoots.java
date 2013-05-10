@@ -38,7 +38,9 @@ public class ItemArmorTeslaBoots extends ItemArmor implements IKeyBoundClient {
 		setMaxStackSize(1);
 		setMaxDamage(0);
 		
-		active = false;
+		if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
+			active = false;
+		}
 	}
 	
 	@Override
