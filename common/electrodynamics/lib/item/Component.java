@@ -10,7 +10,7 @@ public enum Component {
 	MAGNET(Strings.MAGNET_NAME, "Magnet"),
 	MAGNETITE_CHUNK(Strings.MAGNETITE_CHUNK_NAME, "Magnetite Chunk"),
 	MAGNETITE_DUST(Strings.MAGNETITE_DUST_NAME, "Magnetite Dust"),
-	METAL_BAR(Strings.METAL_BAR, "Metal Bar"),
+	METAL_BAR(Strings.METAL_BAR, "Metal Rod"),
 	ARSENIC(Strings.ARSENIC, "Arsenic"),
 	LODESTONE_PEBBLE(Strings.LODESTONE_PEBBLE, "Lodestone Pebble"),
 	SAP(Strings.SAP, "Sap"),

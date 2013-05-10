@@ -1,5 +1,6 @@
 package electrodynamics.lib.block;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityBasicSieve;
@@ -19,6 +20,10 @@ public enum Machine {
 		this.unlocalizedName = unlocalizedName;
 		this.localizedName = localizedName;
 		this.tileEntity = tileEntity;
+	}
+	
+	public ItemStack toItemStack() {
+		return new ItemStack(BlockIDs.BLOCK_MACHINE_ID, 1, this.ordinal());
 	}
 	
 }
