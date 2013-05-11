@@ -14,6 +14,7 @@ import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.client.FXType;
 import electrodynamics.network.PacketTypeHandler;
 import electrodynamics.network.packet.PacketFX;
+import electrodynamics.network.packet.PacketSound;
 import electrodynamics.network.packet.PacketTableUpdate;
 import electrodynamics.recipe.CraftingManager;
 import electrodynamics.recipe.RecipeTable;
@@ -128,7 +129,8 @@ public class TileEntityTable extends TileEntity {
 					
 					update();
 					
-					this.worldObj.playSound(xCoord, yCoord, zCoord, "electrodynamics.block.tableSmash", 0.75F, 1.1F, false);
+					PacketSound sound = new PacketSound("electrodynamics.block.tableSmash", xCoord, yCoord, zCoord);
+					PacketDispatcher.sendPacketToAllAround(xCoord, yCoord, zCoord, 32D, this.worldObj.provider.dimensionId, PacketTypeHandler.fillPacket(sound));
 				}
 			}
 		}

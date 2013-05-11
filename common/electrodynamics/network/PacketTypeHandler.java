@@ -23,6 +23,7 @@ import electrodynamics.network.packet.PacketJump;
 import electrodynamics.network.packet.PacketKeyPress;
 import electrodynamics.network.packet.PacketLightningFX;
 import electrodynamics.network.packet.PacketPayload;
+import electrodynamics.network.packet.PacketSound;
 import electrodynamics.network.packet.PacketTableUpdate;
 
 public enum PacketTypeHandler {
@@ -33,7 +34,8 @@ public enum PacketTypeHandler {
 	JUMP(PacketJump.class),
 	LIGHTNING(PacketLightningFX.class),
 	FX(PacketFX.class),
-	ACTIVATE(PacketActivate.class);
+	ACTIVATE(PacketActivate.class),
+	SOUND(PacketSound.class);
 	
 	private Class<? extends PacketED> clazz;
 	

@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -69,6 +70,10 @@ public class ClientProxy extends CommonProxy {
 				addBlockDestroyParticles((int)x, (int)y, (int)z, extraInfo[0], extraInfo[1]);
 			}
 		}
+	}
+	
+	public void handleSoundPacket(String sound, double x, double y, double z) {
+		FMLClientHandler.instance().getClient().theWorld.playSoundEffect(x, y, z, sound, 1F, 1F);
 	}
 	
 	@Override
