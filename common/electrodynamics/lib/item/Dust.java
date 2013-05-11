@@ -26,7 +26,10 @@ public enum Dust {
 	IRON(Strings.DUST_IRON, "dustIron"),
 	GOLD(Strings.DUST_GOLD, "dustGold"),
 	BLUESTONE(Strings.DUST_BLUESTONE, "dustBluestone"),
-	GREENSTONE(Strings.DUST_GREENSTONE, "dustGreenstone");
+	GREENSTONE(Strings.DUST_GREENSTONE, "dustGreenstone"),
+	TIN(Strings.DUST_TIN, "dustTin"),
+	URANIUM(Strings.DUST_URANIUM, "dustUranium"),
+	SILVER(Strings.DUST_SILVER, "dustSilver");
 	
 	public String unlocalizedName;
 	public String textureFile;

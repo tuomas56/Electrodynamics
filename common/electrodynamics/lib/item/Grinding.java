@@ -6,7 +6,6 @@ import electrodynamics.lib.core.Strings;
 
 public enum Grinding {
 
-	//Mod Ores
 	CHALCOPYRITE(Strings.GROUND_CHALCOPYRITE, "grindingsChalcopyrite"),
 	COBALTITE(Strings.GROUND_COBALTITE, "grindingsCobaltite"),
 	GALENA(Strings.GROUND_GALENA, "grindingsGalena"),
@@ -22,7 +21,12 @@ public enum Grinding {
 	GOLD(Strings.GROUND_GOLD, "grindingsGold"), 
 	IRON(Strings.GROUND_IRON, "grindingsIron"), 
 	LAPIS(Strings.GROUND_LAPIS, "grindingsLapis"),
-	REDSTONE(Strings.GROUND_REDSTONE, "grindingsRedstone");
+	REDSTONE(Strings.GROUND_REDSTONE, "grindingsRedstone"),
+	COPPER(Strings.GROUND_COPPER, "grindingsCopper"),
+	LEAD(Strings.GROUND_LEAD, "grindingsLead"),
+	SILVER(Strings.GROUND_SILVER, "grindingsSilver"),
+	TIN(Strings.GROUND_TIN, "grindingsTin"),
+	URANIUM(Strings.GROUND_URANIUM, "grindingsUranium");
 	
 	public String unlocalizedName;
 	public String textureFile;

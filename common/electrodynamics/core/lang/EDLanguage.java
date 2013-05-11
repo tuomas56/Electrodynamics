@@ -13,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import electrodynamics.Electrodynamics;
+import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.core.EDLogger;
 import electrodynamics.lib.core.ModInfo;
 
@@ -83,12 +84,17 @@ public class EDLanguage {
 	}
 	
 	public void registerItemStack(ItemStack stack, String unlocalized) {
+		String currLang = "";
+		
 		try {
 			for (String lang : languageMapping.keySet()) {
+				currLang = lang;
 				LanguageRegistry.instance().addNameForObject(stack, lang, translate(unlocalized, lang));
 			}
 		} catch(Exception ex) {
-			EDLogger.warn("Failed to register localization for " + unlocalized);
+			if (ConfigurationSettings.SHOW_LOCALIZATION_ERRORS) {
+				EDLogger.warn("Failed to register " + currLang + " localization for " + unlocalized);
+			}
 		}
 	}
 	

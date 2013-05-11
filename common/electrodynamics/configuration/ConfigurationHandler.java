@@ -24,17 +24,6 @@ public class ConfigurationHandler {
 		Configuration config = new Configuration(file);
 		
 		try {
-			/* Settings */
-			ConfigurationSettings.MAGNETITE_ENABLED = config.get(CATEGORY_SETTINGS, ConfigurationSettings.MAGNETITE_ENABLED_CONFIGNAME, ConfigurationSettings.MAGNETITE_ENABLED_DEFAULT).getBoolean(ConfigurationSettings.MAGNETITE_ENABLED_DEFAULT);
-			ConfigurationSettings.MAGNETITE_MAX_Y_LEVEL = config.get(CATEGORY_SETTINGS, ConfigurationSettings.MAGNETITE_MAX_Y_LEVEL_CONFIGNAME, ConfigurationSettings.MAGNETITE_MAX_Y_LEVEL_DEFAULT).getInt(ConfigurationSettings.MAGNETITE_MAX_Y_LEVEL_DEFAULT);
-			ConfigurationSettings.MAGNETITE_SPAWN_AMOUNT = config.get(CATEGORY_SETTINGS, ConfigurationSettings.MAGNETITE_SPAWN_AMOUNT_CONFIGNAME, ConfigurationSettings.MAGNETITE_SPAWN_AMOUNT_DEFAULT).getInt(ConfigurationSettings.MAGNETITE_SPAWN_AMOUNT_DEFAULT);
-			ConfigurationSettings.MAGNETITE_SPAWN_RARITY = config.get(CATEGORY_SETTINGS, ConfigurationSettings.MAGNETITE_SPAWN_RARITY_CONFIGNAME, ConfigurationSettings.MAGNETITE_SPAWN_RARITY_DEFAULT).getInt(ConfigurationSettings.MAGNETITE_SPAWN_RARITY_DEFAULT);
-
-			ConfigurationSettings.NICKEL_ENABLED = config.get(CATEGORY_SETTINGS, ConfigurationSettings.NICKEL_ENABLED_CONFIGNAME, ConfigurationSettings.NICKEL_ENABLED_DEFAULT).getBoolean(ConfigurationSettings.NICKEL_ENABLED_DEFAULT);
-			ConfigurationSettings.NICKEL_MAX_Y_LEVEL = config.get(CATEGORY_SETTINGS, ConfigurationSettings.NICKEL_MAX_Y_LEVEL_CONFIGNAME, ConfigurationSettings.NICKEL_MAX_Y_LEVEL_DEFAULT).getInt(ConfigurationSettings.NICKEL_MAX_Y_LEVEL_DEFAULT);
-			ConfigurationSettings.NICKEL_SPAWN_AMOUNT = config.get(CATEGORY_SETTINGS, ConfigurationSettings.NICKEL_SPAWN_AMOUNT_CONFIGNAME, ConfigurationSettings.NICKEL_SPAWN_AMOUNT_DEFAULT).getInt(ConfigurationSettings.NICKEL_SPAWN_AMOUNT_DEFAULT);
-			ConfigurationSettings.NICKEL_SPAWN_RARITY = config.get(CATEGORY_SETTINGS, ConfigurationSettings.NICKEL_SPAWN_RARITY_CONFIGNAME, ConfigurationSettings.NICKEL_SPAWN_RARITY_DEFAULT).getInt(ConfigurationSettings.NICKEL_SPAWN_RARITY_DEFAULT);
-			
 			ConfigurationSettings.MAGNETIC_RANGE = config.get(CATEGORY_TESLA, ConfigurationSettings.MAGNETIC_RANGE_CONFIGNAME, ConfigurationSettings.MAGNETIC_RANGE_DEFAULT).getDouble(ConfigurationSettings.MAGNETIC_RANGE_DEFAULT);
 			ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED = config.get(CATEGORY_TESLA, ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_CONFIGNAME, ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_DEFAULT).getDouble(ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_DEFAULT);
 			ConfigurationSettings.THERMAL_VIEW_RANGE = config.get(CATEGORY_TESLA, ConfigurationSettings.THERMAL_VIEW_RANGE_CONFIGNAME, ConfigurationSettings.THERMAL_VIEW_RANGE_DEFAULT).getDouble(ConfigurationSettings.THERMAL_VIEW_RANGE_DEFAULT);
@@ -45,6 +34,9 @@ public class ConfigurationHandler {
 			
 			/* Audio settings */
 			ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND = config.get(CATEGORY_SOUND, ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND_NAME, ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND_DEFAULT).getBoolean(ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND_DEFAULT);
+			
+			/* General Settings */
+			ConfigurationSettings.SHOW_LOCALIZATION_ERRORS = config.get(CATEGORY_SETTINGS, ConfigurationSettings.SHOW_LOCALIZATION_ERRORS_NAME, ConfigurationSettings.SHOW_LOCALIZATION_ERRORS_DEFAULT, "Whether missing localization entries should print errors to the console.").getBoolean(ConfigurationSettings.SHOW_LOCALIZATION_ERRORS_DEFAULT);
 			
 			/* Key Bindings */
 			Electrodynamics.proxy.setKeyBinding(ConfigurationSettings.MAGNET_TOGGLE_NAME, config.get(CATEGORY_KEYS, ConfigurationSettings.MAGNET_TOGGLE_CONFIGNAME, ConfigurationSettings.MAGNET_TOGGLE_DEFAULT).getInt(ConfigurationSettings.MAGNET_TOGGLE_DEFAULT), false);

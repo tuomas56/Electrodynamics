@@ -77,4 +77,9 @@ public class ConfigurationSettings {
 	public static final String VOIDSTONE_AMBIENT_SOUND_NAME = "sound.voidstone.ambient";
 	public static final boolean VOIDSTONE_AMBIENT_SOUND_DEFAULT = true;
 	
+	/* General settings */
+	public static boolean SHOW_LOCALIZATION_ERRORS;
+	public static final String SHOW_LOCALIZATION_ERRORS_NAME = "general.localization.show_errors";
+	public static final boolean SHOW_LOCALIZATION_ERRORS_DEFAULT = false;
+	
 }

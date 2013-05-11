@@ -14,7 +14,10 @@ public enum Ingot {
 	NICKEL(Strings.INGOT_NICKEL, "ingotNickel"),
 	TELLURIUM(Strings.INGOT_TELLURIUM, "ingotTellurium"),
 	TUNGSTEN(Strings.INGOT_TUNGSTEN, "ingotTungsten"),
-	STEEL(Strings.INGOT_STEEL, "ingotSteel");
+	STEEL(Strings.INGOT_STEEL, "ingotSteel"),
+	TIN(Strings.INGOT_TIN, "ingotTin"),
+	URANIUM(Strings.INGOT_URANIUM, "ingotUranium"),
+	SILVER(Strings.INGOT_SILVER, "ingotSilver");
 	
 	public String unlocalizedName;
 	public String textureFile;

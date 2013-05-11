@@ -83,6 +83,9 @@ public class Strings {
 	public static final String DUST_GOLD = "dust.gold.name";
 	public static final String DUST_BLUESTONE = "dust.bluestone.name";
 	public static final String DUST_GREENSTONE = "dust.greenstone.name";
+	public static final String DUST_TIN = "dust.tin.name";
+	public static final String DUST_URANIUM = "dust.uranium.name";
+	public static final String DUST_SILVER = "dust.silver.name";
 	
 	/* Internal grinding names */
 	public static final String GROUND_CHALCOPYRITE = "ground.chalcopyrite.name";
@@ -101,6 +104,11 @@ public class Strings {
 	public static final String GROUND_REDSTONE = "ground.redstone.name";
 	public static final String GROUND_BLUESTONE = "ground.bluestone.name";
 	public static final String GROUND_GREENSTONE = "ground.greenstone.name";
+	public static final String GROUND_COPPER = "ground.copper.name";
+	public static final String GROUND_LEAD = "ground.lead.name";
+	public static final String GROUND_SILVER = "ground.silver.name";
+	public static final String GROUND_TIN = "ground.tin.name";
+	public static final String GROUND_URANIUM = "ground.uranium.name";
 	
 	/* Internal ingot names */
 	public static final String INGOT_LODESTONE = "ingot.lodestone.name";
@@ -111,6 +119,9 @@ public class Strings {
 	public static final String INGOT_TELLURIUM = "ingot.tellurium.name";
 	public static final String INGOT_TUNGSTEN = "ingot.tungsten.name";
 	public static final String INGOT_STEEL = "ingot.steel.name";
+	public static final String INGOT_TIN = "ingot.tin.name";
+	public static final String INGOT_URANIUM = "ingot.uranium.name";
+	public static final String INGOT_SILVER = "ingot.silver.name";
 	
 	/* Internal machine names */
 	public static final String MACHINE_SINTERING_OVEN = "machine.sinteringOven.name";
