@@ -1,6 +1,7 @@
 package electrodynamics.recipe;
 
 import net.minecraft.item.ItemStack;
+import electrodynamics.api.crafting.util.TableRecipeType;
 import electrodynamics.api.tool.ITool;
 
 public class RecipeTable {

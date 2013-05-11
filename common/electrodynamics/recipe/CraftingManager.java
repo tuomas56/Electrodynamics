@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
 import electrodynamics.Electrodynamics;
 import electrodynamics.api.crafting.ICraftingManager;
+import electrodynamics.api.crafting.util.TableRecipeType;
 import electrodynamics.api.crafting.util.WeightedRecipeOutput;
 
 public class CraftingManager implements ICraftingManager {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import electrodynamics.api.crafting.util.TableRecipeType;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.lib.block.Ore;
 import electrodynamics.lib.item.Component;
@@ -52,8 +53,8 @@ public class TableManager {
 		registerSmashingRecipe(new ItemStack(Block.stone), new ItemStack(Block.cobblestone), 1);
 		registerSmashingRecipe(new ItemStack(Block.brick), new ItemStack(Item.brick, 4, 0), 1);
 		
-		//First 8 ore/grinding ordinals are equal
-		for (int i=0; i<8; i++) {
+		//First 9 ore/grinding ordinals are equal
+		for (int i=0; i<9; i++) {
 			registerSmashingRecipe(Ore.get(i).toItemStack(), Grinding.get(i).toItemStack(), 1);
 		}
 		
@@ -68,6 +69,12 @@ public class TableManager {
 		registerSmashingRecipe(new ItemStack(Block.oreIron), Grinding.IRON.toItemStack(), 1);
 		registerSmashingRecipe(new ItemStack(Block.oreLapis), Grinding.LAPIS.toItemStack(), 1);
 		registerSmashingRecipe(new ItemStack(Block.oreRedstone), Grinding.REDSTONE.toItemStack(), 1);
+		
+		//Ore dictionary ores
+		registerRecipe(new OreRecipeTable(TableRecipeType.SMASH, "oreCopper", Grinding.COPPER.toItemStack(), 1));
+		registerRecipe(new OreRecipeTable(TableRecipeType.SMASH, "oreSilver", Grinding.SILVER.toItemStack(), 1));
+		registerRecipe(new OreRecipeTable(TableRecipeType.SMASH, "oreTin", Grinding.TIN.toItemStack(), 1));
+		registerRecipe(new OreRecipeTable(TableRecipeType.SMASH, "oreUranium", Grinding.URANIUM.toItemStack(), 1));
 	}
 	
 }

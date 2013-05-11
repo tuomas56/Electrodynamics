@@ -114,6 +114,46 @@ public class SieveManager {
 				outputs.add(new WeightedRecipeOutput(Component.VOIDSTONE_MAGNET, 0.001F));
 			}
 		});
+		
+		registerRecipe(new RecipeBasicSieve(Grinding.GOLD.toItemStack(), 100) {
+			@Override
+			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
+				outputs.add(new WeightedRecipeOutput(Dust.GOLD, 1F));
+				outputs.add(new WeightedRecipeOutput(Dust.LEAD, 0.05F));
+				outputs.add(new WeightedRecipeOutput(Dust.TELLURIUM, 0.001F));
+			}
+		});
+		
+		registerRecipe(new RecipeBasicSieve(Grinding.IRON.toItemStack(), 100) {
+			@Override
+			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
+				outputs.add(new WeightedRecipeOutput(Dust.IRON, 1F));
+				outputs.add(new WeightedRecipeOutput(Dust.LEAD, 0.05F));
+				outputs.add(new WeightedRecipeOutput(Dust.TELLURIUM, 0.001F));
+			}
+		});
+		
+		registerRecipe(new RecipeBasicSieve(Grinding.COPPER.toItemStack(), 100) {
+			@Override
+			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
+				outputs.add(new WeightedRecipeOutput(Dust.COPPER, 1F));
+			}
+		});
+		
+		registerRecipe(new RecipeBasicSieve(Grinding.TIN.toItemStack(), 100) {
+			@Override
+			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
+				outputs.add(new WeightedRecipeOutput(Dust.TIN, 1F));
+			}
+		});
+		
+		registerRecipe(new RecipeBasicSieve(Grinding.URANIUM.toItemStack(), 100) {
+			@Override
+			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
+				outputs.add(new WeightedRecipeOutput(Dust.URANIUM, 1F));
+				outputs.add(new WeightedRecipeOutput(Dust.TELLURIUM, 0.001F));
+			}
+		});
 	}
 	
 }

@@ -1,4 +1,4 @@
-package electrodynamics.recipe;
+package electrodynamics.api.crafting.util;
 
 import electrodynamics.api.tool.ToolType;
 

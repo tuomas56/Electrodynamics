@@ -3,8 +3,8 @@ package electrodynamics.api.crafting;
 import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
+import electrodynamics.api.crafting.util.TableRecipeType;
 import electrodynamics.api.crafting.util.WeightedRecipeOutput;
-import electrodynamics.recipe.TableRecipeType;
 
 public interface ICraftingManager {
 

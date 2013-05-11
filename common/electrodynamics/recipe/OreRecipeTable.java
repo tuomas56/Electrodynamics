@@ -1,5 +1,6 @@
 package electrodynamics.recipe;
 
+import electrodynamics.api.crafting.util.TableRecipeType;
 import electrodynamics.api.tool.ITool;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
