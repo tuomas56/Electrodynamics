@@ -17,5 +17,6 @@ public class EDBlocks {
 	public static Block blockRubberWood;
 	public static Block blockRubberLeaves;
 	public static Block blockRubberSapling;
+	public static Block blockTreetap;
 	
 }

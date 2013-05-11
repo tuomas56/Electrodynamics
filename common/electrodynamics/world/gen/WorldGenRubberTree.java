@@ -60,7 +60,7 @@ public class WorldGenRubberTree implements IWorldGenerator {
 		h -= h / 2;
 		height += random.nextInt(h + 1);
 		for (int i = 0; i < height; i++) {
-			world.setBlock(x, y + i, z, EDBlocks.blockRubberWood.blockID, 0, 7);
+			world.setBlock(x, y + i, z, EDBlocks.blockRubberWood.blockID, 1, 7);
 
 			if ((height < 4) || ((height < 7) && (i > 1)) || (i > 2)) {
 				for (int a = x - 2; a <= x + 2; a++) {

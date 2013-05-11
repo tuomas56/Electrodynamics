@@ -1,6 +1,5 @@
 package electrodynamics.lib.core;
 
-//TODO add wormwood tea and peeling spud
 public class Strings {
 
 	/* REMINDER: ANY LOCALIZATION STRINGS ADDED HERE MUST BE ADDED TO THE .lang FILES!
@@ -36,6 +35,7 @@ public class Strings {
 	public static final String BLOCK_RUBBER_WOOD = "rubber.wood.name";
 	public static final String BLOCK_RUBBER_LEAF = "rubber.leaves.name";
 	public static final String BLOCK_RUBBER_SAPLING = "rubber.sapling.name";
+	public static final String BLOCK_TREETAP = "treetap.name";
 	
 	/* Internal component names */
 	public static final String COMPONENT_FAN_BLADE = "component.fanBlade.name";

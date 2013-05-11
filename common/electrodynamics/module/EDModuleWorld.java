@@ -14,10 +14,12 @@ import electrodynamics.block.BlockOre;
 import electrodynamics.block.BlockRubberLeaves;
 import electrodynamics.block.BlockRubberSapling;
 import electrodynamics.block.BlockRubberWood;
+import electrodynamics.block.BlockTreetap;
 import electrodynamics.block.BlockWormseed;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.block.item.ItemBlockDecorative;
 import electrodynamics.block.item.ItemBlockOre;
+import electrodynamics.block.item.ItemBlockTreetap;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemPeelingSpud;
@@ -26,6 +28,7 @@ import electrodynamics.lib.block.Decorative;
 import electrodynamics.lib.block.Ore;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.lib.item.ItemIDs;
+import electrodynamics.tileentity.TileEntityTreetap;
 import electrodynamics.util.BiomeHelper;
 import electrodynamics.world.TickHandlerMBS;
 import electrodynamics.world.gen.WorldGenBlock;
@@ -76,11 +79,17 @@ public class EDModuleWorld extends EDModule {
 		EDBlocks.blockRubberSapling = new BlockRubberSapling(BlockIDs.BLOCK_RUBBER_SAPLING_ID).setUnlocalizedName(Strings.BLOCK_RUBBER_SAPLING);
 		GameRegistry.registerBlock(EDBlocks.blockRubberSapling, Strings.BLOCK_RUBBER_SAPLING);
 		EDLanguage.getInstance().registerBlock(EDBlocks.blockRubberSapling);
+		
+		EDBlocks.blockTreetap = new BlockTreetap(BlockIDs.BLOCK_TREETAP_ID).setUnlocalizedName(Strings.BLOCK_TREETAP);
+		GameRegistry.registerBlock(EDBlocks.blockTreetap, ItemBlockTreetap.class, Strings.BLOCK_TREETAP);
+		EDLanguage.getInstance().registerBlock(EDBlocks.blockTreetap);
 	}
 
 	@Override
 	public void init() {
 //		MinecraftForge.EVENT_BUS.register(new BonemealEventHandler());
+		
+		GameRegistry.registerTileEntity(TileEntityTreetap.class, Strings.BLOCK_TREETAP);
 		
 		FurnaceRecipes.smelting().addSmelting(BlockIDs.BLOCK_DECORATIVE_ID, 2, new ItemStack(EDBlocks.blockDecorative, 1, 0), 0F);
 		

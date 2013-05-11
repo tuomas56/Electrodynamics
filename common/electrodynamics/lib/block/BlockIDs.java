@@ -53,4 +53,9 @@ public class BlockIDs {
 	/* blockRubberSapling */
 	public static int BLOCK_RUBBER_SAPLING_ID;
 	public static final int BLOCK_RUBBER_SAPLING_DEFAULT_ID = 512;
+	
+	/* blockTreetap */
+	public static int BLOCK_TREETAP_ID;
+	public static int BLOCK_TREETAP_DEFAULT_ID = 513;
+	
 }
