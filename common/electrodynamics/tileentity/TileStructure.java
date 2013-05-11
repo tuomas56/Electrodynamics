@@ -1,6 +1,7 @@
 package electrodynamics.tileentity;
 
 
+import electrodynamics.mbs.MultiBlockStructure;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -16,7 +17,7 @@ public abstract class TileStructure extends TileEntity {
 	// The orientation of the MBS as a whole (relative to the MBS's pattern design).
 	protected int rotation;
 
-	public void validateStructure(int rotation, int x, int y, int z) {
+	public void validateStructure(MultiBlockStructure multiBlockStructure, int rotation, int x, int y, int z) {
 		this.rotation = rotation;
 		this.targetX = x;
 		this.targetY = y;

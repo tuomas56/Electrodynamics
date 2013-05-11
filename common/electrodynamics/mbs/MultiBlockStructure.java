@@ -113,7 +113,7 @@ public class MultiBlockStructure {
 			if( worldBlock != null ) {
 				tile = worldBlock.getTileEntity();
 				if( tile != null && tile instanceof TileStructure ) {
-					((TileStructure) tile).validateStructure( rotation, x, y, z );
+					((TileStructure) tile).validateStructure( this, rotation, x, y, z );
 				}
 			}
 		}
