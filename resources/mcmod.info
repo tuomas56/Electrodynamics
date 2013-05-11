@@ -2,9 +2,9 @@
 {
 	"modid": "ED",
 	"name": "Electrodynamics - Core",
-	"version": "0.0.3",
-	"description": "Compact your world, comrade!",
-	"credits": "Forge team for Forge, Eloraam for RP2!",
+	"version": "0.0.5",
+	"description": "We need moar powah!",
+	"credits": "Forge Dev Team, Eloraam, Chickenbones",
 	"url": "http://www.electrodynamicsmod.com",
 	"authors": [ "CyanideX", "dmillerw", "Hawkye",  "Xhamolk_", "Odiefrom",  "Mrabow" ],
 	"dependencies": [
