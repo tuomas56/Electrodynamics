@@ -2,9 +2,9 @@ package electrodynamics.module;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import electrodynamics.block.BlockLaserEmitter;
 import electrodynamics.block.EDBlocks;
+import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.entity.EntityBeam;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemPlasmaRifle;
@@ -19,11 +19,11 @@ public class EDModuleLaser extends EDModule {
 	public void preInit() {
 		EDBlocks.blockLaserEmitter = new BlockLaserEmitter(BlockIDs.BLOCK_LASER_EMITTER_ID).setUnlocalizedName(Strings.BLOCK_LASER_EMITTER);
 		GameRegistry.registerBlock(EDBlocks.blockLaserEmitter, Strings.BLOCK_LASER_EMITTER);
-		LanguageRegistry.addName(EDBlocks.blockLaserEmitter, "Laser Emitter");
+		EDLanguage.getInstance().registerBlock(EDBlocks.blockLaserEmitter);
 		
 		EDItems.itemPlasmaRifle = new ItemPlasmaRifle(ItemIDs.ITEM_PLASMA_RIFLE).setUnlocalizedName(Strings.ITEM_PLASMA_RIFLE);
 		GameRegistry.registerItem(EDItems.itemPlasmaRifle, Strings.ITEM_PLASMA_RIFLE);
-		LanguageRegistry.addName(EDItems.itemPlasmaRifle, "Plasma Rifle");
+		EDLanguage.getInstance().registerItem(EDItems.itemPlasmaRifle);
 	}
 
 	@Override

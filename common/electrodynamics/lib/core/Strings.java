@@ -3,136 +3,148 @@ package electrodynamics.lib.core;
 //TODO add wormwood tea and peeling spud
 public class Strings {
 
+	/* REMINDER: ANY LOCALIZATION STRINGS ADDED HERE MUST BE ADDED TO THE .lang FILES!
+	 * en_US AT THE VERY LEAST */
+	
 	/* Internal item names */
-	public static final String ITEM_COMPONENT_NAME = "itemComponent";
-	public static final String ITEM_TESLA_HAT_NAME = "itemTeslaHat";
-	public static final String ITEM_TESLA_CHEST_NAME = "itemTeslaChest";
-	public static final String ITEM_TESLA_LEGS_NAME = "itemTeslaLegs";
-	public static final String ITEM_TESLA_BOOTS_NAME = "itemTeslaBoots";
-	public static final String ITEM_STONE_HAMMER_NAME = "itemStoneHammer";
-	public static final String ITEM_STEEL_HAMMER_NAME = "itemSteelHammer";
-	public static final String ITEM_SLEDGE_HAMMER_NAME = "itemSledgeHammer";
-	public static final String ITEM_DUST_NAME = "itemDust";
-	public static final String ITEM_INGOT_NAME = "itemIngot";
-	public static final String ITEM_HANDHELD_SIEVE_NAME = "itemHandSieve";
-	public static final String ITEM_TRAY_NAME = "itemTray";
-	public static final String ITEM_PLASMA_RIFLE = "itemPlasmaRifle";
+	public static final String ITEM_COMPONENT_NAME = "component.name";
+	public static final String ITEM_TESLA_HAT_NAME = "tesla.helm.name";
+	public static final String ITEM_TESLA_CHEST_NAME = "tesla.chest.name";
+	public static final String ITEM_TESLA_LEGS_NAME = "tesla.legs.name";
+	public static final String ITEM_TESLA_BOOTS_NAME = "tesla.boots.name";
+	public static final String ITEM_STONE_HAMMER_NAME = "hammer.stone.name";
+	public static final String ITEM_STEEL_HAMMER_NAME = "hammer.steel.name";
+	public static final String ITEM_SLEDGE_HAMMER_NAME = "hammer.sledge.name";
+	public static final String ITEM_DUST_NAME = "dust.name";
+	public static final String ITEM_INGOT_NAME = "ingot.name";
+	public static final String ITEM_HANDHELD_SIEVE_NAME = "tool.hand_sieve.name";
+	public static final String ITEM_TRAY_NAME = "tray.name";
+	public static final String ITEM_PLASMA_RIFLE = "weapon.plasma_rifle.name";
 	
 	/* Internal block names */
-	public static final String BLOCK_ORE_NAME = "blockOre";
-	public static final String BLOCK_RED_WIRE_NAME = "blockRedWire";
-	public static final String BLOCK_TABLE_NAME = "blockTable";
-	public static final String BLOCK_LASER_EMITTER = "blockLaserEmitter";
-	public static final String BLOCK_MACHINE = "blockMachine";
-	public static final String BLOCK_DECORATIVE = "blockDecorative";
-	public static final String BLOCK_WORMSEED = "blockWormseed";
-	public static final String BLOCK_GAS = "blockGas";
-	public static final String BLOCK_STORAGE = "blockStorage";
+	public static final String BLOCK_ORE_NAME = "ore.name";
+	public static final String BLOCK_RED_WIRE_NAME = "red_wire.name";
+	public static final String BLOCK_TABLE_NAME = "table.name";
+	public static final String BLOCK_LASER_EMITTER = "laser_emitter.name";
+	public static final String BLOCK_MACHINE = "machine.name";
+	public static final String BLOCK_DECORATIVE = "decorative.name";
+	public static final String BLOCK_WORMSEED = "wormseed.name";
+	public static final String BLOCK_GAS = "gas.name";
+	public static final String BLOCK_STORAGE = "storage.name";
+	public static final String BLOCK_LITHIUM_CLAY = "clayLithium.name";
 	
 	/* Internal component names */
-	public static final String FAN_BLADE_NAME = "fanBlade";
-	public static final String MAGNET_NAME = "magnet";
-	public static final String MAGNETITE_CHUNK_NAME = "magnetiteChunk";
-	public static final String MAGNETITE_DUST_NAME = "magnetiteDust";
-	public static final String METAL_BAR = "metalBar";
-	public static final String ARSENIC = "arsenic";
-	public static final String LODESTONE_PEBBLE = "lodestonePebble";
-	public static final String SAP = "itemSap";
-	public static final String TWINE = "itemTwine";
-	public static final String TWINE_MESH = "twineMesh";
-	public static final String LITHIUM_CLAY = "lithiumDriedClay";
-	public static final String WORMWOOD_LEAF = "wormwoodLeaf";
-	public static final String PCB = "pcb";
-	public static final String VOIDSTONE_MAGNET = "voidstoneMagnet";
-	public static final String LITHIUM_CLAY_WET = "lithiumWetClay";
+	public static final String COMPONENT_FAN_BLADE = "component.fanBlade.name";
+	public static final String COMPONENT_MAGNET = "component.magnet.name";
+	public static final String COMPONENT_MAGNETITE_CHUNK = "component.magnetiteChunk.name";
+	public static final String COMPONENT_MAGNETITE_DUST = "component.magnetiteDust.name";
+	public static final String COMPONENT_METAL_BAR = "component.metalBar.name";
+	public static final String COMPONENT_ARSENIC = "component.arsenic.name";
+	public static final String COMPONENT_LODESTONE_PEBBLE = "component.lodestonePebble.name";
+	public static final String COMPONENT_SAP = "component.sap.name";
+	public static final String COMPONENT_TWINE = "component.twine.name";
+	public static final String COMPONENT_TWINE_MESH = "component.twineMesh.name";
+	public static final String COMPONENT_WORMWOOD_LEAF = "component.wormwoodLeaf.name";
+	public static final String COMPONENT_PCB = "component.pcb.name";
+	public static final String COMPONENT_VOIDSTONE_MAGNET = "component.voidstoneMagnet.name";
+	public static final String COMPONENT_LITHIUM_CLAY_DRY = "component.lithiumClayDry.name";
+	public static final String COMPONENT_LITHIUM_CLAY_WET = "component.lithiumClayWet.name";
 	
 	/* Internal ore names */
-	public static final String ORE_COBALTITE_NAME = "oreCobaltite";
-	public static final String ORE_CHALCOPYRITE_NAME = "oreChalcopyrite";
-	public static final String ORE_GALENA_ORE = "oreGalena";
-	public static final String ORE_LITHIUM_CLAY = "clayLithium";
-	public static final String ORE_MAGNETITE_NAME = "oreMagnetite";
-	public static final String ORE_NICKEL_NAME = "oreNickel";
-	public static final String ORE_WOLFRAMITE_NAME = "oreWolframite";
-	public static final String ORE_LIMESTONE_BLOCK = "blockLimestone";
-	public static final String ORE_VOIDSTONE = "oreVoidstone";
-	public static final String ORE_BLUESTONE = "oreBluestone";
-	public static final String ORE_GREENSTONE = "oreGreenstone";
+	public static final String ORE_COBALTITE_NAME = "ore.cobaltite.name";
+	public static final String ORE_CHALCOPYRITE_NAME = "ore.chalcopyrite.name";
+	public static final String ORE_GALENA_ORE = "ore.galena.name";
+	public static final String ORE_MAGNETITE_NAME = "ore.magnetite.name";
+	public static final String ORE_NICKEL_NAME = "ore.nickel.name";
+	public static final String ORE_WOLFRAMITE_NAME = "ore.wolframite.name";
+	public static final String ORE_VOIDSTONE = "ore.voidstone.name";
+	public static final String ORE_BLUESTONE = "ore.bluestone.name";
+	public static final String ORE_GREENSTONE = "ore.greenstone.name";
 	
 	/* Internal dust names */
-	public static final String DUST_CLAY = "dustClay";
-	public static final String DUST_COBALT = "dustCobalt";
-	public static final String DUST_COB_HEX = "dustCobaltHexahydrate";
-	public static final String DUST_COPPER = "dustCopper";
-	public static final String DUST_LEAD = "dustLead";
-	public static final String DUST_LIME_PURE = "dustLimePure";
-	public static final String DUST_LIMESTONE = "dustLimestone";
-	public static final String DUST_LITHIUM = "dustLithium";
-	public static final String DUST_MAGNETITE = "dustMagnetite";
-	public static final String DUST_NICKEL = "dustNickel";
-	public static final String DUST_SILICON = "dustSilicon";
-	public static final String DUST_SILICON_SMALL = "dustSiliconSmall";
-	public static final String DUST_SULFUR = "dustSulfur";
-	public static final String DUST_TELLURIUM = "dustTellurium";
-	public static final String DUST_TUNGSTEN = "dustTungsten";
-	public static final String DUST_LODESTONE = "dustLodestone";
-	public static final String DUST_VOIDSTONE = "dustVoidstone";
-	public static final String DUST_IRON = "dustIron";
-	public static final String DUST_GOLD = "dustGold";
-	public static final String DUST_BLUESTONE = "dustBluestone";
-	public static final String DUST_GREENSTONE = "dustGreenstone";
+	public static final String DUST_CLAY = "dust.clay.name";
+	public static final String DUST_COBALT = "dust.cobalt.name";
+	public static final String DUST_COB_HEX = "dust.cobaltHexahydrate.name";
+	public static final String DUST_COPPER = "dust.copper.name";
+	public static final String DUST_LEAD = "dust.lead.name";
+	public static final String DUST_LIME_PURE = "dust.limePure.name";
+	public static final String DUST_LIMESTONE = "dust.limestone.name";
+	public static final String DUST_LITHIUM = "dust.lithium.name";
+	public static final String DUST_MAGNETITE = "dust.magnetite.name";
+	public static final String DUST_NICKEL = "dust.nickel.name";
+	public static final String DUST_SILICON = "dust.silicon.name";
+	public static final String DUST_SILICON_SMALL = "dust.siliconSmall.name";
+	public static final String DUST_SULFUR = "dust.sulfur.name";
+	public static final String DUST_TELLURIUM = "dust.tellurium.name";
+	public static final String DUST_TUNGSTEN = "dust.tungsten.name";
+	public static final String DUST_LODESTONE = "dust.lodestone.name";
+	public static final String DUST_VOIDSTONE = "dust.voidstone.name";
+	public static final String DUST_IRON = "dust.iron.name";
+	public static final String DUST_GOLD = "dust.gold.name";
+	public static final String DUST_BLUESTONE = "dust.bluestone.name";
+	public static final String DUST_GREENSTONE = "dust.greenstone.name";
 	
 	/* Internal grinding names */
-	public static final String GROUND_CHARCOPYRITE = "grindingsCharcopyrite";
-	public static final String GROUND_COBALTITE = "grindingsCobaltite";
-	public static final String GROUND_GALENA = "grindingsGalena";
-	public static final String GROUND_LITHIUM = "grindingsLithium";
-	public static final String GROUND_MAGNETITE = "grindingsMagnetite";
-	public static final String GROUND_NICKEL = "grindingsNickel";
-	public static final String GROUND_WOLFRAMITE = "grindingsWolframite";
-	public static final String GROUND_VOIDSTONE = "grindingsVoidstone";
-	public static final String GROUND_DIAMOND = "grindingsDiamond";
-	public static final String GROUND_EMERALD = "grindingsEmerald";
-	public static final String GROUND_GOLD = "grindingsGold";
-	public static final String GROUND_IRON = "grindingsIron";
-	public static final String GROUND_LAPIS = "grindingsLapis";
-	public static final String GROUND_REDSTONE = "grindingsRedstone";
-	public static final String GROUND_BLUESTONE = "grindingsBluestone";
-	public static final String GROUND_GREENSTONE = "grindingsGreenstone";
+	public static final String GROUND_CHALCOPYRITE = "ground.chalcopyrite.name";
+	public static final String GROUND_COBALTITE = "ground.cobaltite.name";
+	public static final String GROUND_GALENA = "ground.galena.name";
+	public static final String GROUND_LITHIUM = "ground.lithium.name";
+	public static final String GROUND_MAGNETITE = "ground.magnetite.name";
+	public static final String GROUND_NICKEL = "ground.nickel.name";
+	public static final String GROUND_WOLFRAMITE = "ground.wolframite.name";
+	public static final String GROUND_VOIDSTONE = "ground.voidstone.name";
+	public static final String GROUND_DIAMOND = "ground.diamond.name";
+	public static final String GROUND_EMERALD = "ground.emerald.name";
+	public static final String GROUND_GOLD = "ground.gold.name";
+	public static final String GROUND_IRON = "ground.iron.name";
+	public static final String GROUND_LAPIS = "ground.lapis.name";
+	public static final String GROUND_REDSTONE = "ground.redstone.name";
+	public static final String GROUND_BLUESTONE = "ground.bluestone.name";
+	public static final String GROUND_GREENSTONE = "ground.greenstone.name";
 	
 	/* Internal ingot names */
-	public static final String INGOT_LODESTONE = "ingotLodestone";
-	public static final String INGOT_COBALT = "ingotCobalt";
-	public static final String INGOT_COPPER = "ingotCopper";
-	public static final String INGOT_LEAD = "ingotLead";
-	public static final String INGOT_NICKEL = "ingotNickel";
-	public static final String INGOT_TELLURIUM = "ingotTellurium";
-	public static final String INGOT_TUNGSTEN = "ingotTungsten";
-	public static final String INGOT_STEEL = "ingotSteel";
+	public static final String INGOT_LODESTONE = "ingot.lodestone.name";
+	public static final String INGOT_COBALT = "ingot.cobalt.name";
+	public static final String INGOT_COPPER = "ingot.copper.name";
+	public static final String INGOT_LEAD = "ingot.lead.name";
+	public static final String INGOT_NICKEL = "ingot.nickel.name";
+	public static final String INGOT_TELLURIUM = "ingot.tellurium.name";
+	public static final String INGOT_TUNGSTEN = "ingot.tungsten.name";
+	public static final String INGOT_STEEL = "ingot.steel.name";
 	
 	/* Internal machine names */
-	public static final String MACHINE_SINTERING_FURNACE = "machineSinteringFurnace";
-	public static final String MACHINE_BASIC_SIEVE = "machineBasicSieve";
+	public static final String MACHINE_SINTERING_OVEN = "machine.sinteringOven.name";
+	public static final String MACHINE_BASIC_SIEVE = "machine.basicSieve.name";
+	
+	/* Internal table names */
+	public static final String BASIC_TABLE = "table.basic.name";
+	public static final String SMASH_TABLE = "table.smash.name";
+	
+	/* Internal decorative block names */
+	public static final String DECORATIVE_LIMESTONE = "decorative.limestone.name";
+	public static final String DECORATIVE_LIMESTONE_BRICK = "decorative.limestone.brick.name";
+	public static final String DECORATIVE_LIMESTONE_BRICKS = "decorative.limestone.bricks.name";
+	public static final String DECORATIVE_LIMESTONE_BRITTLE = "decorative.limestone.brittle.name";
 	
 	/* Internal gas names */
-	public static final String GAS_AIR_CLEAN = "gasAirClean";
-	public static final String GAS_AIR_DIRTY = "gasAirDirty";
-	public static final String GAS_CO2 = "gasCarbonDioxide";
-	public static final String GAS_H2S = "gasHydrogenSulfide";
-	public static final String GAS_METHANE = "gasMethane";
-	public static final String GAS_COW_METHANE = "gasMooshroomFarts";
-	public static final String GAS_NATURAL_REFINED = "gasNaturalRefined";
-	public static final String GAS_NATURAL_UNREFINED = "gasNaturalUnrefined";
-	public static final String GAS_N = "gasNitrogen";
-	public static final String GAS_SO2 = "gasSulfurDioxide";
-	public static final String GAS_H2SO4 = "gasSulfuricAcid";
+	public static final String GAS_AIR_CLEAN = "gas.air.clean.name";
+	public static final String GAS_AIR_DIRTY = "gas.air.dirty.name";
+	public static final String GAS_CO2 = "gas.carbonDioxide.name";
+	public static final String GAS_H2S = "gas.hydrogenSulfide.name";
+	public static final String GAS_METHANE = "gas.methane.name";
+	public static final String GAS_COW_METHANE = "gas.mooshroomFarts.name";
+	public static final String GAS_NATURAL_REFINED = "gas.natural.refined.name";
+	public static final String GAS_NATURAL_UNREFINED = "gas.natural.unrefined.name";
+	public static final String GAS_N = "gas.nitrogen.name";
+	public static final String GAS_SO2 = "gas.sulfurDioxide.name";
+	public static final String GAS_H2SO4 = "gas.sulfuricAcid.name";
 	
 	/* Internal storage names */
-	public static final String STORAGE_COPPER = "blockCopper";
-	public static final String STORAGE_LEAD = "blockLead";
-	public static final String STORAGE_LODESTONE = "blockLodestone";
-	public static final String STORAGE_NICKEL = "blockNickel";
-	public static final String STORAGE_TELLURIUM = "blockTellurium";
-	public static final String STORAGE_TUNGSTEN = "blockTungsten";
+	public static final String STORAGE_COPPER = "tile.storage.copper.name";
+	public static final String STORAGE_LEAD = "tile.storage.lead.name";
+	public static final String STORAGE_LODESTONE = "tile.storage.lodestone.name";
+	public static final String STORAGE_NICKEL = "tile.storage.nickel.name";
+	public static final String STORAGE_TELLURIUM = "tile.storage.tellurium.name";
+	public static final String STORAGE_TUNGSTEN = "tile.storage.tungsten.name";
 	
 }

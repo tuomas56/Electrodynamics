@@ -6,7 +6,6 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import electrodynamics.block.BlockDecorative;
@@ -16,7 +15,9 @@ import electrodynamics.block.BlockWormseed;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.block.item.ItemBlockDecorative;
 import electrodynamics.block.item.ItemBlockOre;
+import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.lib.block.Decorative;
 import electrodynamics.lib.block.Ore;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.util.BiomeHelper;
@@ -34,27 +35,24 @@ public class EDModuleWorld extends EDModule {
 	public void preInit() {
 		EDBlocks.blockOre = new BlockOre( BlockIDs.BLOCK_ORE_ID ).setUnlocalizedName( Strings.BLOCK_ORE_NAME );
 		GameRegistry.registerBlock( EDBlocks.blockOre, ItemBlockOre.class, Strings.BLOCK_ORE_NAME );
-		for( int i = 0; i < Ore.values().length; i++ ) {
-			ItemStack ore = new ItemStack( EDBlocks.blockOre, 1, i );
-
-			LanguageRegistry.addName( ore, Ore.get( i ).getLocalizedName( "en_US" ) );
-			MinecraftForge.setBlockHarvestLevel( EDBlocks.blockOre, i, "pickaxe", Ore.get( i ).harvestLevel );
-			Ore.get(i).registerWithOreDictionary();
+		for (Ore ore : Ore.values()) {
+			MinecraftForge.setBlockHarvestLevel(EDBlocks.blockOre, ore.ordinal(), "pickaxe", ore.harvestLevel);
+			EDLanguage.getInstance().registerItemStack(ore.toItemStack(), ore.unlocalizedName);
 		}
-
+		
 		EDBlocks.blockDecorative = new BlockDecorative( BlockIDs.BLOCK_DECORATIVE_ID ).setUnlocalizedName( Strings.BLOCK_DECORATIVE );
 		GameRegistry.registerBlock( EDBlocks.blockDecorative, ItemBlockDecorative.class, Strings.BLOCK_DECORATIVE );
-		for( int i = 0; i < BlockDecorative.blockNames.length; i++ ) {
-			LanguageRegistry.addName( new ItemStack( EDBlocks.blockDecorative, 1, i ), BlockDecorative.blockNames[i] );
+		for (Decorative dec : Decorative.values()) {
+			EDLanguage.getInstance().registerItemStack(dec.toItemStack(), dec.unlocalizedName);
 		}
 
 		EDBlocks.blockWormseed = new BlockWormseed( BlockIDs.BLOCK_WORMSEED_ID ).setUnlocalizedName( Strings.BLOCK_WORMSEED );
 		GameRegistry.registerBlock( EDBlocks.blockWormseed, Strings.BLOCK_WORMSEED );
-		LanguageRegistry.addName( EDBlocks.blockWormseed, "Wormseed" );
+		EDLanguage.getInstance().registerBlock(EDBlocks.blockWormseed);
 
-		EDBlocks.blockLithiumClay = new BlockLithiumClay(BlockIDs.BLOCK_LITHIUM_CLAY_ID).setUnlocalizedName(Strings.ORE_LITHIUM_CLAY);
-		GameRegistry.registerBlock(EDBlocks.blockLithiumClay, Strings.ORE_LITHIUM_CLAY);
-		LanguageRegistry.addName(EDBlocks.blockLithiumClay, "Lithium-Rich Clay");
+		EDBlocks.blockLithiumClay = new BlockLithiumClay(BlockIDs.BLOCK_LITHIUM_CLAY_ID).setUnlocalizedName(Strings.BLOCK_LITHIUM_CLAY);
+		GameRegistry.registerBlock(EDBlocks.blockLithiumClay, Strings.BLOCK_LITHIUM_CLAY);
+		EDLanguage.getInstance().registerBlock(EDBlocks.blockLithiumClay);
 	}
 
 	@Override

@@ -1,40 +1,35 @@
 package electrodynamics.lib.item;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 
 public enum Ingot {
 
-	LODESTONE(Strings.INGOT_LODESTONE, "Lodestone Ingot"),
+	LODESTONE(Strings.INGOT_LODESTONE, "ingotLodestone"),
 	
-	COBALT(Strings.INGOT_COBALT, "Cobolt Ingot"),
-	COPPER(Strings.INGOT_COPPER, "Copper Ingot"),
-	LEAD(Strings.INGOT_LEAD, "Lead Ingot"), 
-	NICKEL(Strings.INGOT_NICKEL, "Nickel Ingot"),
-	TELLURIUM(Strings.INGOT_TELLURIUM, "Tellurium Ingot"),
-	TUNGSTEN(Strings.INGOT_TUNGSTEN, "Tungsten Ingot"),
-	STEEL(Strings.INGOT_STEEL, "Steel Ingot");
+	COBALT(Strings.INGOT_COBALT, "ingotCobalt"),
+	COPPER(Strings.INGOT_COPPER, "ingotCopper"),
+	LEAD(Strings.INGOT_LEAD, "ingotLead"), 
+	NICKEL(Strings.INGOT_NICKEL, "ingotNickel"),
+	TELLURIUM(Strings.INGOT_TELLURIUM, "ingotTellurium"),
+	TUNGSTEN(Strings.INGOT_TUNGSTEN, "ingotTungsten"),
+	STEEL(Strings.INGOT_STEEL, "ingotSteel");
 	
 	public String unlocalizedName;
-	public String localizedName;
+	public String textureFile;
 	
-	private Ingot(String unlocalizedName, String localizedName) {
+	private Ingot(String unlocalizedName, String textureFile) {
 		this.unlocalizedName = unlocalizedName;
-		this.localizedName = localizedName;
+		this.textureFile = textureFile;
 	}
 	
 	public String getTextureFile() {
-		return ModInfo.ICON_PREFIX + "ingot/" + unlocalizedName;
+		return ModInfo.ICON_PREFIX + "ingot/" + textureFile;
 	}
 	
 	public ItemStack toItemStack() {
 		return new ItemStack(ItemIDs.ITEM_INGOT_ID + 256, 1, this.ordinal());
-	}
-	
-	public void registerWithOreDictionary() {
-		OreDictionary.registerOre(unlocalizedName, this.toItemStack());
 	}
 	
 	public static Ingot get(int ordinal) {

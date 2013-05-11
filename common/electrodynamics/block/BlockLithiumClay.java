@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.lib.core.ModInfo;
-import electrodynamics.lib.core.Strings;
 import electrodynamics.lib.item.Component;
 import electrodynamics.lib.item.ItemIDs;
 
@@ -41,7 +40,7 @@ public class BlockLithiumClay extends Block {
 
 	@Override
 	public void registerIcons(IconRegister register) {
-		texture = register.registerIcon(ModInfo.ICON_PREFIX + "world/ore/" + Strings.ORE_LITHIUM_CLAY);
+		texture = register.registerIcon(ModInfo.ICON_PREFIX + "world/ore/clayLithium");
 	}
 	
 }

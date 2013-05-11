@@ -6,28 +6,28 @@ import electrodynamics.lib.core.Strings;
 
 public enum Gas {
 
-	AIR_CLEAN(Strings.GAS_AIR_CLEAN, "Clean Air"),
-	AIR_DIRTY(Strings.GAS_AIR_DIRTY, "Dirty Air"),
-	CO2(Strings.GAS_CO2, "Carbon Dioxide"),
-	H2S(Strings.GAS_H2S, "Hydrogen Sulfide"),
-	METHANE(Strings.GAS_METHANE, "Methane"),
-	COW_METHANE(Strings.GAS_COW_METHANE, "Cow-Produced Methane"),
-	NATURAL_REFINED(Strings.GAS_NATURAL_REFINED, "Refined Natural Gas"),
-	NATURAL_UNREFINED(Strings.GAS_NATURAL_UNREFINED, "Unrefined Natural Gas"),
-	N(Strings.GAS_N, "Nitrogen"),
-	SO2(Strings.GAS_SO2, "Sulfur Dioxide"),
-	H2SO4(Strings.GAS_H2SO4, "Sulfuric Acid");
+	AIR_CLEAN(Strings.GAS_AIR_CLEAN, "gasAirClean"),
+	AIR_DIRTY(Strings.GAS_AIR_DIRTY, "gasAirDirty"),
+	CO2(Strings.GAS_CO2, "gasCarbonDioxide"),
+	H2S(Strings.GAS_H2S, "gasHydrogenSulfide"),
+	METHANE(Strings.GAS_METHANE, "gasMethane"),
+	COW_METHANE(Strings.GAS_COW_METHANE, "gasMooshroomFarts"),
+	NATURAL_REFINED(Strings.GAS_NATURAL_REFINED, "gasNaturalRefined"),
+	NATURAL_UNREFINED(Strings.GAS_NATURAL_UNREFINED, "gasNaturalUnrefined"),
+	N(Strings.GAS_N, "gasNitrogen"),
+	SO2(Strings.GAS_SO2, "gasSulfurDioxide"),
+	H2SO4(Strings.GAS_H2SO4, "gasSulfuricAcid");
 	
 	public String unlocalizedName;
-	public String localizedName;
+	public String textureFile;
 	
-	private Gas(String unlocalizedName, String localizedName) {
+	private Gas(String unlocalizedName, String textureFile) {
 		this.unlocalizedName = unlocalizedName;
-		this.localizedName = localizedName;
+		this.textureFile = textureFile;
 	}
 	
 	public String getTextureFile() {
-		return ModInfo.ICON_PREFIX + "gas/" + unlocalizedName;
+		return ModInfo.ICON_PREFIX + "gas/" + textureFile;
 	}
 	
 	public ItemStack toItemStack() {

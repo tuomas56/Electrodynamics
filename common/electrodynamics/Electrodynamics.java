@@ -15,6 +15,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import electrodynamics.api.IEDApi;
 import electrodynamics.api.crafting.ICraftingManager;
 import electrodynamics.core.CommonProxy;
+import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.module.ModuleManager;
 import electrodynamics.network.PacketHandler;
@@ -32,10 +33,14 @@ public class Electrodynamics implements IEDApi {
 
 	public CraftingManager craftingManager;
 	
+	public EDLanguage languageManager;
+	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
 		this.configFolder = new File( event.getModConfigurationDirectory(), ModInfo.GENERIC_MOD_ID);
 
+		languageManager = EDLanguage.getInstance();
+		
 		ModuleManager.preInit();
 		proxy.preInitClient();
 		

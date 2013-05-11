@@ -7,33 +7,33 @@ import electrodynamics.lib.core.Strings;
 public enum Grinding {
 
 	//Mod Ores
-	CHALCOPYRITE(Strings.GROUND_CHARCOPYRITE, "Ground Chalcopyrite"),
-	COBALTITE(Strings.GROUND_COBALTITE, "Ground Cobaltite"),
-	GALENA(Strings.GROUND_GALENA, "Ground Galena"),
-	MAGNETITE(Strings.GROUND_MAGNETITE, "Ground Magnetite"),
-	NICKEL(Strings.GROUND_NICKEL, "Ground Nickel"),
-	WOLFRAMITE(Strings.GROUND_WOLFRAMITE, "Ground Wolframite"),
-	VOIDSTONE(Strings.GROUND_VOIDSTONE, "Ground Voidstone"),
-	BLUESTONE(Strings.GROUND_BLUESTONE, "Ground Bluestone"),
-	GREENSTONE(Strings.GROUND_GREENSTONE, "Ground Greenstone"),
-	LITHIUM(Strings.GROUND_LITHIUM, "Ground Lithium"),
-	DIAMOND(Strings.GROUND_DIAMOND, "Ground Diamond"),
-	EMERALD(Strings.GROUND_EMERALD, "Ground Emerald"), 
-	GOLD(Strings.GROUND_GOLD, "Ground Gold"), 
-	IRON(Strings.GROUND_IRON, "Ground Iron"), 
-	LAPIS(Strings.GROUND_LAPIS, "Ground Lapis"),
-	REDSTONE(Strings.GROUND_REDSTONE, "Ground Redstone");
+	CHALCOPYRITE(Strings.GROUND_CHALCOPYRITE, "grindingsChalcopyrite"),
+	COBALTITE(Strings.GROUND_COBALTITE, "grindingsCobaltite"),
+	GALENA(Strings.GROUND_GALENA, "grindingsGalena"),
+	MAGNETITE(Strings.GROUND_MAGNETITE, "grindingsMagnetite"),
+	NICKEL(Strings.GROUND_NICKEL, "grindingsNickel"),
+	WOLFRAMITE(Strings.GROUND_WOLFRAMITE, "grindingsWolframite"),
+	VOIDSTONE(Strings.GROUND_VOIDSTONE, "grindingsVoidstone"),
+	BLUESTONE(Strings.GROUND_BLUESTONE, "grindingsBluestone"),
+	GREENSTONE(Strings.GROUND_GREENSTONE, "grindingsGreenstone"),
+	LITHIUM(Strings.GROUND_LITHIUM, "grindingsLithium"),
+	DIAMOND(Strings.GROUND_DIAMOND, "grindingsDiamond"),
+	EMERALD(Strings.GROUND_EMERALD, "grindingsEmerald"), 
+	GOLD(Strings.GROUND_GOLD, "grindingsGold"), 
+	IRON(Strings.GROUND_IRON, "grindingsIron"), 
+	LAPIS(Strings.GROUND_LAPIS, "grindingsLapis"),
+	REDSTONE(Strings.GROUND_REDSTONE, "grindingsRedstone");
 	
 	public String unlocalizedName;
-	public String localizedName;
+	public String textureFile;
 	
-	private Grinding(String unlocalizedName, String localizedName) {
+	private Grinding(String unlocalizedName, String textureFile) {
 		this.unlocalizedName = unlocalizedName;
-		this.localizedName = localizedName;
+		this.textureFile = textureFile;
 	}
 	
 	public String getTextureFile() {
-		return ModInfo.ICON_PREFIX + "dust/ground/" + unlocalizedName;
+		return ModInfo.ICON_PREFIX + "dust/ground/" + textureFile;
 	}
 	
 	public ItemStack toItemStack() {

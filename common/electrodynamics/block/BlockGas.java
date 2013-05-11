@@ -2,17 +2,13 @@ package electrodynamics.block;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.lib.block.Gas;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
-import net.minecraft.world.World;
 
 public class BlockGas extends Block {
 
@@ -36,15 +32,6 @@ public class BlockGas extends Block {
 		return textures[metadata];
 	}
 	
-	@SideOnly(Side.CLIENT)
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
-		return null;
-	}
-
-//	public int getRenderType() {
-//		return 4;
-//	}
-
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubBlocks(int id, CreativeTabs tab, List list) {

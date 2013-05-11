@@ -19,7 +19,7 @@ public class ItemBlockTable extends ItemBlock {
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return super.getUnlocalizedName() + "." + BlockTable.subNames[stack.getItemDamage()];
+		return BlockTable.subNames[stack.getItemDamage()];
 	}
 	
 }

@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import electrodynamics.block.BlockMachine;
 import electrodynamics.block.BlockStorage;
 import electrodynamics.block.BlockTable;
@@ -16,6 +15,7 @@ import electrodynamics.block.EDBlocks;
 import electrodynamics.block.item.ItemBlockMachine;
 import electrodynamics.block.item.ItemBlockStorage;
 import electrodynamics.block.item.ItemBlockTable;
+import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemDust;
 import electrodynamics.item.ItemHandheldSieve;
@@ -45,47 +45,47 @@ public class EDModuleMachine extends EDModule {
 		/* BLOCK */
 		EDBlocks.blockTable = new BlockTable(BlockIDs.BLOCK_TABLE_ID).setUnlocalizedName(Strings.BLOCK_TABLE_NAME);
 		GameRegistry.registerBlock(EDBlocks.blockTable, ItemBlockTable.class, Strings.BLOCK_TABLE_NAME);
-		for (int i=0; i<BlockTable.blockNames.length; i++) {
-			LanguageRegistry.addName(new ItemStack(EDBlocks.blockTable, 1, i), BlockTable.blockNames[i]);
+		for (int i=0; i<2; i++) {
+			EDLanguage.getInstance().registerItemStack(new ItemStack(EDBlocks.blockTable, 1, i), BlockTable.subNames[i]);
 		}
 		
 		EDBlocks.blockMachine = new BlockMachine(BlockIDs.BLOCK_MACHINE_ID).setUnlocalizedName(Strings.BLOCK_MACHINE);
 		GameRegistry.registerBlock(EDBlocks.blockMachine, ItemBlockMachine.class, Strings.BLOCK_MACHINE);
-		for (int i=0; i<Machine.values().length; i++) {
-			LanguageRegistry.addName(new ItemStack(EDBlocks.blockMachine, 1, i), Machine.values()[i].localizedName);
+		for (Machine machine : Machine.values()) {
+			EDLanguage.getInstance().registerItemStack(machine.toItemStack(), machine.unlocalizedName);
 		}
 		
 		EDBlocks.blockStorage = new BlockStorage(BlockIDs.BLOCK_STORAGE_ID).setUnlocalizedName(Strings.BLOCK_STORAGE);
 		GameRegistry.registerBlock(EDBlocks.blockStorage, ItemBlockStorage.class, Strings.BLOCK_STORAGE);
 		for (Storage storage : Storage.values()) {
-			LanguageRegistry.addName(storage.toItemStack(), storage.localizedName);
+			EDLanguage.getInstance().registerItemStack(storage.toItemStack(), storage.unlocalizedName);
 		}
 		
 		/* ITEM */
 		EDItems.itemDust = new ItemDust( ItemIDs.ITEM_DUST_ID ).setUnlocalizedName( Strings.ITEM_DUST_NAME );
 		GameRegistry.registerItem( EDItems.itemDust, Strings.ITEM_DUST_NAME );
 		for( Dust dust : Dust.values() ) {
-			dust.registerWithOreDictionary();
-			LanguageRegistry.addName( new ItemStack( EDItems.itemDust, 1, dust.ordinal() ), dust.localizedName );
+//			dust.registerWithOreDictionary();
+			EDLanguage.getInstance().registerItemStack(dust.toItemStack(), dust.unlocalizedName);
 		}
-		for( Grinding grind : Grinding.values() ) {
-			LanguageRegistry.addName( new ItemStack( EDItems.itemDust, 1, grind.ordinal() + Dust.values().length ), grind.localizedName );
+		for( Grinding grinding : Grinding.values() ) {
+			EDLanguage.getInstance().registerItemStack(grinding.toItemStack(), grinding.unlocalizedName);
 		}
 		
 		EDItems.itemIngot = new ItemIngot(ItemIDs.ITEM_INGOT_ID).setUnlocalizedName(Strings.ITEM_INGOT_NAME);
 		GameRegistry.registerItem(EDItems.itemIngot, Strings.ITEM_INGOT_NAME);
 		for(Ingot ingot : Ingot.values()) {
-			ingot.registerWithOreDictionary();
-			LanguageRegistry.addName(new ItemStack(EDItems.itemIngot, 1, ingot.ordinal()), ingot.localizedName);
+//			ingot.registerWithOreDictionary();
+			EDLanguage.getInstance().registerItemStack(ingot.toItemStack(), ingot.unlocalizedName);
 		}
 		
 		EDItems.itemHandheldSieve = new ItemHandheldSieve(ItemIDs.ITEM_HANDHELD_SIEVE_ID).setUnlocalizedName(Strings.ITEM_HANDHELD_SIEVE_NAME);
 		GameRegistry.registerItem(EDItems.itemHandheldSieve, Strings.ITEM_HANDHELD_SIEVE_NAME);
-		LanguageRegistry.addName(EDItems.itemHandheldSieve, "Wooden Handsieve");
+		EDLanguage.getInstance().registerItem(EDItems.itemHandheldSieve);
 		
 		EDItems.itemTray = new ItemTray(ItemIDs.ITEM_TRAY_ID).setUnlocalizedName(Strings.ITEM_TRAY_NAME);
 		GameRegistry.registerItem(EDItems.itemTray, Strings.ITEM_TRAY_NAME);
-		LanguageRegistry.addName(EDItems.itemTray, "Tray");
+		EDLanguage.getInstance().registerItem(EDItems.itemTray);
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class EDModuleMachine extends EDModule {
 		FurnaceRecipes.smelting().addSmelting(ItemIDs.ITEM_DUST_ID + 256, Dust.IRON.ordinal(), new ItemStack(Item.ingotIron), 0F);
 		FurnaceRecipes.smelting().addSmelting(ItemIDs.ITEM_DUST_ID + 256, Dust.GOLD.ordinal(), new ItemStack(Item.ingotGold), 0F);
 		
-		GameRegistry.registerTileEntity(TileEntitySinteringOven.class, Strings.MACHINE_SINTERING_FURNACE);
+		GameRegistry.registerTileEntity(TileEntitySinteringOven.class, Strings.MACHINE_SINTERING_OVEN);
 		GameRegistry.registerTileEntity(TileEntityTable.class, Strings.BLOCK_TABLE_NAME);
 		GameRegistry.registerTileEntity(TileEntityBasicSieve.class, Strings.MACHINE_BASIC_SIEVE);
 	}

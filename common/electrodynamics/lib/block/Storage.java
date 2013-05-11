@@ -7,26 +7,26 @@ import electrodynamics.lib.item.Ingot;
 
 public enum Storage {
 
-	COPPER(Strings.STORAGE_COPPER, "Block of Copper", Ingot.COPPER),
-	LEAD(Strings.STORAGE_LEAD, "Block of Lead", Ingot.LEAD),
-	LODESTONE(Strings.STORAGE_LODESTONE, "Block of Lodestone", Ingot.LODESTONE),
-	NICKEL(Strings.STORAGE_NICKEL, "Block of Nickel", Ingot.NICKEL),
-	TELLURIUM(Strings.STORAGE_TELLURIUM, "Block of Tellurium", Ingot.TELLURIUM),
-	TUNGSTEN(Strings.STORAGE_TUNGSTEN, "Block of Tungsten", Ingot.TUNGSTEN);
+	COPPER(Strings.STORAGE_COPPER, "blockCopper", Ingot.COPPER),
+	LEAD(Strings.STORAGE_LEAD, "blockLead", Ingot.LEAD),
+	LODESTONE(Strings.STORAGE_LODESTONE, "blockLodestone", Ingot.LODESTONE),
+	NICKEL(Strings.STORAGE_NICKEL, "blockNickel", Ingot.NICKEL),
+	TELLURIUM(Strings.STORAGE_TELLURIUM, "blockTellurium", Ingot.TELLURIUM),
+	TUNGSTEN(Strings.STORAGE_TUNGSTEN, "blockTungsten", Ingot.TUNGSTEN);
 	
 	public String unlocalizedName;
-	public String localizedName;
+	public String textureFile;
 	
 	public Ingot ingot;
 	
-	private Storage(String unlocalizedName, String localizedName, Ingot ingot) {
+	private Storage(String unlocalizedName, String textureFile, Ingot ingot) {
 		this.unlocalizedName = unlocalizedName;
-		this.localizedName = localizedName;
+		this.textureFile = textureFile;
 		this.ingot = ingot;
 	}
 	
 	public String getTextureFile() {
-		return ModInfo.ICON_PREFIX + "storage/" + unlocalizedName;
+		return ModInfo.ICON_PREFIX + "storage/" + textureFile;
 	}
 	
 	public ItemStack toItemStack() {

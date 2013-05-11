@@ -16,6 +16,6 @@ public class ItemBlockOre extends ItemBlock {
 	}
 
 	public String getUnlocalizedName(ItemStack itemstack) {
-		return Ore.get(itemstack.getItemDamage()).getUnlocalizedName();
+		return Ore.get(itemstack.getItemDamage()).unlocalizedName;
 	}
 }

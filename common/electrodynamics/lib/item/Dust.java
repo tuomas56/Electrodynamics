@@ -1,52 +1,47 @@
 package electrodynamics.lib.item;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 
 public enum Dust {
 
-	CLAY(Strings.DUST_CLAY, "Clay Dust"),
-	COBALT(Strings.DUST_COBALT, "Cobalt Dust"),
-	COBALT_HEXAHYDRATE(Strings.DUST_COB_HEX, "Cobalt Hexahydrate Dust"),
-	COPPER(Strings.DUST_COPPER, "Copper Dust"),
-	LEAD(Strings.DUST_LEAD, "Lead Dust"),
-	LIME_PURE(Strings.DUST_LIME_PURE, "Pure Limestone Dust"),
-	LIMESTONE(Strings.DUST_LIMESTONE, "Limestone Dust"),
-	LITHIUM(Strings.DUST_LITHIUM, "Lithium Dust"),
-	MAGNETITE(Strings.DUST_MAGNETITE, "Magnetite Dust"),
-	NICKEL(Strings.DUST_NICKEL, "Nickel Dust"),
-	SILICON(Strings.DUST_SILICON, "Silicon Dust"), 
-	SILICON_SMALL(Strings.DUST_SILICON_SMALL, "Small Pile of Silicon Dust"),
-	SULFUR(Strings.DUST_SULFUR, "Sulfur Dust"),
-	TELLURIUM(Strings.DUST_TELLURIUM, "Tellurium Dust"),
-	TUNGSTEN(Strings.DUST_TUNGSTEN, "Tungsten Dust"),
-	LODESTONE(Strings.DUST_LODESTONE, "Lodestone Dust"),
-	VOIDSTONE(Strings.DUST_VOIDSTONE, "Voidstone Dust"),
-	IRON(Strings.DUST_IRON, "Iron Dust"),
-	GOLD(Strings.DUST_GOLD, "Gold Dust"),
-	BLUESTONE(Strings.DUST_BLUESTONE, "Bluestone Dust"),
-	GREENSTONE(Strings.DUST_GREENSTONE, "Greenstone Dust");
+	CLAY(Strings.DUST_CLAY, "dustClay"),
+	COBALT(Strings.DUST_COBALT, "dustCobalt"),
+	COBALT_HEXAHYDRATE(Strings.DUST_COB_HEX, "dustCobaltHexahydrate"),
+	COPPER(Strings.DUST_COPPER, "dustCopper"),
+	LEAD(Strings.DUST_LEAD, "dustLead"),
+	LIME_PURE(Strings.DUST_LIME_PURE, "dustLimePure"),
+	LIMESTONE(Strings.DUST_LIMESTONE, "dustLimestone"),
+	LITHIUM(Strings.DUST_LITHIUM, "dustLithium"),
+	MAGNETITE(Strings.DUST_MAGNETITE, "dustMagnetite"),
+	NICKEL(Strings.DUST_NICKEL, "dustNickel"),
+	SILICON(Strings.DUST_SILICON, "dustSilicon"), 
+	SILICON_SMALL(Strings.DUST_SILICON_SMALL, "dustSiliconSmall"),
+	SULFUR(Strings.DUST_SULFUR, "dustSulfur"),
+	TELLURIUM(Strings.DUST_TELLURIUM, "dustTellurium"),
+	TUNGSTEN(Strings.DUST_TUNGSTEN, "dustTungsten"),
+	LODESTONE(Strings.DUST_LODESTONE, "dustLodestone"),
+	VOIDSTONE(Strings.DUST_VOIDSTONE, "dustVoidstone"),
+	IRON(Strings.DUST_IRON, "dustIron"),
+	GOLD(Strings.DUST_GOLD, "dustGold"),
+	BLUESTONE(Strings.DUST_BLUESTONE, "dustBluestone"),
+	GREENSTONE(Strings.DUST_GREENSTONE, "dustGreenstone");
 	
 	public String unlocalizedName;
-	public String localizedName;
+	public String textureFile;
 	
-	private Dust(String unlocalizedName, String localizedName) {
+	private Dust(String unlocalizedName, String textureFile) {
 		this.unlocalizedName = unlocalizedName;
-		this.localizedName = localizedName;
+		this.textureFile = textureFile;
 	}
 	
 	public String getTextureFile() {
-		return ModInfo.ICON_PREFIX + "dust/" + unlocalizedName;
+		return ModInfo.ICON_PREFIX + "dust/" + textureFile;
 	}
 	
 	public ItemStack toItemStack() {
 		return new ItemStack(ItemIDs.ITEM_DUST_ID + 256, 1, this.ordinal());
-	}
-	
-	public void registerWithOreDictionary() {
-		OreDictionary.registerOre(unlocalizedName, this.toItemStack());
 	}
 	
 	public static Dust get(int ordinal) {

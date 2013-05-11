@@ -16,14 +16,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.api.tool.ITool;
 import electrodynamics.core.CreativeTabED;
+import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityTable;
 import electrodynamics.util.BlockUtil;
 
 public class BlockTable extends BlockContainer {
 
-	public static String[] blockNames = new String[] { "Basic Table", "Smashing Table" };
-	public static String[] subNames = new String[] { "blockTableDisplay", "blockTableSmash" };
-
+	public static String[] subNames = new String[] {Strings.BASIC_TABLE, Strings.SMASH_TABLE};
+	
 	public Random random = new Random();
 	
 	public BlockTable(int id) {
@@ -42,35 +42,6 @@ public class BlockTable extends BlockContainer {
 	public int getRenderType() {
 		return -1;
 	}
-
-//	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-//		if (world.isRemote) return;
-//		
-//		if (entity instanceof EntityItem) {
-//			TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
-//
-//			if (table.displayedItem == null) {
-//				EntityItem item = (EntityItem) entity;
-//				
-//				if (item.delayBeforeCanPickup == 0) {
-//					ItemStack toAdd = null;
-//					
-//					if (item.getEntityItem().stackSize > 1) {
-//						toAdd = item.getEntityItem().copy();
-//						toAdd.stackSize = 1;
-//						item.getEntityItem().stackSize--;
-//					} else {
-//						toAdd = item.getEntityItem();
-//						item.setDead();
-//					}
-//					
-//					table.displayedItem = toAdd;
-//					PacketDispatcher.sendPacketToAllInDimension(PacketTypeHandler.fillPacket(new PacketTableUpdate(x, y, z, toAdd)), world.provider.dimensionId);
-//					world.markBlockForUpdate(x, y, z);
-//				}
-//			}
-//		}
-//	}
 
 	public void breakBlock(World world, int x, int y, int z, int i1, int i2) {
 		TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
@@ -129,7 +100,7 @@ public class BlockTable extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void getSubBlocks(int id, CreativeTabs tab, List list) {
-		for (int i = 0; i < blockNames.length; i++) {
+		for (int i = 0; i < subNames.length; i++) {
 			list.add(new ItemStack(id, 1, i));
 		}
 	}

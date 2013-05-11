@@ -6,40 +6,40 @@ import net.minecraft.item.ItemStack;
 
 public enum Component {
 
-	FAN_BLADE(Strings.FAN_BLADE_NAME, "Fan Blade"), 
-	MAGNET(Strings.MAGNET_NAME, "Magnet"),
-	MAGNETITE_CHUNK(Strings.MAGNETITE_CHUNK_NAME, "Magnetite Chunk"),
-	MAGNETITE_DUST(Strings.MAGNETITE_DUST_NAME, "Magnetite Dust"),
-	METAL_BAR(Strings.METAL_BAR, "Metal Rod"),
-	ARSENIC(Strings.ARSENIC, "Arsenic"),
-	LODESTONE_PEBBLE(Strings.LODESTONE_PEBBLE, "Lodestone Pebble"),
-	SAP(Strings.SAP, "Sap"),
-	TWINE(Strings.TWINE, "Piece of Twine"),
-	TWINE_MESH(Strings.TWINE_MESH, "Twine Mesh"),
-	LITHIUM_CLAY(Strings.LITHIUM_CLAY, "Dried Lithium Clay"),
-	LITHIUM_CLAY_WET(Strings.LITHIUM_CLAY_WET, "Wet Lithium Clay"),
-	WORMWOOD_LEAF(Strings.WORMWOOD_LEAF, "Wormwood Leaf"),
-	PCB(Strings.PCB, "PCB"),
-	VOIDSTONE_MAGNET(Strings.VOIDSTONE_MAGNET, "Voidstone Magnet");
+	FAN_BLADE(Strings.COMPONENT_FAN_BLADE, "fanBlade"), 
+	MAGNET(Strings.COMPONENT_MAGNET, "magnet"),
+	MAGNETITE_CHUNK(Strings.COMPONENT_MAGNETITE_CHUNK, "magnetiteChunk"),
+	MAGNETITE_DUST(Strings.COMPONENT_MAGNETITE_DUST, "magnetiteDust"),
+	METAL_BAR(Strings.COMPONENT_METAL_BAR, "metalBar"),
+	ARSENIC(Strings.COMPONENT_ARSENIC, "arsenic"),
+	LODESTONE_PEBBLE(Strings.COMPONENT_LODESTONE_PEBBLE, "lodestonePebble"),
+	SAP(Strings.COMPONENT_SAP, "sap"),
+	TWINE(Strings.COMPONENT_TWINE, "twine"),
+	TWINE_MESH(Strings.COMPONENT_TWINE_MESH, "twineMesh"),
+	LITHIUM_CLAY(Strings.COMPONENT_LITHIUM_CLAY_DRY, "lithiumClayDry"),
+	LITHIUM_CLAY_WET(Strings.COMPONENT_LITHIUM_CLAY_WET, "lithiumClayWet"),
+	WORMWOOD_LEAF(Strings.COMPONENT_WORMWOOD_LEAF, "wormwoodLeaf"),
+	PCB(Strings.COMPONENT_PCB, "pcb"),
+	VOIDSTONE_MAGNET(Strings.COMPONENT_VOIDSTONE_MAGNET, "voidstoneMagnet");
 	
-	private String unlocalizedName;
-	private String localizedName; // temporary
+	public String unlocalizedName;
+	private String textureName;
 
-	private Component(String unlocalizedName, String localizedName) {
+	private Component(String unlocalizedName, String textureName) {
 		this.unlocalizedName = unlocalizedName;
-		this.localizedName = localizedName;
+		this.textureName = textureName;
 	}
 
 	public String getTextureFile() {
-		return ModInfo.ICON_PREFIX + "component/" + unlocalizedName;
+		return ModInfo.ICON_PREFIX + "component/" + textureName;
 	}
 
 	public String getUnlocalizedName() {
-		return "item." + unlocalizedName + ".name";
+		return unlocalizedName;
 	}
 
 	public String getLocalizedName(String language) {
-		return localizedName; // temp
+		return "";
 	}
 
 	public ItemStack toItemStack() {
