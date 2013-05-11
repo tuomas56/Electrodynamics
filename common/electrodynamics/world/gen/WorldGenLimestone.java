@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
 
@@ -20,6 +21,10 @@ public class WorldGenLimestone implements IWorldGenerator {
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+		if (world.getWorldInfo().getTerrainType() == WorldType.FLAT) {
+			return;
+		}
+		
 		int x = chunkX * 16;
 		int y = random.nextInt(64);
 		int z = chunkZ * 16;
@@ -37,10 +42,14 @@ public class WorldGenLimestone implements IWorldGenerator {
 
 					if (k1 * k1 + l1 * l1 <= l * l) {
 						for (int i2 = y - b0; i2 <= y + b0; ++i2) {
-							int j2 = world.getBlockId(i1, i2, j1);
+							if (i2 > 0) {
+								if (world.getChunkFromBlockCoords(i1, j1).isTerrainPopulated && world.getChunkFromBlockCoords(i1, j1).isChunkLoaded) {
+									int j2 = world.getBlockId(i1, i2, j1);
 
-							if (j2 == Block.dirt.blockID || j2 == Block.stone.blockID) {
-								world.setBlock(i1, i2, j1, this.blockID, 0, 2);
+									if (j2 == Block.dirt.blockID || j2 == Block.stone.blockID) {
+										world.setBlock(i1, i2, j1, this.blockID, 0, 2);
+									}
+								}
 							}
 						}
 					}
