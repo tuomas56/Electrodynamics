@@ -1,5 +1,5 @@
 <?xml version="1.0" ?> 
-<project name="Foundry">
+<project name="Electrodynamics">
 	
 	<property file="build.properties" />
 	<property file="version.properties" />
