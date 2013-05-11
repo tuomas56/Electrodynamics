@@ -14,5 +14,8 @@ public class EDBlocks {
 	public static Block blockLithiumClay;
 	public static Block blockGas;
 	public static Block blockStorage;
+	public static Block blockRubberWood;
+	public static Block blockRubberLeaves;
+	public static Block blockRubberSapling;
 	
 }

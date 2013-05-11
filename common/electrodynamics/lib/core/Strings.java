@@ -20,6 +20,7 @@ public class Strings {
 	public static final String ITEM_HANDHELD_SIEVE_NAME = "tool.hand_sieve.name";
 	public static final String ITEM_TRAY_NAME = "tray.name";
 	public static final String ITEM_PLASMA_RIFLE = "weapon.plasma_rifle.name";
+	public static final String ITEM_SPUD_PEELER = "spud_peeler.name";
 	
 	/* Internal block names */
 	public static final String BLOCK_ORE_NAME = "ore.name";
@@ -32,6 +33,9 @@ public class Strings {
 	public static final String BLOCK_GAS = "gas.name";
 	public static final String BLOCK_STORAGE = "storage.name";
 	public static final String BLOCK_LITHIUM_CLAY = "clayLithium.name";
+	public static final String BLOCK_RUBBER_WOOD = "rubber.wood.name";
+	public static final String BLOCK_RUBBER_LEAF = "rubber.leaves.name";
+	public static final String BLOCK_RUBBER_SAPLING = "rubber.sapling.name";
 	
 	/* Internal component names */
 	public static final String COMPONENT_FAN_BLADE = "component.fanBlade.name";

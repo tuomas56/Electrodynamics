@@ -20,7 +20,7 @@ public class SoundHandler {
 
 	@ForgeSubscribe
 	public void onSoundLoad(SoundLoadEvent e) {
-		String[] soundFiles = new String[] { "block/voidstoneAmbient.ogg" };
+		String[] soundFiles = new String[] { "block/voidstoneAmbient.ogg", "block/tableSmash.ogg", "block/treeTap.ogg" };
 		for (int i = 0; i < soundFiles.length; i++) {
 			try {
 				File file = extractAndLoadResource(Minecraft.getMinecraft(), soundFiles[i]);

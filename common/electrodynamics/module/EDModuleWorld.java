@@ -11,15 +11,21 @@ import cpw.mods.fml.relauncher.Side;
 import electrodynamics.block.BlockDecorative;
 import electrodynamics.block.BlockLithiumClay;
 import electrodynamics.block.BlockOre;
+import electrodynamics.block.BlockRubberLeaves;
+import electrodynamics.block.BlockRubberSapling;
+import electrodynamics.block.BlockRubberWood;
 import electrodynamics.block.BlockWormseed;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.block.item.ItemBlockDecorative;
 import electrodynamics.block.item.ItemBlockOre;
 import electrodynamics.core.lang.EDLanguage;
+import electrodynamics.item.EDItems;
+import electrodynamics.item.ItemPeelingSpud;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.block.Decorative;
 import electrodynamics.lib.block.Ore;
 import electrodynamics.lib.core.Strings;
+import electrodynamics.lib.item.ItemIDs;
 import electrodynamics.util.BiomeHelper;
 import electrodynamics.world.TickHandlerMBS;
 import electrodynamics.world.gen.WorldGenBlock;
@@ -28,11 +34,16 @@ import electrodynamics.world.gen.WorldGenLimestone;
 import electrodynamics.world.gen.WorldGenNear;
 import electrodynamics.world.gen.WorldGenOre;
 import electrodynamics.world.gen.WorldGenPlant;
+import electrodynamics.world.gen.WorldGenRubberTree;
 
 public class EDModuleWorld extends EDModule {
 
 	@Override
 	public void preInit() {
+		EDItems.itemSpudPeeler = new ItemPeelingSpud(ItemIDs.ITEM_SPUD_PEELER_ID).setUnlocalizedName(Strings.ITEM_SPUD_PEELER);
+		GameRegistry.registerItem(EDItems.itemSpudPeeler, Strings.ITEM_SPUD_PEELER);
+		EDLanguage.getInstance().registerItem(EDItems.itemSpudPeeler);
+		
 		EDBlocks.blockOre = new BlockOre( BlockIDs.BLOCK_ORE_ID ).setUnlocalizedName( Strings.BLOCK_ORE_NAME );
 		GameRegistry.registerBlock( EDBlocks.blockOre, ItemBlockOre.class, Strings.BLOCK_ORE_NAME );
 		for (Ore ore : Ore.values()) {
@@ -53,10 +64,24 @@ public class EDModuleWorld extends EDModule {
 		EDBlocks.blockLithiumClay = new BlockLithiumClay(BlockIDs.BLOCK_LITHIUM_CLAY_ID).setUnlocalizedName(Strings.BLOCK_LITHIUM_CLAY);
 		GameRegistry.registerBlock(EDBlocks.blockLithiumClay, Strings.BLOCK_LITHIUM_CLAY);
 		EDLanguage.getInstance().registerBlock(EDBlocks.blockLithiumClay);
+		
+		EDBlocks.blockRubberWood = new BlockRubberWood(BlockIDs.BLOCK_RUBBER_WOOD_ID).setUnlocalizedName(Strings.BLOCK_RUBBER_WOOD);
+		GameRegistry.registerBlock(EDBlocks.blockRubberWood, Strings.BLOCK_RUBBER_WOOD);
+		EDLanguage.getInstance().registerBlock(EDBlocks.blockRubberWood);
+		
+		EDBlocks.blockRubberLeaves = new BlockRubberLeaves(BlockIDs.BLOCK_RUBBER_LEAVES_ID).setUnlocalizedName(Strings.BLOCK_RUBBER_LEAF);
+		GameRegistry.registerBlock(EDBlocks.blockRubberLeaves, Strings.BLOCK_RUBBER_LEAF);
+		EDLanguage.getInstance().registerBlock(EDBlocks.blockRubberLeaves);
+		
+		EDBlocks.blockRubberSapling = new BlockRubberSapling(BlockIDs.BLOCK_RUBBER_SAPLING_ID).setUnlocalizedName(Strings.BLOCK_RUBBER_SAPLING);
+		GameRegistry.registerBlock(EDBlocks.blockRubberSapling, Strings.BLOCK_RUBBER_SAPLING);
+		EDLanguage.getInstance().registerBlock(EDBlocks.blockRubberSapling);
 	}
 
 	@Override
 	public void init() {
+//		MinecraftForge.EVENT_BUS.register(new BonemealEventHandler());
+		
 		FurnaceRecipes.smelting().addSmelting(BlockIDs.BLOCK_DECORATIVE_ID, 2, new ItemStack(EDBlocks.blockDecorative, 1, 0), 0F);
 		
 		GameRegistry.addRecipe(new ItemStack(EDBlocks.blockDecorative, 4, 1), "XX", "XX", 'X', new ItemStack(EDBlocks.blockDecorative, 1, 0));
@@ -83,6 +108,9 @@ public class EDModuleWorld extends EDModule {
 		// Wormseed
 		GameRegistry.registerWorldGenerator(new WorldGenPlant(BlockIDs.BLOCK_WORMSEED_ID, 0, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MOUNTAIN)));
 		GameRegistry.registerWorldGenerator(new WorldGenPlant(BlockIDs.BLOCK_WORMSEED_ID, 1, BiomeHelper.getBiomesForTypes(Type.DESERT, Type.WASTELAND)));
+	
+		// Rubber Trees
+		GameRegistry.registerWorldGenerator(new WorldGenRubberTree(10, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.JUNGLE)));
 	}
 
 	@Override

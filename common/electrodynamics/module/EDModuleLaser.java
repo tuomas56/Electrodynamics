@@ -21,7 +21,7 @@ public class EDModuleLaser extends EDModule {
 		GameRegistry.registerBlock(EDBlocks.blockLaserEmitter, Strings.BLOCK_LASER_EMITTER);
 		EDLanguage.getInstance().registerBlock(EDBlocks.blockLaserEmitter);
 		
-		EDItems.itemPlasmaRifle = new ItemPlasmaRifle(ItemIDs.ITEM_PLASMA_RIFLE).setUnlocalizedName(Strings.ITEM_PLASMA_RIFLE);
+		EDItems.itemPlasmaRifle = new ItemPlasmaRifle(ItemIDs.ITEM_PLASMA_RIFLE_ID).setUnlocalizedName(Strings.ITEM_PLASMA_RIFLE);
 		GameRegistry.registerItem(EDItems.itemPlasmaRifle, Strings.ITEM_PLASMA_RIFLE);
 		EDLanguage.getInstance().registerItem(EDItems.itemPlasmaRifle);
 	}

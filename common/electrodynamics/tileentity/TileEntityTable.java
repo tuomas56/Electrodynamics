@@ -127,6 +127,8 @@ public class TileEntityTable extends TileEntity {
 					tool.damageItem(recipe.hammerDamage, player);
 					
 					update();
+					
+					this.worldObj.playSound(xCoord, yCoord, zCoord, "electrodynamics.block.tableSmash", 0.75F, 1.1F, false);
 				}
 			}
 		}

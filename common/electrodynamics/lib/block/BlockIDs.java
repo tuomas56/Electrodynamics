@@ -42,4 +42,15 @@ public class BlockIDs {
 	public static int BLOCK_STORAGE_ID;
 	public static final int BLOCK_STORAGE_DEFAULT_ID = 509;
 	
+	/* blockRubberWood */
+	public static int BLOCK_RUBBER_WOOD_ID;
+	public static final int BLOCK_RUBBER_WOOD_DEFAULT_ID = 510;
+	
+	/* blockRubberLeaves */
+	public static int BLOCK_RUBBER_LEAVES_ID;
+	public static final int BLOCK_RUBBER_LEAVES_DEFAULT_ID = 511;
+	
+	/* blockRubberSapling */
+	public static int BLOCK_RUBBER_SAPLING_ID;
+	public static final int BLOCK_RUBBER_SAPLING_DEFAULT_ID = 512;
 }

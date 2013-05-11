@@ -51,7 +51,11 @@ public class ItemIDs {
 	public static final int ITEM_TRAY_DEFAULT_ID = 5111;
 	
 	/* itemPlasmaRifle */
-	public static int ITEM_PLASMA_RIFLE;
-	public static final int ITEM_PLASMA_RIFLE_ID = 5112;
+	public static int ITEM_PLASMA_RIFLE_ID;
+	public static final int ITEM_PLASMA_RIFLE_DEFAULT_ID = 5112;
+	
+	/* itemSpudPeeler */
+	public static int ITEM_SPUD_PEELER_ID;
+	public static final int ITEM_SPUD_PEELER_DEFAULT_ID = 5113;
 	
 }
