@@ -10,6 +10,7 @@ import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 import electrodynamics.network.IPayloadReceiver;
 import electrodynamics.network.PacketTypeHandler;
+import electrodynamics.network.Payload;
 
 public class PacketPayload extends PacketED {
 
@@ -17,54 +18,45 @@ public class PacketPayload extends PacketED {
 	private int y;
 	private int z;
 	
-	private byte[] data;
+	private Payload payload;
 	
 	public PacketPayload() {
 		super(PacketTypeHandler.PAYLOAD, true);
 	}
 
-	public PacketPayload(int x, int y, int z, byte[] data) {
+	public PacketPayload(int x, int y, int z, Payload payload) {
 		super(PacketTypeHandler.PAYLOAD, true);
 		
 		this.x = x;
 		this.y = y;
 		this.z = z;
 		
-		this.data = data;
+		this.payload = payload;
 	}
 
 	@Override
 	public void readData(DataInputStream data) throws IOException {
-		int length = data.readInt();
-		
 		this.x = data.readInt();
 		this.y = data.readInt();
 		this.z = data.readInt();
-		
-		this.data = new byte[length];
-		
-		for (int i=0; i<length; i++) {
-			this.data[i] = data.readByte();
-		}
+
+		this.payload = new Payload();
+		this.payload.readPayloadData(data);
 	}
 
 	@Override
 	public void writeData(DataOutputStream dos) throws IOException {
-		dos.writeInt(data.length);
 		dos.writeInt(x);
 		dos.writeInt(y);
 		dos.writeInt(z);
 		
-		for (int i=0; i<data.length; i++) {
-			dos.writeByte(data[i]);
-		}
+		this.payload.writePayloadData(dos);
 	}
 
 	@Override
 	public void execute(INetworkManager network, Player player, Side side) {
 		EntityPlayer playerEnt = (EntityPlayer)player;
-		((IPayloadReceiver)playerEnt.worldObj.getBlockTileEntity(x, y, z)).handlePayload(data);
-		playerEnt.worldObj.markBlockForUpdate(x, y, z);
+		((IPayloadReceiver)playerEnt.worldObj.getBlockTileEntity(x, y, z)).handlePayload(payload);
 	}
 	
 }

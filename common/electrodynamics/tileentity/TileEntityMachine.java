@@ -3,7 +3,6 @@ package electrodynamics.tileentity;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
@@ -36,11 +35,6 @@ public abstract class TileEntityMachine extends TileEntity {
 		super.readFromNBT(tag);
 
 		rotation = ForgeDirection.VALID_DIRECTIONS[tag.getByte("direction")];
-	}
-
-	@Override
-	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
-		this.readFromNBT(pkt.customParam1);
 	}
 
 	@Override
