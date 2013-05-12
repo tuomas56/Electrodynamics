@@ -29,7 +29,7 @@ public class BlockDecorative extends Block {
 	@Override
 	public int damageDropped(int meta) {
 		if (meta == 0) {
-			return 2;
+			return Decorative.LIMESTONE_BRITTLE.ordinal();
 		}
 		
 		return meta;
