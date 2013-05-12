@@ -1,7 +1,5 @@
 package electrodynamics.block;
 
-import java.util.Random;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,7 +9,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.tileentity.TileEntityTreetap;
-import electrodynamics.util.BlockUtil;
 
 public class BlockTreetap extends BlockContainer {
 
@@ -44,15 +41,19 @@ public class BlockTreetap extends BlockContainer {
 		TileEntityTreetap tile = (TileEntityTreetap) world.getBlockTileEntity(x, y, z);
 		
 		if (tile != null && tile instanceof TileEntityTreetap) {
-			if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Item.bucketEmpty && !tile.hasBucket) {
-				tile.hasBucket = true;
-				tile.dirty = true;
-				--player.getCurrentEquippedItem().stackSize;
-				return true;
-			} else if (tile.hasBucket) {
-				BlockUtil.dropItemFromBlock(world, x, y, z, tile.getBucket(), new Random());
-				tile.hasBucket = false;
-				tile.dirty = true;
+			if (!tile.hasBucket) {
+				if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Item.bucketEmpty && !tile.hasBucket) {
+					tile.hasBucket = true;
+					tile.dirty = true;
+					--player.getCurrentEquippedItem().stackSize;
+					
+					return true;
+				}
+			} else {
+				if (tile.liquidAmount == 0 || tile.liquidAmount == 1000) {
+					tile.dropBucket();
+				}
+				
 				return true;
 			}
 		}

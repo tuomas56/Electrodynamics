@@ -1,5 +1,7 @@
 package electrodynamics.tileentity;
 
+import java.util.Random;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,7 +11,9 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.common.network.PacketDispatcher;
+import electrodynamics.item.EDItems;
 import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.util.BlockUtil;
 
 public class TileEntityTreetap extends TileEntity {
 
@@ -20,13 +24,15 @@ public class TileEntityTreetap extends TileEntity {
 	public boolean hasBucket;
 	
 	/** Liquid amount */
-	public int liquidAmount;
+	public int liquidAmount = 0;
 	
 	/** Should tile entity send out update packet */
 	public boolean dirty = true;
 	
 	@Override
 	public void updateEntity() {
+		if (worldObj.isRemote) return;
+		
 		if (dirty) {
 			PacketDispatcher.sendPacketToAllInDimension(getDescriptionPacket(), this.worldObj.provider.dimensionId);
 			dirty = false;
@@ -77,7 +83,14 @@ public class TileEntityTreetap extends TileEntity {
 	}
 	
 	public ItemStack getBucket() {
-		return new ItemStack(Item.bucketEmpty);
+		return liquidAmount == 0 ? new ItemStack(Item.bucketEmpty) : new ItemStack(EDItems.itemLatexBucket);
+	}
+	
+	public void dropBucket() {
+		BlockUtil.dropItemFromBlock(worldObj, xCoord, yCoord, zCoord, getBucket(), new Random());
+		hasBucket = false;
+		liquidAmount = 0;
+		dirty = true;
 	}
 	
 	public int getAttachedTreeHeight() {
