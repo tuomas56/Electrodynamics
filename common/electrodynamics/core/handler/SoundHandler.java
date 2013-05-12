@@ -43,7 +43,9 @@ public class SoundHandler {
 	@SideOnly(Side.CLIENT)
 	private File extractAndLoadResource(Minecraft mc, String resName) throws Exception {
 		String mcDir = Minecraft.getMinecraftDir().getAbsolutePath();
-		mcDir = mcDir.substring(0, mcDir.lastIndexOf("."));
+		if (mcDir.contains(".")) {
+			mcDir = mcDir.substring(0, mcDir.lastIndexOf("."));
+		}
 		
 		File resDestDir = new File(mcDir + "resources/", ModInfo.GENERIC_MOD_ID.toLowerCase() + "");
 
