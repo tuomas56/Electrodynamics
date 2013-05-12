@@ -23,7 +23,7 @@ public class BlockRubberSapling extends BlockSapling {
 	
 	public BlockRubberSapling(int id) {
 		super(id);
-		setCreativeTab(CreativeTabED.block);
+		setCreativeTab(CreativeTabED.resource);
 	}
 
 	@Override

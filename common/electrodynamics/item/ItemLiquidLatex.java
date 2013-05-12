@@ -12,7 +12,7 @@ public class ItemLiquidLatex extends Item {
 	
 	public ItemLiquidLatex(int id) {
 		super(id);
-		setCreativeTab(CreativeTabED.item);
+		setCreativeTab(CreativeTabED.resource);
 	}
 	
 	@Override

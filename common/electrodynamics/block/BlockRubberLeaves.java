@@ -22,7 +22,7 @@ public class BlockRubberLeaves extends BlockLeaves {
 
 	public BlockRubberLeaves(int id) {
 		super(id);
-		setCreativeTab(CreativeTabED.block);
+		setCreativeTab(CreativeTabED.resource);
 	}
 
 	public int idDropped(int i, Random d, int k) {
@@ -99,4 +99,10 @@ public class BlockRubberLeaves extends BlockLeaves {
 		this.textures[1] = register.registerIcon(ModInfo.ICON_PREFIX + "world/plant/rubberLeavesFancy");
 	}
 
+	@Override
+	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
+		int i1 = par1IBlockAccess.getBlockId(par2, par3, par4);
+		return !Minecraft.getMinecraft().gameSettings.fancyGraphics && i1 == this.blockID ? false : par5 == 0 && this.minY > 0.0D ? true : (par5 == 1 && this.maxY < 1.0D ? true : (par5 == 2 && this.minZ > 0.0D ? true : (par5 == 3 && this.maxZ < 1.0D ? true : (par5 == 4 && this.minX > 0.0D ? true : (par5 == 5 && this.maxX < 1.0D ? true : !par1IBlockAccess.isBlockOpaqueCube(par2, par3, par4))))));
+	}
+	
 }

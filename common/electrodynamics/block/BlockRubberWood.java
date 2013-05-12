@@ -26,7 +26,7 @@ public class BlockRubberWood extends Block {
 	public BlockRubberWood(int id) {
 		super(id, Material.wood);
 		setTickRandomly(true);
-		setCreativeTab(CreativeTabED.block);
+		setCreativeTab(CreativeTabED.resource);
 	}
 	
 	public int quantityDropped(Random rand) {

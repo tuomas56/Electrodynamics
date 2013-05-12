@@ -18,7 +18,7 @@ public class BlockTreetap extends BlockContainer {
 		super(id, Material.iron);
 		setTickRandomly(true);
 		setHardness(1F);
-		setCreativeTab(CreativeTabED.block);
+		setCreativeTab(CreativeTabED.tool);
 	}
 	
 	@Override
