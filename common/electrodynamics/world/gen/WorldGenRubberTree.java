@@ -79,6 +79,12 @@ public class WorldGenRubberTree implements IWorldGenerator {
 			}
 		}
 		
+		for (int a = x - 1; a <= x + 1; a++) {
+			for (int b = z - 1; b <= z + 1; b++) {
+				world.setBlock(a, y + height, b, EDBlocks.blockRubberLeaves.blockID, 0, 7);
+			}
+		}
+		
 		return true;
 	}
 
