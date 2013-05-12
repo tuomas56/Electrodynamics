@@ -16,7 +16,6 @@ import net.minecraft.server.MinecraftServer;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import electrodynamics.lib.core.ModInfo;
-import electrodynamics.network.packet.PacketActivate;
 import electrodynamics.network.packet.PacketED;
 import electrodynamics.network.packet.PacketFX;
 import electrodynamics.network.packet.PacketJump;
@@ -34,7 +33,6 @@ public enum PacketTypeHandler {
 	JUMP(PacketJump.class),
 	LIGHTNING(PacketLightningFX.class),
 	FX(PacketFX.class),
-	ACTIVATE(PacketActivate.class),
 	SOUND(PacketSound.class);
 	
 	private Class<? extends PacketED> clazz;

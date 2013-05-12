@@ -65,6 +65,7 @@ public class BlockMachine extends BlockContainer {
 		
 		if (tile instanceof TileEntityMachine) {
 			((TileEntityMachine)tile).onBlockActivated(world, x, y, z, player, side, hX, hY, hZ);
+			return true;
 		}
 		
 		return false;
