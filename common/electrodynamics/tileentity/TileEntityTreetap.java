@@ -15,7 +15,6 @@ public class TileEntityTreetap extends TileEntity {
 	
 	@Override
 	public void updateEntity() {
-		System.out.println(getAttachedTreeHeight());
 	}
 	
 	@Override
@@ -43,19 +42,30 @@ public class TileEntityTreetap extends TileEntity {
 		return new Packet132TileEntityData(xCoord, yCoord, zCoord, 0, comp);
 	}
 	
-	private int getAttachedTreeHeight() {
+	public boolean isSupported() {
+		int x = xCoord + rotation.getOpposite().offsetX;
+		int y = yCoord;
+		int z = zCoord + rotation.getOpposite().offsetZ;
+		
+		return (this.worldObj.getBlockId(x, y, z) == BlockIDs.BLOCK_RUBBER_WOOD_ID);
+	}
+	
+	public int getAttachedTreeHeight() {
 		if (rotation != null) {
 			boolean foundEnd = false;
-			int height = 1;
+			int height = 0;
 			
+			int x = xCoord + rotation.getOpposite().offsetX;
 			int y = yCoord;
+			int z = zCoord + rotation.getOpposite().offsetZ;
 			
 			while (!foundEnd) {
-				if (this.worldObj.getBlockId(xCoord + rotation.offsetX, y, zCoord + rotation.offsetZ) != BlockIDs.BLOCK_RUBBER_WOOD_ID) {
+				if (this.worldObj.getBlockId(x, y, z) != BlockIDs.BLOCK_RUBBER_WOOD_ID) {
 					foundEnd = true;
+				} else {
+					height += 1;
+					y += 1;
 				}
-				
-				y += 1;
 			}
 			
 			return height;

@@ -46,7 +46,7 @@ public class RenderItemTable implements IItemRenderer {
 			}
 			
 			case INVENTORY: {
-				renderTable((byte) item.getItemDamage(), 0F, 1.075F, 0F);
+				renderTable((byte) item.getItemDamage(), 0F, 0F, 0F);
 				break;
 			}
 			

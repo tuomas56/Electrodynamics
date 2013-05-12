@@ -20,7 +20,14 @@ public class SoundHandler {
 
 	@ForgeSubscribe
 	public void onSoundLoad(SoundLoadEvent e) {
-		String[] soundFiles = new String[] { "block/voidstoneAmbient.ogg", "block/tableSmash.ogg", "block/treeTap.ogg" };
+		String[] soundFiles = new String[] { 
+			"block/voidstoneAmbient.ogg", 
+			"block/tableSmash.ogg", 
+			"block/treeTap.ogg",
+			"block/barkCut1.ogg",
+			"block/barkCut2.ogg"
+		};
+
 		for (int i = 0; i < soundFiles.length; i++) {
 			try {
 				File file = extractAndLoadResource(Minecraft.getMinecraft(), soundFiles[i]);
@@ -35,10 +42,13 @@ public class SoundHandler {
 
 	@SideOnly(Side.CLIENT)
 	private File extractAndLoadResource(Minecraft mc, String resName) throws Exception {
-		String MC_PATH_STRING = Minecraft.getMinecraftDir().getAbsolutePath();
-		MC_PATH_STRING = MC_PATH_STRING.substring(0, MC_PATH_STRING.length() - 1);
-		File resDestDir = new File(MC_PATH_STRING, "resources/" + ModInfo.GENERIC_MOD_ID.toLowerCase() + "");
+		String mcDir = Minecraft.getMinecraftDir().getAbsolutePath();
+		mcDir = mcDir.substring(0, mcDir.lastIndexOf("."));
+		
+		File resDestDir = new File(mcDir + "resources/", ModInfo.GENERIC_MOD_ID.toLowerCase() + "");
 
+		System.out.println(resDestDir.getAbsolutePath());
+		
 		if (!resDestDir.exists()) {
 			resDestDir.mkdirs();
 		}

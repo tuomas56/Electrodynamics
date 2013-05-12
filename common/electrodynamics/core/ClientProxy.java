@@ -16,9 +16,11 @@ import electrodynamics.client.render.entity.RenderBeam;
 import electrodynamics.client.render.item.RenderItemMachine;
 import electrodynamics.client.render.item.RenderItemPlasmaRifle;
 import electrodynamics.client.render.item.RenderItemTable;
+import electrodynamics.client.render.item.RenderItemTreetap;
 import electrodynamics.client.render.tileentity.RenderBasicSieve;
 import electrodynamics.client.render.tileentity.RenderSinteringOven;
 import electrodynamics.client.render.tileentity.RenderTable;
+import electrodynamics.client.render.tileentity.RenderTreetap;
 import electrodynamics.control.KeyBindingHelper;
 import electrodynamics.control.KeybindingHandler;
 import electrodynamics.core.handler.SoundHandler;
@@ -29,6 +31,7 @@ import electrodynamics.lib.client.FXType;
 import electrodynamics.tileentity.TileEntityBasicSieve;
 import electrodynamics.tileentity.TileEntitySinteringOven;
 import electrodynamics.tileentity.TileEntityTable;
+import electrodynamics.tileentity.TileEntityTreetap;
 
 public class ClientProxy extends CommonProxy {
 
@@ -42,11 +45,13 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySinteringOven.class, new RenderSinteringOven());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTable.class, new RenderTable());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBasicSieve.class, new RenderBasicSieve());
-
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreetap.class, new RenderTreetap());
+		
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockTable.blockID, new RenderItemTable());
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockMachine.blockID, new RenderItemMachine());
 		MinecraftForgeClient.registerItemRenderer(EDItems.itemPlasmaRifle.itemID, new RenderItemPlasmaRifle());
-
+		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockTreetap.blockID, new RenderItemTreetap());
+		
 		RenderingRegistry.registerBlockHandler(new RenderBlockRedWire());
 		RenderingRegistry.registerBlockHandler(new RenderBlockOre());
 

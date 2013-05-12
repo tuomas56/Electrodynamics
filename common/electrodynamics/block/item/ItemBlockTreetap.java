@@ -1,5 +1,6 @@
 package electrodynamics.block.item;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -7,6 +8,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.network.PacketTypeHandler;
+import electrodynamics.network.packet.PacketSound;
 import electrodynamics.tileentity.TileEntityTreetap;
 
 public class ItemBlockTreetap extends ItemBlock {
@@ -28,6 +31,10 @@ public class ItemBlockTreetap extends ItemBlock {
 		TileEntity tile = world.getBlockTileEntity(x, y, z);
 		
 		if (tile != null && tile instanceof TileEntityTreetap) {
+			if (!world.isRemote) {
+				PacketSound sound = new PacketSound("electrodynamics.block.treeTap", x, y, z);
+				PacketDispatcher.sendPacketToAllAround(x, y, z, 32D, world.provider.dimensionId, PacketTypeHandler.fillPacket(sound));
+			}
 			((TileEntityTreetap)tile).rotation = ForgeDirection.getOrientation(side);
 		}
 		
@@ -48,7 +55,7 @@ public class ItemBlockTreetap extends ItemBlock {
 			return false;
 		}
 		
-		return super.placeBlockAt(stack, player, world, xOrig, yOrig, zOrig, side, hitX, hitY, hitZ, metadata);
+		return super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);
 	}
 	
 }
