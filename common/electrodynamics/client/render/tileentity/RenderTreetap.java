@@ -28,12 +28,13 @@ public class RenderTreetap extends TileEntitySpecialRenderer {
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_LIGHTING);
 		
-		GL11.glTranslated(x + 0.72, y + 0.70, z + 0.5);
+		GL11.glTranslated(x + 0.5, y + 0.65, z + 0.69);
 		GL11.glRotatef(180, 1, 0, 0);
 		
 		switch(tile.rotation) {
 			case EAST: {
 				GL11.glRotatef(-90, 0, 1, 0);
+				GL11.glTranslated(0.19, 0, 0.17);
 				break;
 			}
 			case NORTH: {
@@ -41,10 +42,12 @@ public class RenderTreetap extends TileEntitySpecialRenderer {
 				break;
 			}
 			case SOUTH: {
+				GL11.glTranslated(0, 0, 0.37);
 				break;
 			}
 			case WEST: {
 				GL11.glRotatef(90, 0, 1, 0);
+				GL11.glTranslated(-0.19, 0, 0.17);
 				break;
 			}
 			default: break;
