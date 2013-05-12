@@ -18,7 +18,7 @@ public class ItemDust extends Item {
 	public ItemDust(int id) {
 		super(id);
 		setHasSubtypes(true);
-		setCreativeTab(CreativeTabED.item);
+		setCreativeTab(CreativeTabED.resource);
 	}
 	
 	@Override

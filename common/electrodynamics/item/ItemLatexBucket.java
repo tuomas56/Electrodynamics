@@ -13,7 +13,7 @@ public class ItemLatexBucket extends Item {
 	public ItemLatexBucket(int id) {
 		super(id);
 		setMaxStackSize(1);
-		setCreativeTab(CreativeTabED.item);
+		setCreativeTab(CreativeTabED.resource);
 	}
 	
 	@Override

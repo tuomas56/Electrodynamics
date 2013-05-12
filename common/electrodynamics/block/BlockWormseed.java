@@ -25,7 +25,7 @@ public class BlockWormseed extends BlockFlower {
 
 	public BlockWormseed(int id) {
 		super(id);
-		setCreativeTab(CreativeTabED.block);
+		setCreativeTab(CreativeTabED.resource);
 	}
 
 	@Override

@@ -22,7 +22,7 @@ public class BlockRubberLeaves extends BlockLeaves {
 
 	public BlockRubberLeaves(int id) {
 		super(id);
-		setCreativeTab(CreativeTabED.block);
+		setCreativeTab(CreativeTabED.resource);
 	}
 
 	public int idDropped(int i, Random d, int k) {

@@ -20,7 +20,7 @@ public class ItemComponent extends Item {
 	public ItemComponent(int id) {
 		super(id);
 		setHasSubtypes(true);
-		setCreativeTab(CreativeTabED.item);
+		setCreativeTab(CreativeTabED.resource);
 	}
 
 	@Override

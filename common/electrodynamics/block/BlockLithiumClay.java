@@ -19,7 +19,7 @@ public class BlockLithiumClay extends Block {
 		super(id, Material.clay);
 		setHardness(0.6F);
 		setStepSound(soundGravelFootstep);
-		setCreativeTab(CreativeTabED.block);
+		setCreativeTab(CreativeTabED.resource);
 	}
 
 	public Icon getIcon(int side, int meta) {

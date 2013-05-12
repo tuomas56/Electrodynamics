@@ -17,7 +17,7 @@ public class ItemIngot extends Item {
 	public ItemIngot(int id) {
 		super(id);
 		setHasSubtypes(true);
-		setCreativeTab(CreativeTabED.item);
+		setCreativeTab(CreativeTabED.resource);
 	}
 	
 	@Override

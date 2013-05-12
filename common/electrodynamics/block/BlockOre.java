@@ -31,7 +31,7 @@ public class BlockOre extends Block {
 		super(i, Material.rock);
 		setHardness(3F);
 		setResistance(5F);
-		setCreativeTab(CreativeTabED.block);
+		setCreativeTab(CreativeTabED.resource);
 	}
 
 	@Override

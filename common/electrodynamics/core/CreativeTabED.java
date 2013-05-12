@@ -10,7 +10,7 @@ import electrodynamics.lib.item.ItemIDs;
 
 public class CreativeTabED extends CreativeTabs {
 
-	public static CreativeTabs item;
+	public static CreativeTabs resource;
 	public static CreativeTabs tool;
 	public static CreativeTabs block;
 	
@@ -18,7 +18,7 @@ public class CreativeTabED extends CreativeTabs {
 	public int itemMeta = 0;
 	
 	static {
-		item = new CreativeTabED("ED Resources").setIcon(ItemIDs.ITEM_COMPONENT_ID + 256, Component.PCB.ordinal());
+		resource = new CreativeTabED("ED Resources").setIcon(ItemIDs.ITEM_COMPONENT_ID + 256, Component.PCB.ordinal());
 		tool = new CreativeTabED("ED Tools").setIcon(ItemIDs.ITEM_STEEL_HAMMER_ID + 256, 0);
 		block = new CreativeTabED("ED Blocks").setIcon(BlockIDs.BLOCK_MACHINE_ID, Machine.SINTERING_FURNACE.ordinal());
 	}

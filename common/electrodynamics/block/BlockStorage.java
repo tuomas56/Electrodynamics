@@ -17,7 +17,7 @@ public class BlockStorage extends Block {
 	public BlockStorage(int id) {
 		super(id, Material.iron);
 		setHardness(1F);
-		setCreativeTab(CreativeTabED.block);
+		setCreativeTab(CreativeTabED.resource);
 	}
 	
 	@Override
