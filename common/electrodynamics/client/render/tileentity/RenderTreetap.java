@@ -58,11 +58,9 @@ public class RenderTreetap extends TileEntitySpecialRenderer {
 			renderBucket(tile);
 			
 			LiquidStack liquid = LiquidDictionary.getCanonicalLiquid("Latex");
-//			int[] displayListPour = LiquidRenderer.getLiquidDisplayLists(liquid, tile.worldObj, false, 0, 0, 0.425F, 0.125F, 100, "latexPour");
-			int[] displayListBucket = LiquidRenderer.getLiquidDisplayLists(liquid, tile.worldObj, false, 0, 0, 0.375F, 0.375F, 100, "latexBucket");
 		
-//			renderLiquidPouring(displayListPour, liquid);
 			if (tile.liquidAmount > 0) {
+				int[] displayListBucket = LiquidRenderer.getLiquidDisplayLists(liquid, tile.worldObj, false, 0, 0, 0.375F, 0.375F, 100, "latexBucket");
 				renderLiquidInBucket(displayListBucket, liquid, tile.liquidAmount, 1000);
 			}
 		}
