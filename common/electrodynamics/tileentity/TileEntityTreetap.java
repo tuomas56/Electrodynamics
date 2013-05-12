@@ -61,7 +61,6 @@ public class TileEntityTreetap extends TileEntity {
 	@Override
 	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
 		this.readFromNBT(pkt.customParam1);
-		dirty = true;
 	}
 
 	@Override

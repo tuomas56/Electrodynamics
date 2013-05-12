@@ -1,5 +1,6 @@
 package electrodynamics.tileentity;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
@@ -13,6 +14,16 @@ public abstract class TileEntityMachine extends TileEntity {
 
 	public ForgeDirection rotation;
 
+	public boolean dirty = true;
+	
+	@Override
+	public void updateEntity() {
+		if (dirty) {
+			PacketDispatcher.sendPacketToAllInDimension(this.getDescriptionPacket(), this.worldObj.provider.dimensionId);
+			dirty = false;
+		}
+	}
+	
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
