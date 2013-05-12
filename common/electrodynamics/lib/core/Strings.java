@@ -20,6 +20,8 @@ public class Strings {
 	public static final String ITEM_TRAY_NAME = "tray.name";
 	public static final String ITEM_PLASMA_RIFLE = "weapon.plasma_rifle.name";
 	public static final String ITEM_SPUD_PEELER = "spud_peeler.name";
+	public static final String ITEM_LATEX_BUCKET = "bucket.latex.name";
+	public static final String ITEM_LIQUID_LATEX = "liquid.latex.name";
 	
 	/* Internal block names */
 	public static final String BLOCK_ORE_NAME = "ore.name";

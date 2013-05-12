@@ -15,8 +15,10 @@ public class EDItems {
 	public static Item itemHandheldSieve;
 	public static Item itemPlasmaRifle;
 	public static Item itemSpudPeeler;
-	
 	public static Item itemTray;
+	public static Item itemLatexBucket;
+	
+	public static Item itemLiquidLatex;
 	
 	public static Item itemTeslaHelm;
 	public static Item itemTeslaChest;

@@ -65,6 +65,11 @@ public class ConfigurationSettings {
 	public static final String HOVER_MODE_TOGGLE_CONFIGNAME = "tesla_armor.jump_mode.toggle";
 	public static final int HOVER_MODE_TOGGLE_DEFAULT = 36;
 	
+	/* Rubber Settings */
+	public static int RUBBER_FILL_TIME;
+	public static final String RUBBER_FILL_TIME_CONFIGNAME = "rubber.fill_time";
+	public static final int RUBBER_FILL_TIME_DEFAULT = 20 * 120; // Two minutes
+	
 	/* Graphical settings */
 	public static int VOIDSTONE_RENDER_ID;
 	

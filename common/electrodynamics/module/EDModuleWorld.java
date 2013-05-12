@@ -1,10 +1,15 @@
 package electrodynamics.module;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.liquids.LiquidContainerData;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
+import net.minecraftforge.liquids.LiquidDictionary;
+import net.minecraftforge.liquids.LiquidStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -22,6 +27,8 @@ import electrodynamics.block.item.ItemBlockOre;
 import electrodynamics.block.item.ItemBlockTreetap;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.item.EDItems;
+import electrodynamics.item.ItemLatexBucket;
+import electrodynamics.item.ItemLiquidLatex;
 import electrodynamics.item.ItemPeelingSpud;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.block.Decorative;
@@ -83,11 +90,25 @@ public class EDModuleWorld extends EDModule {
 		EDBlocks.blockTreetap = new BlockTreetap(BlockIDs.BLOCK_TREETAP_ID).setUnlocalizedName(Strings.BLOCK_TREETAP);
 		GameRegistry.registerBlock(EDBlocks.blockTreetap, ItemBlockTreetap.class, Strings.BLOCK_TREETAP);
 		EDLanguage.getInstance().registerBlock(EDBlocks.blockTreetap);
+		
+		EDItems.itemLatexBucket = new ItemLatexBucket(ItemIDs.ITEM_LATEX_BUCKET_ID).setUnlocalizedName(Strings.ITEM_LATEX_BUCKET);
+		GameRegistry.registerItem(EDItems.itemLatexBucket, Strings.ITEM_LATEX_BUCKET);
+		EDLanguage.getInstance().registerItem(EDItems.itemLatexBucket);
+		
+		EDItems.itemLiquidLatex = new ItemLiquidLatex(ItemIDs.ITEM_LIQUID_LATEX_ID).setUnlocalizedName(Strings.ITEM_LIQUID_LATEX);
+		GameRegistry.registerItem(EDItems.itemLiquidLatex, Strings.ITEM_LIQUID_LATEX);
+		EDLanguage.getInstance().registerItem(EDItems.itemLiquidLatex);
 	}
 
 	@Override
 	public void init() {
 //		MinecraftForge.EVENT_BUS.register(new BonemealEventHandler());
+		
+		LiquidDictionary.getOrCreateLiquid("Latex", new LiquidStack(EDItems.itemLiquidLatex, LiquidContainerRegistry.BUCKET_VOLUME));
+		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(new LiquidStack(EDItems.itemLiquidLatex, LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(EDItems.itemLiquidLatex), new ItemStack(Item.bucketEmpty)));
+		LiquidStack latex = LiquidDictionary.getCanonicalLiquid("Latex");
+		latex.setTextureSheet("/gui/items.png");
+		latex.setRenderingIcon(EDItems.itemLiquidLatex.getIconFromDamage(0));
 		
 		GameRegistry.registerTileEntity(TileEntityTreetap.class, Strings.BLOCK_TREETAP);
 		

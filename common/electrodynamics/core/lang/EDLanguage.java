@@ -21,6 +21,8 @@ public class EDLanguage {
 
 	public static final String LANG_DIR = "/mods/" + ModInfo.GENERIC_MOD_ID.toLowerCase() + "/lang/";
 	
+	public boolean errorShown = false;
+	
 	/** Key is language name, value is properties file */
 	public HashMap<String, Properties> languageMapping = new HashMap<String, Properties>();
 	
@@ -94,6 +96,11 @@ public class EDLanguage {
 		} catch(Exception ex) {
 			if (ConfigurationSettings.SHOW_LOCALIZATION_ERRORS) {
 				EDLogger.warn("Failed to register " + currLang + " localization for " + unlocalized);
+			} else {
+				if (!errorShown) {
+					EDLogger.warn("Ran into an issue with localization. This message will only show once, but you can enable localization errors in the config to see more info.");
+					errorShown = true;
+				}
 			}
 		}
 	}

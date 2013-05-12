@@ -28,6 +28,8 @@ public class ConfigurationHandler {
 			ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED = config.get(CATEGORY_TESLA, ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_CONFIGNAME, ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_DEFAULT).getDouble(ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_DEFAULT);
 			ConfigurationSettings.THERMAL_VIEW_RANGE = config.get(CATEGORY_TESLA, ConfigurationSettings.THERMAL_VIEW_RANGE_CONFIGNAME, ConfigurationSettings.THERMAL_VIEW_RANGE_DEFAULT).getDouble(ConfigurationSettings.THERMAL_VIEW_RANGE_DEFAULT);
 			
+			ConfigurationSettings.RUBBER_FILL_TIME = config.get(CATEGORY_SETTINGS, ConfigurationSettings.RUBBER_FILL_TIME_CONFIGNAME, ConfigurationSettings.RUBBER_FILL_TIME_DEFAULT, "Amount of time (in ticks) for one bucket to fill via basic tap. (20 ticks to one second)").getInt(ConfigurationSettings.RUBBER_FILL_TIME_DEFAULT);
+			
 			/* Graphical Settings */
 			ConfigurationSettings.VOIDSTONE_RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 			ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS = config.get(CATEGORY_GRAPHICS, ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS_NAME, ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS_DEFAULT).getBoolean(ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS_DEFAULT);
@@ -74,6 +76,8 @@ public class ConfigurationHandler {
 			ItemIDs.ITEM_TRAY_ID = config.getItem(Strings.ITEM_TRAY_NAME, ItemIDs.ITEM_TRAY_DEFAULT_ID).getInt(ItemIDs.ITEM_TRAY_DEFAULT_ID);
 			ItemIDs.ITEM_PLASMA_RIFLE_ID = config.getItem(Strings.ITEM_PLASMA_RIFLE, ItemIDs.ITEM_PLASMA_RIFLE_DEFAULT_ID).getInt(ItemIDs.ITEM_PLASMA_RIFLE_DEFAULT_ID);
 			ItemIDs.ITEM_SPUD_PEELER_ID = config.getItem(Strings.ITEM_SPUD_PEELER, ItemIDs.ITEM_SPUD_PEELER_DEFAULT_ID).getInt(ItemIDs.ITEM_SPUD_PEELER_DEFAULT_ID);
+			ItemIDs.ITEM_LATEX_BUCKET_ID = config.getItem(Strings.ITEM_LATEX_BUCKET, ItemIDs.ITEM_LATEX_BUCKET_DEFAULT_ID).getInt(ItemIDs.ITEM_LATEX_BUCKET_DEFAULT_ID);
+			ItemIDs.ITEM_LIQUID_LATEX_ID = config.getItem(Strings.ITEM_LIQUID_LATEX, ItemIDs.ITEM_LIQUID_LATEX_DEFAULT_ID).getInt(ItemIDs.ITEM_LIQUID_LATEX_DEFAULT_ID);
 			
 		} catch (Exception e) {
 			EDLogger.warn("Had trouble reading/writing to the configuration file.");

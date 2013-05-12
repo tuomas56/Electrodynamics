@@ -58,4 +58,12 @@ public class ItemIDs {
 	public static int ITEM_SPUD_PEELER_ID;
 	public static final int ITEM_SPUD_PEELER_DEFAULT_ID = 5113;
 	
+	/* itemBucketOfLatex */
+	public static int ITEM_LATEX_BUCKET_ID;
+	public static final int ITEM_LATEX_BUCKET_DEFAULT_ID = 5114;
+	
+	/* itemLiquidLatex */
+	public static int ITEM_LIQUID_LATEX_ID;
+	public static final int ITEM_LIQUID_LATEX_DEFAULT_ID = 5115;
+	
 }
