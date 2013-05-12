@@ -47,8 +47,6 @@ public class SoundHandler {
 		
 		File resDestDir = new File(mcDir + "resources/", ModInfo.GENERIC_MOD_ID.toLowerCase() + "");
 
-		System.out.println(resDestDir.getAbsolutePath());
-		
 		if (!resDestDir.exists()) {
 			resDestDir.mkdirs();
 		}
