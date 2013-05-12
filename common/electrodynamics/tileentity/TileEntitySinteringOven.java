@@ -3,6 +3,8 @@ package electrodynamics.tileentity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
+import electrodynamics.util.ItemUtil;
 
 public class TileEntitySinteringOven extends TileEntityMachine {
 
@@ -17,6 +19,8 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 	
 	@Override
 	public void updateEntity() {
+		super.updateEntity();
+		
 		if (open && doorAngle <= ROTATIONAL_MAX) {
 			doorAngle += 0.2F;
 		} else if (!open && doorAngle > 0) {
@@ -45,9 +49,15 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 	}
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
-		open = !open;
+		if (player.getCurrentEquippedItem() != null && ItemUtil.getFuelValue(player.getCurrentEquippedItem()) > 0) {
+			this.fuelLevel += ItemUtil.getFuelValue(player.getCurrentEquippedItem());
+		} else {
+			if (ForgeDirection.getOrientation(side) == rotation) {
+				open = !open;
+			}
+		}
 		dirty = true;
-		return false;
+		return true;
 	}
 
 }

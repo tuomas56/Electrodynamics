@@ -27,6 +27,7 @@ public abstract class TileEntityMachine extends TileEntity {
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
+		
 		tag.setByte("direction", (byte) rotation.ordinal());
 	}
 
