@@ -50,7 +50,8 @@ public class RenderTreetap extends TileEntitySpecialRenderer {
 			default: break;
 		}
 		
-		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_TREETAP);
+		String texture = (tile.liquidAmount == 1000 ? Models.TEX_BUCKET_FULL : Models.TEX_BUCKET);
+		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		modelTreetap.render(0.0625F);
 		
 		if (tile.hasBucket) {

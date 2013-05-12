@@ -11,6 +11,7 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.common.network.PacketDispatcher;
+import electrodynamics.block.BlockRubberWood;
 import electrodynamics.item.EDItems;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.util.BlockUtil;
@@ -70,6 +71,12 @@ public class TileEntityTreetap extends TileEntity {
 		return new Packet132TileEntityData(xCoord, yCoord, zCoord, 0, comp);
 	}
 	
+	public void tick() {
+		if (liquidAmount + 500 <= 1000 && hasBucket) {
+			drawLatex();
+		}
+	}
+	
 	public boolean isTapSupported() {
 		int x = xCoord + rotation.getOpposite().offsetX;
 		int y = yCoord;
@@ -93,7 +100,16 @@ public class TileEntityTreetap extends TileEntity {
 		dirty = true;
 	}
 	
-	public int getAttachedTreeHeight() {
+	public void drawLatex() {
+		if (getHighestValidLog() > 0) {
+			if (BlockRubberWood.suckLatex(this.worldObj, xCoord, yCoord + (getHighestValidLog() - 1), zCoord)) {
+				this.liquidAmount += 500;
+				this.dirty = true;
+			}
+		}
+	}
+	
+	public int getHighestValidLog() {
 		if (rotation != null) {
 			boolean foundEnd = false;
 			int height = 0;
@@ -103,7 +119,7 @@ public class TileEntityTreetap extends TileEntity {
 			int z = zCoord + rotation.getOpposite().offsetZ;
 			
 			while (!foundEnd) {
-				if (this.worldObj.getBlockId(x, y, z) != BlockIDs.BLOCK_RUBBER_WOOD_ID) {
+				if (this.worldObj.getBlockId(x, y, z) != BlockIDs.BLOCK_RUBBER_WOOD_ID && (this.worldObj.getBlockMetadata(x, y, z) != 0 && this.worldObj.getBlockMetadata(x, y, z) <= 8)) {
 					foundEnd = true;
 				} else {
 					height += 1;

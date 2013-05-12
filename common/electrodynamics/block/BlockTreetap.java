@@ -1,5 +1,7 @@
 package electrodynamics.block;
 
+import java.util.Random;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +16,7 @@ public class BlockTreetap extends BlockContainer {
 
 	public BlockTreetap(int id) {
 		super(id, Material.iron);
+		setTickRandomly(true);
 		setHardness(1F);
 		setCreativeTab(CreativeTabED.block);
 	}
@@ -59,6 +62,15 @@ public class BlockTreetap extends BlockContainer {
 		}
 		
 		return false;
+	}
+	
+	@Override
+	public void updateTick(World world, int x, int y, int z, Random rand) {
+		TileEntityTreetap tile = (TileEntityTreetap) world.getBlockTileEntity(x, y, z);
+		
+		if (tile != null && tile instanceof TileEntityTreetap) {
+			tile.tick();
+		}
 	}
 	
 	@Override

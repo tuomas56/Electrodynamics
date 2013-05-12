@@ -47,11 +47,17 @@ public class ItemBlockTreetap extends ItemBlock {
 		int yOrig = y - sideForge.offsetY;
 		int zOrig = z - sideForge.offsetZ;
 		
+		int meta = world.getBlockMetadata(xOrig, yOrig, zOrig);
+		
 		if (world.getBlockId(xOrig, yOrig, zOrig) != BlockIDs.BLOCK_RUBBER_WOOD_ID) {
 			return false;
 		}
 		
-		if (world.getBlockMetadata(xOrig, yOrig, zOrig) != side) {
+		if (meta <= 1) {
+			return false;
+		}
+		
+		if (meta != side) {
 			return false;
 		}
 		

@@ -25,6 +25,7 @@ public class BlockRubberWood extends Block {
 	
 	public BlockRubberWood(int id) {
 		super(id, Material.wood);
+		setTickRandomly(true);
 		setCreativeTab(CreativeTabED.block);
 	}
 	
@@ -56,6 +57,24 @@ public class BlockRubberWood extends Block {
 		return (world.getBlockId(x, y + 1, z) == BlockIDs.BLOCK_RUBBER_WOOD_ID && world.getBlockId(x, y - 1, z) == BlockIDs.BLOCK_RUBBER_WOOD_ID) && (world.getBlockId(x, y - 2, z) != BlockIDs.BLOCK_RUBBER_WOOD_ID) && (world.getBlockMetadata(x, y, z) == 1);
 	}
 	
+	public static boolean suckLatex(World world, int x, int y, int z) {
+		int meta = world.getBlockMetadata(x, y, z);
+		
+		if (meta > 1 && meta <= 9) {
+			world.setBlockMetadataWithNotify(x, y, z, meta + 4, 2);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public void updateTick(World world, int x, int y, int z, Random rand) {
+		if (world.getBlockMetadata(x, y, z) < 1) {
+			world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) - 4, 2);
+		}
+	}
+	
 	@Override
 	public boolean canSustainLeaves(World world, int x, int y, int z) {
 		return true;
@@ -75,7 +94,11 @@ public class BlockRubberWood extends Block {
 			return textures[0];
 		}
 		
-		return side == meta ? textures[2] : textures[1];
+		if (side == meta || side == meta - 4 || side == meta - 8) {
+			return textures[2];
+		}
+		
+		return textures[1];
 	}
 	
 	public void registerIcons(IconRegister register) {
