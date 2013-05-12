@@ -125,6 +125,7 @@ public class EDModuleWorld extends EDModule {
 		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 2, 4, 16, 32, 6));
 		// Lithium
 		GameRegistry.registerWorldGenerator(new WorldGenClay(BlockIDs.BLOCK_LITHIUM_CLAY_ID, 4));
+		//MinecraftForge.TERRAIN_GEN_BUS.register(new electrodynamics.world.handler.CreateDecoratorHandler());
 		// Magnetite
 		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 3, 8, 16, 32, 4));
 		// Nickel
