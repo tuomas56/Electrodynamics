@@ -5,6 +5,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import electrodynamics.inventory.InventoryItem;
+import electrodynamics.item.EDItems;
 
 public class ContainerTray extends Container {
 
@@ -45,7 +46,7 @@ public class ContainerTray extends Container {
 		System.out.println("craft gui closed");
 		
 		if (!player.worldObj.isRemote) {
-			if (this.activePlayer.getCurrentEquippedItem() != null) {
+			if (this.activePlayer.getCurrentEquippedItem() != null && this.activePlayer.getCurrentEquippedItem().getItem() == EDItems.itemTray) {
 				this.activePlayer.setCurrentItemOrArmor(0, this.inventory.parent);
 				this.activePlayer.inventory.onInventoryChanged();
 			}
