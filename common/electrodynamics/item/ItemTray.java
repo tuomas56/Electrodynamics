@@ -13,7 +13,7 @@ public class ItemTray extends Item implements IInventoryItem {
 
 	public ItemTray(int id) {
 		super(id);
-		setMaxStackSize(64);
+		setMaxStackSize(1);
 		setMaxDamage(0);
 		setCreativeTab(CreativeTabED.tool);
 	}

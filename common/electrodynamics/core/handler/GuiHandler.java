@@ -36,7 +36,7 @@ public class GuiHandler implements IGuiHandler {
 		switch(type) {
 			case TRAY: {
 				ItemStack tray = player.inventory.getCurrentItem();
-				return side == Side.SERVER ? new ContainerTray(player, ((ItemTray)tray.getItem()).getInventory(tray)) : new GuiTray(new ContainerTray(player, ((ItemTray)tray.getItem()).getInventory(tray)));
+				return side == Side.SERVER ? new ContainerTray(player, ((ItemTray)tray.getItem()).getInventory(tray)) : new GuiTray(player, new ContainerTray(player, ((ItemTray)tray.getItem()).getInventory(tray)));
 			}
 		}
 		

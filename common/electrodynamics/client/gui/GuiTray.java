@@ -1,19 +1,24 @@
 package electrodynamics.client.gui;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.StatCollector;
+
 import org.lwjgl.opengl.GL11;
 
 import electrodynamics.inventory.container.ContainerTray;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.util.StatCollector;
 
 public class GuiTray extends GuiContainer {
 
+	public EntityPlayer player;
+	
 	public ContainerTray container;
 	
-	public GuiTray(ContainerTray container) {
+	public GuiTray(EntityPlayer player, ContainerTray container) {
 		super(container);
 		
 		this.container = container;
+		this.player = player;
 	}
 
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
