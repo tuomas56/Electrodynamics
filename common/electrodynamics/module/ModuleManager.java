@@ -58,7 +58,8 @@ public class ModuleManager {
 						EDLogger.fine("Module " + module.toString() + " decided not to load. Reason: " + instance.failLoadReason());
 					}
 				} else {
-					EDLogger.warn("Module " + module.toString() + " is missing a mapping!");
+					// Silently die
+//					EDLogger.warn("Module " + module.toString() + " is missing a mapping!");
 				}
 			}
 		}

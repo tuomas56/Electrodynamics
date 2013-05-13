@@ -50,13 +50,13 @@ public class ClientProxy extends CommonProxy {
 		
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockTable.blockID, new RenderItemTable());
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockMachine.blockID, new RenderItemMachine());
-		MinecraftForgeClient.registerItemRenderer(EDItems.itemPlasmaRifle.itemID, new RenderItemPlasmaRifle());
+//		MinecraftForgeClient.registerItemRenderer(EDItems.itemPlasmaRifle.itemID, new RenderItemPlasmaRifle());
 		
-		RenderingRegistry.registerBlockHandler(new RenderBlockRedWire());
+//		RenderingRegistry.registerBlockHandler(new RenderBlockRedWire());
 		RenderingRegistry.registerBlockHandler(new RenderBlockOre());
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityBeam.class, new RenderBeam());
-		RenderingRegistry.registerEntityRenderingHandler(EntityPlasmaBeam.class, new RenderBeam());
+//		RenderingRegistry.registerEntityRenderingHandler(EntityBeam.class, new RenderBeam());
+//		RenderingRegistry.registerEntityRenderingHandler(EntityPlasmaBeam.class, new RenderBeam());
 	}
 
 	@Override
