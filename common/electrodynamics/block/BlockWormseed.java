@@ -1,11 +1,13 @@
 package electrodynamics.block;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
@@ -72,4 +74,11 @@ public class BlockWormseed extends BlockFlower {
 		textures[1] = icon.registerIcon(ModInfo.ICON_PREFIX + "world/plant/plantWormseedDried");
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void getSubBlocks(int id, CreativeTabs tab, List list) {
+		for (int i=0; i<2; i++) {
+			list.add(new ItemStack(id, 1, i));
+		}
+	}
+	
 }
