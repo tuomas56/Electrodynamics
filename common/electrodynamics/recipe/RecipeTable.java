@@ -1,8 +1,10 @@
 package electrodynamics.recipe;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import electrodynamics.api.crafting.util.TableRecipeType;
 import electrodynamics.api.tool.ITool;
+import electrodynamics.tileentity.TileEntityTable;
 
 public class RecipeTable {
 
@@ -25,6 +27,6 @@ public class RecipeTable {
 	}
 	
 	/** Extra code to be called when the item is smashed. Can be left blank */
-	public void onSmashed() {}
+	public void onSmashed(EntityPlayer player, TileEntityTable tile, ItemStack stack) {}
 	
 }

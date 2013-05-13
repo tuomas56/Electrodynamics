@@ -1,18 +1,26 @@
 package electrodynamics.recipe;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.item.EntityTNTPrimed;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import electrodynamics.api.crafting.util.TableRecipeType;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.lib.block.Ore;
+import electrodynamics.lib.client.FXType;
 import electrodynamics.lib.item.Component;
 import electrodynamics.lib.item.Dust;
 import electrodynamics.lib.item.Grinding;
+import electrodynamics.network.packet.PacketFX;
+import electrodynamics.network.packet.PacketSound;
+import electrodynamics.tileentity.TileEntityTable;
 
-public class TableManager {
+public class RecipeManagerTable {
 
 	public ArrayList<RecipeTable> smashingTableRecipes = new ArrayList<RecipeTable>();
 	
@@ -52,6 +60,42 @@ public class TableManager {
 		/* Various vanilla recipes */
 		registerSmashingRecipe(new ItemStack(Block.stone), new ItemStack(Block.cobblestone), 1);
 		registerSmashingRecipe(new ItemStack(Block.brick), new ItemStack(Item.brick, 4, 0), 1);
+		
+		registerRecipe(new RecipeTable(TableRecipeType.SMASH, new ItemStack(Item.enderPearl), null, 1) {
+			@Override
+			public void onSmashed(EntityPlayer player, TileEntityTable table, ItemStack stack) {
+				Random random = new Random();
+				
+				int xPosOrNeg = random.nextInt(2) == 1 ? -1 : 1;
+				int zPosOrNeg = random.nextInt(2) == 1 ? -1 : 1;
+				int xMove = random.nextInt(10);
+				int zMove = random.nextInt(10);
+				
+				player.setPositionAndUpdate(player.posX + (xMove * xPosOrNeg), player.posY, player.posZ + (zMove * zPosOrNeg));
+
+				PacketFX fx = new PacketFX(FXType.ENDER_PARTICLES, player.posX, player.posY, player.posZ, new int[] {});
+				PacketSound sound = new PacketSound("mob.endermen.portal", player.posX, player.posY, player.posZ, PacketSound.TYPE_SOUND);
+				
+				PacketDispatcher.sendPacketToAllAround(player.posX, player.posY, player.posZ, 32D, player.worldObj.provider.dimensionId, fx.makePacket());
+				PacketDispatcher.sendPacketToAllAround(player.posX, player.posY, player.posZ, 32D, player.worldObj.provider.dimensionId, sound.makePacket());
+			}
+		});
+		
+		registerRecipe(new RecipeTable(TableRecipeType.SMASH, new ItemStack(Item.gunpowder), null, 1) {
+			@Override
+			public void onSmashed(EntityPlayer player, TileEntityTable table, ItemStack stack) {
+				player.worldObj.createExplosion(player, table.xCoord, table.yCoord, table.zCoord, 6F, false);
+			}
+		});
+		
+		registerRecipe(new RecipeTable(TableRecipeType.SMASH, new ItemStack(Block.tnt), null, 1) {
+			@Override
+			public void onSmashed(EntityPlayer player, TileEntityTable table, ItemStack stack) {
+				EntityTNTPrimed tnt = new EntityTNTPrimed(player.worldObj, table.xCoord + 0.5, table.yCoord + 1.5, table.zCoord + 0.5, player);
+				tnt.fuse = 0;
+				player.worldObj.spawnEntityInWorld(tnt);
+			}
+		});
 		
 		//First 9 ore/grinding ordinals are equal
 		for (int i=0; i<9; i++) {

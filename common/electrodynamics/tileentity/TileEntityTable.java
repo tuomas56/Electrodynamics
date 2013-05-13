@@ -124,6 +124,8 @@ public class TileEntityTable extends TileEntity {
 						PacketDispatcher.sendPacketToAllAround(xCoord, yCoord + 2, zCoord, 64D, this.worldObj.provider.dimensionId, PacketTypeHandler.fillPacket(packet));
 					}
 					
+					recipe.onSmashed(player, this, this.displayedItem);
+					
 					setItem(recipe.outputItem);
 					tool.damageItem(recipe.hammerDamage, player);
 					

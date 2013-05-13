@@ -25,7 +25,8 @@ public class SoundHandler {
 			"block/tableSmash.ogg", 
 			"block/treeTap.ogg",
 			"block/barkCut1.ogg",
-			"block/barkCut2.ogg"
+			"block/barkCut2.ogg",
+			"block/melonSquish.ogg"
 		};
 
 		for (int i = 0; i < soundFiles.length; i++) {

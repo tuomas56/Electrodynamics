@@ -1,5 +1,7 @@
 package electrodynamics.core;
 
+import java.util.Random;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -71,6 +73,11 @@ public class ClientProxy extends CommonProxy {
 		switch (type) {
 			case BLOCK_BREAK: {
 				addBlockDestroyParticles((int)x, (int)y, (int)z, extraInfo[0], extraInfo[1]);
+				break;
+			}
+			case ENDER_PARTICLES: {
+				addEnderParticles(x, y, z);
+				break;
 			}
 		}
 	}
@@ -90,6 +97,24 @@ public class ClientProxy extends CommonProxy {
 		}
 	}
 
+	@Override
+	public void addEnderParticles(double x, double y, double z) {
+		short short1 = 128;
+
+		Random rand = new Random();
+		
+		for (int l = 0; l < short1; ++l) {
+			double d6 = (double) l / ((double) short1 - 1.0D);
+			float f = (rand.nextFloat() - 0.5F) * 0.2F;
+			float f1 = (rand.nextFloat() - 0.5F) * 0.2F;
+			float f2 = (rand.nextFloat() - 0.5F) * 0.2F;
+			double d7 = x + (x - x) * d6 + (rand.nextDouble() - 0.5D) * (double) .2 * 2.0D;
+			double d8 = y + (y - y) * d6 + rand.nextDouble() * (double) .2;
+			double d9 = z + (z - z) * d6 + (rand.nextDouble() - 0.5D) * (double) .2 * 2.0D;
+			FMLClientHandler.instance().getClient().theWorld.spawnParticle("portal", d7, d8, d9, (double) f, (double) f1, (double) f2);
+		}
+	}
+	
 	public void addLightningFX(World world, double x1, double y1, double z1, double x, double y, double z, long seed, int duration) {
 		FXLightningBolt bolt = new FXLightningBolt(world, x1, y1, z1, x, y, z, seed, duration);
 		bolt.defaultFractal();

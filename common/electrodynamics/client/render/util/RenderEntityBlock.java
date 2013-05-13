@@ -24,9 +24,10 @@ import electrodynamics.entity.EntityBlock;
 
 public class RenderEntityBlock extends Render {
 
-    private static RenderBlocks renderBlocks = new RenderBlocks();
-    static {
-    }
+	private static RenderBlocks renderBlocks = new RenderBlocks();
+	static {
+	}
+
 	public static class BlockInterface {
 
 		public double minX;
@@ -49,6 +50,15 @@ public class RenderEntityBlock extends Render {
 
 		public float getBlockBrightness(IBlockAccess iblockaccess, int i, int j, int k) {
 			return baseBlock.getBlockBrightness(iblockaccess, i, j, k);
+		}
+		
+		public void setSize(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
+			this.minX = minX;
+			this.minY = minY;
+			this.minZ = minZ;
+			this.maxX = maxX;
+			this.maxY = maxY;
+			this.maxZ = maxZ;
 		}
 	}
 
@@ -115,14 +125,13 @@ public class RenderEntityBlock extends Render {
 		float f2 = 0.8F;
 		float f3 = 0.6F;
 
-        renderBlocks.renderMaxX = block.maxX;
-        renderBlocks.renderMinX = block.minX;
-        renderBlocks.renderMaxY = block.maxY;
-        renderBlocks.renderMinY = block.minY;
-        renderBlocks.renderMaxZ = block.maxZ;
-        renderBlocks.renderMinZ = block.minZ;
-        renderBlocks.enableAO = false;
-
+		renderBlocks.renderMaxX = block.maxX;
+		renderBlocks.renderMinX = block.minX;
+		renderBlocks.renderMaxY = block.maxY;
+		renderBlocks.renderMinY = block.minY;
+		renderBlocks.renderMaxZ = block.maxZ;
+		renderBlocks.renderMinZ = block.minZ;
+		renderBlocks.enableAO = false;
 
 		Tessellator tessellator = Tessellator.instance;
 
@@ -198,5 +207,3 @@ public class RenderEntityBlock extends Render {
 		}
 	}
 }
-
-

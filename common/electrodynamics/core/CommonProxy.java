@@ -37,6 +37,10 @@ public class CommonProxy {
 
 	}
 
+	public void addEnderParticles(double x, double y, double z) {
+		
+	}
+	
 	public void addLightningFX(World world, double x1, double y1, double z1, double x, double y, double z, long seed, int duration) {
 		
 	}

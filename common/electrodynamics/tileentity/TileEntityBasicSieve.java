@@ -11,7 +11,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
 import electrodynamics.api.crafting.util.WeightedRecipeOutput;
 import electrodynamics.recipe.CraftingManager;
-import electrodynamics.recipe.RecipeBasicSieve;
+import electrodynamics.recipe.RecipeSieve;
 import electrodynamics.util.InventoryUtil;
 
 public class TileEntityBasicSieve extends TileEntity {
@@ -110,7 +110,7 @@ public class TileEntityBasicSieve extends TileEntity {
 		if (detectedItems != null && detectedItems.size() > 0) {
 			EntityItem detected = detectedItems.get(0);
 			ItemStack detectedIS = detected.getEntityItem();
-			RecipeBasicSieve recipe = CraftingManager.getInstance().sieveManager.getRecipe(detectedIS);
+			RecipeSieve recipe = CraftingManager.getInstance().sieveManager.getRecipe(detectedIS);
 			
 			if (recipe != null) {
 				ItemStack item = detectedIS.copy();
@@ -129,7 +129,7 @@ public class TileEntityBasicSieve extends TileEntity {
 	}
 	
 	private void process() {
-		RecipeBasicSieve recipe = CraftingManager.getInstance().sieveManager.getRecipe(currentlyProcessing);
+		RecipeSieve recipe = CraftingManager.getInstance().sieveManager.getRecipe(currentlyProcessing);
 		Random rand = new Random();
 		
 		for (WeightedRecipeOutput out : recipe.itemOutputs) {

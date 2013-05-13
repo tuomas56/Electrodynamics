@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import electrodynamics.api.crafting.util.WeightedRecipeOutput;
 
-public class OreRecipeBasicSieve extends RecipeBasicSieve {
+public class OreRecipeBasicSieve extends RecipeSieve {
 
 	public String oreDictionaryName;
 	

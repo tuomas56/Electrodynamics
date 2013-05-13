@@ -8,18 +8,18 @@ import electrodynamics.lib.item.Component;
 import electrodynamics.lib.item.Dust;
 import electrodynamics.lib.item.Grinding;
 
-public class SieveManager {
+public class RecipeManagerSieve {
 
-	public static ArrayList<RecipeBasicSieve> sieveRecipes = new ArrayList<RecipeBasicSieve>();
+	public static ArrayList<RecipeSieve> sieveRecipes = new ArrayList<RecipeSieve>();
 	
-	public void registerRecipe(RecipeBasicSieve recipe) {
+	public void registerRecipe(RecipeSieve recipe) {
 		sieveRecipes.add(recipe);
 	}
 
-	public RecipeBasicSieve getRecipe(ItemStack input) {
+	public RecipeSieve getRecipe(ItemStack input) {
 		if (input == null) return null;
 		
-		for (RecipeBasicSieve recipe : sieveRecipes) {
+		for (RecipeSieve recipe : sieveRecipes) {
 			if (recipe.isInput(input)) {
 				return recipe;
 			}
@@ -28,12 +28,12 @@ public class SieveManager {
 		return null;
 	}
 
-	public RecipeBasicSieve[] getRecipes() {
-		return sieveRecipes.toArray(new RecipeBasicSieve[sieveRecipes.size()]);
+	public RecipeSieve[] getRecipes() {
+		return sieveRecipes.toArray(new RecipeSieve[sieveRecipes.size()]);
 	}
 	
 	public void initRecipes() {
-		registerRecipe(new RecipeBasicSieve(Grinding.COBALTITE.toItemStack(), 100) {
+		registerRecipe(new RecipeSieve(Grinding.COBALTITE.toItemStack(), 100) {
 			@Override
 			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
 				outputs.add(new WeightedRecipeOutput(Component.ARSENIC.toItemStack(), 0.05F));
@@ -42,7 +42,7 @@ public class SieveManager {
 			}
 		});
 		
-		registerRecipe(new RecipeBasicSieve(Grinding.CHALCOPYRITE.toItemStack(), 100) {
+		registerRecipe(new RecipeSieve(Grinding.CHALCOPYRITE.toItemStack(), 100) {
 			@Override
 			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
 				outputs.add(new WeightedRecipeOutput(Dust.GOLD, 0.01F));
@@ -54,7 +54,7 @@ public class SieveManager {
 			}
 		});
 		
-		registerRecipe(new RecipeBasicSieve(Grinding.GALENA.toItemStack(), 100) {
+		registerRecipe(new RecipeSieve(Grinding.GALENA.toItemStack(), 100) {
 			@Override
 			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
 				outputs.add(new WeightedRecipeOutput(Component.ARSENIC, 0.05F));
@@ -63,7 +63,7 @@ public class SieveManager {
 			}
 		});
 		
-		registerRecipe(new RecipeBasicSieve(Grinding.LITHIUM.toItemStack(), 100) {
+		registerRecipe(new RecipeSieve(Grinding.LITHIUM.toItemStack(), 100) {
 			@Override
 			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
 				outputs.add(new WeightedRecipeOutput(Dust.CLAY, 1F));
@@ -71,7 +71,7 @@ public class SieveManager {
 			}
 		});
 		
-		registerRecipe(new RecipeBasicSieve(Grinding.MAGNETITE.toItemStack(), 100) {
+		registerRecipe(new RecipeSieve(Grinding.MAGNETITE.toItemStack(), 100) {
 			@Override
 			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
 				outputs.add(new WeightedRecipeOutput(Component.MAGNETITE_CHUNK, 0.2F));
@@ -82,7 +82,7 @@ public class SieveManager {
 			}
 		});
 		
-		registerRecipe(new RecipeBasicSieve(Grinding.NICKEL.toItemStack(), 100) {
+		registerRecipe(new RecipeSieve(Grinding.NICKEL.toItemStack(), 100) {
 			@Override
 			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
 				outputs.add(new WeightedRecipeOutput(Dust.IRON, 0.5F));
@@ -91,7 +91,7 @@ public class SieveManager {
 			}
 		});
 		
-		registerRecipe(new RecipeBasicSieve(Grinding.WOLFRAMITE.toItemStack(), 100) {
+		registerRecipe(new RecipeSieve(Grinding.WOLFRAMITE.toItemStack(), 100) {
 			@Override
 			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
 				outputs.add(new WeightedRecipeOutput(Dust.TELLURIUM, 0.001F));
@@ -99,7 +99,7 @@ public class SieveManager {
 			}
 		});
 		
-		registerRecipe(new RecipeBasicSieve(Dust.LIMESTONE.toItemStack(), 100) {
+		registerRecipe(new RecipeSieve(Dust.LIMESTONE.toItemStack(), 100) {
 			@Override
 			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
 				outputs.add(new WeightedRecipeOutput(Dust.LIME_PURE, 1F));
@@ -107,7 +107,7 @@ public class SieveManager {
 			}
 		});
 		
-		registerRecipe(new RecipeBasicSieve(Grinding.VOIDSTONE.toItemStack(), 100) {
+		registerRecipe(new RecipeSieve(Grinding.VOIDSTONE.toItemStack(), 100) {
 			@Override
 			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
 				outputs.add(new WeightedRecipeOutput(Dust.VOIDSTONE, 1F));
@@ -115,7 +115,7 @@ public class SieveManager {
 			}
 		});
 		
-		registerRecipe(new RecipeBasicSieve(Grinding.GOLD.toItemStack(), 100) {
+		registerRecipe(new RecipeSieve(Grinding.GOLD.toItemStack(), 100) {
 			@Override
 			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
 				outputs.add(new WeightedRecipeOutput(Dust.GOLD, 1F));
@@ -124,7 +124,7 @@ public class SieveManager {
 			}
 		});
 		
-		registerRecipe(new RecipeBasicSieve(Grinding.IRON.toItemStack(), 100) {
+		registerRecipe(new RecipeSieve(Grinding.IRON.toItemStack(), 100) {
 			@Override
 			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
 				outputs.add(new WeightedRecipeOutput(Dust.IRON, 1F));
@@ -133,21 +133,21 @@ public class SieveManager {
 			}
 		});
 		
-		registerRecipe(new RecipeBasicSieve(Grinding.COPPER.toItemStack(), 100) {
+		registerRecipe(new RecipeSieve(Grinding.COPPER.toItemStack(), 100) {
 			@Override
 			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
 				outputs.add(new WeightedRecipeOutput(Dust.COPPER, 1F));
 			}
 		});
 		
-		registerRecipe(new RecipeBasicSieve(Grinding.TIN.toItemStack(), 100) {
+		registerRecipe(new RecipeSieve(Grinding.TIN.toItemStack(), 100) {
 			@Override
 			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
 				outputs.add(new WeightedRecipeOutput(Dust.TIN, 1F));
 			}
 		});
 		
-		registerRecipe(new RecipeBasicSieve(Grinding.URANIUM.toItemStack(), 100) {
+		registerRecipe(new RecipeSieve(Grinding.URANIUM.toItemStack(), 100) {
 			@Override
 			public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
 				outputs.add(new WeightedRecipeOutput(Dust.URANIUM, 1F));
