@@ -41,7 +41,7 @@ public class ItemBlockTreetap extends ItemBlock {
 		
 		if (tile != null && tile instanceof TileEntityTreetap) {
 			if (!world.isRemote) {
-				PacketSound sound = new PacketSound("electrodynamics.block.treeTap", x, y, z);
+				PacketSound sound = new PacketSound("electrodynamics.block.treeTap", x, y, z, PacketSound.TYPE_SOUND);
 				PacketDispatcher.sendPacketToAllAround(x, y, z, 32D, world.provider.dimensionId, PacketTypeHandler.fillPacket(sound));
 			}
 			((TileEntityTreetap)tile).rotation = ForgeDirection.getOrientation(side);

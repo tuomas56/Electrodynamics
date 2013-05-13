@@ -124,12 +124,14 @@ public class TileEntityTable extends TileEntity {
 						PacketDispatcher.sendPacketToAllAround(xCoord, yCoord + 2, zCoord, 64D, this.worldObj.provider.dimensionId, PacketTypeHandler.fillPacket(packet));
 					}
 					
+					recipe.onSmashed(player, this, this.displayedItem);
+					
 					setItem(recipe.outputItem);
 					tool.damageItem(recipe.hammerDamage, player);
 					
 					update();
 					
-					PacketSound sound = new PacketSound("electrodynamics.block.tableSmash", xCoord, yCoord, zCoord);
+					PacketSound sound = new PacketSound("electrodynamics.block.tableSmash", xCoord, yCoord, zCoord, PacketSound.TYPE_SOUND);
 					PacketDispatcher.sendPacketToAllAround(xCoord, yCoord, zCoord, 32D, this.worldObj.provider.dimensionId, PacketTypeHandler.fillPacket(sound));
 				}
 			}

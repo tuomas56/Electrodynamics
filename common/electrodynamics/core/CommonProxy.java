@@ -29,10 +29,18 @@ public class CommonProxy {
 		
 	}
 	
+	public void handleSFXPacket(int sfx, double x, double y, double z) {
+		
+	}
+	
 	public void addBlockDestroyParticles(int x, int y, int z, int blockID, int meta) {
 
 	}
 
+	public void addEnderParticles(double x, double y, double z) {
+		
+	}
+	
 	public void addLightningFX(World world, double x1, double y1, double z1, double x, double y, double z, long seed, int duration) {
 		
 	}

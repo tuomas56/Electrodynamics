@@ -6,7 +6,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.network.INetworkManager;
-
+import net.minecraft.network.packet.Packet;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 import electrodynamics.network.PacketTypeHandler;
@@ -43,6 +43,10 @@ public abstract class PacketED {
 		} catch(IOException ex) {
 			ex.printStackTrace();
 		}
+	}
+	
+	public Packet makePacket() {
+		return PacketTypeHandler.fillPacket(this);
 	}
 	
 	public abstract void readData(DataInputStream data) throws IOException;

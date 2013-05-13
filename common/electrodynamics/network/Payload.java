@@ -4,6 +4,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import net.minecraft.nbt.NBTTagCompound;
+
 public class Payload {
 
 	public boolean[] boolPayload = new boolean[0];
@@ -11,16 +13,18 @@ public class Payload {
 	public int[] intPayload = new int[0];
 	public float[] floatPayload = new float[0];
 	public String[] stringPayload = new String[0];
+	public NBTTagCompound[] nbtPayload = new NBTTagCompound[0];
 
 	public Payload() {
 	}
 
-	public Payload(int boolSize, int byteSize, int intSize, int floatSize, int stringSize) {
+	public Payload(int boolSize, int byteSize, int intSize, int floatSize, int stringSize, int nbtSize) {
 		this.boolPayload = new boolean[boolSize];
 		this.bytePayload = new byte[byteSize];
 		this.intPayload = new int[intSize];
 		this.floatPayload = new float[floatSize];
 		this.stringPayload = new String[stringSize];
+		this.nbtPayload = new NBTTagCompound[nbtSize];
 	}
 
 	public void readPayloadData(DataInputStream data) throws IOException {
@@ -29,6 +33,7 @@ public class Payload {
 		this.intPayload = new int[data.readByte()];
 		this.floatPayload = new float[data.readByte()];
 		this.stringPayload = new String[data.readByte()];
+		this.nbtPayload = new NBTTagCompound[data.readByte()];
 
 		for (int i = 0; i < this.boolPayload.length; i++) {
 			this.boolPayload[i] = data.readBoolean();
@@ -42,8 +47,12 @@ public class Payload {
 		for (int i = 0; i < this.floatPayload.length; i++) {
 			this.floatPayload[i] = data.readFloat();
 		}
-		for (int i = 0; i < this.stringPayload.length; i++)
+		for (int i = 0; i < this.stringPayload.length; i++) {
 			this.stringPayload[i] = data.readUTF();
+		}
+		for (int i = 0; i < this.nbtPayload.length; i++) {
+			this.nbtPayload[i] = PacketUtils.readNBTTagCompound(data);
+		}
 	}
 
 	public void writePayloadData(DataOutputStream data) throws IOException {
@@ -52,6 +61,7 @@ public class Payload {
 		data.writeByte(this.intPayload.length);
 		data.writeByte(this.floatPayload.length);
 		data.writeByte(this.stringPayload.length);
+		data.writeByte(this.nbtPayload.length);
 
 		for (boolean boolData : this.boolPayload) {
 			data.writeBoolean(boolData);
@@ -65,8 +75,12 @@ public class Payload {
 		for (float floatData : this.floatPayload) {
 			data.writeFloat(floatData);
 		}
-		for (String stringData : this.stringPayload)
+		for (String stringData : this.stringPayload) {
 			data.writeUTF(stringData);
+		}
+		for (NBTTagCompound nbtData : this.nbtPayload) {
+			PacketUtils.writeNBTTagCompound(nbtData, data);
+		}
 	}
 
 }

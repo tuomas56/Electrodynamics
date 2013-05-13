@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
+import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 import electrodynamics.network.IPayloadReceiver;
@@ -30,7 +31,6 @@ public class PacketPayload extends PacketED {
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		
 		this.payload = payload;
 	}
 
@@ -39,7 +39,7 @@ public class PacketPayload extends PacketED {
 		this.x = data.readInt();
 		this.y = data.readInt();
 		this.z = data.readInt();
-
+		
 		this.payload = new Payload();
 		this.payload.readPayloadData(data);
 	}
@@ -49,14 +49,17 @@ public class PacketPayload extends PacketED {
 		dos.writeInt(x);
 		dos.writeInt(y);
 		dos.writeInt(z);
-		
 		this.payload.writePayloadData(dos);
 	}
 
 	@Override
 	public void execute(INetworkManager network, Player player, Side side) {
 		EntityPlayer playerEnt = (EntityPlayer)player;
-		((IPayloadReceiver)playerEnt.worldObj.getBlockTileEntity(x, y, z)).handlePayload(payload);
+		TileEntity tile = playerEnt.worldObj.getBlockTileEntity(x, y, z);
+		
+		if (tile != null) {
+			((IPayloadReceiver)tile).handlePayload(payload);
+		}
 	}
 	
 }

@@ -30,6 +30,8 @@ public class ItemArmorTeslaChest extends ItemArmor implements IKeyBoundServer {
 
 	private Icon texture;
 
+	private int cooldown = 0;
+	
 	private HashSet<String> activeFor = new HashSet<String>();
 	
 	public ItemArmorTeslaChest(int id) {
@@ -75,8 +77,13 @@ public class ItemArmorTeslaChest extends ItemArmor implements IKeyBoundServer {
 					item.motionY += d2 / d4 * d5 * ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED;
 					item.motionZ += d3 / d4 * d5 * ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED;
 
-					PacketDispatcher.sendPacketToAllInDimension(new Packet28EntityVelocity(item), world.provider.dimensionId);
-					PacketDispatcher.sendPacketToAllAround(player.posX, player.posY, player.posZ, 50D, player.worldObj.provider.dimensionId, PacketTypeHandler.fillPacket(new PacketLightningFX(player.posX, player.posY + 1.5, player.posZ, item.posX, item.posY, item.posZ, 1)));
+					if (cooldown == 0) {
+						PacketDispatcher.sendPacketToAllInDimension(new Packet28EntityVelocity(item), world.provider.dimensionId);
+						PacketDispatcher.sendPacketToAllAround(player.posX, player.posY, player.posZ, 50D, player.worldObj.provider.dimensionId, PacketTypeHandler.fillPacket(new PacketLightningFX(player.posX, player.posY + 1.5, player.posZ, item.posX, item.posY, item.posZ, 1)));
+						cooldown = 20;
+					} else {
+						cooldown++;
+					}
 				}
 			}
 		}

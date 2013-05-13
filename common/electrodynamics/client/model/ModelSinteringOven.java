@@ -123,6 +123,6 @@ public class ModelSinteringOven extends ModelBase {
 		ovenRight.render(f5);
 		ovenTop.render(f5);
 		bottomRack.render(f5);
-		topRack.render(f5);
+//		topRack.render(f5);
 	}
 }

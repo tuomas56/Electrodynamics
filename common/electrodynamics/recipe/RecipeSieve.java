@@ -7,7 +7,7 @@ import electrodynamics.api.crafting.util.WeightedRecipeOutput;
 
 import net.minecraft.item.ItemStack;
 
-public class RecipeBasicSieve {
+public class RecipeSieve {
 
 	public ItemStack itemInput;
 	
@@ -15,17 +15,17 @@ public class RecipeBasicSieve {
 	
 	public int processingTime;
 	
-	public RecipeBasicSieve(ItemStack itemInput, ArrayList<WeightedRecipeOutput> itemOutputs, int processingTime) {
+	public RecipeSieve(ItemStack itemInput, ArrayList<WeightedRecipeOutput> itemOutputs, int processingTime) {
 		this.itemInput = itemInput;
 		this.itemOutputs = itemOutputs;
 		this.processingTime = processingTime;
 	}
 	
-	public RecipeBasicSieve(ItemStack itemInput, int processingTime, WeightedRecipeOutput ... itemOutputs) {
+	public RecipeSieve(ItemStack itemInput, int processingTime, WeightedRecipeOutput ... itemOutputs) {
 		this(itemInput, new ArrayList<WeightedRecipeOutput>(Arrays.asList(itemOutputs)), processingTime);
 	}
 	
-	public RecipeBasicSieve(ItemStack itemInput, int processingTime) {
+	public RecipeSieve(ItemStack itemInput, int processingTime) {
 		this.itemInput = itemInput;
 		this.processingTime = processingTime;
 		this.itemOutputs = new ArrayList<WeightedRecipeOutput>();

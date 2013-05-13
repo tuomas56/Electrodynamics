@@ -33,8 +33,9 @@ import electrodynamics.lib.item.Ingot;
 import electrodynamics.lib.item.ItemIDs;
 import electrodynamics.module.ModuleManager.Module;
 import electrodynamics.recipe.CraftingManager;
-import electrodynamics.recipe.SieveManager;
-import electrodynamics.recipe.TableManager;
+import electrodynamics.recipe.RecipeManagerSieve;
+import electrodynamics.recipe.RecipeManagerSinteringOven;
+import electrodynamics.recipe.RecipeManagerTable;
 import electrodynamics.tileentity.TileEntityBasicSieve;
 import electrodynamics.tileentity.TileEntitySinteringOven;
 import electrodynamics.tileentity.TileEntityTable;
@@ -90,11 +91,14 @@ public class EDModuleMachine extends EDModule {
 
 	@Override
 	public void init() {
-		CraftingManager.getInstance().tableManager = new TableManager();
+		CraftingManager.getInstance().tableManager = new RecipeManagerTable();
 		CraftingManager.getInstance().tableManager.initRecipes();
 		
-		CraftingManager.getInstance().sieveManager = new SieveManager();
+		CraftingManager.getInstance().sieveManager = new RecipeManagerSieve();
 		CraftingManager.getInstance().sieveManager.initRecipes();
+		
+		CraftingManager.getInstance().ovenManager = new RecipeManagerSinteringOven();
+		CraftingManager.getInstance().ovenManager.initRecipes();
 		
 		for (Storage storage : Storage.values()) {
 			GameRegistry.addRecipe(storage.toItemStack(), "XXX", "XXX", "XXX", 'X', storage.ingot.toItemStack());
