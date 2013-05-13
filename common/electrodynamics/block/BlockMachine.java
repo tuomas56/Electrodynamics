@@ -24,6 +24,10 @@ public class BlockMachine extends BlockContainer {
 		setCreativeTab(CreativeTabED.block);
 	}
 
+	public int damageDropped(int damage) {
+		return damage;
+	}
+	
 	@Override
 	public int getRenderType() {
 		return -1;

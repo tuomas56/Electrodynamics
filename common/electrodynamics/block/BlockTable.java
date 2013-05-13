@@ -33,6 +33,10 @@ public class BlockTable extends BlockContainer {
 		setBlockBounds(0, 0, 0, 1, 0.87F, 1);
 	}
 
+	public int damageDropped(int damage) {
+		return damage;
+	}
+	
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
