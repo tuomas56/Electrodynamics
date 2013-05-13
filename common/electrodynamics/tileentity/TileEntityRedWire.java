@@ -13,6 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.network.IPayloadReceiver;
 import electrodynamics.network.PacketTypeHandler;
+import electrodynamics.network.Payload;
 import electrodynamics.network.packet.PacketPayload;
 
 public class TileEntityRedWire extends TileEntity implements IPayloadReceiver {
@@ -75,27 +76,7 @@ public class TileEntityRedWire extends TileEntity implements IPayloadReceiver {
 		}
 	}
 
-	@Override
-	public void handlePayload(byte[] data) {
-		for (int i = 0; i < 6; i++) {
-			activeMasks[i] = data[i] == 1 ? true : false;
-		}
-		prevIsPowered = isPowered;
-		isPowered = data[6] == 1 ? true : false;
-	}
-
-	@Override
-	public Packet getDescriptionPacket() {
-		byte[] data = new byte[activeMasks.length + 1];
-		for (int i = 0; i < activeMasks.length; i++) {
-			data[i] = (byte) (activeMasks[i] == true ? 1 : 0);
-		}
-		data[6] = (byte) (isPowered == true ? 1 : 0);
-
-		PacketPayload packet = new PacketPayload(xCoord, yCoord, zCoord, data);
-
-		return PacketTypeHandler.fillPacket(packet);
-	}
+	
 
 	/** Should only be run when the block is first placed */
 	public void updateMasks() {
@@ -179,6 +160,12 @@ public class TileEntityRedWire extends TileEntity implements IPayloadReceiver {
 		}
 
 		return false;
+	}
+
+	@Override
+	public void handlePayload(Payload payload) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -118,12 +118,18 @@ public class TileEntityTreetap extends TileEntity {
 			int z = zCoord + rotation.getOpposite().offsetZ;
 			
 			while (!foundEnd) {
-				if (this.worldObj.getBlockId(x, y, z) != BlockIDs.BLOCK_RUBBER_WOOD_ID && (this.worldObj.getBlockMetadata(x, y, z) != 0 && this.worldObj.getBlockMetadata(x, y, z) <= 9)) {
-					foundEnd = true;
+				if (this.worldObj.getBlockId(x, y, z) == BlockIDs.BLOCK_RUBBER_WOOD_ID) {
+					if ((this.worldObj.getBlockMetadata(x, y, z) != 0 && this.worldObj.getBlockMetadata(x, y, z) <= 9)) {
+						foundEnd = true;
+						break;
+					}
 				} else {
-					height += 1;
-					y += 1;
+					foundEnd = true;
+					break;
 				}
+				
+				height += 1;
+				y += 1;
 			}
 			
 			return height;
