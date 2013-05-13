@@ -1,8 +1,12 @@
 package electrodynamics.item;
 
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.core.handler.GuiHandler;
@@ -18,6 +22,26 @@ public class ItemTray extends Item implements IInventoryItem {
 		setCreativeTab(CreativeTabED.tool);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, @SuppressWarnings("rawtypes") List list, boolean show) {
+		if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("Items")) {
+			NBTTagList items = stack.stackTagCompound.getTagList("Items");
+			
+			for (int i=0; i<items.tagCount(); i++) {
+				NBTTagCompound itemTag = (NBTTagCompound) items.tagAt(i);
+				
+				if (itemTag != null) {
+					ItemStack item = ItemStack.loadItemStackFromNBT(itemTag);
+					
+					if (item != null) {
+						list.add(item.getDisplayName());
+					}
+				}
+			}
+		}
+	}
+	
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (!world.isRemote && player.isSneaking()) {
