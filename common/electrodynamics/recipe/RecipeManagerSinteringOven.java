@@ -2,8 +2,6 @@ package electrodynamics.recipe;
 
 import java.util.ArrayList;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class RecipeManagerSinteringOven {
@@ -31,17 +29,7 @@ public class RecipeManagerSinteringOven {
 	}
 	
 	public void initRecipes() {
-		registerRecipe(new RecipeSinteringOven(20) {
-			@Override
-			public void setInput(ArrayList<ItemStack> inputs) {
-				inputs.add(new ItemStack(Block.oreIron));
-			}
-			
-			@Override
-			public void setOutput(ArrayList<ItemStack> outputs) {
-				outputs.add(new ItemStack(Item.ingotIron));
-			}
-		});
+		
 	}
 	
 }

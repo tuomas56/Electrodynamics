@@ -1,7 +1,13 @@
 package electrodynamics.network;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -37,4 +43,26 @@ public class PacketUtils {
 		}
 	}
 
+	public static NBTTagCompound readNBTTagCompound(DataInputStream par0DataInputStream) throws IOException {
+		short short1 = par0DataInputStream.readShort();
+
+		if (short1 < 0) {
+			return null;
+		} else {
+			byte[] abyte = new byte[short1];
+			par0DataInputStream.readFully(abyte);
+			return CompressedStreamTools.decompress(abyte);
+		}
+	}
+
+	public static void writeNBTTagCompound(NBTTagCompound par0NBTTagCompound, DataOutputStream par1DataOutputStream) throws IOException {
+		if (par0NBTTagCompound == null) {
+			par1DataOutputStream.writeShort(-1);
+		} else {
+			byte[] abyte = CompressedStreamTools.compress(par0NBTTagCompound);
+			par1DataOutputStream.writeShort((short) abyte.length);
+			par1DataOutputStream.write(abyte);
+		}
+	}
+	
 }

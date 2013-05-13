@@ -45,7 +45,10 @@ public class RecipeSinteringOven {
 	}
 
 	private boolean doesListContain(ItemStack stack) {
+		if (stack == null) return false;
+		
 		for (ItemStack stack2 : this.itemInputs) {
+			if (stack2 == null) return false;
 			if (stack2.isItemEqual(stack)) {
 				return true;
 			}

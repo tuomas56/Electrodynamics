@@ -3,6 +3,7 @@ package electrodynamics.tileentity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +23,7 @@ import electrodynamics.network.packet.PacketPayload;
 import electrodynamics.network.packet.PacketSound;
 import electrodynamics.recipe.CraftingManager;
 import electrodynamics.recipe.RecipeSinteringOven;
+import electrodynamics.util.BlockUtil;
 import electrodynamics.util.ItemUtil;
 
 public class TileEntitySinteringOven extends TileEntityMachine implements IPayloadReceiver {
@@ -29,6 +31,8 @@ public class TileEntitySinteringOven extends TileEntityMachine implements IPaylo
 	public final int ROTATIONAL_MAX = 2;
 	
 	public float doorAngle = 0;
+	
+	public boolean hasTray = false;
 	
 	public boolean open = false;
 	
@@ -41,9 +45,6 @@ public class TileEntitySinteringOven extends TileEntityMachine implements IPaylo
 	/** Set to the recipes value when tray is input, when equal to zero, tray contents are replaced with recipe output */
 	public int currentCookTime;
 	
-	/** Instance of the tray that's in the furnace. */
-	public ItemStack trayItem;
-	
 	/** Instance of tray's inventory */
 	public InventoryItem trayInventory;
 	
@@ -53,7 +54,9 @@ public class TileEntitySinteringOven extends TileEntityMachine implements IPaylo
 		
 		if (CoreUtils.isServer(worldObj)) {
 			if (fuelLevel > 0) {
-				if (this.trayItem != null && this.trayInventory != null) {
+				--this.fuelLevel;
+				
+				if (this.trayInventory != null) {
 					if (totalCookTime > 0) {
 						if (currentCookTime == 0) {
 							ArrayList<ItemStack> trayInventoryList = new ArrayList<ItemStack>(Arrays.asList(trayInventory.inventory));
@@ -65,7 +68,7 @@ public class TileEntitySinteringOven extends TileEntityMachine implements IPaylo
 									trayInventory.inventory = new ItemStack[recipe.itemOutputs.size()];
 									for (int i=0; i<recipe.itemOutputs.size(); i++) {
 										if (recipe.itemOutputs.get(i) != null) {
-											trayInventory.setInventorySlotContents(i, recipe.itemOutputs.get(i));
+											trayInventory.setInventorySlotContents(i, recipe.itemOutputs.get(i).copy());
 										}
 									}
 								}
@@ -81,21 +84,18 @@ public class TileEntitySinteringOven extends TileEntityMachine implements IPaylo
 							
 							if (recipe != null) {
 								this.totalCookTime = this.currentCookTime = recipe.processingTime;
-								System.out.println("Found recipe for contents, totalCookTime = " + this.totalCookTime);
 							}
 						}
 					}
 				}
 				
-				--this.fuelLevel;
-			}
-			
-			if (this.open) {
-				List<EntityLiving> entities = getEntitiesInFireRange();
-				
-				if (entities != null && entities.size() > 0) {
-					for (EntityLiving entity : entities) {
-						entity.setFire(10);
+				if (this.open) {
+					List<EntityLiving> entities = getEntitiesInFireRange();
+					
+					if (entities != null && entities.size() > 0) {
+						for (EntityLiving entity : entities) {
+							entity.setFire(10);
+						}
 					}
 				}
 			}
@@ -126,16 +126,20 @@ public class TileEntitySinteringOven extends TileEntityMachine implements IPaylo
 	@Override
 	public void handlePayload(Payload payload) {
 		this.open = payload.boolPayload[0];
+		this.hasTray = payload.boolPayload[1];
 		this.rotation = ForgeDirection.getOrientation(payload.bytePayload[0]);
 		this.fuelLevel = payload.intPayload[0];
+		readFromNBT(payload.nbtPayload[0]);
 	}
 	
 	@Override
 	public Packet getDescriptionPacket() {
-		Payload payload = new Payload(1, 1, 1, 0, 0);
+		Payload payload = new Payload(2, 1, 1, 0, 0, 1);
 		payload.boolPayload[0] = this.open;
+		payload.boolPayload[1] = this.trayInventory != null;
 		payload.bytePayload[0] = (byte) this.rotation.ordinal();
 		payload.intPayload[0] = this.fuelLevel;
+		payload.nbtPayload[0] = getStoredNBTData();
 		PacketPayload packet = new PacketPayload(xCoord, yCoord, zCoord, payload);
 		return packet.makePacket();
 	}
@@ -146,6 +150,12 @@ public class TileEntitySinteringOven extends TileEntityMachine implements IPaylo
 		
 		nbt.setBoolean("open", open);
 		nbt.setInteger("fuelLevel", fuelLevel);
+		
+		if (this.trayInventory != null) {
+			NBTTagCompound trayContents = new NBTTagCompound();
+			trayInventory.writeToNBT(trayContents);
+			nbt.setTag("trayContents", trayContents);
+		}
 	}
 
 	@Override
@@ -154,38 +164,50 @@ public class TileEntitySinteringOven extends TileEntityMachine implements IPaylo
 		
 		this.open = nbt.getBoolean("open");
 		this.fuelLevel = nbt.getInteger("fuelLevel");
+		
+		if (nbt.hasKey("trayContents")) {
+			NBTTagCompound trayContents = new NBTTagCompound();
+			this.trayInventory = new InventoryItem(9, new ItemStack(EDItems.itemTray));
+			this.trayInventory.readFromNBT(trayContents);
+			this.hasTray = true;
+		}
 	}
 	
 	@Override
 	public void onBlockActivated(EntityPlayer player) {
-		if (open) {
+		if (this.open) {
 			if (player.getCurrentEquippedItem() != null) {
-				if (ItemUtil.getFuelValue(player.getCurrentEquippedItem()) > 0) {
+				if (player.getCurrentEquippedItem().getItem() == EDItems.itemTray) {
+					if (this.trayInventory == null) {
+						this.trayInventory = new InventoryItem(9, player.getCurrentEquippedItem().copy());
+						--player.getCurrentEquippedItem().stackSize;
+						
+						sendUpdatePacket(Side.CLIENT);
+						return;
+					}
+				} else if (ItemUtil.getFuelValue(player.getCurrentEquippedItem()) > 0) {
 					this.fuelLevel += ItemUtil.getFuelValue(player.getCurrentEquippedItem());
 					--player.getCurrentEquippedItem().stackSize;
-				} else if (player.getCurrentEquippedItem().getItem() == EDItems.itemTray) {
-					this.trayItem = player.getCurrentEquippedItem();
-					this.trayInventory = new InventoryItem(9, this.trayItem);
-					--player.getCurrentEquippedItem().stackSize;
-				}
-			} else {
-				if ((this.totalCookTime > 0 && this.currentCookTime == 0) || (this.totalCookTime == 0 && this.currentCookTime == 0)) {
-					player.inventory.addItemStackToInventory(this.trayItem);
 					
-					this.trayInventory = null;
-					this.trayItem = null;
-					this.totalCookTime = 0;
-					this.currentCookTime = 0;
+					sendUpdatePacket(Side.CLIENT);
+					return;
 				}
-			}
-		} else {
-			open = !open;
-			
-			if (open == true && this.fuelLevel > 0) {
-				PacketUtils.sendToPlayers(new PacketSound("1009", xCoord, yCoord, zCoord, PacketSound.TYPE_SFX).makePacket(), this);
+			} else if (this.trayInventory != null) {
+				BlockUtil.dropItemFromBlock(worldObj, xCoord, yCoord, zCoord, this.trayInventory.parent.copy(), new Random());
+				
+				this.trayInventory = null;
+				this.currentCookTime = 0;
+				this.totalCookTime = 0;
+				
+				sendUpdatePacket(Side.CLIENT);
+				return;
 			}
 		}
 		
+		open = !open;
+		if (open == true && this.fuelLevel > 0) {
+			PacketUtils.sendToPlayers(new PacketSound("1009", xCoord, yCoord, zCoord, PacketSound.TYPE_SFX).makePacket(), this);
+		}
 		sendUpdatePacket(Side.CLIENT);
 	}
 

@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import electrodynamics.client.model.ModelMetalTray;
 import electrodynamics.client.model.ModelSinteringOven;
 import electrodynamics.lib.client.Models;
 import electrodynamics.tileentity.TileEntityMachine;
@@ -17,9 +18,11 @@ import electrodynamics.tileentity.TileEntitySinteringOven;
 public class RenderSinteringOven extends TileEntitySpecialRenderer {
 
 	private ModelSinteringOven modelSinteringOven;
+	private ModelMetalTray modelMetalTray;
 
 	public RenderSinteringOven() {
 		this.modelSinteringOven = new ModelSinteringOven();
+		this.modelMetalTray = new ModelMetalTray();
 	}
 
 	@Override
@@ -57,8 +60,18 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 			renderFire(tile.worldObj, tile.xCoord, tile.yCoord, tile.zCoord, ((TileEntityMachine)tile).rotation.ordinal());
 		}
 		
+		if (((TileEntitySinteringOven)tile).hasTray) {
+			renderTray();
+		}
+		
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
+	}
+	
+	public void renderTray() {
+		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_METAL_TRAY);
+		GL11.glTranslated(0, -0.5, 0);
+		modelMetalTray.render(0.0625F);
 	}
 	
 	public void renderFire(World world, int x, int y, int z, int rotation) {
