@@ -192,7 +192,7 @@ public class TileEntitySinteringOven extends TileEntityMachine implements IPaylo
 					sendUpdatePacket(Side.CLIENT);
 					return;
 				}
-			} else if (this.trayInventory != null) {
+			} else if (this.trayInventory != null && player.isSneaking()) {
 				BlockUtil.dropItemFromBlock(worldObj, xCoord, yCoord, zCoord, this.trayInventory.parent.copy(), new Random());
 				
 				this.trayInventory = null;
