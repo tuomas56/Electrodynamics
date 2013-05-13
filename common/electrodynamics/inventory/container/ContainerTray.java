@@ -43,8 +43,6 @@ public class ContainerTray extends Container {
 	}
 
 	public void onCraftGuiClosed(EntityPlayer player) {
-		System.out.println("craft gui closed");
-		
 		if (!player.worldObj.isRemote) {
 			if (this.activePlayer.getCurrentEquippedItem() != null && this.activePlayer.getCurrentEquippedItem().getItem() == EDItems.itemTray) {
 				this.activePlayer.setCurrentItemOrArmor(0, this.inventory.parent);
