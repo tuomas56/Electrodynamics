@@ -9,7 +9,7 @@ public class ItemStoneHammer extends ItemHammer {
 	private Icon texture;
 	
 	public ItemStoneHammer(int id) {
-		super(id, 10);
+		super(id, 50);
 	}
 	
 	@Override
