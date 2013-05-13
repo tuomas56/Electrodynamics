@@ -1,22 +1,31 @@
 package electrodynamics.block.item;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.lib.core.ModInfo;
 import electrodynamics.network.PacketTypeHandler;
 import electrodynamics.network.packet.PacketSound;
 import electrodynamics.tileentity.TileEntityTreetap;
 
 public class ItemBlockTreetap extends ItemBlock {
 
+	private Icon texture;
+	
 	public ItemBlockTreetap(int id) {
 		super(id);
 		setHasSubtypes(true);
+	}
+	
+	public Icon getIconFromDamage(int meta) {
+		return texture;
 	}
 	
 	@Override
@@ -62,6 +71,16 @@ public class ItemBlockTreetap extends ItemBlock {
 		}
 		
 		return super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);
+	}
+	
+	@Override
+	public int getSpriteNumber() {
+		return 1;
+	}
+	
+	@Override
+	public void registerIcons(IconRegister register) {
+		this.texture = register.registerIcon(ModInfo.ICON_PREFIX + "tool/treeTap");
 	}
 	
 }
