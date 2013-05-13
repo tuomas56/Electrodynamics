@@ -20,7 +20,8 @@ public enum Component {
 	LITHIUM_CLAY_WET(Strings.COMPONENT_LITHIUM_CLAY_WET, "lithiumClayWet"),
 	WORMWOOD_LEAF(Strings.COMPONENT_WORMWOOD_LEAF, "wormwoodLeaf"),
 	PCB(Strings.COMPONENT_PCB, "pcb"),
-	VOIDSTONE_MAGNET(Strings.COMPONENT_VOIDSTONE_MAGNET, "voidstoneMagnet");
+	VOIDSTONE_MAGNET(Strings.COMPONENT_VOIDSTONE_MAGNET, "voidstoneMagnet"),
+	OVEN_WALL(Strings.COMPONENT_OVEN_WALL, "ovenWall");
 	
 	public String unlocalizedName;
 	private String textureName;

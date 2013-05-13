@@ -22,6 +22,7 @@ import electrodynamics.item.ItemHandheldSieve;
 import electrodynamics.item.ItemIngot;
 import electrodynamics.item.ItemTray;
 import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.lib.block.Decorative;
 import electrodynamics.lib.block.Machine;
 import electrodynamics.lib.block.Storage;
 import electrodynamics.lib.core.Strings;
@@ -75,7 +76,6 @@ public class EDModuleMachine extends EDModule {
 		EDItems.itemIngot = new ItemIngot(ItemIDs.ITEM_INGOT_ID).setUnlocalizedName(Strings.ITEM_INGOT_NAME);
 		GameRegistry.registerItem(EDItems.itemIngot, Strings.ITEM_INGOT_NAME);
 		for(Ingot ingot : Ingot.values()) {
-//			ingot.registerWithOreDictionary();
 			EDLanguage.getInstance().registerItemStack(ingot.toItemStack(), ingot.unlocalizedName);
 		}
 		
@@ -119,6 +119,10 @@ public class EDModuleMachine extends EDModule {
 		GameRegistry.addRecipe(Component.TWINE_MESH.toItemStack(), "TTT", "TTT" ,"TTT", 'T', Component.TWINE.toItemStack());
 		// Basic Table
 		GameRegistry.addRecipe(new ItemStack(EDBlocks.blockTable), "SSS", "WWW", "T T", 'S', new ItemStack(Block.woodSingleSlab, 1, OreDictionary.WILDCARD_VALUE), 'W', new ItemStack(Block.planks, 1, OreDictionary.WILDCARD_VALUE), 'T', Item.stick);
+		// Oven Wall Component
+		GameRegistry.addRecipe(Component.OVEN_WALL.toItemStack(), " IL", " IL", " IL", 'I', Item.ingotIron, 'L', Decorative.LIMESTONE.toItemStack());
+		// Sintering Oven
+		GameRegistry.addRecipe(Machine.SINTERING_FURNACE.toItemStack(), "WWW", "WBW", "III", 'W', Component.OVEN_WALL, 'B', Block.fenceIron, 'I', Item.ingotIron);
 		
 		FurnaceRecipes.smelting().addSmelting(ItemIDs.ITEM_COMPONENT_ID + 256, Component.LITHIUM_CLAY_WET.ordinal(), Component.LITHIUM_CLAY.toItemStack(), 0F);
 		

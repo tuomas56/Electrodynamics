@@ -55,6 +55,7 @@ public class Strings {
 	public static final String COMPONENT_VOIDSTONE_MAGNET = "component.voidstoneMagnet.name";
 	public static final String COMPONENT_LITHIUM_CLAY_DRY = "component.lithiumClayDry.name";
 	public static final String COMPONENT_LITHIUM_CLAY_WET = "component.lithiumClayWet.name";
+	public static final String COMPONENT_OVEN_WALL = "component.oven_wall.name";
 	
 	/* Internal ore names */
 	public static final String ORE_COBALTITE_NAME = "ore.cobaltite.name";
