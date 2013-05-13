@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import electrodynamics.client.model.ModelBasicSieve;
 import electrodynamics.lib.client.Models;
+import electrodynamics.tileentity.TileEntityBasicSieve;
 import electrodynamics.tileentity.TileEntityMachine;
 
 public class RenderBasicSieve extends TileEntitySpecialRenderer {
@@ -27,26 +28,28 @@ public class RenderBasicSieve extends TileEntitySpecialRenderer {
 		GL11.glTranslated(x + 0.5, y + 1.5, z + 0.5);
 		GL11.glRotatef(180, 0, 0, 1);
 
-		switch (((TileEntityMachine) tile).rotation) {
-		case NORTH:
-			GL11.glRotatef(270, 0, 1, 0);
-			break;
-		case SOUTH:
-			GL11.glRotatef(90, 0, 1, 0);
-			break;
-		case WEST:
-			GL11.glRotatef(180, 0, 1, 0);
-			break;
-		case EAST:
-			// GL11.glRotatef(0, 0, 1, 0);
-			break;
-		default:
-			break;
+		if (((TileEntityBasicSieve)tile).rotation != null) {
+			switch (((TileEntityMachine) tile).rotation) {
+			case NORTH:
+				GL11.glRotatef(270, 0, 1, 0);
+				break;
+			case SOUTH:
+				GL11.glRotatef(90, 0, 1, 0);
+				break;
+			case WEST:
+				GL11.glRotatef(180, 0, 1, 0);
+				break;
+			case EAST:
+				// GL11.glRotatef(0, 0, 1, 0);
+				break;
+			default:
+				break;
+			}
+
+			Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_BASIC_SIEVE);
+
+			modelBasicSieve.renderAll(0.0625F);
 		}
-
-		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_BASIC_SIEVE);
-
-		modelBasicSieve.renderAll(0.0625F);
 		
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();

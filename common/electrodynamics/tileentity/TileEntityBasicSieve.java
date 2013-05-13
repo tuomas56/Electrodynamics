@@ -6,7 +6,6 @@ import java.util.Random;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
 import electrodynamics.api.crafting.util.WeightedRecipeOutput;
@@ -14,7 +13,7 @@ import electrodynamics.recipe.CraftingManager;
 import electrodynamics.recipe.RecipeSieve;
 import electrodynamics.util.InventoryUtil;
 
-public class TileEntityBasicSieve extends TileEntity {
+public class TileEntityBasicSieve extends TileEntityMachine {
 
 	/** ItemStack currently being read/processed */
 	public ItemStack currentlyProcessing;

@@ -35,8 +35,23 @@ public class RecipeSinteringOven {
 	}
 
 	public boolean isInput(ArrayList<ItemStack> input) {
-		//TODO
-		return true;
+		for (ItemStack stack : input) {
+			if (doesListContain(stack)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	private boolean doesListContain(ItemStack stack) {
+		for (ItemStack stack2 : this.itemInputs) {
+			if (stack2.isItemEqual(stack)) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 }
