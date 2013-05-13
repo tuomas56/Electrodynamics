@@ -4,19 +4,14 @@ import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.block.EDBlocks;
-import electrodynamics.network.IPayloadReceiver;
-import electrodynamics.network.PacketTypeHandler;
-import electrodynamics.network.Payload;
-import electrodynamics.network.packet.PacketPayload;
 
-public class TileEntityRedWire extends TileEntity implements IPayloadReceiver {
+public class TileEntityRedWire extends TileEntity {
 
 	/** If this block is being powered from somewhere */
 	public boolean isPowered;
@@ -75,8 +70,6 @@ public class TileEntityRedWire extends TileEntity implements IPayloadReceiver {
 			}
 		}
 	}
-
-	
 
 	/** Should only be run when the block is first placed */
 	public void updateMasks() {
@@ -160,12 +153,6 @@ public class TileEntityRedWire extends TileEntity implements IPayloadReceiver {
 		}
 
 		return false;
-	}
-
-	@Override
-	public void handlePayload(Payload payload) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

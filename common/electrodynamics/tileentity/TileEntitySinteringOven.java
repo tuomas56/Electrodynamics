@@ -2,11 +2,18 @@ package electrodynamics.tileentity;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
+import net.minecraft.network.packet.Packet;
 import net.minecraftforge.common.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import electrodynamics.core.CoreUtils;
+import electrodynamics.network.IPayloadReceiver;
+import electrodynamics.network.PacketUtils;
+import electrodynamics.network.Payload;
+import electrodynamics.network.packet.PacketPayload;
+import electrodynamics.network.packet.PacketSound;
 import electrodynamics.util.ItemUtil;
 
-public class TileEntitySinteringOven extends TileEntityMachine {
+public class TileEntitySinteringOven extends TileEntityMachine implements IPayloadReceiver {
 
 	public final int ROTATIONAL_MAX = 2;
 	
@@ -19,17 +26,40 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 	
 	@Override
 	public void updateEntity() {
-		super.updateEntity();
-		
-		if (open && doorAngle <= ROTATIONAL_MAX) {
-			doorAngle += 0.2F;
-		} else if (!open && doorAngle > 0) {
-			doorAngle -= 0.2F;
+		if (CoreUtils.isServer(worldObj)) {
+			if (fuelLevel > 0) {
+				--this.fuelLevel;
+			}
 		}
 		
-		if (doorAngle < 0) {
-			doorAngle = 0;
+		if (CoreUtils.isClient(worldObj)) {
+			if (open && doorAngle <= ROTATIONAL_MAX) {
+				doorAngle += 0.2F;
+			} else if (!open && doorAngle > 0) {
+				doorAngle -= 0.2F;
+			}
+			
+			if (doorAngle < 0) {
+				doorAngle = 0;
+			}
 		}
+	}
+	
+	@Override
+	public void handlePayload(Payload payload) {
+		this.open = payload.boolPayload[0];
+		this.rotation = ForgeDirection.getOrientation(payload.bytePayload[0]);
+		this.fuelLevel = payload.intPayload[0];
+	}
+	
+	@Override
+	public Packet getDescriptionPacket() {
+		Payload payload = new Payload(1, 1, 1, 0, 0);
+		payload.boolPayload[0] = this.open;
+		payload.bytePayload[0] = (byte) this.rotation.ordinal();
+		payload.intPayload[0] = this.fuelLevel;
+		PacketPayload packet = new PacketPayload(xCoord, yCoord, zCoord, payload);
+		return packet.makePacket();
 	}
 	
 	@Override
@@ -48,16 +78,19 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 		this.fuelLevel = nbt.getInteger("fuelLevel");
 	}
 	
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
+	@Override
+	public void onBlockActivated(EntityPlayer player) {
 		if (player.getCurrentEquippedItem() != null && ItemUtil.getFuelValue(player.getCurrentEquippedItem()) > 0) {
 			this.fuelLevel += ItemUtil.getFuelValue(player.getCurrentEquippedItem());
 		} else {
-			if (ForgeDirection.getOrientation(side) == rotation) {
-				open = !open;
+			open = !open;
+			
+			if (open == true && this.fuelLevel > 0) {
+				PacketUtils.sendToPlayers(new PacketSound("1009", xCoord, yCoord, zCoord, PacketSound.TYPE_SFX).makePacket(), this);
 			}
 		}
-		dirty = true;
-		return true;
+		
+		sendUpdatePacket(Side.CLIENT);
 	}
 
 }

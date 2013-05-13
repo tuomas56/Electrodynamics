@@ -76,8 +76,11 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	public void handleSoundPacket(String sound, double x, double y, double z) {
-//		FMLClientHandler.instance().getClient().theWorld.playSound(x, y, z, "electrodynamics.block.voidstoneAmbient", 0.75F, 1.1F, false);
 		FMLClientHandler.instance().getClient().theWorld.playSound(x, y, z, sound, 1F, 1F, false);
+	}
+	
+	public void handleSFXPacket(int sfx, double x, double y, double z) {
+		FMLClientHandler.instance().getClient().theWorld.playAuxSFX(sfx, (int)x, (int)y, (int)z, 0);
 	}
 	
 	@Override

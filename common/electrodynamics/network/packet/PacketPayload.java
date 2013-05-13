@@ -30,7 +30,6 @@ public class PacketPayload extends PacketED {
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		
 		this.payload = payload;
 	}
 
@@ -39,7 +38,7 @@ public class PacketPayload extends PacketED {
 		this.x = data.readInt();
 		this.y = data.readInt();
 		this.z = data.readInt();
-
+		
 		this.payload = new Payload();
 		this.payload.readPayloadData(data);
 	}
@@ -49,7 +48,6 @@ public class PacketPayload extends PacketED {
 		dos.writeInt(x);
 		dos.writeInt(y);
 		dos.writeInt(z);
-		
 		this.payload.writePayloadData(dos);
 	}
 

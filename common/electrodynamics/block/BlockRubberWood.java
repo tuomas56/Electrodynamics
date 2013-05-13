@@ -44,7 +44,7 @@ public class BlockRubberWood extends Block {
 				world.setBlockMetadataWithNotify(x, y, z, side, 2);
 				player.getCurrentEquippedItem().damageItem(1, player);
 				
-				PacketSound packet = new PacketSound("electrodynamics.block.barkCut", x, y, z);
+				PacketSound packet = new PacketSound("electrodynamics.block.barkCut", x, y, z, PacketSound.TYPE_SOUND);
 				PacketDispatcher.sendPacketToAllAround(x, y, z, 32D, world.provider.dimensionId, PacketTypeHandler.fillPacket(packet));
 				return true;
 			}

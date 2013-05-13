@@ -29,6 +29,10 @@ public class CommonProxy {
 		
 	}
 	
+	public void handleSFXPacket(int sfx, double x, double y, double z) {
+		
+	}
+	
 	public void addBlockDestroyParticles(int x, int y, int z, int blockID, int meta) {
 
 	}
