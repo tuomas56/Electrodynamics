@@ -31,10 +31,10 @@ public class ModuleManager {
 	public static void preInit() {
 		registerModule(Module.CORE, new EDModuleCore());
 		registerModule(Module.WORLD, new EDModuleWorld());
-		registerModule(Module.LOGIC, new EDModuleLogic());
-		registerModule(Module.LASER, new EDModuleLaser());
+//		registerModule(Module.LOGIC, new EDModuleLogic());
+//		registerModule(Module.LASER, new EDModuleLaser());
 		registerModule(Module.MACHINE, new EDModuleMachine());
-		registerModule(Module.GAS,  new EDModuleGas());
+//		registerModule(Module.GAS,  new EDModuleGas());
 		
 		Configuration config = new Configuration(new File(Electrodynamics.instance.configFolder, MODULE_CONFIG_FILE));
 		config.load();
