@@ -42,11 +42,33 @@ public class ContainerTray extends Container {
 	}
 
 	public void onCraftGuiClosed(EntityPlayer player) {
+		System.out.println("craft gui closed");
+		
 		if (!player.worldObj.isRemote) {
-			this.activePlayer.setCurrentItemOrArmor(0, this.inventory.parent);
-			this.activePlayer.inventory.onInventoryChanged();
+			if (this.activePlayer.getCurrentEquippedItem() != null) {
+				this.activePlayer.setCurrentItemOrArmor(0, this.inventory.parent);
+				this.activePlayer.inventory.onInventoryChanged();
+			}
 		}
 	}
+	
+//	@Override
+//	public ItemStack slotClick(int slot, int x, int y, EntityPlayer player) {
+//		Slot clickedSlot = (Slot)this.inventorySlots.get(slot);
+//		
+//		if (clickedSlot.getStack() != null) {
+//			if (clickedSlot.getStack().getItem() == EDItems.itemTray) {
+//				player.dropPlayerItem(clickedSlot.getStack());
+//				if (!player.worldObj.isRemote) {
+//					this.detectAndSendChanges();
+//					player.inventory.onInventoryChanged();
+//					player.closeScreen();
+//				}
+//			}
+//		}
+//		
+//		return super.slotClick(slot, x, y, player);
+//	}
 	
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		ItemStack itemstack = null;
