@@ -10,9 +10,12 @@ public class ContainerTray extends Container {
 
 	public InventoryItem inventory;
 	
+	public EntityPlayer activePlayer;
+	
 	public ContainerTray(EntityPlayer player, InventoryItem inventory) {
 		this.inventory = inventory;
 		inventory.parentContainer = this;
+		this.activePlayer = player;
 		
 		// Tray Inventory
 		for (int i = 0; i < 3; ++i) {
@@ -38,6 +41,13 @@ public class ContainerTray extends Container {
 		return true;
 	}
 
+	public void onCraftGuiClosed(EntityPlayer player) {
+		if (!player.worldObj.isRemote) {
+			this.activePlayer.setCurrentItemOrArmor(0, this.inventory.parent);
+			this.activePlayer.inventory.onInventoryChanged();
+		}
+	}
+	
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(par2);

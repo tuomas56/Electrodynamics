@@ -64,7 +64,7 @@ public class InventoryItem implements IInventory, INBTTagable {
 			
 			this.inventory = new ItemStack[9];
 			
-			for (int i=0; i<inventory.length; i++) {
+			for (int i=0; i<items.tagCount(); i++) {
 				NBTTagCompound tempTag = (NBTTagCompound) items.tagAt(i);
 				
 				if (tempTag != null) {
