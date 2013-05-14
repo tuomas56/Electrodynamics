@@ -17,5 +17,7 @@ public class Models {
 	public static final String TEX_BUCKET = TEXTURE_BASE + "/latexBucket.png";
 	public static final String TEX_BUCKET_FULL = TEXTURE_BASE + "/latexBucketFull.png";
 	public static final String TEX_METAL_TRAY = TEXTURE_BASE + "/metalTray.png";
+	public static final String TEX_CHICKEN = TEXTURE_BASE + "/chicken.png";
+	public static final String TEX_CHICKEN_COOKED = TEXTURE_BASE + "/chickenCooked.png";
 	
 }

@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -13,6 +14,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import electrodynamics.client.model.ModelChicken;
 import electrodynamics.client.model.ModelMetalTray;
 import electrodynamics.client.model.ModelSinteringOven;
 import electrodynamics.lib.client.Models;
@@ -24,10 +26,14 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 
 	private ModelSinteringOven modelSinteringOven;
 	private ModelMetalTray modelMetalTray;
-
+	private ModelChicken modelChicken;
+	
+	private final boolean chickenEasterEgg = true;
+	
 	public RenderSinteringOven() {
 		this.modelSinteringOven = new ModelSinteringOven();
 		this.modelMetalTray = new ModelMetalTray();
+		this.modelChicken = new ModelChicken();
 	}
 
 	@Override
@@ -84,22 +90,41 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 			GL11.glTranslated(0, 1.4, -0.23);
 			GL11.glRotatef(90, 1, 0, 0);
 			
-			if (!Minecraft.getMinecraft().gameSettings.fancyGraphics) {
-				GL11.glRotatef(-180, 0, 1, 0);
-				GL11.glRotatef(Minecraft.getMinecraft().renderViewEntity.rotationYaw, 0, 1, 0);
+			if (chickenEasterEgg) {
+				boolean chicken = false;
+				if (stack.getItem() == Item.chickenRaw) {
+					chicken = true;
+					Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_CHICKEN);
+				} else if (stack.getItem() == Item.chickenCooked) {
+					chicken = true;
+					Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_CHICKEN_COOKED);
+				}
+				
+				if (chicken) {
+					GL11.glRotatef(90, 0, 1, 0);
+					GL11.glRotatef(-90, 1, 0, 0);
+					GL11.glRotatef(-90, 0, 0, 1);
+					GL11.glTranslated(0, -1.4, 0.25);
+					this.modelChicken.render(0.0625F);
+				}
+			} else {
+				if (!Minecraft.getMinecraft().gameSettings.fancyGraphics) {
+					GL11.glRotatef(-180, 0, 1, 0);
+					GL11.glRotatef(Minecraft.getMinecraft().renderViewEntity.rotationYaw, 0, 1, 0);
+				}
+				
+				if (stack.getItem() instanceof ItemBlock) {
+					GL11.glRotatef(-90, 1, 0, 0);
+					GL11.glRotatef(180, 1, 0, 0);
+					GL11.glRotatef(-90, 0, 1, 0);
+					GL11.glTranslated(-0.23, 0, 0);
+				}
+				
+				EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, stack);
+				entityitem.getEntityItem().stackSize = 1;
+				entityitem.hoverStart = 0.0F;
+		        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
 			}
-			
-			if (stack.getItem() instanceof ItemBlock) {
-				GL11.glRotatef(-90, 1, 0, 0);
-				GL11.glRotatef(180, 1, 0, 0);
-				GL11.glRotatef(-90, 0, 1, 0);
-				GL11.glTranslated(-0.23, 0, 0);
-			}
-			
-			EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, stack);
-			entityitem.getEntityItem().stackSize = 1;
-			entityitem.hoverStart = 0.0F;
-	        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
 		}
 	}
 	
