@@ -78,20 +78,22 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 		GL11.glTranslated(0, -0.5, 0);
 		modelMetalTray.render(0.0625F);
 		
-		GL11.glTranslated(0, 1.4, -0.23);
-		GL11.glRotatef(90, 1, 0, 0);
-		
-		if (stack.getItem() instanceof ItemBlock) {
-			GL11.glRotatef(-90, 1, 0, 0);
-			GL11.glRotatef(180, 1, 0, 0);
-			GL11.glRotatef(-90, 0, 1, 0);
-			GL11.glTranslated(-0.23, 0, 0);
+		if (stack != null) {
+			GL11.glTranslated(0, 1.4, -0.23);
+			GL11.glRotatef(90, 1, 0, 0);
+			
+			if (stack.getItem() instanceof ItemBlock) {
+				GL11.glRotatef(-90, 1, 0, 0);
+				GL11.glRotatef(180, 1, 0, 0);
+				GL11.glRotatef(-90, 0, 1, 0);
+				GL11.glTranslated(-0.23, 0, 0);
+			}
+			
+			EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, stack);
+			entityitem.getEntityItem().stackSize = 1;
+			entityitem.hoverStart = 0.0F;
+	        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
 		}
-		
-		EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, stack);
-		entityitem.getEntityItem().stackSize = 1;
-		entityitem.hoverStart = 0.0F;
-        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
 	}
 	
 	public void renderFire(World world, int x, int y, int z, int rotation) {

@@ -89,7 +89,7 @@ public class EDModuleMachine extends EDModule {
 	public void init() {
 		CraftingManager.getInstance().tableManager = new RecipeManagerTable();
 		CraftingManager.getInstance().tableManager.initRecipes();
-
+		
 		CraftingManager.getInstance().sieveManager = new RecipeManagerSieve();
 		CraftingManager.getInstance().sieveManager.initRecipes();
 

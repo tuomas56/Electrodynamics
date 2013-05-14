@@ -19,6 +19,8 @@ public class RecipeSieve {
 		this.itemInput = itemInput;
 		this.itemOutputs = itemOutputs;
 		this.processingTime = processingTime;
+		
+		CraftingManager.getInstance().tableManager.registerSieveRecipe(itemInput, getHighestOutput(), 1);
 	}
 	
 	public RecipeSieve(ItemStack itemInput, int processingTime, WeightedRecipeOutput ... itemOutputs) {
@@ -37,6 +39,19 @@ public class RecipeSieve {
 
 	}
 
+	public ItemStack getHighestOutput() {
+		float chance = 0F;
+		ItemStack output = null;
+		
+		for (WeightedRecipeOutput out : this.itemOutputs) {
+			if (out.chance > chance) {
+				output = out.output;
+			}
+		}
+		
+		return output;
+	}
+	
 	public boolean isInput(ItemStack input) {
 		return (ItemStack.areItemStacksEqual(input, itemInput));
 	}

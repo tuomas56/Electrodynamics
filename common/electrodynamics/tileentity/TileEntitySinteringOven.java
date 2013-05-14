@@ -19,7 +19,7 @@ import electrodynamics.util.ItemUtil;
 
 public class TileEntitySinteringOven extends TileEntityMachine {
 
-	public final int ROTATIONAL_MAX = 2;
+	public final float ROTATIONAL_MAX = 1.5F;
 	
 	public float doorAngle = 0;
 	
@@ -140,18 +140,6 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 		}
 		
 		if (this.open) {
-			if (this.hasTray) {
-				player.inventory.addItemStackToInventory(trayInventory.parent.copy());
-				
-				this.hasTray = false;
-				this.trayInventory = null;
-				this.currentCookTime = 0;
-				this.totalCookTime = 0;
-				
-				sendUpdatePacket(Side.CLIENT);
-				return;
-			}
-			
 			if (player.getCurrentEquippedItem() != null) {
 				ItemStack currentItem = player.getCurrentEquippedItem();
 				
@@ -169,6 +157,18 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 					sendUpdatePacket(Side.CLIENT);
 					return;
 				}
+			}
+			
+			if (this.hasTray) {
+				player.inventory.addItemStackToInventory(trayInventory.parent.copy());
+				
+				this.hasTray = false;
+				this.trayInventory = null;
+				this.currentCookTime = 0;
+				this.totalCookTime = 0;
+				
+				sendUpdatePacket(Side.CLIENT);
+				return;
 			}
 		}
 	}
