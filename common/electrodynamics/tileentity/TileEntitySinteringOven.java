@@ -80,6 +80,12 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 						}
 					}
 				}
+				
+				if (this.open) {
+					for (EntityLiving living : getEntitiesInFireRange()) {
+						living.setFire(1);
+					}
+				}
 			}
 		}
 		
@@ -102,7 +108,7 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 	}
 	
 	public AxisAlignedBB getFireDetectionBoundingBox() {
-		return this.getRenderBoundingBox().expand(1, 1, 1);
+		return this.getRenderBoundingBox().addCoord(1 * this.rotation.offsetX, 0, 1 * this.rotation.offsetZ);
 	}
 	
 	@Override
