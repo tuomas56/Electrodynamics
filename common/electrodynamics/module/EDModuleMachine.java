@@ -87,15 +87,6 @@ public class EDModuleMachine extends EDModule {
 
 	@Override
 	public void init() {
-		CraftingManager.getInstance().tableManager = new RecipeManagerTable();
-		CraftingManager.getInstance().tableManager.initRecipes();
-		
-		CraftingManager.getInstance().sieveManager = new RecipeManagerSieve();
-		CraftingManager.getInstance().sieveManager.initRecipes();
-
-		CraftingManager.getInstance().ovenManager = new RecipeManagerSinteringOven();
-		CraftingManager.getInstance().ovenManager.initRecipes();
-
 		for( Storage storage : Storage.values() ) {
 			GameRegistry.addRecipe( storage.toItemStack(), "XXX", "XXX", "XXX", 'X', storage.ingot.toItemStack() );
 			GameRegistry.addShapelessRecipe( new ItemStack( ItemIDs.ITEM_INGOT_ID + 256, 9, storage.ingot.ordinal() ), storage.toItemStack() );
@@ -143,6 +134,15 @@ public class EDModuleMachine extends EDModule {
 		GameRegistry.registerTileEntity( TileEntityTable.class, Strings.BLOCK_TABLE_NAME );
 		GameRegistry.registerTileEntity( TileEntityBasicSieve.class, Strings.MACHINE_BASIC_SIEVE );
 		GameRegistry.registerTileEntity( TileConveyorBelt.class, "tile.conveyor.belt" );
+		
+		CraftingManager.getInstance().tableManager = new RecipeManagerTable();
+		CraftingManager.getInstance().tableManager.initRecipes();
+		
+		CraftingManager.getInstance().sieveManager = new RecipeManagerSieve();
+		CraftingManager.getInstance().sieveManager.initRecipes();
+
+		CraftingManager.getInstance().ovenManager = new RecipeManagerSinteringOven();
+		CraftingManager.getInstance().ovenManager.initRecipes();
 	}
 
 	@Override
