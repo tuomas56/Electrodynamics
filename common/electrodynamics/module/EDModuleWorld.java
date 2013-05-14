@@ -10,6 +10,7 @@ import net.minecraftforge.liquids.LiquidContainerData;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
@@ -27,6 +28,7 @@ import electrodynamics.block.item.ItemBlockDecorative;
 import electrodynamics.block.item.ItemBlockOre;
 import electrodynamics.block.item.ItemBlockTreetap;
 import electrodynamics.client.render.block.RenderBlockOre;
+import electrodynamics.client.render.tileentity.RenderTreetap;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemLatexBucket;
@@ -116,6 +118,7 @@ public class EDModuleWorld extends EDModule {
 		GameRegistry.registerTileEntity(TileEntityTreetap.class, Strings.BLOCK_TREETAP);
 		
 		FurnaceRecipes.smelting().addSmelting(BlockIDs.BLOCK_DECORATIVE_ID, 2, new ItemStack(EDBlocks.blockDecorative, 1, 0), 0F);
+		FurnaceRecipes.smelting().addSmelting(ItemIDs.ITEM_COMPONENT_ID, Component.WORMWOOD_LEAF.ordinal(), Component.SAP.toItemStack(), 0F);
 		
 		GameRegistry.addRecipe(new ItemStack(EDBlocks.blockDecorative, 4, 1), "XX", "XX", 'X', new ItemStack(EDBlocks.blockDecorative, 1, 0));
 		GameRegistry.addRecipe(new ItemStack(EDBlocks.blockDecorative, 4, 4), "XX", "XX", 'X', new ItemStack(EDBlocks.blockDecorative, 1, 1));
@@ -151,6 +154,8 @@ public class EDModuleWorld extends EDModule {
 
 	@Override
 	public void initClient() {
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreetap.class, new RenderTreetap());
+		
 		RenderingRegistry.registerBlockHandler(new RenderBlockOre());
 	}
 	
