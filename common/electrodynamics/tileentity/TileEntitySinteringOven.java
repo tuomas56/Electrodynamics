@@ -7,12 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
-import cpw.mods.fml.relauncher.Side;
 import electrodynamics.core.CoreUtils;
-import electrodynamics.item.EDItems;
-import electrodynamics.network.PacketUtils;
-import electrodynamics.network.packet.PacketSound;
-import electrodynamics.util.ItemUtil;
 
 public class TileEntitySinteringOven extends TileEntityMachine {
 
@@ -89,36 +84,7 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 	
 	@Override
 	public void onBlockActivated(EntityPlayer player) {
-		if (this.open) {
-			if (player.getCurrentEquippedItem() != null) {
-				if (player.getCurrentEquippedItem().getItem() == EDItems.itemTray) {
-					//TODO Add held tray
-					this.hasTray = true;
-				} else if (ItemUtil.getFuelValue(player.getCurrentEquippedItem()) > 0) {
-					this.fuelLevel += ItemUtil.getFuelValue(player.getCurrentEquippedItem());
-					--player.getCurrentEquippedItem().stackSize;
-					
-					sendUpdatePacket(Side.CLIENT);
-					return;
-				}
-			} else if (this.trayInventory != null && player.isSneaking()) {
-				//Remove held tray
-				
-				this.trayInventory = null;
-				this.hasTray = false;
-				this.currentCookTime = 0;
-				this.totalCookTime = 0;
-				
-				sendUpdatePacket(Side.CLIENT);
-				return;
-			}
-		}
-		
-		open = !open;
-		if (open == true && this.fuelLevel > 0) {
-			PacketUtils.sendToPlayers(new PacketSound("1009", xCoord, yCoord, zCoord, PacketSound.TYPE_SFX).makePacket(), this);
-		}
-		sendUpdatePacket(Side.CLIENT);
+
 	}
 
 }
