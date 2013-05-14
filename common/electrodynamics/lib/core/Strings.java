@@ -4,7 +4,7 @@ public class Strings {
 
 	/* REMINDER: ANY LOCALIZATION STRINGS ADDED HERE MUST BE ADDED TO THE .lang FILES!
 	 * en_US AT THE VERY LEAST */
-	
+
 	/* Internal item names */
 	public static final String ITEM_COMPONENT_NAME = "component.name";
 	public static final String ITEM_TESLA_HAT_NAME = "tesla.helm.name";
@@ -22,7 +22,7 @@ public class Strings {
 	public static final String ITEM_SPUD_PEELER = "spud_peeler.name";
 	public static final String ITEM_LATEX_BUCKET = "bucket.latex.name";
 	public static final String ITEM_LIQUID_LATEX = "liquid.latex.name";
-	
+
 	/* Internal block names */
 	public static final String BLOCK_ORE_NAME = "ore.name";
 	public static final String BLOCK_RED_WIRE_NAME = "red_wire.name";
@@ -38,7 +38,7 @@ public class Strings {
 	public static final String BLOCK_RUBBER_LEAF = "rubber.leaves.name";
 	public static final String BLOCK_RUBBER_SAPLING = "rubber.sapling.name";
 	public static final String BLOCK_TREETAP = "treetap.name";
-	
+
 	/* Internal component names */
 	public static final String COMPONENT_FAN_BLADE = "component.fanBlade.name";
 	public static final String COMPONENT_MAGNET = "component.magnet.name";
@@ -56,7 +56,7 @@ public class Strings {
 	public static final String COMPONENT_LITHIUM_CLAY_DRY = "component.lithiumClayDry.name";
 	public static final String COMPONENT_LITHIUM_CLAY_WET = "component.lithiumClayWet.name";
 	public static final String COMPONENT_OVEN_WALL = "component.oven_wall.name";
-	
+
 	/* Internal ore names */
 	public static final String ORE_COBALTITE_NAME = "ore.cobaltite.name";
 	public static final String ORE_CHALCOPYRITE_NAME = "ore.chalcopyrite.name";
@@ -67,7 +67,7 @@ public class Strings {
 	public static final String ORE_VOIDSTONE = "ore.voidstone.name";
 	public static final String ORE_BLUESTONE = "ore.bluestone.name";
 	public static final String ORE_GREENSTONE = "ore.greenstone.name";
-	
+
 	/* Internal dust names */
 	public static final String DUST_CLAY = "dust.clay.name";
 	public static final String DUST_COBALT = "dust.cobalt.name";
@@ -93,7 +93,7 @@ public class Strings {
 	public static final String DUST_TIN = "dust.tin.name";
 	public static final String DUST_URANIUM = "dust.uranium.name";
 	public static final String DUST_SILVER = "dust.silver.name";
-	
+
 	/* Internal grinding names */
 	public static final String GROUND_CHALCOPYRITE = "ground.chalcopyrite.name";
 	public static final String GROUND_COBALTITE = "ground.cobaltite.name";
@@ -116,7 +116,7 @@ public class Strings {
 	public static final String GROUND_SILVER = "ground.silver.name";
 	public static final String GROUND_TIN = "ground.tin.name";
 	public static final String GROUND_URANIUM = "ground.uranium.name";
-	
+
 	/* Internal ingot names */
 	public static final String INGOT_LODESTONE = "ingot.lodestone.name";
 	public static final String INGOT_COBALT = "ingot.cobalt.name";
@@ -129,21 +129,29 @@ public class Strings {
 	public static final String INGOT_TIN = "ingot.tin.name";
 	public static final String INGOT_URANIUM = "ingot.uranium.name";
 	public static final String INGOT_SILVER = "ingot.silver.name";
-	
+
 	/* Internal machine names */
 	public static final String MACHINE_SINTERING_OVEN = "machine.sinteringOven.name";
 	public static final String MACHINE_BASIC_SIEVE = "machine.basicSieve.name";
-	
+
 	/* Internal table names */
 	public static final String BASIC_TABLE = "table.basic.name";
 	public static final String SMASH_TABLE = "table.smash.name";
-	
+
 	/* Internal decorative block names */
 	public static final String DECORATIVE_LIMESTONE = "decorative.limestone.name";
 	public static final String DECORATIVE_LIMESTONE_BRICK = "decorative.limestone.brick.name";
 	public static final String DECORATIVE_LIMESTONE_BRICKS = "decorative.limestone.bricks.name";
 	public static final String DECORATIVE_LIMESTONE_BRITTLE = "decorative.limestone.brittle.name";
-	
+
+	/* Internal structure component block names */
+	public static final String STRUCTURE_COMPONENT_CONVEYOR_BELT = "structure.component.conveyorBelt.name";
+	public static final String STRUCTURE_COMPONENT_FURNACE_FRAME = "structure.component.furnace.frame.name";
+	public static final String STRUCTURE_COMPONENT_FURNACE_HEATER = "structure.component.furnace.heater.name";
+	public static final String STRUCTURE_COMPONENT_FURNACE_GAUGE = "structure.component.furnace.gauge.name";
+	public static final String STRUCTURE_COMPONENT_FURNACE_VALVE = "structure.component.furnace.valve.name";
+	public static final String STRUCTURE_COMPONENT_FURNACE_VENT = "structure.component.furnace.vent.name";
+
 	/* Internal gas names */
 	public static final String GAS_AIR_CLEAN = "gas.air.clean.name";
 	public static final String GAS_AIR_DIRTY = "gas.air.dirty.name";
@@ -156,7 +164,7 @@ public class Strings {
 	public static final String GAS_N = "gas.nitrogen.name";
 	public static final String GAS_SO2 = "gas.sulfurDioxide.name";
 	public static final String GAS_H2SO4 = "gas.sulfuricAcid.name";
-	
+
 	/* Internal storage names */
 	public static final String STORAGE_COPPER = "tile.storage.copper.name";
 	public static final String STORAGE_LEAD = "tile.storage.lead.name";
@@ -164,5 +172,5 @@ public class Strings {
 	public static final String STORAGE_NICKEL = "tile.storage.nickel.name";
 	public static final String STORAGE_TELLURIUM = "tile.storage.tellurium.name";
 	public static final String STORAGE_TUNGSTEN = "tile.storage.tungsten.name";
-	
+
 }

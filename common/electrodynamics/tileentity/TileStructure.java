@@ -4,9 +4,8 @@ package electrodynamics.tileentity;
 import electrodynamics.mbs.MultiBlockStructure;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 
-public abstract class TileStructure extends TileEntity {
+public abstract class TileStructure extends TileEntityGeneric {
 
 	// The coordinates of the central TE.
 	protected int targetX, targetY, targetZ;
@@ -68,6 +67,15 @@ public abstract class TileStructure extends TileEntity {
 		tag.setInteger( "targetY", targetY );
 		tag.setInteger( "targetZ", targetZ );
 		nbt.setTag( "structure", tag );
+	}
+
+	public static TileStructure createNewPlaceHolderTE() {
+		return new TileStructure() {
+			@Override
+			public boolean onBlockActivatedBy(EntityPlayer player, int side, float xOff, float yOff, float zOff) {
+				return false; // place holder.
+			}
+		};
 	}
 
 }

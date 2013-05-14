@@ -1,20 +1,30 @@
 package electrodynamics.block;
 
+import electrodynamics.core.CreativeTabED;
+import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.tileentity.TileStructure;
 import electrodynamics.world.TickHandlerMBS;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 /**
  * Blocks used for MBS
  */
-public abstract class BlockStructure extends BlockContainer {
+public class BlockStructure extends BlockGeneric {
 
 	public BlockStructure(int blockID, Material material) {
 		super( blockID, material );
+		setCreativeTab( CreativeTabED.block );
+	}
+
+	@Override
+	protected Set<? extends SubBlock> getSubBlocks() {
+		return EnumSet.allOf( StructureComponent.class );
 	}
 
 	@Override
@@ -38,9 +48,6 @@ public abstract class BlockStructure extends BlockContainer {
 		}
 		return false;
 	}
-
-	@Override
-	public abstract TileStructure createNewTileEntity(World world);
 
 	protected void scheduleUpdate(World world, int x, int y, int z) {
 		TickHandlerMBS.instance().scheduleTask( world, x, y, z );
