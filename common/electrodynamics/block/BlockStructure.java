@@ -17,8 +17,8 @@ import java.util.Set;
  */
 public class BlockStructure extends BlockGeneric {
 
-	public BlockStructure(int blockID, Material material) {
-		super( blockID, material );
+	public BlockStructure(int blockID) {
+		super( blockID, Material.iron );
 		setCreativeTab( CreativeTabED.block );
 	}
 

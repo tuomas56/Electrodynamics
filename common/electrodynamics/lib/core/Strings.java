@@ -38,6 +38,7 @@ public class Strings {
 	public static final String BLOCK_RUBBER_LEAF = "rubber.leaves.name";
 	public static final String BLOCK_RUBBER_SAPLING = "rubber.sapling.name";
 	public static final String BLOCK_TREETAP = "treetap.name";
+	public static final String BLOCK_STRUCTURE_COMPONENT = "structure.component";
 
 	/* Internal component names */
 	public static final String COMPONENT_FAN_BLADE = "component.fanBlade.name";
