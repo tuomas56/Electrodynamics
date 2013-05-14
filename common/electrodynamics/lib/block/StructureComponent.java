@@ -1,11 +1,13 @@
 package electrodynamics.lib.block;
 
 
+import electrodynamics.block.EDBlocks;
 import electrodynamics.block.SubBlock;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityGeneric;
 import electrodynamics.tileentity.TileStructure;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public enum StructureComponent implements SubBlock {
@@ -79,6 +81,11 @@ public enum StructureComponent implements SubBlock {
 	@Override
 	public TileEntityGeneric createNewTileEntity(World world) {
 		return TileStructure.createNewPlaceHolderTE();
+	}
+
+	@Override
+	public ItemStack toItemStack() {
+		return new ItemStack( EDBlocks.blockStructureComponent, 1, ordinal() );
 	}
 
 }

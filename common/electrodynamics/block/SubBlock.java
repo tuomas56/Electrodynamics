@@ -2,6 +2,7 @@ package electrodynamics.block;
 
 
 import electrodynamics.tileentity.TileEntityGeneric;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public interface SubBlock {
@@ -29,5 +30,6 @@ public interface SubBlock {
 	 */
 	TileEntityGeneric createNewTileEntity(World world);
 
+	ItemStack toItemStack();
 
 }
