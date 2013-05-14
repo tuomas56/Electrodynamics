@@ -20,6 +20,16 @@ public class RecipeManagerSinteringOven {
 	}
 	
 	public RecipeSinteringOven getRecipe(List<ItemStack> input) {
+		RecipeSinteringOven recipe = getOvenRecipe(input);
+		
+		if (recipe == null && trimItemStackList(input).size() == 1) {
+			recipe = getFurnaceRecipe(input.get(0));
+		}
+		
+		return recipe;
+	}
+	
+	public RecipeSinteringOven getOvenRecipe(List<ItemStack> input) {
 		if (input == null) return null;
 		
 		for (RecipeSinteringOven recipe : sinteringOvenRecipes) {
@@ -31,16 +41,38 @@ public class RecipeManagerSinteringOven {
 		return null;
 	}
 	
-	public void initRecipes() {
+	public RecipeSinteringOven getFurnaceRecipe(ItemStack stack) {
 		for (Entry<List<Integer>, ItemStack> recipe : FurnaceRecipes.smelting().getMetaSmeltingList().entrySet()) {
-			ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
-			ArrayList<ItemStack> outputs = new ArrayList<ItemStack>();
+			ItemStack input = new ItemStack(recipe.getKey().get(0), 1, recipe.getKey().get(1));
 			
-			inputs.add(new ItemStack(recipe.getKey().get(0), 1, recipe.getKey().get(1)));
-			outputs.add(recipe.getValue());
-			
-			registerRecipe(inputs, outputs, 200);
+			if (input.isItemEqual(stack)) {
+				ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
+				ArrayList<ItemStack> outputs = new ArrayList<ItemStack>();
+				
+				inputs.add(input);
+				outputs.add(recipe.getValue());
+				
+				return new RecipeSinteringOven(inputs, outputs, 200);
+			}
 		}
+		
+		return null;
+	}
+	
+	public List<ItemStack> trimItemStackList(List<ItemStack> input) {
+		List<ItemStack> inputs = new ArrayList<ItemStack>();
+		
+		for (ItemStack stack : input) {
+			if (stack != null) {
+				inputs.add(stack);
+			}
+		}
+		
+		return inputs;
+	}
+	
+	public void initRecipes() {
+		
 	}
 	
 }
