@@ -11,6 +11,16 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class InventoryUtil {
 
+	public static ItemStack getFirstItemInArray(ItemStack[] array) {
+		for (ItemStack stack : array) {
+			if (stack != null) {
+				return stack;
+			}
+		}
+		
+		return null;
+	}
+	
 	/** Returns whether the TileEntity at the specified coordinates is an instance of IInventory */
 	public static boolean isInventory(World world, int x, int y, int z) {
 		return world.getBlockTileEntity(x, y, z) instanceof IInventory;

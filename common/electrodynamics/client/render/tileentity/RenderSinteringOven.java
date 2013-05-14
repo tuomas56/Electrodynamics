@@ -3,7 +3,11 @@ package electrodynamics.client.render.tileentity;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -14,6 +18,7 @@ import electrodynamics.client.model.ModelSinteringOven;
 import electrodynamics.lib.client.Models;
 import electrodynamics.tileentity.TileEntityMachine;
 import electrodynamics.tileentity.TileEntitySinteringOven;
+import electrodynamics.util.InventoryUtil;
 
 public class RenderSinteringOven extends TileEntitySpecialRenderer {
 
@@ -61,17 +66,32 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 		}
 		
 		if (((TileEntitySinteringOven)tile).hasTray) {
-			renderTray();
+			renderTray(tile.worldObj, InventoryUtil.getFirstItemInArray(((TileEntitySinteringOven)tile).trayInventory.inventory));
 		}
 		
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 	}
 	
-	public void renderTray() {
+	public void renderTray(World world, ItemStack stack) {
 		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_METAL_TRAY);
 		GL11.glTranslated(0, -0.5, 0);
 		modelMetalTray.render(0.0625F);
+		
+		GL11.glTranslated(0, 1.4, -0.23);
+		GL11.glRotatef(90, 1, 0, 0);
+		
+		if (stack.getItem() instanceof ItemBlock) {
+			GL11.glRotatef(-90, 1, 0, 0);
+			GL11.glRotatef(180, 1, 0, 0);
+			GL11.glRotatef(-90, 0, 1, 0);
+			GL11.glTranslated(-0.23, 0, 0);
+		}
+		
+		EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, stack);
+		entityitem.getEntityItem().stackSize = 1;
+		entityitem.hoverStart = 0.0F;
+        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
 	}
 	
 	public void renderFire(World world, int x, int y, int z, int rotation) {
