@@ -44,7 +44,7 @@ public class ConnectionHandler implements IConnectionHandler {
 	@Override
 	public void clientLoggedIn(NetHandler clientHandler, INetworkManager manager, Packet1Login login) {
 		if (Electrodynamics.instance.showOptifineError) {
-			FMLClientHandler.instance().getClient().thePlayer.addChatMessage(EnumChatFormatting.RED.toString() + "OPTIFINE DETECTED: " + EnumChatFormatting.RESET.toString() + "Optifine does several things that break some of the graphical parts of this mod. If you notice any graphical glitches, disable Optifine before reporting them to me!");
+			FMLClientHandler.instance().getClient().thePlayer.addChatMessage(EnumChatFormatting.RED.toString() + "[Electrodynamics] OPTIFINE DETECTED: " + EnumChatFormatting.RESET.toString() + "Optifine does several things that break some of the graphical parts of this mod. If you notice any graphical glitches, disable Optifine before reporting them to me!");
 			FMLClientHandler.instance().getClient().thePlayer.addChatMessage("This message will only show once.");
 			
 			try {
