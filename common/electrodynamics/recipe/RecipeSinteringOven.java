@@ -1,17 +1,18 @@
 package electrodynamics.recipe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.item.ItemStack;
 
 public class RecipeSinteringOven {
 
-	public ArrayList<ItemStack> itemInputs;
-	public ArrayList<ItemStack> itemOutputs;
+	public List<ItemStack> itemInputs;
+	public List<ItemStack> itemOutputs;
 	
 	public int processingTime;
 	
-	public RecipeSinteringOven(ArrayList<ItemStack> itemInput, ArrayList<ItemStack> itemOutputs, int processingTime) {
+	public RecipeSinteringOven(List<ItemStack> itemInput, List<ItemStack> itemOutputs, int processingTime) {
 		this.itemInputs = itemInput;
 		this.itemOutputs = itemOutputs;
 		this.processingTime = processingTime;
@@ -22,22 +23,24 @@ public class RecipeSinteringOven {
 		this.itemInputs = new ArrayList<ItemStack>();
 		this.itemOutputs = new ArrayList<ItemStack>();
 		
-		setInput(itemInputs);
+		setInput(this.itemInputs);
 		setOutput(this.itemOutputs);
 	}
 
-	public void setInput(ArrayList<ItemStack> inputs) {
+	public void setInput(List<ItemStack> inputs) {
 		
 	}
 	
-	public void setOutput(ArrayList<ItemStack> outputs) {
+	public void setOutput(List<ItemStack> outputs) {
 
 	}
 
-	public boolean isInput(ArrayList<ItemStack> input) {
+	public boolean isInput(List<ItemStack> input) {
 		for (ItemStack stack : input) {
-			if (doesListContain(stack)) {
-				return true;
+			if (stack != null) {
+				if (doesListContain(stack)) {
+					return true;
+				}
 			}
 		}
 		
@@ -45,12 +48,11 @@ public class RecipeSinteringOven {
 	}
 
 	private boolean doesListContain(ItemStack stack) {
-		if (stack == null) return false;
-		
 		for (ItemStack stack2 : this.itemInputs) {
-			if (stack2 == null) return false;
-			if (stack2.isItemEqual(stack)) {
-				return true;
+			if (stack2 != null) {
+				if (stack2.isItemEqual(stack)) {
+					return true;
+				}
 			}
 		}
 		

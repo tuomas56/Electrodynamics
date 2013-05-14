@@ -1,8 +1,11 @@
 package electrodynamics.recipe;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import electrodynamics.lib.item.Ingot;
 
 public class RecipeManagerSinteringOven {
 
@@ -16,7 +19,7 @@ public class RecipeManagerSinteringOven {
 		this.registerRecipe(new RecipeSinteringOven(input, output, duration));
 	}
 	
-	public RecipeSinteringOven getRecipe(ArrayList<ItemStack> input) {
+	public RecipeSinteringOven getRecipe(List<ItemStack> input) {
 		if (input == null) return null;
 		
 		for (RecipeSinteringOven recipe : sinteringOvenRecipes) {
@@ -29,7 +32,18 @@ public class RecipeManagerSinteringOven {
 	}
 	
 	public void initRecipes() {
-		
+		registerRecipe(new RecipeSinteringOven(1) {
+			@Override
+			public void setInput(List<ItemStack> inputs) {
+				inputs.add(new ItemStack(Item.coal, 1, Short.MAX_VALUE));
+				inputs.add(new ItemStack(Item.ingotIron));
+			}
+			
+			@Override
+			public void setOutput(List<ItemStack> outputs) {
+				outputs.add(Ingot.STEEL.toItemStack());
+			}
+		});
 	}
 	
 }

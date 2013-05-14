@@ -1,5 +1,8 @@
 package electrodynamics.inventory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -70,6 +73,28 @@ public class InventoryItem implements IInventory, INBTTagable {
 					inventory[slotByte] = ItemStack.loadItemStackFromNBT(tempTag);
 				}
 			}
+		}
+	}
+	
+	public List<ItemStack> getInventory() {
+		if (this.inventory == null) return null;
+		
+		ArrayList<ItemStack> inventory = new ArrayList<ItemStack>();
+		
+		for (ItemStack stack : this.inventory) {
+			inventory.add(stack);
+		}
+		
+		return inventory;
+	}
+	
+	public void setInventory(List<ItemStack> items) {
+		if (items == null) return;
+		
+		this.inventory = new ItemStack[items.size()];
+		
+		for (int i=0; i<items.size(); i++) {
+			this.inventory[i] = items.get(i);
 		}
 	}
 	

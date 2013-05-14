@@ -1,5 +1,6 @@
 package electrodynamics.tileentity;
 
+import java.util.Arrays;
 import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
@@ -12,6 +13,8 @@ import net.minecraft.util.AxisAlignedBB;
 import electrodynamics.core.CoreUtils;
 import electrodynamics.inventory.InventoryItem;
 import electrodynamics.item.EDItems;
+import electrodynamics.recipe.CraftingManager;
+import electrodynamics.recipe.RecipeSinteringOven;
 import electrodynamics.util.ItemUtil;
 
 public class TileEntitySinteringOven extends TileEntityMachine {
@@ -44,6 +47,39 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 		if (CoreUtils.isServer(worldObj)) {
 			if (fuelLevel > 0) {
 				--this.fuelLevel;
+				
+				if (totalCookTime > 0) {
+					if (trayInventory != null) {
+						if (currentCookTime == 0) {
+							RecipeSinteringOven recipe = CraftingManager.getInstance().ovenManager.getRecipe(Arrays.asList(this.trayInventory.inventory));
+						
+							if (recipe != null) {
+								this.trayInventory.setInventory(recipe.itemOutputs);
+								
+								this.totalCookTime = 0;
+								this.currentCookTime = 0;
+								
+								sendUpdatePacket(Side.CLIENT);
+								return;
+							}
+						} else {
+							--currentCookTime;
+						}
+					} else {
+						totalCookTime = 0;
+					}
+				} else {
+					if (trayInventory != null) {
+						RecipeSinteringOven recipe = CraftingManager.getInstance().ovenManager.getRecipe(Arrays.asList(this.trayInventory.inventory));
+						
+						if (recipe != null) {
+							this.totalCookTime = this.currentCookTime = recipe.processingTime;
+							
+							sendUpdatePacket(Side.CLIENT);
+							return;
+						}
+					}
+				}
 			}
 		}
 		
