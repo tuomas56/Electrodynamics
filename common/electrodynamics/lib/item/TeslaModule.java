@@ -1,7 +1,7 @@
 package electrodynamics.lib.item;
 
 import net.minecraft.item.ItemStack;
-import electrodynamics.item.tesla.logic.TeslaLogic;
+import electrodynamics.api.tool.ITeslaLogic;
 import electrodynamics.item.tesla.logic.TeslaLogicMagneticPull;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
@@ -13,10 +13,10 @@ public enum TeslaModule {
 	public String unlocalizedName;
 	public String moduleDescription;
 	public int[] validArmorTypes;
-	public TeslaLogic teslaLogic;
+	public ITeslaLogic teslaLogic;
 	private String textureName;
 
-	private TeslaModule(String unlocalizedName, String moduleDescription, int[] validArmorTypes, TeslaLogic teslaLogic, String textureName) {
+	private TeslaModule(String unlocalizedName, String moduleDescription, int[] validArmorTypes, ITeslaLogic teslaLogic, String textureName) {
 		this.unlocalizedName = unlocalizedName;
 		this.moduleDescription = moduleDescription;
 		this.validArmorTypes = validArmorTypes;
