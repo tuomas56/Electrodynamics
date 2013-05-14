@@ -42,7 +42,7 @@ public class Electrodynamics implements IEDApi {
 	public void preInit(FMLPreInitializationEvent event) {
 		this.configFolder = new File( event.getModConfigurationDirectory(), ModInfo.GENERIC_MOD_ID);
 
-		this.showOptifineError = (FMLClientHandler.instance().hasOptifine()) && !(new File(configFolder, "optifineErrorShown.flag").exists());
+		this.showOptifineError = (FMLClientHandler.instance().hasOptifine()) && !(new File(configFolder, "optifineErrorShown.flag")).exists();
 		
 		languageManager = EDLanguage.getInstance();
 		
