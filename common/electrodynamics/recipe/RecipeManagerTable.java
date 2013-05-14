@@ -119,6 +119,22 @@ public class RecipeManagerTable {
 		registerRecipe(new OreRecipeTable(TableRecipeType.SMASH, "oreSilver", Grinding.SILVER.toItemStack(), 1));
 		registerRecipe(new OreRecipeTable(TableRecipeType.SMASH, "oreTin", Grinding.TIN.toItemStack(), 1));
 		registerRecipe(new OreRecipeTable(TableRecipeType.SMASH, "oreUranium", Grinding.URANIUM.toItemStack(), 1));
+		
+		// Hand-Sieve recipes
+		registerSieveRecipe(Grinding.COBALTITE.toItemStack(), Dust.COBALT.toItemStack(), 1);
+		registerSieveRecipe(Grinding.CHALCOPYRITE.toItemStack(), Dust.COPPER.toItemStack(), 1);
+		registerSieveRecipe(Grinding.GALENA.toItemStack(), Dust.LEAD.toItemStack(), 1);
+		registerSieveRecipe(Grinding.LITHIUM.toItemStack(), Dust.LITHIUM.toItemStack(), 1);
+		registerSieveRecipe(Grinding.MAGNETITE.toItemStack(), Dust.MAGNETITE.toItemStack(), 1);
+		registerSieveRecipe(Grinding.NICKEL.toItemStack(), Dust.NICKEL.toItemStack(), 1);
+		registerSieveRecipe(Grinding.WOLFRAMITE.toItemStack(), Dust.TUNGSTEN.toItemStack(), 1);
+		registerSieveRecipe(Dust.LIMESTONE.toItemStack(), Dust.LIME_PURE.toItemStack(), 1);
+		registerSieveRecipe(Grinding.VOIDSTONE.toItemStack(), Dust.VOIDSTONE.toItemStack(), 1);
+		registerSieveRecipe(Grinding.GOLD.toItemStack(), Dust.GOLD.toItemStack(), 1);
+		registerSieveRecipe(Grinding.IRON.toItemStack(), Dust.IRON.toItemStack(), 1);
+		registerSieveRecipe(Grinding.COPPER.toItemStack(), Dust.COPPER.toItemStack(), 1);
+		registerSieveRecipe(Grinding.TIN.toItemStack(), Dust.TIN.toItemStack(), 1);
+		registerSieveRecipe(Grinding.URANIUM.toItemStack(), Dust.URANIUM.toItemStack(), 1);
 	}
 	
 }
