@@ -13,9 +13,11 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import electrodynamics.api.IEDApi;
 import electrodynamics.api.crafting.ICraftingManager;
 import electrodynamics.core.CommonProxy;
+import electrodynamics.core.handler.ConnectionHandler;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.module.ModuleManager;
@@ -42,7 +44,7 @@ public class Electrodynamics implements IEDApi {
 	public void preInit(FMLPreInitializationEvent event) {
 		this.configFolder = new File( event.getModConfigurationDirectory(), ModInfo.GENERIC_MOD_ID);
 
-		this.showOptifineError = (FMLClientHandler.instance().hasOptifine()) && !(new File(configFolder, "optifineErrorShown.flag")).exists();
+		this.showOptifineError = (FMLClientHandler.instance().hasOptifine()) && !(new File(configFolder, "optifineErrorShown.flag").exists());
 		
 		languageManager = EDLanguage.getInstance();
 		
@@ -50,6 +52,8 @@ public class Electrodynamics implements IEDApi {
 		proxy.preInitClient();
 		
 		craftingManager = new CraftingManager();
+		
+		NetworkRegistry.instance().registerConnectionHandler(new ConnectionHandler());
 	}
 
 	@Init
