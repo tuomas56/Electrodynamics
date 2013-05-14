@@ -65,6 +65,11 @@ public class RenderTable extends TileEntitySpecialRenderer {
 		GL11.glRotatef(180, 1, 0, 0);
 		GL11.glTranslated(0, -0.62, 0);
 		
+		if (!Minecraft.getMinecraft().gameSettings.fancyGraphics) {
+			GL11.glRotatef(-180, 0, 1, 0);
+			GL11.glRotatef(Minecraft.getMinecraft().renderViewEntity.rotationYaw, 0, 0, 1);
+		}
+		
 		if (!(stack.getItem() instanceof ItemBlock)) {
 			GL11.glRotatef(90, 1, 0, 0);
 			GL11.glTranslated(0, -0.18, 0);

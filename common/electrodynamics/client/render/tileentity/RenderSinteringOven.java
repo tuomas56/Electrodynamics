@@ -74,13 +74,20 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 	}
 	
 	public void renderTray(World world, ItemStack stack) {
-		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_METAL_TRAY);
 		GL11.glTranslated(0, -0.5, 0);
+		GL11.glRotatef(90, 0, 1, 0);
+		
+		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_METAL_TRAY);
 		modelMetalTray.render(0.0625F);
 		
 		if (stack != null) {
 			GL11.glTranslated(0, 1.4, -0.23);
 			GL11.glRotatef(90, 1, 0, 0);
+			
+			if (!Minecraft.getMinecraft().gameSettings.fancyGraphics) {
+				GL11.glRotatef(-180, 0, 1, 0);
+				GL11.glRotatef(Minecraft.getMinecraft().renderViewEntity.rotationYaw, 0, 1, 0);
+			}
 			
 			if (stack.getItem() instanceof ItemBlock) {
 				GL11.glRotatef(-90, 1, 0, 0);
