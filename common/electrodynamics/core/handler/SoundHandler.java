@@ -22,7 +22,7 @@ public class SoundHandler {
 	public void onSoundLoad(SoundLoadEvent e) {
 		String[] soundFiles = new String[] { 
 			"block/voidstoneAmbient.ogg", 
-			"block/tableSmash.ogg", 
+			"block/oreCrumble.ogg", 
 			"block/treeTap.ogg",
 			"block/barkCut1.ogg",
 			"block/barkCut2.ogg",

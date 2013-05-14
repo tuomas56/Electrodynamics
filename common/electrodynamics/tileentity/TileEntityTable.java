@@ -122,6 +122,8 @@ public class TileEntityTable extends TileEntity {
 					if (displayedItem.getItem() instanceof ItemBlock) {
 						PacketFX packet = new PacketFX(FXType.BLOCK_BREAK, xCoord, yCoord, zCoord, new int[] {displayedItem.itemID, displayedItem.getItemDamage()});
 						PacketDispatcher.sendPacketToAllAround(xCoord, yCoord + 2, zCoord, 64D, this.worldObj.provider.dimensionId, PacketTypeHandler.fillPacket(packet));
+						PacketSound sound = new PacketSound("electrodynamics.block.oreCrumble", xCoord, yCoord, zCoord, PacketSound.TYPE_SOUND);
+						PacketDispatcher.sendPacketToAllAround(xCoord, yCoord, zCoord, 32D, this.worldObj.provider.dimensionId, PacketTypeHandler.fillPacket(sound));
 					}
 					
 					recipe.onSmashed(player, this, this.displayedItem);
@@ -130,9 +132,6 @@ public class TileEntityTable extends TileEntity {
 					tool.damageItem(recipe.hammerDamage, player);
 					
 					update();
-					
-					PacketSound sound = new PacketSound("electrodynamics.block.tableSmash", xCoord, yCoord, zCoord, PacketSound.TYPE_SOUND);
-					PacketDispatcher.sendPacketToAllAround(xCoord, yCoord, zCoord, 32D, this.worldObj.provider.dimensionId, PacketTypeHandler.fillPacket(sound));
 				}
 			}
 		}
