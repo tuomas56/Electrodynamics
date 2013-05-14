@@ -6,7 +6,6 @@ import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityGeneric;
 import electrodynamics.tileentity.TileStructure;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public enum StructureComponent implements SubBlock {
@@ -79,12 +78,7 @@ public enum StructureComponent implements SubBlock {
 
 	@Override
 	public TileEntityGeneric createNewTileEntity(World world) {
-		return new TileStructure() {
-			@Override
-			public boolean onBlockActivatedBy(EntityPlayer player, int side, float xOff, float yOff, float zOff) {
-				return false;
-			}
-		};
+		return TileStructure.createNewPlaceHolderTE();
 	}
 
 }
