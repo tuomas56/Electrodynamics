@@ -1,9 +1,6 @@
 package electrodynamics.tileentity;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,13 +9,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import cpw.mods.fml.relauncher.Side;
 import electrodynamics.core.CoreUtils;
-import electrodynamics.inventory.InventoryItem;
 import electrodynamics.item.EDItems;
 import electrodynamics.network.PacketUtils;
 import electrodynamics.network.packet.PacketSound;
-import electrodynamics.recipe.CraftingManager;
-import electrodynamics.recipe.RecipeSinteringOven;
-import electrodynamics.util.BlockUtil;
 import electrodynamics.util.ItemUtil;
 
 public class TileEntitySinteringOven extends TileEntityMachine {
@@ -27,6 +20,7 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 	
 	public float doorAngle = 0;
 	
+	/** Does the oven currently have a tray in it. Primarily used for logic purposes */
 	public boolean hasTray = false;
 	
 	public boolean open = false;
@@ -40,8 +34,8 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 	/** Set to the recipes value when tray is input, when equal to zero, tray contents are replaced with recipe output */
 	public int currentCookTime;
 	
-	/** Instance of tray's inventory */
-	public InventoryItem trayInventory;
+	/** Tray's internal inventory */
+	public ItemStack[] trayInventory;
 	
 	@Override
 	public void updateEntity() {
@@ -50,49 +44,6 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 		if (CoreUtils.isServer(worldObj)) {
 			if (fuelLevel > 0) {
 				--this.fuelLevel;
-				
-				if (this.trayInventory != null) {
-					if (totalCookTime > 0) {
-						if (currentCookTime == 0) {
-							ArrayList<ItemStack> trayInventoryList = new ArrayList<ItemStack>(Arrays.asList(trayInventory.inventory));
-							
-							if (trayInventoryList != null) {
-								RecipeSinteringOven recipe = CraftingManager.getInstance().ovenManager.getRecipe(trayInventoryList);
-								
-								if (recipe != null) {
-									trayInventory.inventory = new ItemStack[recipe.itemOutputs.size()];
-									for (int i=0; i<recipe.itemOutputs.size(); i++) {
-										if (recipe.itemOutputs.get(i) != null) {
-											trayInventory.setInventorySlotContents(i, recipe.itemOutputs.get(i).copy());
-										}
-									}
-								}
-							}
-						} else {
-							--currentCookTime;
-						}
-					} else {
-						ArrayList<ItemStack> trayInventoryList = new ArrayList<ItemStack>(Arrays.asList(trayInventory.inventory));
-						
-						if (trayInventoryList != null) {
-							RecipeSinteringOven recipe = CraftingManager.getInstance().ovenManager.getRecipe(trayInventoryList);
-							
-							if (recipe != null) {
-								this.totalCookTime = this.currentCookTime = recipe.processingTime;
-							}
-						}
-					}
-				}
-				
-				if (this.open) {
-					List<EntityLiving> entities = getEntitiesInFireRange();
-					
-					if (entities != null && entities.size() > 0) {
-						for (EntityLiving entity : entities) {
-							entity.setFire(10);
-						}
-					}
-				}
 			}
 		}
 		
@@ -123,13 +74,8 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 		super.writeToNBT(nbt);
 		
 		nbt.setBoolean("open", open);
+		nbt.setBoolean("hasTray", hasTray);
 		nbt.setInteger("fuelLevel", fuelLevel);
-		
-		if (this.trayInventory != null) {
-			NBTTagCompound trayContents = new NBTTagCompound();
-			trayInventory.writeToNBT(trayContents);
-			nbt.setTag("trayContents", trayContents);
-		}
 	}
 
 	@Override
@@ -137,14 +83,8 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 		super.readFromNBT(nbt);
 		
 		this.open = nbt.getBoolean("open");
+		this.hasTray = nbt.getBoolean("hasTray");
 		this.fuelLevel = nbt.getInteger("fuelLevel");
-		
-		if (nbt.hasKey("trayContents")) {
-			NBTTagCompound trayContents = new NBTTagCompound();
-			this.trayInventory = new InventoryItem(9, new ItemStack(EDItems.itemTray));
-			this.trayInventory.readFromNBT(trayContents);
-			this.hasTray = true;
-		}
 	}
 	
 	@Override
@@ -152,13 +92,8 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 		if (this.open) {
 			if (player.getCurrentEquippedItem() != null) {
 				if (player.getCurrentEquippedItem().getItem() == EDItems.itemTray) {
-					if (this.trayInventory == null) {
-						this.trayInventory = new InventoryItem(9, player.getCurrentEquippedItem().copy());
-						--player.getCurrentEquippedItem().stackSize;
-						
-						sendUpdatePacket(Side.CLIENT);
-						return;
-					}
+					//TODO Add held tray
+					this.hasTray = true;
 				} else if (ItemUtil.getFuelValue(player.getCurrentEquippedItem()) > 0) {
 					this.fuelLevel += ItemUtil.getFuelValue(player.getCurrentEquippedItem());
 					--player.getCurrentEquippedItem().stackSize;
@@ -167,9 +102,10 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 					return;
 				}
 			} else if (this.trayInventory != null && player.isSneaking()) {
-				BlockUtil.dropItemFromBlock(worldObj, xCoord, yCoord, zCoord, this.trayInventory.parent.copy(), new Random());
+				//Remove held tray
 				
 				this.trayInventory = null;
+				this.hasTray = false;
 				this.currentCookTime = 0;
 				this.totalCookTime = 0;
 				
