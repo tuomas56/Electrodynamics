@@ -65,6 +65,10 @@ public class Strings {
 	/* Internal module descriptions */
 	public static final String MODULE_MAGNETIC_PULL_DESC = "module.magnetic_pull.desc";
 	
+	/* Internal GUI names */
+	public static final String GUI_TRAY = "gui.tray.name";
+	public static final String GUI_MODULE = "gui.module.name";
+	
 	/* Internal ore names */
 	public static final String ORE_COBALTITE_NAME = "ore.cobaltite.name";
 	public static final String ORE_CHALCOPYRITE_NAME = "ore.chalcopyrite.name";

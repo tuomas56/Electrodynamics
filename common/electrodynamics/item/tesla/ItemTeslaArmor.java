@@ -1,15 +1,21 @@
 package electrodynamics.item.tesla;
 
+import electrodynamics.api.tool.ITeslaModule;
 import electrodynamics.core.CreativeTabED;
+import electrodynamics.core.handler.GuiHandler;
+import electrodynamics.interfaces.IInventoryItem;
+import electrodynamics.inventory.InventoryItem;
 import electrodynamics.lib.core.ModInfo;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 
-public class ItemTeslaArmor extends ItemArmor {
+public class ItemTeslaArmor extends ItemArmor implements IInventoryItem {
 
 	public ArmorType armorType;
 	
@@ -22,6 +28,23 @@ public class ItemTeslaArmor extends ItemArmor {
 		setMaxDamage(0);
 		
 		this.armorType = ArmorType.values()[armorType];
+	}
+	
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+		if (!world.isRemote && player.isSneaking()) {
+			GuiHandler.openGui(player, world, (int)player.posX, (int)player.posY, (int)player.posZ, GuiHandler.GuiType.TESLA_MODULE);
+		}
+		
+		return stack;
+	}
+	
+	public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack itemStack) {
+		InventoryItem inv = this.getInventory(itemStack);
+		
+		if (inv != null && inv.getStackInSlot(0) != null) {
+			((ITeslaModule)inv.getStackInSlot(0).getItem()).onArmorTick(world, player, itemStack);
+		}
 	}
 	
 	@Override
@@ -52,6 +75,11 @@ public class ItemTeslaArmor extends ItemArmor {
 			this.textureFile = textureFile;
 			this.renderFile = renderFile;
 		}
+	}
+
+	@Override
+	public InventoryItem getInventory(ItemStack stack) {
+		return new InventoryItem(2, stack);
 	}
 	
 }

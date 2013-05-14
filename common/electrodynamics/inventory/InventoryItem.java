@@ -105,7 +105,11 @@ public class InventoryItem implements IInventory, INBTTagable {
 
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		return inventory[slot];
+		if (slot < this.inventory.length) {
+			return inventory[slot];
+		}
+		
+		return null;
 	}
 
 	@Override
@@ -135,24 +139,30 @@ public class InventoryItem implements IInventory, INBTTagable {
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slot) {
-		if (this.inventory[slot] != null) {
-			ItemStack itemstack = this.inventory[slot];
-			this.inventory[slot] = null;
-			return itemstack;
-		} else {
-			return null;
+		if (slot < this.inventory.length) {
+			if (this.inventory[slot] != null) {
+				ItemStack itemstack = this.inventory[slot];
+				this.inventory[slot] = null;
+				return itemstack;
+			} else {
+				return null;
+			}
 		}
+		
+		return null;
 	}
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
-		this.inventory[slot] = stack;
+		if (slot < this.inventory.length) {
+			this.inventory[slot] = stack;
 
-		if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
-			stack.stackSize = this.getInventoryStackLimit();
+			if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
+				stack.stackSize = this.getInventoryStackLimit();
+			}
+
+			this.onInventoryChanged();
 		}
-
-		this.onInventoryChanged();
 	}
 
 	@Override

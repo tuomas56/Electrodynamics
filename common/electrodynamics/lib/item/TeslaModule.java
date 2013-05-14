@@ -8,7 +8,7 @@ import electrodynamics.lib.core.Strings;
 
 public enum TeslaModule {
 
-	MAGNETIC_PULL(Strings.MODULE_MAGNETIC_PULL, Strings.MODULE_MAGNETIC_PULL_DESC, new int[] {2}, new TeslaLogicMagneticPull(), "magneticPull");
+	MAGNETIC_PULL(Strings.MODULE_MAGNETIC_PULL, Strings.MODULE_MAGNETIC_PULL_DESC, new int[] {1}, new TeslaLogicMagneticPull(), "magneticPull");
 	
 	public String unlocalizedName;
 	public String moduleDescription;

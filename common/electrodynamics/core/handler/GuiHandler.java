@@ -6,14 +6,24 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.relauncher.Side;
 import electrodynamics.Electrodynamics;
+import electrodynamics.client.gui.GuiTeslaModule;
 import electrodynamics.client.gui.GuiTray;
+import electrodynamics.interfaces.IInventoryItem;
+import electrodynamics.inventory.container.ContainerTeslaModule;
 import electrodynamics.inventory.container.ContainerTray;
-import electrodynamics.item.ItemTray;
+import electrodynamics.lib.core.ModInfo;
 
 public class GuiHandler implements IGuiHandler {
 
 	public enum GuiType {
-		TRAY;
+		TRAY("/gui/trap.png"),
+		TESLA_MODULE(ModInfo.RESOURCE_DIR + "/textures/gui/teslaModule.png");
+		
+		public String guiFile;
+		
+		private GuiType(String guiFile) {
+			this.guiFile = guiFile;
+		}
 	}
 	
 	public static void openGui(EntityPlayer player, World world, int x, int y, int z, GuiType type) {
@@ -32,11 +42,14 @@ public class GuiHandler implements IGuiHandler {
 	
 	public Object getGuiElement(int id, EntityPlayer player, World world, int x, int y, int z, Side side) {
 		GuiType type = GuiType.values()[id];
+		ItemStack held = player.inventory.getCurrentItem();
 		
 		switch(type) {
 			case TRAY: {
-				ItemStack tray = player.inventory.getCurrentItem();
-				return side == Side.SERVER ? new ContainerTray(player, ((ItemTray)tray.getItem()).getInventory(tray)) : new GuiTray(player, new ContainerTray(player, ((ItemTray)tray.getItem()).getInventory(tray)));
+				return side == Side.SERVER ? new ContainerTray(player, ((IInventoryItem)held.getItem()).getInventory(held)) : new GuiTray(player, new ContainerTray(player, ((IInventoryItem)held.getItem()).getInventory(held)));
+			}
+			case TESLA_MODULE:  {
+				return side == Side.SERVER ? new ContainerTeslaModule(player, ((IInventoryItem)held.getItem()).getInventory(held)) : new GuiTeslaModule(player, new ContainerTeslaModule(player, ((IInventoryItem)held.getItem()).getInventory(held)));
 			}
 		}
 		
