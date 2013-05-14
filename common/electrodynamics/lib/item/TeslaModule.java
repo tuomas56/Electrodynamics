@@ -25,7 +25,7 @@ public enum TeslaModule {
 	}
 
 	public String getTextureFile() {
-		return ModInfo.ICON_PREFIX + "module/" + textureName;
+		return ModInfo.ICON_PREFIX + "tesla/module/" + textureName;
 	}
 
 	public String getUnlocalizedName() {

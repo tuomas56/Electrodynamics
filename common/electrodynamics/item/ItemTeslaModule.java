@@ -28,6 +28,11 @@ public class ItemTeslaModule extends Item implements ITeslaModule {
 	}
 
 	@Override
+	public Icon getIconFromDamage(int damage) {
+		return textures[damage];
+	}
+	
+	@Override
 	public String getModuleName(ItemStack stack) {
 		return EDLanguage.getInstance().translate(TeslaModule.get(stack.getItemDamage()).unlocalizedName);
 	}

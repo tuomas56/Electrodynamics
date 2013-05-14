@@ -1,5 +1,7 @@
 package electrodynamics.item.tesla;
 
+import java.util.List;
+
 import electrodynamics.api.tool.ITeslaModule;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.core.handler.GuiHandler;
@@ -28,6 +30,16 @@ public class ItemTeslaArmor extends ItemArmor implements IInventoryItem {
 		setMaxDamage(0);
 		
 		this.armorType = ArmorType.values()[armorType];
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean show) {
+		InventoryItem inv = this.getInventory(stack);
+		
+		if (inv != null && inv.getStackInSlot(0) != null) {
+			list.add(((ITeslaModule)inv.getStackInSlot(0).getItem()).getModuleName(stack));
+		}
 	}
 	
 	@Override
