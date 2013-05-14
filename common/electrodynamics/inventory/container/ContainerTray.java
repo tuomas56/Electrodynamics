@@ -47,16 +47,13 @@ public class ContainerTray extends Container {
 
 	public void onCraftGuiClosed(EntityPlayer player) {
 		if (!player.worldObj.isRemote) {
-			if (this.activePlayer.getCurrentEquippedItem() != null && this.activePlayer.getCurrentEquippedItem().getItem() == EDItems.itemTray) {
-				this.activePlayer.setCurrentItemOrArmor(0, this.inventory.parent);
-				this.activePlayer.inventory.onInventoryChanged();
-			}
+			this.activePlayer.setCurrentItemOrArmor(0, this.inventory.parent);
+			this.activePlayer.inventory.onInventoryChanged();
 		}
 	}
 	
 	@Override
 	public ItemStack slotClick(int slot, int x, int y, EntityPlayer player) {
-		System.out.println(slot+": " + this.activeSlot);
 		if (slot == this.activeSlot) return null;
 		return super.slotClick(slot, x, y, player);
 	}
