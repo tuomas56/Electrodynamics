@@ -13,10 +13,13 @@ public class ContainerTray extends Container {
 	
 	public EntityPlayer activePlayer;
 	
+	public int activeSlot;
+	
 	public ContainerTray(EntityPlayer player, InventoryItem inventory) {
 		this.inventory = inventory;
 		inventory.parentContainer = this;
 		this.activePlayer = player;
+		this.activeSlot = player.inventory.currentItem + 36;
 		
 		// Tray Inventory
 		for (int i = 0; i < 3; ++i) {
@@ -51,25 +54,16 @@ public class ContainerTray extends Container {
 		}
 	}
 	
-//	@Override
-//	public ItemStack slotClick(int slot, int x, int y, EntityPlayer player) {
-//		Slot clickedSlot = (Slot)this.inventorySlots.get(slot);
-//		
-//		if (clickedSlot.getStack() != null) {
-//			if (clickedSlot.getStack().getItem() == EDItems.itemTray) {
-//				player.dropPlayerItem(clickedSlot.getStack());
-//				if (!player.worldObj.isRemote) {
-//					this.detectAndSendChanges();
-//					player.inventory.onInventoryChanged();
-//					player.closeScreen();
-//				}
-//			}
-//		}
-//		
-//		return super.slotClick(slot, x, y, player);
-//	}
+	@Override
+	public ItemStack slotClick(int slot, int x, int y, EntityPlayer player) {
+		System.out.println(slot+": " + this.activeSlot);
+		if (slot == this.activeSlot) return null;
+		return super.slotClick(slot, x, y, player);
+	}
 	
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
+		if (par2 == this.activeSlot) return null;
+		
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(par2);
 
