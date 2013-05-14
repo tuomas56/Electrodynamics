@@ -9,7 +9,6 @@ public enum Component {
 	FAN_BLADE(Strings.COMPONENT_FAN_BLADE, "fanBlade"), 
 	MAGNET(Strings.COMPONENT_MAGNET, "magnet"),
 	MAGNETITE_CHUNK(Strings.COMPONENT_MAGNETITE_CHUNK, "magnetiteChunk"),
-	MAGNETITE_DUST(Strings.COMPONENT_MAGNETITE_DUST, "magnetiteDust"),
 	METAL_BAR(Strings.COMPONENT_METAL_BAR, "metalBar"),
 	ARSENIC(Strings.COMPONENT_ARSENIC, "arsenic"),
 	LODESTONE_PEBBLE(Strings.COMPONENT_LODESTONE_PEBBLE, "lodestonePebble"),
