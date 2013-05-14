@@ -16,7 +16,6 @@ import cpw.mods.fml.common.network.NetworkMod;
 import electrodynamics.api.IEDApi;
 import electrodynamics.api.crafting.ICraftingManager;
 import electrodynamics.core.CommonProxy;
-import electrodynamics.core.EDLogger;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.module.ModuleManager;
@@ -31,6 +30,8 @@ public class Electrodynamics implements IEDApi {
 	@SidedProxy(clientSide = "electrodynamics.core.ClientProxy", serverSide = "electrodynamics.core.CommonProxy")
 	public static CommonProxy proxy;
 
+	public boolean showOptifineError = true;
+	
 	public File configFolder;
 
 	public CraftingManager craftingManager;
@@ -39,12 +40,10 @@ public class Electrodynamics implements IEDApi {
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
-		if (FMLClientHandler.instance().hasOptifine()) {
-			EDLogger.warn("OPTFINE DETECTED: Optifine does several things that break some of the graphical parts of this mod. If you notice any graphical glitches, disable Optifine before reporting them to me!");
-		}
-		
 		this.configFolder = new File( event.getModConfigurationDirectory(), ModInfo.GENERIC_MOD_ID);
 
+		this.showOptifineError = (FMLClientHandler.instance().hasOptifine()) && !(new File(configFolder, "optifineErrorShown.flag").exists());
+		
 		languageManager = EDLanguage.getInstance();
 		
 		ModuleManager.preInit();
