@@ -20,6 +20,10 @@ public class BlockStorage extends Block {
 		setCreativeTab(CreativeTabED.resource);
 	}
 	
+	public int damageDropped(int damage) {
+		return damage;
+	}
+	
 	@Override
 	public Icon getIcon(int side, int metadata) {
 		return textures[metadata];

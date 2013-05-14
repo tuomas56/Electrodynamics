@@ -2,6 +2,8 @@ package electrodynamics.module;
 
 import java.io.File;
 
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import electrodynamics.Electrodynamics;
@@ -67,6 +69,9 @@ public class EDModuleCore extends EDModule {
 	@Override
 	public void init() {
 		NetworkRegistry.instance().registerGuiHandler(Electrodynamics.instance, new GuiHandler());
+		
+		// 3 twine to one string
+		GameRegistry.addRecipe(new ItemStack(Item.silk), "TTT", 'T', Component.TWINE.toItemStack());
 	}
 
 	@Override
