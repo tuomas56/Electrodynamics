@@ -12,6 +12,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StringTranslate;
 import electrodynamics.Electrodynamics;
 import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.core.EDLogger;
@@ -68,12 +69,21 @@ public class EDLanguage {
 		EDLogger.info("Loaded language file: " + lang);
 	}
 	
+	public String translate(String tag) {
+		return translate(tag, StringTranslate.getInstance().getCurrentLanguage());
+	}
+	
 	public String translate(String tag, String lang) {
 		if (languageMapping.containsKey(lang)) {
-			return ((Properties)languageMapping.get(lang)).getProperty(tag);
+			try {
+				return ((Properties)languageMapping.get(lang)).getProperty(tag);
+			} catch(Exception ex) {
+				printLanguageError(lang, tag);
+				return lang + ": " + tag;
+			}
 		}
 		
-		EDLogger.warn(tag + " was not found for language: " + lang);
+		EDLogger.warn("Language registery is missing a file for " + lang);
 		return "";
 	}
 	
@@ -94,13 +104,17 @@ public class EDLanguage {
 				LanguageRegistry.instance().addNameForObject(stack, lang, translate(unlocalized, lang));
 			}
 		} catch(Exception ex) {
-			if (ConfigurationSettings.SHOW_LOCALIZATION_ERRORS) {
-				EDLogger.warn("Failed to register " + currLang + " localization for " + unlocalized);
-			} else {
-				if (!errorShown) {
-					EDLogger.warn("Ran into an issue with localization. This message will only show once, but you can enable localization errors in the config to see more info.");
-					errorShown = true;
-				}
+			printLanguageError(currLang, unlocalized);
+		}
+	}
+	
+	public void printLanguageError(String lang, String tag) {
+		if (ConfigurationSettings.SHOW_LOCALIZATION_ERRORS) {
+			EDLogger.warn("Failed to register " + lang + " localization for " + tag);
+		} else {
+			if (!errorShown) {
+				EDLogger.warn("Ran into an issue with localization. This message will only show once, but you can enable localization errors in the config to see more info.");
+				errorShown = true;
 			}
 		}
 	}

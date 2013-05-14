@@ -22,7 +22,8 @@ public class Strings {
 	public static final String ITEM_SPUD_PEELER = "spud_peeler.name";
 	public static final String ITEM_LATEX_BUCKET = "bucket.latex.name";
 	public static final String ITEM_LIQUID_LATEX = "liquid.latex.name";
-
+	public static final String ITEM_TESLA_MODULE = "tesla.module.name";
+	
 	/* Internal block names */
 	public static final String BLOCK_ORE_NAME = "ore.name";
 	public static final String BLOCK_RED_WIRE_NAME = "red_wire.name";
@@ -58,6 +59,12 @@ public class Strings {
 	public static final String COMPONENT_LITHIUM_CLAY_WET = "component.lithiumClayWet.name";
 	public static final String COMPONENT_OVEN_WALL = "component.oven_wall.name";
 
+	/* Internal module names */
+	public static final String MODULE_MAGNETIC_PULL = "module.magnetic_pull.name";
+	
+	/* Internal module descriptions */
+	public static final String MODULE_MAGNETIC_PULL_DESC = "module.magnetic_pull.desc";
+	
 	/* Internal ore names */
 	public static final String ORE_COBALTITE_NAME = "ore.cobaltite.name";
 	public static final String ORE_CHALCOPYRITE_NAME = "ore.chalcopyrite.name";

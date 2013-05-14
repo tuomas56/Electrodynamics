@@ -77,6 +77,7 @@ public class ConfigurationHandler {
 			ItemIDs.ITEM_SPUD_PEELER_ID = config.getItem( Strings.ITEM_SPUD_PEELER, ItemIDs.ITEM_SPUD_PEELER_DEFAULT_ID ).getInt( ItemIDs.ITEM_SPUD_PEELER_DEFAULT_ID );
 			ItemIDs.ITEM_LATEX_BUCKET_ID = config.getItem( Strings.ITEM_LATEX_BUCKET, ItemIDs.ITEM_LATEX_BUCKET_DEFAULT_ID ).getInt( ItemIDs.ITEM_LATEX_BUCKET_DEFAULT_ID );
 			ItemIDs.ITEM_LIQUID_LATEX_ID = config.getItem( Strings.ITEM_LIQUID_LATEX, ItemIDs.ITEM_LIQUID_LATEX_DEFAULT_ID ).getInt( ItemIDs.ITEM_LIQUID_LATEX_DEFAULT_ID );
+			ItemIDs.ITEM_TESLA_MODULE_ID = config.getItem(Strings.ITEM_TESLA_MODULE, ItemIDs.ITEM_TESLA_MODULE_DEFAULT_ID).getInt(ItemIDs.ITEM_TESLA_MODULE_DEFAULT_ID);
 
 		} catch( Exception e ) {
 			EDLogger.warn( "Had trouble reading/writing to the configuration file." );

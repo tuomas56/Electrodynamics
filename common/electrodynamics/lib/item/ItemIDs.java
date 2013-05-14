@@ -66,4 +66,8 @@ public class ItemIDs {
 	public static int ITEM_LIQUID_LATEX_ID;
 	public static final int ITEM_LIQUID_LATEX_DEFAULT_ID = 5115;
 	
+	/* itemModule */
+	public static int ITEM_TESLA_MODULE_ID;
+	public static final int ITEM_TESLA_MODULE_DEFAULT_ID = 5116;
+	
 }
