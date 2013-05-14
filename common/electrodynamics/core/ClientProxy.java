@@ -4,55 +4,42 @@ import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import electrodynamics.block.EDBlocks;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import electrodynamics.client.fx.FXLightningBolt;
-import electrodynamics.client.render.block.RenderBlockOre;
-import electrodynamics.client.render.item.RenderItemMachine;
-import electrodynamics.client.render.item.RenderItemTable;
-import electrodynamics.client.render.tileentity.RenderBasicSieve;
-import electrodynamics.client.render.tileentity.RenderSinteringOven;
-import electrodynamics.client.render.tileentity.RenderTable;
-import electrodynamics.client.render.tileentity.RenderTreetap;
 import electrodynamics.control.KeyBindingHelper;
 import electrodynamics.control.KeybindingHandler;
 import electrodynamics.core.handler.SoundHandler;
 import electrodynamics.lib.client.FXType;
-import electrodynamics.tileentity.TileEntityBasicSieve;
-import electrodynamics.tileentity.TileEntitySinteringOven;
-import electrodynamics.tileentity.TileEntityTable;
-import electrodynamics.tileentity.TileEntityTreetap;
+import electrodynamics.module.ModuleManager;
 
 public class ClientProxy extends CommonProxy {
 
-	public void preInitClient() {
+	@Override
+	public void preInit(FMLPreInitializationEvent event) {
+		// Sound handler registration
 		MinecraftForge.EVENT_BUS.register(new SoundHandler());
+		
+		ModuleManager.preInitClient();
 	}
 
-	public void initClient() {
+	@Override
+	public void init(FMLInitializationEvent event) {
+		// Key handler registration
 		KeyBindingRegistry.registerKeyBinding(new KeybindingHandler());
 		
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySinteringOven.class, new RenderSinteringOven());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTable.class, new RenderTable());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBasicSieve.class, new RenderBasicSieve());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreetap.class, new RenderTreetap());
-		
-		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockTable.blockID, new RenderItemTable());
-		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockMachine.blockID, new RenderItemMachine());
-//		MinecraftForgeClient.registerItemRenderer(EDItems.itemPlasmaRifle.itemID, new RenderItemPlasmaRifle());
-		
-//		RenderingRegistry.registerBlockHandler(new RenderBlockRedWire());
-		RenderingRegistry.registerBlockHandler(new RenderBlockOre());
-
-//		RenderingRegistry.registerEntityRenderingHandler(EntityBeam.class, new RenderBeam());
-//		RenderingRegistry.registerEntityRenderingHandler(EntityPlasmaBeam.class, new RenderBeam());
+		ModuleManager.initClient();
 	}
 
+	@Override
+	public void postInit(FMLPostInitializationEvent event) {
+		ModuleManager.postInitClient();
+	}
+	
 	@Override
 	public void setKeyBinding(String name, int value, boolean repeats) {
 		KeyBindingHelper.addKeyBinding(name, value, repeats);

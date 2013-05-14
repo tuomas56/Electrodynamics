@@ -20,14 +20,4 @@ public class EDModuleGas extends EDModule {
 		}
 	}
 
-	@Override
-	public void init() {
-
-	}
-
-	@Override
-	public void postInit() {
-		
-	}
-	
 }

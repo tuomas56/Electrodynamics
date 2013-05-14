@@ -17,6 +17,18 @@ public abstract class EDModule {
 	public void postInit() {
 		
 	}
+
+	public void preInitClient() {
+		
+	}
+	
+	public void initClient() {
+		
+	}
+	
+	public void postInitClient() {
+		
+	}
 	
 	public EnumSet<Module> dependencies() {
 		return EnumSet.of(Module.CORE);

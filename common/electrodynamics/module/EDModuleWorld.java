@@ -10,6 +10,7 @@ import net.minecraftforge.liquids.LiquidContainerData;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -25,6 +26,7 @@ import electrodynamics.block.EDBlocks;
 import electrodynamics.block.item.ItemBlockDecorative;
 import electrodynamics.block.item.ItemBlockOre;
 import electrodynamics.block.item.ItemBlockTreetap;
+import electrodynamics.client.render.block.RenderBlockOre;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemLatexBucket;
@@ -34,6 +36,7 @@ import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.block.Decorative;
 import electrodynamics.lib.block.Ore;
 import electrodynamics.lib.core.Strings;
+import electrodynamics.lib.item.Component;
 import electrodynamics.lib.item.ItemIDs;
 import electrodynamics.tileentity.TileEntityTreetap;
 import electrodynamics.util.BiomeHelper;
@@ -117,6 +120,8 @@ public class EDModuleWorld extends EDModule {
 		GameRegistry.addRecipe(new ItemStack(EDBlocks.blockDecorative, 4, 1), "XX", "XX", 'X', new ItemStack(EDBlocks.blockDecorative, 1, 0));
 		GameRegistry.addRecipe(new ItemStack(EDBlocks.blockDecorative, 4, 4), "XX", "XX", 'X', new ItemStack(EDBlocks.blockDecorative, 1, 1));
 		
+		GameRegistry.addRecipe(new ItemStack(Item.silk), "TTT", 'T', Component.TWINE.toItemStack());
+		
 		// Cobaltite
 		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 0, 8, 16, 64, 4));
 		// Chalcopyrite
@@ -144,6 +149,11 @@ public class EDModuleWorld extends EDModule {
 		GameRegistry.registerWorldGenerator(new WorldGenRubberTree(10, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.JUNGLE)));
 	}
 
+	@Override
+	public void initClient() {
+		RenderingRegistry.registerBlockHandler(new RenderBlockOre());
+	}
+	
 	@Override
 	public void postInit() {
 		// Might need some side-sensitivity for these tick handlers.

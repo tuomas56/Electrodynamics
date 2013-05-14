@@ -28,6 +28,7 @@ public class ModuleManager {
 		return null;
 	}
 	
+	/* SERVER METHODS */
 	public static void preInit() {
 		registerModule(Module.CORE, new EDModuleCore());
 		registerModule(Module.WORLD, new EDModuleWorld());
@@ -35,6 +36,7 @@ public class ModuleManager {
 //		registerModule(Module.LASER, new EDModuleLaser());
 		registerModule(Module.MACHINE, new EDModuleMachine());
 //		registerModule(Module.GAS,  new EDModuleGas());
+		registerModule(Module.TESLA, new EDModuleTesla());
 		
 		Configuration config = new Configuration(new File(Electrodynamics.instance.configFolder, MODULE_CONFIG_FILE));
 		config.load();
@@ -58,8 +60,7 @@ public class ModuleManager {
 						EDLogger.fine("Module " + module.toString() + " decided not to load. Reason: " + instance.failLoadReason());
 					}
 				} else {
-					// Silently die
-//					EDLogger.warn("Module " + module.toString() + " is missing a mapping!");
+					EDLogger.warn("Module " + module.toString() + " is missing a mapping!");
 				}
 			}
 		}
@@ -108,6 +109,37 @@ public class ModuleManager {
 		modules.get(m).postInit();
 	}
 	
+	/* CLIENT METHODS */
+	public static void preInitClient() {
+		for (Module module : loadedModules) {
+			preInitClient(module);
+		}
+	}
+	
+	public static void initClient() {
+		for (Module module : loadedModules) {
+			initClient(module);
+		}
+	}
+	
+	public static void postInitClient() {
+		for (Module module : loadedModules) {
+			postInitClient(module);
+		}
+	}
+	
+	private static void preInitClient(Module m) {
+		modules.get(m).preInitClient();
+	}
+	
+	private static void initClient(Module m) {
+		modules.get(m).initClient();
+	}
+	
+	private static void postInitClient(Module m) {
+		modules.get(m).postInitClient();
+	}
+	
 	private static boolean isEnabled(Configuration config, Module module) {
 		Property moduleEnabled = config.get(CATEGORY_MODULES, module.toString(), true);
 		return moduleEnabled.getBoolean(true);
@@ -145,7 +177,13 @@ public class ModuleManager {
 	}
 	
 	public static enum Module {
-		CORE, WORLD, LOGIC, LASER, MACHINE, GAS;
+		CORE,
+		WORLD,
+//		LOGIC,
+//		LASER,
+		MACHINE,
+//		GAS,
+		TESLA;
 	}
 	
 }

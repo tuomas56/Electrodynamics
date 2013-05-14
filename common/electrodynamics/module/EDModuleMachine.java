@@ -1,17 +1,50 @@
 package electrodynamics.module;
 
+import java.util.EnumSet;
+
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import electrodynamics.block.*;
+import electrodynamics.block.BlockMachine;
+import electrodynamics.block.BlockStorage;
+import electrodynamics.block.BlockStructure;
+import electrodynamics.block.BlockTable;
+import electrodynamics.block.EDBlocks;
 import electrodynamics.block.item.ItemBlockMachine;
 import electrodynamics.block.item.ItemBlockStorage;
 import electrodynamics.block.item.ItemBlockStructure;
 import electrodynamics.block.item.ItemBlockTable;
+import electrodynamics.client.render.item.RenderItemMachine;
+import electrodynamics.client.render.item.RenderItemTable;
+import electrodynamics.client.render.tileentity.RenderBasicSieve;
+import electrodynamics.client.render.tileentity.RenderSinteringOven;
+import electrodynamics.client.render.tileentity.RenderTable;
 import electrodynamics.core.lang.EDLanguage;
-import electrodynamics.item.*;
-import electrodynamics.lib.block.*;
+import electrodynamics.item.EDItems;
+import electrodynamics.item.ItemDust;
+import electrodynamics.item.ItemHandheldSieve;
+import electrodynamics.item.ItemIngot;
+import electrodynamics.item.ItemTray;
+import electrodynamics.item.hammer.ItemSledgeHammer;
+import electrodynamics.item.hammer.ItemSteelHammer;
+import electrodynamics.item.hammer.ItemStoneHammer;
+import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.lib.block.Decorative;
+import electrodynamics.lib.block.Machine;
+import electrodynamics.lib.block.Storage;
+import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.lib.core.Strings;
-import electrodynamics.lib.item.*;
+import electrodynamics.lib.item.Component;
+import electrodynamics.lib.item.Dust;
+import electrodynamics.lib.item.Grinding;
+import electrodynamics.lib.item.Ingot;
+import electrodynamics.lib.item.ItemIDs;
 import electrodynamics.module.ModuleManager.Module;
 import electrodynamics.recipe.CraftingManager;
 import electrodynamics.recipe.RecipeManagerSieve;
@@ -21,13 +54,6 @@ import electrodynamics.tileentity.TileConveyorBelt;
 import electrodynamics.tileentity.TileEntityBasicSieve;
 import electrodynamics.tileentity.TileEntitySinteringOven;
 import electrodynamics.tileentity.TileEntityTable;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.EnumSet;
 
 public class EDModuleMachine extends EDModule {
 
@@ -76,6 +102,18 @@ public class EDModuleMachine extends EDModule {
 			EDLanguage.getInstance().registerItemStack( ingot.toItemStack(), ingot.unlocalizedName );
 		}
 
+		EDItems.itemStoneHammer = new ItemStoneHammer(ItemIDs.ITEM_STONE_HAMMER_ID).setUnlocalizedName(Strings.ITEM_STONE_HAMMER_NAME);
+		GameRegistry.registerItem(EDItems.itemStoneHammer, Strings.ITEM_STONE_HAMMER_NAME);
+		EDLanguage.getInstance().registerItem(EDItems.itemStoneHammer);
+		
+		EDItems.itemSteelHammer = new ItemSteelHammer(ItemIDs.ITEM_STEEL_HAMMER_ID).setUnlocalizedName(Strings.ITEM_STEEL_HAMMER_NAME);
+		GameRegistry.registerItem(EDItems.itemSteelHammer, Strings.ITEM_STEEL_HAMMER_NAME);
+		EDLanguage.getInstance().registerItem(EDItems.itemSteelHammer);
+		
+		EDItems.itemSledgeHammer = new ItemSledgeHammer(ItemIDs.ITEM_SLEDGE_HAMMER_ID).setUnlocalizedName(Strings.ITEM_SLEDGE_HAMMER_NAME);
+		GameRegistry.registerItem(EDItems.itemSledgeHammer, Strings.ITEM_SLEDGE_HAMMER_NAME);
+		EDLanguage.getInstance().registerItem(EDItems.itemSledgeHammer);
+		
 		EDItems.itemHandheldSieve = new ItemHandheldSieve( ItemIDs.ITEM_HANDHELD_SIEVE_ID ).setUnlocalizedName( Strings.ITEM_HANDHELD_SIEVE_NAME );
 		GameRegistry.registerItem( EDItems.itemHandheldSieve, Strings.ITEM_HANDHELD_SIEVE_NAME );
 		EDLanguage.getInstance().registerItem( EDItems.itemHandheldSieve );
@@ -146,10 +184,15 @@ public class EDModuleMachine extends EDModule {
 	}
 
 	@Override
-	public void postInit() {
-
+	public void initClient() {
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySinteringOven.class, new RenderSinteringOven());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTable.class, new RenderTable());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBasicSieve.class, new RenderBasicSieve());
+		
+		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockTable.blockID, new RenderItemTable());
+		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockMachine.blockID, new RenderItemMachine());
 	}
-
+	
 	public EnumSet<Module> dependencies() {
 		return EnumSet.of( Module.CORE, Module.WORLD );
 	}

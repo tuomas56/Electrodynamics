@@ -2,7 +2,6 @@ package electrodynamics;
 
 import java.io.File;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -13,14 +12,11 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import electrodynamics.api.IEDApi;
 import electrodynamics.api.crafting.ICraftingManager;
 import electrodynamics.core.CommonProxy;
-import electrodynamics.core.handler.ConnectionHandler;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.lib.core.ModInfo;
-import electrodynamics.module.ModuleManager;
 import electrodynamics.network.PacketHandler;
 import electrodynamics.recipe.CraftingManager;
 
@@ -31,40 +27,24 @@ public class Electrodynamics implements IEDApi {
 	public static Electrodynamics instance;
 	@SidedProxy(clientSide = "electrodynamics.core.ClientProxy", serverSide = "electrodynamics.core.CommonProxy")
 	public static CommonProxy proxy;
-
 	public boolean showOptifineError = true;
-	
 	public File configFolder;
-
 	public CraftingManager craftingManager;
-	
 	public EDLanguage languageManager;
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
-		this.configFolder = new File( event.getModConfigurationDirectory(), ModInfo.GENERIC_MOD_ID);
-
-		this.showOptifineError = (FMLClientHandler.instance().hasOptifine()) && !(new File(configFolder, "optifineErrorShown.flag").exists());
-		
-		languageManager = EDLanguage.getInstance();
-		
-		ModuleManager.preInit();
-		proxy.preInitClient();
-		
-		craftingManager = new CraftingManager();
-		
-		NetworkRegistry.instance().registerConnectionHandler(new ConnectionHandler());
+		proxy.preInit(event);
 	}
 
 	@Init
 	public void init(FMLInitializationEvent event) {
-		ModuleManager.init();
-		proxy.initClient();
+		proxy.init(event);
 	}
 
 	@PostInit
 	public void postInit(FMLPostInitializationEvent event) {
-		ModuleManager.postInit();
+		proxy.postInit(event);
 	}
 
 	@Override

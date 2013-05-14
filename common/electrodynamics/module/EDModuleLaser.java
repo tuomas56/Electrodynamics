@@ -1,11 +1,16 @@
 package electrodynamics.module;
 
+import net.minecraftforge.client.MinecraftForgeClient;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import electrodynamics.block.BlockLaserEmitter;
 import electrodynamics.block.EDBlocks;
+import electrodynamics.client.render.entity.RenderBeam;
+import electrodynamics.client.render.item.RenderItemPlasmaRifle;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.entity.EntityBeam;
+import electrodynamics.entity.EntityPlasmaBeam;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemPlasmaRifle;
 import electrodynamics.lib.block.BlockIDs;
@@ -34,8 +39,11 @@ public class EDModuleLaser extends EDModule {
 	}
 
 	@Override
-	public void postInit() {
+	public void initClient() {
+		MinecraftForgeClient.registerItemRenderer(EDItems.itemPlasmaRifle.itemID, new RenderItemPlasmaRifle());
 		
+		RenderingRegistry.registerEntityRenderingHandler(EntityBeam.class, new RenderBeam());
+		RenderingRegistry.registerEntityRenderingHandler(EntityPlasmaBeam.class, new RenderBeam());
 	}
-
+	
 }
