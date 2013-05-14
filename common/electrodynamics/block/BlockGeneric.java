@@ -76,7 +76,7 @@ public abstract class BlockGeneric extends BlockContainer {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubBlocks(int blockID, CreativeTabs creativeTabs, List list) {
 		// Register all the sub-blocks.
 		int count = getSubBlocks().size();

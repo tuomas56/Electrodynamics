@@ -9,24 +9,19 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import electrodynamics.core.CoreUtils;
 import electrodynamics.inventory.InventoryItem;
 import electrodynamics.item.EDItems;
-import electrodynamics.network.IPayloadReceiver;
 import electrodynamics.network.PacketUtils;
-import electrodynamics.network.Payload;
-import electrodynamics.network.packet.PacketPayload;
 import electrodynamics.network.packet.PacketSound;
 import electrodynamics.recipe.CraftingManager;
 import electrodynamics.recipe.RecipeSinteringOven;
 import electrodynamics.util.BlockUtil;
 import electrodynamics.util.ItemUtil;
 
-public class TileEntitySinteringOven extends TileEntityMachine implements IPayloadReceiver {
+public class TileEntitySinteringOven extends TileEntityMachine {
 
 	public final int ROTATIONAL_MAX = 2;
 	
@@ -121,27 +116,6 @@ public class TileEntitySinteringOven extends TileEntityMachine implements IPaylo
 	
 	public AxisAlignedBB getFireDetectionBoundingBox() {
 		return this.getRenderBoundingBox().expand(1, 1, 1);
-	}
-	
-	@Override
-	public void handlePayload(Payload payload) {
-		this.open = payload.boolPayload[0];
-		this.hasTray = payload.boolPayload[1];
-		this.rotation = ForgeDirection.getOrientation(payload.bytePayload[0]);
-		this.fuelLevel = payload.intPayload[0];
-		readFromNBT(payload.nbtPayload[0]);
-	}
-	
-	@Override
-	public Packet getDescriptionPacket() {
-		Payload payload = new Payload(2, 1, 1, 0, 0, 1);
-		payload.boolPayload[0] = this.open;
-		payload.boolPayload[1] = this.trayInventory != null;
-		payload.bytePayload[0] = (byte) this.rotation.ordinal();
-		payload.intPayload[0] = this.fuelLevel;
-		payload.nbtPayload[0] = getStoredNBTData();
-		PacketPayload packet = new PacketPayload(xCoord, yCoord, zCoord, payload);
-		return packet.makePacket();
 	}
 	
 	@Override

@@ -21,14 +21,12 @@ import electrodynamics.network.packet.PacketFX;
 import electrodynamics.network.packet.PacketJump;
 import electrodynamics.network.packet.PacketKeyPress;
 import electrodynamics.network.packet.PacketLightningFX;
-import electrodynamics.network.packet.PacketPayload;
 import electrodynamics.network.packet.PacketSound;
 import electrodynamics.network.packet.PacketTableUpdate;
 
 public enum PacketTypeHandler {
 
 	KEY(PacketKeyPress.class),
-	PAYLOAD(PacketPayload.class),
 	TABLE_UPDATE(PacketTableUpdate.class),
 	JUMP(PacketJump.class),
 	LIGHTNING(PacketLightningFX.class),
