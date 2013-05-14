@@ -8,12 +8,10 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import electrodynamics.Electrodynamics;
-import electrodynamics.configuration.ConfigurationHandler;
 import electrodynamics.core.handler.ConnectionHandler;
 import electrodynamics.core.handler.GuiHandler;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.lib.client.FXType;
-import electrodynamics.lib.core.ModInfo;
 import electrodynamics.module.ModuleManager;
 import electrodynamics.recipe.CraftingManager;
 import net.minecraft.world.World;
@@ -21,9 +19,6 @@ import net.minecraft.world.World;
 public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
-		// Config initialization
-		Electrodynamics.instance.configFolder = new File( event.getModConfigurationDirectory(), ModInfo.GENERIC_MOD_ID);
-		ConfigurationHandler.handleConfig(new File(Electrodynamics.instance.configFolder, ModInfo.GENERIC_MOD_ID + ".cfg"));
 		// Optifine check
 		Electrodynamics.instance.showOptifineError = (FMLClientHandler.instance().hasOptifine()) && !(new File(Electrodynamics.instance.configFolder, "optifineErrorShown.flag").exists());
 		// Language manager initialization

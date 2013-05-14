@@ -21,6 +21,8 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
+		super.preInit(event);
+		
 		// Sound handler registration
 		MinecraftForge.EVENT_BUS.register(new SoundHandler());
 		
@@ -29,6 +31,8 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void init(FMLInitializationEvent event) {
+		super.init(event);
+		
 		// Key handler registration
 		KeyBindingRegistry.registerKeyBinding(new KeybindingHandler());
 		
@@ -37,6 +41,8 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {
+		super.postInit(event);
+		
 		ModuleManager.postInitClient();
 	}
 	
