@@ -1,13 +1,8 @@
 package electrodynamics.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet;
-import net.minecraftforge.common.ForgeDirection;
-import electrodynamics.network.IPayloadReceiver;
-import electrodynamics.network.Payload;
-import electrodynamics.network.packet.PacketPayload;
 
-public class TileEntityEggTimer extends TileEntityMachine implements IPayloadReceiver {
+public class TileEntityEggTimer extends TileEntityMachine {
 
 	/** Whether or not timer is active */
 	public boolean active;
@@ -29,25 +24,6 @@ public class TileEntityEggTimer extends TileEntityMachine implements IPayloadRec
 				// Ring
 			}
 		}
-	}
-	
-	@Override
-	public void handlePayload(Payload payload) {
-		this.active = payload.boolPayload[1];
-		this.rotation = ForgeDirection.getOrientation(payload.bytePayload[0]);
-		this.timeRemaining = payload.intPayload[0];
-		this.totalTime = payload.intPayload[1];
-	}
-	
-	@Override
-	public Packet getDescriptionPacket() {
-		Payload payload = new Payload(1, 1, 2, 0, 0, 0);
-		payload.boolPayload[0] = this.active;
-		payload.bytePayload[0] = (byte) this.rotation.ordinal();
-		payload.intPayload[0] = this.timeRemaining;
-		payload.intPayload[1] = this.totalTime;
-		PacketPayload packet = new PacketPayload(xCoord, yCoord, zCoord, payload);
-		return packet.makePacket();
 	}
 	
 	@Override
