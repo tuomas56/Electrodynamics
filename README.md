@@ -22,10 +22,12 @@ Eloraam
 
 Chickenbones
 
-##Extended Description
+#Extended Description
 
 *Info currently being updated*
 
-##Planned Features
+#Website
 
-[Website](http://electrodynamicsmod.com/ "Electrodynamics")
+It's better than a Wiki.
+
+[electrodynamicsmod.com](http://electrodynamicsmod.com/ "Electrodynamics")
