@@ -52,9 +52,8 @@ public abstract class BlockGeneric extends BlockContainer {
 	}
 
 	@Override
-	// Don't need this.
 	public final TileEntity createNewTileEntity(World world) {
-		return null;
+		return TileEntityGeneric.createReplaceableTE();
 	}
 
 	@Override
@@ -79,9 +78,8 @@ public abstract class BlockGeneric extends BlockContainer {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubBlocks(int blockID, CreativeTabs creativeTabs, List list) {
 		// Register all the sub-blocks.
-		int count = getSubBlocks().size();
-		for( int i = 0; i < count; i++ ) {
-			list.add( new ItemStack( blockID, 1, i ) );
+		for( SubBlock subBlock : getSubBlocks() ) {
+			list.add( subBlock.toItemStack() );
 		}
 	}
 
@@ -101,6 +99,9 @@ public abstract class BlockGeneric extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public Icon getBlockTexture(IBlockAccess access, int x, int y, int z, int side) {
 		TileEntityGeneric tile = (TileEntityGeneric) access.getBlockTileEntity( x, y, z );
+		if( tile == null )
+			return null; // prevent null pointers; although this shouldn't be needed.
+
 		int subBlock = tile.getSubBlock();
 		int front = access.getBlockMetadata( x, y, z );
 

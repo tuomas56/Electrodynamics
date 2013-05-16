@@ -70,12 +70,15 @@ public abstract class TileStructure extends TileEntityGeneric {
 	}
 
 	public static TileStructure createNewPlaceHolderTE() {
-		return new TileStructure() {
-			@Override
-			public boolean onBlockActivatedBy(EntityPlayer player, int side, float xOff, float yOff, float zOff) {
-				return false; // place holder.
-			}
-		};
+		return new TileStructurePlaceHolder();
+	}
+
+	public static class TileStructurePlaceHolder extends TileStructure {
+
+		@Override
+		public boolean onBlockActivatedBy(EntityPlayer player, int side, float xOff, float yOff, float zOff) {
+			return false;
+		}
 	}
 
 }

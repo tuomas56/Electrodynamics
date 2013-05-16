@@ -22,7 +22,7 @@ public enum StructureComponent implements SubBlock {
 	FURNACE_FRAME( Strings.STRUCTURE_COMPONENT_FURNACE_FRAME ) {
 		@Override
 		public String[] getLocalTextureFiles() {
-			return new String[6]; // pending
+			return new String[] { frame, frame, frame, frame, frame, frame };
 		}
 	},
 	FURNACE_HEATER( Strings.STRUCTURE_COMPONENT_FURNACE_HEATER ) {
@@ -36,14 +36,14 @@ public enum StructureComponent implements SubBlock {
 		@Override
 		public String[] getLocalTextureFiles() {
 			String base = "sinteringFurnace_gauge";
-			return new String[] { base, base, base, base, base, base };
+			return new String[] { frame, frame, base, frame, base, frame };
 		}
 	},
 	FURNACE_VALVE( Strings.STRUCTURE_COMPONENT_FURNACE_VALVE ) {
 		@Override
 		public String[] getLocalTextureFiles() {
 			String base = "sinteringFurnace_valve";
-			return new String[] { base, base, base, base, base, base };
+			return new String[] { frame, frame, base, frame, base, frame };
 		}
 	},
 	FURNACE_VENT( Strings.STRUCTURE_COMPONENT_FURNACE_VENT ) {
@@ -88,4 +88,5 @@ public enum StructureComponent implements SubBlock {
 		return new ItemStack( EDBlocks.blockStructureComponent, 1, ordinal() );
 	}
 
+	private static String frame = "sinteringFurnace_frame";
 }

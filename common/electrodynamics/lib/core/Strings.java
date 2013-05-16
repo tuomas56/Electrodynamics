@@ -23,7 +23,7 @@ public class Strings {
 	public static final String ITEM_LATEX_BUCKET = "bucket.latex.name";
 	public static final String ITEM_LIQUID_LATEX = "liquid.latex.name";
 	public static final String ITEM_TESLA_MODULE = "tesla.module.name";
-	
+
 	/* Internal block names */
 	public static final String BLOCK_ORE_NAME = "ore.name";
 	public static final String BLOCK_RED_WIRE_NAME = "red_wire.name";
@@ -61,14 +61,14 @@ public class Strings {
 
 	/* Internal module names */
 	public static final String MODULE_MAGNETIC_PULL = "module.magnetic_pull.name";
-	
+
 	/* Internal module descriptions */
 	public static final String MODULE_MAGNETIC_PULL_DESC = "module.magnetic_pull.desc";
-	
+
 	/* Internal GUI names */
 	public static final String GUI_TRAY = "gui.tray.name";
 	public static final String GUI_MODULE = "gui.module.name";
-	
+
 	/* Internal ore names */
 	public static final String ORE_COBALTITE_NAME = "ore.cobaltite.name";
 	public static final String ORE_CHALCOPYRITE_NAME = "ore.chalcopyrite.name";
@@ -145,6 +145,8 @@ public class Strings {
 	/* Internal machine names */
 	public static final String MACHINE_SINTERING_OVEN = "machine.sinteringOven.name";
 	public static final String MACHINE_BASIC_SIEVE = "machine.basicSieve.name";
+	public static final String MACHINE_CONVEYOR_BELT = "machine.conveyor.belt";
+	public static final String MACHINE_STRUCTURE_PLACE_HOLDER = "machine.structure.place.holder";
 
 	/* Internal table names */
 	public static final String BASIC_TABLE = "table.basic.name";

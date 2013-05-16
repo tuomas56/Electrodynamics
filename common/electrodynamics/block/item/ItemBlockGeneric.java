@@ -21,7 +21,9 @@ public class ItemBlockGeneric extends ItemBlock {
 	public String getUnlocalizedName(ItemStack itemStack) {
 		Block block = Block.blocksList[itemStack.itemID];
 		if( block != null && block instanceof BlockGeneric ) {
-			((BlockGeneric) block).getSubBlocksArray()[itemStack.getItemDamage()].getUnlocalizedName();
+			BlockGeneric blockGeneric = (BlockGeneric) block;
+			int index = blockGeneric.getSubBlockIndex( itemStack );
+			blockGeneric.getSubBlocksArray()[index].getUnlocalizedName();
 		}
 		return null;
 	}
