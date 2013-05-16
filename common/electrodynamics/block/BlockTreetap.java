@@ -54,7 +54,7 @@ public class BlockTreetap extends BlockContainer {
 				}
 			} else {
 				if (tile.liquidAmount == 0 || tile.liquidAmount == 1000) {
-					tile.dropBucket();
+					tile.dropBucket(player);
 				}
 				
 				return true;
