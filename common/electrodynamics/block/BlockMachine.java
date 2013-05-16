@@ -2,21 +2,31 @@ package electrodynamics.block;
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+import net.minecraft.client.particle.EntityDiggingFX;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.world.World;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.core.EDLogger;
 import electrodynamics.lib.block.Machine;
+import electrodynamics.lib.block.Ore;
 import electrodynamics.tileentity.TileEntityMachine;
 import electrodynamics.util.PlayerUtil;
 
 public class BlockMachine extends BlockContainer {
+	
+	public Icon[] textures;
 
 	public BlockMachine(int id) {
 		super(id, Material.iron);
@@ -88,5 +98,19 @@ public class BlockMachine extends BlockContainer {
 	public TileEntity createNewTileEntity(World world) {
 		return null;
 	}
-
+	
+	@Override
+	public void registerIcons(IconRegister registry) {
+		textures = new Icon[Machine.values().length];
+		for (int i = 0; i < Machine.values().length; i++) {
+			textures[i] = registry.registerIcon(Machine.get(i).getTextureFile());
+		}
+	}
+	
+	@Override
+    public Icon getIcon(int id, int meta)
+    {
+		return textures[meta];
+    }
+	
 }
