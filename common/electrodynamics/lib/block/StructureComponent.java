@@ -1,14 +1,14 @@
 package electrodynamics.lib.block;
 
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.block.SubBlock;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityGeneric;
 import electrodynamics.tileentity.TileStructure;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public enum StructureComponent implements SubBlock {
 
