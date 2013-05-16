@@ -73,8 +73,10 @@ public class WorldGenRubberTree implements IWorldGenerator {
 							c = 1;
 						}
 						boolean gen = ((a > x - 2) && (a < x + 2) && (b > z - 2) && (b < z + 2)) || ((a > x - 2) && (a < x + 2) && (random.nextInt(c) == 0)) || ((b > z - 2) && (b < z + 2) && (random.nextInt(c) == 0));
-
-						if ((gen) && (world.getBlockId(a, y + i, b) == 0)) {
+						Block block = Block.blocksList[world.getBlockId(a, y + i, b)];
+						
+						if ((gen) && (block == null || block.canBeReplacedByLeaves(world, a, y + i, b))) {
+							
 							world.setBlock(a, y + i, b, EDBlocks.blockRubberLeaves.blockID, 0, 7);
 						}
 					}
