@@ -43,9 +43,7 @@ public class WorldGenRubberTree implements IWorldGenerator {
 				y--;
 			
 			if (validBiomes.contains(world.getBiomeGenForCoords(x, z))) {
-				if (!grow(world, x, y, z, random)) {
-					count -= 3;
-				}
+				grow(world, x, y, z, random);
 			}
 		}
 		return true;
@@ -86,7 +84,9 @@ public class WorldGenRubberTree implements IWorldGenerator {
 		
 		for (int a = x - 1; a <= x + 1; a++) {
 			for (int b = z - 1; b <= z + 1; b++) {
-				world.setBlock(a, y + height, b, EDBlocks.blockRubberLeaves.blockID, 0, 7);
+				if (world.getBlockId(a, y, b) == 0) {
+					world.setBlock(a, y + height, b, EDBlocks.blockRubberLeaves.blockID, 0, 7);
+				}
 			}
 		}
 		
