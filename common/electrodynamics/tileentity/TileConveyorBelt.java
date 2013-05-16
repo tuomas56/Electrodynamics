@@ -1,11 +1,13 @@
 package electrodynamics.tileentity;
 
 
+import java.util.List;
+
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
-
-import java.util.List;
+import net.minecraftforge.common.ForgeDirection;
 
 public class TileConveyorBelt extends TileStructure {
 	@Override
@@ -15,14 +17,13 @@ public class TileConveyorBelt extends TileStructure {
 
 	@Override
 	public void updateEntity() {
-		// todo: move the entities on the right direction.
-
-//		List<Entity> entities = getEntitiesAbove( EntityItem.class );
-//		for(Entity entity : entities) {
-//			ItemStack itemStack = ((EntityItem) entity).getEntityItem();
-//
-//		}
-
+		List<Entity> entities = getEntitiesAbove( EntityItem.class );
+		for(Entity entity : entities) {
+			ForgeDirection dir = ForgeDirection.getOrientation(this.rotation);
+			
+			entity.motionX += (0.1 * dir.offsetX);
+			entity.motionZ += (0.1 * dir.offsetZ);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
