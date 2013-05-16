@@ -38,6 +38,16 @@ public class BlockRubberSapling extends BlockSapling {
 		return false;
 	}
 	
+	public void markOrGrowMarked(World world, int x, int y, int z, Random random) {
+		int l = world.getBlockMetadata(x, y, z);
+
+		if ((l & 8) == 0) {
+			world.setBlockMetadataWithNotify(x, y, z, l | 8, 4);
+		} else {
+			(new WorldGenRubberTree(10, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.JUNGLE))).grow(world, x, y, z, new Random());
+		}
+	}
+	
 	@Override
 	public Icon getIcon(int side, int meta) {
 		return texture;
