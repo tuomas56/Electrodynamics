@@ -1,9 +1,12 @@
 package electrodynamics.module;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.liquids.LiquidContainerData;
@@ -143,7 +146,20 @@ public class EDModuleWorld extends EDModule {
 		// Limestone
 		GameRegistry.registerWorldGenerator(new WorldGenLimestone(BlockIDs.BLOCK_DECORATIVE_ID, 5));
 		// Voidstone
-		GameRegistry.registerWorldGenerator(new WorldGenBlock(BlockIDs.BLOCK_ORE_ID, Ore.VOIDSTONE.ordinal(), 1, 10));
+		GameRegistry.registerWorldGenerator(new WorldGenBlock(BlockIDs.BLOCK_ORE_ID, Ore.VOIDSTONE.ordinal(), 3, 10) {
+			@Override
+			public void onGenned(World world, int x, int y, int z, Random random) {
+				for (int ix = x - 2; ix < x + 2; ix++) {
+					for (int iy = y - 2; iy < y + 2; iy++) {
+						for (int iz = z - 2; iz < z + 2; iz++) {
+							if (ix != x && iy != y && iz != z) {
+								world.setBlockToAir(ix, iy, iz);
+							}
+						}
+					}
+				}
+			}
+		});
 		// Wormseed
 		GameRegistry.registerWorldGenerator(new WorldGenPlant(BlockIDs.BLOCK_WORMSEED_ID, 0, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MOUNTAIN)));
 		GameRegistry.registerWorldGenerator(new WorldGenPlant(BlockIDs.BLOCK_WORMSEED_ID, 1, BiomeHelper.getBiomesForTypes(Type.DESERT, Type.WASTELAND)));

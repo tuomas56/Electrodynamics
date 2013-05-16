@@ -8,7 +8,7 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
 
-public class WorldGenBlock implements IWorldGenerator {
+public abstract class WorldGenBlock implements IWorldGenerator {
 
 	public int blockID;
 	public int blockMeta;
@@ -40,4 +40,6 @@ public class WorldGenBlock implements IWorldGenerator {
 		}
 	}
 
+	public abstract void onGenned(World world, int x, int y, int z, Random random);
+	
 }
