@@ -22,7 +22,7 @@ public class TickHandlerMBS implements ITickHandler {
 		return instance;
 	}
 
-	private LinkedList<WorldCoordinate> queue = new LinkedList<WorldCoordinate>();
+	private LinkedList<Task> queue = new LinkedList<Task>();
 	private boolean queueEmpty = true;
 
 	@Override
@@ -30,12 +30,16 @@ public class TickHandlerMBS implements ITickHandler {
 		if( queueEmpty )
 			return;
 
-		WorldCoordinate coords = queue.poll();
+		Task task = queue.poll();
 		queueEmpty = queue.isEmpty();
 
-		WorldChunk chunk = MBSUtil.getChunkSurrounding( coords );
+		WorldChunk chunk = MBSUtil.getChunkSurrounding( task );
 		if( chunk != null ) {
-			MBSManager.updateStructuresAt( chunk );
+			if( task.doValidate ) {
+				MBSManager.updateStructuresAt( chunk );
+			} else {
+				MBSManager.invalidateChunk( chunk );
+			}
 		}
 	}
 
@@ -53,10 +57,19 @@ public class TickHandlerMBS implements ITickHandler {
 		return "ED-MBS";
 	}
 
-	public void scheduleTask(IBlockAccess world, int x, int y, int z) {
-		queue.offer( new WorldCoordinate( world, x, y, z ) );
+	public void scheduleTask(IBlockAccess world, int x, int y, int z, boolean doValidate) {
+		queue.offer( new Task( world, x, y, z, doValidate ) );
 		queueEmpty = false;
 	}
 
+	private class Task extends WorldCoordinate {
+
+		final boolean doValidate;
+
+		public Task(IBlockAccess access, int x, int y, int z, boolean doValidate) {
+			super( access, x, y, z );
+			this.doValidate = doValidate;
+		}
+	}
 
 }

@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 
@@ -81,6 +82,22 @@ public abstract class BlockGeneric extends BlockContainer {
 		for( SubBlock subBlock : getSubBlocks() ) {
 			list.add( subBlock.toItemStack() );
 		}
+	}
+
+	@Override
+	public void breakBlock(World world, int x, int y, int z, int blockID, int metadata) {
+		TileEntityGeneric tile = (TileEntityGeneric) world.getBlockTileEntity( x, y, z );
+		if( tile != null ) { // drop the block
+			int sub = tile.getSubBlock();
+			SubBlock subBlock = getSubBlocksArray()[sub];
+			this.dropBlockAsItem_do( world, x, y, z, subBlock.toItemStack() );
+		}
+		super.breakBlock( world, x, y, z, blockID, metadata ); // break block and remove TE.
+	}
+
+	@Override
+	public int quantityDropped(Random random) {
+		return 0; // let breakBlock handle dropping the item(s)
 	}
 
 	// Textures

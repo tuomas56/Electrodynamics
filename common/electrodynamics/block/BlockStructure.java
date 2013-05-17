@@ -11,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 import java.util.EnumSet;
-import java.util.Random;
 import java.util.Set;
 
 /**
@@ -31,47 +30,27 @@ public class BlockStructure extends BlockGeneric {
 	}
 
 	@Override
-	public void onPostBlockPlaced(World world, int x, int y, int z, int metadata) {
-		scheduleUpdate( world, x, y, z );
-	}
-
-	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int neighborID) {
 		Block block = Block.blocksList[neighborID];
 		if( block != null && block instanceof BlockStructure ) {
-			scheduleUpdate( world, x, y, z );
+			scheduleUpdate( world, x, y, z, false );
 		}
 	}
-
-	@Override
-	public int quantityDropped(Random random) {
-		return 0; // let breakBlock handle dropping the item(s)
-	}
-
-	public void breakBlock(World world, int x, int y, int z, int blockID, int metadata) {
-		TileStructure tile = (TileStructure) world.getBlockTileEntity( x, y, z );
-		if( tile != null ) { // drop the block
-			int sub = tile.getSubBlock();
-			this.dropBlockAsItem_do( world, x, y, z, StructureComponent.values()[sub].toItemStack() );
-		}
-		super.breakBlock( world, x, y, z, blockID, metadata ); // break block and remove TE.
-	}
-
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float xOff, float yOff, float zOff) {
 		TileStructure tile = (TileStructure) world.getBlockTileEntity( x, y, z );
 		if( tile != null ) {
-			if( !world.isRemote && player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ITool ) {
-				player.sendChatToPlayer( tile.isValidStructure() ? "Valid structure!" : "Invalid structure." );
+			if( player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ITool ) {
+				scheduleUpdate( world, x, y, z, true );
 			}
 			return tile.onBlockActivatedBy( player, side, xOff, yOff, zOff );
 		}
 		return false;
 	}
 
-	protected void scheduleUpdate(World world, int x, int y, int z) {
-		TickHandlerMBS.instance().scheduleTask( world, x, y, z );
+	protected void scheduleUpdate(World world, int x, int y, int z, boolean doValidate) {
+		TickHandlerMBS.instance().scheduleTask( world, x, y, z, doValidate );
 	}
 
 }
