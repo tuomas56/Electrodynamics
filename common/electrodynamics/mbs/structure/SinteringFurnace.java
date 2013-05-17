@@ -19,6 +19,8 @@ import static electrodynamics.lib.block.StructureComponent.*;
 
 public class SinteringFurnace extends MultiBlockStructure {
 
+	private static final int REQUIREMENT_HEATER = 1, REQUIREMENT_VALVE = 1, REQUIREMENT_GAUGE = 1, REQUIREMENT_VENT = 2;
+
 	public SinteringFurnace() {
 		super( makePattern() );
 	}
@@ -64,7 +66,8 @@ public class SinteringFurnace extends MultiBlockStructure {
 			}
 		}
 
-		if( heaterCount > 0 && gaugeCount > 0 && valveCount > 0 && ventCount > 0 ) {
+		// Check the component requirement.
+		if( heaterCount >= REQUIREMENT_HEATER && gaugeCount >= REQUIREMENT_GAUGE && valveCount >= REQUIREMENT_VALVE && ventCount >= REQUIREMENT_VENT ) {
 			return c;
 		}
 		return -1;
@@ -99,10 +102,10 @@ public class SinteringFurnace extends MultiBlockStructure {
 		compiler.addLayer( new char[][] { // y=1
 				{ '-', '-', '-' },
 				{ 'w', 'w', 'w' },
-				{ 'w', 'v', 'w' },
-				{ 'w', 'v', 'w' },
-				{ 'w', 'v', 'w' },
-				{ 'w', '-', 'w' },
+				{ 'g', 'v', 'g' },
+				{ 'g', 'v', 'g' },
+				{ 'w', 'w', 'w' },
+				{ '-', '-', '-' },
 				{ '-', '-', '-' }
 		} );
 
@@ -110,9 +113,9 @@ public class SinteringFurnace extends MultiBlockStructure {
 		Map<Character, StructureBlock> mappings = new HashMap<Character, StructureBlock>();
 		mappings.put( 'w', matchAny( FURNACE_FRAME ) ); // machine frame
 		mappings.put( 'b', matchAny( CONVEYOR_BELT ) ); // conveyor belt
-		mappings.put( 'x', matchAny( FURNACE_FRAME, FURNACE_HEATER, FURNACE_VALVE, FURNACE_GAUGE ) ); // heater, valve, gauge
-		mappings.put( 'v', matchAny( FURNACE_FRAME, FURNACE_VENT ) ); // vent
-
+		mappings.put( 'x', matchAny( FURNACE_FRAME, FURNACE_HEATER, FURNACE_VALVE ) ); // heater, valve
+		mappings.put( 'v', matchAny( FURNACE_VENT ) ); // vent
+		mappings.put( 'g', matchAny( FURNACE_FRAME, FURNACE_GAUGE ) ); // gauge
 
 		return compiler.compile( mappings );
 	}
