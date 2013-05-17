@@ -22,7 +22,7 @@ public class SinteringFurnace extends MultiBlockStructure {
 	private static final int REQUIREMENT_HEATER = 1, REQUIREMENT_VALVE = 1, REQUIREMENT_GAUGE = 1, REQUIREMENT_VENT = 2;
 
 	public SinteringFurnace() {
-		super( makePattern() );
+		super("SintFurnace", makePattern() );
 	}
 
 	@Override

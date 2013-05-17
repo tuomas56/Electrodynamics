@@ -12,6 +12,7 @@ import electrodynamics.client.render.item.RenderItemTable;
 import electrodynamics.client.render.tileentity.RenderBasicSieve;
 import electrodynamics.client.render.tileentity.RenderSinteringOven;
 import electrodynamics.client.render.tileentity.RenderTable;
+import electrodynamics.client.render.tileentity.RenderTileStructure;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.item.*;
 import electrodynamics.item.hammer.ItemSledgeHammer;
@@ -173,7 +174,8 @@ public class EDModuleMachine extends EDModule {
 		ClientRegistry.bindTileEntitySpecialRenderer( TileEntitySinteringOven.class, new RenderSinteringOven() );
 		ClientRegistry.bindTileEntitySpecialRenderer( TileEntityTable.class, new RenderTable() );
 		ClientRegistry.bindTileEntitySpecialRenderer( TileEntityBasicSieve.class, new RenderBasicSieve() );
-
+		ClientRegistry.bindTileEntitySpecialRenderer(TileStructure.class, new RenderTileStructure());
+		
 		MinecraftForgeClient.registerItemRenderer( EDBlocks.blockTable.blockID, new RenderItemTable() );
 		MinecraftForgeClient.registerItemRenderer( EDBlocks.blockMachine.blockID, new RenderItemMachine() );
 	}

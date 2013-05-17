@@ -10,6 +10,9 @@ import net.minecraft.tileentity.TileEntity;
 
 public class MultiBlockStructure {
 
+	// Unique string used to identity this multi-block during rendering
+	public String renderId;
+	
 	private int width;
 	private int height;
 	private int depth;
@@ -17,11 +20,12 @@ public class MultiBlockStructure {
 
 	private boolean isSymmetricXZ;
 
-	public MultiBlockStructure(Pattern pattern) {
-		this( pattern, false );
+	public MultiBlockStructure(String renderId, Pattern pattern) {
+		this(renderId, pattern, false );
 	}
 
-	public MultiBlockStructure(Pattern pattern, boolean isSymmetricXZ) {
+	public MultiBlockStructure(String renderId, Pattern pattern, boolean isSymmetricXZ) {
+		this.renderId = renderId;
 		this.pattern = pattern;
 		this.width = pattern.getWidth();
 		this.height = pattern.getHeight();

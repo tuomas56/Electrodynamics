@@ -16,12 +16,16 @@ public abstract class TileStructure extends TileEntityGeneric {
 	// The orientation of the MBS as a whole (relative to the MBS's pattern design).
 	protected int rotation;
 
+	// Temp var which stores the current MBS this TE is a part of
+	public MultiBlockStructure structure;
+	
 	public void validateStructure(MultiBlockStructure multiBlockStructure, int rotation, int x, int y, int z) {
 		this.rotation = rotation;
 		this.targetX = x;
 		this.targetY = y;
 		this.targetZ = z;
 		this.isValidStructure = true;
+		this.structure = multiBlockStructure;
 	}
 
 	public void invalidateStructure() {
