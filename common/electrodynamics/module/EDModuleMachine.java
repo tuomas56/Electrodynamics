@@ -20,6 +20,8 @@ import electrodynamics.item.hammer.ItemStoneHammer;
 import electrodynamics.lib.block.*;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.lib.item.*;
+import electrodynamics.mbs.MBSManager;
+import electrodynamics.mbs.structure.SinteringFurnace;
 import electrodynamics.module.ModuleManager.Module;
 import electrodynamics.recipe.CraftingManager;
 import electrodynamics.recipe.RecipeManagerSieve;
@@ -161,6 +163,9 @@ public class EDModuleMachine extends EDModule {
 
 		CraftingManager.getInstance().ovenManager = new RecipeManagerSinteringOven();
 		CraftingManager.getInstance().ovenManager.initRecipes();
+
+		// Multi-block Structures
+		MBSManager.registerMBS( new SinteringFurnace() ); // Sintering Furnace
 	}
 
 	@Override

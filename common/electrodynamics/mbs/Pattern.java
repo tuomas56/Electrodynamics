@@ -34,6 +34,18 @@ public class Pattern {
 	}
 
 	/**
+	 * Gets the pattern key for the given position.
+	 * Uses relative positions to the structure's origin (0,0,0).
+	 *
+	 * @param x the relative x position.
+	 * @param y the relative y position.
+	 * @param z the relative z position.
+	 */
+	public char getKeyAt(int x, int y, int z) {
+		return pattern[y][x][z];
+	}
+
+	/**
 	 * Gets the block representation used to check StructureBlock.isMatchingBlock(WorldBlock).
 	 * Uses relative positions to the structure's origin (0,0,0).
 	 *
