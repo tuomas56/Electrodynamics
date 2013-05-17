@@ -70,6 +70,11 @@ public class SinteringFurnace extends MultiBlockStructure {
 		return -1;
 	}
 
+	public void initialize(WorldChunk chunk, int rotation) {
+		super.initialize( chunk, rotation );
+		System.out.println( "Valid structure! =)" );
+	}
+
 	private StructureComponent getStructureComponentFrom(TileEntity tileEntity) {
 		if( tileEntity != null && tileEntity instanceof TileStructure ) {
 			TileStructure tile = (TileStructure) tileEntity;
