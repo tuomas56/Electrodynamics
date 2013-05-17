@@ -1,6 +1,7 @@
 package electrodynamics.mbs;
 
 
+import electrodynamics.core.EDLogger;
 import electrodynamics.mbs.util.WorldBlock;
 import electrodynamics.mbs.util.WorldChunk;
 import electrodynamics.mbs.util.WorldCoordinate;
@@ -117,6 +118,7 @@ public class MultiBlockStructure {
 				}
 			}
 		}
+		EDLogger.fine( String.format( "Validated Structure at: (%s, %s, %s)", x, y, z ) );
 	}
 
 

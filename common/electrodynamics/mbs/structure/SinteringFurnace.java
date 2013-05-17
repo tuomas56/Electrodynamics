@@ -25,6 +25,7 @@ public class SinteringFurnace extends MultiBlockStructure {
 		super( makePattern() );
 	}
 
+	@Override
 	public int check(WorldChunk chunk) {
 		// use the c value to rotate the pattern,
 		// and then check if the MBS really has all of the components.
@@ -71,11 +72,6 @@ public class SinteringFurnace extends MultiBlockStructure {
 			return c;
 		}
 		return -1;
-	}
-
-	public void initialize(WorldChunk chunk, int rotation) {
-		super.initialize( chunk, rotation );
-		System.out.println( "Valid structure! =)" );
 	}
 
 	private StructureComponent getStructureComponentFrom(TileEntity tileEntity) {
