@@ -42,6 +42,7 @@ public class BlockStructure extends BlockGeneric {
 		TileStructure tile = (TileStructure) world.getBlockTileEntity( x, y, z );
 		if( tile != null ) {
 			if( player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ITool ) {
+				player.sendChatToPlayer( tile.isValidStructure() ? "Valid structure!" : "Invalid structure." );
 				scheduleUpdate( world, x, y, z, true );
 			}
 			return tile.onBlockActivatedBy( player, side, xOff, yOff, zOff );

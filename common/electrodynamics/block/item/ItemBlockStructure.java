@@ -8,6 +8,7 @@ public class ItemBlockStructure extends ItemBlockGeneric {
 
 	public ItemBlockStructure(int itemID) {
 		super( itemID );
+		this.setHasSubtypes(true);
 	}
 	
 	public int getMetadata(int metadata) {
