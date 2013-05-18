@@ -65,10 +65,11 @@ public class SinteringFurnace extends MultiBlockStructure {
 					if( key == 'x' ) {
 						if( component == FURNACE_HEATER )
 							heaterCount++;
-						else if( component == FURNACE_GAUGE )
-							gaugeCount++;
 						else if( component == FURNACE_VALVE )
 							valveCount++;
+					} else if( key == 'g' ) {
+						if( component == FURNACE_GAUGE )
+							gaugeCount++;
 					} else if( key == 'v' ) {
 						if( component == FURNACE_VENT )
 							ventCount++;
