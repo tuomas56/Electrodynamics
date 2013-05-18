@@ -109,7 +109,7 @@ public abstract class BlockGeneric extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side, int metadata) {
 		// Used only for rendering the blocks in the inventory.
-		return icons[side][metadata];
+		return icons[metadata][side];
 	}
 
 	@Override
