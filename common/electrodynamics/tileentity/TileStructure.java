@@ -1,6 +1,7 @@
 package electrodynamics.tileentity;
 
 
+import electrodynamics.mbs.MBSManager;
 import electrodynamics.mbs.MultiBlockStructure;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,20 +17,21 @@ public abstract class TileStructure extends TileEntityGeneric {
 	// The orientation of the MBS as a whole (relative to the MBS's pattern design).
 	protected int rotation;
 
-	// Temp var which stores the current MBS this TE is a part of
-	public MultiBlockStructure structure;
-	
+	// stores the ID of the current MBS this TE is a part of
+	protected String mbsID = null;
+
 	public void validateStructure(MultiBlockStructure multiBlockStructure, int rotation, int x, int y, int z) {
 		this.rotation = rotation;
 		this.targetX = x;
 		this.targetY = y;
 		this.targetZ = z;
 		this.isValidStructure = true;
-		this.structure = multiBlockStructure;
+		this.mbsID = multiBlockStructure.getUID();
 	}
 
 	public void invalidateStructure() {
 		isValidStructure = false;
+		mbsID = null;
 	}
 
 	public boolean isValidStructure() {
@@ -37,7 +39,7 @@ public abstract class TileStructure extends TileEntityGeneric {
 	}
 
 	public boolean isCentralTileEntity() {
-		return xCoord == targetX && yCoord == targetY && zCoord == targetZ;
+		return isValidStructure() && xCoord == targetX && yCoord == targetY && zCoord == targetZ;
 	}
 
 	public TileStructure getCentralTileEntity() {
@@ -48,6 +50,17 @@ public abstract class TileStructure extends TileEntityGeneric {
 			return (TileStructure) worldObj.getBlockTileEntity( targetX, targetY, targetZ );
 		}
 		return null;
+	}
+
+	public MultiBlockStructure getMBS() {
+		if( mbsID != null ) {
+			return MBSManager.getMultiBlockStructure( mbsID );
+		}
+		return null;
+	}
+
+	public int getRotation() {
+		return rotation;
 	}
 
 	public abstract boolean onBlockActivatedBy(EntityPlayer player, int side, float xOff, float yOff, float zOff);

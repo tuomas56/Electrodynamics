@@ -6,13 +6,14 @@ import electrodynamics.mbs.util.WorldBlock;
 import electrodynamics.mbs.util.WorldChunk;
 import electrodynamics.mbs.util.WorldCoordinate;
 import electrodynamics.tileentity.TileStructure;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.tileentity.TileEntity;
 
-public class MultiBlockStructure {
+public abstract class MultiBlockStructure {
 
 	// Unique string used to identity this multi-block during rendering
-	public String renderId;
-	
+	public final String mbsID;
+
 	private int width;
 	private int height;
 	private int depth;
@@ -20,12 +21,12 @@ public class MultiBlockStructure {
 
 	private boolean isSymmetricXZ;
 
-	public MultiBlockStructure(String renderId, Pattern pattern) {
-		this(renderId, pattern, false );
+	public MultiBlockStructure(String mbsID, Pattern pattern) {
+		this( mbsID, pattern, false );
 	}
 
-	public MultiBlockStructure(String renderId, Pattern pattern, boolean isSymmetricXZ) {
-		this.renderId = renderId;
+	public MultiBlockStructure(String mbsID, Pattern pattern, boolean isSymmetricXZ) {
+		this.mbsID = mbsID;
 		this.pattern = pattern;
 		this.width = pattern.getWidth();
 		this.height = pattern.getHeight();
@@ -33,9 +34,15 @@ public class MultiBlockStructure {
 		this.isSymmetricXZ = isSymmetricXZ;
 	}
 
+	public String getUID() {
+		return mbsID;
+	}
+
 	public Pattern getPattern() {
 		return pattern;
 	}
+
+	public abstract ModelBase getModel();
 
 	/**
 	 * Checks if this MBS is found within the passed WorldChunk.
