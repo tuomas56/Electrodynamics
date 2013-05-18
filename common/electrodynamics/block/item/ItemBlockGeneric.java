@@ -10,6 +10,7 @@ public class ItemBlockGeneric extends ItemBlock {
 
 	public ItemBlockGeneric(int itemID) {
 		super( itemID );
+		setHasSubtypes( true );
 	}
 
 	@Override
