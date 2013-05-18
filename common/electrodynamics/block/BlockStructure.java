@@ -1,5 +1,7 @@
 package electrodynamics.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.api.tool.ITool;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.lib.block.StructureComponent;
@@ -8,6 +10,8 @@ import electrodynamics.world.TickHandlerMBS;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.EnumSet;
@@ -48,6 +52,15 @@ public class BlockStructure extends BlockGeneric {
 			return tile.onBlockActivatedBy( player, side, xOff, yOff, zOff );
 		}
 		return false;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTexture(IBlockAccess access, int x, int y, int z, int side) {
+		Icon icon = super.getBlockTexture( access, x, y, z, side );
+		if( icon == null ) // If the texture is invalid, better paint the "standard" texture.
+			return getIcon( StructureComponent.FURNACE_FRAME.ordinal(), side );
+		return icon;
 	}
 
 	protected void scheduleUpdate(World world, int x, int y, int z, boolean doValidate) {

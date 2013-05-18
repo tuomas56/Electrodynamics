@@ -120,6 +120,9 @@ public abstract class BlockGeneric extends BlockContainer {
 			return null; // prevent null pointers; although this shouldn't be needed.
 
 		int subBlock = tile.getSubBlock();
+		if( subBlock == -1 ) {
+			return null; // invalid sub-block - ahead of rendering the proper TE.
+		}
 		int front = access.getBlockMetadata( x, y, z );
 
 		// Assuming that no component will ever face up or down.
