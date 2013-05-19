@@ -25,6 +25,14 @@ public class BlockRenderer {
 	protected static float W13 = 0.8125F;
 	protected static float W15 = 0.9375F;
 
+	public static void drawFaces(RenderBlocks renderblocks, Block block, int metadata, boolean solidTop) {
+		Icon[] icons = new Icon[6];
+		for( int i = 0; i < 6; i++ ) {
+			icons[i] = block.getIcon( i, metadata );
+		}
+		drawFaces( renderblocks, block, icons[1], icons[0], icons[3], icons[5], icons[2], icons[4], solidTop );
+	}
+
 	public static void drawFaces(RenderBlocks renderblocks, Block block, Icon icon, boolean st) {
 		drawFaces(renderblocks, block, icon, icon, icon, icon, icon, icon, st);
 	}

@@ -3,6 +3,7 @@ package electrodynamics.block;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.api.tool.ITool;
+import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.tileentity.TileStructure;
@@ -52,6 +53,11 @@ public class BlockStructure extends BlockGeneric {
 			return tile.onBlockActivatedBy( player, side, xOff, yOff, zOff );
 		}
 		return false;
+	}
+
+	@Override
+	public int getRenderType() {
+		return ConfigurationSettings.STRUCTURE_BLOCK_RENDER_ID;
 	}
 
 	@Override

@@ -29,9 +29,10 @@ public class ConfigurationHandler {
 			ConfigurationSettings.RUBBER_FILL_TIME = config.get( CATEGORY_SETTINGS, ConfigurationSettings.RUBBER_FILL_TIME_CONFIGNAME, ConfigurationSettings.RUBBER_FILL_TIME_DEFAULT, "Amount of time (in ticks) for one bucket to fill via basic tap. (20 ticks to one second)" ).getInt( ConfigurationSettings.RUBBER_FILL_TIME_DEFAULT );
 			
 			/* Graphical Settings */
+			ConfigurationSettings.STRUCTURE_BLOCK_RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 			ConfigurationSettings.VOIDSTONE_RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 			ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS = config.get( CATEGORY_GRAPHICS, ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS_NAME, ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS_DEFAULT ).getBoolean( ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS_DEFAULT );
-			
+
 			/* Audio settings */
 			ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND = config.get( CATEGORY_SOUND, ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND_NAME, ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND_DEFAULT ).getBoolean( ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND_DEFAULT );
 			
@@ -77,7 +78,7 @@ public class ConfigurationHandler {
 			ItemIDs.ITEM_SPUD_PEELER_ID = config.getItem( Strings.ITEM_SPUD_PEELER, ItemIDs.ITEM_SPUD_PEELER_DEFAULT_ID ).getInt( ItemIDs.ITEM_SPUD_PEELER_DEFAULT_ID );
 			ItemIDs.ITEM_LATEX_BUCKET_ID = config.getItem( Strings.ITEM_LATEX_BUCKET, ItemIDs.ITEM_LATEX_BUCKET_DEFAULT_ID ).getInt( ItemIDs.ITEM_LATEX_BUCKET_DEFAULT_ID );
 			ItemIDs.ITEM_LIQUID_LATEX_ID = config.getItem( Strings.ITEM_LIQUID_LATEX, ItemIDs.ITEM_LIQUID_LATEX_DEFAULT_ID ).getInt( ItemIDs.ITEM_LIQUID_LATEX_DEFAULT_ID );
-			ItemIDs.ITEM_TESLA_MODULE_ID = config.getItem(Strings.ITEM_TESLA_MODULE, ItemIDs.ITEM_TESLA_MODULE_DEFAULT_ID).getInt(ItemIDs.ITEM_TESLA_MODULE_DEFAULT_ID);
+			ItemIDs.ITEM_TESLA_MODULE_ID = config.getItem( Strings.ITEM_TESLA_MODULE, ItemIDs.ITEM_TESLA_MODULE_DEFAULT_ID ).getInt( ItemIDs.ITEM_TESLA_MODULE_DEFAULT_ID );
 
 		} catch( Exception e ) {
 			EDLogger.warn( "Had trouble reading/writing to the configuration file." );

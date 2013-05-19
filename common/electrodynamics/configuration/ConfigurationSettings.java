@@ -72,6 +72,7 @@ public class ConfigurationSettings {
 	
 	/* Graphical settings */
 	public static int VOIDSTONE_RENDER_ID;
+	public static int STRUCTURE_BLOCK_RENDER_ID;
 	
 	public static boolean VOIDSTONE_FANCY_GRAPHICS;
 	public static final String VOIDSTONE_FANCY_GRAPHICS_NAME = "graphics.voidstone.fancy";
