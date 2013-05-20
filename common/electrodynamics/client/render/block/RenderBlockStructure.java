@@ -3,6 +3,7 @@ package electrodynamics.client.render.block;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import electrodynamics.configuration.ConfigurationSettings;
+import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.tileentity.TileStructure;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -13,21 +14,18 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderBlockStructure implements ISimpleBlockRenderingHandler {
 
-	public RenderBlockStructure() {
-		init();
-	}
-
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		GL11.glPushMatrix();
 		GL11.glDisable( GL11.GL_ALPHA_TEST );
 
-		setOrientation( renderer, ForgeDirection.NORTH );
-
+		int[] rotations = getRotations( metadata, ForgeDirection.NORTH.ordinal() );
+		if( rotations.length == 6 ) {
+			setRotationUV( renderer, rotations ); // set UV rotations
+		}
 		renderer.setRenderBoundsFromBlock( block );
 		BlockRenderer.drawFaces( renderer, block, metadata, true );
-
-		setOrientation( renderer, null );
+		setRotationUV( renderer, null ); // clear UV rotations
 
 		GL11.glEnable( GL11.GL_ALPHA_TEST );
 		GL11.glPopMatrix();
@@ -50,12 +48,12 @@ public class RenderBlockStructure implements ISimpleBlockRenderingHandler {
 			return true; // deal with invalid type later.
 
 		int metadata = world.getBlockMetadata( x, y, z );
-
-		if( sub == 0 ) // conveyor belt
-			renderRotatedBlock( renderer, block, x, y, z, ForgeDirection.getOrientation( metadata ) );
-		else
-			renderer.renderStandardBlock( block, x, y, z );
-
+		int[] rotations = getRotations( sub, metadata );
+		if( rotations.length == 6 ) {
+			setRotationUV( renderer, rotations ); // set UV rotations
+		}
+		renderer.renderStandardBlock( block, x, y, z );
+		setRotationUV( renderer, null ); // clear UV rotations
 		return true;
 	}
 
@@ -69,38 +67,20 @@ public class RenderBlockStructure implements ISimpleBlockRenderingHandler {
 		return ConfigurationSettings.STRUCTURE_BLOCK_RENDER_ID;
 	}
 
-
-	int[][] rotationMatrix = new int[6][6]; // metadata X bottom, top, east, west, north, south
-
-
-	void init() {
-		rotationMatrix[ForgeDirection.NORTH.ordinal()] = new int[] { 3, 0, 3, 0, 1, 2 };
-		rotationMatrix[ForgeDirection.SOUTH.ordinal()] = new int[] { 0, 3, 0, 3, 2, 0 }; // last pair is wrong.
-		rotationMatrix[ForgeDirection.WEST.ordinal()] = new int[] { 2, 2, 2, 1, 3, 0 };
-		rotationMatrix[ForgeDirection.EAST.ordinal()] = new int[] { 1, 1, 2, 2, 0, 3 }; // middle pair is wrong.
-	}
-
-	public void renderRotatedBlock(RenderBlocks renderer, Block block, int x, int y, int z, ForgeDirection front) {
-		setOrientation( renderer, front );
-		renderer.renderStandardBlock( block, x, y, z );
-		setOrientation( renderer, null );
+	private int[] getRotations(int subBlock, int orientation) {
+		return StructureComponent.values()[subBlock].getRotationMatrix()[orientation];
 	}
 
 	private void setRotationUV(RenderBlocks renderer, int[] rotations) {
+		if( rotations == null || rotations.length != 6 )
+			rotations = new int[6]; // on invalid input, clear UV rotations.
+
 		renderer.uvRotateBottom = rotations[0]; // -Y
 		renderer.uvRotateTop = rotations[1];    // +Y
 		renderer.uvRotateEast = rotations[2];   // -Z
 		renderer.uvRotateWest = rotations[3];   // +Z
 		renderer.uvRotateNorth = rotations[4];  // -X
 		renderer.uvRotateSouth = rotations[5];  // +X
-	}
-
-	public void setOrientation(RenderBlocks renderer, ForgeDirection orientation) {
-		if( orientation == null || orientation == ForgeDirection.UNKNOWN ) {
-			setRotationUV( renderer, new int[] { 0, 0, 0, 0, 0, 0 } );
-		} else {
-			setRotationUV( renderer, rotationMatrix[orientation.ordinal()] );
-		}
 	}
 
 }

@@ -1,22 +1,36 @@
 package electrodynamics.lib.block;
 
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.block.SubBlock;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityGeneric;
 import electrodynamics.tileentity.TileStructure;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public enum StructureComponent implements SubBlock {
 
 	CONVEYOR_BELT( Strings.STRUCTURE_COMPONENT_CONVEYOR_BELT ) {
+		int[][] rotations = new int[][] {
+				{ 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0 },
+				{ 3, 0, 3, 0, 1, 2 },
+				{ 0, 3, 0, 3, 2, 0 }, // last pair is wrong.
+				{ 2, 2, 2, 1, 3, 0 },
+				{ 1, 1, 2, 1, 0, 3 }, // middle pair is wrong.
+		};
+
 		@Override
 		public String[] getLocalTextureFiles() {
 			String top = "sinteringFurnace_conveyorTop", side = "sinteringFurnace_conveyorSide";
 			return new String[] { top, top, top, side, top, side };
+		}
+
+		@Override
+		public int[][] getRotationMatrix() {
+			return rotations;
 		}
 	},
 	FURNACE_FRAME( Strings.STRUCTURE_COMPONENT_FURNACE_FRAME ) {
@@ -86,6 +100,17 @@ public enum StructureComponent implements SubBlock {
 	@Override
 	public ItemStack toItemStack() {
 		return new ItemStack( EDBlocks.blockStructureComponent, 1, ordinal() );
+	}
+
+	/**
+	 * Gets the matrix that describes the texture rotations to be used for this component.
+	 * The order of the values matches the order of <code>ForgeDirection</code> enum constants.
+	 *
+	 * By default, an array of 6x0 is returned; which indicates that no rotation is necessary.
+	 * @return A 6x6 array of int.
+	 */
+	public int[][] getRotationMatrix() {
+		return new int[6][0];
 	}
 
 	private static String frame = "sinteringFurnace_frame";
