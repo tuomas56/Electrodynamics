@@ -133,6 +133,7 @@ public abstract class MultiBlockStructure {
 				tile = worldBlock.getTileEntity();
 				if( tile != null && tile instanceof TileStructure ) {
 					((TileStructure) tile).validateStructure( this, rotation, x, y, z );
+					((World)chunk.getBlockAccess()).markBlockForUpdate(x, y, z);
 				}
 			}
 		}

@@ -35,6 +35,11 @@ public class BlockStructure extends BlockGeneric {
 	}
 
 	@Override
+	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
+		scheduleUpdate(world, x, y, z, true);
+	}
+	
+	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int neighborID) {
 		Block block = Block.blocksList[neighborID];
 		if( block != null && block instanceof BlockStructure ) {
