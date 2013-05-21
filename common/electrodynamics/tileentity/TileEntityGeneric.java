@@ -52,29 +52,36 @@ public abstract class TileEntityGeneric extends TileEntity {
 		worldObj.markBlockForUpdate( xCoord, yCoord, zCoord ); // re-render.
 	}
 
-	public static final TileEntityGeneric createReplaceableTE() {
-		return new TileEntityGeneric() { // Needed to have the client synchronized.
+	public static TileEntityGeneric createReplaceableTE() {
+		return new TileGenericReplaceable();
+	}
 
-			@Override
-			public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
-				// Read from NBT
-				readFromNBT( pkt.customParam1 );
+	// Needed to have the client synchronized.
+	static class TileGenericReplaceable extends TileEntityGeneric {
 
-				// Replace this tile entity with the correct one.
-				int subBlock = getSubBlock();
-				TileEntityGeneric tileEntity = createReplacementTileEntity( subBlock );
-				tileEntity.readFromNBT( pkt.customParam1 );
-				worldObj.setBlockTileEntity( xCoord, yCoord, zCoord, tileEntity );
-				worldObj.markBlockForRenderUpdate( xCoord, yCoord, zCoord );
-			}
+		static {
+			TileEntity.addMapping( TileEntityGeneric.TileGenericReplaceable.class, "tile.replaceable.generic" );
+		}
 
-			private TileEntityGeneric createReplacementTileEntity(int subBlock) {
-				BlockGeneric block = (BlockGeneric) this.getBlockType();
-				SubBlock sub = block.getSubBlocksArray()[subBlock];
+		@Override
+		public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
+			// Read from NBT
+			readFromNBT( pkt.customParam1 );
 
-				return sub.createNewTileEntity( worldObj );
-			}
-		};
+			// Replace this tile entity with the correct one.
+			int subBlock = getSubBlock();
+			TileEntityGeneric tileEntity = createReplacementTileEntity( subBlock );
+			tileEntity.readFromNBT( pkt.customParam1 );
+			worldObj.setBlockTileEntity( xCoord, yCoord, zCoord, tileEntity );
+			worldObj.markBlockForRenderUpdate( xCoord, yCoord, zCoord );
+		}
+
+		private TileEntityGeneric createReplacementTileEntity(int subBlock) {
+			BlockGeneric block = (BlockGeneric) this.getBlockType();
+			SubBlock sub = block.getSubBlocksArray()[subBlock];
+
+			return sub.createNewTileEntity( worldObj );
+		}
 	}
 
 

@@ -21,7 +21,7 @@ public abstract class TileStructure extends TileEntityGeneric {
 	protected int rotation;
 
 	// stores the ID of the current MBS this TE is a part of
-	protected String mbsID = null;
+	protected String mbsID = "";
 
 	public void validateStructure(MultiBlockStructure multiBlockStructure, int rotation, int x, int y, int z) {
 		this.rotation = rotation;
@@ -34,7 +34,7 @@ public abstract class TileStructure extends TileEntityGeneric {
 
 	public void invalidateStructure() {
 		isValidStructure = false;
-		mbsID = null;
+		mbsID = "";
 	}
 
 	public boolean isValidStructure() {
@@ -56,7 +56,7 @@ public abstract class TileStructure extends TileEntityGeneric {
 	}
 
 	public MultiBlockStructure getMBS() {
-		if( mbsID != null ) {
+		if( !mbsID.equals( "" ) ) {
 			return MBSManager.getMultiBlockStructure( mbsID );
 		}
 		return null;
@@ -76,6 +76,8 @@ public abstract class TileStructure extends TileEntityGeneric {
 		targetX = tag.getInteger( "targetX" );
 		targetY = tag.getInteger( "targetY" );
 		targetZ = tag.getInteger( "targetZ" );
+		rotation = tag.getInteger( "rotation" );
+		mbsID = tag.getString( "mbsID" );
 	}
 
 	@Override
@@ -86,6 +88,8 @@ public abstract class TileStructure extends TileEntityGeneric {
 		tag.setInteger( "targetX", targetX );
 		tag.setInteger( "targetY", targetY );
 		tag.setInteger( "targetZ", targetZ );
+		tag.setInteger( "rotation", rotation );
+		tag.setString( "mbsID", mbsID );
 		nbt.setTag( "structure", tag );
 	}
 
