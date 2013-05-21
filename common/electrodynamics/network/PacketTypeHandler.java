@@ -18,6 +18,7 @@ import cpw.mods.fml.common.FMLLog;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.network.packet.PacketED;
 import electrodynamics.network.packet.PacketFX;
+import electrodynamics.network.packet.PacketInitializeMBS;
 import electrodynamics.network.packet.PacketJump;
 import electrodynamics.network.packet.PacketKeyPress;
 import electrodynamics.network.packet.PacketLightningFX;
@@ -31,7 +32,8 @@ public enum PacketTypeHandler {
 	JUMP(PacketJump.class),
 	LIGHTNING(PacketLightningFX.class),
 	FX(PacketFX.class),
-	SOUND(PacketSound.class);
+	SOUND(PacketSound.class),
+	MBS_INIT(PacketInitializeMBS.class);
 	
 	private Class<? extends PacketED> clazz;
 	

@@ -1,6 +1,5 @@
 package electrodynamics.client.render.block;
 
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.lib.block.StructureComponent;
@@ -17,17 +16,17 @@ public class RenderBlockStructure implements ISimpleBlockRenderingHandler {
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		GL11.glPushMatrix();
-		GL11.glDisable( GL11.GL_ALPHA_TEST );
+		GL11.glDisable(GL11.GL_ALPHA_TEST);
 
-		int[] rotations = getRotations( metadata, ForgeDirection.NORTH.ordinal() );
-		if( rotations.length == 6 ) {
-			setRotationUV( renderer, rotations ); // set UV rotations
+		int[] rotations = getRotations(metadata, ForgeDirection.NORTH.ordinal());
+		if (rotations.length == 6) {
+			setRotationUV(renderer, rotations); // set UV rotations
 		}
-		renderer.setRenderBoundsFromBlock( block );
-		BlockRenderer.drawFaces( renderer, block, metadata, true );
-		setRotationUV( renderer, null ); // clear UV rotations
+		renderer.setRenderBoundsFromBlock(block);
+		BlockRenderer.drawFaces(renderer, block, metadata, true);
+		setRotationUV(renderer, null); // clear UV rotations
 
-		GL11.glEnable( GL11.GL_ALPHA_TEST );
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glPopMatrix();
 	}
 
@@ -38,11 +37,9 @@ public class RenderBlockStructure implements ISimpleBlockRenderingHandler {
 			return true;
 
 		TileStructure tile = (TileStructure) tileEntity;
-		// re-enable this after the MBS rendering is done.
-//		if( tile.isValidStructure() ) {
-//			// let the TESR handle the rendering.
-//			return true;
-//		}
+		if( tile.isValidStructure()) {
+			return true;
+		}
 		int sub = tile.getSubBlock();
 		if( sub == -1 )
 			return true; // deal with invalid type later.
@@ -72,15 +69,15 @@ public class RenderBlockStructure implements ISimpleBlockRenderingHandler {
 	}
 
 	private void setRotationUV(RenderBlocks renderer, int[] rotations) {
-		if( rotations == null || rotations.length != 6 )
+		if (rotations == null || rotations.length != 6)
 			rotations = new int[6]; // on invalid input, clear UV rotations.
 
 		renderer.uvRotateBottom = rotations[0]; // -Y
-		renderer.uvRotateTop = rotations[1];    // +Y
-		renderer.uvRotateEast = rotations[2];   // -Z
-		renderer.uvRotateWest = rotations[3];   // +Z
-		renderer.uvRotateNorth = rotations[4];  // -X
-		renderer.uvRotateSouth = rotations[5];  // +X
+		renderer.uvRotateTop = rotations[1]; // +Y
+		renderer.uvRotateEast = rotations[2]; // -Z
+		renderer.uvRotateWest = rotations[3]; // +Z
+		renderer.uvRotateNorth = rotations[4]; // -X
+		renderer.uvRotateSouth = rotations[5]; // +X
 	}
 
 }

@@ -19,5 +19,6 @@ public class Models {
 	public static final String TEX_METAL_TRAY = TEXTURE_BASE + "/metalTray.png";
 	public static final String TEX_CHICKEN = TEXTURE_BASE + "/chicken.png";
 	public static final String TEX_CHICKEN_COOKED = TEXTURE_BASE + "/chickenCooked.png";
+	public static final String TEX_SINT_OVEN = TEXTURE_BASE + "/sinteringFurnace.png";
 	
 }

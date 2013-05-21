@@ -1,13 +1,17 @@
 package electrodynamics.mbs;
 
 
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import electrodynamics.core.EDLogger;
 import electrodynamics.mbs.util.WorldBlock;
 import electrodynamics.mbs.util.WorldChunk;
 import electrodynamics.mbs.util.WorldCoordinate;
+import electrodynamics.network.packet.PacketInitializeMBS;
 import electrodynamics.tileentity.TileStructure;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.tileentity.TileEntity;
 
 public abstract class MultiBlockStructure {
 
@@ -100,19 +104,22 @@ public abstract class MultiBlockStructure {
 	public void initialize(WorldChunk chunk, int rotation) {
 		WorldCoordinate coords = getCentralCoordinate( chunk, rotation );
 		WorldBlock block = chunk.getBlockAt( coords.x, coords.y, coords.z );
+		
 		if( block == null ) {
 			coords = coords.translate( 0, -1, 0 );
 			block = chunk.getBlockAt( coords.x, coords.y, coords.z );
 		}
-		if( block == null || block.getTileEntity() == null ) {
-			throw new IllegalStateException( "Can't assign central TileEntity for MBS." );
-		}
 
 		validateTileEntities( chunk, rotation, coords.x, coords.y, coords.z );
+		
+		if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+			PacketInitializeMBS packet = new PacketInitializeMBS(chunk);
+			PacketDispatcher.sendPacketToAllInDimension(packet.makePacket(), ((World)chunk.getBlockAccess()).provider.dimensionId);
+		}
 	}
 
 	protected WorldCoordinate getCentralCoordinate(WorldChunk chunk, int rotation) {
-		WorldCoordinate coords = new WorldCoordinate( chunk.getBlockAccess(), 0, 0, 0 );
+		WorldCoordinate coords = new WorldCoordinate( chunk.getBlockAccess(), chunk.getBaseCoordinates().x, chunk.getBaseCoordinates().y, chunk.getBaseCoordinates().z );
 		int centerX = chunk.getWidth() / 2;
 		int centerY = chunk.getHeight() / 2;
 		int centerZ = chunk.getDepth() / 2;
