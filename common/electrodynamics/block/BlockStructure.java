@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.api.tool.ITool;
 import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.core.CreativeTabED;
+import electrodynamics.item.EDItems;
 import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.tileentity.TileStructure;
 import electrodynamics.world.TickHandlerMBS;
@@ -36,7 +37,7 @@ public class BlockStructure extends BlockGeneric {
 
 	@Override
 	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
-		scheduleUpdate(world, x, y, z, true);
+		scheduleUpdate(world, x, y, z, false);
 	}
 	
 	@Override
@@ -53,7 +54,8 @@ public class BlockStructure extends BlockGeneric {
 		if( tile != null ) {
 			if( player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ITool ) {
 				player.sendChatToPlayer( tile.isValidStructure() ? "Valid structure!" : "Invalid structure." );
-				scheduleUpdate( world, x, y, z, true );
+				if( player.getHeldItem().itemID != EDItems.itemSledgeHammer.itemID )
+					scheduleUpdate( world, x, y, z, true );
 			}
 			return tile.onBlockActivatedBy( player, side, xOff, yOff, zOff );
 		}
