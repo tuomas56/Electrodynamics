@@ -44,23 +44,27 @@ public class BlockTreetap extends BlockContainer {
 		TileEntityTreetap tile = (TileEntityTreetap) world.getBlockTileEntity(x, y, z);
 		
 		if (tile != null && tile instanceof TileEntityTreetap) {
-			if (!tile.hasBucket) {
-				if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Item.bucketEmpty && !tile.hasBucket) {
+			if(player.getCurrentEquippedItem() != null)
+			{
+				if(!tile.hasBucket && player.getCurrentEquippedItem().getItem() == Item.bucketEmpty)
+				{
 					tile.hasBucket = true;
 					tile.dirty = true;
 					--player.getCurrentEquippedItem().stackSize;
 					
 					return true;
-				}
-			} else {
-				if (tile.liquidAmount == 0 || tile.liquidAmount == 1000) {
+				}	
+			}
+			else
+			{
+				if(tile.hasBucket && (tile.liquidAmount == 0 || tile.liquidAmount == 1000))
+				{
 					tile.dropBucket(player);
+					return true;
 				}
-				
-				return true;
 			}
 		}
-		
+			
 		return false;
 	}
 	
