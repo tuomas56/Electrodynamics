@@ -111,7 +111,7 @@ public class SinteringFurnace extends MultiBlockStructure {
 				{ 'w', 'w', 'w' },
 				{ 'g', 'v', 'g' },
 				{ 'g', 'v', 'g' },
-				{ 'w', 'w', 'w' },
+				{ 'q', 'v', 'q' },
 				{ 'w', 'w', 'w' },
 				{ '-', '-', '-' }
 		} );
