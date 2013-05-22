@@ -22,8 +22,11 @@ public class RecipeManagerSinteringOven {
 	public RecipeSinteringOven getRecipe(List<ItemStack> input) {
 		RecipeSinteringOven recipe = getOvenRecipe(input);
 		
-		if (recipe == null && trimItemStackList(input).size() == 1) {
-			recipe = getFurnaceRecipe(input.get(0));
+		if (recipe == null) {
+			input = trimItemStackList(input);
+			if (input.size() == 1) {
+				recipe = getFurnaceRecipe(input.get(0));
+			}
 		}
 		
 		return recipe;
@@ -42,6 +45,8 @@ public class RecipeManagerSinteringOven {
 	}
 	
 	public RecipeSinteringOven getFurnaceRecipe(ItemStack stack) {
+		if (stack == null) return null;
+
 		for (Entry<List<Integer>, ItemStack> recipe : FurnaceRecipes.smelting().getMetaSmeltingList().entrySet()) {
 			ItemStack input = new ItemStack(recipe.getKey().get(0), 1, recipe.getKey().get(1));
 			
