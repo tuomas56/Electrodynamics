@@ -179,9 +179,6 @@ public class EDModuleWorld extends EDModule {
 	
 	@Override
 	public void postInit() {
-		// Might need some side-sensitivity for these tick handlers.
-		TickRegistry.registerTickHandler(TickHandlerMBS.instance(), Side.SERVER);
-		TickRegistry.registerTickHandler(TickHandlerMBS.instance(), Side.CLIENT);
 	}
 
 }

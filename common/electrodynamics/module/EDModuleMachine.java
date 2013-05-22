@@ -2,6 +2,8 @@ package electrodynamics.module;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 import electrodynamics.block.*;
 import electrodynamics.block.item.ItemBlockMachine;
 import electrodynamics.block.item.ItemBlockStorage;
@@ -29,6 +31,7 @@ import electrodynamics.recipe.RecipeManagerSieve;
 import electrodynamics.recipe.RecipeManagerSinteringOven;
 import electrodynamics.recipe.RecipeManagerTable;
 import electrodynamics.tileentity.*;
+import electrodynamics.world.TickHandlerMBS;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -182,6 +185,11 @@ public class EDModuleMachine extends EDModule {
 
 	public EnumSet<Module> dependencies() {
 		return EnumSet.of(Module.CORE, Module.WORLD);
+	}
+
+	public void postInit() {
+		// Register TickHandler for MBS validation.
+		TickRegistry.registerTickHandler(TickHandlerMBS.instance(), Side.SERVER);
 	}
 
 }
