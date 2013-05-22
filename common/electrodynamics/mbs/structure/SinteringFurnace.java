@@ -121,7 +121,7 @@ public class SinteringFurnace extends MultiBlockStructure {
 		mappings.put( 'w', matchAny( FURNACE_FRAME ) ); // machine frame
 		mappings.put( 'b', matchAny( CONVEYOR_BELT ) ); // conveyor belt
 		mappings.put( 'x', matchAny( FURNACE_FRAME, FURNACE_HEATER, FURNACE_VALVE ) ); // heater, valve
-		mappings.put( 'v', matchAny( FURNACE_VENT ) ); // vent
+		mappings.put( 'v', matchAny( FURNACE_FRAME, FURNACE_VENT ) ); // vent
 		mappings.put( 'g', matchAny( FURNACE_FRAME, FURNACE_GAUGE ) ); // gauge
 
 		return compiler.compile( mappings );
