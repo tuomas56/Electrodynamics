@@ -53,11 +53,12 @@ public class BlockStructure extends BlockGeneric {
 		TileStructure tile = (TileStructure) world.getBlockTileEntity( x, y, z );
 		if( tile != null ) {
 			if( player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ITool ) {
-				if( player.getHeldItem().itemID != EDItems.itemSledgeHammer.itemID )
+				if( player.getHeldItem().itemID != EDItems.itemSledgeHammer.itemID ) {
 					scheduleUpdate( world, x, y, z, true );
-			}
-			if( !world.isRemote ) {
-				player.sendChatToPlayer( tile.isValidStructure() ? "Valid structure!" : "Invalid structure." );
+					if( !world.isRemote ) {
+						player.sendChatToPlayer( tile.isValidStructure() ? "Valid structure!" : "Invalid structure." );
+					}
+				}
 			}
 			return tile.onBlockActivatedBy( player, side, xOff, yOff, zOff );
 		}
