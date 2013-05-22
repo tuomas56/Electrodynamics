@@ -16,8 +16,6 @@ import net.minecraftforge.liquids.LiquidStack;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
 import electrodynamics.block.BlockDecorative;
 import electrodynamics.block.BlockLithiumClay;
 import electrodynamics.block.BlockOre;
@@ -30,6 +28,7 @@ import electrodynamics.block.EDBlocks;
 import electrodynamics.block.item.ItemBlockDecorative;
 import electrodynamics.block.item.ItemBlockOre;
 import electrodynamics.block.item.ItemBlockTreetap;
+import electrodynamics.block.item.ItemBlockWormseed;
 import electrodynamics.client.render.block.RenderBlockOre;
 import electrodynamics.client.render.block.RenderBlockStructure;
 import electrodynamics.client.render.tileentity.RenderTreetap;
@@ -46,7 +45,6 @@ import electrodynamics.lib.item.Component;
 import electrodynamics.lib.item.ItemIDs;
 import electrodynamics.tileentity.TileEntityTreetap;
 import electrodynamics.util.BiomeHelper;
-import electrodynamics.world.TickHandlerMBS;
 import electrodynamics.world.gen.WorldGenBlock;
 import electrodynamics.world.gen.WorldGenClay;
 import electrodynamics.world.gen.WorldGenLimestone;
@@ -77,7 +75,7 @@ public class EDModuleWorld extends EDModule {
 		}
 
 		EDBlocks.blockWormseed = new BlockWormseed( BlockIDs.BLOCK_WORMSEED_ID ).setUnlocalizedName( Strings.BLOCK_WORMSEED );
-		GameRegistry.registerBlock( EDBlocks.blockWormseed, Strings.BLOCK_WORMSEED );
+		GameRegistry.registerBlock( EDBlocks.blockWormseed, ItemBlockWormseed.class, Strings.BLOCK_WORMSEED );
 		EDLanguage.getInstance().registerBlock(EDBlocks.blockWormseed);
 
 		EDBlocks.blockLithiumClay = new BlockLithiumClay(BlockIDs.BLOCK_LITHIUM_CLAY_ID).setUnlocalizedName(Strings.BLOCK_LITHIUM_CLAY);
