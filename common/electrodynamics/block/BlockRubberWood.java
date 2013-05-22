@@ -26,6 +26,8 @@ public class BlockRubberWood extends Block {
 	public BlockRubberWood(int id) {
 		super(id, Material.wood);
 		setTickRandomly(true);
+		setHardness(2.0F);
+		setStepSound(soundWoodFootstep);
 		setCreativeTab(CreativeTabED.resource);
 	}
 	

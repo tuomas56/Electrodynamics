@@ -22,6 +22,9 @@ public class BlockRubberLeaves extends BlockLeaves {
 
 	public BlockRubberLeaves(int id) {
 		super(id);
+		setHardness(0.2F);
+		setLightOpacity(1);
+		setStepSound(soundGrassFootstep);
 		setCreativeTab(CreativeTabED.resource);
 	}
 
