@@ -28,7 +28,7 @@ public class RenderTreetap extends TileEntitySpecialRenderer {
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_LIGHTING);
 		
-		GL11.glTranslated(x + 0.5, y + 0.65, z + 0.69);
+		GL11.glTranslated(x + 0.5, y + 0.7, z + 0.69);
 		GL11.glRotatef(180, 1, 0, 0);
 		
 		switch(tile.rotation) {
@@ -73,7 +73,7 @@ public class RenderTreetap extends TileEntitySpecialRenderer {
 	
 	public void renderBucket(TileEntityTreetap tile) {
 		GL11.glPushMatrix();
-		GL11.glTranslated(0, -0.80, 0);
+		GL11.glTranslated(0, -0.84, 0);
 		GL11.glRotatef(90, 0, 1, 0);
 		
 		String texture = (tile.liquidAmount == 1000 ? Models.TEX_BUCKET_FULL : Models.TEX_BUCKET);
