@@ -103,7 +103,7 @@ public class TileEntityTable extends TileEntity {
 	}
 	
 	public boolean hasRecipe(ItemStack tool) {
-		if (type == 0 && displayedItem.getItem().itemID == Block.stoneSingleSlab.blockID) {
+		if (type == 0 && displayedItem != null && displayedItem.getItem().itemID == Block.stoneSingleSlab.blockID) {
 			return true;
 		}
 		
