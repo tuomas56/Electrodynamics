@@ -52,9 +52,8 @@ public class RenderTreetap extends TileEntitySpecialRenderer {
 			}
 			default: break;
 		}
-		
-		String texture = (tile.liquidAmount == 1000 ? Models.TEX_BUCKET_FULL : Models.TEX_BUCKET);
-		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+
+		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_TREETAP);
 		modelTreetap.render(0.0625F);
 		
 		if (tile.hasBucket) {
@@ -77,8 +76,9 @@ public class RenderTreetap extends TileEntitySpecialRenderer {
 		GL11.glTranslated(0, -0.80, 0);
 		GL11.glRotatef(90, 0, 1, 0);
 		
-		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_BUCKET_FULL);
-		modelBucket.render(0.0625F);;
+		String texture = (tile.liquidAmount == 1000 ? Models.TEX_BUCKET_FULL : Models.TEX_BUCKET);
+		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+		modelBucket.render(0.0625F);
 		GL11.glPopMatrix();
 	}
 	
