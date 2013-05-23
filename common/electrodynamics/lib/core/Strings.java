@@ -31,7 +31,7 @@ public class Strings {
 	public static final String BLOCK_LASER_EMITTER = "laser_emitter.name";
 	public static final String BLOCK_MACHINE = "machine.name";
 	public static final String BLOCK_DECORATIVE = "decorative.name";
-	public static final String BLOCK_WORMSEED = "wormseed.name";
+	public static final String BLOCK_WORMWOOD = "wormwood.name";
 	public static final String BLOCK_GAS = "gas.name";
 	public static final String BLOCK_STORAGE = "storage.name";
 	public static final String BLOCK_LITHIUM_CLAY = "clayLithium.name";

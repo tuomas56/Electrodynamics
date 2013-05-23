@@ -23,12 +23,12 @@ import electrodynamics.block.BlockRubberLeaves;
 import electrodynamics.block.BlockRubberSapling;
 import electrodynamics.block.BlockRubberWood;
 import electrodynamics.block.BlockTreetap;
-import electrodynamics.block.BlockWormseed;
+import electrodynamics.block.BlockWormwood;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.block.item.ItemBlockDecorative;
 import electrodynamics.block.item.ItemBlockOre;
 import electrodynamics.block.item.ItemBlockTreetap;
-import electrodynamics.block.item.ItemBlockWormseed;
+import electrodynamics.block.item.ItemBlockWormwood;
 import electrodynamics.client.render.block.RenderBlockOre;
 import electrodynamics.client.render.block.RenderBlockStructure;
 import electrodynamics.client.render.tileentity.RenderTreetap;
@@ -74,9 +74,9 @@ public class EDModuleWorld extends EDModule {
 			EDLanguage.getInstance().registerItemStack(dec.toItemStack(), dec.unlocalizedName);
 		}
 
-		EDBlocks.blockWormseed = new BlockWormseed( BlockIDs.BLOCK_WORMSEED_ID ).setUnlocalizedName( Strings.BLOCK_WORMSEED );
-		GameRegistry.registerBlock( EDBlocks.blockWormseed, ItemBlockWormseed.class, Strings.BLOCK_WORMSEED );
-		EDLanguage.getInstance().registerBlock(EDBlocks.blockWormseed);
+		EDBlocks.blockWormwood = new BlockWormwood( BlockIDs.BLOCK_WORMWOOD_ID ).setUnlocalizedName( Strings.BLOCK_WORMWOOD );
+		GameRegistry.registerBlock( EDBlocks.blockWormwood, ItemBlockWormwood.class, Strings.BLOCK_WORMWOOD );
+		EDLanguage.getInstance().registerBlock(EDBlocks.blockWormwood);
 
 		EDBlocks.blockLithiumClay = new BlockLithiumClay(BlockIDs.BLOCK_LITHIUM_CLAY_ID).setUnlocalizedName(Strings.BLOCK_LITHIUM_CLAY);
 		GameRegistry.registerBlock(EDBlocks.blockLithiumClay, Strings.BLOCK_LITHIUM_CLAY);
@@ -123,7 +123,7 @@ public class EDModuleWorld extends EDModule {
 		FurnaceRecipes.smelting().addSmelting(ItemIDs.ITEM_COMPONENT_ID + 256, Component.WORMWOOD_LEAF.ordinal(), Component.SAP.toItemStack(), 0F);
 		
 		GameRegistry.addRecipe(new ItemStack(EDBlocks.blockDecorative, 4, 1), "XX", "XX", 'X', new ItemStack(EDBlocks.blockDecorative, 1, 0));
-		GameRegistry.addRecipe(new ItemStack(EDBlocks.blockDecorative, 4, 3), "XX", "XX", 'X', new ItemStack(EDBlocks.blockDecorative, 1, 1));
+		GameRegistry.addRecipe(new ItemStack(EDBlocks.blockDecorative, 4, 2), "XX", "XX", 'X', new ItemStack(EDBlocks.blockDecorative, 1, 1));
 		
 		GameRegistry.addRecipe(new ItemStack(Item.silk), "TTT", 'T', Component.TWINE.toItemStack());
 		
@@ -159,9 +159,9 @@ public class EDModuleWorld extends EDModule {
 				}
 			}
 		});
-		// Wormseed
-		GameRegistry.registerWorldGenerator(new WorldGenPlant(BlockIDs.BLOCK_WORMSEED_ID, 0, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MOUNTAIN)));
-		GameRegistry.registerWorldGenerator(new WorldGenPlant(BlockIDs.BLOCK_WORMSEED_ID, 1, BiomeHelper.getBiomesForTypes(Type.DESERT, Type.WASTELAND)));
+		// Wormwood
+		GameRegistry.registerWorldGenerator(new WorldGenPlant(BlockIDs.BLOCK_WORMWOOD_ID, 0, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MOUNTAIN)));
+		GameRegistry.registerWorldGenerator(new WorldGenPlant(BlockIDs.BLOCK_WORMWOOD_ID, 1, BiomeHelper.getBiomesForTypes(Type.DESERT, Type.WASTELAND)));
 	
 		// Rubber Trees
 		GameRegistry.registerWorldGenerator(new WorldGenRubberTree(10, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.JUNGLE)));

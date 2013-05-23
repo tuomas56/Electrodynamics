@@ -4,9 +4,9 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import electrodynamics.lib.core.Strings;
 
-public class ItemBlockWormseed extends ItemBlock {
+public class ItemBlockWormwood extends ItemBlock {
 	
-	public ItemBlockWormseed(int i) {
+	public ItemBlockWormwood(int i) {
 		super(i);
 		setHasSubtypes(true);
 	}
@@ -16,7 +16,7 @@ public class ItemBlockWormseed extends ItemBlock {
 	}
 
 	public String getUnlocalizedName(ItemStack itemstack) {
-		return Strings.BLOCK_WORMSEED;
+		return Strings.BLOCK_WORMWOOD;
 	}
 	
 }

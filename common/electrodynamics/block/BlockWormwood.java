@@ -18,14 +18,14 @@ import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.item.Component;
 import electrodynamics.lib.item.ItemIDs;
 
-public class BlockWormseed extends BlockFlower {
+public class BlockWormwood extends BlockFlower {
 
 	public static final int NORMAL = 0;
 	public static final int DRIED = 1;
 
 	private Icon[] textures;
 
-	public BlockWormseed(int id) {
+	public BlockWormwood(int id) {
 		super(id);
 		setCreativeTab(CreativeTabED.resource);
 	}

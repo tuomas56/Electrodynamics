@@ -27,8 +27,8 @@ public class BlockIDs {
 	public static final int BLOCK_DECORATIVE_DEFAULT_ID = 505;
 
 	/* blockWormseed */
-	public static int BLOCK_WORMSEED_ID;
-	public static final int BLOCK_WORMSEED_DEFAULT_ID = 506;
+	public static int BLOCK_WORMWOOD_ID;
+	public static final int BLOCK_WORMWOOD_DEFAULT_ID = 506;
 
 	/* blockLithiumClay */
 	public static int BLOCK_LITHIUM_CLAY_ID;

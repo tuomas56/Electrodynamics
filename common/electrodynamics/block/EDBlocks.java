@@ -10,7 +10,7 @@ public class EDBlocks {
 	public static Block blockTable;
 	public static Block blockLaserEmitter;
 	public static Block blockDecorative;
-	public static Block blockWormseed;
+	public static Block blockWormwood;
 	public static Block blockLithiumClay;
 	public static Block blockGas;
 	public static Block blockStorage;
