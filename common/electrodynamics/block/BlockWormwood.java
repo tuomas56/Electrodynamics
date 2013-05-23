@@ -31,13 +31,8 @@ public class BlockWormwood extends BlockFlower {
 	}
 
 	@Override
-	public Icon getIcon(int meta, int side) {
-		// Fix for block-break particles causing AOBE
-		if (meta < 2) {
-			return textures[meta];
-		}
-
-		return textures[0];
+	public Icon getIcon(int side, int meta) {
+		return textures[meta];
 	}
 
 	@Override
@@ -66,7 +61,7 @@ public class BlockWormwood extends BlockFlower {
 		
 		return ret;
 	}
-
+	
 	public void registerIcons(IconRegister icon) {
 		textures = new Icon[2];
 
