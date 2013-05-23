@@ -10,9 +10,6 @@ import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 
 public class ItemBlockWormwood extends ItemBlock {
-	
-	public static final int NORMAL = 0;
-	public static final int DRIED = 1;
 
 	public Icon[] textures;
 	

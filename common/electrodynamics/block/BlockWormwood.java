@@ -61,7 +61,7 @@ public class BlockWormwood extends BlockFlower {
 		
 		return ret;
 	}
-	
+
 	public void registerIcons(IconRegister icon) {
 		textures = new Icon[2];
 
