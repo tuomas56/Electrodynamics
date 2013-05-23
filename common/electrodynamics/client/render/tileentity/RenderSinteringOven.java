@@ -106,25 +106,26 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 					GL11.glRotatef(-90, 0, 0, 1);
 					GL11.glTranslated(0, -1.4, 0.25);
 					this.modelChicken.render(0.0625F);
+					return;
 				}
-			} else {
-				if (!Minecraft.getMinecraft().gameSettings.fancyGraphics) {
-					GL11.glRotatef(-180, 0, 1, 0);
-					GL11.glRotatef(Minecraft.getMinecraft().renderViewEntity.rotationYaw, 0, 1, 0);
-				}
-				
-				if (stack.getItem() instanceof ItemBlock) {
-					GL11.glRotatef(-90, 1, 0, 0);
-					GL11.glRotatef(180, 1, 0, 0);
-					GL11.glRotatef(-90, 0, 1, 0);
-					GL11.glTranslated(-0.23, 0, 0);
-				}
-				
-				EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, stack);
-				entityitem.getEntityItem().stackSize = 1;
-				entityitem.hoverStart = 0.0F;
-		        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
 			}
+			
+			if (!Minecraft.getMinecraft().gameSettings.fancyGraphics) {
+				GL11.glRotatef(-180, 0, 1, 0);
+				GL11.glRotatef(Minecraft.getMinecraft().renderViewEntity.rotationYaw, 0, 1, 0);
+			}
+				
+			if (stack.getItem() instanceof ItemBlock) {
+				GL11.glRotatef(-90, 1, 0, 0);
+				GL11.glRotatef(180, 1, 0, 0);
+				GL11.glRotatef(-90, 0, 1, 0);
+				GL11.glTranslated(-0.23, 0, 0);
+			}
+				
+			EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, stack);
+			entityitem.getEntityItem().stackSize = 1;
+			entityitem.hoverStart = 0.0F;
+			RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
 		}
 	}
 	
