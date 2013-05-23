@@ -76,7 +76,6 @@ public class WorldGenRubberTree implements IWorldGenerator {
 						Block block = Block.blocksList[world.getBlockId(a, y + i, b)];
 						
 						if ((gen) && (block == null || block.canBeReplacedByLeaves(world, a, y + i, b))) {
-							
 							world.setBlock(a, y + i, b, EDBlocks.blockRubberLeaves.blockID, 0, 7);
 						}
 					}

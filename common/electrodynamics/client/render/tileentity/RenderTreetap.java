@@ -115,6 +115,12 @@ public class RenderTreetap extends TileEntitySpecialRenderer {
 			
 			bindTextureByName(LiquidRenderer.getLiquidSheet(liquid));
 			GL11.glPushMatrix();
+			
+			GL11.glEnable(GL11.GL_CULL_FACE);
+			GL11.glDisable(GL11.GL_LIGHTING);
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			
 			GL11.glRotatef(180, 1, 0, 0);
 			GL11.glTranslated(-0.1875, -0.625, -0.1875);
 			GL11.glCallList(displayList[Math.round(((float)amount / (float)maxCapacity) * 30)]);
