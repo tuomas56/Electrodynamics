@@ -30,4 +30,4 @@ Chickenbones
 
 It's better than a Wiki.
 
-[electrodynamicsmod.com](http://electrodynamicsmod.com/ "Electrodynamics")
+[www.electrodynamicsmod.com](http://electrodynamicsmod.com/ "Electrodynamics")
