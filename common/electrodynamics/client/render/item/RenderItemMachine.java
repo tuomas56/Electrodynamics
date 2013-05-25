@@ -37,9 +37,14 @@ public class RenderItemMachine implements IItemRenderer {
 					renderFurnace(0F, 1F, 0F);
 					break;
 				}
-				
+
 				case EQUIPPED: {
 					renderFurnace(1.0F, 1.0F, 1.0F);
+					break;
+				}
+
+				case EQUIPPED_FIRST_PERSON: {
+					renderFurnace(1.0F, 2.0F, 1.0F);
 					break;
 				}
 				
@@ -61,7 +66,12 @@ public class RenderItemMachine implements IItemRenderer {
 					renderSieve(1.0F, 1.0F, 1.0F);
 					break;
 				}
-				
+
+				case EQUIPPED_FIRST_PERSON: {
+					renderSieve(1.0F, 2.0F, 1.0F);
+					break;
+				}
+
 				case INVENTORY: {
 					renderSieve(0F, 1F, 0F);
 					break;

@@ -44,6 +44,11 @@ public class RenderItemTable implements IItemRenderer {
 				renderTable((byte) item.getItemDamage(), 1.0F, 1.0F, 1.0F);
 				break;
 			}
+
+			case EQUIPPED_FIRST_PERSON: {
+				renderTable((byte) item.getItemDamage(), 1.0F, 2.0F, 1.0F);
+				break;
+			}
 			
 			case INVENTORY: {
 				renderTable((byte) item.getItemDamage(), 0F, 1F, 0F);
