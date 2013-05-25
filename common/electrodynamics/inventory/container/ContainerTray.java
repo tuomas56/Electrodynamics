@@ -145,6 +145,7 @@ public class ContainerTray extends Container {
 
 				if( slotStack == null ) {
 					int max = Math.min( itemStack.getMaxStackSize(), slot.getSlotStackLimit() );
+					max = Math.min( itemStack.stackSize, max );
 					slot.putStack( itemStack.copy() );
 					slot.onSlotChanged();
 					itemStack.stackSize -= max;
