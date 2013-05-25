@@ -90,5 +90,82 @@ public class ContainerTray extends Container {
 
 		return itemstack;
 	}
+
+	@Override
+	protected boolean mergeItemStack(ItemStack itemStack, int slotMin, int slotMax, boolean reverse) {
+		boolean returnValue = false;
+		int i = slotMin;
+
+		if( reverse ) {
+			i = slotMax - 1;
+		}
+
+		Slot slot;
+		if( itemStack.isStackable() ) {
+			while( itemStack.stackSize > 0 && (!reverse && i < slotMax || reverse && i >= slotMin) ) {
+				slot = (Slot) this.inventorySlots.get( i );
+				ItemStack slotStack = slot.getStack();
+
+				if( slotStack != null && slotStack.itemID == itemStack.itemID && (!itemStack.getHasSubtypes()
+						|| itemStack.getItemDamage() == slotStack.getItemDamage()) && ItemStack.areItemStackTagsEqual( itemStack, slotStack ) ) {
+					int total = slotStack.stackSize + itemStack.stackSize;
+					int max = Math.min( itemStack.getMaxStackSize(), slot.getSlotStackLimit() );
+
+					if( total <= max ) {
+						itemStack.stackSize = 0;
+						slotStack.stackSize = total;
+						slot.onSlotChanged();
+						returnValue = true;
+					} else if( slotStack.stackSize < max ) {
+						itemStack.stackSize -= max - slotStack.stackSize;
+						slotStack.stackSize = max;
+						slot.onSlotChanged();
+						returnValue = true;
+					}
+				}
+
+				if( reverse ) {
+					--i;
+				} else {
+					++i;
+				}
+			}
+		}
+
+		if( itemStack.stackSize > 0 ) {
+			if( reverse ) {
+				i = slotMax - 1;
+			} else {
+				i = slotMin;
+			}
+
+			while( !reverse && i < slotMax || reverse && i >= slotMin ) {
+				slot = (Slot) this.inventorySlots.get( i );
+				ItemStack slotStack = slot.getStack();
+
+				if( slotStack == null ) {
+					int max = Math.min( itemStack.getMaxStackSize(), slot.getSlotStackLimit() );
+					slot.putStack( itemStack.copy() );
+					slot.onSlotChanged();
+					itemStack.stackSize -= max;
+					return true;
+				}
+
+				if( reverse ) {
+					--i;
+				} else {
+					++i;
+				}
+			}
+		}
+
+		return returnValue;
+	}
+
+	@Override
+	protected void retrySlotClick(int slotID, int mouseButton, boolean shiftDown, EntityPlayer player) {
+		if( slotID >= 9 && mouseButton == 1 ) return;
+		super.retrySlotClick( slotID, mouseButton, shiftDown, player );
+	}
 	
 }
