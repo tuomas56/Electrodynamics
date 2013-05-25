@@ -24,9 +24,16 @@ public class RecipeManagerSinteringOven {
 		
 		if (recipe == null) {
 			input = trimItemStackList(input);
-			if (input.size() == 1) {
-				recipe = getFurnaceRecipe(input.get(0));
+			int processingTime = 0;
+			List<ItemStack> output = new ArrayList<ItemStack>();
+			for( ItemStack item : input ) {
+				recipe = getFurnaceRecipe( item );
+				if( recipe != null ) {
+					output.addAll( recipe.itemOutputs );
+					processingTime += recipe.processingTime;
+				}
 			}
+			recipe = new RecipeSinteringOven( input, output, processingTime );
 		}
 		
 		return recipe;
