@@ -8,9 +8,11 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -47,6 +49,23 @@ public class BlockTable extends BlockContainer {
 		return -1;
 	}
 
+	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z) {
+		TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
+
+		if (table != null) {
+			ItemStack itemstack = table.displayedItem;
+
+			if (itemstack != null) {
+				if (itemstack.getItem() instanceof ItemBlock) {
+					return Block.lightValue[itemstack.getItemDamage()];
+				}
+			}
+		}
+		
+		return super.getLightValue(world, x, y, z);
+	}
+	
 	public void breakBlock(World world, int x, int y, int z, int i1, int i2) {
 		TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
 
