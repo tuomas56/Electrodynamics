@@ -36,33 +36,33 @@ public class ConfigurationSettings {
 	public static final String NICKEL_SPAWN_RARITY_CONFIGNAME = "nickle.spawn_rarity";
 	public static final int NICKEL_SPAWN_RARITY_DEFAULT = 8;
 
-	/* Tesla armor ability settings */
+	/* ElMag armor ability settings */
 	public static double MAGNETIC_RANGE;
-	public static final String MAGNETIC_RANGE_CONFIGNAME = "tesla_armor.range";
+	public static final String MAGNETIC_RANGE_CONFIGNAME = "elmag_armor.range";
 	public static final double MAGNETIC_RANGE_DEFAULT = 3D;
 	
 	public static double MAGNETIC_ATTRACTION_SPEED;
-	public static final String MAGNETIC_ATTRACTION_SPEED_CONFIGNAME = "tesla_armor.speed";
+	public static final String MAGNETIC_ATTRACTION_SPEED_CONFIGNAME = "elmag_armor.speed";
 	public static final double MAGNETIC_ATTRACTION_SPEED_DEFAULT = 0.8D;
 	
 	public static double THERMAL_VIEW_RANGE;
-	public static final String THERMAL_VIEW_RANGE_CONFIGNAME = "tesla_armor.thermal_view_range";
+	public static final String THERMAL_VIEW_RANGE_CONFIGNAME = "elmag_armor.thermal_view_range";
 	public static final double THERMAL_VIEW_RANGE_DEFAULT = 16D;
 	
 	/* Key Bindings */
 	public static int MAGNET_TOGGLE;
-	public static final String MAGNET_TOGGLE_NAME = "tesla_armor.magnet.toggle";
-	public static final String MAGNET_TOGGLE_CONFIGNAME = "tesla_armor.magnet.toggle";
+	public static final String MAGNET_TOGGLE_NAME = "elmag_armor.magnet.toggle";
+	public static final String MAGNET_TOGGLE_CONFIGNAME = "elmag_armor.magnet.toggle";
 	public static final int MAGNET_TOGGLE_DEFAULT = 34;
 	
 	public static int THERMAL_VIEW_TOGGLE;
-	public static final String THERMAL_VIEW_TOGGLE_NAME = "tesla_armor.thermal_view.toggle";
-	public static final String THERMAL_VIEW_TOGGLE_CONFIGNAME = "tesla_armor.thermal_view.toggle";
+	public static final String THERMAL_VIEW_TOGGLE_NAME = "elmag_armor.thermal_view.toggle";
+	public static final String THERMAL_VIEW_TOGGLE_CONFIGNAME = "elmag_armor.thermal_view.toggle";
 	public static final int THERMAL_VIEW_TOGGLE_DEFAULT = 35;
 	
 	public static int HOVER_MODE_TOGGLE;
-	public static final String HOVER_MODE_TOGGLE_NAME = "tesla_armor.jump_mode.toggle";
-	public static final String HOVER_MODE_TOGGLE_CONFIGNAME = "tesla_armor.jump_mode.toggle";
+	public static final String HOVER_MODE_TOGGLE_NAME = "elmag_armor.jump_mode.toggle";
+	public static final String HOVER_MODE_TOGGLE_CONFIGNAME = "elmag_armor.jump_mode.toggle";
 	public static final int HOVER_MODE_TOGGLE_DEFAULT = 36;
 	
 	/* Rubber Settings */

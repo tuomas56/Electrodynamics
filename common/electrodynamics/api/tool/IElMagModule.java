@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public interface ITeslaModule {
+public interface IElMagModule {
 
 	/** Name of module */
 	public String getModuleName(ItemStack stack);

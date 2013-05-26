@@ -1,11 +1,11 @@
-package electrodynamics.item.tesla.logic;
+package electrodynamics.item.elmag.logic;
 
 import java.util.List;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
-import electrodynamics.api.tool.ITeslaLogic;
+import electrodynamics.api.tool.IElMagLogic;
 import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.network.PacketTypeHandler;
 import electrodynamics.network.packet.PacketLightningFX;
@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet28EntityVelocity;
 import net.minecraft.world.World;
 
-public class TeslaLogicMagneticPull implements ITeslaLogic {
+public class ElMagLogicMagneticPull implements IElMagLogic {
 
 	public int cooldown = 0;
 	

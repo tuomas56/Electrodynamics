@@ -1,8 +1,8 @@
-package electrodynamics.item.tesla;
+package electrodynamics.item.elmag;
 
 import java.util.List;
 
-import electrodynamics.api.tool.ITeslaModule;
+import electrodynamics.api.tool.IElMagModule;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.core.handler.GuiHandler;
 import electrodynamics.interfaces.IInventoryItem;
@@ -17,13 +17,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class ItemTeslaArmor extends ItemArmor implements IInventoryItem {
+public class ItemElMagArmor extends ItemArmor implements IInventoryItem {
 
 	public ArmorType armorType;
 	
 	public Icon texture;
 	
-	public ItemTeslaArmor(int id, int armorType) {
+	public ItemElMagArmor(int id, int armorType) {
 		super(id, EnumArmorMaterial.IRON, 2, armorType);
 		setCreativeTab(CreativeTabED.tool);
 		setMaxStackSize(1);
@@ -38,7 +38,7 @@ public class ItemTeslaArmor extends ItemArmor implements IInventoryItem {
 		InventoryItem inv = this.getInventory(stack);
 		
 		if (inv != null && inv.getStackInSlot(0) != null) {
-			list.add(((ITeslaModule)inv.getStackInSlot(0).getItem()).getModuleName(stack));
+			list.add(((IElMagModule)inv.getStackInSlot(0).getItem()).getModuleName(stack));
 		}
 	}
 	
@@ -55,7 +55,7 @@ public class ItemTeslaArmor extends ItemArmor implements IInventoryItem {
 		InventoryItem inv = this.getInventory(itemStack);
 		
 		if (inv != null && inv.getStackInSlot(0) != null) {
-			((ITeslaModule)inv.getStackInSlot(0).getItem()).onArmorTick(world, player, itemStack);
+			((IElMagModule)inv.getStackInSlot(0).getItem()).onArmorTick(world, player, itemStack);
 		}
 	}
 	

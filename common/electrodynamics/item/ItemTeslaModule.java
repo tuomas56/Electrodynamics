@@ -10,13 +10,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import electrodynamics.api.tool.ITeslaModule;
+import electrodynamics.api.tool.IElMagModule;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.lib.item.TeslaModule;
 import electrodynamics.util.StringUtil;
 
-public class ItemTeslaModule extends Item implements ITeslaModule {
+public class ItemTeslaModule extends Item implements IElMagModule {
 
 	private Icon[] textures;
 	

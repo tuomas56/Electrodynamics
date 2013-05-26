@@ -13,7 +13,7 @@ import java.io.File;
 public class ConfigurationHandler {
 
 	public static final String CATEGORY_SETTINGS = "user.settings";
-	public static final String CATEGORY_TESLA = "tesla_armor.settings";
+	public static final String CATEGORY_ELMAG = "elmag_armor.settings";
 	public static final String CATEGORY_KEYS = "user.keybindings";
 	public static final String CATEGORY_GRAPHICS = "user.graphics";
 	public static final String CATEGORY_SOUND = "user.sound";
@@ -22,9 +22,9 @@ public class ConfigurationHandler {
 		Configuration config = new Configuration( file );
 
 		try {
-			ConfigurationSettings.MAGNETIC_RANGE = config.get( CATEGORY_TESLA, ConfigurationSettings.MAGNETIC_RANGE_CONFIGNAME, ConfigurationSettings.MAGNETIC_RANGE_DEFAULT ).getDouble( ConfigurationSettings.MAGNETIC_RANGE_DEFAULT );
-			ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED = config.get( CATEGORY_TESLA, ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_CONFIGNAME, ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_DEFAULT ).getDouble( ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_DEFAULT );
-			ConfigurationSettings.THERMAL_VIEW_RANGE = config.get( CATEGORY_TESLA, ConfigurationSettings.THERMAL_VIEW_RANGE_CONFIGNAME, ConfigurationSettings.THERMAL_VIEW_RANGE_DEFAULT ).getDouble( ConfigurationSettings.THERMAL_VIEW_RANGE_DEFAULT );
+			ConfigurationSettings.MAGNETIC_RANGE = config.get( CATEGORY_ELMAG, ConfigurationSettings.MAGNETIC_RANGE_CONFIGNAME, ConfigurationSettings.MAGNETIC_RANGE_DEFAULT ).getDouble( ConfigurationSettings.MAGNETIC_RANGE_DEFAULT );
+			ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED = config.get( CATEGORY_ELMAG, ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_CONFIGNAME, ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_DEFAULT ).getDouble( ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_DEFAULT );
+			ConfigurationSettings.THERMAL_VIEW_RANGE = config.get( CATEGORY_ELMAG, ConfigurationSettings.THERMAL_VIEW_RANGE_CONFIGNAME, ConfigurationSettings.THERMAL_VIEW_RANGE_DEFAULT ).getDouble( ConfigurationSettings.THERMAL_VIEW_RANGE_DEFAULT );
 
 			ConfigurationSettings.RUBBER_FILL_TIME = config.get( CATEGORY_SETTINGS, ConfigurationSettings.RUBBER_FILL_TIME_CONFIGNAME, ConfigurationSettings.RUBBER_FILL_TIME_DEFAULT, "Amount of time (in ticks) for one bucket to fill via basic tap. (20 ticks to one second)" ).getInt( ConfigurationSettings.RUBBER_FILL_TIME_DEFAULT );
 			
@@ -63,10 +63,10 @@ public class ConfigurationHandler {
 			
 			/* Item IDs */
 			ItemIDs.ITEM_COMPONENT_ID = config.getItem( Strings.ITEM_COMPONENT_NAME, ItemIDs.ITEM_COMPONENT_DEFAULT_ID ).getInt( ItemIDs.ITEM_COMPONENT_DEFAULT_ID );
-			ItemIDs.ITEM_TESLA_HELM_ID = config.getItem( Strings.ITEM_TESLA_HAT_NAME, ItemIDs.ITEM_TESLA_HELM_DEFAULT_ID ).getInt( ItemIDs.ITEM_TESLA_HELM_DEFAULT_ID );
-			ItemIDs.ITEM_TESLA_CHEST_ID = config.getItem( Strings.ITEM_TESLA_CHEST_NAME, ItemIDs.ITEM_TESLA_CHEST_DEFAULT_ID ).getInt( ItemIDs.ITEM_TESLA_CHEST_DEFAULT_ID );
-			ItemIDs.ITEM_TESLA_LEGS_ID = config.getItem( Strings.ITEM_TESLA_LEGS_NAME, ItemIDs.ITEM_TESLA_LEGS_DEFAULT_ID ).getInt( ItemIDs.ITEM_TESLA_LEGS_DEFAULT_ID );
-			ItemIDs.ITEM_TESLA_BOOTS_ID = config.getItem( Strings.ITEM_TESLA_BOOTS_NAME, ItemIDs.ITEM_TESLA_BOOTS_DEFAULT_ID ).getInt( ItemIDs.ITEM_TESLA_BOOTS_DEFAULT_ID );
+			ItemIDs.ITEM_ELMAG_HELM_ID = config.getItem( Strings.ITEM_ELMAG_HAT_NAME, ItemIDs.ITEM_ELMAG_HELM_DEFAULT_ID ).getInt( ItemIDs.ITEM_ELMAG_HELM_DEFAULT_ID );
+			ItemIDs.ITEM_ELMAG_CHEST_ID = config.getItem( Strings.ITEM_ELMAG_CHEST_NAME, ItemIDs.ITEM_ELMAG_CHEST_DEFAULT_ID ).getInt( ItemIDs.ITEM_ELMAG_CHEST_DEFAULT_ID );
+			ItemIDs.ITEM_ELMAG_LEGS_ID = config.getItem( Strings.ITEM_ELMAG_LEGS_NAME, ItemIDs.ITEM_ELMAG_LEGS_DEFAULT_ID ).getInt( ItemIDs.ITEM_ELMAG_LEGS_DEFAULT_ID );
+			ItemIDs.ITEM_ELMAG_BOOTS_ID = config.getItem( Strings.ITEM_ELMAG_BOOTS_NAME, ItemIDs.ITEM_ELMAG_BOOTS_DEFAULT_ID ).getInt( ItemIDs.ITEM_ELMAG_BOOTS_DEFAULT_ID );
 			ItemIDs.ITEM_STONE_HAMMER_ID = config.getItem( Strings.ITEM_STONE_HAMMER_NAME, ItemIDs.ITEM_STONE_HAMMER_DEFAULT_ID ).getInt( ItemIDs.ITEM_STONE_HAMMER_DEFAULT_ID );
 			ItemIDs.ITEM_STEEL_HAMMER_ID = config.getItem( Strings.ITEM_STEEL_HAMMER_NAME, ItemIDs.ITEM_STEEL_HAMMER_DEFAULT_ID ).getInt( ItemIDs.ITEM_STEEL_HAMMER_DEFAULT_ID );
 			ItemIDs.ITEM_SLEDGE_HAMMER_ID = config.getItem( Strings.ITEM_SLEDGE_HAMMER_NAME, ItemIDs.ITEM_SLEDGE_HAMMER_DEFAULT_ID ).getInt( ItemIDs.ITEM_SLEDGE_HAMMER_DEFAULT_ID );
@@ -78,7 +78,7 @@ public class ConfigurationHandler {
 			ItemIDs.ITEM_SPUD_PEELER_ID = config.getItem( Strings.ITEM_SPUD_PEELER, ItemIDs.ITEM_SPUD_PEELER_DEFAULT_ID ).getInt( ItemIDs.ITEM_SPUD_PEELER_DEFAULT_ID );
 			ItemIDs.ITEM_LATEX_BUCKET_ID = config.getItem( Strings.ITEM_LATEX_BUCKET, ItemIDs.ITEM_LATEX_BUCKET_DEFAULT_ID ).getInt( ItemIDs.ITEM_LATEX_BUCKET_DEFAULT_ID );
 			ItemIDs.ITEM_LIQUID_LATEX_ID = config.getItem( Strings.ITEM_LIQUID_LATEX, ItemIDs.ITEM_LIQUID_LATEX_DEFAULT_ID ).getInt( ItemIDs.ITEM_LIQUID_LATEX_DEFAULT_ID );
-			ItemIDs.ITEM_TESLA_MODULE_ID = config.getItem( Strings.ITEM_TESLA_MODULE, ItemIDs.ITEM_TESLA_MODULE_DEFAULT_ID ).getInt( ItemIDs.ITEM_TESLA_MODULE_DEFAULT_ID );
+			ItemIDs.ITEM_ELMAG_MODULE_ID = config.getItem( Strings.ITEM_ELMAG_MODULE, ItemIDs.ITEM_ELMAG_MODULE_DEFAULT_ID ).getInt( ItemIDs.ITEM_ELMAG_MODULE_DEFAULT_ID );
 
 		} catch( Exception e ) {
 			EDLogger.warn( "Had trouble reading/writing to the configuration file." );

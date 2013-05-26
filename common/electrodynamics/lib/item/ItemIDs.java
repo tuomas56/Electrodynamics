@@ -15,20 +15,20 @@ public class ItemIDs {
 	public static final int ITEM_SLEDGE_HAMMER_DEFAULT_ID = 5102;
 	
 	/* itemTeslaChest */
-	public static int ITEM_TESLA_HELM_ID;
-	public static final int ITEM_TESLA_HELM_DEFAULT_ID = 5103;
+	public static int ITEM_ELMAG_HELM_ID;
+	public static final int ITEM_ELMAG_HELM_DEFAULT_ID = 5103;
 	
 	/* itemTeslaChest */
-	public static int ITEM_TESLA_CHEST_ID;
-	public static final int ITEM_TESLA_CHEST_DEFAULT_ID = 5104;
+	public static int ITEM_ELMAG_CHEST_ID;
+	public static final int ITEM_ELMAG_CHEST_DEFAULT_ID = 5104;
 	
 	/* itemTeslaChest */
-	public static int ITEM_TESLA_LEGS_ID;
-	public static final int ITEM_TESLA_LEGS_DEFAULT_ID = 5105;
+	public static int ITEM_ELMAG_LEGS_ID;
+	public static final int ITEM_ELMAG_LEGS_DEFAULT_ID = 5105;
 	
 	/* itemTeslaChest */
-	public static int ITEM_TESLA_BOOTS_ID;
-	public static final int ITEM_TESLA_BOOTS_DEFAULT_ID = 5106;
+	public static int ITEM_ELMAG_BOOTS_ID;
+	public static final int ITEM_ELMAG_BOOTS_DEFAULT_ID = 5106;
 	
 	/* itemComponent */
 	public static int ITEM_COMPONENT_ID;
@@ -67,7 +67,7 @@ public class ItemIDs {
 	public static final int ITEM_LIQUID_LATEX_DEFAULT_ID = 5115;
 	
 	/* itemModule */
-	public static int ITEM_TESLA_MODULE_ID;
-	public static final int ITEM_TESLA_MODULE_DEFAULT_ID = 5116;
+	public static int ITEM_ELMAG_MODULE_ID;
+	public static final int ITEM_ELMAG_MODULE_DEFAULT_ID = 5116;
 	
 }

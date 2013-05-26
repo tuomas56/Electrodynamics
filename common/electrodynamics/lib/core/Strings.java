@@ -7,10 +7,10 @@ public class Strings {
 
 	/* Internal item names */
 	public static final String ITEM_COMPONENT_NAME = "component.name";
-	public static final String ITEM_TESLA_HAT_NAME = "tesla.helm.name";
-	public static final String ITEM_TESLA_CHEST_NAME = "tesla.chest.name";
-	public static final String ITEM_TESLA_LEGS_NAME = "tesla.legs.name";
-	public static final String ITEM_TESLA_BOOTS_NAME = "tesla.boots.name";
+	public static final String ITEM_ELMAG_HAT_NAME = "elmag.helm.name";
+	public static final String ITEM_ELMAG_CHEST_NAME = "elmag.chest.name";
+	public static final String ITEM_ELMAG_LEGS_NAME = "elmag.legs.name";
+	public static final String ITEM_ELMAG_BOOTS_NAME = "elmag.boots.name";
 	public static final String ITEM_STONE_HAMMER_NAME = "hammer.stone.name";
 	public static final String ITEM_STEEL_HAMMER_NAME = "hammer.steel.name";
 	public static final String ITEM_SLEDGE_HAMMER_NAME = "hammer.sledge.name";
@@ -22,7 +22,7 @@ public class Strings {
 	public static final String ITEM_SPUD_PEELER = "spud_peeler.name";
 	public static final String ITEM_LATEX_BUCKET = "bucket.latex.name";
 	public static final String ITEM_LIQUID_LATEX = "liquid.latex.name";
-	public static final String ITEM_TESLA_MODULE = "tesla.module.name";
+	public static final String ITEM_ELMAG_MODULE = "elmag.module.name";
 
 	/* Internal block names */
 	public static final String BLOCK_ORE_NAME = "ore.name";
