@@ -12,6 +12,7 @@ import electrodynamics.world.TickHandlerMBS;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -68,6 +69,14 @@ public class BlockStructure extends BlockGeneric {
 	@Override
 	public int getRenderType() {
 		return ConfigurationSettings.STRUCTURE_BLOCK_RENDER_ID;
+	}
+
+	@Override
+	public int getLightOpacity(World world, int x, int y, int z) {
+		TileEntity tile = world.getBlockTileEntity( x, y, z );
+		if( tile != null && tile instanceof TileStructure && ((TileStructure) tile).isValidStructure() )
+			return 0;
+		return 255;
 	}
 
 	@Override
