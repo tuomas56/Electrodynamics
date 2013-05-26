@@ -20,7 +20,6 @@ import electrodynamics.client.model.ModelSinteringOven;
 import electrodynamics.lib.client.Models;
 import electrodynamics.tileentity.TileEntityMachine;
 import electrodynamics.tileentity.TileEntitySinteringOven;
-import electrodynamics.util.InventoryUtil;
 
 public class RenderSinteringOven extends TileEntitySpecialRenderer {
 
@@ -72,24 +71,50 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 		}
 		
 		if (((TileEntitySinteringOven)tile).hasTray) {
-			renderTray(tile.worldObj, InventoryUtil.getFirstItemInArray(((TileEntitySinteringOven)tile).trayInventory.inventory));
+			renderTray(tile.worldObj, ((TileEntitySinteringOven)tile).trayInventory.inventory);
 		}
 		
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 	}
 	
-	public void renderTray(World world, ItemStack stack) {
+	public void renderTray(World world, ItemStack[] inv) {
 		GL11.glTranslated(0, -0.5, 0);
 		GL11.glRotatef(90, 0, 1, 0);
 		
 		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_METAL_TRAY);
 		modelMetalTray.render(0.0625F);
-		
+
+		GL11.glTranslated(-.11, 1.35, .165);
+		GL11.glScaled(.4, .4, .4);
+		for (int i=0; i<inv.length; i++) {
+			ItemStack stack = inv[i];
+			if (stack != null) {
+				if (i != 0) {
+					GL11.glTranslated(.28, 0, 0);
+				}
+				
+				if (i == 3 || i == 6) {
+					GL11.glTranslated(-.84, 0, -.38);
+				}
+				
+				if (!(stack.getItem() instanceof ItemBlock)) {
+					GL11.glPushMatrix();
+					GL11.glScaled(.8, .8, .8);
+					GL11.glRotatef(90, 1, 0, 0);
+					GL11.glTranslated(0, -.24, 0);
+					
+					renderItem(world, stack);
+					GL11.glPopMatrix();
+				} else {
+					renderItem(world, stack);
+				}
+			}
+		}
+	}
+	
+	public void renderItem(World world, ItemStack stack) {
 		if (stack != null) {
-			GL11.glTranslated(0, 1.4, -0.23);
-			GL11.glRotatef(90, 1, 0, 0);
-			
 			if (chickenEasterEgg) {
 				boolean chicken = false;
 				if (stack.getItem() == Item.chickenRaw) {
@@ -104,28 +129,22 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 					GL11.glRotatef(90, 0, 1, 0);
 					GL11.glRotatef(-90, 1, 0, 0);
 					GL11.glRotatef(-90, 0, 0, 1);
-					GL11.glTranslated(0, -1.4, 0.25);
+					GL11.glTranslated(0, -1.2, 0.25);
 					this.modelChicken.render(0.0625F);
 					return;
 				}
 			}
 			
-			if (!Minecraft.getMinecraft().gameSettings.fancyGraphics) {
-				GL11.glRotatef(-180, 0, 1, 0);
-				GL11.glRotatef(Minecraft.getMinecraft().renderViewEntity.rotationYaw, 0, 1, 0);
-			}
-				
-			if (stack.getItem() instanceof ItemBlock) {
-				GL11.glRotatef(-90, 1, 0, 0);
-				GL11.glRotatef(180, 1, 0, 0);
-				GL11.glRotatef(-90, 0, 1, 0);
-				GL11.glTranslated(-0.23, 0, 0);
-			}
-				
+			//Incredibly hackish, but better than essentially writing out a copy of the EntityItem renderer
+			boolean fancy = Minecraft.getMinecraft().gameSettings.fancyGraphics;
+			Minecraft.getMinecraft().gameSettings.fancyGraphics = true;
+			
 			EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, stack);
 			entityitem.getEntityItem().stackSize = 1;
 			entityitem.hoverStart = 0.0F;
 			RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+			
+			Minecraft.getMinecraft().gameSettings.fancyGraphics = fancy;
 		}
 	}
 	
