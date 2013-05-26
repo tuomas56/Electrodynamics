@@ -58,7 +58,7 @@ public class BlockTable extends BlockContainer {
 
 			if (itemstack != null) {
 				if (itemstack.getItem() instanceof ItemBlock) {
-					return Block.lightValue[itemstack.getItemDamage()];
+					return Block.lightValue[itemstack.itemID];
 				}
 			}
 		}
