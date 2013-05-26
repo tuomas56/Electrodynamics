@@ -24,7 +24,9 @@ public class RenderTileStructure extends TileEntitySpecialRenderer {
 			GL11.glDisable( GL11.GL_LIGHTING );
 			GL11.glTranslated( x + .5, y + 1.5, z + .5 );
 			GL11.glRotatef(180, 1, 0, 0);
-			
+			int rotation = structure.getRotation();
+			GL11.glRotatef( 90 * (rotation / 2), 0, 1, 0 );
+
 			Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_SINT_OVEN);
 			
 			GL11.glColor4f(1, 1, 1, 1);
