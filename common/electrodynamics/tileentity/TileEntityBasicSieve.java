@@ -9,6 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
 import electrodynamics.api.crafting.util.WeightedRecipeOutput;
+import electrodynamics.inventory.SimpleInventory;
 import electrodynamics.recipe.CraftingManager;
 import electrodynamics.recipe.RecipeSieve;
 import electrodynamics.util.InventoryUtil;
@@ -27,6 +28,12 @@ public class TileEntityBasicSieve extends TileEntityMachine {
 	
 	/** Total time required for processing "currentlyProcessing" */
 	public int totalProcessingTime;
+
+	/** The current (internal) slot being processed. */
+	public int processedSlot = 0;
+
+	/** The internal queue for the sieve */
+	private SimpleInventory inventory = new SieveInternalInventory();
 	
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
@@ -45,6 +52,9 @@ public class TileEntityBasicSieve extends TileEntityMachine {
 		
 		tag.setInteger("currProcessTime", currentProcessingTime);
 		tag.setInteger("totalProcessTime", totalProcessingTime);
+		tag.setInteger("processedSlot", processedSlot);
+
+		inventory.writeToNBT( tag );
 	}
 
 	@Override
@@ -55,9 +65,12 @@ public class TileEntityBasicSieve extends TileEntityMachine {
 			NBTTagCompound currProcess = tag.getCompoundTag("currProcess");
 			currentlyProcessing = ItemStack.loadItemStackFromNBT(currProcess);
 		}
-		
+
 		currentProcessingTime = tag.getInteger("currProcessTime");
 		totalProcessingTime = tag.getInteger("totalProcessTime");
+		processedSlot = tag.getInteger("processedSlot");
+
+		inventory.readFromNBT(tag);
 	}
 	
 	public void setItem(ItemStack stack) {
@@ -86,6 +99,10 @@ public class TileEntityBasicSieve extends TileEntityMachine {
 	public void updateEntity() {
 		if (this.worldObj.isRemote) return;
 
+		boolean tick = this.worldObj.getWorldTime() % 5 == 0;
+		if( tick )
+			scanForItems();
+
 		if (canProcess()) {
 			if (totalProcessingTime > 0) {
 				if (currentProcessingTime > 0) {
@@ -95,8 +112,13 @@ public class TileEntityBasicSieve extends TileEntityMachine {
 				}
 			}
 		} else {
-			if (this.worldObj.getWorldTime() % 5 == 0) {
-				scanForItems();
+			if (tick) {
+				ItemStack item = getNextItemToProcess();
+				if( item != null ) {
+					RecipeSieve recipe = CraftingManager.getInstance().sieveManager.getRecipe(item);
+					setItem(item);
+					setProcessTime(recipe.processingTime);
+				}
 			}
 		}
 	} 
@@ -105,23 +127,18 @@ public class TileEntityBasicSieve extends TileEntityMachine {
 	private void scanForItems() {
 		AxisAlignedBB scanArea = AxisAlignedBB.getBoundingBox(xCoord, yCoord + 1, zCoord, xCoord + 1, yCoord + 2, zCoord + 1);
 		List<EntityItem> detectedItems = this.worldObj.getEntitiesWithinAABB(EntityItem.class, scanArea);
-	
+
 		if (detectedItems != null && detectedItems.size() > 0) {
-			EntityItem detected = detectedItems.get(0);
-			ItemStack detectedIS = detected.getEntityItem();
-			RecipeSieve recipe = CraftingManager.getInstance().sieveManager.getRecipe(detectedIS);
-			
-			if (recipe != null) {
-				ItemStack item = detectedIS.copy();
-				item.stackSize = 1;
-				
-				setItem(item);
-				setProcessTime(recipe.processingTime);
-				
-				if (detectedIS.stackSize > 1) {
-					detectedIS.stackSize--;
-				} else {
-					detected.setDead();
+			for( EntityItem detected : detectedItems ) {
+				ItemStack detectedIS = detected.getEntityItem();
+				if( isValidItem( detectedIS ) ) {
+					ItemStack remaining = InventoryUtil.addToInventory( inventory, detectedIS );
+					if( remaining == null ) {
+						detected.setDead();
+					} else {
+						detectedIS.stackSize = remaining.stackSize;
+						break;
+					}
 				}
 			}
 		}
@@ -140,6 +157,7 @@ public class TileEntityBasicSieve extends TileEntityMachine {
 		setItem(null);
 		currentProcessingTime = 0;
 		totalProcessingTime = 0;
+		inventory.decrStackSize( processedSlot, 1 );
 	}
 	
 	private boolean canProcess() {
@@ -147,6 +165,50 @@ public class TileEntityBasicSieve extends TileEntityMachine {
 		if (CraftingManager.getInstance().sieveManager.getRecipe(currentlyProcessing) == null) return false;
 		
 		return true;
+	}
+
+	private ItemStack getNextItemToProcess() {
+		// make sure it only iterate once through the inventory.
+		for( int i = 0; i < inventory.getSizeInventory(); i++ ) {
+			ItemStack current = inventory.getStackInSlot( processedSlot );
+			if( current != null ) {
+				return current;
+			}
+			processedSlot = (++processedSlot % CAPACITY);
+		}
+		return null;
+	}
+
+	/**
+	 * Whether if the item is valid to be processed by the Sieve.
+	 *
+	 * @param item the item to check.
+	 */
+	public static boolean isValidItem(ItemStack item) {
+		if( item != null ) {
+			RecipeSieve recipe = CraftingManager.getInstance().sieveManager.getRecipe(item);
+			return recipe != null;
+		}
+		return false;
+	}
+
+	private static final int CAPACITY = 64; // queue capacity.
+
+	private static class SieveInternalInventory extends SimpleInventory {
+
+		public SieveInternalInventory() {
+			super( CAPACITY, "inventoryBasicOven" );
+		}
+
+		@Override
+		public int getInventoryStackLimit() {
+			return 1;
+		}
+
+		@Override
+		public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+			return isValidItem( itemstack );
+		}
 	}
 
 }

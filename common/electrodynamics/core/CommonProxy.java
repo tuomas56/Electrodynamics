@@ -19,8 +19,6 @@ import net.minecraft.world.World;
 public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
-		// Optifine check
-		Electrodynamics.instance.showOptifineError = (FMLClientHandler.instance().hasOptifine()) && !(new File(Electrodynamics.instance.configFolder, "optifineErrorShown.flag").exists());
 		// Language manager initialization
 		Electrodynamics.instance.languageManager = EDLanguage.getInstance();
 		// Crafting manager initialization

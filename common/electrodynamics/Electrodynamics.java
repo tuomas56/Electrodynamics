@@ -30,7 +30,7 @@ public class Electrodynamics implements IEDApi {
 	@SidedProxy(clientSide = "electrodynamics.core.ClientProxy", serverSide = "electrodynamics.core.CommonProxy")
 	public static CommonProxy proxy;
 
-	public boolean showOptifineError = true;
+	public boolean showOptifineError = false;
 	public File configFolder;
 	public CraftingManager craftingManager;
 	public EDLanguage languageManager;

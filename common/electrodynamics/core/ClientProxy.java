@@ -1,7 +1,9 @@
 package electrodynamics.core;
 
+import java.io.File;
 import java.util.Random;
 
+import electrodynamics.Electrodynamics;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -22,7 +24,10 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		super.preInit(event);
-		
+
+		// Optifine check
+		Electrodynamics.instance.showOptifineError = (FMLClientHandler.instance().hasOptifine()) && !(new File(Electrodynamics.instance.configFolder, "optifineErrorShown.flag").exists());
+
 		// Sound handler registration
 		MinecraftForge.EVENT_BUS.register(new SoundHandler());
 		
