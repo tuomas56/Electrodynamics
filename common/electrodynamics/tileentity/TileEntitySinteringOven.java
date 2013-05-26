@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -162,19 +163,20 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 					}
 					
 					sendUpdatePacket(Side.CLIENT);
-					return;
-				} else if (currentItem.getItem() == EDItems.itemTray) {
+					((EntityPlayerMP)player).updateHeldItem();
+				} else if (!hasTray && currentItem.getItem() == EDItems.itemTray) {
 					this.hasTray = true;
 					this.trayInventory = new InventoryItem(9, currentItem.copy());
 					--currentItem.stackSize;
 					
 					sendUpdatePacket(Side.CLIENT);
-					return;
+					((EntityPlayerMP)player).updateHeldItem();
 				}
+				return;
 			}
 			
 			if (this.hasTray) {
-				player.inventory.addItemStackToInventory(trayInventory.parent.copy());
+				player.setCurrentItemOrArmor( 0, trayInventory.parent.copy() );
 				
 				this.hasTray = false;
 				this.trayInventory = null;
@@ -182,6 +184,7 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 				this.totalCookTime = 0;
 				
 				sendUpdatePacket(Side.CLIENT);
+				((EntityPlayerMP)player).updateHeldItem();
 				return;
 			}
 		}

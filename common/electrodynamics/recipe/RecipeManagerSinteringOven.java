@@ -1,13 +1,15 @@
 package electrodynamics.recipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map.Entry;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 
 public class RecipeManagerSinteringOven {
+
+	public static final int DEFAULT_PROCESSING_TIME = 10 * 20; // 10 seconds.
 
 	public ArrayList<RecipeSinteringOven> sinteringOvenRecipes = new ArrayList<RecipeSinteringOven>();
 	
@@ -54,18 +56,9 @@ public class RecipeManagerSinteringOven {
 	public RecipeSinteringOven getFurnaceRecipe(ItemStack stack) {
 		if (stack == null) return null;
 
-		for (Entry<List<Integer>, ItemStack> recipe : FurnaceRecipes.smelting().getMetaSmeltingList().entrySet()) {
-			ItemStack input = new ItemStack(recipe.getKey().get(0), 1, recipe.getKey().get(1));
-			
-			if (input.isItemEqual(stack)) {
-				ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
-				ArrayList<ItemStack> outputs = new ArrayList<ItemStack>();
-				
-				inputs.add(input);
-				outputs.add(recipe.getValue());
-				
-				return new RecipeSinteringOven(inputs, outputs, 200);
-			}
+		ItemStack result = FurnaceRecipes.smelting().getSmeltingResult( stack );
+		if( result != null ) {
+			return new RecipeSinteringOven( Arrays.asList(stack), Arrays.asList( result ), DEFAULT_PROCESSING_TIME );
 		}
 		
 		return null;
