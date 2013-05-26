@@ -5,6 +5,7 @@ import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
 
+import electrodynamics.util.InventoryUtil;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -56,7 +57,7 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 							RecipeSinteringOven recipe = CraftingManager.getInstance().ovenManager.getRecipe(Arrays.asList(this.trayInventory.inventory));
 						
 							if (recipe != null) {
-								this.trayInventory.setInventory(recipe.itemOutputs);
+								doProcess( recipe );
 								
 								this.totalCookTime = 0;
 								this.currentCookTime = 0;
@@ -187,6 +188,27 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 				((EntityPlayerMP)player).updateHeldItem();
 				return;
 			}
+		}
+	}
+
+	private void doProcess(RecipeSinteringOven recipe) {
+		// Consume the inputs.
+		trayLoop:
+		for( int i = 0; i < trayInventory.getSizeInventory(); i++ ) {
+			ItemStack itemStack = trayInventory.getStackInSlot( i );
+			if( itemStack == null ) continue;
+
+			for( ItemStack input : recipe.itemInputs ) {
+				if( input.isItemEqual( itemStack ) ) {
+					trayInventory.setInventorySlotContents( i, null );
+					continue trayLoop;
+				}
+			}
+		}
+
+		// Give the outputs
+		for( ItemStack output : recipe.itemOutputs ) {
+			InventoryUtil.addToInventory( trayInventory, output.copy() );
 		}
 	}
 

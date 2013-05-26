@@ -93,7 +93,7 @@ public class InventoryUtil {
 			ItemStack invStack = inv.getStackInSlot(i);
 			
 			if (invStack == null) {
-				inv.setInventorySlotContents(i, stack);
+				inv.setInventorySlotContents(i, stack.copy());
 				stack.stackSize -= inv.getStackInSlot( i ).stackSize;
 				if( stack.stackSize == 0 )
 					return null;
@@ -110,7 +110,7 @@ public class InventoryUtil {
 				int itemsToMove = max - invStack.stackSize;
 				invStack.stackSize += itemsToMove;
 				stack.stackSize -= itemsToMove;
-				inv.setInventorySlotContents(i, stack);
+				inv.setInventorySlotContents(i, invStack);
 			}
 		}
 		
