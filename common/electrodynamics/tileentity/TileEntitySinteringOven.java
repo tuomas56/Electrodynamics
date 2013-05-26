@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
@@ -152,6 +153,13 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 				if (ItemUtil.getFuelValue(currentItem) > 0) {
 					this.fuelLevel += ItemUtil.getFuelValue(currentItem);
 					--currentItem.stackSize;
+					if( currentItem.itemID == Item.bucketLava.itemID ) { // return the empty bucket when using lava as fuel.
+						ItemStack bucket = new ItemStack( Item.bucketEmpty, 1 );
+						if( currentItem.stackSize == 0 )
+							player.setCurrentItemOrArmor( 0, bucket );
+						else
+							player.inventory.addItemStackToInventory( bucket );
+					}
 					
 					sendUpdatePacket(Side.CLIENT);
 					return;
