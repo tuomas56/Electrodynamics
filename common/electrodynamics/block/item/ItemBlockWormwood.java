@@ -1,11 +1,9 @@
 package electrodynamics.block.item;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
-import electrodynamics.block.BlockWormwood;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 
