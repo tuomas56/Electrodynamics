@@ -14,6 +14,8 @@ public class RecipeSieve {
 	public ArrayList<WeightedRecipeOutput> itemOutputs;
 	
 	public int processingTime;
+
+	public static final int DEFAULT_PROCESSING_TIME = 3 * 20; // 3 seconds.
 	
 	public RecipeSieve(ItemStack itemInput, ArrayList<WeightedRecipeOutput> itemOutputs, int processingTime) {
 		this.itemInput = itemInput;
@@ -31,6 +33,10 @@ public class RecipeSieve {
 		this.itemOutputs = new ArrayList<WeightedRecipeOutput>();
 		
 		setOutput(this.itemOutputs);
+	}
+
+	public RecipeSieve(ItemStack itemInput) {
+		this(itemInput, DEFAULT_PROCESSING_TIME);
 	}
 	
 	public void setOutput(ArrayList<WeightedRecipeOutput> outputs) {
