@@ -10,6 +10,7 @@ import electrodynamics.inventory.InventoryItem;
 import electrodynamics.lib.core.ModInfo;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
@@ -44,8 +45,17 @@ public class ItemElMagArmor extends ItemArmor implements IInventoryItem {
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (!world.isRemote && player.isSneaking()) {
-			GuiHandler.openGui(player, world, (int)player.posX, (int)player.posY, (int)player.posZ, GuiHandler.GuiType.TESLA_MODULE);
+		if (!world.isRemote) {
+			if (player.isSneaking()) {
+				GuiHandler.openGui(player, world, (int)player.posX, (int)player.posY, (int)player.posZ, GuiHandler.GuiType.TESLA_MODULE);
+			} else {
+				int pos = EntityLiving.getArmorPosition(stack) - 1;
+				ItemStack currArmor = player.getCurrentArmor(pos);
+				
+				if (currArmor == null) {
+					player.setCurrentItemOrArmor(pos, stack.copy());
+				}
+			}
 		}
 		
 		return stack;
