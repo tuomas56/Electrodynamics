@@ -51,7 +51,8 @@ public class RecipeSieve {
 	}
 	
 	public boolean isInput(ItemStack input) {
-		return (ItemStack.areItemStacksEqual(input, itemInput));
+		return input != null && itemInput.itemID == input.itemID && itemInput.getItemDamage() == input.getItemDamage()
+				&& ItemStack.areItemStackTagsEqual(itemInput, input);
 	}
 	
 }

@@ -60,10 +60,7 @@ public class SimpleInventory implements IInventory, INBTTagable {
 	public void setInventorySlotContents(int i, ItemStack itemstack) {
 		if( i < 0 || i >= size ) return;
 		internalInv[i] = itemstack.copy();
-		int limit = getInventoryStackLimit();
-		if( itemstack.stackSize > limit )
-			itemstack.stackSize -= limit;
-		internalInv[i].stackSize = limit;
+		internalInv[i].stackSize = Math.min( itemstack.stackSize, getInventoryStackLimit() );
 		onInventoryChanged();
 	}
 
