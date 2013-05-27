@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
@@ -14,7 +16,7 @@ import electrodynamics.recipe.CraftingManager;
 import electrodynamics.recipe.RecipeSieve;
 import electrodynamics.util.InventoryUtil;
 
-public class TileEntityBasicSieve extends TileEntityMachine {
+public class TileEntityBasicSieve extends TileEntityMachine implements ISidedInventory {
 
 	/** ItemStack currently being read/processed */
 	public ItemStack currentlyProcessing;
@@ -209,6 +211,87 @@ public class TileEntityBasicSieve extends TileEntityMachine {
 		public boolean isStackValidForSlot(int i, ItemStack itemstack) {
 			return isValidItem( itemstack );
 		}
+	}
+
+	// ISidedInventory:
+	@Override
+	public int[] getAccessibleSlotsFromSide(int side) {
+		if( side == 1 ) { // top
+			int[] validSlots = new int[CAPACITY];
+			for(int i=0; i<CAPACITY;i++) {
+				validSlots[i] = i;
+			}
+			return validSlots;
+		}
+		return new int[0];
+	}
+
+	@Override
+	public boolean canInsertItem(int i, ItemStack itemstack, int side) {
+		return side == 1 && isStackValidForSlot( i, itemstack ); // top
+	}
+
+	@Override
+	public boolean canExtractItem(int i, ItemStack itemstack, int side) {
+		return false;
+	}
+
+	// IInventory:
+
+	@Override
+	public int getSizeInventory() {
+		return inventory.getSizeInventory();
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int i) {
+		return inventory.getStackInSlot( i );
+	}
+
+	@Override
+	public ItemStack decrStackSize(int i, int j) {
+		return inventory.decrStackSize( i, j );
+	}
+
+	@Override
+	public ItemStack getStackInSlotOnClosing(int i) {
+		return inventory.getStackInSlotOnClosing( i );
+	}
+
+	@Override
+	public void setInventorySlotContents(int i, ItemStack itemstack) {
+		inventory.setInventorySlotContents( i, itemstack );
+	}
+
+	@Override
+	public String getInvName() {
+		return inventory.getInvName();
+	}
+
+	@Override
+	public boolean isInvNameLocalized() {
+		return inventory.isInvNameLocalized();
+	}
+
+	@Override
+	public int getInventoryStackLimit() {
+		return inventory.getInventoryStackLimit();
+	}
+
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+		return inventory.isUseableByPlayer( entityplayer );
+	}
+
+	@Override
+	public void openChest() { }
+
+	@Override
+	public void closeChest() { }
+
+	@Override
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+		return inventory.isStackValidForSlot( i, itemstack );
 	}
 
 }
