@@ -20,11 +20,11 @@ public class BlockTreetap extends BlockContainer {
 		setHardness(1F);
 		setCreativeTab(CreativeTabED.tool);
 	}
-	
+
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int id) {
 		TileEntityTreetap tile = (TileEntityTreetap) world.getBlockTileEntity(x, y, z);
-		
+
 		if (tile != null) {
 			if (!tile.isTapSupported()) {
 				this.dropBlockAsItem_do(world, x, y, z, new ItemStack(this));
@@ -35,60 +35,55 @@ public class BlockTreetap extends BlockContainer {
 			world.setBlockToAir(x, y, z);
 		}
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
 		if (world.isRemote) return false;
 		if (player.isSneaking()) return false;
-		
+
 		TileEntityTreetap tile = (TileEntityTreetap) world.getBlockTileEntity(x, y, z);
-		
+
 		if (tile != null && tile instanceof TileEntityTreetap) {
-			if(player.getCurrentEquippedItem() != null)
-			{
-				if(!tile.hasBucket && player.getCurrentEquippedItem().getItem() == Item.bucketEmpty)
-				{
+			if (player.getCurrentEquippedItem() != null) {
+				if (!tile.hasBucket && player.getCurrentEquippedItem().getItem() == Item.bucketEmpty) {
 					tile.hasBucket = true;
 					tile.dirty = true;
 					--player.getCurrentEquippedItem().stackSize;
-					
+
 					return true;
-				}	
-			}
-			else
-			{
-				if(tile.hasBucket && (tile.liquidAmount == 0 || tile.liquidAmount == 1000))
-				{
+				}
+			} else {
+				if (tile.hasBucket && (tile.liquidAmount == 0 || tile.liquidAmount == 1000)) {
 					tile.dropBucket(player);
 					return true;
 				}
 			}
 		}
-			
+
 		return false;
 	}
-	
+
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		TileEntityTreetap tile = (TileEntityTreetap) world.getBlockTileEntity(x, y, z);
-		
+
 		if (tile != null && tile instanceof TileEntityTreetap) {
 			tile.tick();
 		}
 	}
-	
+
 	@Override
 	public int getRenderType() {
 		return -1;
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
-	
+
 	public TileEntity createNewTileEntity(World world) {
 		return new TileEntityTreetap();
 	}
-	
+
 }

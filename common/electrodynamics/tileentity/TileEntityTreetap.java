@@ -117,7 +117,7 @@ public class TileEntityTreetap extends TileEntity {
 			
 			while (!foundEnd) {
 				if (this.worldObj.getBlockId(x, y, z) == BlockIDs.BLOCK_RUBBER_WOOD_ID) {
-					if ((this.worldObj.getBlockMetadata(x, y, z) != 0 && this.worldObj.getBlockMetadata(x, y, z) <= 9)) {
+					if (!(this.worldObj.getBlockMetadata(x, y, z) >= 1 && this.worldObj.getBlockMetadata(x, y, z) <= 9)) {
 						foundEnd = true;
 						break;
 					}

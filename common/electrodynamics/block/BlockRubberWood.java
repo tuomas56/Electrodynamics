@@ -61,9 +61,9 @@ public class BlockRubberWood extends Block {
 	
 	public static boolean suckLatex(World world, int x, int y, int z) {
 		int meta = world.getBlockMetadata(x, y, z);
-		
+
 		if (meta > 1 && meta <= 9) {
-			world.setBlockMetadataWithNotify(x, y, z, meta + 4, 2);
+			world.setBlockMetadataWithNotify(x, y, z, meta - 4, 2);
 			return true;
 		}
 		
