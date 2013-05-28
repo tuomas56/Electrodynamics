@@ -9,7 +9,11 @@ public enum Decorative {
 	LIMESTONE(Strings.DECORATIVE_LIMESTONE, "blockLimestone"),
 	LIMESTONE_BRICK(Strings.DECORATIVE_LIMESTONE_BRICK, "brickLimestone"),
 	LIMESTONE_BRICKS(Strings.DECORATIVE_LIMESTONE_BRICKS, "bricksLimestone"),
-	LIMESTONE_BRITTLE(Strings.DECORATIVE_LIMESTONE_BRITTLE, "brittleLimestone");
+	LIMESTONE_BRITTLE(Strings.DECORATIVE_LIMESTONE_BRITTLE, "brittleLimestone"),
+	LIMESTONE_SCORCHED(Strings.DECORATIVE_LIMESTONE_SCORCHED, "blockScorchedLimestone"),
+	LIMESTONE_SCORCHED_BRICK(Strings.DECORATIVE_LIMESTONE_SCORCHED, "blockScorchedLimestoneBrick"),
+	LIMESTONE_TILED(Strings.DECORATIVE_LIMESTONE_TILED, "blockTiledLimestone"),
+	LIMESTONE_TT(Strings.DECORATIVE_LIMESTONE_TT, "blockTiledTT");
 	
 	public String unlocalizedName;
 	public String textureName;

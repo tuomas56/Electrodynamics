@@ -157,7 +157,11 @@ public class Strings {
 	public static final String DECORATIVE_LIMESTONE_BRICK = "decorative.limestone.brick.name";
 	public static final String DECORATIVE_LIMESTONE_BRICKS = "decorative.limestone.bricks.name";
 	public static final String DECORATIVE_LIMESTONE_BRITTLE = "decorative.limestone.brittle.name";
-
+	public static final String DECORATIVE_LIMESTONE_SCORCHED = "decorative.limestone.scorched.name";
+	public static final String DECORATIVE_LIMESTONE_SCORCHED_BRICK = "decorative.limestone.scorched.brick.name";
+	public static final String DECORATIVE_LIMESTONE_TILED = "decorative.limestone.tiled.name";
+	public static final String DECORATIVE_LIMESTONE_TT = "decorative.limestone.tt.name"; //TT?
+	
 	/* Internal structure component block names */
 	public static final String STRUCTURE_COMPONENT_CONVEYOR_BELT = "structure.component.conveyorBelt.name";
 	public static final String STRUCTURE_COMPONENT_FURNACE_FRAME = "structure.component.furnace.frame.name";
