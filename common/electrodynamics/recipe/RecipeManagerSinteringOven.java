@@ -9,7 +9,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 
 public class RecipeManagerSinteringOven {
 
-	public static final int DEFAULT_PROCESSING_TIME = 4 * 20; // 4 seconds.
+	public static final int DEFAULT_PROCESSING_TIME = 4 * 20; // 4 seconds (full tray will take 8.7 seconds)
 
 	public ArrayList<RecipeSinteringOven> sinteringOvenRecipes = new ArrayList<RecipeSinteringOven>();
 	
@@ -24,7 +24,7 @@ public class RecipeManagerSinteringOven {
 	public RecipeSinteringOven getRecipe(List<ItemStack> input) {
 		RecipeSinteringOven recipe = getOvenRecipe(input);
 		
-		if (recipe == null) {
+		if (recipe == null) { // Handle vanilla furnace recipes.
 			input = trimItemStackList(input);
 			int processingTime = 0;
 			List<ItemStack> realInput = new ArrayList<ItemStack>(), output = new ArrayList<ItemStack>();
@@ -33,7 +33,6 @@ public class RecipeManagerSinteringOven {
 				if( recipe != null ) {
 					realInput.add( item );
 					output.addAll( recipe.itemOutputs );
-					processingTime += recipe.processingTime;
 					processingTime = processingTime == 0 ? DEFAULT_PROCESSING_TIME : (int) Math.ceil( processingTime * 1.1f );
 				}
 			}
@@ -60,7 +59,7 @@ public class RecipeManagerSinteringOven {
 
 		ItemStack result = FurnaceRecipes.smelting().getSmeltingResult( stack );
 		if( result != null ) {
-			return new RecipeSinteringOven( Arrays.asList(stack), Arrays.asList( result ), DEFAULT_PROCESSING_TIME );
+			return new RecipeSinteringOven( Arrays.asList(stack), Arrays.asList( result ), 0 );
 		}
 		
 		return null;
