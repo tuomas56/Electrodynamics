@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.tileentity.TileEntityTreetap;
@@ -63,6 +64,33 @@ public class BlockTreetap extends BlockContainer {
 		return false;
 	}
 
+	//TODO Fix bounding box for player collision
+	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
+		TileEntityTreetap tile = (TileEntityTreetap) world.getBlockTileEntity(x, y, z);
+		
+		if (tile != null) {
+			switch(tile.rotation) {
+			case EAST: {
+				this.setBlockBounds(0.0F, 0.0F, 0.2F, 0.6F, 0.9F, 0.8F);
+				break;
+			}
+			case SOUTH: {
+				this.setBlockBounds(0.2F, 0.0F, 0.0F, 0.8F, 0.9F, 0.6F);
+				break;
+			}
+			case WEST: {
+				this.setBlockBounds(0.4F, 0.0F, 0.2F, 1.0F, 0.9F, 0.8F);
+				break;
+			}
+			case NORTH: {
+				this.setBlockBounds(0.2F, 0.0F, 0.4F, 0.8F, 0.9F, 1.0F);
+				break;
+			}
+			default: break;
+			}
+		}
+	}
+	
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		TileEntityTreetap tile = (TileEntityTreetap) world.getBlockTileEntity(x, y, z);
