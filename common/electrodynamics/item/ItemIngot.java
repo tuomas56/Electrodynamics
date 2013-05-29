@@ -19,13 +19,23 @@ public class ItemIngot extends Item {
 	public static int[][] ingotColors;
 	
 	static {
-		//TODO Ingot colors + actual gold color for gold ingot
 		ingotColors = new int[Ingot.values().length + 2][];
 		
+		ingotColors[Ingot.COPPER.ordinal()] = new int[] {200, 100, 0};
+		ingotColors[Ingot.LEAD.ordinal()] = new int[] {85, 85, 120};
+		ingotColors[Ingot.NICKEL.ordinal()] = new int[] {50, 210, 160};
+		ingotColors[Ingot.TUNGSTEN.ordinal()] = new int[] {45, 45, 45};
+		ingotColors[Ingot.COBALT.ordinal()] = new int[] {60, 60, 70};
+		ingotColors[Ingot.TELLURIUM.ordinal()] = new int[] {250, 250, 250};
+		ingotColors[Ingot.STEEL.ordinal()] = new int[] {130, 130, 130};
+		ingotColors[Ingot.TIN.ordinal()] = new int[] {230, 230, 230};
+		ingotColors[Ingot.URANIUM.ordinal()] = new int[] {90, 180, 65};
+		ingotColors[Ingot.SILVER.ordinal()] = new int[] {220, 240, 245};
+		
 		// Iron Ingot
-		ingotColors[Ingot.values().length] = new int[] {255, 255, 255, 255};
+		ingotColors[Ingot.values().length] = new int[] {255, 255, 255};
 		// Gold Ingot
-		ingotColors[Ingot.values().length + 1] = new int[] {255, 122, 122, 255};
+		ingotColors[Ingot.values().length + 1] = new int[] {220, 220, 0};
 	}
 	
 	public ItemIngot(int id) {
@@ -50,9 +60,9 @@ public class ItemIngot extends Item {
 		}
 
 		if (colors != null) {
-			return new GLColor(colors[0], colors[1], colors[2], colors[3]);
+			return new GLColor(colors[0], colors[1], colors[2]);
 		} else {
-			return new GLColor(255, 255, 255, 255);
+			return new GLColor(255, 255, 255);
 		}
 	}
 	

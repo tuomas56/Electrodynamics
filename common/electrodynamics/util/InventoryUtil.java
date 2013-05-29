@@ -15,9 +15,8 @@ public class InventoryUtil {
 		if (check == null || inv == null || inv.length == 0) return false;
 		
 		for (ItemStack stack : inv) {
-			if (stack == null || !(check.isItemEqual(stack))) {
-				return false;
-			}
+			if (stack == null) return true;
+			if (!check.isItemEqual(stack)) return false;
 		}
 		
 		return true;
