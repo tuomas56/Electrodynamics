@@ -11,6 +11,18 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class InventoryUtil {
 
+	public static boolean containsOnly(ItemStack[] inv, ItemStack check) {
+		if (check == null || inv == null || inv.length == 0) return false;
+		
+		for (ItemStack stack : inv) {
+			if (stack == null || !(check.isItemEqual(stack))) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
 	public static ItemStack getFirstItemInArray(ItemStack[] array) {
 		for (ItemStack stack : array) {
 			if (stack != null) {
