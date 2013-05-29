@@ -76,6 +76,7 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 		}
 		
 		if (((TileEntitySinteringOven)tile).hasTray) {
+			//TODO Render big item if the tray contains only that, otherwise render grid of tray contents
 			renderTray(tile.worldObj, ((TileEntitySinteringOven)tile).trayInventory.inventory);
 		}
 		
