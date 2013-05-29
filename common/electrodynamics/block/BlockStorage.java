@@ -9,6 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 
 public class BlockStorage extends Block {
 
@@ -46,4 +47,12 @@ public class BlockStorage extends Block {
 		}
 	}
 	
+	
+	public int idPicked(World world, int x, int y, int z) {
+		return this.blockID;
+	}
+
+	public int getDamageValue(World world, int x, int y, int z) {
+		return world.getBlockMetadata(x, y, z);
+	}
 }

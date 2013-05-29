@@ -102,9 +102,16 @@ public class BlockMachine extends BlockContainer {
 	}
 	
 	@Override
-    public Icon getIcon(int id, int meta)
-    {
+	public Icon getIcon(int id, int meta) {
 		return textures[meta];
-    }
+	}
+	
+	public int idPicked(World world, int x, int y, int z) {
+		return this.blockID;
+	}
+
+	public int getDamageValue(World world, int x, int y, int z) {
+		return world.getBlockMetadata(x, y, z);
+	}
 	
 }

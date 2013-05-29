@@ -111,4 +111,12 @@ public class BlockOre extends Block {
 		}
 	}
 	
+	public int idPicked(World world, int x, int y, int z) {
+		return this.blockID;
+	}
+
+	public int getDamageValue(World world, int x, int y, int z) {
+		return world.getBlockMetadata(x, y, z);
+	}
+	
 }
