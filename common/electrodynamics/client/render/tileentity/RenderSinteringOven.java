@@ -69,7 +69,7 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_SINT_FURNACE);
 
 		modelSinteringOven.rotateDoor(((TileEntitySinteringOven)tile).doorAngle);
-//		modelSinteringOven.renderAll(0.0625F);
+		modelSinteringOven.renderAll(0.0625F);
 
 		if (((TileEntitySinteringOven)tile).fuelLevel > 0) {
 			renderFire(tile.worldObj, tile.xCoord, tile.yCoord, tile.zCoord, ((TileEntityMachine)tile).rotation.ordinal());
