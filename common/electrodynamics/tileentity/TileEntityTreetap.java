@@ -69,7 +69,7 @@ public class TileEntityTreetap extends TileEntity {
 	}
 	
 	public void tick() {
-		if (liquidAmount + 500 <= 1000 && hasBucket) {
+		if (liquidAmount + 1000 <= 1000 && hasBucket) {
 			drawLatex();
 		}
 	}
@@ -100,7 +100,7 @@ public class TileEntityTreetap extends TileEntity {
 	public void drawLatex() {
 		if (getHighestValidLog() > 0) {
 			if (BlockRubberWood.suckLatex(this.worldObj, xCoord, yCoord + (getHighestValidLog() - 1), zCoord)) {
-				this.liquidAmount += 500;
+				this.liquidAmount += 1000;
 				this.dirty = true;
 			}
 		}
