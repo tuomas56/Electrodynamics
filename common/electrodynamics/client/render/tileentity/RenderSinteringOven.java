@@ -69,7 +69,7 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_SINT_FURNACE);
 
 		modelSinteringOven.rotateDoor(((TileEntitySinteringOven)tile).doorAngle);
-		modelSinteringOven.renderAll(0.0625F);
+//		modelSinteringOven.renderAll(0.0625F);
 
 		if (((TileEntitySinteringOven)tile).fuelLevel > 0) {
 			renderFire(tile.worldObj, tile.xCoord, tile.yCoord, tile.zCoord, ((TileEntityMachine)tile).rotation.ordinal());
@@ -94,15 +94,16 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 		if (inv != null && inv.length > 0) {
 			ItemStack first = InventoryUtil.getFirstItemInArray(inv);
 			
-			if (ItemIngot.isIngot(first) && InventoryUtil.containsOnly(inv, first)) {
-				renderIngot(world, InventoryUtil.getFirstItemInArray(inv));
-			} else {
-				GL11.glTranslated(-.11, 1.35, .165);
-				GL11.glScaled(.4, .4, .4);
-				
-				for (int i=0; i<inv.length; i++) {
-					ItemStack stack = inv[i];
-					if (stack != null) {
+			if (first != null) {
+				if (ItemIngot.isIngot(first) && InventoryUtil.containsOnly(inv, first)) {
+					renderIngot(world, InventoryUtil.getFirstItemInArray(inv));
+				} else {
+					GL11.glTranslated(-.11, 1.35, .165);
+					GL11.glScaled(.4, .4, .4);
+					
+					for (int i=0; i<inv.length; i++) {
+						ItemStack stack = inv[i];
+
 						if (i != 0) {
 							GL11.glTranslated(.28, 0, 0);
 						}
@@ -111,16 +112,18 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 							GL11.glTranslated(-.84, 0, -.38);
 						}
 						
-						if (!(stack.getItem() instanceof ItemBlock)) {
-							GL11.glPushMatrix();
-							GL11.glScaled(.8, .8, .8);
-							GL11.glRotatef(90, 1, 0, 0);
-							GL11.glTranslated(0, -.24, 0);
-							
-							renderItem(world, stack);
-							GL11.glPopMatrix();
-						} else {
-							renderItem(world, stack);
+						if (stack != null) {
+							if (!(stack.getItem() instanceof ItemBlock)) {
+								GL11.glPushMatrix();
+								GL11.glScaled(.8, .8, .8);
+								GL11.glRotatef(90, 1, 0, 0);
+								GL11.glTranslated(0, -.24, 0);
+								
+								renderItem(world, stack);
+								GL11.glPopMatrix();
+							} else {
+								renderItem(world, stack);
+							}
 						}
 					}
 				}

@@ -51,42 +51,42 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 			if (fuelLevel > 0) {
 				--this.fuelLevel;
 				
-				if (totalCookTime > 0) {
-					if (trayInventory != null) {
-						if (currentCookTime == 0) {
+				if (this.open) {
+					for (EntityLiving living : getEntitiesInFireRange()) {
+						living.setFire(1);
+					}
+				} else {
+					if (totalCookTime > 0) {
+						if (trayInventory != null) {
+							if (currentCookTime == 0) {
+								RecipeSinteringOven recipe = CraftingManager.getInstance().ovenManager.getRecipe(Arrays.asList(this.trayInventory.inventory));
+							
+								if (recipe != null) {
+									doProcess( recipe );
+									
+									this.totalCookTime = 0;
+									this.currentCookTime = 0;
+									
+									sendUpdatePacket(Side.CLIENT);
+									return;
+								}
+							} else {
+								--currentCookTime;
+							}
+						} else {
+							totalCookTime = 0;
+						}
+					} else {
+						if (trayInventory != null) {
 							RecipeSinteringOven recipe = CraftingManager.getInstance().ovenManager.getRecipe(Arrays.asList(this.trayInventory.inventory));
-						
+							
 							if (recipe != null) {
-								doProcess( recipe );
-								
-								this.totalCookTime = 0;
-								this.currentCookTime = 0;
+								this.totalCookTime = this.currentCookTime = recipe.processingTime;
 								
 								sendUpdatePacket(Side.CLIENT);
 								return;
 							}
-						} else {
-							--currentCookTime;
 						}
-					} else {
-						totalCookTime = 0;
-					}
-				} else {
-					if (trayInventory != null) {
-						RecipeSinteringOven recipe = CraftingManager.getInstance().ovenManager.getRecipe(Arrays.asList(this.trayInventory.inventory));
-						
-						if (recipe != null) {
-							this.totalCookTime = this.currentCookTime = recipe.processingTime;
-							
-							sendUpdatePacket(Side.CLIENT);
-							return;
-						}
-					}
-				}
-				
-				if (this.open) {
-					for (EntityLiving living : getEntitiesInFireRange()) {
-						living.setFire(1);
 					}
 				}
 			}
