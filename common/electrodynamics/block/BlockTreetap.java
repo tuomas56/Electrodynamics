@@ -64,7 +64,6 @@ public class BlockTreetap extends BlockContainer {
 		return false;
 	}
 
-	//TODO Fix bounding box for player collision
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
 		TileEntityTreetap tile = (TileEntityTreetap) world.getBlockTileEntity(x, y, z);
 		
@@ -105,6 +104,11 @@ public class BlockTreetap extends BlockContainer {
 		return -1;
 	}
 
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+	
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
