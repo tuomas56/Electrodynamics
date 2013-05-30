@@ -52,6 +52,7 @@ import electrodynamics.world.gen.WorldGenNear;
 import electrodynamics.world.gen.WorldGenOre;
 import electrodynamics.world.gen.WorldGenPlant;
 import electrodynamics.world.gen.WorldGenRubberTree;
+import electrodynamics.world.handler.BonemealEventHandler;
 
 public class EDModuleWorld extends EDModule {
 
@@ -109,7 +110,7 @@ public class EDModuleWorld extends EDModule {
 
 	@Override
 	public void init() {
-//		MinecraftForge.EVENT_BUS.register(new BonemealEventHandler());
+		MinecraftForge.EVENT_BUS.register(new BonemealEventHandler());
 		
 		LiquidDictionary.getOrCreateLiquid("Latex", new LiquidStack(EDItems.itemLiquidLatex, LiquidContainerRegistry.BUCKET_VOLUME));
 		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(new LiquidStack(EDItems.itemLiquidLatex, LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(EDItems.itemLiquidLatex), new ItemStack(Item.bucketEmpty)));

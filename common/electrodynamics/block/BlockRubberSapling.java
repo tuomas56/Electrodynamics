@@ -25,20 +25,6 @@ public class BlockRubberSapling extends BlockSapling {
 		super(id);
 		setCreativeTab(CreativeTabED.resource);
 	}
-
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
-		ItemStack heldItem = player.getCurrentEquippedItem();
-		if( heldItem != null && heldItem.getItem() == Item.dyePowder && heldItem.getItemDamage() == 15 ) {
-			if( !world.isRemote ) {
-				(new WorldGenRubberTree(10, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.JUNGLE))).grow(world, x, y, z, new Random());
-				if( !player.capabilities.isCreativeMode )
-					heldItem.stackSize--;
-			}
-			return true;
-		}
-		return false;
-	}
 	
 	public void markOrGrowMarked(World world, int x, int y, int z, Random random) {
 		int l = world.getBlockMetadata(x, y, z);
