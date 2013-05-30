@@ -153,6 +153,12 @@ public class EDModuleMachine extends EDModule {
 		FurnaceRecipes.smelting().addSmelting(ItemIDs.ITEM_DUST_ID + 256, Dust.IRON.ordinal(), new ItemStack(Item.ingotIron), 0F);
 		FurnaceRecipes.smelting().addSmelting(ItemIDs.ITEM_DUST_ID + 256, Dust.GOLD.ordinal(), new ItemStack(Item.ingotGold), 0F);
 
+		FurnaceRecipes.smelting().addSmelting(BlockIDs.BLOCK_ORE_ID, Ore.CHALCOPYRITE.ordinal(), Ingot.COPPER.toItemStack(), 0F);
+		FurnaceRecipes.smelting().addSmelting(BlockIDs.BLOCK_ORE_ID, Ore.COBALTITE.ordinal(), Ingot.COBALT.toItemStack(), 0F);
+		FurnaceRecipes.smelting().addSmelting(BlockIDs.BLOCK_ORE_ID, Ore.GALENA.ordinal(), Ingot.LEAD.toItemStack(), 0F);
+		FurnaceRecipes.smelting().addSmelting(BlockIDs.BLOCK_ORE_ID, Ore.NICKEL.ordinal(), Ingot.NICKEL.toItemStack(), 0F);
+		FurnaceRecipes.smelting().addSmelting(BlockIDs.BLOCK_ORE_ID, Ore.WOLFRAMITE.ordinal(), Ingot.TUNGSTEN.toItemStack(), 0F);
+		
 		GameRegistry.registerTileEntity(TileEntitySinteringOven.class, Strings.MACHINE_SINTERING_OVEN);
 		GameRegistry.registerTileEntity(TileEntityTable.class, Strings.BLOCK_TABLE_NAME);
 		GameRegistry.registerTileEntity(TileEntityBasicSieve.class, Strings.MACHINE_BASIC_SIEVE);
