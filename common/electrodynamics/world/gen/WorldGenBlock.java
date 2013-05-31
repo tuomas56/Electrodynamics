@@ -4,11 +4,10 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
 
-public abstract class WorldGenBlock implements IWorldGenerator {
+public class WorldGenBlock implements IWorldGenerator {
 
 	public int blockID;
 	public int blockMeta;
@@ -25,10 +24,6 @@ public abstract class WorldGenBlock implements IWorldGenerator {
 	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-		if (world.getWorldInfo().getTerrainType() == WorldType.FLAT) {
-			return;
-		}
-		
 		for (int i=0; i<blockAmount; i++) {
 			int x = (chunkX * 16) + random.nextInt(16);
 			int y = random.nextInt(yMax);
@@ -36,10 +31,12 @@ public abstract class WorldGenBlock implements IWorldGenerator {
 			
 			if (world.getBlockId(x, y, z) == Block.stone.blockID) {
 				world.setBlock(x, y, z, this.blockID, this.blockMeta, 2);
+				
+				onGenned(world, x, y, z, random);
 			}
 		}
 	}
 
-	public abstract void onGenned(World world, int x, int y, int z, Random random);
+	public void onGenned(World world, int x, int y, int z, Random random) {}
 	
 }
