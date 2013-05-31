@@ -100,13 +100,13 @@ public class EDLanguage {
 	public void registerItemStack(ItemStack stack, String unlocalized) {
 		String currLang = "";
 		
-		try {
-			for (String lang : languageMapping.keySet()) {
+		for (String lang : languageMapping.keySet()) {
+			try {
 				currLang = lang;
 				LanguageRegistry.instance().addNameForObject(stack, lang, translate(unlocalized, lang));
+			} catch(Exception ex) {
+				printLanguageError(currLang, unlocalized);
 			}
-		} catch(Exception ex) {
-			printLanguageError(currLang, unlocalized);
 		}
 	}
 	
