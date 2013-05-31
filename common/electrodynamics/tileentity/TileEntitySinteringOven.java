@@ -2,10 +2,8 @@ package electrodynamics.tileentity;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-
-import electrodynamics.util.InventoryUtil;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -13,11 +11,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraftforge.common.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
 import electrodynamics.core.CoreUtils;
 import electrodynamics.inventory.InventoryItem;
 import electrodynamics.item.EDItems;
 import electrodynamics.recipe.CraftingManager;
 import electrodynamics.recipe.RecipeSinteringOven;
+import electrodynamics.util.InventoryUtil;
 import electrodynamics.util.ItemUtil;
 
 public class TileEntitySinteringOven extends TileEntityMachine {
@@ -102,6 +103,13 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 			if (doorAngle < 0) {
 				doorAngle = 0;
 			}
+		}
+	}
+	
+	@Override
+	public void onBlockBreak() {
+		if (this.hasTray) {
+			InventoryUtil.ejectItem(worldObj, xCoord, yCoord, zCoord, ForgeDirection.UP, this.trayInventory.parent.copy(), new Random());
 		}
 	}
 	

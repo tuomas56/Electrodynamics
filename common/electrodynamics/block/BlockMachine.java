@@ -79,6 +79,16 @@ public class BlockMachine extends BlockContainer {
 		return false;
 	}
 	
+	public void breakBlock(World world, int x, int y, int z, int id, int meta) {
+		TileEntity tile = world.getBlockTileEntity(x, y, z);
+		
+		if (tile instanceof TileEntityMachine) {
+			((TileEntityMachine)tile).onBlockBreak();
+		}
+		
+		super.breakBlock(world, x, y, z, id, meta);
+	}
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubBlocks(int id, CreativeTabs tab, List list) {

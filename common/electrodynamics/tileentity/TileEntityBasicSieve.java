@@ -36,6 +36,21 @@ public class TileEntityBasicSieve extends TileEntityMachine {
 	private SimpleInventory inventory = new SieveInternalInventory();
 	
 	@Override
+	public void onBlockBreak() {
+		if (currentlyProcessing != null) {
+			InventoryUtil.ejectItem(worldObj, xCoord, yCoord, zCoord, ForgeDirection.UP, currentlyProcessing.copy(), new Random());
+		}
+		
+		for (int i=0; i<inventory.getSizeInventory(); i++) {
+			ItemStack stack = inventory.getStackInSlot(i);
+			
+			if (stack != null) {
+				InventoryUtil.ejectItem(worldObj, xCoord, yCoord, zCoord, ForgeDirection.UP, stack.copy(), new Random());
+			}
+		}
+	}
+	
+	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		

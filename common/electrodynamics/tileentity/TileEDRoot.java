@@ -24,6 +24,10 @@ public class TileEDRoot extends TileEntity {
 		
 	}
 	
+	public void onBlockBreak() {
+		
+	}
+	
 	@Override
 	public void updateEntity() {
 		if (CoreUtils.isServer(this.worldObj)) {
