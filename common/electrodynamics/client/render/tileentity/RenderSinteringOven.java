@@ -97,6 +97,8 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 			if (first != null) {
 				if (ItemIngot.isIngot(first) && InventoryUtil.containsOnly(inv, first)) {
 					renderIngot(world, InventoryUtil.getFirstItemInArray(inv));
+				} else if ((first.getItem() == Item.chickenRaw && InventoryUtil.containsOnly(inv, first)) || (first.getItem() == Item.chickenCooked && InventoryUtil.containsOnly(inv, first))) {
+					renderChicken(world, InventoryUtil.getFirstItemInArray(inv));
 				} else {
 					GL11.glTranslated(-.11, 1.35, .165);
 					GL11.glScaled(.4, .4, .4);
@@ -141,28 +143,21 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 		this.modelIngot.render(0.0625F);
 	}
 	
-	public void renderItem(World world, ItemStack stack) {
-		if (stack != null) {
-			if (chickenEasterEgg) {
-				boolean chicken = false;
-				if (stack.getItem() == Item.chickenRaw) {
-					chicken = true;
-					Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_CHICKEN);
-				} else if (stack.getItem() == Item.chickenCooked) {
-					chicken = true;
-					Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_CHICKEN_COOKED);
-				}
-				
-				if (chicken) {
-					GL11.glRotatef(90, 0, 1, 0);
-					GL11.glRotatef(-90, 1, 0, 0);
-					GL11.glRotatef(-90, 0, 0, 1);
-					GL11.glTranslated(0, -1.2, 0.25);
-					this.modelChicken.render(0.0625F);
-					return;
-				}
+	public void renderChicken(World world, ItemStack stack) {
+		if (chickenEasterEgg) {
+			if (stack.getItem() == Item.chickenRaw) {
+				Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_CHICKEN);
+			} else if (stack.getItem() == Item.chickenCooked) {
+				Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_CHICKEN_COOKED);
 			}
 			
+			this.modelChicken.render(0.0625F);
+			return;
+		}
+	}
+	
+	public void renderItem(World world, ItemStack stack) {
+		if (stack != null) {
 			//Incredibly hackish, but better than essentially writing out a copy of the EntityItem renderer
 			boolean fancy = Minecraft.getMinecraft().gameSettings.fancyGraphics;
 			Minecraft.getMinecraft().gameSettings.fancyGraphics = true;

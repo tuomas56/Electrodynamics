@@ -12,9 +12,9 @@ public class ModelIngot extends ModelBase {
 		textureWidth = 64;
 		textureHeight = 32;
 
-		ingotRight = new ModelRenderer(this, 0, 0);
+		ingotRight = new ModelRenderer(this, 20, 3);
 		ingotRight.addBox(0F, 0F, 0F, 7, 2, 1);
-		ingotRight.setRotationPoint(0F, 0F, 0F);
+		ingotRight.setRotationPoint(0.02F, 0F, 0F);
 		ingotRight.setTextureSize(64, 32);
 		ingotRight.mirror = true;
 		setRotation(ingotRight, -0.2792527F, 0F, 0F);
@@ -24,9 +24,9 @@ public class ModelIngot extends ModelBase {
 		ingotBody.setTextureSize(64, 32);
 		ingotBody.mirror = true;
 		setRotation(ingotBody, 0F, 0F, 0F);
-		ingotLeft = new ModelRenderer(this, 0, 0);
+		ingotLeft = new ModelRenderer(this, 20, 0);
 		ingotLeft.addBox(0F, 0F, -1F, 7, 2, 1);
-		ingotLeft.setRotationPoint(0F, 0F, 3F);
+		ingotLeft.setRotationPoint(0.02F, 0F, 3F);
 		ingotLeft.setTextureSize(64, 32);
 		ingotLeft.mirror = true;
 		setRotation(ingotLeft, 0.2792527F, 0F, 0F);
