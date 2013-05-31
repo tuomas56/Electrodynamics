@@ -16,6 +16,8 @@ import net.minecraftforge.liquids.LiquidStack;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.block.BlockDecorative;
 import electrodynamics.block.BlockLithiumClay;
 import electrodynamics.block.BlockOre;
@@ -114,10 +116,7 @@ public class EDModuleWorld extends EDModule {
 		
 		LiquidDictionary.getOrCreateLiquid("Latex", new LiquidStack(EDItems.itemLiquidLatex, LiquidContainerRegistry.BUCKET_VOLUME));
 		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(new LiquidStack(EDItems.itemLiquidLatex, LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(EDItems.itemLiquidLatex), new ItemStack(Item.bucketEmpty)));
-		LiquidStack latex = LiquidDictionary.getCanonicalLiquid("Latex");
-		latex.setTextureSheet("/gui/items.png");
-		latex.setRenderingIcon(EDItems.itemLiquidLatex.getIconFromDamage(0));
-		
+
 		GameRegistry.registerTileEntity(TileEntityTreetap.class, Strings.BLOCK_TREETAP);
 		
 		FurnaceRecipes.smelting().addSmelting(BlockIDs.BLOCK_DECORATIVE_ID, 3, new ItemStack(EDBlocks.blockDecorative, 1, 0), 0F);
@@ -168,6 +167,15 @@ public class EDModuleWorld extends EDModule {
 		GameRegistry.registerWorldGenerator(new WorldGenRubberTree(10, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.JUNGLE)));
 	}
 
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void preInitClient() {
+		LiquidStack latex = LiquidDictionary.getCanonicalLiquid("Latex");
+		latex.setTextureSheet("/gui/items.png");
+		latex.setRenderingIcon(EDItems.itemLiquidLatex.getIconFromDamage(0));
+	}
+	
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void initClient() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreetap.class, new RenderTreetap());

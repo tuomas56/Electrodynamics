@@ -3,6 +3,9 @@ package electrodynamics.block;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -79,6 +82,7 @@ public class BlockRubberLeaves extends BlockLeaves {
 		return Minecraft.getMinecraft().gameSettings.fancyGraphics == true ? textures[1] : textures[0];
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public boolean isOpaqueCube() {
 		return !Minecraft.getMinecraft().gameSettings.fancyGraphics;

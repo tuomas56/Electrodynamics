@@ -4,6 +4,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.block.*;
 import electrodynamics.block.item.ItemBlockMachine;
 import electrodynamics.block.item.ItemBlockStorage;
@@ -179,6 +180,7 @@ public class EDModuleMachine extends EDModule {
 		MBSManager.registerMBS(new SinteringFurnace()); // Sintering Furnace
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void initClient() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySinteringOven.class, new RenderSinteringOven());
