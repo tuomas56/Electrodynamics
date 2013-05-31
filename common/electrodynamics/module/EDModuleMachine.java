@@ -31,6 +31,7 @@ import electrodynamics.recipe.RecipeManagerSieve;
 import electrodynamics.recipe.RecipeManagerSinteringOven;
 import electrodynamics.recipe.RecipeManagerTable;
 import electrodynamics.tileentity.*;
+import electrodynamics.util.ItemUtil;
 import electrodynamics.world.TickHandlerMBS;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -124,7 +125,7 @@ public class EDModuleMachine extends EDModule {
 		// Sap Torches
 		GameRegistry.addRecipe(new ItemStack(Block.torchWood, 16), "W", "A", "S", 'W', new ItemStack(Block.cloth, 1, OreDictionary.WILDCARD_VALUE), 'A', Component.SAP.toItemStack(), 'S', Item.stick);
 		// Metal Rod
-		GameRegistry.addRecipe(Component.METAL_BAR.toItemStack(), "  I", " I ", "I  ", 'I', Item.ingotIron);
+		GameRegistry.addRecipe(ItemUtil.getAndResize(Component.METAL_BAR.toItemStack(), 6), "  I", " I ", "I  ", 'I', Item.ingotIron);
 		// Basic Sieve
 		GameRegistry.addRecipe(Machine.BASIC_SIEVE.toItemStack(), "S S", "RBR", "WWW", 'S', new ItemStack(Block.woodSingleSlab, 1, OreDictionary.WILDCARD_VALUE), 'R', Component.METAL_BAR.toItemStack(), 'B', Block.fenceIron, 'W', new ItemStack(Block.planks, 1, OreDictionary.WILDCARD_VALUE));
 		// Hand Sieve
