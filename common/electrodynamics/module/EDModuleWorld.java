@@ -169,15 +169,11 @@ public class EDModuleWorld extends EDModule {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void preInitClient() {
+	public void initClient() {
 		LiquidStack latex = LiquidDictionary.getCanonicalLiquid("Latex");
 		latex.setTextureSheet("/gui/items.png");
 		latex.setRenderingIcon(EDItems.itemLiquidLatex.getIconFromDamage(0));
-	}
-	
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void initClient() {
+		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreetap.class, new RenderTreetap());
 		
 		RenderingRegistry.registerBlockHandler(new RenderBlockOre());
