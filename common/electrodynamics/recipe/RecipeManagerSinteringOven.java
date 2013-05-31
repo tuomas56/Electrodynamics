@@ -22,6 +22,8 @@ public class RecipeManagerSinteringOven {
 	}
 	
 	public RecipeSinteringOven getRecipe(List<ItemStack> input) {
+		if ((input == null) || (input.size() == 0)) return null;
+		
 		RecipeSinteringOven recipe = getOvenRecipe(input);
 		
 		if (recipe == null) { // Handle vanilla furnace recipes.
@@ -33,7 +35,7 @@ public class RecipeManagerSinteringOven {
 				if( recipe != null ) {
 					realInput.add( item );
 					output.addAll( recipe.itemOutputs );
-					processingTime = processingTime == 0 ? DEFAULT_PROCESSING_TIME : (int) Math.ceil( processingTime * 1.1f );
+					processingTime = processingTime == 0 ? DEFAULT_PROCESSING_TIME : (int) Math.ceil( processingTime * 1.5f );
 				}
 			}
 			recipe = new RecipeSinteringOven( realInput, output, processingTime );
