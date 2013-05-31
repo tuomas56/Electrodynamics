@@ -69,11 +69,11 @@ public class ContainerTeslaModule extends Container {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (par2 < 9) {
-				if (!this.mergeItemStack(itemstack1, 9, 45, true)) {
+			if (par2 < this.inventory.getSizeInventory()) {
+				if (!this.mergeItemStack(itemstack1, this.inventory.getSizeInventory(), this.inventorySlots.size(), true)) {
 					return null;
 				}
-			} else if (!this.mergeItemStack(itemstack1, 0, 9, false)) {
+			} else if (!this.mergeItemStack(itemstack1, 0, this.inventory.getSizeInventory(), false)) {
 				return null;
 			}
 
@@ -82,12 +82,6 @@ public class ContainerTeslaModule extends Container {
 			} else {
 				slot.onSlotChanged();
 			}
-
-			if (itemstack1.stackSize == itemstack.stackSize) {
-				return null;
-			}
-
-			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
 		}
 
 		return itemstack;
