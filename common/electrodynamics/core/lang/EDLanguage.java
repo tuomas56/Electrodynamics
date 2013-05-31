@@ -37,6 +37,7 @@ public class EDLanguage {
 	public EDLanguage() {
 		loadDefaultLanguage("en_US");
 		loadDefaultLanguage("es_ES");
+		loadDefaultLanguage("zh_CH");
 		
 		File langDir = new File(Electrodynamics.instance.configFolder, "lang");
 		if (!langDir.exists()) {
