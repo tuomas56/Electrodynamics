@@ -1,7 +1,7 @@
 package electrodynamics.client.render.block;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import electrodynamics.configuration.ConfigurationSettings;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.tileentity.TileStructure;
 import net.minecraft.block.Block;
@@ -13,6 +13,12 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderBlockStructure implements ISimpleBlockRenderingHandler {
 
+	public static int renderID;
+	
+	static {
+		renderID = RenderingRegistry.getNextAvailableRenderId();
+	}
+	
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		GL11.glPushMatrix();
@@ -61,7 +67,7 @@ public class RenderBlockStructure implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public int getRenderId() {
-		return ConfigurationSettings.STRUCTURE_BLOCK_RENDER_ID;
+		return renderID;
 	}
 
 	private int[] getRotations(int subBlock, int orientation) {

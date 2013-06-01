@@ -11,10 +11,6 @@ public class ConfigurationSettings {
 	public static final String MAGNETIC_ATTRACTION_SPEED_CONFIGNAME = "elmag_armor.speed";
 	public static final double MAGNETIC_ATTRACTION_SPEED_DEFAULT = 0.8D;
 	
-	/* Graphical settings */
-	public static int VOIDSTONE_RENDER_ID;
-	public static int STRUCTURE_BLOCK_RENDER_ID;
-	
 	/* Audio settings */
 	public static boolean VOIDSTONE_AMBIENT_SOUND;
 	public static final String VOIDSTONE_AMBIENT_SOUND_NAME = "sound.voidstone.ambient";

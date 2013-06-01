@@ -7,12 +7,18 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import electrodynamics.block.BlockOre;
-import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.lib.block.Ore;
 
 public class RenderBlockOre extends BlockRenderer implements ISimpleBlockRenderingHandler {
 
+	public static int renderID;
+	
+	static {
+		renderID = RenderingRegistry.getNextAvailableRenderId();
+	}
+	
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		GL11.glPushMatrix();
@@ -67,7 +73,7 @@ public class RenderBlockOre extends BlockRenderer implements ISimpleBlockRenderi
 	}
 
 	public int getRenderId() {
-		return ConfigurationSettings.VOIDSTONE_RENDER_ID;
+		return renderID;
 	}
 
 }

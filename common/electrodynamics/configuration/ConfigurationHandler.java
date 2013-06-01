@@ -1,6 +1,5 @@
 package electrodynamics.configuration;
 
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import electrodynamics.core.EDLogger;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.core.Strings;
@@ -24,10 +23,6 @@ public class ConfigurationHandler {
 			ConfigurationSettings.MAGNETIC_RANGE = config.get( CATEGORY_ELMAG, ConfigurationSettings.MAGNETIC_RANGE_CONFIGNAME, ConfigurationSettings.MAGNETIC_RANGE_DEFAULT ).getDouble( ConfigurationSettings.MAGNETIC_RANGE_DEFAULT );
 			ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED = config.get( CATEGORY_ELMAG, ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_CONFIGNAME, ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_DEFAULT ).getDouble( ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_DEFAULT );
 			
-			/* Graphical Settings */
-			ConfigurationSettings.STRUCTURE_BLOCK_RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
-			ConfigurationSettings.VOIDSTONE_RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
-
 			/* Audio settings */
 			ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND = config.get( CATEGORY_SOUND, ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND_NAME, ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND_DEFAULT ).getBoolean( ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND_DEFAULT );
 			

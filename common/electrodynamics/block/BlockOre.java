@@ -12,6 +12,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import electrodynamics.client.render.block.RenderBlockOre;
 import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.lib.block.BlockIDs;
@@ -77,7 +78,7 @@ public class BlockOre extends Block {
 
 	@Override
 	public int getRenderType() {
-		return ConfigurationSettings.VOIDSTONE_RENDER_ID;
+		return RenderBlockOre.renderID;
 	}
 	
 	@Override

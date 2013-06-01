@@ -3,7 +3,7 @@ package electrodynamics.block;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.api.tool.ITool;
-import electrodynamics.configuration.ConfigurationSettings;
+import electrodynamics.client.render.block.RenderBlockStructure;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.item.EDItems;
 import electrodynamics.lib.block.StructureComponent;
@@ -68,7 +68,7 @@ public class BlockStructure extends BlockGeneric {
 
 	@Override
 	public int getRenderType() {
-		return ConfigurationSettings.STRUCTURE_BLOCK_RENDER_ID;
+		return RenderBlockStructure.renderID;
 	}
 
 	@Override
