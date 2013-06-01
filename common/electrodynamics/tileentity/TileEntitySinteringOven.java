@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import electrodynamics.util.BlockUtil;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -37,6 +38,8 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 	
 	/** Set to the recipes value when tray is input. If this is greater than zero, a valid recipe is present */
 	public int totalCookTime;
+
+	public float storedExperience = 0.0f;
 	
 	/** Set to the recipes value when tray is input, when equal to zero, tray contents are replaced with recipe output */
 	public int currentCookTime;
@@ -64,7 +67,8 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 							
 								if (recipe != null) {
 									doProcess( recipe );
-									
+									this.storedExperience = recipe.getExperience();
+
 									this.totalCookTime = 0;
 									this.currentCookTime = 0;
 									
@@ -129,6 +133,7 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 		nbt.setBoolean("open", open);
 		nbt.setBoolean("hasTray", hasTray);
 		nbt.setInteger("fuelLevel", fuelLevel);
+		nbt.setFloat("storedExperience", storedExperience);
 		if (this.hasTray) {
 			this.trayInventory.writeToNBT(nbt);
 		}
@@ -141,6 +146,7 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 		this.open = nbt.getBoolean("open");
 		this.hasTray = nbt.getBoolean("hasTray");
 		this.fuelLevel = nbt.getInteger("fuelLevel");
+		this.storedExperience = nbt.getFloat("storedExperience");
 		if (nbt.hasKey("Items")) {
 			this.trayInventory = new InventoryItem(9, new ItemStack(EDItems.itemTray));
 			this.trayInventory.readFromNBT(nbt);
@@ -186,7 +192,12 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 			
 			if (this.hasTray) {
 				player.setCurrentItemOrArmor( 0, trayInventory.parent.copy() );
-				
+
+				// Give experience
+				if( storedExperience > 0.0f ) {
+					BlockUtil.spawnExperienceOrbs( worldObj, xCoord, yCoord, zCoord, storedExperience );
+				}
+				this.storedExperience = 0.0f;
 				this.hasTray = false;
 				this.trayInventory = null;
 				this.currentCookTime = 0;

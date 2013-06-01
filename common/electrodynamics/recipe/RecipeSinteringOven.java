@@ -11,6 +11,8 @@ public class RecipeSinteringOven {
 	public List<ItemStack> itemOutputs;
 	
 	public int processingTime;
+
+	public float experience = 0.0f;
 	
 	public RecipeSinteringOven(List<ItemStack> itemInput, List<ItemStack> itemOutputs, int processingTime) {
 		this.itemInputs = itemInput;
@@ -33,6 +35,14 @@ public class RecipeSinteringOven {
 	
 	public void setOutput(List<ItemStack> outputs) {
 
+	}
+
+	public void setExperience(float experience) {
+		this.experience = experience;
+	}
+
+	public float getExperience() {
+		return experience;
 	}
 
 	public boolean isInput(List<ItemStack> input) {

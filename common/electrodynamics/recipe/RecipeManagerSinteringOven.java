@@ -30,16 +30,19 @@ public class RecipeManagerSinteringOven {
 		if (recipe == null) { // Handle vanilla furnace recipes.
 			input = trimItemStackList(input);
 			int processingTime = 0;
+			float experience = 0.0f;
 			List<ItemStack> realInput = new ArrayList<ItemStack>(), output = new ArrayList<ItemStack>();
 			for( ItemStack item : input ) {
 				recipe = getFurnaceRecipe( item );
 				if( recipe != null ) {
 					realInput.add( item );
 					output.addAll( recipe.itemOutputs );
+					experience += recipe.getExperience();
 					processingTime = processingTime == 0 ? DEFAULT_PROCESSING_TIME : (int) Math.ceil( processingTime * DEFAULT_PROCESSING_RATE );
 				}
 			}
 			recipe = new RecipeSinteringOven( realInput, output, processingTime );
+			recipe.setExperience( experience < 0.0f ? 0.0f : experience );
 		}
 		
 		return recipe;
@@ -62,7 +65,10 @@ public class RecipeManagerSinteringOven {
 
 		ItemStack result = FurnaceRecipes.smelting().getSmeltingResult( stack );
 		if( result != null ) {
-			return new RecipeSinteringOven( Arrays.asList(stack), Arrays.asList( result ), 0 );
+			float experience = FurnaceRecipes.smelting().getExperience( result ) * stack.stackSize;
+			RecipeSinteringOven recipe = new RecipeSinteringOven( Arrays.asList( stack ), Arrays.asList( result ), 0 );
+			recipe.setExperience( experience );
+			return recipe;
 		}
 		
 		return null;

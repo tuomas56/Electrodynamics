@@ -2,8 +2,10 @@ package electrodynamics.util;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -51,6 +53,30 @@ public class BlockUtil {
 			}
 
 			world.spawnEntityInWorld( entityitem );
+		}
+	}
+
+	/**
+	 * Spawns the experience orbs in the world at the given coordinates.
+	 * The total amount of experience is split into several orbs, following what EntityXPOrb.getXPSplit() dictates.
+	 *
+	 * @param world      the World object
+	 * @param x          the x coordinate
+	 * @param y          the y coordinate
+	 * @param z          the z coordinate
+	 * @param experience the amount of experience to spawn.
+	 * @see EntityXPOrb#getXPSplit(int)
+	 */
+	public static void spawnExperienceOrbs(World world, int x, int y, int z, float experience) {
+		int exp = MathHelper.floor_float( experience );
+		if( exp < MathHelper.ceiling_float_int( experience ) && (float) Math.random() < experience - (float) exp ) {
+			exp++;
+		}
+
+		while( exp > 0 ) {
+			int split = EntityXPOrb.getXPSplit( exp );
+			exp -= split;
+			world.spawnEntityInWorld( new EntityXPOrb( world, x, y + 0.5D, z, split ) );
 		}
 	}
 
