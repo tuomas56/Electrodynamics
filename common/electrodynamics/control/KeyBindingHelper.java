@@ -23,6 +23,14 @@ public class KeyBindingHelper {
 	}
 	
 	public static KeyBinding[] getBindings() {
+		if (bindingList == null) {
+			bindingList = new ArrayList<KeyBinding>();
+		}
+		
+		if (isRepeatingList == null) {
+			isRepeatingList = new ArrayList<Boolean>();
+		}
+		
 		return bindingList.toArray(new KeyBinding[bindingList.size()]);
 	}
 

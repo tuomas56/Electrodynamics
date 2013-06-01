@@ -26,11 +26,11 @@ public class RenderBlockOre extends BlockRenderer implements ISimpleBlockRenderi
 			t.setBrightness(320);
 
 			block.setBlockBounds(0.1F, 0.1F, 0.1F, 0.9F, 0.9F, 0.9F);
-			drawFaces(renderer, block, ((BlockOre) block).voidstoneTextures[2], true);
+			drawFaces(renderer, block, ((BlockOre) block).voidstoneTexture, true);
 			
 			block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 			renderer.setRenderBoundsFromBlock(block);
-			drawFaces(renderer, block, ((BlockOre) block).voidstoneTextures[0], true);
+			drawFaces(renderer, block, ((BlockOre) block).oreTransparency, true);
 		} else {
 			drawFaces(renderer, block, ((BlockOre) block).textures[metadata], true);
 		}
@@ -45,12 +45,12 @@ public class RenderBlockOre extends BlockRenderer implements ISimpleBlockRenderi
 		int bb = setBrightness(world, x, y, z, block);
 	    int metadata = world.getBlockMetadata(x, y, z);
 	    
-	    if ((metadata == Ore.VOIDSTONE.ordinal() && ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS)) {
+	    if ((metadata == Ore.VOIDSTONE.ordinal())) {
 	      Tessellator t = Tessellator.instance;
 	      t.setBrightness(320);
 
 	      block.setBlockBounds(0.2F, 0.2F, 0.2F, 0.8F, 0.8F, 0.8F);
-	      renderAllSides(world, x, y, z, block, renderer, ((BlockOre)block).voidstoneTextures[2]);
+	      renderAllSides(world, x, y, z, block, renderer, ((BlockOre)block).voidstoneTexture);
 	    }
 
 	    block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);

@@ -1,7 +1,6 @@
 package electrodynamics.configuration;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import electrodynamics.Electrodynamics;
 import electrodynamics.core.EDLogger;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.core.Strings;
@@ -24,25 +23,16 @@ public class ConfigurationHandler {
 		try {
 			ConfigurationSettings.MAGNETIC_RANGE = config.get( CATEGORY_ELMAG, ConfigurationSettings.MAGNETIC_RANGE_CONFIGNAME, ConfigurationSettings.MAGNETIC_RANGE_DEFAULT ).getDouble( ConfigurationSettings.MAGNETIC_RANGE_DEFAULT );
 			ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED = config.get( CATEGORY_ELMAG, ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_CONFIGNAME, ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_DEFAULT ).getDouble( ConfigurationSettings.MAGNETIC_ATTRACTION_SPEED_DEFAULT );
-			ConfigurationSettings.THERMAL_VIEW_RANGE = config.get( CATEGORY_ELMAG, ConfigurationSettings.THERMAL_VIEW_RANGE_CONFIGNAME, ConfigurationSettings.THERMAL_VIEW_RANGE_DEFAULT ).getDouble( ConfigurationSettings.THERMAL_VIEW_RANGE_DEFAULT );
-
-			ConfigurationSettings.RUBBER_FILL_TIME = config.get( CATEGORY_SETTINGS, ConfigurationSettings.RUBBER_FILL_TIME_CONFIGNAME, ConfigurationSettings.RUBBER_FILL_TIME_DEFAULT, "Amount of time (in ticks) for one bucket to fill via basic tap. (20 ticks to one second)" ).getInt( ConfigurationSettings.RUBBER_FILL_TIME_DEFAULT );
 			
 			/* Graphical Settings */
 			ConfigurationSettings.STRUCTURE_BLOCK_RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 			ConfigurationSettings.VOIDSTONE_RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
-			ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS = config.get( CATEGORY_GRAPHICS, ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS_NAME, ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS_DEFAULT ).getBoolean( ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS_DEFAULT );
 
 			/* Audio settings */
 			ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND = config.get( CATEGORY_SOUND, ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND_NAME, ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND_DEFAULT ).getBoolean( ConfigurationSettings.VOIDSTONE_AMBIENT_SOUND_DEFAULT );
 			
 			/* General Settings */
 			ConfigurationSettings.SHOW_LOCALIZATION_ERRORS = config.get( CATEGORY_SETTINGS, ConfigurationSettings.SHOW_LOCALIZATION_ERRORS_NAME, ConfigurationSettings.SHOW_LOCALIZATION_ERRORS_DEFAULT, "Whether missing localization entries should print errors to the console." ).getBoolean( ConfigurationSettings.SHOW_LOCALIZATION_ERRORS_DEFAULT );
-			
-			/* Key Bindings */
-			Electrodynamics.proxy.setKeyBinding( ConfigurationSettings.MAGNET_TOGGLE_NAME, config.get( CATEGORY_KEYS, ConfigurationSettings.MAGNET_TOGGLE_CONFIGNAME, ConfigurationSettings.MAGNET_TOGGLE_DEFAULT ).getInt( ConfigurationSettings.MAGNET_TOGGLE_DEFAULT ), false );
-			Electrodynamics.proxy.setKeyBinding( ConfigurationSettings.THERMAL_VIEW_TOGGLE_NAME, config.get( CATEGORY_KEYS, ConfigurationSettings.THERMAL_VIEW_TOGGLE_CONFIGNAME, ConfigurationSettings.THERMAL_VIEW_TOGGLE_DEFAULT ).getInt( ConfigurationSettings.THERMAL_VIEW_TOGGLE_DEFAULT ), false );
-			Electrodynamics.proxy.setKeyBinding( ConfigurationSettings.HOVER_MODE_TOGGLE_NAME, config.get( CATEGORY_KEYS, ConfigurationSettings.HOVER_MODE_TOGGLE_CONFIGNAME, ConfigurationSettings.HOVER_MODE_TOGGLE_DEFAULT ).getInt( ConfigurationSettings.HOVER_MODE_TOGGLE_DEFAULT ), false );
 			
 			/* Block IDs */
 			BlockIDs.BLOCK_ORE_ID = config.getBlock( Strings.BLOCK_ORE_NAME, BlockIDs.BLOCK_ORE_DEFAULT_ID ).getInt( BlockIDs.BLOCK_ORE_DEFAULT_ID );

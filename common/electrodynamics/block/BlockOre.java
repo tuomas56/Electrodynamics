@@ -16,14 +16,16 @@ import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.block.Ore;
+import electrodynamics.lib.core.ModInfo;
 
 public class BlockOre extends Block {
 
 	public Icon[] textures;
 	
-	/** Textures specifically for Voidstone. <br /> 0 = transparent, 1 = fake star field, 2 = glowing animation */
-	public Icon[] voidstoneTextures;
+	public Icon voidstoneTexture;
 
+	public Icon oreTransparency;
+	
 	@SideOnly(Side.CLIENT)
 	public long soundDelay;
 	
@@ -70,7 +72,7 @@ public class BlockOre extends Block {
 
 	@Override
 	public Icon getIcon(int side, int metadata) {
-		return (metadata == Ore.VOIDSTONE.ordinal() ? ConfigurationSettings.VOIDSTONE_FANCY_GRAPHICS == true ? voidstoneTextures[0] : voidstoneTextures[1] : textures[metadata]);
+		return (metadata == Ore.VOIDSTONE.ordinal() ? oreTransparency : textures[metadata]);
 	}
 
 	@Override
@@ -81,15 +83,13 @@ public class BlockOre extends Block {
 	@Override
 	public void registerIcons(IconRegister registry) {
 		textures = new Icon[Ore.values().length];
-		voidstoneTextures = new Icon[3];
 		
 		for (int i = 0; i < Ore.values().length; i++) {
 			textures[i] = registry.registerIcon(Ore.get(i).getTextureFile());
 		}
 		
-		voidstoneTextures[2] = registry.registerIcon(Ore.VOIDSTONE.getTextureFile() + "Effect");
-		voidstoneTextures[1] = registry.registerIcon(Ore.VOIDSTONE.getTextureFile() + "Fast");
-		voidstoneTextures[0] = registry.registerIcon(Ore.VOIDSTONE.getTextureFile() + "Fancy");
+		voidstoneTexture = registry.registerIcon(Ore.VOIDSTONE.getTextureFile() + "Effect");
+		oreTransparency = registry.registerIcon(ModInfo.ICON_PREFIX + "world/ore/oreTransparent");
 	}
 
 	@SideOnly(Side.CLIENT)
