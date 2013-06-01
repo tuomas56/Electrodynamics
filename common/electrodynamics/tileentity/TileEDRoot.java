@@ -55,9 +55,11 @@ public class TileEDRoot extends TileEntity {
 	public Packet getDescriptionPacket() {
 		return new Packet132TileEntityData(xCoord, yCoord, zCoord, 3, getStoredNBTData());
 	}
-	
+
+	@Override
 	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
 		readFromNBT(pkt.customParam1);
+		worldObj.markBlockForRenderUpdate( xCoord, yCoord, zCoord );
     }
 	
 }
