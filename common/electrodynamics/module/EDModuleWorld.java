@@ -145,13 +145,13 @@ public class EDModuleWorld extends EDModule {
 		// Limestone
 		GameRegistry.registerWorldGenerator(new WorldGenLimestone(BlockIDs.BLOCK_DECORATIVE_ID, 10));
 		// Voidstone
-		GameRegistry.registerWorldGenerator(new WorldGenBlock(BlockIDs.BLOCK_ORE_ID, Ore.VOIDSTONE.ordinal(), 3, 10) {
+		GameRegistry.registerWorldGenerator(new WorldGenBlock(BlockIDs.BLOCK_ORE_ID, Ore.VOIDSTONE.ordinal(), 1, 10) {
 			@Override
 			public void onGenned(World world, int x, int y, int z, Random random) {
 				for (int ix = x - 2; ix < x + 2; ix++) {
 					for (int iy = y - 2; iy < y + 2; iy++) {
 						for (int iz = z - 2; iz < z + 2; iz++) {
-							if (ix != x && iy != y && iz != z) {
+							if (world.getBlockId(ix, iy, iz) != blockID) {
 								world.setBlockToAir(ix, iy, iz);
 							}
 						}
