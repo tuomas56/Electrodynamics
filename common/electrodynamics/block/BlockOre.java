@@ -22,9 +22,7 @@ public class BlockOre extends Block {
 
 	public Icon[] textures;
 	
-	public Icon voidstoneTexture;
-
-	public Icon oreTransparency;
+	public Icon voidstoneEffect;
 	
 	@SideOnly(Side.CLIENT)
 	public long soundDelay;
@@ -72,7 +70,7 @@ public class BlockOre extends Block {
 
 	@Override
 	public Icon getIcon(int side, int metadata) {
-		return (metadata == Ore.VOIDSTONE.ordinal() ? oreTransparency : textures[metadata]);
+		return textures[metadata];
 	}
 
 	@Override
@@ -88,8 +86,7 @@ public class BlockOre extends Block {
 			textures[i] = registry.registerIcon(Ore.get(i).getTextureFile());
 		}
 		
-		voidstoneTexture = registry.registerIcon(Ore.VOIDSTONE.getTextureFile() + "Effect");
-		oreTransparency = registry.registerIcon(ModInfo.ICON_PREFIX + "world/ore/oreTransparent");
+		voidstoneEffect = registry.registerIcon(ModInfo.ICON_PREFIX + "world/ore/oreVoidstoneEffect");
 	}
 
 	@SideOnly(Side.CLIENT)

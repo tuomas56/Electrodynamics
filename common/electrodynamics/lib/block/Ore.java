@@ -2,6 +2,7 @@ package electrodynamics.lib.block;
 
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
 public enum Ore {
@@ -51,6 +52,11 @@ public enum Ore {
 	}
 	
 	public String getTextureFile() {
+		if (this == Ore.VOIDSTONE) {
+			String graphicType = Minecraft.getMinecraft().gameSettings.fancyGraphics == true ? "Fancy" : "Fast";
+			return ModInfo.ICON_PREFIX + "world/ore/" + textureFile + graphicType;
+		}
+		
 		return ModInfo.ICON_PREFIX + "world/ore/" + textureFile;
 	}
 
