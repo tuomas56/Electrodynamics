@@ -9,7 +9,8 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 
 public class RecipeManagerSinteringOven {
 
-	public static final int DEFAULT_PROCESSING_TIME = 4 * 20; // 4 seconds (full tray will take 8.7 seconds)
+	public static final int DEFAULT_PROCESSING_TIME = 4 * 20; // 4 seconds
+	public static final float DEFAULT_PROCESSING_RATE = 1.3f; // full tray will take 33.2 seconds
 
 	public ArrayList<RecipeSinteringOven> sinteringOvenRecipes = new ArrayList<RecipeSinteringOven>();
 	
@@ -35,7 +36,7 @@ public class RecipeManagerSinteringOven {
 				if( recipe != null ) {
 					realInput.add( item );
 					output.addAll( recipe.itemOutputs );
-					processingTime = processingTime == 0 ? DEFAULT_PROCESSING_TIME : (int) Math.ceil( processingTime * 1.5f );
+					processingTime = processingTime == 0 ? DEFAULT_PROCESSING_TIME : (int) Math.ceil( processingTime * DEFAULT_PROCESSING_RATE );
 				}
 			}
 			recipe = new RecipeSinteringOven( realInput, output, processingTime );
