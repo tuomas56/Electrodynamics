@@ -119,7 +119,7 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 	}
 	
 	public AxisAlignedBB getFireDetectionBoundingBox() {
-		return this.getRenderBoundingBox().addCoord(1 * this.rotation.offsetX, 0, 1 * this.rotation.offsetZ);
+		return AxisAlignedBB.getAABBPool().getAABB(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).addCoord(1 * this.rotation.offsetX, 0, 1 * this.rotation.offsetZ);
 	}
 	
 	@Override
