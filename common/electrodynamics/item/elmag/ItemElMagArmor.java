@@ -8,10 +8,11 @@ import electrodynamics.core.handler.GuiHandler;
 import electrodynamics.interfaces.IInventoryItem;
 import electrodynamics.inventory.InventoryItem;
 import electrodynamics.lib.core.ModInfo;
+import electrodynamics.util.MathUtil;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -48,15 +49,15 @@ public class ItemElMagArmor extends ItemArmor implements IInventoryItem {
 		if (!world.isRemote) {
 			if (player.isSneaking()) {
 				GuiHandler.openGui(player, world, (int)player.posX, (int)player.posY, (int)player.posZ, GuiHandler.GuiType.TESLA_MODULE);
-			} else {
-				int pos = EntityLiving.getArmorPosition(stack) - 1;
-				ItemStack currArmor = player.getCurrentArmor(pos);
-				
-				if (currArmor == null) {
-					player.setCurrentItemOrArmor(pos, stack.copy());
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-				}
 			}
+		}
+		
+		int pos = MathUtil.reverseNumber(((ItemArmor)stack.getItem()).armorType, 0, 3);
+		ItemStack currArmor = player.getCurrentArmor(pos);
+		
+		if (currArmor == null) {
+			player.setCurrentItemOrArmor(pos + 1, stack.copy());
+			player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 		}
 		
 		return stack;
