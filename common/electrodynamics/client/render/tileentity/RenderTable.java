@@ -65,11 +65,6 @@ public class RenderTable extends TileEntitySpecialRenderer {
 		GL11.glRotatef(180, 1, 0, 0);
 		GL11.glTranslated(0, -0.62, 0);
 		
-		if (!Minecraft.getMinecraft().gameSettings.fancyGraphics && !(stack.getItem() instanceof ItemBlock)) {
-			GL11.glRotatef(-180, 0, 1, 0);
-			GL11.glRotatef(Minecraft.getMinecraft().renderViewEntity.rotationYaw, 0, 0, 1);
-		}
-		
 		if (!(stack.getItem() instanceof ItemBlock)) {
 			GL11.glRotatef(90, 1, 0, 0);
 			GL11.glTranslated(0, -0.18, 0);
@@ -88,10 +83,16 @@ public class RenderTable extends TileEntitySpecialRenderer {
 		
 		GL11.glScalef(1.25F, 1.25F, 1.25F);
 		
+		//Incredibly hackish, but better than essentially writing out a copy of the EntityItem renderer
+		boolean fancy = Minecraft.getMinecraft().gameSettings.fancyGraphics;
+		Minecraft.getMinecraft().gameSettings.fancyGraphics = true;
+		
 		EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, stack);
 		entityitem.getEntityItem().stackSize = 1;
 		entityitem.hoverStart = 0.0F;
-        RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+		RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+		
+		Minecraft.getMinecraft().gameSettings.fancyGraphics = fancy;
 	}
 	
 	@Override
