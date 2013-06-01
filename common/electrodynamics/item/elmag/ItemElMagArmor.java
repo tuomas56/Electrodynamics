@@ -45,18 +45,18 @@ public class ItemElMagArmor extends ItemArmor implements IInventoryItem {
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (!world.isRemote) {
-			if (player.isSneaking()) {
+		if (player.isSneaking()) {
+			if (!world.isRemote) {
 				GuiHandler.openGui(player, world, (int)player.posX, (int)player.posY, (int)player.posZ, GuiHandler.GuiType.TESLA_MODULE);
 			}
-		}
-		
-		int pos = MathUtil.reverseNumber(((ItemArmor)stack.getItem()).armorType, 0, 3);
-		ItemStack currArmor = player.getCurrentArmor(pos);
-		
-		if (currArmor == null) {
-			player.setCurrentItemOrArmor(pos + 1, stack.copy());
-			player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+		} else {
+			int pos = MathUtil.reverseNumber(((ItemArmor)stack.getItem()).armorType, 0, 3);
+			ItemStack currArmor = player.getCurrentArmor(pos);
+			
+			if (currArmor == null) {
+				player.setCurrentItemOrArmor(pos + 1, stack.copy());
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+			}
 		}
 		
 		return stack;
