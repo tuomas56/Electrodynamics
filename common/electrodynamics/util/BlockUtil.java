@@ -80,4 +80,14 @@ public class BlockUtil {
 		}
 	}
 
+	public static int getFirstUncoveredYPos(World world, int x, int z) {
+		int y;
+		
+		for (y = 255; !world.isAirBlock(x, y - 1, y); --y) {
+			;
+		}
+
+		return y;
+	}
+	
 }

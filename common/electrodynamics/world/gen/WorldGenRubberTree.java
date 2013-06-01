@@ -1,6 +1,7 @@
 package electrodynamics.world.gen;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -8,10 +9,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import cpw.mods.fml.common.IWorldGenerator;
 import electrodynamics.block.EDBlocks;
+import electrodynamics.util.BlockUtil;
 
 public class WorldGenRubberTree implements IWorldGenerator {
 
@@ -30,23 +34,25 @@ public class WorldGenRubberTree implements IWorldGenerator {
 			return;
 		}
 		
-		generate(world, random, chunkX, 10, chunkZ);
-	}
-
-	public boolean generate(World world, Random random, int x, int count, int z) {
+		int count = 0;
+		
+		if (Arrays.asList(BiomeDictionary.getBiomesForType(Type.PLAINS)).contains(world.getBiomeGenForCoords(chunkX * 16, chunkZ * 16))) {
+			count = 2;
+		} else if (Arrays.asList(BiomeDictionary.getBiomesForType(Type.SWAMP)).contains(world.getBiomeGenForCoords(chunkX * 16, chunkZ * 16))) {
+			count = 5;
+		} else if (Arrays.asList(BiomeDictionary.getBiomesForType(Type.JUNGLE)).contains(world.getBiomeGenForCoords(chunkX * 16, chunkZ * 16))) {
+			count = 10;
+		}
+		
 		for (; count > 0; count--) {
-			x += random.nextInt(15) - 7;
-			z += random.nextInt(15) - 7;
-			
-			int y = 256 - 1;
-			while ((world.getBlockId(x, y - 1, z) == 0) && (y > 0))
-				y--;
+			int x = (chunkX * 16) + random.nextInt(16);
+			int z = (chunkZ * 16) + random.nextInt(16);
+			int y = BlockUtil.getFirstUncoveredYPos(world, x, z);
 			
 			if (validBiomes.contains(world.getBiomeGenForCoords(x, z))) {
 				grow(world, x, y, z, random);
 			}
 		}
-		return true;
 	}
 
 	public boolean grow(World world, int x, int y, int z, Random random) {
