@@ -54,6 +54,7 @@ public class ItemElMagArmor extends ItemArmor implements IInventoryItem {
 				
 				if (currArmor == null) {
 					player.setCurrentItemOrArmor(pos, stack.copy());
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 				}
 			}
 		}
