@@ -25,7 +25,7 @@ public class CommonProxy {
 		NetworkRegistry.instance().registerConnectionHandler(new ConnectionHandler());
 		
 		ModuleManager.preInit();
-		AddonManager.loadAddons();
+		
 	}
 
 	public void init(FMLInitializationEvent event) {
@@ -37,6 +37,7 @@ public class CommonProxy {
 
 	public void postInit(FMLPostInitializationEvent event) {
 		ModuleManager.postInit();
+		AddonManager.loadAddons();
 		AddonManager.init();
 	}
 	

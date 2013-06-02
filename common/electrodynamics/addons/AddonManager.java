@@ -5,6 +5,8 @@ import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Map;
 
+import cpw.mods.fml.common.Loader;
+
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 import electrodynamics.Electrodynamics;
@@ -50,8 +52,12 @@ public class AddonManager {
 				EDAddon instance = addons.get(addon);
 				
 				if (instance != null) {
-					loadedAddons.add(addon);
-					EDLogger.info("Loading addon " + addon.toString());
+					if (Loader.isModLoaded(instance.getModDependency())) {
+						loadedAddons.add(addon);
+						EDLogger.info("Loading addon " + addon.toString());
+					} else {
+						EDLogger.warn("Tried to load addon " + addon.toString() + " but it's dependency " + instance.getModDependency() + " isn't loaded. Skipping.");
+					}
 				} else {
 					EDLogger.warn("Addon " + addon.toString() + " is missing a mapping!");
 				}
