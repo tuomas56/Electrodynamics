@@ -73,6 +73,7 @@ public class TurtleHammer implements ITurtleUpgrade {
 		    					
 		    					if (turtle.storeItemStack(table.displayedItem.copy())) {
 		    						table.setItem(null);
+		    						table.update();
 		    					}
 		    				}
 		    				
