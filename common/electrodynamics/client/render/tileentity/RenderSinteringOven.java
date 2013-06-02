@@ -71,11 +71,11 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 		modelSinteringOven.rotateDoor(((TileEntitySinteringOven)tile).doorAngle);
 		modelSinteringOven.renderAll(0.0625F);
 
-		if (((TileEntitySinteringOven)tile).fuelLevel > 0) {
+		if (((TileEntitySinteringOven)tile).burning) {
 			renderFire(tile.worldObj, tile.xCoord, tile.yCoord, tile.zCoord, ((TileEntityMachine)tile).rotation.ordinal());
 		}
 		
-		if (((TileEntitySinteringOven)tile).hasTray) {
+		if (((TileEntitySinteringOven)tile).trayInventory != null) {
 			renderTray(tile.worldObj, ((TileEntitySinteringOven)tile).trayInventory.inventory);
 		}
 		

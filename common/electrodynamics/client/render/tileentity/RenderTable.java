@@ -35,10 +35,11 @@ public class RenderTable extends TileEntitySpecialRenderer {
 		ItemStack itemstack = table.displayedItem;
 
 		if (itemstack != null) {
+			byte type = (byte)table.worldObj.getBlockMetadata(table.xCoord, table.yCoord, table.zCoord);
 			if (itemstack.getItem() instanceof ItemMinecart) {
-				renderMinecart(table.worldObj, itemstack, table.type);
+				renderMinecart(table.worldObj, itemstack, type);
 			} else {
-				renderItem(table.worldObj, itemstack, table.type);
+				renderItem(table.worldObj, itemstack, type);
 			}
 		}
 	}
@@ -103,11 +104,13 @@ public class RenderTable extends TileEntitySpecialRenderer {
 		GL11.glColor4f(1, 1, 1, 1);
 		GL11.glTranslated(x + 0.5, y + 1.5, z + 0.5);
 		GL11.glRotatef(180, 0, 0, 1);
-
-		Minecraft.getMinecraft().renderEngine.bindTexture(textures[((TileEntityTable) tile).type]);
-		tables[((TileEntityTable)tile).type].render(0.0625F);
 		
-		renderTableContentsAt((TileEntityTable) tile);
+		byte type = (byte)tile.worldObj.getBlockMetadata(tile.xCoord, tile.yCoord, tile.zCoord);
+
+		Minecraft.getMinecraft().renderEngine.bindTexture(textures[type]);
+		tables[type].render(0.0625F);
+		
+		renderTableContentsAt((TileEntityTable)tile);
 
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();

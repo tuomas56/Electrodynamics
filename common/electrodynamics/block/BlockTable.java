@@ -72,11 +72,7 @@ public class BlockTable extends BlockContainer implements IAcceptsTool {
 		TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
 
 		if (table != null) {
-			ItemStack itemstack = table.displayedItem;
-
-			if (itemstack != null) {
-				BlockUtil.dropItemFromBlock(world, x, y, z, itemstack, this.random);
-			}
+			table.onBlockBreak();
 		}
 
 		super.breakBlock(world, x, y, z, i1, i2);
@@ -84,33 +80,9 @@ public class BlockTable extends BlockContainer implements IAcceptsTool {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
-		if (world.isRemote) return true;
-		if (player.isSneaking()) return false;
-		
 		TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
-		
-		if (player.getCurrentEquippedItem() != null && (player.getCurrentEquippedItem().getItem() instanceof ITool) && table.hasRecipe(player.getCurrentEquippedItem())) {
-			table.handleSmash(player, player.getCurrentEquippedItem());
-			((ITool)player.getCurrentEquippedItem().getItem()).onToolUsed(player.getCurrentEquippedItem(), world, x, y, z, player);
-		} else {
-			if (table.getItem() != null) {
-				BlockUtil.dropItemFromBlock(world, x, y, z, table.displayedItem.copy(), this.random);
-				table.setItem(null);
-			} else {
-				if (player.getCurrentEquippedItem() != null) {
-					ItemStack toDisplay = player.getCurrentEquippedItem().copy();
-					toDisplay.stackSize = 1;
-					table.setItem(toDisplay);
-					
-					if (player.getCurrentEquippedItem().stackSize > 1) {
-						player.getCurrentEquippedItem().stackSize--;
-					} else {
-						player.inventory.mainInventory[player.inventory.currentItem] = null;
-					}
-				}
-			}
-			
-			table.update();
+		if(table != null) {
+			table.onBlockActivated(player);
 		}
 		
 		return true;
@@ -130,13 +102,8 @@ public class BlockTable extends BlockContainer implements IAcceptsTool {
 		}
 	}
 
-	public TileEntity createTileEntity(World world, int meta) {
-		return new TileEntityTable((byte) meta);
-	}
-
-	/* IGNORE */
 	public TileEntity createNewTileEntity(World world) {
-		return null;
+		return new TileEntityTable();
 	}
 
 	public int idPicked(World world, int x, int y, int z) {

@@ -21,7 +21,6 @@ import electrodynamics.lib.core.ModInfo;
 public enum PacketTypeHandler {
 
 	KEY(PacketKeyPress.class),
-	TABLE_UPDATE(PacketTableUpdate.class),
 	JUMP(PacketJump.class),
 	LIGHTNING(PacketLightningFX.class),
 	FX(PacketFX.class),

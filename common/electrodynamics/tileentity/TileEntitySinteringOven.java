@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import electrodynamics.util.BlockUtil;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -19,6 +18,7 @@ import electrodynamics.inventory.InventoryItem;
 import electrodynamics.item.EDItems;
 import electrodynamics.recipe.CraftingManager;
 import electrodynamics.recipe.RecipeSinteringOven;
+import electrodynamics.util.BlockUtil;
 import electrodynamics.util.InventoryUtil;
 import electrodynamics.util.ItemUtil;
 
@@ -28,10 +28,8 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 	
 	public float doorAngle = 0;
 	
-	/** Does the oven currently have a tray in it. Primarily used for logic purposes */
-	public boolean hasTray = false;
-	
 	public boolean open = false;
+	public boolean burning = false;
 	
 	/** Based off of furnace fuel burn time, but constantly drained "to keep oven hot" */
 	public int fuelLevel;
@@ -48,75 +46,88 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 	public InventoryItem trayInventory;
 	
 	@Override
-	public void updateEntity() {
-		super.updateEntity();
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
 		
-		if (CoreUtils.isServer(worldObj)) {
-			if (fuelLevel > 0) {
-				--this.fuelLevel;
-				
-				if (this.open) {
-					for (EntityLiving living : getEntitiesInFireRange()) {
-						living.setFire(1);
-					}
-				} else {
-					if (totalCookTime > 0) {
-						if (trayInventory != null) {
-							if (currentCookTime == 0) {
-								RecipeSinteringOven recipe = CraftingManager.getInstance().ovenManager.getRecipe(Arrays.asList(this.trayInventory.inventory));
-							
-								if (recipe != null) {
-									doProcess( recipe );
-									this.storedExperience = recipe.getExperience();
+		nbt.setBoolean("open", open);
+		nbt.setInteger("fuelLevel", fuelLevel);
+		nbt.setFloat("storedExperience", storedExperience);
+		if (this.trayInventory != null) {
+			this.trayInventory.writeToNBT(nbt);
+		}
+	}
 
-									this.totalCookTime = 0;
-									this.currentCookTime = 0;
-									
-									sendUpdatePacket(Side.CLIENT);
-									return;
-								}
-							} else {
-								--currentCookTime;
-							}
-						} else {
-							totalCookTime = 0;
-						}
-					} else {
-						if (trayInventory != null) {
-							RecipeSinteringOven recipe = CraftingManager.getInstance().ovenManager.getRecipe(Arrays.asList(this.trayInventory.inventory));
-							
-							if (recipe != null) {
-								this.totalCookTime = this.currentCookTime = recipe.processingTime;
-								
-								sendUpdatePacket(Side.CLIENT);
-								return;
-							}
-						}
-					}
-				}
-			}
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		
+		this.open = nbt.getBoolean("open");
+		this.fuelLevel = nbt.getInteger("fuelLevel");
+		if(this.fuelLevel > 0)
+			this.burning = true;
+		else
+			this.burning = false;
+		this.storedExperience = nbt.getFloat("storedExperience");
+		if (nbt.hasKey("Items")) {
+			this.trayInventory = new InventoryItem(9, new ItemStack(EDItems.itemTray));
+			this.trayInventory.readFromNBT(nbt);
+		}
+	}
+
+	@Override
+	public void onUpdatePacket(NBTTagCompound nbt) {
+		super.onUpdatePacket(nbt);
+		
+		if(nbt.hasKey("open"))
+		{
+			this.open = nbt.getBoolean("open");
 		}
 		
-		if (CoreUtils.isClient(worldObj)) {
-			if (open && doorAngle <= ROTATIONAL_MAX) {
-				doorAngle += 0.2F;
-			} else if (!open && doorAngle > 0) {
-				doorAngle -= 0.2F;
-			}
-			
-			if (doorAngle < 0) {
-				doorAngle = 0;
-			}
+		if(nbt.hasKey("burning"))
+		{
+			this.burning = nbt.getBoolean("burning");
+		}
+		
+		if(nbt.hasKey("noTray"))
+		{
+			this.trayInventory = null;
+		}
+		
+		if(nbt.hasKey("Items"))
+		{
+			this.trayInventory = new InventoryItem(9, new ItemStack(EDItems.itemTray));
+			this.trayInventory.readFromNBT(nbt);
 		}
 	}
-	
+
 	@Override
-	public void onBlockBreak() {
-		if (this.hasTray) {
-			InventoryUtil.ejectItem(worldObj, xCoord, yCoord, zCoord, ForgeDirection.UP, this.trayInventory.parent.copy(), new Random());
+	public void onDescriptionPacket(NBTTagCompound nbt) {
+		super.onDescriptionPacket(nbt);
+
+		this.open = nbt.getBoolean("open");
+		this.burning = nbt.getBoolean("burning");
+		this.fuelLevel = nbt.getInteger("fuelLevel");
+
+		if (nbt.hasKey("Items")) {
+			this.trayInventory = new InventoryItem(9, new ItemStack(EDItems.itemTray));
+			this.trayInventory.readFromNBT(nbt);
+		}else{
+			this.trayInventory = null;
 		}
 	}
-	
+
+	@Override
+	public void getDescriptionForClient(NBTTagCompound nbt) {
+		super.getDescriptionForClient(nbt);
+		
+		nbt.setBoolean("open", open);
+		nbt.setBoolean("burning", burning);
+		nbt.setInteger("fuelLevel", fuelLevel);
+		if (this.trayInventory != null) {
+			this.trayInventory.writeToNBT(nbt);
+		}
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<EntityLiving> getEntitiesInFireRange() {
 		return this.worldObj.getEntitiesWithinAABB(EntityLiving.class, getFireDetectionBoundingBox());
@@ -127,87 +138,159 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 	}
 	
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
+	public void updateEntityClient()
+	{
+		if (open && doorAngle <= ROTATIONAL_MAX) {
+			doorAngle += 0.2F;
+		} else if (!open && doorAngle > 0) {
+			doorAngle -= 0.2F;
+		}
 		
-		nbt.setBoolean("open", open);
-		nbt.setBoolean("hasTray", hasTray);
-		nbt.setInteger("fuelLevel", fuelLevel);
-		nbt.setFloat("storedExperience", storedExperience);
-		if (this.hasTray) {
-			this.trayInventory.writeToNBT(nbt);
+		if (doorAngle < 0) {
+			doorAngle = 0;
 		}
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-		
-		this.open = nbt.getBoolean("open");
-		this.hasTray = nbt.getBoolean("hasTray");
-		this.fuelLevel = nbt.getInteger("fuelLevel");
-		this.storedExperience = nbt.getFloat("storedExperience");
-		if (nbt.hasKey("Items")) {
-			this.trayInventory = new InventoryItem(9, new ItemStack(EDItems.itemTray));
-			this.trayInventory.readFromNBT(nbt);
+	public void updateEntityServer()
+	{
+		if (fuelLevel > 0) {
+			--this.fuelLevel;
+			
+			if (this.open) {
+				for (EntityLiving living : getEntitiesInFireRange()) {
+					living.setFire(1);
+				}
+			} else {
+				if (totalCookTime > 0) {
+					if (trayInventory != null) {
+						if (currentCookTime == 0) {
+							RecipeSinteringOven recipe = CraftingManager.getInstance().ovenManager.getRecipe(Arrays.asList(this.trayInventory.inventory));
+						
+							if (recipe != null) {
+								doProcess(recipe);
+								this.storedExperience = recipe.getExperience();
+
+								this.totalCookTime = 0;
+								this.currentCookTime = 0;
+
+								sendTrayUpdate();
+								return;
+							}
+						} else {
+							--currentCookTime;
+						}
+					} else {
+						totalCookTime = 0;
+					}
+				} else {
+					if (trayInventory != null) {
+						RecipeSinteringOven recipe = CraftingManager.getInstance().ovenManager.getRecipe(Arrays.asList(this.trayInventory.inventory));
+						
+						if (recipe != null) {
+							this.totalCookTime = this.currentCookTime = recipe.processingTime;
+							
+							return;
+						}
+					}
+				}
+			}
+		}else if(burning == true) {
+			this.burning = false;
+			sendBurningUpdate();
+		}
+	}
+
+	@Override
+	public void onBlockBreak() {
+		if (this.trayInventory != null) {
+			InventoryUtil.ejectItem(worldObj, xCoord, yCoord, zCoord, ForgeDirection.UP, this.trayInventory.parent.copy(), new Random());
 		}
 	}
 	
 	@Override
 	public void onBlockActivated(EntityPlayer player) {
-		if (player.isSneaking()) {
-			this.open = !this.open;
-			
-			sendUpdatePacket(Side.CLIENT);
-			return;
-		}
+		if(CoreUtils.isServer(worldObj))
+		{
+			if (player.isSneaking()) {
+				this.open = !this.open;
+				sendOpenUpdate();
+				return;
+			}
 		
-		if (this.open) {
-			if (player.getCurrentEquippedItem() != null) {
-				ItemStack currentItem = player.getCurrentEquippedItem();
+			if (this.open) {
+				if (player.getCurrentEquippedItem() != null) {
+					ItemStack currentItem = player.getCurrentEquippedItem();
 				
-				if (ItemUtil.getFuelValue(currentItem) > 0) {
-					this.fuelLevel += ItemUtil.getFuelValue(currentItem);
-					--currentItem.stackSize;
-					if( currentItem.itemID == Item.bucketLava.itemID ) { // return the empty bucket when using lava as fuel.
-						ItemStack bucket = new ItemStack( Item.bucketEmpty, 1 );
-						if( currentItem.stackSize == 0 )
-							player.setCurrentItemOrArmor( 0, bucket );
+					if (ItemUtil.getFuelValue(currentItem) > 0) {
+						this.fuelLevel += ItemUtil.getFuelValue(currentItem);
+						--currentItem.stackSize;
+						if( currentItem.itemID == Item.bucketLava.itemID ) { // return the empty bucket when using lava as fuel.
+							ItemStack bucket = new ItemStack(Item.bucketEmpty, 1);
+							if(currentItem.stackSize == 0)
+							player.setCurrentItemOrArmor(0, bucket);
 						else
-							player.inventory.addItemStackToInventory( bucket );
-					}
+							player.inventory.addItemStackToInventory(bucket);
+						}
+						this.burning = true;
+						sendBurningUpdate();
 					
-					sendUpdatePacket(Side.CLIENT);
-					((EntityPlayerMP)player).updateHeldItem();
-				} else if (!hasTray && currentItem.getItem() == EDItems.itemTray) {
-					this.hasTray = true;
-					this.trayInventory = new InventoryItem(9, currentItem.copy());
-					--currentItem.stackSize;
-					
-					sendUpdatePacket(Side.CLIENT);
-					((EntityPlayerMP)player).updateHeldItem();
-				}
-				return;
-			}
-			
-			if (this.hasTray) {
-				player.setCurrentItemOrArmor( 0, trayInventory.parent.copy() );
+						((EntityPlayerMP)player).updateHeldItem();
+					} else if (this.trayInventory == null && currentItem.getItem() == EDItems.itemTray) {
+						this.trayInventory = new InventoryItem(9, currentItem.copy());
+						--currentItem.stackSize;
 
-				// Give experience
-				if( storedExperience > 0.0f ) {
-					BlockUtil.spawnExperienceOrbs( worldObj, xCoord, yCoord, zCoord, storedExperience );
+						sendTrayUpdate();
+						((EntityPlayerMP)player).updateHeldItem();
+					}
+					return;
 				}
-				this.storedExperience = 0.0f;
-				this.hasTray = false;
-				this.trayInventory = null;
-				this.currentCookTime = 0;
-				this.totalCookTime = 0;
+			
+				if (this.trayInventory != null) {
+					player.setCurrentItemOrArmor(0, trayInventory.parent.copy());
+
+					// Give experience
+					if( storedExperience > 0.0f ) {
+						BlockUtil.spawnExperienceOrbs(worldObj, xCoord, yCoord, zCoord, storedExperience);
+					}
+					this.storedExperience = 0.0f;
+					this.trayInventory = null;
+					this.currentCookTime = 0;
+					this.totalCookTime = 0;
 				
-				sendUpdatePacket(Side.CLIENT);
-				((EntityPlayerMP)player).updateHeldItem();
-				return;
+					sendTrayUpdate();
+					((EntityPlayerMP)player).updateHeldItem();
+					return;
+				}
 			}
 		}
+	}
+
+	private void sendOpenUpdate()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setBoolean("open", this.open);
+
+		sendUpdatePacket(nbt);
+	}
+	
+	private void sendBurningUpdate()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setBoolean("burning", this.burning);
+
+		sendUpdatePacket(nbt);
+	}
+	
+	private void sendTrayUpdate()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		if(this.trayInventory != null)
+			this.trayInventory.writeToNBT(nbt);
+		else
+			nbt.setBoolean("noTray", true);
+
+		sendUpdatePacket(nbt);
 	}
 
 	private void doProcess(RecipeSinteringOven recipe) {

@@ -1,108 +1,134 @@
 package electrodynamics.tileentity;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.common.network.PacketDispatcher;
+import electrodynamics.api.tool.ITool;
+import electrodynamics.core.CoreUtils;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.client.FXType;
 import electrodynamics.network.PacketTypeHandler;
 import electrodynamics.network.packet.PacketFX;
 import electrodynamics.network.packet.PacketSound;
-import electrodynamics.network.packet.PacketTableUpdate;
 import electrodynamics.recipe.CraftingManager;
 import electrodynamics.recipe.RecipeTable;
+import electrodynamics.util.BlockUtil;
+import electrodynamics.util.InventoryUtil;
 
-public class TileEntityTable extends TileEntity {
-
-	/** Type of table. 0 is Display Table, 1 is Smashing Table */
-	public byte type;
-
-	/** Item that was displayed previously. Can be null */
-	public ItemStack prevDisplayedItem;
+public class TileEntityTable extends TileEDRoot {
 	
 	/** Item to be displayed on the display table */
 	public ItemStack displayedItem;
-
-	public TileEntityTable() {
-		this.type = 0;
-	}
-
-	public TileEntityTable(byte type) {
-		this.type = type;
-	}
-
+	
+	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 
-		nbt.setByte("type", type);
 		if (displayedItem != null) {
 			nbt.setTag("displayedItem", displayedItem.writeToNBT(new NBTTagCompound()));
 		}
 	}
 
+	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 
-		this.type = nbt.getByte("type");
+		if (nbt.hasKey("displayedItem")) {
+			this.displayedItem = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("displayedItem"));
+		}else{
+			this.displayedItem = null;
+		}
+	}
+
+	@Override
+	public void onUpdatePacket(NBTTagCompound nbt) {
+		super.onUpdatePacket(nbt);
+		
 		if (nbt.hasKey("displayedItem")) {
 			this.displayedItem = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("displayedItem"));
 		}
-	}
 
-	public Packet getDescriptionPacket() {
-		NBTTagCompound nbt = new NBTTagCompound();
+		if(nbt.hasKey("noDisplay"))
+		{
+			this.displayedItem = null;
+		}
+	}
+	
+	@Override
+	public void onDescriptionPacket(NBTTagCompound nbt) {
+		super.onDescriptionPacket(nbt);
+
+		readFromNBT(nbt);
+	}
+	
+	@Override
+	public void getDescriptionForClient(NBTTagCompound nbt) {
+		super.getDescriptionForClient(nbt);
+		
 		writeToNBT(nbt);
-		return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 2, nbt);
 	}
 
-	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
-		this.readFromNBT(pkt.customParam1);
+	@Override
+	public void onBlockBreak() {
+		if(this.displayedItem != null) {
+			InventoryUtil.ejectItem(worldObj, xCoord, yCoord, zCoord, ForgeDirection.UP, this.displayedItem, new Random());
+		}
+	}
+	
+	@Override
+	public void onBlockActivated(EntityPlayer player) {
+		if(CoreUtils.isServer(worldObj))
+		{
+			if (player.isSneaking()) return;
+			if (player.getCurrentEquippedItem() != null && (player.getCurrentEquippedItem().getItem() instanceof ITool) && hasRecipe(player.getCurrentEquippedItem())) {
+				handleSmash(player, player.getCurrentEquippedItem());
+				((ITool)player.getCurrentEquippedItem().getItem()).onToolUsed(player.getCurrentEquippedItem(), worldObj, xCoord, yCoord, zCoord, player);
+			} else {
+				if (this.displayedItem != null) {
+					BlockUtil.dropItemFromBlock(worldObj, xCoord, yCoord, zCoord, this.displayedItem.copy(), new Random());
+					setItem(null);
+				} else {
+					if (player.getCurrentEquippedItem() != null) {
+						ItemStack toDisplay = player.getCurrentEquippedItem().copy();
+						toDisplay.stackSize = 1;
+						setItem(toDisplay);
+						
+						if (player.getCurrentEquippedItem().stackSize > 1) {
+							player.getCurrentEquippedItem().stackSize--;
+						} else {
+							player.inventory.mainInventory[player.inventory.currentItem] = null;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	private void sendDisplayUpdate()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		if(this.displayedItem != null) {
+			nbt.setTag("displayedItem", displayedItem.writeToNBT(new NBTTagCompound()));
+		} else {
+			nbt.setBoolean("noDisplay", true);
+		}
+
+		sendUpdatePacket(nbt);
 	}
 
 	public void setItem(ItemStack item) {
-		prevDisplayedItem = displayedItem;
 		displayedItem = item;
-	}
-	
-	public ItemStack getItem() {
-		return displayedItem;
-	}
-	
-	public void update() {
-		if (itemChanged()) {
-			PacketDispatcher.sendPacketToAllInDimension(PacketTypeHandler.fillPacket(new PacketTableUpdate(xCoord, yCoord, zCoord, this.displayedItem)), this.worldObj.provider.dimensionId);
-			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		}
-	}
-	
-	public boolean itemChanged() {
-		if (prevDisplayedItem == null && displayedItem == null) {
-			return false;
-		}
-		
-		if (prevDisplayedItem != null && displayedItem == null) {
-			return true;
-		}
-		
-		if (prevDisplayedItem == null && displayedItem != null) {
-			return true;
-		}
-		
-		if (!ItemStack.areItemStacksEqual(prevDisplayedItem, displayedItem)) {
-			return true;
-		}
-		
-		return true;
+		sendDisplayUpdate();
 	}
 	
 	public boolean hasRecipe(ItemStack tool) {
+		byte type = (byte)this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 		if (type == 0 && displayedItem != null && displayedItem.getItem().itemID == Block.stoneSingleSlab.blockID) {
 			return true;
 		}
@@ -112,10 +138,11 @@ public class TileEntityTable extends TileEntity {
 	
 	public void handleSmash(EntityPlayer player, ItemStack tool) {
 		if (displayedItem != null) {
-			if (this.type == 0 && displayedItem.getItem().itemID == Block.stoneSingleSlab.blockID) {
+			byte type = (byte)this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+			if (type == 0 && displayedItem.getItem().itemID == Block.stoneSingleSlab.blockID) {
 				this.displayedItem = null;
 				this.worldObj.setBlock(xCoord, yCoord, zCoord, BlockIDs.BLOCK_TABLE_ID, 1, 2);
-			} else if (this.type == 1) {
+			} else if (type == 1) {
 				RecipeTable recipe = CraftingManager.getInstance().tableManager.getRecipe(displayedItem, tool);
 				
 				if (recipe != null) {
@@ -130,8 +157,6 @@ public class TileEntityTable extends TileEntity {
 					
 					setItem(recipe.outputItem);
 					tool.damageItem(recipe.hammerDamage, player);
-					
-					update();
 				}
 			}
 		}

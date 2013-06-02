@@ -9,57 +9,77 @@ import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.relauncher.Side;
 import electrodynamics.core.CoreUtils;
 import electrodynamics.network.PacketUtils;
+import electrodynamics.network.packet.Packet132TileEntityDataType;
 
-public class TileEDRoot extends TileEntity {
+public abstract class TileEDRoot extends TileEntity {
 
 	public void onBlockActivated(EntityPlayer player) {
 
 	}
-	
+
 	public void onBlockAdded() {
-		
+
 	}
-	
+
 	public void onNeighborUpdate() {
-		
+
 	}
-	
+
 	public void onBlockBreak() {
-		
+
+	}
+
+	public void onUpdatePacket(NBTTagCompound nbt) {
+
 	}
 	
-	@Override
-	public void updateEntity() {
-		if (CoreUtils.isServer(this.worldObj)) {
-			if (this.worldObj.getWorldTime() % 4L == 0) {
-				sendUpdatePacket(Side.CLIENT);
-			}
-		}
+	public void onDescriptionPacket(NBTTagCompound nbt) {
+
 	}
-	
-	public void sendUpdatePacket(Side sendTo) {
-		if (sendTo.isClient()) {
-			PacketUtils.sendToPlayers(getDescriptionPacket(), this);
-		} else if (sendTo.isServer()) {
-			PacketUtils.sendToServer(getDescriptionPacket());
-		}
+
+	public void sendUpdatePacket(NBTTagCompound nbt) {
+		PacketUtils.sendToPlayers(new Packet132TileEntityData(xCoord, yCoord, zCoord, Packet132TileEntityDataType.UPDATE, nbt), this);
 	}
-	
-	public NBTTagCompound getStoredNBTData() {
-		NBTTagCompound tag = new NBTTagCompound();
-		writeToNBT(tag);
-		return tag;
+
+	public void getDescriptionForClient(NBTTagCompound nbt) {
+
 	}
-	
-	@Override
-	public Packet getDescriptionPacket() {
-		return new Packet132TileEntityData(xCoord, yCoord, zCoord, 3, getStoredNBTData());
+
+	public void updateEntityClient() {
+
+	}
+
+	public void updateEntityServer() {
+
 	}
 
 	@Override
-	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
-		readFromNBT(pkt.customParam1);
-		worldObj.markBlockForRenderUpdate( xCoord, yCoord, zCoord );
-    }
+	public Packet getDescriptionPacket() {
+		NBTTagCompound nbt = new NBTTagCompound();
+		getDescriptionForClient(nbt);
+		return new Packet132TileEntityData(xCoord, yCoord, zCoord, Packet132TileEntityDataType.LOAD, nbt);
+	}
+
+	@Override
+	public void updateEntity() {
+		if (CoreUtils.isServer(this.worldObj)) {
+			updateEntityServer();
+		}
+		else 
+		if (CoreUtils.isClient(this.worldObj)) {
+			updateEntityClient();
+		}
+	}
 	
+	@Override
+	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
+		if(pkt.actionType == Packet132TileEntityDataType.LOAD) 
+			onDescriptionPacket(pkt.customParam1);
+		else
+		if(pkt.actionType == Packet132TileEntityDataType.UPDATE) 
+			onUpdatePacket(pkt.customParam1);
+		
+		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+    }
+
 }
