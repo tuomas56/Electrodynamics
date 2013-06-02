@@ -49,21 +49,23 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 		GL11.glTranslated(x + 0.5, y + 1.5, z + 0.5);
 		GL11.glRotatef(180, 0, 0, 1);
 
-		switch (((TileEntityMachine) tile).rotation) {
-		case NORTH:
-			GL11.glRotatef(270, 0, 1, 0);
-			break;
-		case SOUTH:
-			GL11.glRotatef(90, 0, 1, 0);
-			break;
-		case WEST:
-			GL11.glRotatef(180, 0, 1, 0);
-			break;
-		case EAST:
-			// GL11.glRotatef(0, 0, 1, 0);
-			break;
-		default:
-			break;
+		if (((TileEntityMachine) tile).rotation != null  ) {
+			switch (((TileEntityMachine) tile).rotation) {
+			case NORTH:
+				GL11.glRotatef(270, 0, 1, 0);
+				break;
+			case SOUTH:
+				GL11.glRotatef(90, 0, 1, 0);
+				break;
+			case WEST:
+				GL11.glRotatef(180, 0, 1, 0);
+				break;
+			case EAST:
+				// GL11.glRotatef(0, 0, 1, 0);
+				break;
+			default:
+				break;
+			}
 		}
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_SINT_FURNACE);

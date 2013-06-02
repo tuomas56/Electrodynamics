@@ -5,7 +5,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityMachine extends TileEDRoot {
 
-	public ForgeDirection rotation = ForgeDirection.UNKNOWN;
+	public ForgeDirection rotation = null;
 
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
