@@ -1,4 +1,4 @@
-package electrodynamics.computercraft;
+package electrodynamics.addons.computercraft;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
@@ -9,18 +9,18 @@ import dan200.turtle.api.TurtleSide;
 import dan200.turtle.api.TurtleUpgradeType;
 import dan200.turtle.api.TurtleVerb;
 import electrodynamics.item.EDItems;
-import electrodynamics.item.hammer.ItemStoneHammer;
+import electrodynamics.item.hammer.ItemSteelHammer;
 
-public class StoneHammerUpgrade implements ITurtleUpgrade {
+public class SteelHammerUpgrade implements ITurtleUpgrade {
 
 	@Override
 	public int getUpgradeID() {
-		return 301;
+		return 300;
 	}
 
 	@Override
 	public String getAdjective() {
-		return "Stone Hammer";
+		return "Steel Hammer";
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class StoneHammerUpgrade implements ITurtleUpgrade {
 
 	@Override
 	public ItemStack getCraftingItem() {
-		return new ItemStack(EDItems.itemStoneHammer);
+		return new ItemStack(EDItems.itemSteelHammer);
 	}
 
 	@Override
@@ -45,12 +45,13 @@ public class StoneHammerUpgrade implements ITurtleUpgrade {
 
 	@Override
 	public boolean useTool(ITurtleAccess turtle, TurtleSide side, TurtleVerb verb, int direction) {
+		
 		return true;
 	}
 
 	@Override
 	public Icon getIcon(ITurtleAccess turtle, TurtleSide side) {
-		return ItemStoneHammer.texture;
+		return ItemSteelHammer.texture;
 	}
 
 }

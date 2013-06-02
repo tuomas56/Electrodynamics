@@ -10,6 +10,7 @@ import cpw.mods.fml.common.Loader;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 import electrodynamics.Electrodynamics;
+import electrodynamics.addons.computercraft.EDAddonComputerCraft;
 import electrodynamics.core.EDLogger;
 
 public class AddonManager {
@@ -45,6 +46,8 @@ public class AddonManager {
 	}
 	
 	public static void loadAddons() {
+		registerAddon(Addon.COMPUTERCRAFT, new EDAddonComputerCraft());
+		
 		Configuration config = getConfig();
 		
 		for (Addon addon : Addon.values()) {
@@ -99,6 +102,7 @@ public class AddonManager {
 	}
 	
 	public static enum Addon {
+		COMPUTERCRAFT;
 	}
 	
 }
