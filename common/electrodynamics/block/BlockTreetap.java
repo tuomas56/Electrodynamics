@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import electrodynamics.core.CreativeTabED;
+import electrodynamics.tileentity.TileEntityTable;
 import electrodynamics.tileentity.TileEntityTreetap;
 
 public class BlockTreetap extends BlockContainer {
@@ -39,29 +40,12 @@ public class BlockTreetap extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
-		if (world.isRemote) return false;
-		if (player.isSneaking()) return false;
-		
 		TileEntityTreetap tile = (TileEntityTreetap) world.getBlockTileEntity(x, y, z);
 
-		if (tile != null && tile instanceof TileEntityTreetap) {
-			if (player.getCurrentEquippedItem() != null) {
-				if (!tile.hasBucket && player.getCurrentEquippedItem().getItem() == Item.bucketEmpty) {
-					tile.hasBucket = true;
-					tile.dirty = true;
-					--player.getCurrentEquippedItem().stackSize;
-
-					return true;
-				}
-			} else {
-				if (tile.hasBucket && (tile.liquidAmount == 0 || tile.liquidAmount == 1000)) {
-					tile.dropBucket(player);
-					return true;
-				}
-			}
+		if (tile != null) {
+			tile.onBlockActivated(player);
 		}
-
-		return false;
+		return true;
 	}
 
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {

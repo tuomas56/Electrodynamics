@@ -14,10 +14,7 @@ import electrodynamics.block.BlockRubberWood;
 import electrodynamics.item.EDItems;
 import electrodynamics.lib.block.BlockIDs;
 
-public class TileEntityTreetap extends TileEntity {
-
-	/** Side the treetap is attached to */
-	public ForgeDirection rotation;
+public class TileEntityTreetap extends TileEntityMachine {
 	
 	/** Does treetap has bucket? */
 	public boolean hasBucket;
@@ -29,21 +26,10 @@ public class TileEntityTreetap extends TileEntity {
 	public boolean dirty = true;
 	
 	@Override
-	public void updateEntity() {
-		if (worldObj.isRemote) return;
-		
-		if (dirty) {
-			PacketDispatcher.sendPacketToAllInDimension(getDescriptionPacket(), this.worldObj.provider.dimensionId);
-			dirty = false;
-		}
-	}
-	
-	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		
-		tag.setByte("direction", (byte) rotation.ordinal());
-		tag.setByte("hasBucket", (byte) (hasBucket == true ? 1 : 0));
+		tag.setBoolean("hasBucket", hasBucket);
 		tag.setInteger("liquidAmount", liquidAmount);
 	}
 
@@ -51,23 +37,54 @@ public class TileEntityTreetap extends TileEntity {
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 
-		rotation = ForgeDirection.VALID_DIRECTIONS[tag.getByte("direction")];
-		hasBucket = tag.getByte("hasBucket") == 1 ? true : false;
+		hasBucket = tag.getBoolean("hasBucket");
 		liquidAmount = tag.getInteger("liquidAmount");
 	}
-
+	
 	@Override
-	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
-		this.readFromNBT(pkt.customParam1);
-	}
+	public void onDescriptionPacket(NBTTagCompound nbt) {
+		super.onDescriptionPacket(nbt);
 
-	@Override
-	public Packet getDescriptionPacket() {
-		NBTTagCompound comp = new NBTTagCompound();
-		this.writeToNBT(comp);
-		return new Packet132TileEntityData(xCoord, yCoord, zCoord, 0, comp);
+		readFromNBT(nbt);
 	}
 	
+	@Override
+	public void getDescriptionForClient(NBTTagCompound nbt) {
+		super.getDescriptionForClient(nbt);
+		
+		writeToNBT(nbt);
+	}
+
+	@Override
+	public void onBlockActivated(EntityPlayer player) {
+		if (player.getCurrentEquippedItem() != null) {
+			if (!hasBucket && player.getCurrentEquippedItem().getItem() == Item.bucketEmpty) {
+				hasBucket = true;
+				sendBucketUpdate();
+				
+				--player.getCurrentEquippedItem().stackSize;
+				}
+		} else {
+			if (hasBucket && (liquidAmount == 0 || liquidAmount == 1000)) {
+				dropBucket(player);
+			}
+		}
+	}
+
+	private void sendLiquidUpdate()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setInteger("liquidAmount", liquidAmount);
+		sendUpdatePacket(nbt);
+	}
+
+	private void sendBucketUpdate()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setBoolean("hasBucket", hasBucket);
+		sendUpdatePacket(nbt);
+	}
+
 	public void tick() {
 		if (liquidAmount + 1000 <= 1000 && hasBucket) {
 			drawLatex();
@@ -94,14 +111,15 @@ public class TileEntityTreetap extends TileEntity {
 		player.inventory.addItemStackToInventory(getBucket());
 		hasBucket = false;
 		liquidAmount = 0;
-		dirty = true;
+		sendLiquidUpdate();
+		sendBucketUpdate();
 	}
 	
 	public void drawLatex() {
 		if (getHighestValidLog() > 0) {
 			if (BlockRubberWood.suckLatex(this.worldObj, xCoord + this.rotation.getOpposite().offsetX, yCoord + (getHighestValidLog() - 1), zCoord + this.rotation.getOpposite().offsetZ)) {
 				this.liquidAmount += 1000;
-				this.dirty = true;
+				sendLiquidUpdate();
 			}
 		}
 	}
