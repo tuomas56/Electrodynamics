@@ -64,8 +64,7 @@ public class TurtleHammer implements ITurtleUpgrade {
 		    	IAcceptsTool inter = (IAcceptsTool) block;
 		    	
 		    	if (inter.accepts(ToolType.HAMMER)) {
-		    		inter.onToolUse(world, newX, newY, newZ, new EntityPlayerFake(world), getCraftingItem().copy());
-		    		return true;
+		    		return inter.onToolUse(world, newX, newY, newZ, new EntityPlayerFake(world), getCraftingItem().copy());
 		    	}
 		    }
 		}
