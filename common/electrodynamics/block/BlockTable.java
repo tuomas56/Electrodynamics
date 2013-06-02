@@ -157,7 +157,7 @@ public class BlockTable extends BlockContainer implements IAcceptsTool {
 		TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
 		
 		if (table.hasRecipe(stack)) {
-			table.handleSmash(player, player.getCurrentEquippedItem());
+			table.handleSmash(player, stack);
 			return true;
 		}
 		
