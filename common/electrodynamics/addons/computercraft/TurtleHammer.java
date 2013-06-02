@@ -16,6 +16,8 @@ import electrodynamics.entity.EntityPlayerFake;
 import electrodynamics.interfaces.IAcceptsTool;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.hammer.ItemSteelHammer;
+import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.tileentity.TileEntityTable;
 
 public class TurtleHammer implements ITurtleUpgrade {
 
@@ -64,7 +66,19 @@ public class TurtleHammer implements ITurtleUpgrade {
 		    	IAcceptsTool inter = (IAcceptsTool) block;
 		    	
 		    	if (inter.accepts(ToolType.HAMMER)) {
-		    		return inter.onToolUse(world, newX, newY, newZ, new EntityPlayerFake(world), getCraftingItem().copy());
+		    		if (blockID == BlockIDs.BLOCK_TABLE_ID && EDAddonComputerCraft.canUseTable || blockID == BlockIDs.BLOCK_STRUCTURE_COMPONENT_ID && EDAddonComputerCraft.canFormMBS) {
+		    			if (inter.onToolUse(world, newX, newY, newZ, new EntityPlayerFake(world), getCraftingItem().copy())) {
+		    				if (blockID == BlockIDs.BLOCK_TABLE_ID && EDAddonComputerCraft.canTakeFromTable) {
+		    					TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(newX, newY, newZ);
+		    					
+		    					if (turtle.storeItemStack(table.displayedItem.copy())) {
+		    						table.setItem(null);
+		    					}
+		    				}
+		    				
+		    				return true;
+		    			}
+		    		}
 		    	}
 		    }
 		}
