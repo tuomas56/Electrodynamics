@@ -76,7 +76,6 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 		}
 		
 		if (((TileEntitySinteringOven)tile).hasTray) {
-			//TODO Render big item if the tray contains only that, otherwise render grid of tray contents
 			renderTray(tile.worldObj, ((TileEntitySinteringOven)tile).trayInventory.inventory);
 		}
 		
@@ -119,12 +118,19 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 								GL11.glPushMatrix();
 								GL11.glScaled(.8, .8, .8);
 								GL11.glRotatef(90, 1, 0, 0);
-								GL11.glTranslated(0, -.24, 0);
+								GL11.glTranslated(0, -.24, -.26);
 								
 								renderItem(world, stack);
+								
 								GL11.glPopMatrix();
 							} else {
+								GL11.glPushMatrix();
+								GL11.glRotatef(180, 0, 0, 1);
+								GL11.glTranslated(0, -.2, 0);
+								
 								renderItem(world, stack);
+								
+								GL11.glPopMatrix();
 							}
 						}
 					}
