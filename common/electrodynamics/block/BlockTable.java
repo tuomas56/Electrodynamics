@@ -17,12 +17,14 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.api.tool.ITool;
+import electrodynamics.api.tool.ToolType;
 import electrodynamics.core.CreativeTabED;
+import electrodynamics.interfaces.IAcceptsTool;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityTable;
 import electrodynamics.util.BlockUtil;
 
-public class BlockTable extends BlockContainer {
+public class BlockTable extends BlockContainer implements IAcceptsTool {
 
 	public static String[] subNames = new String[] {Strings.BASIC_TABLE, Strings.SMASH_TABLE};
 	
@@ -143,6 +145,23 @@ public class BlockTable extends BlockContainer {
 
 	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z);
+	}
+
+	@Override
+	public boolean accepts(ToolType tool) {
+		return tool == ToolType.HAMMER;
+	}
+
+	@Override
+	public boolean onToolUse(World world, int x, int y, int z, EntityPlayer player, ItemStack stack) {
+		TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
+		
+		if (table.hasRecipe(stack)) {
+			table.handleSmash(player, player.getCurrentEquippedItem());
+			return true;
+		}
+		
+		return false;
 	}
 	
 }

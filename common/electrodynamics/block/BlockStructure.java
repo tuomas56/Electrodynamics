@@ -3,8 +3,10 @@ package electrodynamics.block;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.api.tool.ITool;
+import electrodynamics.api.tool.ToolType;
 import electrodynamics.client.render.block.RenderBlockStructure;
 import electrodynamics.core.CreativeTabED;
+import electrodynamics.interfaces.IAcceptsTool;
 import electrodynamics.item.EDItems;
 import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.tileentity.TileStructure;
@@ -12,6 +14,7 @@ import electrodynamics.world.TickHandlerMBS;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
@@ -23,7 +26,7 @@ import java.util.Set;
 /**
  * Blocks used for MBS
  */
-public class BlockStructure extends BlockGeneric {
+public class BlockStructure extends BlockGeneric implements IAcceptsTool {
 
 	public BlockStructure(int blockID) {
 		super( blockID, Material.iron );
@@ -56,9 +59,6 @@ public class BlockStructure extends BlockGeneric {
 			if( player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ITool ) {
 				if( player.getHeldItem().itemID != EDItems.itemSledgeHammer.itemID ) {
 					scheduleUpdate( world, x, y, z, true );
-					if( !world.isRemote ) {
-						player.sendChatToPlayer( tile.isValidStructure() ? "Valid structure!" : "Invalid structure." );
-					}
 				}
 			}
 			return tile.onBlockActivatedBy( player, side, xOff, yOff, zOff );
@@ -98,6 +98,17 @@ public class BlockStructure extends BlockGeneric {
 
 	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z);
+	}
+
+	@Override
+	public boolean accepts(ToolType tool) {
+		return tool == ToolType.HAMMER;
+	}
+
+	@Override
+	public boolean onToolUse(World world, int x, int y, int z, EntityPlayer player, ItemStack stack) {
+		scheduleUpdate(world, x, y, z, true);
+		return true;
 	}
 	
 }

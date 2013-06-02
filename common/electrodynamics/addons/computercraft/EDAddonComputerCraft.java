@@ -1,12 +1,12 @@
 package electrodynamics.addons.computercraft;
 
+import dan200.turtle.api.TurtleAPI;
 import electrodynamics.addons.EDAddon;
 
 public class EDAddonComputerCraft extends EDAddon {
 
 	public void init() {
-		TurtleAPI.registerUpgrade(new SteelHammerUpgrade());
-		TurtleAPI.registerUpgrade(new StoneHammerUpgrade());
+		TurtleAPI.registerUpgrade(new TurtleHammer());
 	}
 	
 	@Override
