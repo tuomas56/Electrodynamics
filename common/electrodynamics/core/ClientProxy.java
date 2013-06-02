@@ -14,6 +14,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import electrodynamics.addons.AddonManager;
 import electrodynamics.client.fx.FXLightningBolt;
+import electrodynamics.computercraft.ICCMain;
 import electrodynamics.control.KeyBindingHelper;
 import electrodynamics.control.KeybindingHandler;
 import electrodynamics.core.handler.SoundHandler;
@@ -48,11 +49,20 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {
 		super.postInit(event);
+		initComputerCraftAddon(event);
 		
 		ModuleManager.postInitClient();
 		AddonManager.initClient();
 	}
 	
+	private void initComputerCraftAddon(FMLPostInitializationEvent event) {
+	        Object ccMain = event.buildSoftDependProxy("CCTurtle", "electroDynamics.computercraft.CCMain");
+	        if (ccMain != null) {
+	            ICCMain iCCMain = (ICCMain) ccMain;
+	            iCCMain.init();
+	            System.out.println("[Electrodynamics] Computercraft interface layer loaded");
+	        }
+	}
 	@Override
 	public void setKeyBinding(String name, int value, boolean repeats) {
 		KeyBindingHelper.addKeyBinding(name, value, repeats);

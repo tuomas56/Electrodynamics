@@ -6,7 +6,7 @@ import electrodynamics.lib.core.ModInfo;
 
 public class ItemSteelHammer extends ItemHammer {
 
-	private Icon texture;
+	public static Icon texture;
 	
 	public ItemSteelHammer(int id) {
 		super(id, 100);
