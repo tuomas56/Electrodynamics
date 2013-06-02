@@ -12,6 +12,7 @@ import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import electrodynamics.addons.AddonManager;
 import electrodynamics.client.fx.FXLightningBolt;
 import electrodynamics.control.KeyBindingHelper;
 import electrodynamics.control.KeybindingHandler;
@@ -49,6 +50,7 @@ public class ClientProxy extends CommonProxy {
 		super.postInit(event);
 		
 		ModuleManager.postInitClient();
+		AddonManager.initClient();
 	}
 	
 	@Override

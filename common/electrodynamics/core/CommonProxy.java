@@ -5,6 +5,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import electrodynamics.Electrodynamics;
+import electrodynamics.addons.AddonManager;
 import electrodynamics.core.handler.ConnectionHandler;
 import electrodynamics.core.handler.GuiHandler;
 import electrodynamics.core.lang.EDLanguage;
@@ -24,6 +25,7 @@ public class CommonProxy {
 		NetworkRegistry.instance().registerConnectionHandler(new ConnectionHandler());
 		
 		ModuleManager.preInit();
+		AddonManager.loadAddons();
 	}
 
 	public void init(FMLInitializationEvent event) {
@@ -35,6 +37,7 @@ public class CommonProxy {
 
 	public void postInit(FMLPostInitializationEvent event) {
 		ModuleManager.postInit();
+		AddonManager.init();
 	}
 	
 	public void setKeyBinding(String name, int value, boolean repeats) {
