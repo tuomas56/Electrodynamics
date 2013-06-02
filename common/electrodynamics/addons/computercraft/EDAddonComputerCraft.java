@@ -24,10 +24,10 @@ public class EDAddonComputerCraft extends EDAddon {
 		
 		TurtleAPI.registerUpgrade(new TurtleHammer());
 	}
-	
-	@Override
-	public String getModDependency() {
-		return "ComputerCraft";
-	}
 
+	@Override
+	public String[] getModDependencies() {
+		return new String[] {"ComputerCraft"};
+	}
+	
 }

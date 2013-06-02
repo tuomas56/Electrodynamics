@@ -10,6 +10,6 @@ public abstract class EDAddon {
 		
 	}
 	
-	public abstract String getModDependency();
+	public abstract String[] getModDependencies();
 	
 }

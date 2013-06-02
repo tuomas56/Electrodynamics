@@ -22,6 +22,10 @@ public class AddonManager {
 	
 	private static EnumSet<Addon> loadedAddons = EnumSet.noneOf(Addon.class);
 	
+	public static EDAddon forceGetAddon(Addon a) {
+		return addons.get(a);
+	}
+	
 	public static EDAddon getAddon(Addon a) {
 		if (loadedAddons.contains(a)) {
 			return addons.get(a);
@@ -55,11 +59,11 @@ public class AddonManager {
 				EDAddon instance = addons.get(addon);
 				
 				if (instance != null) {
-					if (Loader.isModLoaded(instance.getModDependency())) {
+					if (allDependenciesSatisfied(instance.getModDependencies())) {
 						loadedAddons.add(addon);
 						EDLogger.info("Loading addon " + addon.toString());
 					} else {
-						EDLogger.warn("Tried to load addon " + addon.toString() + " but it's dependency " + instance.getModDependency() + " isn't loaded. Skipping.");
+						EDLogger.warn("Tried to load addon " + addon.toString() + " but not all of its dependencies could be found. Skipping.");
 					}
 				} else {
 					EDLogger.warn("Addon " + addon.toString() + " is missing a mapping!");
@@ -68,6 +72,16 @@ public class AddonManager {
 		}
 		
 		config.save();
+	}
+	
+	private static boolean allDependenciesSatisfied(String[] dependencies) {
+		for (String depends : dependencies) {
+			if (!Loader.isModLoaded(depends)) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
 	
 	/** Called during main mod's PostInit state on server*/
@@ -93,7 +107,19 @@ public class AddonManager {
 	}
 	
 	private static boolean isEnabled(Configuration config, Addon addon) {
+		StringBuilder sb = new StringBuilder();
+		EDAddon instance = forceGetAddon(addon);
+		
+		for (String add : instance.getModDependencies()) {
+			sb.append(add.toString());
+			sb.append(", ");
+		}
+		
+		String dependencies = sb.toString();
+		dependencies = dependencies.substring(0, dependencies.length());
+		
 		Property moduleEnabled = config.get(CATEGORY_ADDONS, addon.toString(), true);
+		moduleEnabled.comment = "DEPENDENCIES: " + dependencies;
 		return moduleEnabled.getBoolean(true);
 	}
 	

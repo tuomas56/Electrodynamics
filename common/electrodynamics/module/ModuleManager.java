@@ -19,6 +19,10 @@ public class ModuleManager {
 	
 	private static EnumSet<Module> loadedModules = EnumSet.noneOf(Module.class);
 	
+	private static EDModule forceGetModule(Module m) {
+		return modules.get(m);
+	}
+	
 	public static EDModule getModule(Module m) {
 		if (loadedModules.contains(m)) {
 			return modules.get(m);
@@ -141,7 +145,19 @@ public class ModuleManager {
 	}
 	
 	private static boolean isEnabled(Configuration config, Module module) {
+		StringBuilder sb = new StringBuilder();
+		EDModule instance = forceGetModule(module);
+		
+		for (Module mod : instance.dependencies()) {
+			sb.append(mod.toString());
+			sb.append(", ");
+		}
+		
+		String dependencies = sb.toString();
+		dependencies = dependencies.substring(0, dependencies.length());
+		
 		Property moduleEnabled = config.get(CATEGORY_MODULES, module.toString(), true);
+		moduleEnabled.comment = "DEPENDENCIES: " + dependencies;
 		return moduleEnabled.getBoolean(true);
 	}
 	
