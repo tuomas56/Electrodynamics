@@ -31,6 +31,7 @@ import electrodynamics.block.item.ItemBlockDecorative;
 import electrodynamics.block.item.ItemBlockOre;
 import electrodynamics.block.item.ItemBlockTreetap;
 import electrodynamics.block.item.ItemBlockWormwood;
+import electrodynamics.client.render.block.RenderBlockDecorative;
 import electrodynamics.client.render.block.RenderBlockOre;
 import electrodynamics.client.render.block.RenderBlockStructure;
 import electrodynamics.client.render.tileentity.RenderTreetap;
@@ -178,6 +179,7 @@ public class EDModuleWorld extends EDModule {
 		
 		RenderingRegistry.registerBlockHandler(new RenderBlockOre());
 		RenderingRegistry.registerBlockHandler(new RenderBlockStructure());
+		RenderingRegistry.registerBlockHandler(new RenderBlockDecorative());
 	}
 	
 	@Override

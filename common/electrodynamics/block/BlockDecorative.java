@@ -8,18 +8,24 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import electrodynamics.client.render.block.RenderBlockDecorative;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.lib.block.Decorative;
 
 public class BlockDecorative extends Block {
 
-	private Icon[] textures;
+	public Icon[] textures;
 	
 	public BlockDecorative(int id) {
 		super(id, Material.rock);
 		setHardness(1F);
 		setResistance(1F);
 		setCreativeTab(CreativeTabED.block);
+	}
+	
+	@Override
+	public int getRenderType() {
+		return RenderBlockDecorative.renderID;
 	}
 	
 	@Override
