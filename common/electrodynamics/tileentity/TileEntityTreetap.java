@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import electrodynamics.block.BlockRubberWood;
+import electrodynamics.core.CoreUtils;
 import electrodynamics.item.EDItems;
 import electrodynamics.lib.block.BlockIDs;
 
@@ -57,16 +58,19 @@ public class TileEntityTreetap extends TileEntityMachine {
 
 	@Override
 	public void onBlockActivated(EntityPlayer player) {
-		if (player.getCurrentEquippedItem() != null) {
-			if (!hasBucket && player.getCurrentEquippedItem().getItem() == Item.bucketEmpty) {
-				hasBucket = true;
-				sendBucketUpdate();
+		if(CoreUtils.isServer(worldObj))
+		{
+			if (player.getCurrentEquippedItem() != null) {
+				if (!hasBucket && player.getCurrentEquippedItem().getItem() == Item.bucketEmpty) {
+					hasBucket = true;
+					sendBucketUpdate();
 				
-				--player.getCurrentEquippedItem().stackSize;
+					--player.getCurrentEquippedItem().stackSize;
 				}
-		} else {
-			if (hasBucket && (liquidAmount == 0 || liquidAmount == 1000)) {
-				dropBucket(player);
+			} else {
+				if (hasBucket && (liquidAmount == 0 || liquidAmount == 1000)) {
+					dropBucket(player);
+				}
 			}
 		}
 	}
