@@ -99,7 +99,7 @@ public class TileEntityTreetap extends TileEntity {
 	
 	public void drawLatex() {
 		if (getHighestValidLog() > 0) {
-			if (BlockRubberWood.suckLatex(this.worldObj, xCoord, yCoord + (getHighestValidLog() - 1), zCoord)) {
+			if (BlockRubberWood.suckLatex(this.worldObj, xCoord + this.rotation.getOpposite().offsetX, yCoord + (getHighestValidLog() - 1), zCoord + this.rotation.getOpposite().offsetZ)) {
 				this.liquidAmount += 1000;
 				this.dirty = true;
 			}

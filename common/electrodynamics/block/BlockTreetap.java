@@ -41,7 +41,7 @@ public class BlockTreetap extends BlockContainer {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
 		if (world.isRemote) return false;
 		if (player.isSneaking()) return false;
-
+		
 		TileEntityTreetap tile = (TileEntityTreetap) world.getBlockTileEntity(x, y, z);
 
 		if (tile != null && tile instanceof TileEntityTreetap) {
