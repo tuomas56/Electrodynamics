@@ -8,7 +8,7 @@ This mod is not to be used in any modpacks.
 
 #Release
 
-[Alpha v0.1.1] (https://www.dropbox.com/s/dr50fu5xqb4fcwj/Electrodynamics-Alpha-0.1.1.jar?dl=1 "Direct Download")
+[Alpha v0.1.1] (https://www.dropbox.com/s/o6868wowwxottih/Electrodynamics-Alpha-0.1.2.jar?dl=1 "Direct Download")
 
 #Main Development Team
 
