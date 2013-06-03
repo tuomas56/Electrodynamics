@@ -4,7 +4,7 @@ This mod is **in development** and is open source for your enjoyment.
 
 Electrodynamics is copyrighted by [CyanideX](https://github.com/CyanideX "CyanideX GitHub profile").
 
-This mod is not to be used in any modpacks.
+This mod is not to be used in any modpacks until a stable release is available. We do not wish to receive complaints or bug reports based on bugs we either already know about or that have been fixed in newer builds. Furthermore, we do not wish to be blamed for broken world saves or lag on a server... that is what our testing team is for.
 
 #Release
 
