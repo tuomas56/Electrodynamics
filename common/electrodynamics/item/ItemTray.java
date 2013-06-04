@@ -1,7 +1,9 @@
 package electrodynamics.item;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import electrodynamics.util.ItemUtil;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -32,6 +34,7 @@ public class ItemTray extends Item implements IInventoryItem {
 	public void addInformation(ItemStack stack, EntityPlayer player, @SuppressWarnings("rawtypes") List list, boolean show) {
 		if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("Items")) {
 			NBTTagList items = stack.stackTagCompound.getTagList("Items");
+			List<ItemStack> itemsList = new ArrayList<ItemStack>();
 			
 			for (int i=0; i<items.tagCount(); i++) {
 				NBTTagCompound itemTag = (NBTTagCompound) items.tagAt(i);
@@ -40,9 +43,13 @@ public class ItemTray extends Item implements IInventoryItem {
 					ItemStack item = ItemStack.loadItemStackFromNBT(itemTag);
 					
 					if (item != null) {
-						list.add(item.getDisplayName());
+						itemsList.add( item );
 					}
 				}
+			}
+			itemsList = ItemUtil.trimItemsList( itemsList, true );
+			for( ItemStack item : itemsList ) {
+				list.add(item.stackSize +"x " + item.getDisplayName());
 			}
 		}
 	}
