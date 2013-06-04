@@ -56,6 +56,8 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 			return;
 		}
 
+		if( !open ) return;
+
 		ItemStack playerHeldItem = player.getHeldItem();
 		if( playerHeldItem != null ) {
 			if( ItemUtil.getFuelValue( playerHeldItem ) > 0 ) { // refuel
