@@ -45,7 +45,8 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 
 	@Override
 	public void onBlockBreak() {
-		InventoryUtil.ejectItem( worldObj, xCoord, yCoord, zCoord, ForgeDirection.UP, trayInventory.parent.copy(), new Random() );
+		if( trayInventory != null )
+			InventoryUtil.ejectItem( worldObj, xCoord, yCoord, zCoord, ForgeDirection.UP, trayInventory.parent.copy(), new Random() );
 	}
 
 	@Override
@@ -74,7 +75,7 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 				sendBurningUpdate();
 				((EntityPlayerMP) player).updateHeldItem();
 
-			} else if( trayInventory == null && playerHeldItem.getItem() == EDItems.itemTray ) { // place tray
+			} else if( trayInventory == null && playerHeldItem.getItem() == EDItems.itemTrayKiln ) { // place tray
 
 				this.trayInventory = new InventoryItem( 9, playerHeldItem.copy() );
 				--playerHeldItem.stackSize;
@@ -115,7 +116,7 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 		this.fuelLevel = tag.getInteger( "fuelLevel" );
 		this.burning = this.fuelLevel > 0;
 		if( tag.hasKey( "Items" ) ) {
-			this.trayInventory = new InventoryItem( 9, new ItemStack( EDItems.itemTray ) );
+			this.trayInventory = new InventoryItem( 9, new ItemStack( EDItems.itemTrayKiln ) );
 			this.trayInventory.readFromNBT( tag );
 		}
 	}

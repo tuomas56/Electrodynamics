@@ -21,9 +21,11 @@ import electrodynamics.lib.core.ModInfo;
 public class ItemTray extends Item implements IInventoryItem {
 
 	private Icon texture;
+	private final TrayType type;
 	
-	public ItemTray(int id) {
+	public ItemTray(int id, TrayType type) {
 		super(id);
+		this.type = type;
 		setMaxStackSize(1);
 		setMaxDamage(0);
 		setCreativeTab(CreativeTabED.tool);
@@ -57,7 +59,7 @@ public class ItemTray extends Item implements IInventoryItem {
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (!world.isRemote && player.isSneaking()) {
-			GuiHandler.openGui(player, world, (int)player.posX, (int)player.posY, (int)player.posZ, GuiHandler.GuiType.TRAY);
+			GuiHandler.openGui(player, world, (int)player.posX, (int)player.posY, (int)player.posZ, type.guiType);
 		}
 		
 		return stack;
@@ -66,7 +68,7 @@ public class ItemTray extends Item implements IInventoryItem {
 	@Override
 	public InventoryItem getInventory(ItemStack stack) {
 		if (stack.getItem() instanceof IInventoryItem) {
-			return new InventoryItem(9, stack);
+			return new InventoryItem(type == TrayType.KILN_TRAY ? 4 : 9, stack);
 		}
 		
 		return null;
@@ -79,7 +81,19 @@ public class ItemTray extends Item implements IInventoryItem {
 	
 	@Override
 	public void registerIcons(IconRegister register) {
-		this.texture = register.registerIcon(ModInfo.ICON_PREFIX + "tool/sinteringTray");
+		this.texture = register.registerIcon(ModInfo.ICON_PREFIX + type.textureFile);
 	}
-	
+
+	public static enum TrayType {
+		OVEN_TRAY("tool/sinteringTray", GuiHandler.GuiType.TRAY), KILN_TRAY ("tool/kilnTray", GuiHandler.GuiType.TRAY_KILN);
+
+		TrayType(String textureFile, GuiHandler.GuiType guiType) {
+			this.textureFile = textureFile;
+			this.guiType = guiType;
+		}
+
+		final String textureFile;
+		final GuiHandler.GuiType guiType;
+	}
+
 }

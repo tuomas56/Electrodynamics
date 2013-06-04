@@ -16,6 +16,7 @@ public class EDItems {
 	public static Item itemPlasmaRifle;
 	public static Item itemSpudPeeler;
 	public static Item itemTray;
+	public static Item itemTrayKiln;
 	public static Item itemLatexBucket;
 	
 	public static Item itemLiquidLatex;

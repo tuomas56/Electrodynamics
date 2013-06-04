@@ -18,6 +18,7 @@ public class Strings {
 	public static final String ITEM_INGOT_NAME = "ingot.name";
 	public static final String ITEM_HANDHELD_SIEVE_NAME = "tool.hand_sieve.name";
 	public static final String ITEM_TRAY_NAME = "tray.name";
+	public static final String ITEM_TRAY_KILN_NAME = "tray.kiln.name";
 	public static final String ITEM_PLASMA_RIFLE = "weapon.plasma_rifle.name";
 	public static final String ITEM_SPUD_PEELER = "spud_peeler.name";
 	public static final String ITEM_LATEX_BUCKET = "bucket.latex.name";

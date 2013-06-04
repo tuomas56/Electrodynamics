@@ -17,7 +17,8 @@ public class GuiHandler implements IGuiHandler {
 
 	public enum GuiType {
 		TRAY("/gui/trap.png"),
-		TESLA_MODULE(ModInfo.RESOURCE_DIR + "/textures/gui/teslaModule.png");
+		TESLA_MODULE(ModInfo.RESOURCE_DIR + "/textures/gui/teslaModule.png"),
+		TRAY_KILN("/gui/trayKiln.png"); // todo the tray gui image
 		
 		public String guiFile;
 		
@@ -51,6 +52,8 @@ public class GuiHandler implements IGuiHandler {
 			case TESLA_MODULE:  {
 				return side == Side.SERVER ? new ContainerTeslaModule(player, ((IInventoryItem)held.getItem()).getInventory(held)) : new GuiTeslaModule(player, new ContainerTeslaModule(player, ((IInventoryItem)held.getItem()).getInventory(held)));
 			}
+			case TRAY_KILN:
+				return side == Side.SERVER ? null : null; // todo: the tray container and gui container.
 		}
 		
 		return null;

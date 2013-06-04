@@ -102,9 +102,13 @@ public class EDModuleMachine extends EDModule {
 		GameRegistry.registerItem(EDItems.itemHandheldSieve, Strings.ITEM_HANDHELD_SIEVE_NAME);
 		EDLanguage.getInstance().registerItem(EDItems.itemHandheldSieve);
 
-		EDItems.itemTray = new ItemTray(ItemIDs.ITEM_TRAY_ID).setUnlocalizedName(Strings.ITEM_TRAY_NAME);
+		EDItems.itemTray = new ItemTray(ItemIDs.ITEM_TRAY_ID, ItemTray.TrayType.OVEN_TRAY).setUnlocalizedName(Strings.ITEM_TRAY_NAME);
 		GameRegistry.registerItem(EDItems.itemTray, Strings.ITEM_TRAY_NAME);
 		EDLanguage.getInstance().registerItem(EDItems.itemTray);
+
+		EDItems.itemTrayKiln = new ItemTray(ItemIDs.ITEM_TRAY_KILN_ID, ItemTray.TrayType.KILN_TRAY).setUnlocalizedName(Strings.ITEM_TRAY_KILN_NAME);
+		GameRegistry.registerItem(EDItems.itemTrayKiln, Strings.ITEM_TRAY_KILN_NAME);
+		EDLanguage.getInstance().registerItem(EDItems.itemTrayKiln);
 	}
 
 	@Override
