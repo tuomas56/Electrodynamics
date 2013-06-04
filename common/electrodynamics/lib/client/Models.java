@@ -12,6 +12,7 @@ public class Models {
 	public static final String TEX_TABLE_STONE = TEXTURE_BASE + "/tableStone.png";
 	public static final String TEX_SINT_FURNACE = TEXTURE_BASE + "/basicSinteringOven.png";
 	public static final String TEX_BASIC_SIEVE = TEXTURE_BASE + "/basicSieve.png";
+	public static final String TEX_BASIC_KILN = TEXTURE_BASE + "/basicKiln.png";
 	public static final String TEX_PLASMA_RIFLE = TEXTURE_BASE + "/plasmaRifle.png";
 	public static final String TEX_TREETAP = TEXTURE_BASE + "/treeTap.png";
 	public static final String TEX_BUCKET = TEXTURE_BASE + "/latexBucket.png";

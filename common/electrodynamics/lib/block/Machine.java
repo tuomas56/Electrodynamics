@@ -1,5 +1,6 @@
 package electrodynamics.lib.block;
 
+import electrodynamics.tileentity.TileEntityBasicKiln;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import electrodynamics.lib.core.ModInfo;
@@ -10,7 +11,8 @@ import electrodynamics.tileentity.TileEntitySinteringOven;
 public enum Machine {
 
 	SINTERING_FURNACE(Strings.MACHINE_SINTERING_OVEN, "sinteringOven", TileEntitySinteringOven.class),
-	BASIC_SIEVE(Strings.MACHINE_BASIC_SIEVE, "basicSieve", TileEntityBasicSieve.class);
+	BASIC_SIEVE(Strings.MACHINE_BASIC_SIEVE, "basicSieve", TileEntityBasicSieve.class),
+	BASIC_KILN(Strings.MACHINE_BASIC_KILN, "basicKiln", TileEntityBasicKiln.class);
 	
 	public String unlocalizedName;
 	public String textureFileForParticle;

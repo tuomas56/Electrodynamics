@@ -1,5 +1,7 @@
 package electrodynamics.client.render.item;
 
+import electrodynamics.client.model.ModelBasicKiln;
+import electrodynamics.lib.block.Machine;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -13,10 +15,12 @@ public class RenderItemMachine implements IItemRenderer {
 
 	private ModelSinteringOven modelSinteringOven;
 	private ModelBasicSieve modelBasicSieve;
+	private ModelBasicKiln modelBasicKiln;
 	
 	public RenderItemMachine() {
 		this.modelSinteringOven = new ModelSinteringOven();
 		this.modelBasicSieve = new ModelBasicSieve();
+		this.modelBasicKiln = new ModelBasicKiln();
 	}
 	
 	@Override
@@ -79,6 +83,30 @@ public class RenderItemMachine implements IItemRenderer {
 				
 				default: break;
 			}
+		} else if( item.getItemDamage() == Machine.BASIC_KILN.ordinal() ) {
+			switch(type) {
+				case ENTITY: {
+					renderKiln(0F, 1F, 0F);
+					break;
+				}
+
+				case EQUIPPED: {
+					renderKiln(1.0F, 1.0F, 1.0F);
+					break;
+				}
+
+				case EQUIPPED_FIRST_PERSON: {
+					renderKiln(1.0F, 2.0F, 1.0F);
+					break;
+				}
+
+				case INVENTORY: {
+					renderKiln(0F, 1F, 0F);
+					break;
+				}
+
+				default: break;
+			}
 		}
 	}
 
@@ -99,6 +127,15 @@ public class RenderItemMachine implements IItemRenderer {
 		GL11.glRotatef(180, 1, 0, 0);
 		GL11.glRotatef(-90, 0, 1, 0);
 		modelBasicSieve.renderAll(0.0625F);
+		GL11.glPopMatrix();
+	}
+
+	private void renderKiln(float x, float y, float z) {
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Models.TEX_BASIC_KILN);
+		GL11.glPushMatrix();
+		GL11.glTranslatef(x, y, z);
+		GL11.glRotatef(180, 1, 0, 0);
+		modelBasicKiln.renderAll(0.0625F);
 		GL11.glPopMatrix();
 	}
 	

@@ -12,10 +12,7 @@ import electrodynamics.block.item.ItemBlockStructure;
 import electrodynamics.block.item.ItemBlockTable;
 import electrodynamics.client.render.item.RenderItemMachine;
 import electrodynamics.client.render.item.RenderItemTable;
-import electrodynamics.client.render.tileentity.RenderBasicSieve;
-import electrodynamics.client.render.tileentity.RenderSinteringOven;
-import electrodynamics.client.render.tileentity.RenderTable;
-import electrodynamics.client.render.tileentity.RenderTileStructure;
+import electrodynamics.client.render.tileentity.*;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.item.*;
 import electrodynamics.item.hammer.ItemSledgeHammer;
@@ -164,6 +161,7 @@ public class EDModuleMachine extends EDModule {
 		GameRegistry.registerTileEntity(TileEntitySinteringOven.class, Strings.MACHINE_SINTERING_OVEN);
 		GameRegistry.registerTileEntity(TileEntityTable.class, Strings.BLOCK_TABLE_NAME);
 		GameRegistry.registerTileEntity(TileEntityBasicSieve.class, Strings.MACHINE_BASIC_SIEVE);
+		GameRegistry.registerTileEntity(TileEntityBasicKiln.class, Strings.MACHINE_BASIC_KILN);
 		GameRegistry.registerTileEntity(TileConveyorBelt.class, Strings.MACHINE_CONVEYOR_BELT);
 		GameRegistry.registerTileEntity(TileStructure.TileStructurePlaceHolder.class, Strings.MACHINE_STRUCTURE_PLACE_HOLDER);
 
@@ -186,6 +184,7 @@ public class EDModuleMachine extends EDModule {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySinteringOven.class, new RenderSinteringOven());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTable.class, new RenderTable());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBasicSieve.class, new RenderBasicSieve());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBasicKiln.class, new RenderBasicKiln());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileStructure.class, new RenderTileStructure());
 
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockTable.blockID, new RenderItemTable());

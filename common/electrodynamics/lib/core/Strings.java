@@ -145,6 +145,7 @@ public class Strings {
 	/* Internal machine names */
 	public static final String MACHINE_SINTERING_OVEN = "machine.sinteringOven.name";
 	public static final String MACHINE_BASIC_SIEVE = "machine.basicSieve.name";
+	public static final String MACHINE_BASIC_KILN = "machine.basicKiln.name";
 	public static final String MACHINE_CONVEYOR_BELT = "machine.conveyor.belt";
 	public static final String MACHINE_STRUCTURE_PLACE_HOLDER = "machine.structure.place.holder";
 
