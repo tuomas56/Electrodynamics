@@ -1,7 +1,7 @@
 package electrodynamics.client.render.tileentity;
 
 import electrodynamics.client.model.ModelBasicKiln;
-import electrodynamics.client.model.ModelMetalTray;
+import electrodynamics.client.model.ModelKilnTray;
 import electrodynamics.lib.client.Models;
 import electrodynamics.tileentity.TileEntityBasicKiln;
 import electrodynamics.tileentity.TileEntityMachine;
@@ -19,11 +19,11 @@ import org.lwjgl.opengl.GL11;
 public class RenderBasicKiln extends TileEntitySpecialRenderer {
 
 	private ModelBasicKiln modelKiln;
-	private ModelMetalTray modelMetalTray;
+	private ModelKilnTray modelTray;
 
 	public RenderBasicKiln() {
 		modelKiln = new ModelBasicKiln();
-		modelMetalTray = new ModelMetalTray();
+		modelTray = new ModelKilnTray();
 	}
 
 	@Override
@@ -71,18 +71,18 @@ public class RenderBasicKiln extends TileEntitySpecialRenderer {
 	}
 
 	public void renderTray(World world, ItemStack[] inv) {
-		GL11.glTranslated( 0, 0.1f, 0 );
-		GL11.glRotatef( 90, 0, 1, 0 );
+		GL11.glTranslated( 0, -0.15f, 0 );
+//		GL11.glRotatef( 0.0f, 0, 1, 0 );
+//		GL11.glScaled( 1.0f, 1.0f, 1.0f );
 
-		GL11.glScaled( 0.75f, 0.75f, 0.75f );
-		Minecraft.getMinecraft().renderEngine.bindTexture( Models.TEX_METAL_TRAY );
-		modelMetalTray.render( 0.0625F );
+		Minecraft.getMinecraft().renderEngine.bindTexture( Models.TEX_KILN_TRAY );
+		modelTray.renderAll( 0.0625F );
 
 		GL11.glRotatef( 270, 0, 1, 0 );
 
 		if( inv != null && inv.length > 0 ) {
-			GL11.glTranslated( -.11, 1.35, .165 );
-			GL11.glScaled( .4, .4, .4 );
+			GL11.glTranslated( -.11, 1.2, .11 );
+			GL11.glScaled( .35, .35, .35 );
 
 			for( int i = 0; i < inv.length; i++ ) {
 				ItemStack stack = inv[i];

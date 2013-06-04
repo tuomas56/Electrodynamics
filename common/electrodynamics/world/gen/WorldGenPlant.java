@@ -37,9 +37,9 @@ public class WorldGenPlant implements IWorldGenerator {
 			return;
 		}
 		
-		int x = chunkX * random.nextInt(16);
+		int x = chunkX * 16 + random.nextInt(16);
 		int y = random.nextInt(256);
-		int z = chunkZ * random.nextInt(16);
+		int z = chunkZ * 16 + random.nextInt(16);
 		
 		generateFlowers(world, x, y, z, flowerID, random);
 	}
