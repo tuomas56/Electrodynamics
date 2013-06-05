@@ -1,5 +1,7 @@
 package electrodynamics.core.handler;
 
+import electrodynamics.client.gui.GuiTrayKiln;
+import electrodynamics.inventory.container.ContainerTrayKiln;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -18,7 +20,7 @@ public class GuiHandler implements IGuiHandler {
 	public enum GuiType {
 		TRAY("/gui/trap.png"),
 		TESLA_MODULE(ModInfo.RESOURCE_DIR + "/textures/gui/teslaModule.png"),
-		TRAY_KILN("/gui/trayKiln.png"); // todo the tray gui image
+		TRAY_KILN(ModInfo.RESOURCE_DIR + "/textures/gui/kilnTray.png");
 		
 		public String guiFile;
 		
@@ -53,7 +55,7 @@ public class GuiHandler implements IGuiHandler {
 				return side == Side.SERVER ? new ContainerTeslaModule(player, ((IInventoryItem)held.getItem()).getInventory(held)) : new GuiTeslaModule(player, new ContainerTeslaModule(player, ((IInventoryItem)held.getItem()).getInventory(held)));
 			}
 			case TRAY_KILN:
-				return side == Side.SERVER ? null : null; // todo: the tray container and gui container.
+				return side == Side.SERVER ? new ContainerTrayKiln(player, ((IInventoryItem)held.getItem()).getInventory(held)) : new GuiTrayKiln(player, new ContainerTrayKiln(player, ((IInventoryItem)held.getItem()).getInventory(held)));
 		}
 		
 		return null;

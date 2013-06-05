@@ -68,7 +68,15 @@ public class ItemTray extends Item implements IInventoryItem {
 	@Override
 	public InventoryItem getInventory(ItemStack stack) {
 		if (stack.getItem() instanceof IInventoryItem) {
-			return new InventoryItem(type == TrayType.KILN_TRAY ? 4 : 9, stack);
+			if( type == TrayType.KILN_TRAY ) {
+				return new InventoryItem(9, stack) {
+					@Override
+					public int getInventoryStackLimit() {
+						return 16;
+					}
+				};
+			}
+			return new InventoryItem(9, stack);
 		}
 		
 		return null;

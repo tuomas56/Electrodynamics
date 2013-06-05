@@ -68,6 +68,7 @@ public class Strings {
 
 	/* Internal GUI names */
 	public static final String GUI_TRAY = "gui.tray.name";
+	public static final String GUI_TRAY_KILN = "gui.tray.kiln.name";
 	public static final String GUI_MODULE = "gui.module.name";
 
 	/* Internal ore names */
