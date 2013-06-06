@@ -1,6 +1,8 @@
 package electrodynamics.module;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -10,10 +12,12 @@ import electrodynamics.block.item.ItemBlockMachine;
 import electrodynamics.block.item.ItemBlockStorage;
 import electrodynamics.block.item.ItemBlockStructure;
 import electrodynamics.block.item.ItemBlockTable;
+import electrodynamics.client.render.entity.RenderDolly;
 import electrodynamics.client.render.item.RenderItemMachine;
 import electrodynamics.client.render.item.RenderItemTable;
 import electrodynamics.client.render.tileentity.*;
 import electrodynamics.core.lang.EDLanguage;
+import electrodynamics.entity.EntityDolly;
 import electrodynamics.item.*;
 import electrodynamics.item.hammer.ItemSledgeHammer;
 import electrodynamics.item.hammer.ItemSteelHammer;
@@ -32,6 +36,7 @@ import electrodynamics.tileentity.*;
 import electrodynamics.util.ItemUtil;
 import electrodynamics.world.TickHandlerMBS;
 import net.minecraft.block.Block;
+import net.minecraft.client.particle.EntityRainFX;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -178,6 +183,8 @@ public class EDModuleMachine extends EDModule {
 		CraftingManager.getInstance().ovenManager = new RecipeManagerSinteringOven();
 		CraftingManager.getInstance().ovenManager.initRecipes();
 
+		EntityRegistry.registerGlobalEntityID(EntityDolly.class, "edxDolly", 151);
+		
 		// Multi-block Structures
 		MBSManager.registerMBS(new SinteringFurnace()); // Sintering Furnace
 	}
@@ -191,6 +198,8 @@ public class EDModuleMachine extends EDModule {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBasicKiln.class, new RenderBasicKiln());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileStructure.class, new RenderTileStructure());
 
+		RenderingRegistry.registerEntityRenderingHandler(EntityDolly.class, new RenderDolly());
+		
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockTable.blockID, new RenderItemTable());
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockMachine.blockID, new RenderItemMachine());
 	}
