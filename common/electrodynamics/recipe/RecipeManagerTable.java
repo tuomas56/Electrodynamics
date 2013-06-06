@@ -19,6 +19,7 @@ import electrodynamics.lib.item.Grinding;
 import electrodynamics.network.packet.PacketFX;
 import electrodynamics.network.packet.PacketSound;
 import electrodynamics.tileentity.TileEntityTable;
+import electrodynamics.util.BlockUtil;
 
 public class RecipeManagerTable {
 
@@ -71,7 +72,7 @@ public class RecipeManagerTable {
 				int xMove = random.nextInt(10);
 				int zMove = random.nextInt(10);
 				
-				player.setPositionAndUpdate(player.posX + (xMove * xPosOrNeg), player.posY, player.posZ + (zMove * zPosOrNeg));
+				player.setPositionAndUpdate(player.posX + (xMove * xPosOrNeg), BlockUtil.getFirstUncoveredYPos(player.worldObj, xMove * xPosOrNeg, zMove * zPosOrNeg), player.posZ + (zMove * zPosOrNeg));
 
 				PacketFX fx = new PacketFX(FXType.ENDER_PARTICLES, player.posX, player.posY, player.posZ, new int[] {});
 				PacketSound sound = new PacketSound("mob.endermen.portal", player.posX, player.posY, player.posZ, PacketSound.TYPE_SOUND);
