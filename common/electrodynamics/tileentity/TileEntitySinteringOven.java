@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
 import electrodynamics.core.CoreUtils;
 import electrodynamics.inventory.InventoryItem;
 import electrodynamics.item.EDItems;

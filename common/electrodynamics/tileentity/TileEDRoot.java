@@ -6,7 +6,6 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
-import cpw.mods.fml.relauncher.Side;
 import electrodynamics.core.CoreUtils;
 import electrodynamics.network.PacketUtils;
 import electrodynamics.network.packet.Packet132TileEntityDataType;
