@@ -1,7 +1,5 @@
 package electrodynamics.lib.item;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
-
 public class ItemIDs {
 
 	/* itemStoneHammer */
@@ -49,8 +47,7 @@ public class ItemIDs {
 	public static final int ITEM_HANDHELD_SIEVE_DEFAULT_ID = 5110;
 	
 	/* itemTray */
-	public static int ITEM_TRAY_ID
-			;
+	public static int ITEM_TRAY_ID;
 	public static final int ITEM_TRAY_DEFAULT_ID = 5111;
 	
 	/* itemPlasmaRifle */
