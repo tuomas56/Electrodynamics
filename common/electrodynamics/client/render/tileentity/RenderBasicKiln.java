@@ -81,8 +81,8 @@ public class RenderBasicKiln extends TileEntitySpecialRenderer {
 		GL11.glRotatef( 270, 0, 1, 0 );
 
 		if( inv != null && inv.length > 0 ) {
-			GL11.glTranslated( -.11, 1.2, .11 );
-			GL11.glScaled( .35, .35, .35 );
+			GL11.glTranslated(0, 1.2, .09 );
+			GL11.glScaled( .65, .65, .65 );
 
 			for( int i = 0; i < inv.length; i++ ) {
 				ItemStack stack = inv[i];
@@ -93,8 +93,8 @@ public class RenderBasicKiln extends TileEntitySpecialRenderer {
 					GL11.glTranslated( .28, 0, 0 );
 				}
 
-				if( i == 3 || i == 6 ) {
-					GL11.glTranslated( -.84, 0, -.38 );
+				if( i == 2) {
+					GL11.glTranslated( -.56, 0, -.38 );
 				}
 
 				if( !(stack.getItem() instanceof ItemBlock) ) {
