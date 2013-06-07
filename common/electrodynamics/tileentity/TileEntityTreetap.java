@@ -1,6 +1,7 @@
 package electrodynamics.tileentity;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -50,6 +51,19 @@ public class TileEntityTreetap extends TileEntityMachine {
 		
 		writeToNBT(nbt);
 	}
+	
+	@Override
+	public void onUpdatePacket(NBTTagCompound nbt) {
+		super.onUpdatePacket(nbt);
+		
+		if (nbt.hasKey("liquidAmount")) {
+			liquidAmount = nbt.getInteger("liquidAmount");
+		}
+		
+		if (nbt.hasKey("hasBucket")) {
+			hasBucket = nbt.getBoolean("hasBucket");
+		}
+	}
 
 	@Override
 	public void onBlockActivated(EntityPlayer player) {
@@ -61,6 +75,7 @@ public class TileEntityTreetap extends TileEntityMachine {
 					sendBucketUpdate();
 				
 					--player.getCurrentEquippedItem().stackSize;
+					((EntityPlayerMP)player).updateHeldItem();
 				}
 			} else {
 				if (hasBucket && (liquidAmount == 0 || liquidAmount == 1000)) {
@@ -107,11 +122,12 @@ public class TileEntityTreetap extends TileEntityMachine {
 	}
 	
 	public void dropBucket(EntityPlayer player) {
-		player.inventory.addItemStackToInventory(getBucket());
+		player.setCurrentItemOrArmor(0, getBucket());
 		hasBucket = false;
 		liquidAmount = 0;
 		sendLiquidUpdate();
 		sendBucketUpdate();
+		((EntityPlayerMP)player).updateHeldItem();
 	}
 	
 	public void drawLatex() {
