@@ -1,13 +1,18 @@
 package electrodynamics.client.render.entity;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
 import org.lwjgl.opengl.GL11;
 
 import electrodynamics.client.model.ModelDolly;
 import electrodynamics.entity.EntityDolly;
 import electrodynamics.lib.client.Models;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.entity.Entity;
 
 public class RenderDolly extends Render {
 
@@ -28,8 +33,25 @@ public class RenderDolly extends Render {
 		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_DOLLY);
 		modelDolly.render(0.0625F);
 		
+		if (dolly.hasBlock()) {
+			renderBlock(dolly.worldObj, new ItemStack(dolly.getBlockID(), 1, dolly.getBlockMeta()));
+		}
+		
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
+	}
+	
+	public void renderBlock(World world, ItemStack stack) {
+		//Incredibly hackish, but better than essentially writing out a copy of the EntityItem renderer
+		boolean fancy = Minecraft.getMinecraft().gameSettings.fancyGraphics;
+		Minecraft.getMinecraft().gameSettings.fancyGraphics = true;
+		
+		EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, stack);
+		entityitem.getEntityItem().stackSize = 1;
+		entityitem.hoverStart = 0.0F;
+		RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+		
+		Minecraft.getMinecraft().gameSettings.fancyGraphics = fancy;
 	}
 	
 	@Override
