@@ -8,6 +8,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import electrodynamics.core.CoreUtils;
 
 public class EntityDolly extends Entity {
 
@@ -25,11 +26,20 @@ public class EntityDolly extends Entity {
         this.setSize(1F, 0.6F);
 	}
 
+	public EntityDolly(World world, int x, int y, int z) {
+		this(world);
+		
+		setPosition(x + .5, y, z + .5);
+		setBlock(world, x, y, z);
+	}
+	
 	public void setBlock(World world, int x, int y, int z) {
 		setBlockID(world.getBlockId(x, y, z));
 		setBlockMeta(world.getBlockMetadata(x, y, z));
 		
-		if (Block.blocksList[this.storedBlockID].hasTileEntity(this.storedBlockMeta)) {
+		Block block = Block.blocksList[this.storedBlockID];
+		
+		if (block != null && block.hasTileEntity(this.storedBlockMeta)) {
 			TileEntity tile = world.getBlockTileEntity(x, y, z);
 			
 			NBTTagCompound nbt = new NBTTagCompound();
@@ -71,10 +81,46 @@ public class EntityDolly extends Entity {
 	}
 	
 	public boolean hasBlock() {
-		return this.storedBlockID != 0;
+		return getBlockID() != 0;
 	}
 	
 	/* ENTITY STUFF */
+	public void updateBoundingBox() {
+		if (getBlockID() != 0) {
+			this.setSize(1F, 1F);
+		} else {
+			this.setSize(1F, 0.6F);
+		}
+	}
+	
+	public void updateMotion() {
+		if (CoreUtils.isServer(worldObj)) {
+	        double d4 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+	
+	        if (d4 > 0.35D)
+	        {
+	            double d5 = 0.35D / d4;
+	            this.motionX *= d5;
+	            this.motionZ *= d5;
+	            d4 = 0.35D;
+	        }
+	
+	        if (this.onGround)
+	        {
+	            this.motionX *= 0.5D;
+	            this.motionY *= 0.5D;
+	            this.motionZ *= 0.5D;
+	        }
+	
+	        this.moveEntity(this.motionX, this.motionY, this.motionZ);
+		} else {
+			double newX = this.posX + this.motionX;
+			double newY = this.posY + this.motionY;
+			double newZ = this.posZ + this.motionZ;
+	        this.setPosition(newX, newY, newZ);
+		}
+	}
+	
 	public AxisAlignedBB getCollisionBox(Entity entity) {
 		return entity.boundingBox;
 	}
@@ -100,17 +146,28 @@ public class EntityDolly extends Entity {
 	public void onUpdate() {
 		super.onUpdate();
 		
-		
+		updateBoundingBox();
+		updateMotion();
 	}
 	
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbt) {
+		setBlockID(nbt.getInteger("bid"));
+		setBlockMeta(nbt.getInteger("bmeta"));
 		
+		if (nbt.hasKey("bdata")) {
+			this.blockData = nbt.getCompoundTag("bdata");
+		}
 	}
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbt) {
+		nbt.setInteger("bid", getBlockID());
+		nbt.setInteger("bmeta", getBlockMeta());
 		
+		if (this.blockData != null) {
+			nbt.setCompoundTag("bdata", this.blockData);
+		}
 	}
 	
 	@SideOnly(Side.CLIENT)

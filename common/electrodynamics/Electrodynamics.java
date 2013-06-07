@@ -17,6 +17,8 @@ import electrodynamics.api.crafting.ICraftingManager;
 import electrodynamics.configuration.ConfigurationHandler;
 import electrodynamics.core.CommonProxy;
 import electrodynamics.core.lang.EDLanguage;
+import electrodynamics.item.EDItems;
+import electrodynamics.item.ItemDolly;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.network.PacketHandler;
 import electrodynamics.recipe.CraftingManager;
@@ -53,9 +55,15 @@ public class Electrodynamics implements IEDApi {
 		proxy.postInit(event);
 	}
 
+	/* API STUFF */
 	@Override
 	public ICraftingManager getCraftingManager() {
 		return craftingManager;
 	}
 
+	@Override
+	public void addToDollyBlacklist(int id, int meta) {
+		((ItemDolly)EDItems.itemDolly).addToBlacklist(id, meta);
+	}
+	
 }

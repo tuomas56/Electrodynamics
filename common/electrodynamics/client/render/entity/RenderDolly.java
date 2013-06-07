@@ -34,6 +34,9 @@ public class RenderDolly extends Render {
 		modelDolly.render(0.0625F);
 		
 		if (dolly.hasBlock()) {
+			GL11.glRotatef(180, 1, 0, 0);
+			GL11.glScaled(3, 3, 3);
+			GL11.glTranslated(0, -0.392, 0);
 			renderBlock(dolly.worldObj, new ItemStack(dolly.getBlockID(), 1, dolly.getBlockMeta()));
 		}
 		

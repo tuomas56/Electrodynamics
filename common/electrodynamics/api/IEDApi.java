@@ -6,4 +6,6 @@ public interface IEDApi {
 
 	public ICraftingManager getCraftingManager();
 	
+	public void addToDollyBlacklist(int id, int meta);
+	
 }

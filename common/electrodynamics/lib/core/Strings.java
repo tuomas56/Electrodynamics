@@ -24,6 +24,7 @@ public class Strings {
 	public static final String ITEM_LATEX_BUCKET = "bucket.latex.name";
 	public static final String ITEM_LIQUID_LATEX = "liquid.latex.name";
 	public static final String ITEM_ELMAG_MODULE = "elmag.module.name";
+	public static final String ITEM_DOLLY = "tool.dolly.name";
 
 	/* Internal block names */
 	public static final String BLOCK_ORE_NAME = "ore.name";

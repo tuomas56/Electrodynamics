@@ -74,4 +74,8 @@ public class ItemIDs {
 	public static int ITEM_TRAY_KILN_ID;
 	public static final int ITEM_TRAY_KILN_DEFAULT_ID = 5117;
 	
+	/* itemDolly */
+	public static int ITEM_DOLLY_ID;
+	public static final int ITEM_DOLLY_DEFAULT_ID = 5118;
+	
 }

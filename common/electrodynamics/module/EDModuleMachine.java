@@ -7,6 +7,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import electrodynamics.Electrodynamics;
 import electrodynamics.block.*;
 import electrodynamics.block.item.ItemBlockMachine;
 import electrodynamics.block.item.ItemBlockStorage;
@@ -36,7 +37,6 @@ import electrodynamics.tileentity.*;
 import electrodynamics.util.ItemUtil;
 import electrodynamics.world.TickHandlerMBS;
 import net.minecraft.block.Block;
-import net.minecraft.client.particle.EntityRainFX;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -114,6 +114,10 @@ public class EDModuleMachine extends EDModule {
 		EDItems.itemTrayKiln = new ItemTray(ItemIDs.ITEM_TRAY_KILN_ID, ItemTray.TrayType.KILN_TRAY).setUnlocalizedName(Strings.ITEM_TRAY_KILN_NAME);
 		GameRegistry.registerItem(EDItems.itemTrayKiln, Strings.ITEM_TRAY_KILN_NAME);
 		EDLanguage.getInstance().registerItem(EDItems.itemTrayKiln);
+		
+		EDItems.itemDolly = new ItemDolly(ItemIDs.ITEM_DOLLY_ID).setUnlocalizedName(Strings.ITEM_DOLLY);
+		GameRegistry.registerItem(EDItems.itemDolly, Strings.ITEM_DOLLY);
+		EDLanguage.getInstance().registerItem(EDItems.itemDolly);
 	}
 
 	@Override
@@ -183,7 +187,7 @@ public class EDModuleMachine extends EDModule {
 		CraftingManager.getInstance().ovenManager = new RecipeManagerSinteringOven();
 		CraftingManager.getInstance().ovenManager.initRecipes();
 
-		EntityRegistry.registerGlobalEntityID(EntityDolly.class, "edxDolly", 151);
+		EntityRegistry.registerModEntity(EntityDolly.class, "edxDolly", 151, Electrodynamics.instance, 256, 3, true);
 		
 		// Multi-block Structures
 		MBSManager.registerMBS(new SinteringFurnace()); // Sintering Furnace
