@@ -30,6 +30,8 @@ public class RenderDolly extends Render {
 		GL11.glRotatef(180, 1, 0, 0);
 		GL11.glTranslated(0, -1.5, 0);
 		
+		GL11.glRotatef(dolly.getRotation(), 0, 1, 0);
+		
 		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_DOLLY);
 		modelDolly.render(0.0625F);
 		

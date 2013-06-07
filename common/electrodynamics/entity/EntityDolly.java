@@ -8,15 +8,17 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import electrodynamics.core.CoreUtils;
 
 public class EntityDolly extends Entity {
 
 	public final int BLOCK_ID = 25;
 	public final int BLOCK_META = 26;
+	public final int DOLLY_ROTATION = 27;
 	
 	public int storedBlockID;
 	public int storedBlockMeta;
+	
+	public int dollyRotation;
 	
 	public NBTTagCompound blockData;
 	
@@ -72,12 +74,24 @@ public class EntityDolly extends Entity {
 		this.dataWatcher.updateObject(BLOCK_META, meta);
 	}
 	
+	public void setRotation(int rotation) {
+		if (rotation > 360) rotation = 0;
+		if (rotation < 0) rotation = 360;
+		
+		this.dollyRotation = rotation;
+		this.dataWatcher.updateObject(DOLLY_ROTATION, rotation);
+	}
+	
 	public int getBlockID() {
 		return this.dataWatcher.getWatchableObjectInt(BLOCK_ID);
 	}
 	
 	public int getBlockMeta() {
 		return this.dataWatcher.getWatchableObjectInt(BLOCK_META);
+	}
+	
+	public int getRotation() {
+		return this.dataWatcher.getWatchableObjectInt(DOLLY_ROTATION);
 	}
 	
 	public boolean hasBlock() {
@@ -94,31 +108,7 @@ public class EntityDolly extends Entity {
 	}
 	
 	public void updateMotion() {
-		if (CoreUtils.isServer(worldObj)) {
-	        double d4 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-	
-	        if (d4 > 0.35D)
-	        {
-	            double d5 = 0.35D / d4;
-	            this.motionX *= d5;
-	            this.motionZ *= d5;
-	            d4 = 0.35D;
-	        }
-	
-	        if (this.onGround)
-	        {
-	            this.motionX *= 0.5D;
-	            this.motionY *= 0.5D;
-	            this.motionZ *= 0.5D;
-	        }
-	
-	        this.moveEntity(this.motionX, this.motionY, this.motionZ);
-		} else {
-			double newX = this.posX + this.motionX;
-			double newY = this.posY + this.motionY;
-			double newZ = this.posZ + this.motionZ;
-	        this.setPosition(newX, newY, newZ);
-		}
+
 	}
 	
 	public AxisAlignedBB getCollisionBox(Entity entity) {
@@ -139,8 +129,9 @@ public class EntityDolly extends Entity {
 	
 	@Override
 	protected void entityInit() {
-		this.dataWatcher.addObject(BLOCK_ID, 0);
-		this.dataWatcher.addObject(BLOCK_META, 0);
+		this.dataWatcher.addObject(BLOCK_ID, new Integer(0));
+		this.dataWatcher.addObject(BLOCK_META, new Integer(0));
+		this.dataWatcher.addObject(DOLLY_ROTATION, new Integer(0));
 	}
 
 	public void onUpdate() {
