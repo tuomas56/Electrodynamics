@@ -6,7 +6,6 @@ import electrodynamics.lib.client.Models;
 import electrodynamics.tileentity.TileEntityBasicKiln;
 import electrodynamics.tileentity.TileEntityMachine;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
