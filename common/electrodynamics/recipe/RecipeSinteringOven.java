@@ -3,6 +3,8 @@ package electrodynamics.recipe;
 import java.util.ArrayList;
 import java.util.List;
 
+import electrodynamics.util.InventoryUtil;
+
 import net.minecraft.item.ItemStack;
 
 public class RecipeSinteringOven {
@@ -48,7 +50,7 @@ public class RecipeSinteringOven {
 	public boolean isInput(List<ItemStack> input) {
 		for (ItemStack stack : input) {
 			if (stack != null) {
-				if (doesListContain(stack)) {
+				if (InventoryUtil.contains((ItemStack[]) this.itemInputs.toArray(), stack)) {
 					return true;
 				}
 			}
@@ -57,16 +59,4 @@ public class RecipeSinteringOven {
 		return false;
 	}
 
-	private boolean doesListContain(ItemStack stack) {
-		for (ItemStack stack2 : this.itemInputs) {
-			if (stack2 != null) {
-				if (stack2.isItemEqual(stack)) {
-					return true;
-				}
-			}
-		}
-		
-		return false;
-	}
-	
 }
