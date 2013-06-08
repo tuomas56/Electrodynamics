@@ -60,7 +60,7 @@ public class RenderBasicKiln extends TileEntitySpecialRenderer {
 		modelKiln.renderAll( 0.0625F );
 
 		renderLED(kiln);
-		
+
 		// todo: render fire and particles
 
 		if( kiln.trayInventory != null ) { // render tray

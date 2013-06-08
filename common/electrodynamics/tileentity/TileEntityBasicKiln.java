@@ -64,7 +64,9 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 
 							this.totalCookTime = 0;
 							this.currentCookTime = 0;
+							
 							sendTrayUpdate();
+							sendTimingUpdate();
 							return;
 						}
 					} else {
@@ -76,6 +78,8 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 					RecipeKiln recipe = getCurrentRecipe();
 					if( recipe != null ) {
 						this.totalCookTime = this.currentCookTime = recipe.processingTime;
+						
+						sendTimingUpdate();
 						return;
 					}
 				}
@@ -136,6 +140,7 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 			this.totalCookTime = 0;
 
 			sendTrayUpdate();
+			sendTimingUpdate();
 			((EntityPlayerMP) player).updateHeldItem();
 		}
 	}
@@ -223,6 +228,12 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 			this.trayInventory = new InventoryItem( 4, new ItemStack( EDItems.itemTrayKiln ), 16 );
 			this.trayInventory.readFromNBT( nbt );
 		}
+		if (nbt.hasKey("currentCookTime")) {
+			this.currentCookTime = nbt.getInteger("currentCookTime");
+		}
+		if (nbt.hasKey("totalCookTime")) {
+			this.totalCookTime = nbt.getInteger("totalCookTime");
+		}
 	}
 
 	private void sendOpenUpdate() {
@@ -244,10 +255,16 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 			this.trayInventory.writeToNBT( nbt );
 		else
 			nbt.setBoolean( "noTray", true );
-		nbt.setInteger("currentCookTime", currentCookTime);
-		nbt.setInteger("totalCookTime", totalCookTime);
 
 		sendUpdatePacket( nbt );
 	}
 
+	private void sendTimingUpdate() {
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setInteger("currentCookTime", currentCookTime);
+		nbt.setInteger("totalCookTime", totalCookTime);
+		
+		sendUpdatePacket(nbt);
+	}
+	
 }
