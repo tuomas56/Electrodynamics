@@ -39,7 +39,7 @@ public class ItemElMagArmor extends ItemArmor implements IInventoryItem {
 		InventoryItem inv = this.getInventory(stack);
 		
 		if (inv != null && inv.getStackInSlot(0) != null) {
-			list.add(((IElMagModule)inv.getStackInSlot(0).getItem()).getModuleName(stack));
+			list.add(((IElMagModule)inv.getStackInSlot(0).getItem()).getModuleName(inv.getStackInSlot(0)));
 		}
 	}
 	

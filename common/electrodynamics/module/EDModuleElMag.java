@@ -1,6 +1,10 @@
 package electrodynamics.module;
 
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import electrodynamics.client.render.handler.XRayOverlayHandler;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemTeslaModule;
@@ -41,6 +45,12 @@ public class EDModuleElMag extends EDModule {
 	
 	public void postInit() {
 		
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void initClient() {
+		MinecraftForge.EVENT_BUS.register(new XRayOverlayHandler());
 	}
 	
 }

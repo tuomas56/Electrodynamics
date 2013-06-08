@@ -49,7 +49,11 @@ public class ItemTeslaModule extends Item implements IElMagModule {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		TeslaModule.get(itemStack.getItemDamage()).teslaLogic.onArmorTick(world, player, itemStack);
+		TeslaModule module = TeslaModule.get(itemStack.getItemDamage());
+		
+		if (module.hasLogic()) {
+			module.teslaLogic.onArmorTick(world, player, itemStack);
+		}
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
