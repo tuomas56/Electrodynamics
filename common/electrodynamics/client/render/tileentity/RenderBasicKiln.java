@@ -6,6 +6,7 @@ import electrodynamics.lib.client.Models;
 import electrodynamics.tileentity.TileEntityBasicKiln;
 import electrodynamics.tileentity.TileEntityMachine;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
@@ -60,6 +61,8 @@ public class RenderBasicKiln extends TileEntitySpecialRenderer {
 		modelKiln.rotateDoor( kiln.doorAngle );
 		modelKiln.renderAll( 0.0625F );
 
+		renderLED(kiln);
+		
 		// todo: render fire and particles
 
 		if( kiln.trayInventory != null ) { // render tray
@@ -70,6 +73,34 @@ public class RenderBasicKiln extends TileEntitySpecialRenderer {
 		GL11.glPopMatrix();
 	}
 
+	public void renderLED(TileEntityBasicKiln kiln) {
+		GL11.glPushMatrix();
+		GL11.glTranslated(0.395, 0.6, -0.378);
+		GL11.glColor4f(1, 1, 1, 1);
+		
+		Tessellator tess = Tessellator.instance;
+		
+		if (kiln.trayInventory != null) {
+			if (kiln.totalCookTime > 0) {
+				GL11.glColor3f(1, 0, 0);
+			} else {
+				GL11.glColor3f(0, 1, 0);
+			}
+		} else {
+			GL11.glColor3f(0, 0, 0);
+		}
+		
+		tess.startDrawingQuads();
+		tess.addVertex(0, 0, 0);
+		tess.addVertex(0, .05, 0);
+		tess.addVertex(.08, .05, 0);
+		tess.addVertex(.08, 0, 0);
+		tess.draw();
+		
+		GL11.glColor4f(1, 1, 1, 1);
+		GL11.glPopMatrix();
+	}
+	
 	public void renderTray(World world, ItemStack[] inv) {
 		GL11.glTranslated( 0, -0.15f, 0 );
 //		GL11.glRotatef( 0.0f, 0, 1, 0 );
