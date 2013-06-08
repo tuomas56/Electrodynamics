@@ -1,13 +1,17 @@
 package electrodynamics.entity;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import electrodynamics.core.CoreUtils;
 
 public class EntityDolly extends Entity {
 
@@ -107,8 +111,13 @@ public class EntityDolly extends Entity {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void updateMotion() {
-
+		List<EntityPlayer> nearbyPlayers = worldObj.getEntitiesWithinAABB(EntityPlayer.class, getBoundingBox().expand(.25, 0, .25));
+		
+		if (nearbyPlayers != null && nearbyPlayers.size() > 0) {
+			setRotation((int) -Math.floor(nearbyPlayers.get(0).rotationYaw / 360.0F));
+		}
 	}
 	
 	public AxisAlignedBB getCollisionBox(Entity entity) {
@@ -117,10 +126,6 @@ public class EntityDolly extends Entity {
 
 	public AxisAlignedBB getBoundingBox() {
 		return this.boundingBox;
-	}
-	
-	public boolean canBePushed() {
-		return true;
 	}
 	
 	public boolean canBeCollidedWith() {
@@ -137,8 +142,10 @@ public class EntityDolly extends Entity {
 	public void onUpdate() {
 		super.onUpdate();
 		
-		updateBoundingBox();
-		updateMotion();
+		if (CoreUtils.isServer(worldObj)) {
+			updateBoundingBox();
+			updateMotion();
+		}
 	}
 	
 	@Override
