@@ -146,6 +146,8 @@ public class EntityDolly extends Entity {
 		setBlockID(nbt.getInteger("bid"));
 		setBlockMeta(nbt.getInteger("bmeta"));
 		
+		this.dollyRotation = nbt.getInteger("rotation");
+		
 		if (nbt.hasKey("bdata")) {
 			this.blockData = nbt.getCompoundTag("bdata");
 		}
@@ -155,6 +157,8 @@ public class EntityDolly extends Entity {
 	protected void writeEntityToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("bid", getBlockID());
 		nbt.setInteger("bmeta", getBlockMeta());
+		
+		nbt.setInteger("rotation", this.dollyRotation);
 		
 		if (this.blockData != null) {
 			nbt.setCompoundTag("bdata", this.blockData);
