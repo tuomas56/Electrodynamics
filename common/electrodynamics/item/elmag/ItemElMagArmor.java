@@ -8,6 +8,7 @@ import electrodynamics.core.handler.GuiHandler;
 import electrodynamics.interfaces.IInventoryItem;
 import electrodynamics.inventory.InventoryItem;
 import electrodynamics.lib.core.ModInfo;
+import electrodynamics.lib.item.TeslaModule;
 import electrodynamics.util.MathUtil;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
@@ -64,9 +65,10 @@ public class ItemElMagArmor extends ItemArmor implements IInventoryItem {
 	
 	public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack itemStack) {
 		InventoryItem inv = this.getInventory(itemStack);
+		ItemStack module = inv.getStackInSlot(0);
 		
-		if (inv != null && inv.getStackInSlot(0) != null) {
-			((IElMagModule)inv.getStackInSlot(0).getItem()).onArmorTick(world, player, itemStack);
+		if (inv != null && module != null) {
+			((IElMagModule)module.getItem()).onArmorTick(TeslaModule.get(module.getItemDamage()), world, player, itemStack);
 		}
 	}
 	

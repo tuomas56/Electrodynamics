@@ -1,5 +1,6 @@
 package electrodynamics.api.tool;
 
+import electrodynamics.lib.item.TeslaModule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -16,6 +17,6 @@ public interface IElMagModule {
 	public int[] validArmorTypes(ItemStack stack);
 	
 	/** Bridge through to Item method onArmorTick */
-	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack);
+	public void onArmorTick(TeslaModule module, World world, EntityPlayer player, ItemStack itemStack);
 	
 }
