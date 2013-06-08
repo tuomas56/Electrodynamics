@@ -64,7 +64,7 @@ public class XRayOverlayHandler {
 		        // To prevent color resetting when rendering entity model.
 		        // Blocks out all colors except the ones we want
 		        // Prevents mobs rendering as white, etc
-		        GL11.glColorMask(false, true, true, true);
+		        GL11.glColorMask(false, true, true, false);
 		        
 		        // For the few mobs that don't reset the color
 		        GL11.glColor4f(1, 1, 1, 1);
