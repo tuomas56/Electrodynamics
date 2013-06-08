@@ -244,6 +244,8 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 			this.trayInventory.writeToNBT( nbt );
 		else
 			nbt.setBoolean( "noTray", true );
+		nbt.setInteger("currentCookTime", currentCookTime);
+		nbt.setInteger("totalCookTime", totalCookTime);
 
 		sendUpdatePacket( nbt );
 	}
