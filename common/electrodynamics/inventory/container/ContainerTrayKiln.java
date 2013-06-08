@@ -18,7 +18,7 @@ public class ContainerTrayKiln extends Container {
 		this.inventory = inventory;
 		inventory.parentContainer = this;
 		this.activePlayer = player;
-		this.activeSlot = player.inventory.currentItem + 36;
+		this.activeSlot = player.inventory.currentItem + 31;
 		
 		// Tray Inventory
 		for (int i = 0; i < 2; ++i) {
