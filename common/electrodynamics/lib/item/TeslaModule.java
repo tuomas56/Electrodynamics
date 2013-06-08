@@ -11,7 +11,7 @@ import electrodynamics.util.InventoryUtil;
 
 public enum TeslaModule {
 
-	MAGNETIC_PULL(Strings.MODULE_MAGNETIC_PULL, Strings.MODULE_MAGNETIC_PULL_DESC, new int[] {1}, new ElMagLogicMagneticPull(), "magneticPull"),
+	MAGNETIC_PULL(Strings.MODULE_MAGNETIC_PULL, Strings.MODULE_MAGNETIC_PULL_DESC, new int[] {1}, new ElMagLogicMagneticPull(), "moduleMagnet"),
 	XRAY(Strings.MODULE_XRAY, Strings.MODULE_XRAY_DESC, new int[] {0}, null, "moduleXray");
 	
 	public String unlocalizedName;
