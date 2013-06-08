@@ -20,12 +20,19 @@ public class InventoryItem implements IInventory, INBTTagable {
 	
 	public Container parentContainer;
 
+	public int stackLimit = 1;
+
 	public InventoryItem(int size, ItemStack parent) {
 		this.inventory = new ItemStack[size];
 		this.parent = parent;
 		this.parentNBT = parent.getTagCompound();
 		
 		readFromNBT(parentNBT);
+	}
+
+	public InventoryItem(int size, ItemStack parent, int stackLimit) {
+		this(size, parent);
+		this.stackLimit = stackLimit < 1 ? 1 : stackLimit;
 	}
 	
 	public void setParentNBT(NBTTagCompound nbt) {
@@ -177,7 +184,7 @@ public class InventoryItem implements IInventory, INBTTagable {
 
 	@Override
 	public int getInventoryStackLimit() {
-		return 1;
+		return stackLimit;
 	}
 
 	@Override
