@@ -10,6 +10,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
@@ -85,14 +86,16 @@ public abstract class BlockGeneric extends BlockContainer {
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, int blockID, int metadata) {
+	public void onBlockHarvested(World world, int x, int y, int z, int metadata, EntityPlayer player) {
+		if( player.capabilities.isCreativeMode )
+			return;
+
 		TileEntityGeneric tile = (TileEntityGeneric) world.getBlockTileEntity( x, y, z );
 		if( tile != null ) { // drop the block
 			int sub = tile.getSubBlock();
 			SubBlock subBlock = getSubBlocksArray()[sub];
 			this.dropBlockAsItem_do( world, x, y, z, subBlock.toItemStack() );
 		}
-		super.breakBlock( world, x, y, z, blockID, metadata ); // break block and remove TE.
 	}
 
 	@Override
