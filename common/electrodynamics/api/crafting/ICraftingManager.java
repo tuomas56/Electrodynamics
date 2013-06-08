@@ -20,7 +20,6 @@ public interface ICraftingManager {
 
 	/**
 	 * Registers a kiln recipe. Stack-size of input/output is assumed to be one <br />
-	 * Input and output size cannot exceed 4
-	 */
+	 * Input and output size cannot exceed 4 */
 	public void registerKilnRecipe(ArrayList<ItemStack> input, ArrayList<ItemStack> output, int duration);
 }
