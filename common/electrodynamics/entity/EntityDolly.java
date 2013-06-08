@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.core.CoreUtils;
+import electrodynamics.util.MathUtil;
 
 public class EntityDolly extends Entity {
 
@@ -116,7 +117,12 @@ public class EntityDolly extends Entity {
 		List<EntityPlayer> nearbyPlayers = worldObj.getEntitiesWithinAABB(EntityPlayer.class, getBoundingBox().expand(.25, 0, .25));
 		
 		if (nearbyPlayers != null && nearbyPlayers.size() > 0) {
-			setRotation((int) -Math.floor(nearbyPlayers.get(0).rotationYaw / 360.0F));
+//			setRotation(MathUtil.reverseNumber((int) -Math.floor(nearbyPlayers.get(0).rotationYaw), 1, 360));
+			this.motionX *= nearbyPlayers.get(0).motionX;
+			this.motionZ *= nearbyPlayers.get(0).motionZ;
+		} else {
+			this.motionX = 0;
+			this.motionZ = 0;
 		}
 	}
 	
@@ -126,6 +132,11 @@ public class EntityDolly extends Entity {
 
 	public AxisAlignedBB getBoundingBox() {
 		return this.boundingBox;
+	}
+	
+	@Override
+	public boolean canBePushed() {
+		return true;
 	}
 	
 	public boolean canBeCollidedWith() {
