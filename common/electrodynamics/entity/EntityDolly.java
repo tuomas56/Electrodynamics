@@ -5,6 +5,8 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -12,7 +14,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.core.CoreUtils;
-import electrodynamics.util.MathUtil;
+import electrodynamics.item.EDItems;
 
 public class EntityDolly extends Entity {
 
@@ -38,6 +40,25 @@ public class EntityDolly extends Entity {
 		
 		setPosition(x + .5, y, z + .5);
 		setBlock(world, x, y, z);
+	}
+	
+	public boolean interact(EntityPlayer player) {
+		if (player.inventory.getCurrentItem() == null) {
+			this.worldObj.setBlock((int)Math.floor(posX), (int)Math.floor(posY), (int)Math.floor(posZ), this.storedBlockID, this.storedBlockMeta, 3);
+		
+			if (this.blockData != null) {
+				TileEntity tile = this.worldObj.getBlockTileEntity((int)Math.floor(posX), (int)Math.floor(posY), (int)Math.floor(posZ));
+				
+				tile.readFromNBT(this.blockData);
+			}
+			
+			player.setCurrentItemOrArmor(0, new ItemStack(EDItems.itemDolly));
+			this.setDead();
+			
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public void setBlock(World world, int x, int y, int z) {
