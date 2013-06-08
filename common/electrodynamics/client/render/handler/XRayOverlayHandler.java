@@ -1,4 +1,4 @@
-package electrodynamics.item.elmag.handler;
+package electrodynamics.client.render.handler;
 
 import java.util.List;
 
@@ -6,20 +6,18 @@ import electrodynamics.client.render.util.RenderUtil;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 
 import org.lwjgl.opengl.GL11;
 
-public class ThermalOverlayHandler {
+public class XRayOverlayHandler {
 
 	@ForgeSubscribe
 	public void onWorldRenderLast(RenderWorldLastEvent event) {
 		GL11.glPushMatrix();
 		Entity entity = event.context.mc.renderViewEntity;
-		EntityPlayer player = (EntityPlayer) entity;
 		RenderUtil.translateToWorldCoords(entity, event.partialTicks);
 		
 		renderEntityHighlight(entity, event.partialTicks);
@@ -30,7 +28,7 @@ public class ThermalOverlayHandler {
 	@SuppressWarnings("unchecked")
 	private void renderEntityHighlight(Entity entity, float partial) {
 		GL11.glDisable(GL11.GL_LIGHTING);
-
+		
 		World world = entity.worldObj;
 		int range = (int) (24 / 2);
 		
@@ -54,14 +52,20 @@ public class ThermalOverlayHandler {
 				GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
 		        GL11.glEnable(GL11.GL_POLYGON_OFFSET_LINE);
 		        GL11.glPolygonOffset(-1.0F, -1.0F);
-		      
-	            GL11.glColor4f(0.5F, 0, 0, 0.2F);
-		        RenderManager.instance.getEntityRenderObject(entLiving).doRender(entLiving, 0, 0, 0, 0, partial);
+
+		        // To prevent color resetting when rendering entity model.
+		        // Blocks out all colors except the ones we want
+		        // Prevents mobs rendering as white, etc
+		        GL11.glColorMask(false, true, true, true);
+		        
+		        // For the few mobs that don't reset the color
+		        GL11.glColor4f(1, 1, 1, 1);
 		        
 		        GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
-		        GL11.glColor4f(0.5F, 0, 0, 1);
 				RenderManager.instance.getEntityRenderObject(entLiving).doRender(entLiving, 0, 0, 0, 0, partial);
-			    
+				
+				GL11.glColorMask(true, true, true, true);
+				
 				GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
 			    GL11.glEnable(GL11.GL_CULL_FACE);
 			    GL11.glEnable(GL11.GL_TEXTURE_2D);
