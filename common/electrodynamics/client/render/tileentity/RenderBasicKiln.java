@@ -6,7 +6,7 @@ import electrodynamics.lib.client.Models;
 import electrodynamics.tileentity.TileEntityBasicKiln;
 import electrodynamics.tileentity.TileEntityMachine;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
@@ -15,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
-
 
 public class RenderBasicKiln extends TileEntitySpecialRenderer {
 
@@ -78,7 +77,9 @@ public class RenderBasicKiln extends TileEntitySpecialRenderer {
 		GL11.glTranslated(0.395, 0.6, -0.378);
 		GL11.glColor4f(1, 1, 1, 1);
 		
-		Tessellator tess = Tessellator.instance;
+		GL11.glEnable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		
 		if (kiln.trayInventory != null) {
 			if (kiln.totalCookTime > 0) {
@@ -90,12 +91,15 @@ public class RenderBasicKiln extends TileEntitySpecialRenderer {
 			GL11.glColor3f(0, 0, 0);
 		}
 		
-		tess.startDrawingQuads();
-		tess.addVertex(0, 0, 0);
-		tess.addVertex(0, .05, 0);
-		tess.addVertex(.08, .05, 0);
-		tess.addVertex(.08, 0, 0);
-		tess.draw();
+		GL11.glBegin(GL11.GL_QUADS);
+		GL11.glVertex3d(0, 0, 0);
+		GL11.glVertex3d(0, .05, 0);
+		GL11.glVertex3d(.08, .05, 0);
+		GL11.glVertex3d(.08, 0, 0);
+		GL11.glEnd();
+		
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		
 		GL11.glColor4f(1, 1, 1, 1);
 		GL11.glPopMatrix();
