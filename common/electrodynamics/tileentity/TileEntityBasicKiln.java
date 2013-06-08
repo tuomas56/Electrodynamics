@@ -2,6 +2,8 @@ package electrodynamics.tileentity;
 
 import electrodynamics.inventory.InventoryItem;
 import electrodynamics.item.EDItems;
+import electrodynamics.recipe.CraftingManager;
+import electrodynamics.recipe.RecipeKiln;
 import electrodynamics.util.InventoryUtil;
 import electrodynamics.util.ItemUtil;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,6 +13,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class TileEntityBasicKiln extends TileEntityMachine {
@@ -41,7 +46,47 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 			doorAngle = ROTATIONAL_MAX;
 	}
 
-	// updateEntityServer
+	@Override
+	public void updateEntityServer() {
+		if( fuelLevel > 0 ) {
+			--this.fuelLevel;
+
+			if( open ) return;
+
+			if( totalCookTime > 0 ) {
+				if( trayInventory == null ) {
+					totalCookTime = 0;
+				} else {
+					if( currentCookTime == 0 ) {
+						RecipeKiln recipe = getCurrentRecipe();
+
+						if( recipe != null ) {
+							doProcess( recipe );
+
+							this.totalCookTime = 0;
+							this.currentCookTime = 0;
+							sendTrayUpdate();
+							return;
+						}
+					} else {
+						--currentCookTime;
+					}
+				}
+			} else {
+				if( trayInventory != null ) {
+					RecipeKiln recipe = getCurrentRecipe();
+					if( recipe != null ) {
+						this.totalCookTime = this.currentCookTime = recipe.processingTime;
+						return;
+					}
+				}
+			}
+
+		} else if( burning ) {
+			burning = false;
+			sendBurningUpdate();
+		}
+	}
 
 	@Override
 	public void onBlockBreak() {
@@ -77,7 +122,7 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 
 			} else if( trayInventory == null && playerHeldItem.getItem() == EDItems.itemTrayKiln ) { // place tray
 
-				this.trayInventory = new InventoryItem( 9, playerHeldItem.copy() );
+				this.trayInventory = new InventoryItem( 4, playerHeldItem.copy(), 16 );
 				--playerHeldItem.stackSize;
 
 				sendTrayUpdate();
@@ -93,6 +138,23 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 
 			sendTrayUpdate();
 			((EntityPlayerMP) player).updateHeldItem();
+		}
+	}
+
+	// ----- Internal functionality -----
+
+	private RecipeKiln getCurrentRecipe() {
+		List<ItemStack> items = Arrays.asList( this.trayInventory.inventory );
+		return CraftingManager.getInstance().kilnManager.getKilnRecipe( items );
+	}
+
+	private void doProcess(RecipeKiln recipe) {
+		// Remove ingredients from the tray inventory
+		ItemUtil.removeItemsFromArray( recipe.getInputs(), trayInventory.inventory );
+
+		// Give the outputs
+		for( ItemStack output : recipe.getOutputs() ) {
+			InventoryUtil.addToInventory( trayInventory, output.copy() );
 		}
 	}
 
@@ -116,7 +178,7 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 		this.fuelLevel = tag.getInteger( "fuelLevel" );
 		this.burning = this.fuelLevel > 0;
 		if( tag.hasKey( "Items" ) ) {
-			this.trayInventory = new InventoryItem( 9, new ItemStack( EDItems.itemTrayKiln ) );
+			this.trayInventory = new InventoryItem( 4, new ItemStack( EDItems.itemTrayKiln ), 16 );
 			this.trayInventory.readFromNBT( tag );
 		}
 	}
@@ -139,7 +201,7 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 		this.burning = nbt.getBoolean( "burning" );
 		this.fuelLevel = nbt.getInteger( "fuelLevel" );
 		if( nbt.hasKey( "Items" ) ) {
-			this.trayInventory = new InventoryItem( 9, new ItemStack( EDItems.itemTray ) );
+			this.trayInventory = new InventoryItem( 4, new ItemStack( EDItems.itemTrayKiln ), 16 );
 			this.trayInventory.readFromNBT( nbt );
 		} else {
 			this.trayInventory = null;
@@ -159,7 +221,7 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 			this.trayInventory = null;
 		}
 		if( nbt.hasKey( "Items" ) ) {
-			this.trayInventory = new InventoryItem( 9, new ItemStack( EDItems.itemTray ) );
+			this.trayInventory = new InventoryItem( 4, new ItemStack( EDItems.itemTrayKiln ), 16 );
 			this.trayInventory.readFromNBT( nbt );
 		}
 	}

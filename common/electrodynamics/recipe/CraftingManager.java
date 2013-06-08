@@ -13,6 +13,7 @@ public class CraftingManager implements ICraftingManager {
 	public RecipeManagerTable tableManager;
 	public RecipeManagerSieve sieveManager;
 	public RecipeManagerSinteringOven ovenManager;
+	public RecipeManagerKiln kilnManager;
 	
 	public static CraftingManager getInstance() {
 		return Electrodynamics.instance.craftingManager;
@@ -32,5 +33,10 @@ public class CraftingManager implements ICraftingManager {
 	public void registerOvenRecipe(ArrayList<ItemStack> input, ArrayList<ItemStack> output, int duration) {
 		ovenManager.registerRecipe(input, output, duration);
 	}
-	
+
+	@Override
+	public void registerKilnRecipe(ArrayList<ItemStack> input, ArrayList<ItemStack> output, int duration) {
+		kilnManager.registerRecipe( input, output, duration );
+	}
+
 }

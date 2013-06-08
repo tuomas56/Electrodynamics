@@ -24,10 +24,7 @@ import electrodynamics.lib.item.*;
 import electrodynamics.mbs.MBSManager;
 import electrodynamics.mbs.structure.SinteringFurnace;
 import electrodynamics.module.ModuleManager.Module;
-import electrodynamics.recipe.CraftingManager;
-import electrodynamics.recipe.RecipeManagerSieve;
-import electrodynamics.recipe.RecipeManagerSinteringOven;
-import electrodynamics.recipe.RecipeManagerTable;
+import electrodynamics.recipe.*;
 import electrodynamics.tileentity.*;
 import electrodynamics.util.ItemUtil;
 import electrodynamics.world.TickHandlerMBS;
@@ -177,6 +174,9 @@ public class EDModuleMachine extends EDModule {
 
 		CraftingManager.getInstance().ovenManager = new RecipeManagerSinteringOven();
 		CraftingManager.getInstance().ovenManager.initRecipes();
+
+		CraftingManager.getInstance().kilnManager = new RecipeManagerKiln();
+		CraftingManager.getInstance().kilnManager.initRecipes();
 
 		// Multi-block Structures
 		MBSManager.registerMBS(new SinteringFurnace()); // Sintering Furnace
