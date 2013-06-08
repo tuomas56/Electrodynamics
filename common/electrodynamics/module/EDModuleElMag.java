@@ -1,10 +1,14 @@
 package electrodynamics.module;
 
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemTeslaModule;
 import electrodynamics.item.elmag.ItemElMagArmor;
+import electrodynamics.item.elmag.handler.ThermalOverlayHandler;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.lib.item.ItemIDs;
 import electrodynamics.lib.item.TeslaModule;
@@ -41,6 +45,12 @@ public class EDModuleElMag extends EDModule {
 	
 	public void postInit() {
 		
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void initClient() {
+		MinecraftForge.EVENT_BUS.register(new ThermalOverlayHandler());
 	}
 	
 }
