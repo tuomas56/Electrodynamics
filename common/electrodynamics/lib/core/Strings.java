@@ -62,9 +62,11 @@ public class Strings {
 
 	/* Internal module names */
 	public static final String MODULE_MAGNETIC_PULL = "module.magnetic_pull.name";
+	public static final String MODULE_XRAY = "module.xray.name";
 
 	/* Internal module descriptions */
 	public static final String MODULE_MAGNETIC_PULL_DESC = "module.magnetic_pull.desc";
+	public static final String MODULE_XRAY_DESC = "module.xray.desc";
 
 	/* Internal GUI names */
 	public static final String GUI_TRAY = "gui.tray.name";

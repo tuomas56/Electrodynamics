@@ -7,6 +7,8 @@ import java.util.List;
 public class StringUtil {
 
 	public static List<String> splitStringAfterNChars(String string, int length) {
+		if (string == null || string.length() == 0) return null;
+		
 		ArrayList<String> strings = new ArrayList<String>();
 		StringBuilder sb = new StringBuilder();
 		String[] splitStrings = string.split(" ");

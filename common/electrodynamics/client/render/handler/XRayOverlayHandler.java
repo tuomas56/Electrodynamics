@@ -2,25 +2,33 @@ package electrodynamics.client.render.handler;
 
 import java.util.List;
 
-import electrodynamics.client.render.util.RenderUtil;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 
 import org.lwjgl.opengl.GL11;
 
+import electrodynamics.client.render.util.RenderUtil;
+import electrodynamics.lib.item.TeslaModule;
+
 public class XRayOverlayHandler {
 
+	public static boolean enabled = false;
+	
 	@ForgeSubscribe
 	public void onWorldRenderLast(RenderWorldLastEvent event) {
 		GL11.glPushMatrix();
 		Entity entity = event.context.mc.renderViewEntity;
-		RenderUtil.translateToWorldCoords(entity, event.partialTicks);
+		EntityPlayer player = (EntityPlayer)entity;
 		
-		renderEntityHighlight(entity, event.partialTicks);
+		if (TeslaModule.XRAY.hasModule(player)) {
+			RenderUtil.translateToWorldCoords(entity, event.partialTicks);
+			renderEntityHighlight(entity, event.partialTicks);
+		}
 		
 		GL11.glPopMatrix();
 	}
