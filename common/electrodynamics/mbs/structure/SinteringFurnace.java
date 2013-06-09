@@ -1,7 +1,5 @@
 package electrodynamics.mbs.structure;
 
-
-import electrodynamics.block.EDBlocks;
 import electrodynamics.client.model.ModelSinteringFurnace;
 import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.mbs.MultiBlockStructure;
@@ -9,10 +7,7 @@ import electrodynamics.mbs.Pattern;
 import electrodynamics.mbs.StructureBlock;
 import electrodynamics.mbs.util.WorldBlock;
 import electrodynamics.mbs.util.WorldChunk;
-import electrodynamics.tileentity.TileStructure;
-import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.tileentity.TileEntity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -85,14 +80,6 @@ public class SinteringFurnace extends MultiBlockStructure {
 		return -1;
 	}
 
-	private StructureComponent getStructureComponentFrom(TileEntity tileEntity) {
-		if( tileEntity != null && tileEntity instanceof TileStructure ) {
-			TileStructure tile = (TileStructure) tileEntity;
-			return StructureComponent.values()[tile.getSubBlock()];
-		}
-		return null;
-	}
-
 	private static Pattern makePattern() {
 		Pattern.PatternCompiler compiler = new Pattern.PatternCompiler( 7, 3 );
 
@@ -126,29 +113,5 @@ public class SinteringFurnace extends MultiBlockStructure {
 
 		return compiler.compile( mappings );
 	}
-
-
-	private static StructureBlock matchAny(final StructureComponent... components) {
-		return new StructureBlock() {
-			@Override
-			public boolean isMatchingBlock(WorldBlock worldBlock) {
-				Block block = worldBlock.getBlock();
-				if( block == null )
-					return false;
-				if( block.blockID == EDBlocks.blockStructureComponent.blockID ) {
-
-					TileStructure tile = (TileStructure) worldBlock.getTileEntity();
-					int subBlock = tile.getSubBlock();
-
-					for( StructureComponent sub : components ) {
-						if( subBlock == sub.ordinal() )
-							return true;
-					}
-				}
-				return false;
-			}
-		};
-	}
-
 
 }

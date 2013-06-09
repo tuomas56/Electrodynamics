@@ -1,12 +1,15 @@
 package electrodynamics.mbs;
 
 
+import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
+import electrodynamics.block.EDBlocks;
 import electrodynamics.core.EDLogger;
+import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.mbs.util.WorldBlock;
 import electrodynamics.mbs.util.WorldChunk;
 import electrodynamics.mbs.util.WorldCoordinate;
@@ -140,5 +143,34 @@ public abstract class MultiBlockStructure {
 		EDLogger.fine( String.format( "Validated Structure at: (%s, %s, %s)", x, y, z ) );
 	}
 
+	public StructureComponent getStructureComponentFrom(TileEntity tileEntity) {
+		if( tileEntity != null && tileEntity instanceof TileStructure ) {
+			TileStructure tile = (TileStructure) tileEntity;
+			return StructureComponent.values()[tile.getSubBlock()];
+		}
+		return null;
+	}
+	
+	public static StructureBlock matchAny(final StructureComponent... components) {
+		return new StructureBlock() {
+			@Override
+			public boolean isMatchingBlock(WorldBlock worldBlock) {
+				Block block = worldBlock.getBlock();
+				if( block == null )
+					return false;
+				if( block.blockID == EDBlocks.blockStructureComponent.blockID ) {
 
+					TileStructure tile = (TileStructure) worldBlock.getTileEntity();
+					int subBlock = tile.getSubBlock();
+
+					for( StructureComponent sub : components ) {
+						if( subBlock == sub.ordinal() )
+							return true;
+					}
+				}
+				return false;
+			}
+		};
+	}
+	
 }

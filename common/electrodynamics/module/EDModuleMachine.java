@@ -22,6 +22,7 @@ import electrodynamics.lib.block.*;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.lib.item.*;
 import electrodynamics.mbs.MBSManager;
+import electrodynamics.mbs.structure.MobGrinder;
 import electrodynamics.mbs.structure.SinteringFurnace;
 import electrodynamics.module.ModuleManager.Module;
 import electrodynamics.recipe.*;
@@ -180,6 +181,7 @@ public class EDModuleMachine extends EDModule {
 
 		// Multi-block Structures
 		MBSManager.registerMBS(new SinteringFurnace()); // Sintering Furnace
+		MBSManager.registerMBS(new MobGrinder()); // Mob Grinder
 	}
 
 	@SideOnly(Side.CLIENT)

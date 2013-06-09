@@ -1,11 +1,12 @@
 package electrodynamics.lib.block;
 
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.block.SubBlock;
+import electrodynamics.client.model.ModelChicken;
 import electrodynamics.client.model.ModelTechne;
+import electrodynamics.lib.client.Models;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityGeneric;
@@ -212,12 +213,12 @@ public enum StructureComponent implements SubBlock {
 		
 		@Override
 		public ModelTechne getModel() {
-			return null;
+			return new ModelChicken();
 		}
 
 		@Override
 		public String getModelTexture() {
-			return null;
+			return Models.TEX_CHICKEN;
 		}
 
 		@Override

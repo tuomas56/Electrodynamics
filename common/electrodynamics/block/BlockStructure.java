@@ -72,9 +72,14 @@ public class BlockStructure extends BlockGeneric implements IAcceptsTool {
 	}
 
 	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
+	
+	@Override
 	public int getLightOpacity(World world, int x, int y, int z) {
 		TileEntity tile = world.getBlockTileEntity( x, y, z );
-		if( tile != null && tile instanceof TileStructure && ((TileStructure) tile).isValidStructure() )
+		if( tile != null && tile instanceof TileStructure && (((TileStructure) tile).isValidStructure() || (StructureComponent.values()[((TileStructure)tile).getSubBlock()].getModel() != null)))
 			return 0;
 		return 255;
 	}

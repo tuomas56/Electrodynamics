@@ -59,13 +59,11 @@ public class RenderBlockStructure implements ISimpleBlockRenderingHandler {
 		if( sub == -1 )
 			return true; // deal with invalid type later.
 
-		StructureComponent component = StructureComponent.values()[world.getBlockMetadata(x, y, z)];
+		StructureComponent component = StructureComponent.values()[sub];
 		
-		if (component.getModel() != null) {
-			Minecraft.getMinecraft().renderEngine.bindTexture(component.getModelTexture());
-			component.applyGLTransformations((byte) 0);
-			component.getModel().render(0.0625F);
-		} else {
+		// If there isn't a model to render
+		// Model rendering handled via TESR
+		if (component.getModel() == null) {
 			int metadata = world.getBlockMetadata( x, y, z );
 			int[] rotations = getRotations( sub, metadata );
 			if( rotations.length == 6 ) {
