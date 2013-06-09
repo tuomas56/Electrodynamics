@@ -3,6 +3,7 @@ package electrodynamics.recipe;
 
 import electrodynamics.lib.block.Decorative;
 import electrodynamics.util.ItemUtil;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -17,6 +18,10 @@ public class RecipeManagerKiln {
 		// Limestone -> Scorched Limestone
 		registerRecipe(
 				new RecipeKiln( Arrays.asList( Decorative.LIMESTONE.toItemStack() ), Arrays.asList( Decorative.LIMESTONE_SCORCHED.toItemStack() ) )
+		);
+		
+		registerRecipe(
+				new RecipeKiln( Arrays.asList( new ItemStack(Item.rottenFlesh) ), Arrays.asList( new ItemStack(Item.leather) ) )
 		);
 	}
 
