@@ -51,8 +51,6 @@ public class WorldGenWormwood implements IWorldGenerator {
 		int z = (chunkZ * 16) + 8;
 		int y = BlockUtil.getFirstUncoveredYPos(world, chunkX, chunkZ);
 		
-		System.out.println("BLOCK: " + x + ":" + y + ":" + z);
-		
 		for (int i=0; i<COUNT; i++) {
 			//Generation spans from slightly off the middle to same point across
 			x = x + random.nextInt(8) - random.nextInt(4);
