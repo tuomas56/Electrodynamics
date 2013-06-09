@@ -52,10 +52,10 @@ import electrodynamics.world.gen.WorldGenBlock;
 import electrodynamics.world.gen.WorldGenClay;
 import electrodynamics.world.gen.WorldGenLimestone;
 import electrodynamics.world.gen.WorldGenNear;
-import electrodynamics.world.gen.WorldGenPlant;
 import electrodynamics.world.gen.WorldGenRubberTree;
 import electrodynamics.world.gen.feature.FeatureHandler;
 import electrodynamics.world.handler.BonemealEventHandler;
+import electrodynamics.world.handler.DecorateBiomeEventHandler;
 
 public class EDModuleWorld extends EDModule {
 
@@ -114,6 +114,7 @@ public class EDModuleWorld extends EDModule {
 	@Override
 	public void init() {
 		MinecraftForge.EVENT_BUS.register(new BonemealEventHandler());
+		MinecraftForge.EVENT_BUS.register(new DecorateBiomeEventHandler());
 		
 		LiquidDictionary.getOrCreateLiquid("Latex", new LiquidStack(EDItems.itemLiquidLatex, LiquidContainerRegistry.BUCKET_VOLUME));
 		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(new LiquidStack(EDItems.itemLiquidLatex, LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(EDItems.itemLiquidLatex), new ItemStack(Item.bucketEmpty)));
@@ -154,10 +155,7 @@ public class EDModuleWorld extends EDModule {
 				}
 			}
 		});
-		// Wormwood
-		GameRegistry.registerWorldGenerator(new WorldGenPlant(BlockIDs.BLOCK_WORMWOOD_ID, 0, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.HILLS, Type.FOREST, Type.JUNGLE, Type.MOUNTAIN)));
-		GameRegistry.registerWorldGenerator(new WorldGenPlant(BlockIDs.BLOCK_WORMWOOD_ID, 1, BiomeHelper.getBiomesForTypes(Type.DESERT, Type.WASTELAND)));
-	
+
 		// Rubber Trees
 		GameRegistry.registerWorldGenerator(new WorldGenRubberTree(10, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.JUNGLE)));
 	}

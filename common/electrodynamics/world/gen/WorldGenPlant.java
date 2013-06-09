@@ -5,43 +5,59 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.util.BiomeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.chunk.IChunkProvider;
-import cpw.mods.fml.common.IWorldGenerator;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 
-public class WorldGenPlant implements IWorldGenerator {
+public class WorldGenPlant {
 
 	public int flowerID;
 	public int flowerMeta;
-	
+
 	public List<BiomeGenBase> validBiomes;
-	
-	public WorldGenPlant(int id, int meta, BiomeGenBase ... validBiomes) {
+
+	public WorldGenPlant(int id, int meta, BiomeGenBase... validBiomes) {
 		this.flowerID = id;
 		this.flowerMeta = meta;
 		this.validBiomes = Arrays.asList(validBiomes);
 	}
-	
+
 	public WorldGenPlant(int id, int meta, ArrayList<BiomeGenBase> validBiomes) {
 		this.flowerID = id;
 		this.flowerMeta = meta;
 		this.validBiomes = validBiomes;
 	}
-	
-	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+
+	private static List<WorldGenPlant> generators;
+
+	static {
+		generators = new ArrayList<WorldGenPlant>();
+
+		register(new WorldGenPlant(BlockIDs.BLOCK_WORMWOOD_ID, 0, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.HILLS, Type.FOREST, Type.JUNGLE, BiomeDictionary.Type.MOUNTAIN)));
+		register(new WorldGenPlant(BlockIDs.BLOCK_WORMWOOD_ID, 1, BiomeHelper.getBiomesForTypes(Type.DESERT, Type.WASTELAND)));
+	}
+
+	public static void register(WorldGenPlant gen) {
+		generators.add(gen);
+	}
+
+	public static void generate(World world, int chunkX, int chunkZ, Random random) {
 		if (world.getWorldInfo().getTerrainType() == WorldType.FLAT) {
 			return;
 		}
-		
-		int x = (chunkX * 16) + random.nextInt(16);
-		int z = (chunkZ * 16) + random.nextInt(16);
-		int y = random.nextInt(256);
-		
-		generateFlowers(world, x, y, z, flowerID, random);
+
+		for (WorldGenPlant gen : generators) {
+			int x = (chunkX * 16) + random.nextInt(16);
+			int z = (chunkZ * 16) + random.nextInt(16);
+			int y = random.nextInt(256);
+
+			gen.generateFlowers(world, x, y, z, gen.flowerID, random);
+		}
 	}
 
 	private void generateFlowers(World world, int x, int y, int z, int blockID, Random random) {
@@ -57,5 +73,5 @@ public class WorldGenPlant implements IWorldGenerator {
 			}
 		}
 	}
-	
+
 }
