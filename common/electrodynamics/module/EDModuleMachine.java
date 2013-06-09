@@ -166,7 +166,8 @@ public class EDModuleMachine extends EDModule {
 		GameRegistry.registerTileEntity(TileEntityBasicKiln.class, Strings.MACHINE_BASIC_KILN);
 		GameRegistry.registerTileEntity(TileConveyorBelt.class, Strings.MACHINE_CONVEYOR_BELT);
 		GameRegistry.registerTileEntity(TileStructure.TileStructurePlaceHolder.class, Strings.MACHINE_STRUCTURE_PLACE_HOLDER);
-
+		GameRegistry.registerTileEntity(TileEntityMobGrinder.class, "edxMobGrinder");
+		
 		CraftingManager.getInstance().tableManager = new RecipeManagerTable();
 		CraftingManager.getInstance().tableManager.initRecipes();
 
