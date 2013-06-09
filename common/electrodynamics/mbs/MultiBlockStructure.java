@@ -141,10 +141,10 @@ public abstract class MultiBlockStructure {
 							WorldCoordinate central = getCentralCoordinate(chunk, rotation);
 							tile.worldObj.setBlockTileEntity(central.x, central.y, central.z, getNewCentralTileEntity());
 						}
-						
-						((TileStructure) tile).validateStructure( this, rotation, x, y, z );
-						((World)chunk.getBlockAccess()).markBlockForUpdate(x, y, z);
 					}
+					
+					((TileStructure) tile).validateStructure( this, rotation, x, y, z );
+					((World)chunk.getBlockAccess()).markBlockForUpdate(x, y, z);
 				}
 			}
 		}
