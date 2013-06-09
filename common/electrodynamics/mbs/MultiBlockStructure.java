@@ -58,7 +58,8 @@ public abstract class MultiBlockStructure {
 	 * @return an integer representing the rotation of the MBS, or -1 if not found.
 	 */
 	public int check(WorldChunk chunk) {
-
+		//TODO Xhamolk_ Fix bug with certain MBS rotations
+		
 		// Compare dimensions:
 		if( !compareDimensions( chunk ) )
 			return -1;
