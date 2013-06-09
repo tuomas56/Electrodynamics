@@ -8,6 +8,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import electrodynamics.api.tool.IElMagModule;
 import electrodynamics.inventory.InventoryItem;
+import electrodynamics.util.InventoryUtil;
 
 public class ContainerTeslaModule extends Container {
 
@@ -23,7 +24,7 @@ public class ContainerTeslaModule extends Container {
 		this.inventory = inventory;
 		inventory.parentContainer = this;
 		this.activePlayer = player;
-		this.activeSlot = player.inventory.currentItem + 28;
+		this.activeSlot = InventoryUtil.getActiveSlot(player.inventory.currentItem, inventory);
 		this.armorType = ((ItemArmor)this.inventory.parent.getItem()).armorType;
 		
 		// Tray Inventory

@@ -11,6 +11,13 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class InventoryUtil {
 
+	public static final int PLAYER_INVENTORY_SIZE = 27;
+	public static final int PLAYER_HOTBAR_SIZE = 9;
+	
+	public static int getActiveSlot(int activeSlot, IInventory inventory) {
+		return (activeSlot + PLAYER_INVENTORY_SIZE + inventory.getSizeInventory()) - 1;
+	}
+	
 	public static boolean contains(ItemStack[] inv, ItemStack check) {
 		if (check == null || inv == null || inv.length == 0) return false;
 		

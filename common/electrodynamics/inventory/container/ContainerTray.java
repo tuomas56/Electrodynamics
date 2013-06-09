@@ -5,6 +5,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import electrodynamics.inventory.InventoryItem;
+import electrodynamics.util.InventoryUtil;
 
 public class ContainerTray extends Container {
 
@@ -18,7 +19,7 @@ public class ContainerTray extends Container {
 		this.inventory = inventory;
 		inventory.parentContainer = this;
 		this.activePlayer = player;
-		this.activeSlot = player.inventory.currentItem + 36;
+		this.activeSlot = InventoryUtil.getActiveSlot(player.inventory.currentItem, inventory);
 		
 		// Tray Inventory
 		for (int i = 0; i < 3; ++i) {

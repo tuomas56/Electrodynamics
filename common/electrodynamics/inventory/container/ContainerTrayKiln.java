@@ -1,6 +1,7 @@
 package electrodynamics.inventory.container;
 
 import electrodynamics.inventory.InventoryItem;
+import electrodynamics.util.InventoryUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
@@ -18,7 +19,7 @@ public class ContainerTrayKiln extends Container {
 		this.inventory = inventory;
 		inventory.parentContainer = this;
 		this.activePlayer = player;
-		this.activeSlot = player.inventory.currentItem + 35;
+		this.activeSlot = InventoryUtil.getActiveSlot(player.inventory.currentItem, inventory);
 		
 		// Tray Inventory
 		for (int i = 0; i < 2; ++i) {
