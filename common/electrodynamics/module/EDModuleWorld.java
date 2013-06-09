@@ -114,6 +114,8 @@ public class EDModuleWorld extends EDModule {
 	@Override
 	public void init() {
 		MinecraftForge.EVENT_BUS.register(new BonemealEventHandler());
+		
+		// Disabled due to "Already decorating!!" issue.
 //		MinecraftForge.TERRAIN_GEN_BUS.register(new DecorateBiomeEventHandler());
 		
 		LiquidDictionary.getOrCreateLiquid("Latex", new LiquidStack(EDItems.itemLiquidLatex, LiquidContainerRegistry.BUCKET_VOLUME));

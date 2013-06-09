@@ -23,6 +23,9 @@ public class DecorateBiomeEventHandler {
 	@ForgeSubscribe
 	public void onDecorate(final Decorate event) {
 		if (event.type == DecorateBiomeEvent.Decorate.EventType.FLOWERS) {
+			// For some reason I cannot fathom, the event stores the block coordinates of the first block in the generating chunk
+			// not the actual chunk coordinates.
+			// FORGE: Y U NO NAME VARS PROPERLY
 			handleWormwood(event.world, event.chunkX, event.chunkZ);
 		}
 	}
@@ -48,17 +51,21 @@ public class DecorateBiomeEventHandler {
 		final int COUNT = 16;
 		
 		Random random = new Random();
-		int x = (chunkX * 16) + random.nextInt(16);
-		int z = (chunkZ * 16) + random.nextInt(16);
-		int y = BlockUtil.getFirstUncoveredYPos(world, x, z);
+		
+		//Generation starts in middle of selected chunk
+		int x = chunkX + 8;
+		int z = chunkZ + 8;
+		int y = BlockUtil.getFirstUncoveredYPos(world, chunkX, chunkZ);
 		
 		for (int i=0; i<COUNT; i++) {
-			x = x + random.nextInt(8) - random.nextInt(8);
-			y = y + random.nextInt(4) - random.nextInt(4);
-			z = z + random.nextInt(8) - random.nextInt(8);
+			//Generation spans from slightly off the middle to same point across
+			x = x + random.nextInt(8) - random.nextInt(4);
+			z = z + random.nextInt(8) - random.nextInt(4);
 
-			if (world.isAirBlock(x, y, z) && (!world.provider.hasNoSky || y < 127) && Block.blocksList[EDBlocks.blockWormwood.blockID].canBlockStay(world, x, y, z)) {
-				world.setBlock(x, y, z, EDBlocks.blockWormwood.blockID, meta, 2);
+			if (x >= (chunkX) && x < ((chunkX) + 16) && z >= (chunkZ) && z < ((chunkZ) + 16)) {
+				if (world.isAirBlock(x, y, z) && (!world.provider.hasNoSky || y < 127) && Block.blocksList[EDBlocks.blockWormwood.blockID].canBlockStay(world, x, y, z)) {
+					world.setBlock(x, y, z, EDBlocks.blockWormwood.blockID, meta, 2);
+				}
 			}
 		}
 	}
