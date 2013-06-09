@@ -53,9 +53,9 @@ import electrodynamics.world.gen.WorldGenClay;
 import electrodynamics.world.gen.WorldGenLimestone;
 import electrodynamics.world.gen.WorldGenNear;
 import electrodynamics.world.gen.WorldGenRubberTree;
+import electrodynamics.world.gen.WorldGenWormwood;
 import electrodynamics.world.gen.feature.FeatureHandler;
 import electrodynamics.world.handler.BonemealEventHandler;
-import electrodynamics.world.handler.DecorateBiomeEventHandler;
 
 public class EDModuleWorld extends EDModule {
 
@@ -114,9 +114,9 @@ public class EDModuleWorld extends EDModule {
 	@Override
 	public void init() {
 		MinecraftForge.EVENT_BUS.register(new BonemealEventHandler());
-		
-		// Disabled due to "Already decorating!!" issue.
-//		MinecraftForge.TERRAIN_GEN_BUS.register(new DecorateBiomeEventHandler());
+
+		// Wormwood
+		GameRegistry.registerWorldGenerator(new WorldGenWormwood());
 		
 		LiquidDictionary.getOrCreateLiquid("Latex", new LiquidStack(EDItems.itemLiquidLatex, LiquidContainerRegistry.BUCKET_VOLUME));
 		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(new LiquidStack(EDItems.itemLiquidLatex, LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(EDItems.itemLiquidLatex), new ItemStack(Item.bucketEmpty)));
