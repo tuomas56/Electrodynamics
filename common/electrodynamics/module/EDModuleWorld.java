@@ -52,9 +52,9 @@ import electrodynamics.world.gen.WorldGenBlock;
 import electrodynamics.world.gen.WorldGenClay;
 import electrodynamics.world.gen.WorldGenLimestone;
 import electrodynamics.world.gen.WorldGenNear;
-import electrodynamics.world.gen.WorldGenOre;
 import electrodynamics.world.gen.WorldGenPlant;
 import electrodynamics.world.gen.WorldGenRubberTree;
+import electrodynamics.world.gen.feature.FeatureHandler;
 import electrodynamics.world.handler.BonemealEventHandler;
 
 public class EDModuleWorld extends EDModule {
@@ -128,19 +128,13 @@ public class EDModuleWorld extends EDModule {
 		
 		GameRegistry.addRecipe(new ItemStack(Item.silk), "TTT", 'T', Component.TWINE.toItemStack());
 		
-		// Cobaltite
-		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 0, 8, 16, 64, 4));
-		// Chalcopyrite
-		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 1, 8, 32, 78, 8));
-		// Galena
-		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 2, 4, 16, 32, 6));
+		FeatureHandler featureHandler = FeatureHandler.getInstance();
+		featureHandler.prepareFeatures();
+		featureHandler.insertFeatures();
+		
 		// Lithium
 		GameRegistry.registerWorldGenerator(new WorldGenClay(BlockIDs.BLOCK_LITHIUM_CLAY_ID, 4));
 		//MinecraftForge.TERRAIN_GEN_BUS.register(new electrodynamics.world.handler.CreateDecoratorHandler());
-		// Magnetite
-		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 3, 8, 16, 32, 4));
-		// Nickel
-		GameRegistry.registerWorldGenerator(new WorldGenOre(BlockIDs.BLOCK_ORE_ID, 4, 8, 16, 64, 8));
 		// Wolframite
 		GameRegistry.registerWorldGenerator(new WorldGenNear(BlockIDs.BLOCK_ORE_ID, Ore.WOLFRAMITE.ordinal(), 4, 4).setTarget(Block.lavaStill.blockID, 0).setYValues(6, 16));
 		// Limestone
