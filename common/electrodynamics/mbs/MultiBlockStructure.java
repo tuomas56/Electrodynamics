@@ -136,8 +136,15 @@ public abstract class MultiBlockStructure {
 			if( worldBlock != null ) {
 				tile = worldBlock.getTileEntity();
 				if( tile != null && tile instanceof TileStructure ) {
-					((TileStructure) tile).validateStructure( this, rotation, x, y, z );
-					((World)chunk.getBlockAccess()).markBlockForUpdate(x, y, z);
+					if (((TileStructure)tile).isCentralTileEntity()) {
+						if (getNewCentralTileEntity() != null) {
+							WorldCoordinate central = getCentralCoordinate(chunk, rotation);
+							tile.worldObj.setBlockTileEntity(central.x, central.y, central.z, getNewCentralTileEntity());
+						}
+						
+						((TileStructure) tile).validateStructure( this, rotation, x, y, z );
+						((World)chunk.getBlockAccess()).markBlockForUpdate(x, y, z);
+					}
 				}
 			}
 		}
@@ -172,6 +179,10 @@ public abstract class MultiBlockStructure {
 				return false;
 			}
 		};
+	}
+	
+	public TileStructure getNewCentralTileEntity() {
+		return null;
 	}
 	
 }
