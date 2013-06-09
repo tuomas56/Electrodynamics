@@ -15,6 +15,8 @@ import electrodynamics.mbs.Pattern;
 import electrodynamics.mbs.StructureBlock;
 import electrodynamics.mbs.util.WorldBlock;
 import electrodynamics.mbs.util.WorldChunk;
+import electrodynamics.tileentity.TileEntityMobGrinder;
+import electrodynamics.tileentity.TileStructure;
 
 public class MobGrinder extends MultiBlockStructure {
 
@@ -33,6 +35,11 @@ public class MobGrinder extends MultiBlockStructure {
 		return model != null ? model : (model = new ModelSinteringFurnace());
 	}
 
+	@Override
+	public TileStructure getNewCentralTileEntity() {
+		return new TileEntityMobGrinder();
+	}
+	
 	@Override
 	public int check(WorldChunk chunk) {
 		// use the c value to rotate the pattern,
