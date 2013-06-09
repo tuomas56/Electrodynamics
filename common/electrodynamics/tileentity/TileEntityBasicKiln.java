@@ -125,7 +125,7 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 
 			} else if( trayInventory == null && playerHeldItem.getItem() == EDItems.itemTrayKiln ) { // place tray
 
-				this.trayInventory = new InventoryItem( 4, playerHeldItem.copy(), 16 );
+				this.trayInventory = new InventoryItem( 8, playerHeldItem.copy(), 16 );
 				--playerHeldItem.stackSize;
 
 				sendTrayUpdate();
@@ -182,7 +182,7 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 		this.fuelLevel = tag.getInteger( "fuelLevel" );
 		this.burning = this.fuelLevel > 0;
 		if( tag.hasKey( "Items" ) ) {
-			this.trayInventory = new InventoryItem( 4, new ItemStack( EDItems.itemTrayKiln ), 16 );
+			this.trayInventory = new InventoryItem( 8, new ItemStack( EDItems.itemTrayKiln ), 16 );
 			this.trayInventory.readFromNBT( tag );
 		}
 	}
@@ -205,7 +205,7 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 		this.burning = nbt.getBoolean( "burning" );
 		this.fuelLevel = nbt.getInteger( "fuelLevel" );
 		if( nbt.hasKey( "Items" ) ) {
-			this.trayInventory = new InventoryItem( 4, new ItemStack( EDItems.itemTrayKiln ), 16 );
+			this.trayInventory = new InventoryItem( 8, new ItemStack( EDItems.itemTrayKiln ), 16 );
 			this.trayInventory.readFromNBT( nbt );
 		} else {
 			this.trayInventory = null;
@@ -225,7 +225,7 @@ public class TileEntityBasicKiln extends TileEntityMachine {
 			this.trayInventory = null;
 		}
 		if( nbt.hasKey( "Items" ) ) {
-			this.trayInventory = new InventoryItem( 4, new ItemStack( EDItems.itemTrayKiln ), 16 );
+			this.trayInventory = new InventoryItem( 8, new ItemStack( EDItems.itemTrayKiln ), 16 );
 			this.trayInventory.readFromNBT( nbt );
 		}
 		if (nbt.hasKey("currentCookTime")) {

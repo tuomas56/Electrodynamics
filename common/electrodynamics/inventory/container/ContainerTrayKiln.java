@@ -18,12 +18,22 @@ public class ContainerTrayKiln extends Container {
 		this.inventory = inventory;
 		inventory.parentContainer = this;
 		this.activePlayer = player;
-		this.activeSlot = player.inventory.currentItem + 31;
+		this.activeSlot = player.inventory.currentItem + 35;
 		
 		// Tray Inventory
 		for (int i = 0; i < 2; ++i) {
 			for (int j = 0; j < 2; ++j) {
-				this.addSlotToContainer(new Slot(inventory, j + i * 2, 71 + j * 18, 26 + i * 18));
+				this.addSlotToContainer(new Slot(inventory, j + i * 2, 44 + j * 18, 26 + i * 18));
+			}
+		}
+		for (int i = 0; i < 2; ++i) {
+			for (int j = 0; j < 2; ++j) {
+				this.addSlotToContainer(new Slot(inventory, 4 + j + i * 2, 98 + j * 18, 26 + i * 18) {
+					@Override
+					public boolean isItemValid(ItemStack par1ItemStack){
+						return false; // don't let the player place items in these slots, as they are output-only.
+					}
+				});
 			}
 		}
 
@@ -67,11 +77,11 @@ public class ContainerTrayKiln extends Container {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (par2 < 4) {
-				if (!this.mergeItemStack(itemstack1, 8, 40, true)) {
+			if (par2 < 8) { // tray slots
+				if (!this.mergeItemStack(itemstack1, 8, 8 + 36, true)) { // move to player's inventory
 					return null;
 				}
-			} else if (!this.mergeItemStack(itemstack1, 0, 4, false)) {
+			} else if (!this.mergeItemStack(itemstack1, 0, 4, false)) { // move to input slots
 				return null;
 			}
 
