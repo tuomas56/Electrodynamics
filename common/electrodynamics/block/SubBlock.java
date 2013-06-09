@@ -1,9 +1,8 @@
 package electrodynamics.block;
 
-
-import electrodynamics.tileentity.TileEntityGeneric;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import electrodynamics.tileentity.TileEntityGeneric;
 
 public interface SubBlock {
 

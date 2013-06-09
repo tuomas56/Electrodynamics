@@ -1,9 +1,8 @@
 package electrodynamics.client.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelBasicKiln extends ModelBase {
+public class ModelBasicKiln extends ModelTechne {
 
 	ModelRenderer kilnRight;
 	ModelRenderer kilnLeft;
@@ -66,7 +65,7 @@ public class ModelBasicKiln extends ModelBase {
 		kilnDoor.mirror = true;
 	}
 
-	public void renderAll(float f5) {
+	public void render(float f5) {
 		kilnRight.render( f5 );
 		kilnLeft.render( f5 );
 		kilnTop.render( f5 );

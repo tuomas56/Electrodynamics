@@ -1,10 +1,8 @@
 package electrodynamics.client.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-
-public class ModelKilnTray extends ModelBase {
+public class ModelKilnTray extends ModelTechne {
 
 	ModelRenderer handle1;
 	ModelRenderer tray;

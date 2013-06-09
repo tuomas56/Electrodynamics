@@ -57,7 +57,7 @@ public class RenderBasicKiln extends TileEntitySpecialRenderer {
 
 		Minecraft.getMinecraft().renderEngine.bindTexture( Models.TEX_BASIC_KILN );
 		modelKiln.rotateDoor( kiln.doorAngle );
-		modelKiln.renderAll( 0.0625F );
+		modelKiln.render( 0.0625F );
 
 		renderLED(kiln);
 

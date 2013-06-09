@@ -1,9 +1,8 @@
 package electrodynamics.client.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelBasicSieve extends ModelBase {
+public class ModelBasicSieve extends ModelTechne {
 	ModelRenderer sieveBase;
 	ModelRenderer sieveRackTop;
 	ModelRenderer sieveRackMiddle;
@@ -83,7 +82,7 @@ public class ModelBasicSieve extends ModelBase {
 		topFront.mirror = true;
 	}
 
-	public void renderAll(float f5) {
+	public void render(float f5) {
 		sieveBase.render(f5);
 		sieveRackTop.render(f5);
 		sieveRackMiddle.render(f5);

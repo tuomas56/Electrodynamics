@@ -1,9 +1,8 @@
 package electrodynamics.client.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelTreeTap extends ModelBase {
+public class ModelTreeTap extends ModelTechne {
 	ModelRenderer tapBottom;
 	ModelRenderer tapSide1;
 	ModelRenderer tapSide2;

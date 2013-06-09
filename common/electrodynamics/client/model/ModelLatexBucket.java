@@ -1,9 +1,8 @@
 package electrodynamics.client.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelLatexBucket extends ModelBase {
+public class ModelLatexBucket extends ModelTechne {
 	ModelRenderer bucketBottom;
 	ModelRenderer bucketBack;
 	ModelRenderer bucketLeft;

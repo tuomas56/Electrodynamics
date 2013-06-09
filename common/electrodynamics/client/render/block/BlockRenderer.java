@@ -42,29 +42,41 @@ public class BlockRenderer {
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 1.0F, 0.0F);
-		renderblocks.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, i1);
+		if (i1 != null) {
+			renderblocks.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, i1);
+		}
 		tessellator.draw();
 		if (solidtop) GL11.glDisable(GL11.GL_ALPHA_TEST);
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, -1.0F, 0.0F);
-		renderblocks.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, i2);
+		if (i2 != null) {
+			renderblocks.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, i2);
+		}
 		tessellator.draw();
 		if (solidtop) GL11.glEnable(GL11.GL_ALPHA_TEST);
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 0.0F, -1.0F);
-		renderblocks.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, i3);
+		if (i3 != null) {
+			renderblocks.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, i3);
+		}
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 0.0F, 1.0F);
-		renderblocks.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, i4);
+		if (i4 != null) {
+			renderblocks.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, i4);
+		}
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(-1.0F, 0.0F, 0.0F);
-		renderblocks.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, i5);
+		if (i5 != null) {
+			renderblocks.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, i5);
+		}
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(1.0F, 0.0F, 0.0F);
-		renderblocks.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, i6);
+		if (i6 != null) {
+			renderblocks.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, i6);
+		}
 		tessellator.draw();
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 	}

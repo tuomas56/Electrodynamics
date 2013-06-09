@@ -1,9 +1,8 @@
 package electrodynamics.client.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelSinteringFurnace extends ModelBase {
+public class ModelSinteringFurnace extends ModelTechne {
 	ModelRenderer ovenBase;
 	ModelRenderer frontRight;
 	ModelRenderer frontLeft;

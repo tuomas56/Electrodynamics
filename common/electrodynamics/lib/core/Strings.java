@@ -174,6 +174,9 @@ public class Strings {
 	public static final String STRUCTURE_COMPONENT_FURNACE_GAUGE = "structure.component.furnace.gauge.name";
 	public static final String STRUCTURE_COMPONENT_FURNACE_VALVE = "structure.component.furnace.valve.name";
 	public static final String STRUCTURE_COMPONENT_FURNACE_VENT = "structure.component.furnace.vent.name";
+	public static final String STRUCTURE_COMPONENT_MOB_GRINDER_CASING = "structure.component.mob_grinder.casing.name";
+	public static final String STRUCTURE_COMPONENT_MOB_GRINDER_BLADE = "structure.component.mob_grinder.blade.name";
+	public static final String STRUCTURE_COMPONENT_MOB_GRINDER_OUTPUT = "structure.component.mob_grinder.output.name";
 
 	/* Internal gas names */
 	public static final String GAS_AIR_CLEAN = "gas.air.clean.name";

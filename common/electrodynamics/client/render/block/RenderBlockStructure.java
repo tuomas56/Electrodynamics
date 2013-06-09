@@ -5,6 +5,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.tileentity.TileStructure;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
@@ -24,14 +25,22 @@ public class RenderBlockStructure implements ISimpleBlockRenderingHandler {
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
 
-		int[] rotations = getRotations(metadata, ForgeDirection.NORTH.ordinal());
-		if (rotations.length == 6) {
-			setRotationUV(renderer, rotations); // set UV rotations
-		}
-		renderer.setRenderBoundsFromBlock(block);
-		BlockRenderer.drawFaces(renderer, block, metadata, true);
-		setRotationUV(renderer, null); // clear UV rotations
+		StructureComponent component = StructureComponent.values()[metadata];
 
+		if (component.getModel() != null) {
+			Minecraft.getMinecraft().renderEngine.bindTexture(component.getModelTexture());
+			component.applyGLTransformations((byte) 1);
+			component.getModel().render(0.0625F);
+		} else {
+			int[] rotations = getRotations(metadata, ForgeDirection.NORTH.ordinal());
+			if (rotations.length == 6) {
+				setRotationUV(renderer, rotations); // set UV rotations
+			}
+			renderer.setRenderBoundsFromBlock(block);
+			BlockRenderer.drawFaces(renderer, block, metadata, true);
+			setRotationUV(renderer, null); // clear UV rotations
+		}
+		
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glPopMatrix();
 	}
@@ -50,13 +59,22 @@ public class RenderBlockStructure implements ISimpleBlockRenderingHandler {
 		if( sub == -1 )
 			return true; // deal with invalid type later.
 
-		int metadata = world.getBlockMetadata( x, y, z );
-		int[] rotations = getRotations( sub, metadata );
-		if( rotations.length == 6 ) {
-			setRotationUV( renderer, rotations ); // set UV rotations
+		StructureComponent component = StructureComponent.values()[world.getBlockMetadata(x, y, z)];
+		
+		if (component.getModel() != null) {
+			Minecraft.getMinecraft().renderEngine.bindTexture(component.getModelTexture());
+			component.applyGLTransformations((byte) 0);
+			component.getModel().render(0.0625F);
+		} else {
+			int metadata = world.getBlockMetadata( x, y, z );
+			int[] rotations = getRotations( sub, metadata );
+			if( rotations.length == 6 ) {
+				setRotationUV( renderer, rotations ); // set UV rotations
+			}
+			renderer.renderStandardBlock( block, x, y, z );
+			setRotationUV( renderer, null ); // clear UV rotations
 		}
-		renderer.renderStandardBlock( block, x, y, z );
-		setRotationUV( renderer, null ); // clear UV rotations
+		
 		return true;
 	}
 

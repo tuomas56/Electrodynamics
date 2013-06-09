@@ -1,9 +1,8 @@
 package electrodynamics.client.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelIngot extends ModelBase {
+public class ModelIngot extends ModelTechne {
 	ModelRenderer ingotRight;
 	ModelRenderer ingotBody;
 	ModelRenderer ingotLeft;

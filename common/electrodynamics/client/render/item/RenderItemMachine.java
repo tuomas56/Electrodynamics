@@ -126,7 +126,7 @@ public class RenderItemMachine implements IItemRenderer {
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180, 1, 0, 0);
 		GL11.glRotatef(-90, 0, 1, 0);
-		modelBasicSieve.renderAll(0.0625F);
+		modelBasicSieve.render(0.0625F);
 		GL11.glPopMatrix();
 	}
 
@@ -135,7 +135,7 @@ public class RenderItemMachine implements IItemRenderer {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180, 1, 0, 0);
-		modelBasicKiln.renderAll(0.0625F);
+		modelBasicKiln.render(0.0625F);
 		GL11.glPopMatrix();
 	}
 	

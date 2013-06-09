@@ -48,7 +48,7 @@ public class RenderBasicSieve extends TileEntitySpecialRenderer {
 
 			Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_BASIC_SIEVE);
 
-			modelBasicSieve.renderAll(0.0625F);
+			modelBasicSieve.render(0.0625F);
 		}
 		
 		GL11.glEnable(GL11.GL_LIGHTING);

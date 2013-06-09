@@ -1,9 +1,8 @@
 package electrodynamics.client.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelChicken extends ModelBase {
+public class ModelChicken extends ModelTechne {
 	ModelRenderer chicken;
 	ModelRenderer chickenWingRight;
 	ModelRenderer chickenWingLeft;
