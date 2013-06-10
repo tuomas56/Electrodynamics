@@ -126,7 +126,7 @@ public abstract class MultiBlockStructure {
 		WorldCoordinate coords = new WorldCoordinate( chunk.getBlockAccess(), chunk.getBaseCoordinates().x, chunk.getBaseCoordinates().y, chunk.getBaseCoordinates().z );
 		int centerX = chunk.getWidth() / 2;
 		int centerZ = chunk.getDepth() / 2;
-		return coords.translate( centerX, chunk.getBaseCoordinates().y, centerZ );
+		return coords.translate( centerX, 0, centerZ );
 	}
 
 	protected void validateTileEntities(WorldChunk chunk, int rotation, int x, int y, int z) {
