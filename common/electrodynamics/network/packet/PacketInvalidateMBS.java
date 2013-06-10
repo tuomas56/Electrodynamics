@@ -26,7 +26,7 @@ public class PacketInvalidateMBS extends PacketED {
 	}
 
 	public PacketInvalidateMBS(int x, int y, int z, int width, int length, int height) {
-		super(PacketTypeHandler.MBS_INIT, false);
+		super(PacketTypeHandler.MBS_INVALIDATE, false);
 
 		this.x = x;
 		this.y = y;
@@ -37,7 +37,7 @@ public class PacketInvalidateMBS extends PacketED {
 	}
 
 	public PacketInvalidateMBS() {
-		super(PacketTypeHandler.MBS_INIT, false);
+		super(PacketTypeHandler.MBS_INVALIDATE, false);
 	}
 
 	@Override
