@@ -71,12 +71,9 @@ public abstract class TileEntityGeneric extends TileEntity {
 			if( tile == null )
 				return;
 
-			// Load the data into the tile entity.
-			tile.onDataPacket( net, pkt );
-
-			// Replace this tile entity, and re-render.
-			worldObj.setBlockTileEntity( xCoord, yCoord, zCoord, tile );
-			worldObj.markBlockForRenderUpdate( xCoord, yCoord, zCoord );
+			worldObj.setBlockTileEntity( xCoord, yCoord, zCoord, tile ); // Replace this tile entity
+			tile.onDataPacket( net, pkt ); // Load the data into the tile entity
+			worldObj.markBlockForRenderUpdate( xCoord, yCoord, zCoord ); // re-render.
 		}
 	}
 
