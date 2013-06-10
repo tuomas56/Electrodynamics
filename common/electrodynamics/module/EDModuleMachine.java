@@ -184,6 +184,20 @@ public class EDModuleMachine extends EDModule {
 		CraftingManager.getInstance().kilnManager = new RecipeManagerKiln();
 		CraftingManager.getInstance().kilnManager.initRecipes();
 
+		// Ore Dictionary registration
+		// Weird, but it ended up working out this way. ;)
+		for (Dust dust : Dust.values()) {
+			OreDictionary.registerOre(dust.textureFile, dust.toItemStack());
+		}
+		
+		for (Ingot ingot : Ingot.values()) {
+			OreDictionary.registerOre(ingot.textureFile, ingot.toItemStack());
+		}
+		
+		for (Ore ore : Ore.values()) {
+			OreDictionary.registerOre(ore.textureFile, ore.toItemStack());
+		}
+		
 		// Multi-block Structures
 		MBSManager.registerMBS(new SinteringFurnace()); // Sintering Furnace
 		MBSManager.registerMBS(new MobGrinder()); // Mob Grinder
