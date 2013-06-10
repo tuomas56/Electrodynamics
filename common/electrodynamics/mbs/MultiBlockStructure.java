@@ -146,9 +146,12 @@ public abstract class MultiBlockStructure {
 
 					if (((TileStructure)tile).isCentralTileEntity()) {
 						if (replacement != null) {
+							int subID = ((TileStructure)tile).getSubBlock();
+							
 							WorldCoordinate central = getCentralCoordinate(chunk, rotation);
 							tile.worldObj.setBlockTileEntity(central.x, central.y, central.z, replacement);
 							((TileStructure) tile).validateStructure( this, rotation, x, y, z );
+							((TileStructure)tile).setSubBlock(subID);
 						}
 					}
 					
