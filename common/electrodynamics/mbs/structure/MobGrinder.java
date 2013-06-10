@@ -27,8 +27,6 @@ public class MobGrinder extends MultiBlockStructure {
 
 	public static final int VALVE_COUNT = 1;
 	
-	private ModelTechne model;
-
 	public MobGrinder() {
 		super(UID, makePattern());
 	}

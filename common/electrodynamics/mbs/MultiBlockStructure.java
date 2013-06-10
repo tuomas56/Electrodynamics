@@ -28,6 +28,8 @@ public abstract class MultiBlockStructure {
 
 	private boolean isSymmetricXZ;
 
+	public ModelTechne model;
+	
 	public MultiBlockStructure(String mbsID, Pattern pattern) {
 		this( mbsID, pattern, false );
 	}

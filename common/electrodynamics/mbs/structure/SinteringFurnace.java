@@ -23,8 +23,6 @@ public class SinteringFurnace extends MultiBlockStructure {
 	public static final String UID = "SintFurnace";
 	private static final int REQUIREMENT_HEATER = 1, REQUIREMENT_VALVE = 1, REQUIREMENT_GAUGE = 1, REQUIREMENT_VENT = 2;
 
-	private ModelTechne model;
-
 	public SinteringFurnace() {
 		super( UID, makePattern() );
 	}
