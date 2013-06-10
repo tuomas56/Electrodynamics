@@ -24,4 +24,9 @@ public class WorldCoordinate {
 	public WorldCoordinate translate(int deltaX, int deltaY, int deltaZ) {
 		return new WorldCoordinate( access, x + deltaX, y + deltaY, z + deltaZ );
 	}
+	
+	public String toString() {
+		return ("World Coordinates: " + x + ":" + y + ":" + z);
+	}
+	
 }
