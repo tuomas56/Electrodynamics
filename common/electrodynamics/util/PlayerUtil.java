@@ -5,6 +5,9 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
@@ -14,6 +17,18 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class PlayerUtil {
 
+	public static ItemStack getPlayerHead(EntityPlayer player) {
+		return getPlayerHead(player.getEntityName());
+	}
+	
+	public static ItemStack getPlayerHead(String name) {
+		ItemStack head = new ItemStack(Item.skull, 1, 3);
+		NBTTagCompound headNBT = new NBTTagCompound();
+		headNBT.setString("SkullOwner", name);
+		head.setTagCompound(headNBT);
+		return head;
+	}
+	
 	public static ForgeDirection determine3DOrientation_F(World world, int x, int y, int z, EntityLiving entity) {
 		return (ForgeDirection.getOrientation(determine3DOrientation_I(world, x, y, z, entity)));
 	}

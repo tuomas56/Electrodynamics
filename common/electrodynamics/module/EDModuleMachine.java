@@ -13,6 +13,7 @@ import electrodynamics.block.item.ItemBlockTable;
 import electrodynamics.client.render.item.RenderItemMachine;
 import electrodynamics.client.render.item.RenderItemTable;
 import electrodynamics.client.render.tileentity.*;
+import electrodynamics.core.handler.EntityDeathHandler;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.item.*;
 import electrodynamics.item.hammer.ItemSledgeHammer;
@@ -34,6 +35,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.EnumSet;
@@ -111,6 +113,8 @@ public class EDModuleMachine extends EDModule {
 
 	@Override
 	public void init() {
+		MinecraftForge.EVENT_BUS.register(new EntityDeathHandler());
+		
 		for (Storage storage : Storage.values()) {
 			GameRegistry.addRecipe(storage.toItemStack(), "XXX", "XXX", "XXX", 'X', storage.ingot.toItemStack());
 			GameRegistry.addShapelessRecipe(new ItemStack(ItemIDs.ITEM_INGOT_ID + 256, 9, storage.ingot.ordinal()), storage.toItemStack());
