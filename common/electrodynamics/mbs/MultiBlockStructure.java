@@ -107,12 +107,6 @@ public abstract class MultiBlockStructure {
 
 	public void initialize(WorldChunk chunk, int rotation) {
 		WorldCoordinate coords = getCentralCoordinate( chunk, rotation );
-		WorldBlock block = chunk.getBlockAt( coords.x, coords.y, coords.z );
-		
-		if( block == null ) {
-			coords = coords.translate( 0, -1, 0 );
-			block = chunk.getBlockAt( coords.x, coords.y, coords.z );
-		}
 
 		validateTileEntities( chunk, rotation, coords.x, coords.y, coords.z );
 		
