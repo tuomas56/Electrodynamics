@@ -2,7 +2,6 @@ package electrodynamics.tileentity;
 
 
 import electrodynamics.block.BlockGeneric;
-import electrodynamics.block.SubBlock;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
@@ -65,22 +64,19 @@ public abstract class TileEntityGeneric extends TileEntity {
 
 		@Override
 		public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
-			// Read from NBT
-			readFromNBT( pkt.customParam1 );
-
-			// Replace this tile entity with the correct one.
-			int subBlock = getSubBlock();
-			TileEntityGeneric tileEntity = createReplacementTileEntity( subBlock );
-			tileEntity.readFromNBT( pkt.customParam1 );
-			worldObj.setBlockTileEntity( xCoord, yCoord, zCoord, tileEntity );
-			worldObj.markBlockForRenderUpdate( xCoord, yCoord, zCoord );
-		}
-
-		private TileEntityGeneric createReplacementTileEntity(int subBlock) {
+			// Get the right tile entity that will replace this one.
 			BlockGeneric block = (BlockGeneric) this.getBlockType();
-			SubBlock sub = block.getSubBlocksArray()[subBlock];
+			int subBlock = pkt.customParam1.getInteger( "subBlock" );
+			TileEntity tile = block.createSpecificTileEntity( this.worldObj, xCoord, yCoord, zCoord, pkt.customParam1, subBlock );
+			if( tile == null )
+				return;
 
-			return sub.createNewTileEntity( worldObj );
+			// Load the data into the tile entity.
+			tile.onDataPacket( net, pkt );
+
+			// Replace this tile entity, and re-render.
+			worldObj.setBlockTileEntity( xCoord, yCoord, zCoord, tile );
+			worldObj.markBlockForRenderUpdate( xCoord, yCoord, zCoord );
 		}
 	}
 

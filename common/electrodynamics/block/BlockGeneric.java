@@ -12,6 +12,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
@@ -56,6 +57,21 @@ public abstract class BlockGeneric extends BlockContainer {
 	@Override
 	public final TileEntity createNewTileEntity(World world) {
 		return TileEntityGeneric.createReplaceableTE();
+	}
+
+	/**
+	 * Creates the TileEntity that will be placed on the passed coordinates.
+	 *
+	 * Override if you want to handle special scenarios,
+	 * otherwise <code>SubBlock#createNewTileEntity(World)</code> will be called.
+	 *
+	 * @return the TileEntity that will be placed in the world.
+	 */
+	public TileEntity createSpecificTileEntity(World world, int x, int y, int z, NBTTagCompound nbt, int subBlock) {
+		if( subBlock == -1 )
+			return null;
+		SubBlock sub = getSubBlocksArray()[subBlock];
+		return sub.createNewTileEntity( world );
 	}
 
 	@Override
