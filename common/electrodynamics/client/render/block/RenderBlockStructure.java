@@ -52,7 +52,7 @@ public class RenderBlockStructure implements ISimpleBlockRenderingHandler {
 			return true;
 
 		TileStructure tile = (TileStructure) tileEntity;
-		if( tile.isValidStructure()) {
+		if( tile.isValidStructure() && ((TileStructure)tile).getMBS().getModel() != null) {
 			return true;
 		}
 		int sub = tile.getSubBlock();

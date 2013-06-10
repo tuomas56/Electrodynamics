@@ -1,16 +1,20 @@
 package electrodynamics.mbs.structure;
 
 import electrodynamics.client.model.ModelSinteringFurnace;
+import electrodynamics.client.model.ModelTechne;
 import electrodynamics.lib.block.StructureComponent;
+import electrodynamics.lib.client.Models;
 import electrodynamics.mbs.MultiBlockStructure;
 import electrodynamics.mbs.Pattern;
 import electrodynamics.mbs.StructureBlock;
 import electrodynamics.mbs.util.WorldBlock;
 import electrodynamics.mbs.util.WorldChunk;
-import net.minecraft.client.model.ModelBase;
+import electrodynamics.tileentity.TileStructure;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.lwjgl.opengl.GL11;
 
 import static electrodynamics.lib.block.StructureComponent.*;
 
@@ -19,15 +23,28 @@ public class SinteringFurnace extends MultiBlockStructure {
 	public static final String UID = "SintFurnace";
 	private static final int REQUIREMENT_HEATER = 1, REQUIREMENT_VALVE = 1, REQUIREMENT_GAUGE = 1, REQUIREMENT_VENT = 2;
 
-	private ModelSinteringFurnace model;
+	private ModelTechne model;
 
 	public SinteringFurnace() {
 		super( UID, makePattern() );
 	}
 
 	@Override
-	public ModelBase getModel() {
+	public ModelTechne getModel() {
 		return model != null ? model : (model = new ModelSinteringFurnace());
+	}
+
+	@Override
+	public String getModelTexture() {
+		return Models.TEX_SINT_FURNACE;
+	}
+
+	@Override
+	public void applyGLTransformations(TileStructure tile) {
+		GL11.glTranslated(tile.xCoord + .5, tile.yCoord + 1.5, tile.zCoord + .5);
+		GL11.glRotatef(180, 1, 0, 0);
+		int rotation = tile.getRotation();
+		GL11.glRotatef(90 * (rotation / 2), 0, 1, 0);
 	}
 
 	@Override

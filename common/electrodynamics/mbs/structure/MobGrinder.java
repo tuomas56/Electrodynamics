@@ -7,9 +7,12 @@ import static electrodynamics.lib.block.StructureComponent.MOB_GRINDER_OUTPUT;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.client.model.ModelBase;
-import electrodynamics.client.model.ModelSinteringFurnace;
+import org.lwjgl.opengl.GL11;
+
+import electrodynamics.client.model.ModelMobGrinder;
+import electrodynamics.client.model.ModelTechne;
 import electrodynamics.lib.block.StructureComponent;
+import electrodynamics.lib.client.Models;
 import electrodynamics.mbs.MultiBlockStructure;
 import electrodynamics.mbs.Pattern;
 import electrodynamics.mbs.StructureBlock;
@@ -24,17 +27,30 @@ public class MobGrinder extends MultiBlockStructure {
 
 	public static final int VALVE_COUNT = 1;
 	
-	private ModelSinteringFurnace model;
+	private ModelTechne model;
 
 	public MobGrinder() {
 		super(UID, makePattern());
 	}
 
 	@Override
-	public ModelBase getModel() {
-		return model != null ? model : (model = new ModelSinteringFurnace());
+	public ModelTechne getModel() {
+		return model != null ? model : (model = new ModelMobGrinder());
 	}
 
+	@Override
+	public String getModelTexture() {
+		return Models.TEX_MOB_GRINDER;
+	}
+
+	@Override
+	public void applyGLTransformations(TileStructure tile) {
+		GL11.glTranslated(tile.xCoord + .5, tile.yCoord + 1.5, tile.zCoord + .5);
+		GL11.glRotatef(180, 1, 0, 0);
+		int rotation = tile.getRotation();
+		GL11.glRotatef(90 * (rotation / 2), 0, 1, 0);
+	}
+	
 	@Override
 	public TileStructure getNewCentralTileEntity() {
 		return new TileEntityMobGrinder();
@@ -103,5 +119,5 @@ public class MobGrinder extends MultiBlockStructure {
 
 		return compiler.compile( mappings );
 	}
-	
+
 }
