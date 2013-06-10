@@ -24,7 +24,7 @@ public class EntityReflectionWrapper {
 		try {
 			Method dropID = EntityLiving.class.getDeclaredMethod(Electrodynamics.instance.obfuscated == true ? OBF_DROP_ID : DROP_ID, new Class[0]);
 			dropID.setAccessible(true);
-			return (int) dropID.invoke(this.entity, new Object[0]);
+			return ((Integer)dropID.invoke(this.entity, new Object[0])).intValue();
 		} catch(Exception ex) {
 			EDLogger.warn("Failed to get method " + DROP_ID + " from Entity " + this.entity.getEntityName());
 			EDLogger.warn("Reason: " + ex.getLocalizedMessage());
@@ -37,7 +37,7 @@ public class EntityReflectionWrapper {
 		try {
 			Method deathSound = EntityLiving.class.getDeclaredMethod(Electrodynamics.instance.obfuscated == true ? OBF_DEATH_SOUND : DEATH_SOUND, new Class[0]);
 			deathSound.setAccessible(true);
-			return (String) deathSound.invoke(this.entity, new Object[0]);
+			return ((String)deathSound.invoke(this.entity, new Object[0]));
 		} catch(Exception ex) {
 			EDLogger.warn("Failed to get method " + DEATH_SOUND + " from Entity " + this.entity.getEntityName());
 			EDLogger.warn("Reason: " + ex.getLocalizedMessage());
