@@ -151,7 +151,7 @@ public abstract class MultiBlockStructure {
 						}
 					}
 					
-					((World)chunk.getBlockAccess()).markBlockForUpdate(x, y, z);
+					((World)chunk.getBlockAccess()).markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
 				}
 			}
 		}
