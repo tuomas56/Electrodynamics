@@ -58,22 +58,21 @@ public abstract class MultiBlockStructure {
 	 * @return an integer representing the rotation of the MBS, or -1 if not found.
 	 */
 	public int check(WorldChunk chunk) {
-		//TODO Xhamolk_ Fix bug with certain MBS rotations
-		
 		// Compare dimensions:
 		if( !compareDimensions( chunk ) )
 			return -1;
 
 		// Optimization Checks
-		boolean rotated = !isSymmetricXZ && width != depth && width == chunk.getDepth();
+		boolean isOptimized = isSymmetricXZ || width != depth;
+		boolean swapXZ = isOptimized && width == chunk.getDepth();
 
 		// Compare each block.
-		boolean[] angles = new boolean[] { true, true };
+		boolean[] angles = new boolean[] { true, true, !isOptimized, !isOptimized }; // 0, 180, 90, 270 degrees.
 
 		for( int x = 0; x < width; x++ ) {
 			for( int y = 0; y < height; y++ ) {
 				for( int z = 0; z < depth; z++ ) {
-					WorldBlock worldBlock = rotated ? chunk.getBlockAt( z, y, x ) : chunk.getBlockAt( x, y, z );
+					WorldBlock worldBlock = !isOptimized || !swapXZ ? chunk.getBlockAt( x, y, z ) : chunk.getBlockAt( z, y, x );
 
 					if( angles[0] && !getPattern().getBlockAt( x, y, z ).isMatchingBlock( worldBlock ) )
 						angles[0] = false;
@@ -81,6 +80,14 @@ public abstract class MultiBlockStructure {
 					if( !isSymmetricXZ ) {
 						if( angles[1] && !getPattern().getBlockAt( width - x - 1, y, depth - z - 1 ).isMatchingBlock( worldBlock ) )
 							angles[1] = false;
+					}
+
+					if( !isOptimized ) { // must check 90/270 degree rotation.
+						if( angles[2] && !getPattern().getBlockAt( z, y, x ).isMatchingBlock( worldBlock ) )
+							angles[2] = false;
+
+						if( angles[3] && !getPattern().getBlockAt( depth - z - 1, y, width - x - 1 ).isMatchingBlock( worldBlock ) )
+							angles[3] = false;
 					}
 				}
 			}
@@ -90,7 +97,11 @@ public abstract class MultiBlockStructure {
 			return angles[0] ? 0 : -1;
 		else {
 			int retValue = angles[0] ? 0 : angles[1] ? 1 : -1;
-			if( retValue != -1 && rotated ) {
+			if( retValue == -1 ) {
+				if( !isOptimized ) {
+					retValue = angles[2] ? 2 : angles[3] ? 3 : -1;
+				}
+			} else if( swapXZ ) {
 				retValue += 2;
 			}
 			return retValue;
