@@ -105,14 +105,15 @@ public class MobGrinder extends MultiBlockStructure {
 		} );
 
 		compiler.addLayer( new char[][] { // y=1
-				{ 'c', 'b', 'c' },
-				{ 'c', 'b', 'c' },
-				{ 'c', 'b', 'c' }
+				{ 'w', 'b', 'w' },
+				{ 'w', 'b', 'w' },
+				{ 'w', 'b', 'w' }
 		} );
 
 
 		Map<Character, StructureBlock> mappings = new HashMap<Character, StructureBlock>();
 		mappings.put('c', matchAny(MOB_GRINDER_CASING, MOB_GRINDER_OUTPUT)); // casing
+		mappings.put('w', matchAny(MOB_GRINDER_CASING));
 		mappings.put('b', matchAny(MOB_GRINDER_BLADE)); // blade
 
 		return compiler.compile( mappings );
