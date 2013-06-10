@@ -132,11 +132,7 @@ public abstract class MultiBlockStructure {
 
 	protected void validateTileEntities(WorldChunk chunk, int rotation, int x, int y, int z) {
 		TileEntity tile;
-		TileStructure replacement = null;
-		
-		if (getNewCentralTileEntity() != null) {
-			replacement = getNewCentralTileEntity();
-		}
+		TileStructure replacement = getNewCentralTileEntity();
 		
 		for( WorldBlock worldBlock : chunk ) {
 			if( worldBlock != null ) {
@@ -147,11 +143,11 @@ public abstract class MultiBlockStructure {
 					if (((TileStructure)tile).isCentralTileEntity()) {
 						if (replacement != null) {
 							int subID = ((TileStructure)tile).getSubBlock();
+							replacement.setSubBlock( subID );
 							
 							WorldCoordinate central = getCentralCoordinate(chunk, rotation);
 							tile.worldObj.setBlockTileEntity(central.x, central.y, central.z, replacement);
-							((TileStructure) tile).validateStructure( this, rotation, x, y, z );
-							((TileStructure)tile).setSubBlock(subID);
+							((TileStructure)worldBlock.getTileEntity()).validateStructure( this, rotation, x, y, z );
 						}
 					}
 					

@@ -9,12 +9,14 @@ import electrodynamics.core.CreativeTabED;
 import electrodynamics.interfaces.IAcceptsTool;
 import electrodynamics.item.EDItems;
 import electrodynamics.lib.block.StructureComponent;
+import electrodynamics.tileentity.TileEntityMobGrinder;
 import electrodynamics.tileentity.TileStructure;
 import electrodynamics.world.TickHandlerMBS;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
@@ -37,6 +39,20 @@ public class BlockStructure extends BlockGeneric implements IAcceptsTool {
 	@Override
 	protected Set<? extends SubBlock> getSubBlocks() {
 		return EnumSet.allOf( StructureComponent.class );
+	}
+
+	@Override
+	public TileEntity createSpecificTileEntity(World world, int x, int y, int z, NBTTagCompound nbt, int subBlock){
+		if( subBlock == StructureComponent.MOB_GRINDER_CASING.ordinal() ) {
+			int targetX = nbt.getInteger( "targetX" );
+			int targetY = nbt.getInteger( "targetY" );
+			int targetZ = nbt.getInteger( "targetZ" );
+
+			if( x == targetX && y == targetY && z == targetZ ) { // is central TE
+				return new TileEntityMobGrinder();
+			}
+		}
+		return super.createSpecificTileEntity( world, x, y, z, nbt, subBlock );
 	}
 
 	@Override
