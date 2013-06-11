@@ -1,10 +1,13 @@
 package electrodynamics.lib.block;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.block.SubBlock;
 import electrodynamics.client.model.ModelChicken;
+import electrodynamics.client.model.ModelMobGrinder;
 import electrodynamics.client.model.ModelTechne;
 import electrodynamics.lib.client.Models;
 import electrodynamics.lib.core.ModInfo;
@@ -46,8 +49,14 @@ public enum StructureComponent implements SubBlock {
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType) {
+		public void applyGLTransformations(byte renderType, TileStructure tile) {
 			
+		}
+
+		@Override
+		public boolean alternativeRender() {
+
+			return false;
 		}
 	},
 	FURNACE_FRAME( Strings.STRUCTURE_COMPONENT_FURNACE_FRAME ) {
@@ -67,8 +76,14 @@ public enum StructureComponent implements SubBlock {
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType) {
+		public void applyGLTransformations(byte renderType, TileStructure tile) {
 			
+		}
+
+		@Override
+		public boolean alternativeRender() {
+
+			return false;
 		}
 	},
 	FURNACE_HEATER( Strings.STRUCTURE_COMPONENT_FURNACE_HEATER ) {
@@ -89,8 +104,14 @@ public enum StructureComponent implements SubBlock {
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType) {
+		public void applyGLTransformations(byte renderType, TileStructure tile) {
 			
+		}
+
+		@Override
+		public boolean alternativeRender() {
+
+			return false;
 		}
 	},
 	FURNACE_GAUGE( Strings.STRUCTURE_COMPONENT_FURNACE_GAUGE ) {
@@ -111,8 +132,14 @@ public enum StructureComponent implements SubBlock {
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType) {
+		public void applyGLTransformations(byte renderType, TileStructure tile) {
 			
+		}
+
+		@Override
+		public boolean alternativeRender() {
+
+			return false;
 		}
 	},
 	FURNACE_VALVE( Strings.STRUCTURE_COMPONENT_FURNACE_VALVE ) {
@@ -133,8 +160,14 @@ public enum StructureComponent implements SubBlock {
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType) {
+		public void applyGLTransformations(byte renderType, TileStructure tile) {
 			
+		}
+
+		@Override
+		public boolean alternativeRender() {
+
+			return false;
 		}
 	},
 	FURNACE_VENT( Strings.STRUCTURE_COMPONENT_FURNACE_VENT ) {
@@ -155,8 +188,14 @@ public enum StructureComponent implements SubBlock {
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType) {
+		public void applyGLTransformations(byte renderType, TileStructure tile) {
 			
+		}
+
+		@Override
+		public boolean alternativeRender() {
+
+			return false;
 		}
 	},
 	
@@ -177,8 +216,13 @@ public enum StructureComponent implements SubBlock {
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType) {
+		public void applyGLTransformations(byte renderType, TileStructure tile) {
 			
+		}
+
+		@Override
+		public boolean alternativeRender() {
+			return false;
 		}
 	},
 	
@@ -200,8 +244,14 @@ public enum StructureComponent implements SubBlock {
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType) {
+		public void applyGLTransformations(byte renderType, TileStructure tile) {
 			
+		}
+
+		@Override
+		public boolean alternativeRender() {
+
+			return false;
 		}
 	},
 	
@@ -213,17 +263,25 @@ public enum StructureComponent implements SubBlock {
 		
 		@Override
 		public ModelTechne getModel() {
-			return new ModelChicken();
+			return new ModelMobGrinder();
 		}
 
+		@Override
+		public boolean alternativeRender() {
+			((ModelMobGrinder)this.getModel()).renderBlades(0.0625F);
+			return false;
+		}
+		
 		@Override
 		public String getModelTexture() {
-			return Models.TEX_CHICKEN;
+			return Models.TEX_MOB_GRINDER;
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType) {
-			
+		public void applyGLTransformations(byte renderType, TileStructure tile) {
+			if (renderType == 1) {
+				GL11.glScaled(.5, .5, .5);
+			}
 		}
 	};
 	
@@ -281,6 +339,11 @@ public enum StructureComponent implements SubBlock {
 	 */
 	public abstract ModelTechne getModel();	
 	/**
+	 * Alternative render for structure block
+	 * @return Whether or not the defined model should render as well
+	 */
+	public abstract boolean alternativeRender();
+	/**
 	 * Texture to be applied to rendered model
 	 * @return Complete path to model texture, starting with /mods/electrodynamics/
 	 */
@@ -290,9 +353,11 @@ public enum StructureComponent implements SubBlock {
 	 * @param renderType 0 or 1 value indicating render type. <br />
 	 * <b>0: </b> Rendering in world
 	 * <b>1: </b> Rendering in inventory/hand/as entity
+	 * @param structure 
 	 */
-	public abstract void applyGLTransformations(byte renderType);
+	public abstract void applyGLTransformations(byte renderType, TileStructure structure);
 	
 	private static String frame = "sinteringFurnace_frame";
 	private static String casing = "mobGrinder_casing";
+
 }

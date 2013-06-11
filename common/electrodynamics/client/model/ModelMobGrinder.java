@@ -565,6 +565,57 @@ public class ModelMobGrinder extends ModelTechne {
 		pipeClamp2.render(f5);
 	}
 
+	public void renderBlades(float f5) {
+		bladeH1.render(f5);
+		bladeC1.render(f5);
+		bladeV1.render(f5);
+		bladeV2.render(f5);
+		bladeC2.render(f5);
+		bladeH2.render(f5);
+		bladeH16.render(f5);
+		bladeC16.render(f5);
+		bladeV16.render(f5);
+		bladeH15.render(f5);
+		bladeC15.render(f5);
+		bladeV15.render(f5);
+		bladeH14.render(f5);
+		bladeC14.render(f5);
+		bladeV14.render(f5);
+		bladeH13.render(f5);
+		bladeC13.render(f5);
+		bladeV13.render(f5);
+		bladeH12.render(f5);
+		bladeC12.render(f5);
+		bladeV12.render(f5);
+		bladeH11.render(f5);
+		bladeC11.render(f5);
+		bladeV11.render(f5);
+		bladeH10.render(f5);
+		bladeC10.render(f5);
+		bladeV10.render(f5);
+		bladeH9.render(f5);
+		bladeC9.render(f5);
+		bladeV9.render(f5);
+		bladeH8.render(f5);
+		bladeC8.render(f5);
+		bladeV8.render(f5);
+		bladeC7.render(f5);
+		bladeH7.render(f5);
+		bladeV7.render(f5);
+		bladeH6.render(f5);
+		bladeC6.render(f5);
+		bladeV6.render(f5);
+		bladeH5.render(f5);
+		bladeC5.render(f5);
+		bladeV5.render(f5);
+		bladeH4.render(f5);
+		bladeC4.render(f5);
+		bladeV4.render(f5);
+		bladeH3.render(f5);
+		bladeC3.render(f5);
+		bladeV3.render(f5);
+	}
+	
 	public void rotateBlades(float angle) {
 		bladeH1.rotateAngleX = -angle;
 		bladeC1.rotateAngleX = -angle;

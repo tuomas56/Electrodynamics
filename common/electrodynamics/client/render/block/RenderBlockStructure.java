@@ -29,8 +29,10 @@ public class RenderBlockStructure implements ISimpleBlockRenderingHandler {
 
 		if (component.getModel() != null) {
 			Minecraft.getMinecraft().renderEngine.bindTexture(component.getModelTexture());
-			component.applyGLTransformations((byte) 1);
-			component.getModel().render(0.0625F);
+			component.applyGLTransformations((byte) 1, null);
+			if (component.alternativeRender()) {
+				component.getModel().render(0.0625F);
+			}
 		} else {
 			int[] rotations = getRotations(metadata, ForgeDirection.NORTH.ordinal());
 			if (rotations.length == 6) {

@@ -41,8 +41,10 @@ public class RenderTileStructure extends TileEntitySpecialRenderer {
 				GL11.glTranslated(x + .5, y + .5, z + .5);
 				
 				Minecraft.getMinecraft().renderEngine.bindTexture(component.getModelTexture());
-				component.applyGLTransformations((byte) 0);
-				component.getModel().render(0.0625F);
+				component.applyGLTransformations((byte) 0, structure);
+				if (component.alternativeRender()) {
+					component.getModel().render(0.0625F);
+				}
 				
 				GL11.glEnable(GL11.GL_LIGHTING);
 				GL11.glPopMatrix();
