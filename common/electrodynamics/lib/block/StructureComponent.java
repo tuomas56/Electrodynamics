@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.block.SubBlock;
-import electrodynamics.client.model.ModelChicken;
 import electrodynamics.client.model.ModelMobGrinder;
 import electrodynamics.client.model.ModelTechne;
 import electrodynamics.lib.client.Models;
@@ -29,7 +28,7 @@ public enum StructureComponent implements SubBlock {
 
 		@Override
 		public String[] getLocalTextureFiles() {
-			String top = "sinteringFurnace_conveyorTop", side = "sinteringFurnace_conveyorSide";
+			String top = "machine_conveyorTop", side = "machine_conveyorSide";
 			return new String[] { top, top, top, side, top, side };
 		}
 
@@ -59,7 +58,7 @@ public enum StructureComponent implements SubBlock {
 			return false;
 		}
 	},
-	FURNACE_FRAME( Strings.STRUCTURE_COMPONENT_FURNACE_FRAME ) {
+	MACHINE_FRAME( Strings.STRUCTURE_COMPONENT_MACHINE_FRAME ) {
 		@Override
 		public String[] getLocalTextureFiles() {
 			return new String[] { frame, frame, frame, frame, frame, frame };
@@ -114,6 +113,65 @@ public enum StructureComponent implements SubBlock {
 			return false;
 		}
 	},
+	
+	VALVE( Strings.STRUCTURE_COMPONENT_MACHINE_VALVE ) { // Liquid/Gas output
+		@Override
+		public String[] getLocalTextureFiles() {
+			String base = "machine_valve";
+			return new String[] { frame, frame, base, frame, base, frame };
+		}
+		
+		@Override
+		public ModelTechne getModel() {
+			return null;
+		}
+
+		@Override
+		public String getModelTexture() {
+			return null;
+		}
+
+		@Override
+		public void applyGLTransformations(byte renderType, TileStructure tile) {
+			
+		}
+
+		@Override
+		public boolean alternativeRender() {
+
+			return false;
+		}
+	},
+	
+	HATCH( Strings.STRUCTURE_COMPONENT_MACHINE_HATCH ) { // Item output
+		@Override
+		public String[] getLocalTextureFiles() {
+			String base = "machine_hatch";
+			return new String[] { frame, frame, base, frame, base, frame };
+		}
+		
+		@Override
+		public ModelTechne getModel() {
+			return null;
+		}
+
+		@Override
+		public String getModelTexture() {
+			return null;
+		}
+
+		@Override
+		public void applyGLTransformations(byte renderType, TileStructure tile) {
+			
+		}
+
+		@Override
+		public boolean alternativeRender() {
+
+			return false;
+		}
+	},
+	
 	FURNACE_GAUGE( Strings.STRUCTURE_COMPONENT_FURNACE_GAUGE ) {
 		@Override
 		public String[] getLocalTextureFiles() {
@@ -142,95 +200,12 @@ public enum StructureComponent implements SubBlock {
 			return false;
 		}
 	},
-	FURNACE_VALVE( Strings.STRUCTURE_COMPONENT_FURNACE_VALVE ) {
-		@Override
-		public String[] getLocalTextureFiles() {
-			String base = "sinteringFurnace_valve";
-			return new String[] { frame, frame, base, frame, base, frame };
-		}
-		
-		@Override
-		public ModelTechne getModel() {
-			return null;
-		}
-
-		@Override
-		public String getModelTexture() {
-			return null;
-		}
-
-		@Override
-		public void applyGLTransformations(byte renderType, TileStructure tile) {
-			
-		}
-
-		@Override
-		public boolean alternativeRender() {
-
-			return false;
-		}
-	},
+	
 	FURNACE_VENT( Strings.STRUCTURE_COMPONENT_FURNACE_VENT ) {
 		@Override
 		public String[] getLocalTextureFiles() {
 			String base = "sinteringFurnace_vent";
 			return new String[] { base, base, base, base, base, base };
-		}
-		
-		@Override
-		public ModelTechne getModel() {
-			return null;
-		}
-
-		@Override
-		public String getModelTexture() {
-			return null;
-		}
-
-		@Override
-		public void applyGLTransformations(byte renderType, TileStructure tile) {
-			
-		}
-
-		@Override
-		public boolean alternativeRender() {
-
-			return false;
-		}
-	},
-	
-	MOB_GRINDER_CASING(Strings.STRUCTURE_COMPONENT_MOB_GRINDER_CASING) {
-		@Override
-		String[] getLocalTextureFiles() {
-			return new String[] {casing, casing, casing, casing, casing, casing};
-		}
-		
-		@Override
-		public ModelTechne getModel() {
-			return null;
-		}
-
-		@Override
-		public String getModelTexture() {
-			return null;
-		}
-
-		@Override
-		public void applyGLTransformations(byte renderType, TileStructure tile) {
-			
-		}
-
-		@Override
-		public boolean alternativeRender() {
-			return false;
-		}
-	},
-	
-	MOB_GRINDER_OUTPUT(Strings.STRUCTURE_COMPONENT_MOB_GRINDER_OUTPUT) {
-		@Override
-		public String[] getLocalTextureFiles() {
-			String base = "mobGrinder_valve";
-			return new String[] { casing, casing, base, casing, base, casing };
 		}
 		
 		@Override
@@ -357,7 +332,6 @@ public enum StructureComponent implements SubBlock {
 	 */
 	public abstract void applyGLTransformations(byte renderType, TileStructure structure);
 	
-	private static String frame = "sinteringFurnace_frame";
-	private static String casing = "mobGrinder_casing";
+	private static String frame = "machine_frame";
 
 }

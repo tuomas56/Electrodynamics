@@ -57,13 +57,15 @@ public class BlockStructure extends BlockGeneric implements IAcceptsTool {
 
 	@Override
 	public TileEntity createSpecificTileEntity(World world, int x, int y, int z, NBTTagCompound nbt, int subBlock){
-		if( subBlock == StructureComponent.MOB_GRINDER_CASING.ordinal() ) {
-			int targetX = nbt.getInteger( "targetX" );
-			int targetY = nbt.getInteger( "targetY" );
-			int targetZ = nbt.getInteger( "targetZ" );
+		if( subBlock == StructureComponent.MACHINE_FRAME.ordinal() ) {
+			if (nbt.hasKey("mbsID") && nbt.getString("mbsID").equals("MobGrinder")) {
+				int targetX = nbt.getInteger( "targetX" );
+				int targetY = nbt.getInteger( "targetY" );
+				int targetZ = nbt.getInteger( "targetZ" );
 
-			if( x == targetX && y == targetY && z == targetZ ) { // is central TE
-				return new TileEntityMobGrinder();
+				if( x == targetX && y == targetY && z == targetZ ) { // is central TE
+					return new TileEntityMobGrinder();
+				}
 			}
 		}
 		return super.createSpecificTileEntity( world, x, y, z, nbt, subBlock );
@@ -122,7 +124,7 @@ public class BlockStructure extends BlockGeneric implements IAcceptsTool {
 	public Icon getBlockTexture(IBlockAccess access, int x, int y, int z, int side) {
 		Icon icon = super.getBlockTexture( access, x, y, z, side );
 		if( icon == null ) // If the texture is invalid, better paint the "standard" texture.
-			return getIcon( StructureComponent.FURNACE_FRAME.ordinal(), side );
+			return getIcon( StructureComponent.MACHINE_FRAME.ordinal(), side );
 		return icon;
 	}
 

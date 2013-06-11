@@ -105,7 +105,7 @@ public class TileEntityMobGrinder extends TileStructure {
 					TileEntity tile = this.worldObj.getBlockTileEntity(x, y, z);
 
 					if (tile != null && tile instanceof TileStructure) {
-						if (StructureComponent.values()[((TileStructure)tile).getSubBlock()] == StructureComponent.MOB_GRINDER_OUTPUT) {
+						if (StructureComponent.values()[((TileStructure)tile).getSubBlock()] == StructureComponent.VALVE) {
 							return (TileStructure) tile;
 						}
 					}

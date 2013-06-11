@@ -1,9 +1,5 @@
 package electrodynamics.mbs.structure;
 
-import static electrodynamics.lib.block.StructureComponent.MOB_GRINDER_BLADE;
-import static electrodynamics.lib.block.StructureComponent.MOB_GRINDER_CASING;
-import static electrodynamics.lib.block.StructureComponent.MOB_GRINDER_OUTPUT;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,7 +54,7 @@ public class MobGrinder extends MultiBlockStructure {
 					WorldBlock worldBlock = rotated ? chunk.getBlockAt(z, y, x) : chunk.getBlockAt(x, y, z);
 					StructureComponent component = getStructureComponentFrom(worldBlock.getTileEntity());
 					
-					if (key == 'o' && component == MOB_GRINDER_OUTPUT) {
+					if (key == 'o' && component == StructureComponent.VALVE) {
 						outputCount++;
 					}
 				}
@@ -82,16 +78,16 @@ public class MobGrinder extends MultiBlockStructure {
 		} );
 
 		compiler.addLayer( new char[][] { // y=1
+				{ 'c', '-', 'c' },
 				{ 'c', 'b', 'c' },
-				{ 'c', 'b', 'c' },
-				{ 'c', 'b', 'c' }
+				{ 'c', '-', 'c' }
 		} );
 
 
 		Map<Character, StructureBlock> mappings = new HashMap<Character, StructureBlock>();
-		mappings.put('c', matchAny(MOB_GRINDER_CASING)); // casing
-		mappings.put('b', matchAny(MOB_GRINDER_BLADE)); // blade
-		mappings.put('o', matchAny(MOB_GRINDER_OUTPUT)); // output
+		mappings.put('c', matchAny(StructureComponent.MACHINE_FRAME)); // casing
+		mappings.put('b', matchAny(StructureComponent.MOB_GRINDER_BLADE)); // blade
+		mappings.put('o', matchAny(StructureComponent.VALVE)); // output
 		
 		return compiler.compile( mappings );
 	}

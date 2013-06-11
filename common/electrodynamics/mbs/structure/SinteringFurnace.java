@@ -58,7 +58,7 @@ public class SinteringFurnace extends MultiBlockStructure {
 					if( key == 'x' ) {
 						if( component == FURNACE_HEATER )
 							heaterCount++;
-						else if( component == FURNACE_VALVE )
+						else if( component == StructureComponent.VALVE )
 							valveCount++;
 					} else if( key == 'g' ) {
 						if( component == FURNACE_GAUGE )
@@ -103,11 +103,11 @@ public class SinteringFurnace extends MultiBlockStructure {
 
 
 		Map<Character, StructureBlock> mappings = new HashMap<Character, StructureBlock>();
-		mappings.put( 'w', matchAny( FURNACE_FRAME ) ); // machine frame
+		mappings.put( 'w', matchAny( MACHINE_FRAME ) ); // machine frame
 		mappings.put( 'b', matchAny( CONVEYOR_BELT ) ); // conveyor belt
-		mappings.put( 'x', matchAny( FURNACE_FRAME, FURNACE_HEATER, FURNACE_VALVE ) ); // heater, valve
-		mappings.put( 'v', matchAny( FURNACE_FRAME, FURNACE_VENT ) ); // vent
-		mappings.put( 'g', matchAny( FURNACE_FRAME, FURNACE_GAUGE ) ); // gauge
+		mappings.put( 'x', matchAny( MACHINE_FRAME, FURNACE_HEATER, VALVE ) ); // heater, valve
+		mappings.put( 'v', matchAny( MACHINE_FRAME, FURNACE_VENT ) ); // vent
+		mappings.put( 'g', matchAny( MACHINE_FRAME, FURNACE_GAUGE ) ); // gauge
 
 		return compiler.compile( mappings );
 	}
