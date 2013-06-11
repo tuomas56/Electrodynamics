@@ -25,6 +25,7 @@ public class Strings {
 	public static final String ITEM_LIQUID_LATEX = "liquid.latex.name";
 	public static final String ITEM_ELMAG_MODULE = "elmag.module.name";
 	public static final String ITEM_REDSTONE_EMITTER = "redstone_emitter.name";
+	public static final String ITEM_SEED_WORMSEED = "seed.wormseed";
 
 	/* Internal block names */
 	public static final String BLOCK_ORE_NAME = "ore.name";

@@ -2,6 +2,7 @@ package electrodynamics.module;
 
 import java.util.Random;
 
+import electrodynamics.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -36,10 +37,6 @@ import electrodynamics.client.render.block.RenderBlockOre;
 import electrodynamics.client.render.block.RenderBlockStructure;
 import electrodynamics.client.render.tileentity.RenderTreetap;
 import electrodynamics.core.lang.EDLanguage;
-import electrodynamics.item.EDItems;
-import electrodynamics.item.ItemLatexBucket;
-import electrodynamics.item.ItemLiquidLatex;
-import electrodynamics.item.ItemPeelingSpud;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.block.Decorative;
 import electrodynamics.lib.block.Ore;
@@ -109,6 +106,10 @@ public class EDModuleWorld extends EDModule {
 		EDItems.itemLiquidLatex = new ItemLiquidLatex(ItemIDs.ITEM_LIQUID_LATEX_ID).setUnlocalizedName(Strings.ITEM_LIQUID_LATEX);
 		GameRegistry.registerItem(EDItems.itemLiquidLatex, Strings.ITEM_LIQUID_LATEX);
 		EDLanguage.getInstance().registerItem(EDItems.itemLiquidLatex);
+
+		EDItems.itemWormSeed = new ItemSeed(ItemIDs.ITEM_WORMSEED_ID).setUnlocalizedName(Strings.ITEM_SEED_WORMSEED);
+		GameRegistry.registerItem(EDItems.itemWormSeed, Strings.ITEM_SEED_WORMSEED);
+		EDLanguage.getInstance().registerItem(EDItems.itemWormSeed);
 	}
 
 	@Override
