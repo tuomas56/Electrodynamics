@@ -74,13 +74,13 @@ public class ItemIDs {
 	public static int ITEM_TRAY_KILN_ID;
 	public static final int ITEM_TRAY_KILN_DEFAULT_ID = 5117;
 
-	/* itemWormSeed */
-	public static int ITEM_WORMSEED_ID;
-	public static final int ITEM_WORMSEED_DEFAULT_ID = 5118;
-
 	
 	/* itemRedstoneEmitter */
 	public static int ITEM_REDSTONE_EMITTER_ID;
 	public static final int ITEM_REDSTONE_EMITTER_DEFAULT_ID = 5118;
+	
+	/* itemWormSeed */
+	public static int ITEM_WORMSEED_ID;
+	public static final int ITEM_WORMSEED_DEFAULT_ID = 5119;
 	
 }
