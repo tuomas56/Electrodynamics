@@ -3,7 +3,6 @@ package electrodynamics.item;
 import java.util.List;
 
 import electrodynamics.core.CreativeTabED;
-import electrodynamics.util.MathUtil;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
