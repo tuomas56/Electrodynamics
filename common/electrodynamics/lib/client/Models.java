@@ -24,5 +24,6 @@ public class Models {
 	public static final String TEX_SINT_OVEN = TEXTURE_BASE + "/sinteringFurnace.png";
 	public static final String TEX_INGOT = TEXTURE_BASE + "/ingotTrayRender.png";
 	public static final String TEX_MOB_GRINDER = TEXTURE_BASE + "/mobGrinder.png";
+	public static final String TEX_MOB_GRINDER_BLOOD = TEXTURE_BASE + "/mobGrinder_blood.png";
 	
 }

@@ -1,13 +1,11 @@
 package electrodynamics.mbs;
 
-
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import electrodynamics.block.EDBlocks;
-import electrodynamics.client.model.ModelTechne;
 import electrodynamics.core.EDLogger;
 import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.mbs.util.WorldBlock;
@@ -28,8 +26,6 @@ public abstract class MultiBlockStructure {
 
 	private boolean isSymmetricXZ;
 
-	public ModelTechne model;
-	
 	public MultiBlockStructure(String mbsID, Pattern pattern) {
 		this( mbsID, pattern, false );
 	}
@@ -51,21 +47,6 @@ public abstract class MultiBlockStructure {
 		return pattern;
 	}
 
-	/** Model to be rendered upon MBS formation.
-	 *  If null, blocks will remain visable as normal
-	 * @return Instance of ModelTechne
-	 */
-	public abstract ModelTechne getModel();
-
-	/** Texture to be applied to rendered model
-	 * @return Complete file path to texture starting with /mods/electrodynamics
-	 */
-	public abstract String getModelTexture();
-	
-	/** Any GL transformations required for the model to render properly
-	 */
-	public abstract void applyGLTransformations(TileStructure tile);
-	
 	/**
 	 * Checks if this MBS is found within the passed WorldChunk.
 	 *

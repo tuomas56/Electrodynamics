@@ -6,13 +6,26 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
+import electrodynamics.client.model.ModelMobGrinder;
+import electrodynamics.client.model.ModelSinteringFurnace;
 import electrodynamics.client.model.ModelTechne;
 import electrodynamics.lib.block.StructureComponent;
+import electrodynamics.lib.client.Models;
 import electrodynamics.mbs.MultiBlockStructure;
 import electrodynamics.tileentity.TileStructure;
 
 public class RenderTileStructure extends TileEntitySpecialRenderer {
 
+	private ModelTechne sintFurnace;
+	private ModelTechne mobGrinder;
+	
+	private int mobGrinderBladeRotation = 0;
+	
+	public RenderTileStructure() {
+		this.sintFurnace = new ModelSinteringFurnace();
+		this.mobGrinder = new ModelMobGrinder();
+	}
+	
 	public void renderStructureBlockAt(TileStructure structure, double x, double y, double z, float partial) {
 		if ((structure).isCentralTileEntity()) {
 			renderMBSAt(structure, x, y, z, partial);
@@ -41,15 +54,38 @@ public class RenderTileStructure extends TileEntitySpecialRenderer {
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_LIGHTING);
 		
+		GL11.glTranslated(x, y, z);
+		
 		MultiBlockStructure mbs = structure.getMBS();
 		if (mbs != null) {
-			ModelTechne mbsModel = mbs.getModel();
-			
-			if (mbsModel != null) {
-				Minecraft.getMinecraft().renderEngine.bindTexture(mbs.getModelTexture());
-				mbs.applyGLTransformations(structure);
+			if (mbs.getUID().equals("MobGrinder")) {
+				this.mobGrinderBladeRotation++;
+				
+				if (this.mobGrinderBladeRotation > 360) {
+					this.mobGrinderBladeRotation = 0;
+				}
+				
+				Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_MOB_GRINDER);
+				
+				GL11.glTranslated(.5, 1.5, .5);
+				GL11.glRotatef(180, 1, 0, 0);
+				int rotation = structure.getRotation();
+				GL11.glRotatef(90 * (rotation / 2), 0, 1, 0);
+				
+				((ModelMobGrinder)this.mobGrinder).rotateBlades(mobGrinderBladeRotation);
+				
 				GL11.glColor4f(1, 1, 1, 1);
-				mbs.getModel().render(0.0625F);
+				this.mobGrinder.render(0.0625F);
+			} else if (mbs.getUID().equals("SintFurnace")) {
+				Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_SINT_OVEN);
+				
+				GL11.glTranslated(.5, 1.5, .5);
+				GL11.glRotatef(180, 1, 0, 0);
+				int rotation = structure.getRotation();
+				GL11.glRotatef(90 * (rotation / 2), 0, 1, 0);
+				
+				GL11.glColor4f(1, 1, 1, 1);
+				this.sintFurnace.render(0.0625F);
 			}
 		}
 		

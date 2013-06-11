@@ -118,10 +118,10 @@ public class TileEntityMobGrinder extends TileStructure {
 	
 	private AxisAlignedBB getCollectionAABB() {
 		double x = this.xCoord + .5;
-		double y = this.yCoord + 2;
+		double y = this.yCoord + 1;
 		double z = this.zCoord + .5;
 		
-		return AxisAlignedBB.getAABBPool().getAABB(x, y, z, x, y, z).expand(1.25, 1, 1.25);
+		return AxisAlignedBB.getAABBPool().getAABB(x, y, z, x, y, z).expand(.75, 1, .75);
 	}
 	
 	@Override

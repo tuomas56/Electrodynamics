@@ -18,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -36,6 +37,19 @@ public class BlockStructure extends BlockGeneric implements IAcceptsTool {
 		setCreativeTab( CreativeTabED.block );
 	}
 
+	//TODO Move this somewhere better
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
+		TileStructure tile = (TileStructure) par1World.getBlockTileEntity(par2, par3, par4);
+		if( tile != null ) {
+			if (StructureComponent.values()[tile.getSubBlock()] == StructureComponent.MOB_GRINDER_BLADE && tile.isValidStructure()) {
+				return null;
+			}
+		}
+		
+		return super.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
+	}
+	
 	@Override
 	protected Set<? extends SubBlock> getSubBlocks() {
 		return EnumSet.allOf( StructureComponent.class );
@@ -87,10 +101,13 @@ public class BlockStructure extends BlockGeneric implements IAcceptsTool {
 		return RenderBlockStructure.renderID;
 	}
 
-	@Override
 	public boolean isOpaqueCube() {
-		return false;
-	}
+        return false;
+    }
+
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
 	
 	@Override
 	public int getLightOpacity(World world, int x, int y, int z) {

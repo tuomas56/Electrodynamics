@@ -7,12 +7,7 @@ import static electrodynamics.lib.block.StructureComponent.MOB_GRINDER_OUTPUT;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.lwjgl.opengl.GL11;
-
-import electrodynamics.client.model.ModelMobGrinder;
-import electrodynamics.client.model.ModelTechne;
 import electrodynamics.lib.block.StructureComponent;
-import electrodynamics.lib.client.Models;
 import electrodynamics.mbs.MultiBlockStructure;
 import electrodynamics.mbs.Pattern;
 import electrodynamics.mbs.StructureBlock;
@@ -31,24 +26,6 @@ public class MobGrinder extends MultiBlockStructure {
 		super(UID, makePattern());
 	}
 
-	@Override
-	public ModelTechne getModel() {
-		return model != null ? model : (model = new ModelMobGrinder());
-	}
-
-	@Override
-	public String getModelTexture() {
-		return Models.TEX_MOB_GRINDER;
-	}
-
-	@Override
-	public void applyGLTransformations(TileStructure tile) {
-		GL11.glTranslated(tile.xCoord + .5, tile.yCoord + 1.5, tile.zCoord + .5);
-		GL11.glRotatef(180, 1, 0, 0);
-		int rotation = tile.getRotation();
-		GL11.glRotatef(90 * (rotation / 2), 0, 1, 0);
-	}
-	
 	@Override
 	public TileStructure getNewCentralTileEntity() {
 		return new TileEntityMobGrinder();
@@ -81,7 +58,7 @@ public class MobGrinder extends MultiBlockStructure {
 					WorldBlock worldBlock = rotated ? chunk.getBlockAt(z, y, x) : chunk.getBlockAt(x, y, z);
 					StructureComponent component = getStructureComponentFrom(worldBlock.getTileEntity());
 					
-					if (key == 'c' && component == MOB_GRINDER_OUTPUT) {
+					if (key == 'o' && component == MOB_GRINDER_OUTPUT) {
 						outputCount++;
 					}
 				}
@@ -99,23 +76,23 @@ public class MobGrinder extends MultiBlockStructure {
 		Pattern.PatternCompiler compiler = new Pattern.PatternCompiler( 3, 3 );
 
 		compiler.addLayer( new char[][] { // y=0
-				{ 'c', 'c', 'c' },
+				{ 'o', 'c', 'c' },
 				{ 'c', 'c', 'c' },
 				{ 'c', 'c', 'c' }
 		} );
 
 		compiler.addLayer( new char[][] { // y=1
-				{ 'w', 'b', 'w' },
-				{ 'w', 'b', 'w' },
-				{ 'w', 'b', 'w' }
+				{ 'c', 'b', 'c' },
+				{ 'c', 'b', 'c' },
+				{ 'c', 'b', 'c' }
 		} );
 
 
 		Map<Character, StructureBlock> mappings = new HashMap<Character, StructureBlock>();
-		mappings.put('c', matchAny(MOB_GRINDER_CASING, MOB_GRINDER_OUTPUT)); // casing
-		mappings.put('w', matchAny(MOB_GRINDER_CASING));
+		mappings.put('c', matchAny(MOB_GRINDER_CASING)); // casing
 		mappings.put('b', matchAny(MOB_GRINDER_BLADE)); // blade
-
+		mappings.put('o', matchAny(MOB_GRINDER_OUTPUT)); // output
+		
 		return compiler.compile( mappings );
 	}
 
