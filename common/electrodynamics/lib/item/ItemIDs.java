@@ -74,4 +74,8 @@ public class ItemIDs {
 	public static int ITEM_TRAY_KILN_ID;
 	public static final int ITEM_TRAY_KILN_DEFAULT_ID = 5117;
 	
+	/* itemRedstoneEmitter */
+	public static int ITEM_REDSTONE_EMITTER_ID;
+	public static final int ITEM_REDSTONE_EMITTER_DEFAULT_ID = 5118;
+	
 }

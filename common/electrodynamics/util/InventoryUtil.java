@@ -8,11 +8,58 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class InventoryUtil {
 
 	public static final int PLAYER_INVENTORY_SIZE = 27;
 	public static final int PLAYER_HOTBAR_SIZE = 9;
+	
+	public static boolean areItemStacksEqual(ItemStack is1, ItemStack is2, boolean compareNBT) {
+		if (is1 == null || is2 == null) return false;
+		
+		if (is1.getItemDamage() != OreDictionary.WILDCARD_VALUE && is2.getItemDamage() != OreDictionary.WILDCARD_VALUE) {
+			if (compareNBT) {
+				return (ItemStack.areItemStacksEqual(is1, is2) && ItemStack.areItemStackTagsEqual(is1, is2));
+			} else {
+				return is1.isItemEqual(is2);
+			}
+		} else {
+			return is1.itemID == is2.itemID;
+		}
+	}
+	
+	public static ItemStack getFirstOccuranceOf(ItemStack[] inv, ItemStack check) {
+		for (ItemStack stack : inv) {
+			if (stack != null && areItemStacksEqual(check, stack, false)) {
+				return stack;
+			}
+		}
+		
+		return null;
+	}
+	
+	public static int getAmountInInventory(ItemStack[] inv, ItemStack check) {
+		int amount = 0;
+		
+		for (ItemStack stack : inv) {
+			if (stack != null && areItemStacksEqual(check, stack, false)) {
+				amount++;
+			}
+		}
+		
+		return amount;
+	}
+	
+	public static ItemStack[] getInvArrayFromInventory(IInventory inv) {
+		ItemStack[] inventory = new ItemStack[inv.getSizeInventory()];
+		
+		for (int i=0; i<inv.getSizeInventory(); i++) {
+			inventory[i] = inv.getStackInSlot(i);
+		}
+		
+		return inventory;
+	}
 	
 	public static int getActiveSlot(int activeSlot, IInventory inventory) {
 		return (activeSlot + PLAYER_INVENTORY_SIZE + inventory.getSizeInventory()) - 1;
@@ -30,6 +77,10 @@ public class InventoryUtil {
 		}
 		
 		return false;
+	}
+	
+	public static boolean containsCertainAmount(ItemStack[] inv, ItemStack check, int amount) {
+		return getAmountInInventory(inv, check) == amount;
 	}
 	
 	public static boolean containsOnly(ItemStack[] inv, ItemStack check) {

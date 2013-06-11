@@ -65,7 +65,8 @@ public class ConfigurationHandler {
 			ItemIDs.ITEM_LIQUID_LATEX_ID = config.getItem( Strings.ITEM_LIQUID_LATEX, ItemIDs.ITEM_LIQUID_LATEX_DEFAULT_ID ).getInt( ItemIDs.ITEM_LIQUID_LATEX_DEFAULT_ID );
 			ItemIDs.ITEM_ELMAG_MODULE_ID = config.getItem( Strings.ITEM_ELMAG_MODULE, ItemIDs.ITEM_ELMAG_MODULE_DEFAULT_ID ).getInt( ItemIDs.ITEM_ELMAG_MODULE_DEFAULT_ID );
 			ItemIDs.ITEM_TRAY_KILN_ID = config.getItem( Strings.ITEM_TRAY_KILN_NAME, ItemIDs.ITEM_TRAY_KILN_DEFAULT_ID ).getInt( ItemIDs.ITEM_TRAY_KILN_DEFAULT_ID );
-
+			ItemIDs.ITEM_REDSTONE_EMITTER_ID = config.getItem(Strings.ITEM_REDSTONE_EMITTER, ItemIDs.ITEM_REDSTONE_EMITTER_DEFAULT_ID).getInt(ItemIDs.ITEM_REDSTONE_EMITTER_DEFAULT_ID);
+			
 		} catch( Exception e ) {
 			EDLogger.warn( "Had trouble reading/writing to the configuration file." );
 		} finally {

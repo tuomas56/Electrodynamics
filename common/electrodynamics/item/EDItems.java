@@ -18,6 +18,7 @@ public class EDItems {
 	public static Item itemTray;
 	public static Item itemTrayKiln;
 	public static Item itemLatexBucket;
+	public static Item itemRedstoneEmitter;
 	
 	public static Item itemLiquidLatex;
 	

@@ -37,7 +37,7 @@ public class ModuleManager {
 		registerModule(Module.CORE, new EDModuleCore());
 		registerModule(Module.WORLD, new EDModuleWorld());
 //		registerModule(Module.LOGIC, new EDModuleLogic());
-//		registerModule(Module.LASER, new EDModuleLaser());
+		registerModule(Module.LASER, new EDModuleLaser());
 		registerModule(Module.MACHINE, new EDModuleMachine());
 //		registerModule(Module.GAS,  new EDModuleGas());
 		registerModule(Module.ELMAG, new EDModuleElMag());
@@ -196,7 +196,7 @@ public class ModuleManager {
 		CORE,
 		WORLD,
 //		LOGIC,
-//		LASER,
+		LASER,
 		MACHINE,
 //		GAS,
 		ELMAG;
