@@ -6,32 +6,54 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class InventoryUtil {
 
 	public static final int PLAYER_INVENTORY_SIZE = 27;
 	public static final int PLAYER_HOTBAR_SIZE = 9;
 	
-	public static boolean areItemStacksEqual(ItemStack is1, ItemStack is2, boolean compareNBT) {
-		if (is1 == null || is2 == null) return false;
+	public static ItemStack[] readItemsFromNBT(String tagName, NBTTagCompound nbt) {
+		NBTTagList invNBT = nbt.getTagList(tagName);
 		
-		if (is1.getItemDamage() != OreDictionary.WILDCARD_VALUE && is2.getItemDamage() != OreDictionary.WILDCARD_VALUE) {
-			if (compareNBT) {
-				return (ItemStack.areItemStacksEqual(is1, is2) && ItemStack.areItemStackTagsEqual(is1, is2));
-			} else {
-				return is1.isItemEqual(is2);
+		if (invNBT != null) {
+			ItemStack[] inv = new ItemStack[invNBT.tagCount()];
+			
+			for (int i=0; i<invNBT.tagCount(); i++) {
+				inv[i] = ItemStack.loadItemStackFromNBT((NBTTagCompound) invNBT.tagAt(i));
 			}
-		} else {
-			return is1.itemID == is2.itemID;
+			
+			return inv;
 		}
+		
+		return null;
+	}
+	
+	public static void writeItemsToNBT(String tagName, NBTTagCompound nbt, ItemStack[] inv) {
+		nbt.setTag(tagName, writeItemsToNBT(inv));
+	}
+	
+	public static NBTTagList writeItemsToNBT(ItemStack[] inv) {
+		NBTTagList inventoryNBT = new NBTTagList();
+		
+		if (inv != null && inv.length > 0) {
+			for (ItemStack stack : inv) {
+				if (stack != null) {
+					NBTTagCompound item = new NBTTagCompound();
+					stack.writeToNBT(item);
+					inventoryNBT.appendTag(item);
+				}
+			}
+		}
+		
+		return inventoryNBT;
 	}
 	
 	public static ItemStack getFirstOccuranceOf(ItemStack[] inv, ItemStack check) {
 		for (ItemStack stack : inv) {
-			if (stack != null && areItemStacksEqual(check, stack, false)) {
+			if (stack != null && ItemUtil.areItemStacksEqual(check, stack, false)) {
 				return stack;
 			}
 		}
@@ -43,7 +65,7 @@ public class InventoryUtil {
 		int amount = 0;
 		
 		for (ItemStack stack : inv) {
-			if (stack != null && areItemStacksEqual(check, stack, false)) {
+			if (stack != null && ItemUtil.areItemStacksEqual(check, stack, false)) {
 				amount++;
 			}
 		}

@@ -12,7 +12,7 @@ import electrodynamics.client.model.ModelTechne;
 import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.lib.client.Models;
 import electrodynamics.mbs.MultiBlockStructure;
-import electrodynamics.tileentity.TileStructure;
+import electrodynamics.tileentity.structure.TileEntityStructure;
 
 public class RenderTileStructure extends TileEntitySpecialRenderer {
 
@@ -26,7 +26,7 @@ public class RenderTileStructure extends TileEntitySpecialRenderer {
 		this.mobGrinder = new ModelMobGrinder();
 	}
 	
-	public void renderStructureBlockAt(TileStructure structure, double x, double y, double z, float partial) {
+	public void renderStructureBlockAt(TileEntityStructure structure, double x, double y, double z, float partial) {
 		if ((structure).isCentralTileEntity()) {
 			renderMBSAt(structure, x, y, z, partial);
 		} else {
@@ -52,7 +52,7 @@ public class RenderTileStructure extends TileEntitySpecialRenderer {
 		}
 	}
 
-	public void renderMBSAt(TileStructure structure, double x, double y, double z, float partial) {
+	public void renderMBSAt(TileEntityStructure structure, double x, double y, double z, float partial) {
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_LIGHTING);
 		
@@ -97,7 +97,7 @@ public class RenderTileStructure extends TileEntitySpecialRenderer {
 
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double d0, double d1, double d2, float f) {
-		renderStructureBlockAt((TileStructure) tileentity, d0, d1, d2, f);
+		renderStructureBlockAt((TileEntityStructure) tileentity, d0, d1, d2, f);
 	}
 
 }

@@ -1,6 +1,7 @@
-package electrodynamics.tileentity;
+package electrodynamics.tileentity.structure;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -9,9 +10,12 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
+import net.minecraftforge.liquids.LiquidTank;
 import electrodynamics.core.CoreUtils;
 import electrodynamics.core.misc.DamageSourceBlock;
 import electrodynamics.lib.block.StructureComponent;
@@ -19,11 +23,14 @@ import electrodynamics.recipe.RecipeGrinder;
 import electrodynamics.recipe.manager.CraftingManager;
 import electrodynamics.util.EntityReflectionWrapper;
 import electrodynamics.util.InventoryUtil;
+import electrodynamics.util.LiquidUtil;
 import electrodynamics.util.PlayerUtil;
 
-public class TileEntityMobGrinder extends TileStructure {
+public class TileEntityMobGrinder extends TileEntityStructure {
 
-	public ArrayList<ItemStack> inventory = new ArrayList<ItemStack>();
+	public List<ItemStack> inventory = new ArrayList<ItemStack>();
+	
+	public LiquidTank tank = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME);
 	
 	@Override
 	public void updateEntity() {
@@ -107,7 +114,13 @@ public class TileEntityMobGrinder extends TileStructure {
 				}
 			}
 			
-			//TODO Handle liquid output
+			if (recipe.liquidOutput != null) {
+				if (LiquidUtil.canStoreLiquid(tank, recipe.liquidOutput)) {
+					tank.fill(recipe.liquidOutput, true);
+				} else {
+					return false;
+				}
+			}
 			
 			return true;
 		}
@@ -116,7 +129,7 @@ public class TileEntityMobGrinder extends TileStructure {
 	}
 	
 	public void dispenseItem(ItemStack stack) {
-		TileStructure output = getOutputBlock();
+		TileEntityStructure output = getOutputBlock();
 		
 		if (output != null) {
 			if (this.inventory.remove(stack)) {
@@ -126,15 +139,15 @@ public class TileEntityMobGrinder extends TileStructure {
 		}
 	}
 	
-	public TileStructure getOutputBlock() {
+	public TileEntityStructure getOutputBlock() {
 		for (int y = yCoord; y < this.yCoord + 2; y++) {
 			for (int x = xCoord - 1; x < xCoord + 2; x++) {
 				for (int z = zCoord - 1; z < zCoord + 2; z++) {
 					TileEntity tile = this.worldObj.getBlockTileEntity(x, y, z);
 
-					if (tile != null && tile instanceof TileStructure) {
-						if (StructureComponent.values()[((TileStructure)tile).getSubBlock()] == StructureComponent.VALVE) {
-							return (TileStructure) tile;
+					if (tile != null && tile instanceof TileEntityStructure) {
+						if (StructureComponent.values()[((TileEntityStructure)tile).getSubBlock()] == StructureComponent.VALVE) {
+							return (TileEntityStructure) tile;
 						}
 					}
 				}
@@ -150,6 +163,22 @@ public class TileEntityMobGrinder extends TileStructure {
 		double z = this.zCoord + .5;
 		
 		return AxisAlignedBB.getAABBPool().getAABB(x, y, z, x, y, z).expand(.75, 1, .75);
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		
+		this.inventory = Arrays.asList(InventoryUtil.readItemsFromNBT("Items", nbt));
+		this.tank.setLiquid(LiquidUtil.readLiquidFromNBT("Liquid", nbt));
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		
+		InventoryUtil.writeItemsToNBT("Items", nbt, (ItemStack[]) this.inventory.toArray());
+		LiquidUtil.writeLiquidToNBT("Liquid", nbt, tank.getLiquid());
 	}
 	
 	@Override

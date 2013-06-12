@@ -3,7 +3,7 @@ package electrodynamics.tileentity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TileEntityMachine extends TileEDRoot {
+public abstract class TileEntityMachine extends TileEntityEDRoot {
 
 	public ForgeDirection rotation = null;
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.liquids.LiquidStack;
-import electrodynamics.util.InventoryUtil;
+import electrodynamics.util.ItemUtil;
 
 public class RecipeGrinder {
 
@@ -21,7 +21,7 @@ public class RecipeGrinder {
 	}
 	
 	public boolean isInput(ItemStack stack) {
-		return InventoryUtil.areItemStacksEqual(input, stack, false);
+		return ItemUtil.areItemStacksEqual(input, stack, false);
 	}
 	
 }

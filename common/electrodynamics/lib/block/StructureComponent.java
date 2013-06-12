@@ -12,7 +12,7 @@ import electrodynamics.lib.client.Models;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityGeneric;
-import electrodynamics.tileentity.TileStructure;
+import electrodynamics.tileentity.structure.TileEntityStructure;
 
 public enum StructureComponent implements SubBlock {
 
@@ -48,7 +48,7 @@ public enum StructureComponent implements SubBlock {
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType, TileStructure tile) {
+		public void applyGLTransformations(byte renderType, TileEntityStructure tile) {
 			
 		}
 
@@ -75,7 +75,7 @@ public enum StructureComponent implements SubBlock {
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType, TileStructure tile) {
+		public void applyGLTransformations(byte renderType, TileEntityStructure tile) {
 			
 		}
 
@@ -103,7 +103,7 @@ public enum StructureComponent implements SubBlock {
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType, TileStructure tile) {
+		public void applyGLTransformations(byte renderType, TileEntityStructure tile) {
 			
 		}
 
@@ -132,7 +132,7 @@ public enum StructureComponent implements SubBlock {
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType, TileStructure tile) {
+		public void applyGLTransformations(byte renderType, TileEntityStructure tile) {
 			
 		}
 
@@ -161,7 +161,7 @@ public enum StructureComponent implements SubBlock {
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType, TileStructure tile) {
+		public void applyGLTransformations(byte renderType, TileEntityStructure tile) {
 			
 		}
 
@@ -190,7 +190,7 @@ public enum StructureComponent implements SubBlock {
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType, TileStructure tile) {
+		public void applyGLTransformations(byte renderType, TileEntityStructure tile) {
 			
 		}
 
@@ -219,7 +219,7 @@ public enum StructureComponent implements SubBlock {
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType, TileStructure tile) {
+		public void applyGLTransformations(byte renderType, TileEntityStructure tile) {
 			
 		}
 
@@ -253,7 +253,7 @@ public enum StructureComponent implements SubBlock {
 		}
 
 		@Override
-		public void applyGLTransformations(byte renderType, TileStructure tile) {
+		public void applyGLTransformations(byte renderType, TileEntityStructure tile) {
 			if (renderType == 1) {
 				GL11.glScaled(.5, .5, .5);
 			} else if (renderType == 0) {
@@ -292,7 +292,7 @@ public enum StructureComponent implements SubBlock {
 
 	@Override
 	public TileEntityGeneric createNewTileEntity(World world) {
-		return TileStructure.createNewPlaceHolderTE();
+		return TileEntityStructure.createNewPlaceHolderTE();
 	}
 
 	@Override
@@ -334,7 +334,7 @@ public enum StructureComponent implements SubBlock {
 	 * <b>1: </b> Rendering in inventory/hand/as entity
 	 * @param structure 
 	 */
-	public abstract void applyGLTransformations(byte renderType, TileStructure structure);
+	public abstract void applyGLTransformations(byte renderType, TileEntityStructure structure);
 	
 	private static String frame = "machine_frame";
 

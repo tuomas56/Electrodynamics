@@ -1,15 +1,16 @@
-package electrodynamics.tileentity;
+package electrodynamics.tileentity.structure;
 
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.mbs.MBSManager;
 import electrodynamics.mbs.MultiBlockStructure;
+import electrodynamics.tileentity.TileEntityGeneric;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 
-public abstract class TileStructure extends TileEntityGeneric {
+public abstract class TileEntityStructure extends TileEntityGeneric {
 
 	// The coordinates of the central TE.
 	protected int targetX, targetY, targetZ;
@@ -45,12 +46,12 @@ public abstract class TileStructure extends TileEntityGeneric {
 		return isValidStructure() && xCoord == targetX && yCoord == targetY && zCoord == targetZ;
 	}
 
-	public TileStructure getCentralTileEntity() {
+	public TileEntityStructure getCentralTileEntity() {
 		if( isValidStructure ) {
 			if( this.isCentralTileEntity() ) {
 				return this;
 			}
-			return (TileStructure) worldObj.getBlockTileEntity( targetX, targetY, targetZ );
+			return (TileEntityStructure) worldObj.getBlockTileEntity( targetX, targetY, targetZ );
 		}
 		return null;
 	}
@@ -99,11 +100,11 @@ public abstract class TileStructure extends TileEntityGeneric {
 		return this.INFINITE_EXTENT_AABB;
     }
 	
-	public static TileStructure createNewPlaceHolderTE() {
+	public static TileEntityStructure createNewPlaceHolderTE() {
 		return new TileStructurePlaceHolder();
 	}
 
-	public static class TileStructurePlaceHolder extends TileStructure {
+	public static class TileStructurePlaceHolder extends TileEntityStructure {
 
 		@Override
 		public boolean onBlockActivatedBy(EntityPlayer player, int side, float xOff, float yOff, float zOff) {

@@ -9,8 +9,8 @@ import electrodynamics.core.CreativeTabED;
 import electrodynamics.interfaces.IAcceptsTool;
 import electrodynamics.item.EDItems;
 import electrodynamics.lib.block.StructureComponent;
-import electrodynamics.tileentity.TileEntityMobGrinder;
-import electrodynamics.tileentity.TileStructure;
+import electrodynamics.tileentity.structure.TileEntityMobGrinder;
+import electrodynamics.tileentity.structure.TileEntityStructure;
 import electrodynamics.world.TickHandlerMBS;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -40,7 +40,7 @@ public class BlockStructure extends BlockGeneric implements IAcceptsTool {
 	//TODO Move this somewhere better
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
-		TileStructure tile = (TileStructure) par1World.getBlockTileEntity(par2, par3, par4);
+		TileEntityStructure tile = (TileEntityStructure) par1World.getBlockTileEntity(par2, par3, par4);
 		if( tile != null ) {
 			if (StructureComponent.values()[tile.getSubBlock()] == StructureComponent.MOB_GRINDER_BLADE && tile.isValidStructure()) {
 				return null;
@@ -86,7 +86,7 @@ public class BlockStructure extends BlockGeneric implements IAcceptsTool {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float xOff, float yOff, float zOff) {
-		TileStructure tile = (TileStructure) world.getBlockTileEntity( x, y, z );
+		TileEntityStructure tile = (TileEntityStructure) world.getBlockTileEntity( x, y, z );
 		if( tile != null ) {
 			if( player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ITool ) {
 				if( player.getHeldItem().itemID != EDItems.itemSledgeHammer.itemID ) {
@@ -114,7 +114,7 @@ public class BlockStructure extends BlockGeneric implements IAcceptsTool {
 	@Override
 	public int getLightOpacity(World world, int x, int y, int z) {
 		TileEntity tile = world.getBlockTileEntity( x, y, z );
-		if( tile != null && tile instanceof TileStructure && (((TileStructure) tile).isValidStructure() || (StructureComponent.values()[((TileStructure)tile).getSubBlock()].getModel() != null)))
+		if( tile != null && tile instanceof TileEntityStructure && (((TileEntityStructure) tile).isValidStructure() || (StructureComponent.values()[((TileEntityStructure)tile).getSubBlock()].getModel() != null)))
 			return 0;
 		return 255;
 	}

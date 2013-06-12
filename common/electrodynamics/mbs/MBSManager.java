@@ -6,7 +6,7 @@ import electrodynamics.core.EDLogger;
 import electrodynamics.mbs.util.WorldBlock;
 import electrodynamics.mbs.util.WorldChunk;
 import electrodynamics.network.packet.PacketInvalidateMBS;
-import electrodynamics.tileentity.TileStructure;
+import electrodynamics.tileentity.structure.TileEntityStructure;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -49,8 +49,8 @@ public class MBSManager {
 		for( WorldBlock block : chunk ) {
 			if( block != null ) {
 				TileEntity tile = block.getTileEntity();
-				if( tile != null && tile instanceof TileStructure ) {
-					TileStructure structure = (TileStructure) tile;
+				if( tile != null && tile instanceof TileEntityStructure ) {
+					TileEntityStructure structure = (TileEntityStructure) tile;
 					notifyClient = notifyClient || structure.isValidStructure();
 					structure.invalidateStructure();
 					((World)chunk.getBlockAccess()).markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);

@@ -1,7 +1,8 @@
-package electrodynamics.tileentity;
+package electrodynamics.tileentity.structure;
 
 
 import java.util.List;
+
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -9,7 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileConveyorBelt extends TileStructure {
+public class TileEntityConveyorBelt extends TileEntityStructure {
 	@Override
 	public boolean onBlockActivatedBy(EntityPlayer player, int side, float xOff, float yOff, float zOff) {
 		return false;

@@ -9,8 +9,8 @@ import electrodynamics.mbs.Pattern;
 import electrodynamics.mbs.StructureBlock;
 import electrodynamics.mbs.util.WorldBlock;
 import electrodynamics.mbs.util.WorldChunk;
-import electrodynamics.tileentity.TileEntityMobGrinder;
-import electrodynamics.tileentity.TileStructure;
+import electrodynamics.tileentity.structure.TileEntityMobGrinder;
+import electrodynamics.tileentity.structure.TileEntityStructure;
 
 public class MobGrinder extends MultiBlockStructure {
 
@@ -23,7 +23,7 @@ public class MobGrinder extends MultiBlockStructure {
 	}
 
 	@Override
-	public TileStructure getNewCentralTileEntity() {
+	public TileEntityStructure getNewCentralTileEntity() {
 		return new TileEntityMobGrinder();
 	}
 	

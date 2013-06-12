@@ -3,12 +3,27 @@ package electrodynamics.util;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ItemUtil {
 
+	public static boolean areItemStacksEqual(ItemStack is1, ItemStack is2, boolean compareNBT) {
+		if (is1 == null || is2 == null) return false;
+		
+		if (is1.getItemDamage() != OreDictionary.WILDCARD_VALUE && is2.getItemDamage() != OreDictionary.WILDCARD_VALUE) {
+			if (compareNBT) {
+				return (ItemStack.areItemStacksEqual(is1, is2) && ItemStack.areItemStackTagsEqual(is1, is2));
+			} else {
+				return is1.isItemEqual(is2);
+			}
+		} else {
+			return is1.itemID == is2.itemID;
+		}
+	}
+	
 	public static ItemStack getAndResize(ItemStack stack, int amount) {
 		ItemStack stack2 = stack.copy();
 		stack2.stackSize = amount;

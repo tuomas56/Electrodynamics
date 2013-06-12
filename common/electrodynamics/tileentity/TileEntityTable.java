@@ -21,7 +21,7 @@ import electrodynamics.recipe.manager.CraftingManager;
 import electrodynamics.util.BlockUtil;
 import electrodynamics.util.InventoryUtil;
 
-public class TileEntityTable extends TileEDRoot {
+public class TileEntityTable extends TileEntityEDRoot {
 	
 	/** Item to be displayed on the display table */
 	public ItemStack displayedItem;

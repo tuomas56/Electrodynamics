@@ -3,7 +3,7 @@ package electrodynamics.client.render.block;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import electrodynamics.lib.block.StructureComponent;
-import electrodynamics.tileentity.TileStructure;
+import electrodynamics.tileentity.structure.TileEntityStructure;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -50,10 +50,10 @@ public class RenderBlockStructure implements ISimpleBlockRenderingHandler {
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 		TileEntity tileEntity = world.getBlockTileEntity( x, y, z );
-		if( tileEntity == null || !(tileEntity instanceof TileStructure) )
+		if( tileEntity == null || !(tileEntity instanceof TileEntityStructure) )
 			return true;
 
-		TileStructure tile = (TileStructure) tileEntity;
+		TileEntityStructure tile = (TileEntityStructure) tileEntity;
 		if( tile.isValidStructure()) {
 			return true;
 		}

@@ -12,7 +12,7 @@ import electrodynamics.mbs.util.WorldBlock;
 import electrodynamics.mbs.util.WorldChunk;
 import electrodynamics.mbs.util.WorldCoordinate;
 import electrodynamics.network.packet.PacketInitializeMBS;
-import electrodynamics.tileentity.TileStructure;
+import electrodynamics.tileentity.structure.TileEntityStructure;
 
 public abstract class MultiBlockStructure {
 
@@ -132,22 +132,22 @@ public abstract class MultiBlockStructure {
 
 	protected void validateTileEntities(WorldChunk chunk, int rotation, int x, int y, int z) {
 		TileEntity tile;
-		TileStructure replacement = getNewCentralTileEntity();
+		TileEntityStructure replacement = getNewCentralTileEntity();
 		
 		for( WorldBlock worldBlock : chunk ) {
 			if( worldBlock != null ) {
 				tile = worldBlock.getTileEntity();
-				if( tile != null && tile instanceof TileStructure ) {
-					((TileStructure) tile).validateStructure( this, rotation, x, y, z );
+				if( tile != null && tile instanceof TileEntityStructure ) {
+					((TileEntityStructure) tile).validateStructure( this, rotation, x, y, z );
 
-					if (((TileStructure)tile).isCentralTileEntity()) {
+					if (((TileEntityStructure)tile).isCentralTileEntity()) {
 						if (replacement != null) {
-							int subID = ((TileStructure)tile).getSubBlock();
+							int subID = ((TileEntityStructure)tile).getSubBlock();
 							replacement.setSubBlock( subID );
 							
 							WorldCoordinate central = getCentralCoordinate(chunk, rotation);
 							tile.worldObj.setBlockTileEntity(central.x, central.y, central.z, replacement);
-							((TileStructure)worldBlock.getTileEntity()).validateStructure( this, rotation, x, y, z );
+							((TileEntityStructure)worldBlock.getTileEntity()).validateStructure( this, rotation, x, y, z );
 						}
 					}
 					
@@ -159,8 +159,8 @@ public abstract class MultiBlockStructure {
 	}
 
 	public StructureComponent getStructureComponentFrom(TileEntity tileEntity) {
-		if( tileEntity != null && tileEntity instanceof TileStructure ) {
-			TileStructure tile = (TileStructure) tileEntity;
+		if( tileEntity != null && tileEntity instanceof TileEntityStructure ) {
+			TileEntityStructure tile = (TileEntityStructure) tileEntity;
 			return StructureComponent.values()[tile.getSubBlock()];
 		}
 		return null;
@@ -175,7 +175,7 @@ public abstract class MultiBlockStructure {
 					return false;
 				if( block.blockID == EDBlocks.blockStructureComponent.blockID ) {
 
-					TileStructure tile = (TileStructure) worldBlock.getTileEntity();
+					TileEntityStructure tile = (TileEntityStructure) worldBlock.getTileEntity();
 					int subBlock = tile.getSubBlock();
 
 					for( StructureComponent sub : components ) {
@@ -188,7 +188,7 @@ public abstract class MultiBlockStructure {
 		};
 	}
 	
-	public TileStructure getNewCentralTileEntity() {
+	public TileEntityStructure getNewCentralTileEntity() {
 		return null;
 	}
 	

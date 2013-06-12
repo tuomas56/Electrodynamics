@@ -10,7 +10,7 @@ import electrodynamics.core.CoreUtils;
 import electrodynamics.network.PacketUtils;
 import electrodynamics.network.packet.Packet132TileEntityDataType;
 
-public abstract class TileEDRoot extends TileEntity {
+public abstract class TileEntityEDRoot extends TileEntity {
 
 	public void onBlockActivated(EntityPlayer player) {
 
