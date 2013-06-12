@@ -111,9 +111,11 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 		RecipeGrinder recipe = CraftingManager.getInstance().grindManager.getRecipe(stack);
 		
 		if (recipe != null) {
-			for (ItemStack stackOut : recipe.itemOutput) {
-				if (stackOut != null) {
-					this.inventory.add(stackOut.copy());
+			if (recipe.itemOutput != null) {
+				for (ItemStack stackOut : recipe.itemOutput) {
+					if (stackOut != null) {
+						this.inventory.add(stackOut.copy());
+					}
 				}
 			}
 			
@@ -180,7 +182,7 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		
-		InventoryUtil.writeItemsToNBT("Items", nbt, (ItemStack[]) this.inventory.toArray());
+		InventoryUtil.writeItemsToNBT("Items", nbt, this.inventory.toArray(new ItemStack[this.inventory.size()]));
 		LiquidUtil.writeLiquidToNBT("Liquid", nbt, tank.getLiquid());
 	}
 	
