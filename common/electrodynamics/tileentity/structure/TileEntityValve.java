@@ -11,34 +11,46 @@ public class TileEntityValve extends TileEntityStructure implements ITankContain
 	/* ITANKCONTAINER */
 	@Override
 	public int fill(ForgeDirection from, LiquidStack resource, boolean doFill) {
-		return 0;
+		return fill(0, resource, doFill);
 	}
 
 	@Override
 	public int fill(int tankIndex, LiquidStack resource, boolean doFill) {
-		return 0;
+		return getCentralTank().fill(resource, doFill);
 	}
 
 	@Override
 	public LiquidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		return null;
+		return drain(0, maxDrain, doDrain);
 	}
 
 	@Override
 	public LiquidStack drain(int tankIndex, int maxDrain, boolean doDrain) {
-		return null;
+		return getCentralTank().drain(maxDrain, doDrain);
 	}
 
 	@Override
 	public ILiquidTank[] getTanks(ForgeDirection direction) {
-		return null;
+		return new ILiquidTank[] {getCentralTank()};
 	}
 
 	@Override
 	public ILiquidTank getTank(ForgeDirection direction, LiquidStack type) {
-		return null;
+		return getTanks(direction)[0];
 	}
 
+	private ILiquidTank getCentralTank() {
+		if (this.isValidStructure()) {
+			TileEntityStructure central = this.getCentralTileEntity();
+			
+			if (central instanceof ITankContainer) {
+				return ((ITankContainer)central).getTanks(ForgeDirection.UNKNOWN)[0];
+			}
+		}
+		
+		return null;
+	}
+	
 	/* TILEENTITYSTRUCTURE */
 	@Override
 	public boolean onBlockActivatedBy(EntityPlayer player, int side, float xOff, float yOff, float zOff) {

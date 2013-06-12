@@ -11,6 +11,7 @@ import electrodynamics.item.EDItems;
 import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.tileentity.structure.TileEntityMobGrinder;
 import electrodynamics.tileentity.structure.TileEntityStructure;
+import electrodynamics.tileentity.structure.TileEntityValve;
 import electrodynamics.world.TickHandlerMBS;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -67,6 +68,8 @@ public class BlockStructure extends BlockGeneric implements IAcceptsTool {
 					return new TileEntityMobGrinder();
 				}
 			}
+		} else if (subBlock == StructureComponent.VALVE.ordinal()) {
+			return new TileEntityValve();
 		}
 		return super.createSpecificTileEntity( world, x, y, z, nbt, subBlock );
 	}

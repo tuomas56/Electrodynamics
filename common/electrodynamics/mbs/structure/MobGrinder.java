@@ -17,6 +17,7 @@ public class MobGrinder extends MultiBlockStructure {
 	public static final String UID = "MobGrinder";
 
 	public static final int VALVE_COUNT = 1;
+	public static final int HATCH_COUNT = 1;
 	
 	public MobGrinder() {
 		super(UID, makePattern());
@@ -44,7 +45,8 @@ public class MobGrinder extends MultiBlockStructure {
 
 		boolean rotated = c > 1, reversed = c % 2 == 1; // optimization checks.
 
-		int outputCount = 0;
+		int valveCount = 0;
+		int hatchCount = 0;
 		
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
@@ -54,14 +56,18 @@ public class MobGrinder extends MultiBlockStructure {
 					WorldBlock worldBlock = rotated ? chunk.getBlockAt(z, y, x) : chunk.getBlockAt(x, y, z);
 					StructureComponent component = getStructureComponentFrom(worldBlock.getTileEntity());
 					
-					if (key == 'o' && component == StructureComponent.VALVE) {
-						outputCount++;
+					if (key == 'o') {
+						if (component == StructureComponent.VALVE) {
+							valveCount++;
+						} else if (component == StructureComponent.HATCH) {
+							hatchCount++;
+						}
 					}
 				}
 			}
 		}
 
-		if (outputCount == 1) {
+		if (valveCount == VALVE_COUNT && hatchCount == HATCH_COUNT) {
 			return c;
 		}
 		
@@ -72,7 +78,7 @@ public class MobGrinder extends MultiBlockStructure {
 		Pattern.PatternCompiler compiler = new Pattern.PatternCompiler( 3, 3 );
 
 		compiler.addLayer( new char[][] { // y=0
-				{ 'o', 'c', 'c' },
+				{ 'o', 'c', 'o' },
 				{ 'c', 'c', 'c' },
 				{ 'c', 'c', 'c' }
 		} );
@@ -87,7 +93,7 @@ public class MobGrinder extends MultiBlockStructure {
 		Map<Character, StructureBlock> mappings = new HashMap<Character, StructureBlock>();
 		mappings.put('c', matchAny(StructureComponent.MACHINE_FRAME)); // casing
 		mappings.put('b', matchAny(StructureComponent.MOB_GRINDER_BLADE)); // blade
-		mappings.put('o', matchAny(StructureComponent.VALVE)); // output
+		mappings.put('o', matchAny(StructureComponent.VALVE, StructureComponent.HATCH)); // output
 		
 		return compiler.compile( mappings );
 	}

@@ -14,7 +14,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.liquids.ILiquidTank;
+import net.minecraftforge.liquids.ITankContainer;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
+import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 import electrodynamics.core.CoreUtils;
 import electrodynamics.core.misc.DamageSourceBlock;
@@ -26,7 +29,7 @@ import electrodynamics.util.InventoryUtil;
 import electrodynamics.util.LiquidUtil;
 import electrodynamics.util.PlayerUtil;
 
-public class TileEntityMobGrinder extends TileEntityStructure {
+public class TileEntityMobGrinder extends TileEntityStructure implements ITankContainer {
 
 	public List<ItemStack> inventory = new ArrayList<ItemStack>();
 	
@@ -184,6 +187,37 @@ public class TileEntityMobGrinder extends TileEntityStructure {
 	@Override
 	public boolean onBlockActivatedBy(EntityPlayer player, int side, float xOff, float yOff, float zOff) {
 		return false;
+	}
+
+	/* ITANKCONTAINER */
+	@Override
+	public int fill(ForgeDirection from, LiquidStack resource, boolean doFill) {
+		return fill(0, resource, doFill);
+	}
+
+	@Override
+	public int fill(int tankIndex, LiquidStack resource, boolean doFill) {
+		return this.tank.fill(resource, doFill);
+	}
+
+	@Override
+	public LiquidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+		return drain(0, maxDrain, doDrain);
+	}
+
+	@Override
+	public LiquidStack drain(int tankIndex, int maxDrain, boolean doDrain) {
+		return this.tank.drain(maxDrain, doDrain);
+	}
+
+	@Override
+	public ILiquidTank[] getTanks(ForgeDirection direction) {
+		return new ILiquidTank[] {this.tank};
+	}
+
+	@Override
+	public ILiquidTank getTank(ForgeDirection direction, LiquidStack type) {
+		return getTanks(direction)[0];
 	}
 
 }
