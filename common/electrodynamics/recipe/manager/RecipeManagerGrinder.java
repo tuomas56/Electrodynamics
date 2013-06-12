@@ -3,7 +3,6 @@ package electrodynamics.recipe.manager;
 import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
-
 import electrodynamics.recipe.RecipeGrinder;
 
 public class RecipeManagerGrinder {
@@ -27,7 +26,7 @@ public class RecipeManagerGrinder {
 	}
 	
 	public void initRecipes() {
-		
+
 	}
 	
 }

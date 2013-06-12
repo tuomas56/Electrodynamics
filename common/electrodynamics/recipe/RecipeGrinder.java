@@ -1,21 +1,20 @@
 package electrodynamics.recipe;
 
-import java.util.ArrayList;
-
-import electrodynamics.util.InventoryUtil;
+import java.util.List;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.liquids.LiquidStack;
+import electrodynamics.util.InventoryUtil;
 
 public class RecipeGrinder {
 
 	public ItemStack input;
 	
-	public ArrayList<ItemStack> itemOutput;
+	public List<ItemStack> itemOutput;
 	
 	public LiquidStack liquidOutput;
 	
-	public RecipeGrinder(ItemStack input, ArrayList<ItemStack> itemOutput, LiquidStack liquidOutput) {
+	public RecipeGrinder(ItemStack input, List<ItemStack> itemOutput, LiquidStack liquidOutput) {
 		this.input = input;
 		this.itemOutput = itemOutput;
 		this.liquidOutput = liquidOutput;
