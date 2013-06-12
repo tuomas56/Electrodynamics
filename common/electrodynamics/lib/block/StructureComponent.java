@@ -256,6 +256,10 @@ public enum StructureComponent implements SubBlock {
 		public void applyGLTransformations(byte renderType, TileStructure tile) {
 			if (renderType == 1) {
 				GL11.glScaled(.5, .5, .5);
+			} else if (renderType == 0) {
+				GL11.glTranslated(0, -.5, 0);
+				int rotation = tile.worldObj.getBlockMetadata(tile.xCoord, tile.yCoord, tile.zCoord);
+				GL11.glRotatef(90 * (rotation / 2), 0, 1, 0);
 			}
 		}
 	};
