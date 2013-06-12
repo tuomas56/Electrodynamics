@@ -1,13 +1,10 @@
 package electrodynamics.item;
 
-import java.util.HashMap;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -15,7 +12,6 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import electrodynamics.core.CreativeTabED;
 import electrodynamics.entity.EntityBeam;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.core.ModInfo;
@@ -23,23 +19,13 @@ import electrodynamics.tileentity.TileEntityRSSource;
 import electrodynamics.util.GLColor;
 import electrodynamics.util.PlayerUtil;
 
-public class ItemRedstoneEmitter extends Item {
+public class ItemRedstoneEmitter extends ItemLaserTool {
 
-	public static final int MAX_POWER = 1600;
-	
-	private Icon[] textures;
-	
-	public static HashMap<String, EntityBeam> emissionBeams = new HashMap<String, EntityBeam>();
-	public static HashMap<String, Integer> startCharges = new HashMap<String, Integer>();
-	public static HashMap<String, Integer> useCount = new HashMap<String, Integer>();
-	
 	public ItemRedstoneEmitter(int id) {
 		super(id);
-		setMaxDamage(0);
-		setMaxStackSize(1);
-		setNoRepair();
-		setCreativeTab(CreativeTabED.tool);
 	}
+
+	private Icon[] textures;
 	
 	public static ItemStack getRemote(int chargeLevel) {
 		ItemStack remote = new ItemStack(EDItems.itemRedstoneEmitter);
@@ -49,62 +35,36 @@ public class ItemRedstoneEmitter extends Item {
 		return remote;
 	}
 	
-	public static int getCharge(ItemStack stack) {
-		if (stack.getTagCompound() == null) {
-			stack.setTagCompound(new NBTTagCompound());
-		}
-		
-		return stack.getTagCompound().getInteger("charge");
-	}
-	
-	public static void setCharge(ItemStack stack, int chargeLevel) {
-		if (chargeLevel > MAX_POWER) chargeLevel = MAX_POWER;
-		if (chargeLevel < 0) chargeLevel = 0;
-		
-		if (stack.getTagCompound() == null) {
-			stack.setTagCompound(new NBTTagCompound());
-		}
-		
-		NBTTagCompound nbt = stack.getTagCompound();
-		nbt.setInteger("charge", chargeLevel);
-		stack.setTagCompound(nbt);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void getSubItems(int id, CreativeTabs tab, List list) {
+		list.add(ItemRedstoneEmitter.getRemote(0));
+		list.add(ItemRedstoneEmitter.getRemote(MAX_POWER));
 	}
 	
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
-		// Don't know what this actually does...
-		return 72000;
+	public Icon getIconFromDamage(int damage) {
+		//TODO
+//		if (getCharge(stack) > 0) {
+//			return textures[0];
+//		}
+//		
+//		return textures[1];
+	
+		return textures[0];
+	}
+	
+	@Override
+	public void registerIcons(IconRegister register) {
+		this.textures = new Icon[2];
+		
+		this.textures[0] = register.registerIcon(ModInfo.ICON_PREFIX + "tool/redstoneEmitter");
+		this.textures[1] = register.registerIcon(ModInfo.ICON_PREFIX + "tool/redstoneEmitterEmpty");
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
-		return EnumAction.bow;
-	}
-
-	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	public boolean onTick(ItemStack stack, EntityPlayer player, int charge, int use) {
 		String id = "BEAM: " + player.username;
-		
-		if (getCharge(stack) > 0) {
-			player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
-			
-			startCharges.put(id, getCharge(stack));
-		}
-		
-		return stack;
-	}
-	
-	public void onUsingItemTick(ItemStack stack, EntityPlayer player, int count) {
-		String id = "BEAM: " + player.username;
-		
-		int charge = startCharges.get(id);
-		
-		int use = 1;
-		if (useCount.get(id) != null) {
-			useCount.put(id, useCount.get(id) + 1);
-		} else {
-			useCount.put(id, 1);
-		}
 		
 		final float RANGE = 35F;
 		EntityBeam laser = null;
@@ -173,78 +133,10 @@ public class ItemRedstoneEmitter extends Item {
 				}
 			}
 		} else {
-			player.stopUsingItem();
+			return true;
 		}
-    }
-	
-	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int count) {
-		String id = "BEAM: " + player.username;
 		
-		// Discharge is done here to prevent constant item update animation while in use
-		setCharge(stack, getCharge(stack) - useCount.get(id));
-		
-		emissionBeams.put(id, null);
-		useCount.put(id, 0);
-	}
-	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean show) {
-		list.add("Power: " + getCharge(stack) + "/" + MAX_POWER);
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@Override
-	public void getSubItems(int id, CreativeTabs tab, List list) {
-		list.add(ItemRedstoneEmitter.getRemote(0));
-		list.add(ItemRedstoneEmitter.getRemote(MAX_POWER));
-	}
-	
-	@Override
-	public Icon getIconFromDamage(int damage) {
-		//TODO
-//		if (getCharge(stack) > 0) {
-//			return textures[0];
-//		}
-//		
-//		return textures[1];
-	
-		return textures[0];
-	}
-	
-	public int getItemDamageFromStack(ItemStack stack) {
-		NBTTagCompound tags = stack.getTagCompound();
-		if (tags == null) {
-			return 0;
-		}
-
-		return getCharge(stack);
-	}
-
-	public int getItemDamageFromStackForDisplay(ItemStack stack) {
-		NBTTagCompound tags = stack.getTagCompound();
-		if (tags == null) {
-			return 0;
-		}
-
-		return getCharge(stack);
-	}
-
-	public int getItemMaxDamageFromStack(ItemStack stack) {
-		NBTTagCompound tags = stack.getTagCompound();
-		if (tags == null) {
-			return 0;
-		}
-
-		return MAX_POWER;
-	}
-	
-	@Override
-	public void registerIcons(IconRegister register) {
-		this.textures = new Icon[2];
-		
-		this.textures[0] = register.registerIcon(ModInfo.ICON_PREFIX + "tool/redstoneEmitter");
-		this.textures[1] = register.registerIcon(ModInfo.ICON_PREFIX + "tool/redstoneEmitterEmpty");
+		return false;
 	}
 	
 }
