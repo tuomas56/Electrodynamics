@@ -15,6 +15,7 @@ public class BlockHiddenRedstoneSource extends BlockContainer {
 
 	public BlockHiddenRedstoneSource(int id) {
 		super(id, Material.circuits);
+		setBlockBounds(0, 0, 0, 0, 0, 0);
 	}
 
 	@Override

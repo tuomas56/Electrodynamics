@@ -20,6 +20,7 @@ import electrodynamics.entity.EntityBeam;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.tileentity.TileEntityRSSource;
+import electrodynamics.util.GLColor;
 import electrodynamics.util.PlayerUtil;
 
 public class ItemRedstoneEmitter extends Item {
@@ -30,6 +31,7 @@ public class ItemRedstoneEmitter extends Item {
 	
 	public static HashMap<String, EntityBeam> emissionBeams = new HashMap<String, EntityBeam>();
 	public static HashMap<String, Integer> startCharges = new HashMap<String, Integer>();
+	public static HashMap<String, Integer> useCount = new HashMap<String, Integer>();
 	
 	public ItemRedstoneEmitter(int id) {
 		super(id);
@@ -97,17 +99,25 @@ public class ItemRedstoneEmitter extends Item {
 		
 		int charge = startCharges.get(id);
 		
+		int use = 1;
+		if (useCount.get(id) != null) {
+			useCount.put(id, useCount.get(id) + 1);
+		} else {
+			useCount.put(id, 1);
+		}
+		
 		final float RANGE = 35F;
 		EntityBeam laser = null;
 		
 		World world = player.worldObj;
 		
-		if (charge > 0 && charge - count > 0) {
+		if (charge > 0 && charge - use > 0) {
 			double[] lookCoords = PlayerUtil.getLookCoordinates(player, RANGE);
 			MovingObjectPosition lookedBlock = PlayerUtil.getLookedBlock(player.worldObj, player, world.getWorldVec3Pool().getVecFromPool(lookCoords[0], lookCoords[1], lookCoords[2]));
 			
 			if (lookedBlock != null) {
 				ForgeDirection side = ForgeDirection.getOrientation(lookedBlock.sideHit);
+				GLColor laserColor = null;
 				
 				if (side != null) { // Can happen, doesn't hurt to check
 					int x = lookedBlock.blockX + side.offsetX;
@@ -117,20 +127,26 @@ public class ItemRedstoneEmitter extends Item {
 					if (world.getBlockId(lookedBlock.blockX, lookedBlock.blockY, lookedBlock.blockZ) != BlockIDs.BLOCK_REDSTONE_SOURCE_ID) {
 						if (world.getBlockId(x, y, z) == 0) {
 							world.setBlock(x, y, z, BlockIDs.BLOCK_REDSTONE_SOURCE_ID);
-						} else {
+							
+							laserColor = new GLColor(0, 255, 0);
+						} else if (world.getBlockId(x, y, z) == BlockIDs.BLOCK_REDSTONE_SOURCE_ID) {
 							TileEntity tile = world.getBlockTileEntity(x, y, z);
 
 							if (tile != null && tile instanceof TileEntityRSSource) {
 								((TileEntityRSSource)tile).keepAlive();
+								
+								laserColor = new GLColor(0, 255, 0);
 							}
+						} else {
+							laserColor = new GLColor(255, 0, 0);
 						}
 					}
 				}
 				
-				//TODO Modify beam start position to not be from the head... lol
+				//TODO Modify beam start position to not be from the head, and cleanup this mess
 				if (emissionBeams.get(id) == null) {
 					laser = new EntityBeam(world, player.posX, player.posY + player.getEyeHeight(), player.posZ, lookedBlock.blockX + .5, lookedBlock.blockY + .5, lookedBlock.blockZ + .5, 1);
-					laser.setRGB(0, 255, 0);
+					laser.setRGB(laserColor.r, laserColor.g, laserColor.b);
 					laser.setEndMod(1.0F);
 					laser.setPulse(false);
 					
@@ -139,7 +155,7 @@ public class ItemRedstoneEmitter extends Item {
 					emissionBeams.put(id, laser);
 				} else {
 					emissionBeams.get(id).updateBeam(player.posX, player.posY + player.getEyeHeight(), player.posZ, lookedBlock.blockX + .5, lookedBlock.blockY + .5, lookedBlock.blockZ + .5);
-					emissionBeams.get(id).setRGB(0, 255, 0);
+					emissionBeams.get(id).setRGB(laserColor.r, laserColor.g, laserColor.b);
 				}
 			} else {
 				if (emissionBeams.get(id) == null) {
@@ -164,10 +180,11 @@ public class ItemRedstoneEmitter extends Item {
 	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int count) {
 		String id = "BEAM: " + player.username;
 		
-		emissionBeams.put(id, null);
-		
 		// Discharge is done here to prevent constant item update animation while in use
-		setCharge(stack, getCharge(stack) - count);
+		setCharge(stack, getCharge(stack) - useCount.get(id));
+		
+		emissionBeams.put(id, null);
+		useCount.put(id, 0);
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
