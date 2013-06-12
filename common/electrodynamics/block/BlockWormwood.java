@@ -22,8 +22,10 @@ import electrodynamics.lib.item.Component;
 import electrodynamics.lib.item.ItemIDs;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.IPlantable;
 
-public class BlockWormwood extends BlockFlower {
+public class BlockWormwood extends BlockFlower implements IPlantable {
 
 	public static final int GROWN_NORMAL = 7;
 	public static final int GROWN_DRIED = 9;
@@ -72,7 +74,7 @@ public class BlockWormwood extends BlockFlower {
 		dropBlockAsItem(world, x, y, z, id, meta);
 	}
 	
-	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune) {
+	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int id, int metadata) {
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		int type = getTypeForBiome( world.getBiomeGenForCoords( x, z ) );
 		Random random = new Random();
@@ -111,6 +113,26 @@ public class BlockWormwood extends BlockFlower {
 		list.add( new ItemStack( id, 1, GROWN_NORMAL ) );
 		list.add( new ItemStack( id, 1, GROWN_DRIED ) );
 	}
+
+	@Override
+	public EnumPlantType getPlantType(World world, int x, int y, int z) {
+		return EnumPlantType.Plains;
+	}
+
+	@Override
+	public int getPlantID(World world, int x, int y, int z) {
+		return blockID;
+	}
+
+	@Override
+	public int getPlantMetadata(World world, int x, int y, int z) {
+		if( world.getBlockId( x, y, z ) != this.blockID )
+			return 0;
+		return world.getBlockMetadata( x, y, z );
+	}
+
+
+
 
 	public static final BiomeDictionary.Type[] WORMWOOD_VALID_BIOMES = new BiomeDictionary.Type[] { BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.JUNGLE, BiomeDictionary.Type.MOUNTAIN };
 	public static final BiomeDictionary.Type[] DRY_WORMWOOD_VALID_BIOMES = new BiomeDictionary.Type[] { BiomeDictionary.Type.DESERT, BiomeDictionary.Type.WASTELAND };

@@ -118,6 +118,8 @@ public class EDModuleWorld extends EDModule {
 
 		// Wormwood
 		GameRegistry.registerWorldGenerator(new WorldGenWormwood());
+
+		MinecraftForge.addGrassSeed( new ItemStack(EDItems.itemWormSeed), 5 );
 		
 		LiquidDictionary.getOrCreateLiquid("Latex", new LiquidStack(EDItems.itemLiquidLatex, LiquidContainerRegistry.BUCKET_VOLUME));
 		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(new LiquidStack(EDItems.itemLiquidLatex, LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(EDItems.itemLiquidLatex), new ItemStack(Item.bucketEmpty)));
