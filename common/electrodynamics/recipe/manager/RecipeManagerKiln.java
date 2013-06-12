@@ -1,7 +1,8 @@
-package electrodynamics.recipe;
+package electrodynamics.recipe.manager;
 
 
 import electrodynamics.lib.block.Decorative;
+import electrodynamics.recipe.RecipeKiln;
 import electrodynamics.util.ItemUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

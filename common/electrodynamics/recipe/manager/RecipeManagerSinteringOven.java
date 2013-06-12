@@ -1,8 +1,10 @@
-package electrodynamics.recipe;
+package electrodynamics.recipe.manager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import electrodynamics.recipe.RecipeSinteringOven;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;

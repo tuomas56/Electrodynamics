@@ -26,7 +26,12 @@ import electrodynamics.mbs.MBSManager;
 import electrodynamics.mbs.structure.MobGrinder;
 import electrodynamics.mbs.structure.SinteringFurnace;
 import electrodynamics.module.ModuleManager.Module;
-import electrodynamics.recipe.*;
+import electrodynamics.recipe.manager.CraftingManager;
+import electrodynamics.recipe.manager.RecipeManagerGrinder;
+import electrodynamics.recipe.manager.RecipeManagerKiln;
+import electrodynamics.recipe.manager.RecipeManagerSieve;
+import electrodynamics.recipe.manager.RecipeManagerSinteringOven;
+import electrodynamics.recipe.manager.RecipeManagerTable;
 import electrodynamics.tileentity.*;
 import electrodynamics.util.ItemUtil;
 import electrodynamics.world.TickHandlerMBS;
@@ -184,6 +189,9 @@ public class EDModuleMachine extends EDModule {
 		CraftingManager.getInstance().kilnManager = new RecipeManagerKiln();
 		CraftingManager.getInstance().kilnManager.initRecipes();
 
+		CraftingManager.getInstance().grindManager = new RecipeManagerGrinder();
+		CraftingManager.getInstance().grindManager.initRecipes();
+		
 		// Ore Dictionary registration
 		// Weird, but it ended up working out this way. ;)
 		for (Dust dust : Dust.values()) {

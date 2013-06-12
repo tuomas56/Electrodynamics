@@ -1,4 +1,4 @@
-package electrodynamics.recipe;
+package electrodynamics.recipe.manager;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,7 @@ import electrodynamics.api.crafting.util.WeightedRecipeOutput;
 import electrodynamics.lib.item.Component;
 import electrodynamics.lib.item.Dust;
 import electrodynamics.lib.item.Grinding;
+import electrodynamics.recipe.RecipeSieve;
 
 public class RecipeManagerSieve {
 

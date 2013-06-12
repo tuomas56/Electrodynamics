@@ -11,7 +11,7 @@ import electrodynamics.core.handler.GuiHandler;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.lib.client.FXType;
 import electrodynamics.module.ModuleManager;
-import electrodynamics.recipe.CraftingManager;
+import electrodynamics.recipe.manager.CraftingManager;
 import net.minecraft.world.World;
 
 public class CommonProxy {

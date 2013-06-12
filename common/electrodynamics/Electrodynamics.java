@@ -21,7 +21,7 @@ import electrodynamics.core.CommonProxy;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.network.PacketHandler;
-import electrodynamics.recipe.CraftingManager;
+import electrodynamics.recipe.manager.CraftingManager;
 
 @Mod(modid = ModInfo.MOD_ID, name = ModInfo.GENERIC_MOD_ID, version = ModInfo.VERSION, dependencies = ModInfo.DEPENDENCIES)
 @NetworkMod(channels = { ModInfo.GENERIC_MOD_ID }, clientSideRequired = false, serverSideRequired = false, packetHandler = PacketHandler.class)

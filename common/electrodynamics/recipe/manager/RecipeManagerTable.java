@@ -1,4 +1,4 @@
-package electrodynamics.recipe;
+package electrodynamics.recipe.manager;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,6 +18,8 @@ import electrodynamics.lib.item.Dust;
 import electrodynamics.lib.item.Grinding;
 import electrodynamics.network.packet.PacketFX;
 import electrodynamics.network.packet.PacketSound;
+import electrodynamics.recipe.OreRecipeTable;
+import electrodynamics.recipe.RecipeTable;
 import electrodynamics.tileentity.TileEntityTable;
 import electrodynamics.util.BlockUtil;
 

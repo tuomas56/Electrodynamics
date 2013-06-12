@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -13,6 +15,8 @@ import net.minecraftforge.common.ForgeDirection;
 import electrodynamics.core.CoreUtils;
 import electrodynamics.core.misc.DamageSourceBlock;
 import electrodynamics.lib.block.StructureComponent;
+import electrodynamics.recipe.RecipeGrinder;
+import electrodynamics.recipe.manager.CraftingManager;
 import electrodynamics.util.EntityReflectionWrapper;
 import electrodynamics.util.InventoryUtil;
 import electrodynamics.util.PlayerUtil;
@@ -38,12 +42,18 @@ public class TileEntityMobGrinder extends TileStructure {
 	
 	@SuppressWarnings("unchecked")
 	private void collectEntities() {
-		List<EntityLiving> entities = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, getCollectionAABB());
+		List<EntityLiving> entities = this.worldObj.getEntitiesWithinAABB(Entity.class, getCollectionAABB());
 		
 		if (entities != null && entities.size() > 0) {
-			for (EntityLiving entity : entities) {
-				collectDropsFromEntity(entity);
-				entity.attackEntityFrom(new DamageSourceBlock(), entity.getHealth());
+			for (Entity entity : entities) {
+				if (entity instanceof EntityLiving) {
+					collectDropsFromEntity((EntityLiving) entity);
+					entity.attackEntityFrom(new DamageSourceBlock(), ((EntityLiving)entity).getHealth());
+				} else if (entity instanceof EntityItem) {
+					if (collectItem(((EntityItem)entity).getEntityItem())) {
+						entity.setDead();
+					}
+				}
 			}
 		}
 	}
@@ -85,6 +95,24 @@ public class TileEntityMobGrinder extends TileStructure {
 				}
 			}
 		}
+	}
+	
+	public boolean collectItem(ItemStack stack) {
+		RecipeGrinder recipe = CraftingManager.getInstance().grindManager.getRecipe(stack);
+		
+		if (recipe != null) {
+			for (ItemStack stackOut : recipe.itemOutput) {
+				if (stackOut != null) {
+					this.inventory.add(stackOut.copy());
+				}
+			}
+			
+			//TODO Handle liquid output
+			
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public void dispenseItem(ItemStack stack) {

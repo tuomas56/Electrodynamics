@@ -51,7 +51,7 @@ public class RecipeKiln {
 		return Collections.unmodifiableList( this.outputs );
 	}
 
-	protected float getMultiplier(List<ItemStack> itemStackList) {
+	public float getMultiplier(List<ItemStack> itemStackList) {
 		itemStackList = ItemUtil.trimItemsList( itemStackList, false );
 		float retValue = Integer.MAX_VALUE;
 		for( ItemStack input : this.inputs ) {

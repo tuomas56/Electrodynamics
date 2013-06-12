@@ -2,8 +2,8 @@ package electrodynamics.tileentity;
 
 import electrodynamics.inventory.InventoryItem;
 import electrodynamics.item.EDItems;
-import electrodynamics.recipe.CraftingManager;
 import electrodynamics.recipe.RecipeKiln;
+import electrodynamics.recipe.manager.CraftingManager;
 import electrodynamics.util.InventoryUtil;
 import electrodynamics.util.ItemUtil;
 import net.minecraft.entity.player.EntityPlayer;

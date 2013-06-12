@@ -3,6 +3,7 @@ package electrodynamics.api.crafting;
 import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.liquids.LiquidStack;
 import electrodynamics.api.crafting.util.TableRecipeType;
 import electrodynamics.api.crafting.util.WeightedRecipeOutput;
 
@@ -18,8 +19,12 @@ public interface ICraftingManager {
 	 *  Input and output size cannot exceed 9 */
 	public void registerOvenRecipe(ArrayList<ItemStack> input, ArrayList<ItemStack> output, int duration);
 
-	/**
-	 * Registers a kiln recipe. Stack-size of input/output is assumed to be one <br />
-	 * Input and output size cannot exceed 4 */
+	/** Registers a kiln recipe. Stack-size of input/output is assumed to be one <br />
+	 *  Input and output size cannot exceed 4 */
 	public void registerKilnRecipe(ArrayList<ItemStack> input, ArrayList<ItemStack> output, int duration);
+	
+	/** Registers a grinding recipe. Stack-size of input/output is assumed to be one 
+	 *  itemOutput OR liquidOutput can be null, but not both */
+	public void registerGrindingRecipe(ItemStack input, ArrayList<ItemStack> itemOutput, LiquidStack liquidOutput);
+	
 }

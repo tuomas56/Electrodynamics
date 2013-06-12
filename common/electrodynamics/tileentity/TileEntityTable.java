@@ -16,8 +16,8 @@ import electrodynamics.lib.client.FXType;
 import electrodynamics.network.PacketTypeHandler;
 import electrodynamics.network.packet.PacketFX;
 import electrodynamics.network.packet.PacketSound;
-import electrodynamics.recipe.CraftingManager;
 import electrodynamics.recipe.RecipeTable;
+import electrodynamics.recipe.manager.CraftingManager;
 import electrodynamics.util.BlockUtil;
 import electrodynamics.util.InventoryUtil;
 

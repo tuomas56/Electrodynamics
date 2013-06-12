@@ -10,8 +10,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
 import electrodynamics.api.crafting.util.WeightedRecipeOutput;
 import electrodynamics.inventory.SimpleInventory;
-import electrodynamics.recipe.CraftingManager;
 import electrodynamics.recipe.RecipeSieve;
+import electrodynamics.recipe.manager.CraftingManager;
 import electrodynamics.util.InventoryUtil;
 
 public class TileEntityBasicSieve extends TileEntityMachine {
