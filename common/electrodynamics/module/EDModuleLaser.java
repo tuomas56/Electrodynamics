@@ -3,14 +3,18 @@ package electrodynamics.module;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import electrodynamics.block.BlockHiddenRedstoneSource;
+import electrodynamics.block.EDBlocks;
 import electrodynamics.client.render.entity.RenderBeam;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.entity.EntityBeam;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.ItemRedstoneEmitter;
+import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.lib.item.ItemIDs;
 import electrodynamics.recipe.vanilla.IRecipeRedstoneEmitter;
+import electrodynamics.tileentity.TileEntityRSSource;
 
 public class EDModuleLaser extends EDModule {
 
@@ -24,6 +28,9 @@ public class EDModuleLaser extends EDModule {
 //		GameRegistry.registerItem(EDItems.itemPlasmaRifle, Strings.ITEM_PLASMA_RIFLE);
 //		EDLanguage.getInstance().registerItem(EDItems.itemPlasmaRifle);
 		
+		EDBlocks.blockRSSource = new BlockHiddenRedstoneSource(BlockIDs.BLOCK_REDSTONE_SOURCE_ID).setUnlocalizedName("hiddenRS");
+		GameRegistry.registerBlock(EDBlocks.blockRSSource, "hiddenRS");
+		
 		EDItems.itemRedstoneEmitter = new ItemRedstoneEmitter(ItemIDs.ITEM_REDSTONE_EMITTER_ID).setUnlocalizedName(Strings.ITEM_REDSTONE_EMITTER);
 		GameRegistry.registerItem(EDItems.itemRedstoneEmitter, Strings.ITEM_REDSTONE_EMITTER);
 		EDLanguage.getInstance().registerItem(EDItems.itemRedstoneEmitter);
@@ -32,6 +39,8 @@ public class EDModuleLaser extends EDModule {
 	@Override
 	public void init() {
 //		GameRegistry.registerTileEntity(TileEntityLaserEmitter.class, Strings.BLOCK_LASER_EMITTER);
+		
+		GameRegistry.registerTileEntity(TileEntityRSSource.class, "hiddenRS");
 		
 		EntityRegistry.registerGlobalEntityID(EntityBeam.class, "entityBeam", 150);
 		

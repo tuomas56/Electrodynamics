@@ -19,5 +19,6 @@ public class EDBlocks {
 	public static Block blockRubberSapling;
 	public static Block blockTreetap;
 	public static Block blockStructureComponent;
+	public static Block blockRSSource;
 
 }

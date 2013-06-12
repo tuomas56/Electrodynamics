@@ -102,7 +102,7 @@ public class EntityBeam extends Entity {
 		this.tY = y;
 		this.tZ = z;
 		
-		while (this.particleMaxAge - this.particleAge < 4) this.particleMaxAge += 1;
+		keepAlive();
 		this.updated = true;
 	}
 

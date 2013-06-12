@@ -61,4 +61,9 @@ public class BlockIDs {
 	/* blockComponent */
 	public static int BLOCK_STRUCTURE_COMPONENT_ID;
 	public static final int BLOCK_STRUCTURE_COMPONENT_DEFAULT_ID = 514;
+	
+	/* blockRSSource */
+	public static int BLOCK_REDSTONE_SOURCE_ID;
+	public static final int BLOCK_REDSTONE_SOURCE_DEFAULT_ID = 515;
+	
 }

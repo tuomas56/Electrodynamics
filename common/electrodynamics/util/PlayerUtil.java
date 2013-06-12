@@ -50,6 +50,22 @@ public class PlayerUtil {
 		return l == 0 ? 2 : (l == 1 ? 5 : (l == 2 ? 3 : (l == 3 ? 4 : 0)));
 	}
 	
+	public static double[] getLookCoordinates(EntityPlayer player, double range) {
+		Vec3 vec3d = Vec3.fakePool.getVecFromPool(player.posX, player.posY + player.getEyeHeight(), player.posZ);
+		Vec3 vec3d1 = player.getLookVec();
+		Vec3 vec3d2 = vec3d.addVector(vec3d1.xCoord * range, vec3d1.yCoord * range, vec3d1.zCoord * range);
+		return new double[] {vec3d2.xCoord, vec3d2.yCoord, vec3d2.zCoord};
+	}
+	
+	public static MovingObjectPosition getLookedBlock(World world, EntityPlayer player, double range) {
+		double[] lookCoords = getLookCoordinates(player, range);
+		return getLookedBlock(world, player, world.getWorldVec3Pool().getVecFromPool(lookCoords[0], lookCoords[1], lookCoords[2]));
+	}
+
+	public static MovingObjectPosition getLookedBlock(World world, EntityPlayer player, Vec3 end) {
+		return world.rayTraceBlocks_do_do(world.getWorldVec3Pool().getVecFromPool(player.posX, player.posY + player.getEyeHeight(), player.posZ), end, false, true);
+	}
+	
 	public static Entity getPointedEntity(World world, EntityPlayer entityplayer, double range, float padding) {
 		return getPointedEntity(world, entityplayer, range, padding, false);
 	}
