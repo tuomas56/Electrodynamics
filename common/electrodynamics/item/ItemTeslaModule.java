@@ -54,6 +54,10 @@ public class ItemTeslaModule extends Item implements IElMagModule {
 		}
 	}
 	
+	public String getUnlocalizedName(ItemStack stack) {
+		return TeslaModule.get(stack.getItemDamage()).unlocalizedName;
+	}
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean show) {
