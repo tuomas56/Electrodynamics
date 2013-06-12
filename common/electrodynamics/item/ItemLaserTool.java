@@ -7,6 +7,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import electrodynamics.entity.EntityBeam;
+import electrodynamics.util.LaserWrapper;
 
 public abstract class ItemLaserTool extends ItemPowerTool {
 
@@ -54,8 +55,8 @@ public abstract class ItemLaserTool extends ItemPowerTool {
 			useCount.put(id, 1);
 		}
 		
-		if (onTick(stack, player, charge, use)) {
-			player.stopUsingItem();
+		if (charge > 0 && charge - use > 0) {
+			generateOrUpdateLaser(id, player.worldObj, onTick(stack, player, charge, use));
 		}
     }
 	
@@ -69,14 +70,35 @@ public abstract class ItemLaserTool extends ItemPowerTool {
 		useCount.put(id, 0);
 	}
 	
+	public void generateOrUpdateLaser(String id, World world, LaserWrapper laser) {
+		if (laser != null) {
+			EntityBeam laserEntity = null;
+			
+			if (emissionBeams.get(id) == null) {
+				laserEntity = new EntityBeam(world, laser.startX, laser.startY, laser.startZ, laser.endX, laser.endY, laser.endZ, 1);
+				laserEntity.setRGB(laser.color.r, laser.color.g, laser.color.b);
+				laserEntity.setEndMod(1.0F);
+				laserEntity.setPulse(false);
+				
+				emissionBeams.put(id, laserEntity);
+				
+				world.spawnEntityInWorld(laserEntity);
+			} else {
+				laserEntity = emissionBeams.get(id);
+				laserEntity.updateBeam(laser.startX, laser.startY, laser.startZ, laser.endX, laser.endY, laser.endZ);
+				laserEntity.setRGB(laser.color.r, laser.color.g, laser.color.b);
+			}
+		}
+	}
+	
 	/**
 	 * Inherited by all tools sub-classing this. Used to determine what the tool does
 	 * @param stack ItemStack of tool
 	 * @param player Player using tool
 	 * @param charge Current charge of tool (as of usage start, doesn't drain as it's used)
 	 * @param usageTick Current tick of usage (can be used to stop usage if tool would be drained)
-	 * @return Whether the Player should be forced to stop using the item
+	 * @return Laser info to create/update. Can be null.
 	 */
-	public abstract boolean onTick(ItemStack stack, EntityPlayer player, int charge, int usageTick);
+	public abstract LaserWrapper onTick(ItemStack stack, EntityPlayer player, int charge, int usageTick);
 	
 }
