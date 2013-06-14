@@ -66,4 +66,8 @@ public class BlockIDs {
 	public static int BLOCK_REDSTONE_SOURCE_ID;
 	public static final int BLOCK_REDSTONE_SOURCE_DEFAULT_ID = 515;
 	
+	/* blockUtility */
+	public static int BLOCK_UTILITY_ID;
+	public static final int BLOCK_UTILITY_DEFAULT_ID = 516;
+	
 }

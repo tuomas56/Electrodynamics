@@ -2,13 +2,12 @@ package electrodynamics.client.render.tileentity;
 
 import electrodynamics.client.model.ModelBasicKiln;
 import electrodynamics.client.model.ModelKilnTray;
+import electrodynamics.client.render.util.RenderUtil;
 import electrodynamics.lib.client.Models;
 import electrodynamics.tileentity.machine.TileEntityBasicKiln;
 import electrodynamics.tileentity.machine.TileEntityMachine;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -137,7 +136,7 @@ public class RenderBasicKiln extends TileEntitySpecialRenderer {
 					GL11.glRotatef( 90, 1, 0, 0 );
 					GL11.glTranslated( 0, -.24, -.26 );
 
-					renderItem( world, stack );
+					RenderUtil.renderEntityItem(world, stack, true);
 
 					GL11.glPopMatrix();
 				} else {
@@ -145,27 +144,11 @@ public class RenderBasicKiln extends TileEntitySpecialRenderer {
 					GL11.glRotatef( 180, 0, 0, 1 );
 					GL11.glTranslated( 0, -.2, 0 );
 
-					renderItem( world, stack );
+					RenderUtil.renderEntityItem(world, stack, true);
 
 					GL11.glPopMatrix();
 				}
 			}
 		}
 	}
-
-	public void renderItem(World world, ItemStack stack) {
-		if (stack != null) {
-			//Incredibly hackish, but better than essentially writing out a copy of the EntityItem renderer
-			boolean fancy = Minecraft.getMinecraft().gameSettings.fancyGraphics;
-			Minecraft.getMinecraft().gameSettings.fancyGraphics = true;
-
-			EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, stack);
-			entityitem.getEntityItem().stackSize = 1;
-			entityitem.hoverStart = 0.0F;
-			RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
-
-			Minecraft.getMinecraft().gameSettings.fancyGraphics = fancy;
-		}
-	}
-
 }

@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemMinecart;
@@ -17,6 +16,7 @@ import org.lwjgl.opengl.GL11;
 import electrodynamics.client.model.ModelStoneTable;
 import electrodynamics.client.model.ModelTable;
 import electrodynamics.client.model.ModelWoodTable;
+import electrodynamics.client.render.util.RenderUtil;
 import electrodynamics.lib.client.Models;
 import electrodynamics.tileentity.machine.TileEntityTable;
 
@@ -84,16 +84,7 @@ public class RenderTable extends TileEntitySpecialRenderer {
 		
 		GL11.glScalef(1.25F, 1.25F, 1.25F);
 		
-		//Incredibly hackish, but better than essentially writing out a copy of the EntityItem renderer
-		boolean fancy = Minecraft.getMinecraft().gameSettings.fancyGraphics;
-		Minecraft.getMinecraft().gameSettings.fancyGraphics = true;
-		
-		EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, stack);
-		entityitem.getEntityItem().stackSize = 1;
-		entityitem.hoverStart = 0.0F;
-		RenderManager.instance.renderEntityWithPosYaw(entityitem, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
-		
-		Minecraft.getMinecraft().gameSettings.fancyGraphics = fancy;
+		RenderUtil.renderEntityItem(world, stack, true);
 	}
 	
 	@Override

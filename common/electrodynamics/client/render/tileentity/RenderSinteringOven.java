@@ -18,6 +18,7 @@ import electrodynamics.client.model.ModelChicken;
 import electrodynamics.client.model.ModelIngot;
 import electrodynamics.client.model.ModelMetalTray;
 import electrodynamics.client.model.ModelSinteringOven;
+import electrodynamics.client.render.util.RenderUtil;
 import electrodynamics.item.ItemIngot;
 import electrodynamics.lib.client.Models;
 import electrodynamics.tileentity.machine.TileEntityMachine;
@@ -122,7 +123,7 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 								GL11.glRotatef(90, 1, 0, 0);
 								GL11.glTranslated(0, -.24, -.26);
 								
-								renderItem(world, stack);
+								RenderUtil.renderEntityItem(world, stack, true);
 								
 								GL11.glPopMatrix();
 							} else {
@@ -130,7 +131,7 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 								GL11.glRotatef(180, 0, 0, 1);
 								GL11.glTranslated(0, -.2, 0);
 								
-								renderItem(world, stack);
+								RenderUtil.renderEntityItem(world, stack, true);
 								
 								GL11.glPopMatrix();
 							}

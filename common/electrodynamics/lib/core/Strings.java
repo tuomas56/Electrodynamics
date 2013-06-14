@@ -43,6 +43,7 @@ public class Strings {
 	public static final String BLOCK_RUBBER_SAPLING = "rubber.sapling.name";
 	public static final String BLOCK_TREETAP = "treetap.name";
 	public static final String BLOCK_STRUCTURE_COMPONENT = "structure.component";
+	public static final String BLOCK_UTILITY = "block.utility.name";
 
 	/* Internal component names */
 	public static final String COMPONENT_FAN_BLADE = "component.fanBlade.name";
@@ -179,6 +180,9 @@ public class Strings {
 	public static final String STRUCTURE_COMPONENT_FURNACE_VENT = "structure.component.furnace.vent.name";
 	public static final String STRUCTURE_COMPONENT_MOB_GRINDER_BLADE = "structure.component.mob_grinder.blade.name";
 
+	/* Internal utility block names */
+	public static final String UTILITY_BLOCK_DEPLOYER = "utility.block_deployer.name";
+	
 	/* Internal gas names */
 	public static final String GAS_AIR_CLEAN = "gas.air.clean.name";
 	public static final String GAS_AIR_DIRTY = "gas.air.dirty.name";

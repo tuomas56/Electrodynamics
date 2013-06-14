@@ -36,4 +36,13 @@ public abstract class TileEntityMachine extends TileEntityEDRoot {
 		rotation = ForgeDirection.VALID_DIRECTIONS[nbt.getByte("direction")];
 	}
 
+	public int[] getOffsetCoords() {
+		return new int[] {xCoord + rotation.offsetX, yCoord + rotation.offsetY, zCoord + rotation.offsetZ};
+	}
+	
+	public int getBlockInFront() {
+		int[] offsetCoords = getOffsetCoords();
+		return this.worldObj.getBlockId(offsetCoords[0], offsetCoords[1], offsetCoords[2]);
+	}
+	
 }

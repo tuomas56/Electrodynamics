@@ -20,5 +20,6 @@ public class EDBlocks {
 	public static Block blockTreetap;
 	public static Block blockStructureComponent;
 	public static Block blockRSSource;
+	public static Block blockUtility;
 
 }

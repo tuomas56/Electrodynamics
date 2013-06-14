@@ -10,6 +10,7 @@ import electrodynamics.block.item.ItemBlockMachine;
 import electrodynamics.block.item.ItemBlockStorage;
 import electrodynamics.block.item.ItemBlockStructure;
 import electrodynamics.block.item.ItemBlockTable;
+import electrodynamics.block.item.ItemBlockUtility;
 import electrodynamics.client.render.item.RenderItemMachine;
 import electrodynamics.client.render.item.RenderItemTable;
 import electrodynamics.client.render.tileentity.*;
@@ -32,11 +33,11 @@ import electrodynamics.recipe.manager.RecipeManagerKiln;
 import electrodynamics.recipe.manager.RecipeManagerSieve;
 import electrodynamics.recipe.manager.RecipeManagerSinteringOven;
 import electrodynamics.recipe.manager.RecipeManagerTable;
-import electrodynamics.tileentity.*;
 import electrodynamics.tileentity.machine.TileEntityBasicKiln;
 import electrodynamics.tileentity.machine.TileEntityBasicSieve;
 import electrodynamics.tileentity.machine.TileEntitySinteringOven;
 import electrodynamics.tileentity.machine.TileEntityTable;
+import electrodynamics.tileentity.machine.utilty.TileEntityBlockDeployer;
 import electrodynamics.tileentity.structure.TileEntityConveyorBelt;
 import electrodynamics.tileentity.structure.TileEntityMobGrinder;
 import electrodynamics.tileentity.structure.TileEntityStructure;
@@ -82,6 +83,12 @@ public class EDModuleMachine extends EDModule {
 			EDLanguage.getInstance().registerItemStack(component.toItemStack(), component.getUnlocalizedName());
 		}
 
+		EDBlocks.blockUtility = new BlockUtility(BlockIDs.BLOCK_UTILITY_ID).setUnlocalizedName(Strings.BLOCK_UTILITY);
+		GameRegistry.registerBlock(EDBlocks.blockUtility, ItemBlockUtility.class, Strings.BLOCK_UTILITY);
+		for (UtilityBlock util : UtilityBlock.values()) {
+			EDLanguage.getInstance().registerItemStack(util.toItemStack(), util.unlocalizedName);
+		}
+		
 		/* ITEM */
 		EDItems.itemDust = new ItemDust(ItemIDs.ITEM_DUST_ID).setUnlocalizedName(Strings.ITEM_DUST_NAME);
 		GameRegistry.registerItem(EDItems.itemDust, Strings.ITEM_DUST_NAME);
@@ -185,6 +192,7 @@ public class EDModuleMachine extends EDModule {
 		GameRegistry.registerTileEntity(TileEntityStructure.TileStructurePlaceHolder.class, Strings.MACHINE_STRUCTURE_PLACE_HOLDER);
 		GameRegistry.registerTileEntity(TileEntityMobGrinder.class, "edxMobGrinder");
 		GameRegistry.registerTileEntity(TileEntityValve.class, Strings.STRUCTURE_COMPONENT_MACHINE_VALVE);
+		GameRegistry.registerTileEntity(TileEntityBlockDeployer.class, Strings.UTILITY_BLOCK_DEPLOYER);
 		
 		CraftingManager.getInstance().tableManager = new RecipeManagerTable();
 		CraftingManager.getInstance().tableManager.initRecipes();
@@ -228,7 +236,8 @@ public class EDModuleMachine extends EDModule {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBasicSieve.class, new RenderBasicSieve());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBasicKiln.class, new RenderBasicKiln());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStructure.class, new RenderTileStructure());
-
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockDeployer.class, new RenderBlockDeployer());
+		
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockTable.blockID, new RenderItemTable());
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockMachine.blockID, new RenderItemMachine());
 	}
