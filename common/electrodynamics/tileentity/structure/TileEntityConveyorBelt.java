@@ -1,6 +1,5 @@
 package electrodynamics.tileentity.structure;
 
-
 import java.util.List;
 
 

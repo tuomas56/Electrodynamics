@@ -1,9 +1,10 @@
 package electrodynamics.lib.block;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
+
 import electrodynamics.block.EDBlocks;
 import electrodynamics.block.SubBlock;
 import electrodynamics.client.model.ModelMobGrinder;
@@ -12,6 +13,7 @@ import electrodynamics.lib.client.Models;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityGeneric;
+import electrodynamics.tileentity.structure.TileEntityConveyorBelt;
 import electrodynamics.tileentity.structure.TileEntityStructure;
 import electrodynamics.tileentity.structure.TileEntityValve;
 
@@ -38,6 +40,11 @@ public enum StructureComponent implements SubBlock {
 			return rotations;
 		}
 
+		@Override
+		public TileEntityGeneric createNewTileEntity(World world) {
+			return new TileEntityConveyorBelt();
+		}
+		
 		@Override
 		public ModelTechne getModel() {
 			return null;
