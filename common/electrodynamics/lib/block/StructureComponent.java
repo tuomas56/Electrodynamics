@@ -39,6 +39,7 @@ public enum StructureComponent implements SubBlock {
 		public int[][] getRotationMatrix() {
 			return rotations;
 		}
+<<<<<<< HEAD
 
 		@Override
 		public TileEntityGeneric createNewTileEntity(World world) {
@@ -65,32 +66,13 @@ public enum StructureComponent implements SubBlock {
 
 			return false;
 		}
+=======
+>>>>>>> 3dee742fa8aef5c66b719e5e6ddcdd3be38809a1
 	},
 	MACHINE_FRAME( Strings.STRUCTURE_COMPONENT_MACHINE_FRAME ) {
 		@Override
 		public String[] getLocalTextureFiles() {
 			return new String[] { frame, frame, frame, frame, frame, frame };
-		}
-		
-		@Override
-		public ModelTechne getModel() {
-			return null;
-		}
-
-		@Override
-		public String getModelTexture() {
-			return null;
-		}
-
-		@Override
-		public void applyGLTransformations(byte renderType, TileEntityStructure tile) {
-			
-		}
-
-		@Override
-		public boolean alternativeRender() {
-
-			return false;
 		}
 	},
 	FURNACE_HEATER( Strings.STRUCTURE_COMPONENT_FURNACE_HEATER ) {
@@ -98,27 +80,6 @@ public enum StructureComponent implements SubBlock {
 		public String[] getLocalTextureFiles() {
 			String base = "sinteringFurnace_heaterBlock";
 			return new String[] { base, base, base, base, base, base };
-		}
-		
-		@Override
-		public ModelTechne getModel() {
-			return null;
-		}
-
-		@Override
-		public String getModelTexture() {
-			return null;
-		}
-
-		@Override
-		public void applyGLTransformations(byte renderType, TileEntityStructure tile) {
-			
-		}
-
-		@Override
-		public boolean alternativeRender() {
-
-			return false;
 		}
 	},
 	
@@ -128,6 +89,7 @@ public enum StructureComponent implements SubBlock {
 			String base = "machine_valve";
 			return new String[] { frame, frame, base, frame, base, frame };
 		}
+<<<<<<< HEAD
 		
 		@Override
 		public ModelTechne getModel() {
@@ -154,6 +116,8 @@ public enum StructureComponent implements SubBlock {
 		public TileEntityGeneric createNewTileEntity(World world) {
 			return new TileEntityValve();
 		}
+=======
+>>>>>>> 3dee742fa8aef5c66b719e5e6ddcdd3be38809a1
 	},
 	
 	HATCH( Strings.STRUCTURE_COMPONENT_MACHINE_HATCH ) { // Item output
@@ -161,27 +125,6 @@ public enum StructureComponent implements SubBlock {
 		public String[] getLocalTextureFiles() {
 			String base = "machine_hatch";
 			return new String[] { frame, frame, base, frame, base, frame };
-		}
-		
-		@Override
-		public ModelTechne getModel() {
-			return null;
-		}
-
-		@Override
-		public String getModelTexture() {
-			return null;
-		}
-
-		@Override
-		public void applyGLTransformations(byte renderType, TileEntityStructure tile) {
-			
-		}
-
-		@Override
-		public boolean alternativeRender() {
-
-			return false;
 		}
 	},
 	
@@ -191,27 +134,6 @@ public enum StructureComponent implements SubBlock {
 			String base = "sinteringFurnace_gauge";
 			return new String[] { frame, frame, base, frame, base, frame };
 		}
-		
-		@Override
-		public ModelTechne getModel() {
-			return null;
-		}
-
-		@Override
-		public String getModelTexture() {
-			return null;
-		}
-
-		@Override
-		public void applyGLTransformations(byte renderType, TileEntityStructure tile) {
-			
-		}
-
-		@Override
-		public boolean alternativeRender() {
-
-			return false;
-		}
 	},
 	
 	FURNACE_VENT( Strings.STRUCTURE_COMPONENT_FURNACE_VENT ) {
@@ -219,27 +141,6 @@ public enum StructureComponent implements SubBlock {
 		public String[] getLocalTextureFiles() {
 			String base = "sinteringFurnace_vent";
 			return new String[] { base, base, base, base, base, base };
-		}
-		
-		@Override
-		public ModelTechne getModel() {
-			return null;
-		}
-
-		@Override
-		public String getModelTexture() {
-			return null;
-		}
-
-		@Override
-		public void applyGLTransformations(byte renderType, TileEntityStructure tile) {
-			
-		}
-
-		@Override
-		public boolean alternativeRender() {
-
-			return false;
 		}
 	},
 	
@@ -329,17 +230,23 @@ public enum StructureComponent implements SubBlock {
 	 * The model to render. Prevents normal block + textures from rendering if not null
 	 * @return An instance of ModelTechne
 	 */
-	public abstract ModelTechne getModel();	
+	public ModelTechne getModel() {
+		return null;
+	}
 	/**
 	 * Alternative render for structure block
 	 * @return Whether or not the defined model should render as well
 	 */
-	public abstract boolean alternativeRender();
+	public boolean alternativeRender() {
+		return false;
+	}
 	/**
 	 * Texture to be applied to rendered model
 	 * @return Complete path to model texture, starting with /mods/electrodynamics/
 	 */
-	public abstract String getModelTexture();	
+	public String getModelTexture() {
+		return null;
+	}
 	/**
 	 * Any GL transformations that should be applied upon rendering.
 	 * @param renderType 0 or 1 value indicating render type. <br />
@@ -347,7 +254,7 @@ public enum StructureComponent implements SubBlock {
 	 * <b>1: </b> Rendering in inventory/hand/as entity
 	 * @param structure 
 	 */
-	public abstract void applyGLTransformations(byte renderType, TileEntityStructure structure);
+	public void applyGLTransformations(byte renderType, TileEntityStructure structure) { }
 	
 	private static String frame = "machine_frame";
 
