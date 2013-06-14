@@ -1,12 +1,12 @@
 package electrodynamics.lib.block;
 
-import electrodynamics.tileentity.TileEntityBasicKiln;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
-import electrodynamics.tileentity.TileEntityBasicSieve;
-import electrodynamics.tileentity.TileEntitySinteringOven;
+import electrodynamics.tileentity.machine.TileEntityBasicKiln;
+import electrodynamics.tileentity.machine.TileEntityBasicSieve;
+import electrodynamics.tileentity.machine.TileEntitySinteringOven;
 
 public enum Machine {
 

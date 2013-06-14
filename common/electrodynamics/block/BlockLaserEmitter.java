@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import electrodynamics.core.CreativeTabED;
-import electrodynamics.tileentity.TileEntityLaserEmitter;
+import electrodynamics.tileentity.machine.TileEntityLaserEmitter;
 import electrodynamics.util.MathUtil;
 import electrodynamics.util.PlayerUtil;
 

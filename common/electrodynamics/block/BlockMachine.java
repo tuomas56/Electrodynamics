@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.core.EDLogger;
 import electrodynamics.lib.block.Machine;
-import electrodynamics.tileentity.TileEntityMachine;
+import electrodynamics.tileentity.machine.TileEntityMachine;
 import electrodynamics.util.PlayerUtil;
 
 public class BlockMachine extends BlockContainer {

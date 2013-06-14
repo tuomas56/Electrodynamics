@@ -1,4 +1,4 @@
-package electrodynamics.tileentity;
+package electrodynamics.tileentity.machine;
 
 import java.util.List;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package electrodynamics.tileentity;
+package electrodynamics.tileentity.machine;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;

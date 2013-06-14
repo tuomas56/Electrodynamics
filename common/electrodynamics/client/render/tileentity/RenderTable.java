@@ -18,7 +18,7 @@ import electrodynamics.client.model.ModelStoneTable;
 import electrodynamics.client.model.ModelTable;
 import electrodynamics.client.model.ModelWoodTable;
 import electrodynamics.lib.client.Models;
-import electrodynamics.tileentity.TileEntityTable;
+import electrodynamics.tileentity.machine.TileEntityTable;
 
 public class RenderTable extends TileEntitySpecialRenderer {
 

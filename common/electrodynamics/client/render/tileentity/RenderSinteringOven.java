@@ -20,8 +20,8 @@ import electrodynamics.client.model.ModelMetalTray;
 import electrodynamics.client.model.ModelSinteringOven;
 import electrodynamics.item.ItemIngot;
 import electrodynamics.lib.client.Models;
-import electrodynamics.tileentity.TileEntityMachine;
-import electrodynamics.tileentity.TileEntitySinteringOven;
+import electrodynamics.tileentity.machine.TileEntityMachine;
+import electrodynamics.tileentity.machine.TileEntitySinteringOven;
 import electrodynamics.util.InventoryUtil;
 
 public class RenderSinteringOven extends TileEntitySpecialRenderer {

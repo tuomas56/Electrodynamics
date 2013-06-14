@@ -1,5 +1,6 @@
-package electrodynamics.tileentity;
+package electrodynamics.tileentity.machine;
 
+import electrodynamics.tileentity.TileEntityEDRoot;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 

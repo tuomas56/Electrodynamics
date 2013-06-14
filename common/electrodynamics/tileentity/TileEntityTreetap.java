@@ -10,6 +10,7 @@ import electrodynamics.block.BlockRubberWood;
 import electrodynamics.core.CoreUtils;
 import electrodynamics.item.EDItems;
 import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.tileentity.machine.TileEntityMachine;
 
 public class TileEntityTreetap extends TileEntityMachine {
 	

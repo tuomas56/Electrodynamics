@@ -1,4 +1,4 @@
-package electrodynamics.tileentity;
+package electrodynamics.tileentity.machine;
 
 import electrodynamics.inventory.InventoryItem;
 import electrodynamics.item.EDItems;

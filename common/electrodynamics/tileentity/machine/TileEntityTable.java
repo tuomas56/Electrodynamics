@@ -1,4 +1,4 @@
-package electrodynamics.tileentity;
+package electrodynamics.tileentity.machine;
 
 import java.util.Random;
 
@@ -18,6 +18,7 @@ import electrodynamics.network.packet.PacketFX;
 import electrodynamics.network.packet.PacketSound;
 import electrodynamics.recipe.RecipeTable;
 import electrodynamics.recipe.manager.CraftingManager;
+import electrodynamics.tileentity.TileEntityEDRoot;
 import electrodynamics.util.BlockUtil;
 import electrodynamics.util.InventoryUtil;
 

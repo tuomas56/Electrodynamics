@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import electrodynamics.api.crafting.util.TableRecipeType;
 import electrodynamics.api.tool.ITool;
-import electrodynamics.tileentity.TileEntityTable;
+import electrodynamics.tileentity.machine.TileEntityTable;
 
 public class RecipeTable {
 

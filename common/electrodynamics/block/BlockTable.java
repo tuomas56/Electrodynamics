@@ -20,7 +20,7 @@ import electrodynamics.api.tool.ToolType;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.interfaces.IAcceptsTool;
 import electrodynamics.lib.core.Strings;
-import electrodynamics.tileentity.TileEntityTable;
+import electrodynamics.tileentity.machine.TileEntityTable;
 
 public class BlockTable extends BlockContainer implements IAcceptsTool {
 

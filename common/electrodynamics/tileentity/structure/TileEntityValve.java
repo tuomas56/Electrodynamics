@@ -30,12 +30,12 @@ public class TileEntityValve extends TileEntityStructure implements ITankContain
 	}
 
 	@Override
-	public ILiquidTank[] getTanks(ForgeDirection direction) {
+	public ILiquidTank[] getTanks(ForgeDirection direction) { // CAN BE NULL
 		return new ILiquidTank[] {getCentralTank()};
 	}
 
 	@Override
-	public ILiquidTank getTank(ForgeDirection direction, LiquidStack type) {
+	public ILiquidTank getTank(ForgeDirection direction, LiquidStack type) { // CAN BE NULL
 		return getTanks(direction)[0];
 	}
 

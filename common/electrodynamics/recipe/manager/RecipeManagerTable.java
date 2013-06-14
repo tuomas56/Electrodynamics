@@ -20,7 +20,7 @@ import electrodynamics.network.packet.PacketFX;
 import electrodynamics.network.packet.PacketSound;
 import electrodynamics.recipe.OreRecipeTable;
 import electrodynamics.recipe.RecipeTable;
-import electrodynamics.tileentity.TileEntityTable;
+import electrodynamics.tileentity.machine.TileEntityTable;
 import electrodynamics.util.BlockUtil;
 
 public class RecipeManagerTable {

@@ -8,8 +8,8 @@ import org.lwjgl.opengl.GL11;
 
 import electrodynamics.client.model.ModelBasicSieve;
 import electrodynamics.lib.client.Models;
-import electrodynamics.tileentity.TileEntityBasicSieve;
-import electrodynamics.tileentity.TileEntityMachine;
+import electrodynamics.tileentity.machine.TileEntityBasicSieve;
+import electrodynamics.tileentity.machine.TileEntityMachine;
 
 public class RenderBasicSieve extends TileEntitySpecialRenderer {
 

@@ -17,7 +17,7 @@ import electrodynamics.interfaces.IAcceptsTool;
 import electrodynamics.item.EDItems;
 import electrodynamics.item.hammer.ItemSteelHammer;
 import electrodynamics.lib.block.BlockIDs;
-import electrodynamics.tileentity.TileEntityTable;
+import electrodynamics.tileentity.machine.TileEntityTable;
 
 public class TurtleHammer implements ITurtleUpgrade {
 
