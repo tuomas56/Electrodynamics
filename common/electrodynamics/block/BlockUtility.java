@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import electrodynamics.client.render.block.RenderBlockUtility;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.lib.block.UtilityBlock;
 import electrodynamics.tileentity.machine.TileEntityMachine;
@@ -54,6 +55,11 @@ public class BlockUtility extends BlockContainer {
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
+	}
+	
+	@Override
+	public int getRenderType() {
+		return RenderBlockUtility.renderID;
 	}
 	
 	@SideOnly(Side.CLIENT)

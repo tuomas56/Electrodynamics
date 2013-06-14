@@ -1,6 +1,7 @@
 package electrodynamics.module;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -11,6 +12,7 @@ import electrodynamics.block.item.ItemBlockStorage;
 import electrodynamics.block.item.ItemBlockStructure;
 import electrodynamics.block.item.ItemBlockTable;
 import electrodynamics.block.item.ItemBlockUtility;
+import electrodynamics.client.render.block.RenderBlockUtility;
 import electrodynamics.client.render.item.RenderItemMachine;
 import electrodynamics.client.render.item.RenderItemTable;
 import electrodynamics.client.render.tileentity.*;
@@ -231,6 +233,8 @@ public class EDModuleMachine extends EDModule {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void initClient() {
+		RenderingRegistry.registerBlockHandler(new RenderBlockUtility());
+		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySinteringOven.class, new RenderSinteringOven());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTable.class, new RenderTable());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBasicSieve.class, new RenderBasicSieve());

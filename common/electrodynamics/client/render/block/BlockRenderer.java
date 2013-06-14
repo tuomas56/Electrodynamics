@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
@@ -26,9 +27,9 @@ public class BlockRenderer {
 	protected static float W15 = 0.9375F;
 
 	public static void drawFaces(RenderBlocks renderblocks, Block block, int metadata, boolean solidTop) {
-		Icon[] icons = new Icon[6];
-		for( int i = 0; i < 6; i++ ) {
-			icons[i] = block.getIcon( i, metadata );
+		Icon[] icons = new Icon[ForgeDirection.VALID_DIRECTIONS.length];
+		for(ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			icons[dir.ordinal()] = block.getIcon(dir.ordinal(), metadata );
 		}
 		drawFaces( renderblocks, block, icons[1], icons[0], icons[3], icons[5], icons[2], icons[4], solidTop );
 	}
@@ -37,6 +38,10 @@ public class BlockRenderer {
 		drawFaces(renderblocks, block, icon, icon, icon, icon, icon, icon, st);
 	}
 
+	public static void drawFaces(RenderBlocks renderblocks, Block block, Icon front, Icon back, Icon side, boolean st) {
+		drawFaces(renderblocks, block, side, side, front, back, side, side, st);
+	}
+	
 	public static void drawFaces(RenderBlocks renderblocks, Block block, Icon i1, Icon i2, Icon i3, Icon i4, Icon i5, Icon i6, boolean solidtop) {
 		Tessellator tessellator = Tessellator.instance;
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
