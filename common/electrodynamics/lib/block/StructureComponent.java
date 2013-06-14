@@ -39,35 +39,12 @@ public enum StructureComponent implements SubBlock {
 		public int[][] getRotationMatrix() {
 			return rotations;
 		}
-<<<<<<< HEAD
 
 		@Override
 		public TileEntityGeneric createNewTileEntity(World world) {
 			return new TileEntityConveyorBelt();
 		}
 		
-		@Override
-		public ModelTechne getModel() {
-			return null;
-		}
-
-		@Override
-		public String getModelTexture() {
-			return null;
-		}
-
-		@Override
-		public void applyGLTransformations(byte renderType, TileEntityStructure tile) {
-			
-		}
-
-		@Override
-		public boolean alternativeRender() {
-
-			return false;
-		}
-=======
->>>>>>> 3dee742fa8aef5c66b719e5e6ddcdd3be38809a1
 	},
 	MACHINE_FRAME( Strings.STRUCTURE_COMPONENT_MACHINE_FRAME ) {
 		@Override
@@ -89,35 +66,12 @@ public enum StructureComponent implements SubBlock {
 			String base = "machine_valve";
 			return new String[] { frame, frame, base, frame, base, frame };
 		}
-<<<<<<< HEAD
-		
-		@Override
-		public ModelTechne getModel() {
-			return null;
-		}
-
-		@Override
-		public String getModelTexture() {
-			return null;
-		}
-
-		@Override
-		public void applyGLTransformations(byte renderType, TileEntityStructure tile) {
-			
-		}
-
-		@Override
-		public boolean alternativeRender() {
-
-			return false;
-		}
 		
 		@Override
 		public TileEntityGeneric createNewTileEntity(World world) {
 			return new TileEntityValve();
 		}
-=======
->>>>>>> 3dee742fa8aef5c66b719e5e6ddcdd3be38809a1
+
 	},
 	
 	HATCH( Strings.STRUCTURE_COMPONENT_MACHINE_HATCH ) { // Item output

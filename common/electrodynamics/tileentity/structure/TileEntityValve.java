@@ -16,7 +16,7 @@ public class TileEntityValve extends TileEntityStructure implements ITankContain
 
 	@Override
 	public int fill(int tankIndex, LiquidStack resource, boolean doFill) {
-		return getCentralTank().fill(resource, doFill);
+		return getCentralTank() != null ? getCentralTank().fill(resource, doFill) : 0;
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class TileEntityValve extends TileEntityStructure implements ITankContain
 
 	@Override
 	public LiquidStack drain(int tankIndex, int maxDrain, boolean doDrain) {
-		return getCentralTank().drain(maxDrain, doDrain);
+		return getCentralTank() != null ? getCentralTank().drain(maxDrain, doDrain) : null;
 	}
 
 	@Override
