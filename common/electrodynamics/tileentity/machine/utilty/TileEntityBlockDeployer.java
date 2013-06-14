@@ -1,13 +1,13 @@
 package electrodynamics.tileentity.machine.utilty;
 
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import electrodynamics.inventory.InventoryLimited;
 import electrodynamics.tileentity.TileEntityInventoryWrapper;
 import electrodynamics.util.ItemUtil;
 
@@ -23,7 +23,7 @@ public class TileEntityBlockDeployer extends TileEntityInventoryWrapper implemen
 	private boolean prevRedstoneState = false;
 	
 	public TileEntityBlockDeployer() {
-		super(new InventoryBasic("Block Deployer", false, 1));
+		super(new InventoryLimited("Block Deployer", 1, 1));
 	}
 
 	@Override
