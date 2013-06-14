@@ -1,8 +1,12 @@
 package electrodynamics.recipe.manager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.liquids.LiquidDictionary;
 import electrodynamics.recipe.RecipeGrinder;
 
 public class RecipeManagerGrinder {
@@ -26,7 +30,7 @@ public class RecipeManagerGrinder {
 	}
 	
 	public void initRecipes() {
-
+		registerRecipe(new RecipeGrinder(new ItemStack(Block.cactus), Arrays.asList(new ItemStack[] {new ItemStack(Item.dyePowder)}), LiquidDictionary.getLiquid("Water", 25)));
 	}
 	
 }

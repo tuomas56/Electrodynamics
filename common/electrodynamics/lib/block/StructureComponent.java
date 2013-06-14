@@ -13,6 +13,7 @@ import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityGeneric;
 import electrodynamics.tileentity.structure.TileEntityStructure;
+import electrodynamics.tileentity.structure.TileEntityValve;
 
 public enum StructureComponent implements SubBlock {
 
@@ -140,6 +141,11 @@ public enum StructureComponent implements SubBlock {
 		public boolean alternativeRender() {
 
 			return false;
+		}
+		
+		@Override
+		public TileEntityGeneric createNewTileEntity(World world) {
+			return new TileEntityValve();
 		}
 	},
 	
