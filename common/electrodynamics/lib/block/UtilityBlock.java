@@ -2,6 +2,7 @@ package electrodynamics.lib.block;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.machine.utilty.TileEntityBlockDeployer;
 
@@ -11,7 +12,8 @@ public enum UtilityBlock {
 		
 		@Override
 		public String[] getTextures() {
-			return new String[] {"null", "null", "null"};
+			final String ICON_PREFIX = ModInfo.ICON_PREFIX + "machine/utility/blockDeployer";
+			return new String[] {ICON_PREFIX + "Front", ICON_PREFIX + "Back", ICON_PREFIX + "Side"};
 		}
 
 		@Override

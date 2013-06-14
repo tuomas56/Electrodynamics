@@ -64,14 +64,11 @@ public class BlockUtility extends BlockContainer {
 		int meta = world.getBlockMetadata(x, y, z);
 		
 		if (sideDir == front) {
-//			return this.textures[meta][0];
-			return Block.dispenser.getBlockTextureFromSide(ForgeDirection.WEST.ordinal());
+			return this.textures[meta][0];
 		} else if (sideDir == front.getOpposite()) {
-//			return this.textures[meta][1];
-			return Block.stone.getBlockTextureFromSide(0);
+			return this.textures[meta][1];
 		} else {
-//			return this.textures[meta][2];
-			return Block.glass.getIcon(0, 0);
+			return this.textures[meta][2];
 		}
 	}
 	
