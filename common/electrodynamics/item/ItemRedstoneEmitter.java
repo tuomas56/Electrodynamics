@@ -63,7 +63,7 @@ public class ItemRedstoneEmitter extends ItemLaserTool {
 
 	@Override
 	public LaserWrapper onTick(ItemStack stack, EntityPlayer player, int charge, int use) {
-		LaserWrapper laser = new LaserWrapper();
+		LaserWrapper laser = new LaserWrapper().setColor(255, 0, 0).setSize(0.002F, 0.002F);
 		
 		final float RANGE = 35F;
 
@@ -83,18 +83,12 @@ public class ItemRedstoneEmitter extends ItemLaserTool {
 				if (world.getBlockId(lookedBlock.blockX, lookedBlock.blockY, lookedBlock.blockZ) != BlockIDs.BLOCK_REDSTONE_SOURCE_ID) {
 					if (world.getBlockId(x, y, z) == 0) {
 						world.setBlock(x, y, z, BlockIDs.BLOCK_REDSTONE_SOURCE_ID);
-						
-						laser.setColor(0, 255, 0);
 					} else if (world.getBlockId(x, y, z) == BlockIDs.BLOCK_REDSTONE_SOURCE_ID) {
 						TileEntity tile = world.getBlockTileEntity(x, y, z);
 
 						if (tile != null && tile instanceof TileEntityRSSource) {
 							((TileEntityRSSource)tile).keepAlive();
-							
-							laser.setColor(0, 255, 0);
 						}
-					} else {
-						laser.setColor(255, 0, 0);
 					}
 				}
 			}
@@ -104,7 +98,6 @@ public class ItemRedstoneEmitter extends ItemLaserTool {
 		} else {
 			laser.setStart(player.posX, player.posY + player.getEyeHeight(), player.posZ);
 			laser.setEnd(lookCoords[0], lookCoords[1], lookCoords[2]);
-			laser.setColor(255, 0, 0);
 		}
 
 		return laser;

@@ -10,6 +10,9 @@ public class LaserWrapper {
 	public double endY;
 	public double endZ;
 	
+	public float width;
+	public float height;
+	
 	public GLColor color;
 	
 	public LaserWrapper() {}
@@ -42,6 +45,13 @@ public class LaserWrapper {
 	
 	public LaserWrapper setColor(float r, float g, float b) {
 		this.color = new GLColor(r, g, b);
+		
+		return this;
+	}
+	
+	public LaserWrapper setSize(float width, float height) {
+		this.width = width;
+		this.height = height;
 		
 		return this;
 	}

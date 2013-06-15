@@ -20,7 +20,7 @@ public class TileEntityRSSource extends TileEntity {
 	
 	public void keepAlive() {
 		// Run every tick as long as the emitter is running, with breathing room for potential sync issues
-		this.timeUntilDeath = 10;
+		this.timeUntilDeath = 20;
 	}
 	
 }
