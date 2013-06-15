@@ -2,7 +2,9 @@ package electrodynamics.tileentity.machine.utilty;
 
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
@@ -105,6 +107,8 @@ public class TileEntityBlockDeployer extends TileEntityInventoryWrapper implemen
 			NBTTagCompound item = new NBTTagCompound();
 			stack.writeToNBT(item);
 			nbt.setTag("block", item);
+		} else {
+			nbt.setString("block", "null");
 		}
 
 		if (this.tileEntityData != null) {
@@ -117,7 +121,13 @@ public class TileEntityBlockDeployer extends TileEntityInventoryWrapper implemen
 		super.readFromNBT(nbt);
 		
 		if (nbt.hasKey("block")) {
-			this.setInventorySlotContents(0, ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("block")));
+			NBTBase block = nbt.getTag("block");
+			
+			if (block instanceof NBTTagCompound) {
+				this.setInventorySlotContents(0, ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("block")));
+			} else if (block instanceof NBTTagString) {
+				this.setInventorySlotContents(0, null);
+			}
 		}
 
 		if (nbt.hasKey("data")) {
