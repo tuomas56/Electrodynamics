@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import electrodynamics.api.tool.IElMagModule;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.core.lang.EDLanguage;
+import electrodynamics.lib.core.Strings;
 import electrodynamics.lib.item.TeslaModule;
 import electrodynamics.util.StringUtil;
 
@@ -67,7 +68,7 @@ public class ItemTeslaModule extends Item implements IElMagModule {
 				list.add(string);
 			}
 		} else {
-			list.add("Press SHIFT to see description");
+			list.add(EDLanguage.getInstance().translate(Strings.MODULE_HELP_MESSAGE));
 		}
 	}
 	
