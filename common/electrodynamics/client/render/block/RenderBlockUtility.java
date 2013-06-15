@@ -55,38 +55,63 @@ public class RenderBlockUtility extends BlockRenderer implements ISimpleBlockRen
 
 	    if (metadata == UtilityBlock.BLOCK_DEPLOYER.ordinal()) {
 	    	TileEntity tile = world.getBlockTileEntity(x, y, z);
-		    ForgeDirection side = ((TileEntityMachine)tile).rotation;
+		    ForgeDirection sideForge = ((TileEntityMachine)tile).rotation;
 		    
 		    Icon front = ((BlockUtility)block).textures[UtilityBlock.BLOCK_DEPLOYER.ordinal()][0];
 		    Icon back = ((BlockUtility)block).textures[UtilityBlock.BLOCK_DEPLOYER.ordinal()][1];
+		    Icon side = ((BlockUtility)block).textures[UtilityBlock.BLOCK_DEPLOYER.ordinal()][2];
 		    
-		    switch(side) {
+		    switch(sideForge) {
 			    case UP: {
 			    	renderer.renderFaceYNeg(block, x, y + 1, z, front);
 			    	renderer.renderFaceYPos(block, x, y - 1, z, back);
+			    	renderer.renderFaceXNeg(block, x + 1, y, z, side);
+			    	renderer.renderFaceXPos(block, x - 1, y, z, side);
+			    	renderer.renderFaceZNeg(block, x, y, z + 1, side);
+			    	renderer.renderFaceZPos(block, x, y, z - 1, side);
 			    	break;
 			    }
 			    case DOWN: {
-			    	renderer.renderFaceYNeg(block, x, y + 1, z, front);
-			    	renderer.renderFaceYPos(block, x, y - 1, z, back);
+			    	renderer.renderFaceYNeg(block, x, y + 1, z, back);
+			    	renderer.renderFaceYPos(block, x, y - 1, z, front);
+			    	renderer.renderFaceXNeg(block, x + 1, y, z, side);
+			    	renderer.renderFaceXPos(block, x - 1, y, z, side);
+			    	renderer.renderFaceZNeg(block, x, y, z + 1, side);
+			    	renderer.renderFaceZPos(block, x, y, z - 1, side);
 			    	break;
 			    }
 				case EAST: {
+					renderer.renderFaceYNeg(block, x, y + 1, z, side);
+			    	renderer.renderFaceYPos(block, x, y - 1, z, side);
 					renderer.renderFaceXNeg(block, x + 1, y, z, front);
 			    	renderer.renderFaceXPos(block, x - 1, y, z, back);
+			    	renderer.renderFaceZNeg(block, x, y, z + 1, side);
+			    	renderer.renderFaceZPos(block, x, y, z - 1, side);
 			    	break;
 				}
 				case WEST: {
-					renderer.renderFaceXNeg(block, x + 1, y, z, front);
-			    	renderer.renderFaceXPos(block, x - 1, y, z, back);
+					renderer.renderFaceYNeg(block, x, y + 1, z, side);
+			    	renderer.renderFaceYPos(block, x, y - 1, z, side);
+					renderer.renderFaceXNeg(block, x + 1, y, z, back);
+			    	renderer.renderFaceXPos(block, x - 1, y, z, front);
+			    	renderer.renderFaceZNeg(block, x, y, z + 1, side);
+			    	renderer.renderFaceZPos(block, x, y, z - 1, side);
 			    	break;
 				}
 				case NORTH: {
-					renderer.renderFaceZNeg(block, x, y, z + 1, front);
-			    	renderer.renderFaceZPos(block, x, y, z - 1, back);
+					renderer.renderFaceYNeg(block, x, y + 1, z, side);
+			    	renderer.renderFaceYPos(block, x, y - 1, z, side);
+					renderer.renderFaceXNeg(block, x + 1, y, z, side);
+			    	renderer.renderFaceXPos(block, x - 1, y, z, side);
+					renderer.renderFaceZNeg(block, x, y, z + 1, back);
+			    	renderer.renderFaceZPos(block, x, y, z - 1, front);
 			    	break;
 				}
 				case SOUTH: {
+					renderer.renderFaceYNeg(block, x, y + 1, z, side);
+			    	renderer.renderFaceYPos(block, x, y - 1, z, side);
+					renderer.renderFaceXNeg(block, x + 1, y, z, side);
+			    	renderer.renderFaceXPos(block, x - 1, y, z, side);
 					renderer.renderFaceZNeg(block, x, y, z + 1, front);
 			    	renderer.renderFaceZPos(block, x, y, z - 1, back);
 			    	break;
