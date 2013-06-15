@@ -3,12 +3,12 @@ package electrodynamics.tileentity.structure;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.Stack;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -21,6 +21,7 @@ import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 import electrodynamics.core.CoreUtils;
 import electrodynamics.core.misc.DamageSourceBlock;
+import electrodynamics.inventory.wrapper.InventoryWrapperStack;
 import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.recipe.RecipeGrinder;
 import electrodynamics.recipe.manager.CraftingManager;
@@ -29,9 +30,9 @@ import electrodynamics.util.InventoryUtil;
 import electrodynamics.util.LiquidUtil;
 import electrodynamics.util.PlayerUtil;
 
-public class TileEntityMobGrinder extends TileEntityStructure implements ITankContainer {
+public class TileEntityMobGrinder extends TileEntityStructure implements ITankContainer, IInventory {
 
-	public Stack<ItemStack> inventory = new Stack<ItemStack>();
+	public InventoryWrapperStack inventoryWrapper = new InventoryWrapperStack();
 	
 	public LiquidTank tank = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME);
 	
@@ -40,12 +41,6 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 		if (CoreUtils.isServer(worldObj)) {
 			if (this.isValidStructure() && this.isCentralTileEntity()) {
 				collectEntities();
-				
-				if (worldObj.getWorldTime() % 5 == 0) { // Runs four times per second
-					if (inventory != null && !inventory.isEmpty()) {
-						dispenseItem(inventory.pop());
-					}
-				}
 			}
 		}
 	}
@@ -91,7 +86,7 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 				int count = new Random().nextInt(3);
 
 				for (int i=0; i<count; i++) {
-					this.inventory.push(new ItemStack(erw.getMainDropID(), 1, 0));
+					this.inventoryWrapper.getStack().push(new ItemStack(erw.getMainDropID(), 1, 0));
 				}
 			} else {
 				EntityPlayer player = (EntityPlayer) entity;
@@ -101,7 +96,7 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 						ItemStack stack = player.inventory.getStackInSlot(i);
 						
 						if (stack != null) {
-							this.inventory.push(stack.copy());
+							this.inventoryWrapper.getStack().push(stack.copy());
 							player.inventory.setInventorySlotContents(i, null);
 						}
 					}
@@ -110,14 +105,14 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 						ItemStack stack = player.inventory.getStackInSlot(i);
 						
 						if (stack != null) {
-							this.inventory.push(stack.copy());
+							this.inventoryWrapper.getStack().push(stack.copy());
 							player.inventory.setInventorySlotContents(i, null);
 						}
 					}
 					
 					// Who commented this out?
 					if (new Random().nextInt(10) == 0) {
-						this.inventory.push(PlayerUtil.getPlayerHead(player).copy());
+						this.inventoryWrapper.getStack().push(PlayerUtil.getPlayerHead(player).copy());
 					}
 				}
 			}
@@ -130,9 +125,7 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 		if (recipe != null) {
 			// Doing liquid check first, since it has a chance to fail
 			if (recipe.liquidOutput != null) {
-				if (tank.getLiquid() == null || (tank.getLiquid().isLiquidEqual(recipe.liquidOutput) && tank.getLiquid().amount + recipe.liquidOutput.amount <= tank.getCapacity())) {
-					tank.fill(recipe.liquidOutput, true);
-				} else {
+				if (tank.fill(recipe.liquidOutput, true) == 0) {
 					return false;
 				}
 			}
@@ -140,15 +133,15 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 			if (recipe.itemOutput != null) {
 				for (ItemStack stackOut : recipe.itemOutput) {
 					if (stackOut != null) {
-						this.inventory.push(stackOut.copy());
+						this.inventoryWrapper.getStack().push(stackOut.copy());
 					}
 				}
 			}
 			
 			return true;
+		} else {
+			return false;
 		}
-		
-		return false;
 	}
 	
 	public void dispenseItem(ItemStack stack) {
@@ -190,8 +183,8 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 
-		this.inventory = new Stack<ItemStack>();
-		this.inventory.addAll(Arrays.asList(InventoryUtil.readItemsFromNBT("Items", nbt)));
+		this.inventoryWrapper = new InventoryWrapperStack();
+		this.inventoryWrapper.getStack().addAll(Arrays.asList(InventoryUtil.readItemsFromNBT("Items", nbt)));
 		this.tank.setLiquid(LiquidUtil.readLiquidFromNBT("Liquid", nbt));
 	}
 	
@@ -199,7 +192,7 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		
-		InventoryUtil.writeItemsToNBT("Items", nbt, this.inventory.toArray(new ItemStack[this.inventory.size()]));
+		InventoryUtil.writeItemsToNBT("Items", nbt, this.inventoryWrapper.getStack().toArray(new ItemStack[this.inventoryWrapper.getStack().size()]));
 		LiquidUtil.writeLiquidToNBT("Liquid", nbt, tank.getLiquid());
 	}
 	
@@ -237,6 +230,67 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 	@Override
 	public ILiquidTank getTank(ForgeDirection direction, LiquidStack type) {
 		return getTanks(direction)[0];
+	}
+
+	/* IINVENTORY */
+	@Override
+	public int getSizeInventory() {
+		return this.inventoryWrapper.getSizeInventory();
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int slot) {
+		return this.inventoryWrapper.getStackInSlot(slot);
+	}
+
+	@Override
+	public ItemStack decrStackSize(int slot, int amount) {
+		return this.inventoryWrapper.decrStackSize(slot, amount);
+	}
+
+	@Override
+	public ItemStack getStackInSlotOnClosing(int slot) {
+		return this.inventoryWrapper.getStackInSlotOnClosing(slot);
+	}
+
+	@Override
+	public void setInventorySlotContents(int slot, ItemStack stack) {
+		this.inventoryWrapper.setInventorySlotContents(slot, stack);
+	}
+
+	@Override
+	public String getInvName() {
+		return this.inventoryWrapper.getInvName();
+	}
+
+	@Override
+	public boolean isInvNameLocalized() {
+		return this.inventoryWrapper.isInvNameLocalized();
+	}
+
+	@Override
+	public int getInventoryStackLimit() {
+		return this.inventoryWrapper.getInventoryStackLimit();
+	}
+
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+		return this.inventoryWrapper.isUseableByPlayer(entityplayer);
+	}
+
+	@Override
+	public void openChest() {
+		this.inventoryWrapper.openChest();
+	}
+
+	@Override
+	public void closeChest() {
+		this.inventoryWrapper.closeChest();
+	}
+
+	@Override
+	public boolean isStackValidForSlot(int slot, ItemStack stack) {
+		return this.inventoryWrapper.isStackValidForSlot(slot, stack);
 	}
 
 }

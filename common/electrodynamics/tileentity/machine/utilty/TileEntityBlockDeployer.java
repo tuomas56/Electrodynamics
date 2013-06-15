@@ -75,6 +75,7 @@ public class TileEntityBlockDeployer extends TileEntityInventoryWrapper implemen
 			}
 			
 			this.setInventorySlotContents(0, null);
+			sendBlockUpdate();
 		} else if (stack == null && getBlockInFront() > 0) { // Pickup block
 			int id = this.worldObj.getBlockId(offsetCoords[0], offsetCoords[1], offsetCoords[2]);
 			int meta = this.worldObj.getBlockMetadata(offsetCoords[0], offsetCoords[1], offsetCoords[2]);
@@ -91,9 +92,8 @@ public class TileEntityBlockDeployer extends TileEntityInventoryWrapper implemen
 			
 			this.worldObj.setBlockToAir(offsetCoords[0], offsetCoords[1], offsetCoords[2]);
 			this.setInventorySlotContents(0, picked);
+			sendBlockUpdate();
 		}
-		
-		sendBlockUpdate();
 	}
 	
 	@Override

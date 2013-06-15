@@ -41,6 +41,7 @@ import electrodynamics.tileentity.machine.TileEntitySinteringOven;
 import electrodynamics.tileentity.machine.TileEntityTable;
 import electrodynamics.tileentity.machine.utilty.TileEntityBlockDeployer;
 import electrodynamics.tileentity.structure.TileEntityConveyorBelt;
+import electrodynamics.tileentity.structure.TileEntityHatch;
 import electrodynamics.tileentity.structure.TileEntityMobGrinder;
 import electrodynamics.tileentity.structure.TileEntityStructure;
 import electrodynamics.tileentity.structure.TileEntityValve;
@@ -194,6 +195,7 @@ public class EDModuleMachine extends EDModule {
 		GameRegistry.registerTileEntity(TileEntityStructure.TileStructurePlaceHolder.class, Strings.MACHINE_STRUCTURE_PLACE_HOLDER);
 		GameRegistry.registerTileEntity(TileEntityMobGrinder.class, "edxMobGrinder");
 		GameRegistry.registerTileEntity(TileEntityValve.class, Strings.STRUCTURE_COMPONENT_MACHINE_VALVE);
+		GameRegistry.registerTileEntity(TileEntityHatch.class, Strings.STRUCTURE_COMPONENT_MACHINE_HATCH);
 		GameRegistry.registerTileEntity(TileEntityBlockDeployer.class, Strings.UTILITY_BLOCK_DEPLOYER);
 		
 		CraftingManager.getInstance().tableManager = new RecipeManagerTable();

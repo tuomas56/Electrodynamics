@@ -14,6 +14,7 @@ import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityGeneric;
 import electrodynamics.tileentity.structure.TileEntityConveyorBelt;
+import electrodynamics.tileentity.structure.TileEntityHatch;
 import electrodynamics.tileentity.structure.TileEntityStructure;
 import electrodynamics.tileentity.structure.TileEntityValve;
 
@@ -79,6 +80,11 @@ public enum StructureComponent implements SubBlock {
 		public String[] getLocalTextureFiles() {
 			String base = "machine_hatch";
 			return new String[] { frame, frame, base, frame, base, frame };
+		}
+		
+		@Override
+		public TileEntityGeneric createNewTileEntity(World world) {
+			return new TileEntityHatch();
 		}
 	},
 	
