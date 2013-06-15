@@ -83,4 +83,8 @@ public class ItemIDs {
 	public static int ITEM_WORMSEED_ID;
 	public static final int ITEM_WORMSEED_DEFAULT_ID = 5119;
 	
+	/* itemNBTBlock */
+	public static int ITEM_NBT_BLOCK_ID;
+	public static final int ITEM_NBT_BLOCK_DEFAULT_ID = 5120;
+	
 }

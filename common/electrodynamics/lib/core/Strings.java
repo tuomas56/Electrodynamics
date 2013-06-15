@@ -5,6 +5,11 @@ public class Strings {
 	/* REMINDER: ANY LOCALIZATION STRINGS ADDED HERE MUST BE ADDED TO THE .lang FILES!
 	 * en_US AT THE VERY LEAST */
 
+	/* Internal misc strings */
+	public static final String MODULE_HELP_MESSAGE = "module.help.message";
+	public static final String ITEM_NBT_HELP_MESSAGE = "item_nbt.help.message";
+	public static final String ITEM_NBT_HELP_DESC = "item_nbt.help.desc";
+	
 	/* Internal item names */
 	public static final String ITEM_COMPONENT_NAME = "component.name";
 	public static final String ITEM_ELMAG_HAT_NAME = "elmag.helm.name";

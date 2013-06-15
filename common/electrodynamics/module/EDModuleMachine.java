@@ -13,6 +13,7 @@ import electrodynamics.block.item.ItemBlockStructure;
 import electrodynamics.block.item.ItemBlockTable;
 import electrodynamics.block.item.ItemBlockUtility;
 import electrodynamics.client.render.block.RenderBlockUtility;
+import electrodynamics.client.render.item.RenderItemBlockWithNBT;
 import electrodynamics.client.render.item.RenderItemMachine;
 import electrodynamics.client.render.item.RenderItemTable;
 import electrodynamics.client.render.tileentity.*;
@@ -132,6 +133,9 @@ public class EDModuleMachine extends EDModule {
 		EDItems.itemTrayKiln = new ItemTray(ItemIDs.ITEM_TRAY_KILN_ID, ItemTray.TrayType.KILN_TRAY).setUnlocalizedName(Strings.ITEM_TRAY_KILN_NAME);
 		GameRegistry.registerItem(EDItems.itemTrayKiln, Strings.ITEM_TRAY_KILN_NAME);
 		EDLanguage.getInstance().registerItem(EDItems.itemTrayKiln);
+		
+		EDItems.itemNBTBlock = new ItemBlockWithNBT(ItemIDs.ITEM_NBT_BLOCK_ID).setUnlocalizedName("item_nbt_block");
+		GameRegistry.registerItem(EDItems.itemNBTBlock, "item_nbt_block");
 	}
 
 	@Override
@@ -246,6 +250,7 @@ public class EDModuleMachine extends EDModule {
 		
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockTable.blockID, new RenderItemTable());
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockMachine.blockID, new RenderItemMachine());
+		MinecraftForgeClient.registerItemRenderer(EDItems.itemNBTBlock.itemID, new RenderItemBlockWithNBT());
 	}
 
 	public EnumSet<Module> dependencies() {
