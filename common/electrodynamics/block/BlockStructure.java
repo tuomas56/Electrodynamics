@@ -9,7 +9,6 @@ import electrodynamics.core.CreativeTabED;
 import electrodynamics.interfaces.IAcceptsTool;
 import electrodynamics.item.EDItems;
 import electrodynamics.lib.block.StructureComponent;
-import electrodynamics.tileentity.structure.TileEntityMobGrinder;
 import electrodynamics.tileentity.structure.TileEntityStructure;
 import electrodynamics.world.TickHandlerMBS;
 import net.minecraft.block.Block;
@@ -57,19 +56,7 @@ public class BlockStructure extends BlockGeneric implements IAcceptsTool {
 
 	@Override
 	public TileEntity createSpecificTileEntity(World world, int x, int y, int z, NBTTagCompound nbt, int subBlock){
-		if( subBlock == StructureComponent.MACHINE_FRAME.ordinal() ) {
-			if (nbt.hasKey("mbsID") && nbt.getString("mbsID").equals("MobGrinder")) {
-				int targetX = nbt.getInteger( "targetX" );
-				int targetY = nbt.getInteger( "targetY" );
-				int targetZ = nbt.getInteger( "targetZ" );
-
-				if( x == targetX && y == targetY && z == targetZ ) { // is central TE
-					return new TileEntityMobGrinder();
-				}
-			}
-		}
-		
-		return super.createSpecificTileEntity( world, x, y, z, nbt, subBlock );
+		return StructureComponent.createSpecificTileEntity( world, x, y, z, nbt, subBlock );
 	}
 
 	@Override

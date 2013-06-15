@@ -1,6 +1,8 @@
 package electrodynamics.lib.block;
 
+import electrodynamics.tileentity.structure.TileEntityMobGrinder;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -217,5 +219,32 @@ public enum StructureComponent implements SubBlock {
 	public void applyGLTransformations(byte renderType, TileEntityStructure structure) { }
 	
 	private static String frame = "machine_frame";
+
+	/**
+	 * Creates a new TileEntityStructure based on the the world coordinates and NBT.
+	 * Special cases must be added here.
+	 * By default points to the correct sub-block's <code>createNewTileEntity()</code> method.
+	 *
+	 * @param world    the world object.
+	 * @param x        the x coordinate
+	 * @param y        the x coordinate
+	 * @param z        the z coordinate
+	 * @param nbt      the NBT containing the data available for creating the correct TileEntity.
+	 * @param subBlock the index of the sub-block.
+	 */
+	public static TileEntityStructure createSpecificTileEntity(World world, int x, int y, int z, NBTTagCompound nbt, int subBlock) {
+		if( subBlock == StructureComponent.MACHINE_FRAME.ordinal() ) {
+			if( nbt.hasKey( "mbsID" ) && nbt.getString( "mbsID" ).equals( "MobGrinder" ) ) {
+				int targetX = nbt.getInteger( "targetX" );
+				int targetY = nbt.getInteger( "targetY" );
+				int targetZ = nbt.getInteger( "targetZ" );
+
+				if( x == targetX && y == targetY && z == targetZ ) { // is central TE
+					return new TileEntityMobGrinder();
+				}
+			}
+		}
+		return (TileEntityStructure) values()[subBlock].createNewTileEntity( world );
+	}
 
 }
