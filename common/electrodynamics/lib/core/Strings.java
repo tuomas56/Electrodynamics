@@ -5,6 +5,9 @@ public class Strings {
 	/* REMINDER: ANY LOCALIZATION STRINGS ADDED HERE MUST BE ADDED TO THE .lang FILES!
 	 * en_US AT THE VERY LEAST */
 
+	/* Internal misc strings */
+	public static String MODULE_HELP_MESSAGE = "module.help.message";
+	
 	/* Internal item names */
 	public static final String ITEM_COMPONENT_NAME = "component.name";
 	public static final String ITEM_ELMAG_HAT_NAME = "elmag.helm.name";
