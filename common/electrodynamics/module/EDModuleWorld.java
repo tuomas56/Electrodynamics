@@ -2,6 +2,7 @@ package electrodynamics.module;
 
 import java.util.Random;
 
+import electrodynamics.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -36,11 +37,6 @@ import electrodynamics.client.render.block.RenderBlockOre;
 import electrodynamics.client.render.block.RenderBlockStructure;
 import electrodynamics.client.render.tileentity.RenderTreetap;
 import electrodynamics.core.lang.EDLanguage;
-import electrodynamics.item.EDItems;
-import electrodynamics.item.ItemLatexBucket;
-import electrodynamics.item.ItemLiquidLatex;
-import electrodynamics.item.ItemPeelingSpud;
-import electrodynamics.item.ItemSeed;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.block.Decorative;
 import electrodynamics.lib.block.Ore;
