@@ -39,7 +39,7 @@ public final class ItemBlockWireRenderer implements IItemRenderer{
 			renderWire(0.5F, 1.5F, 0.5F, 0.5F);
 			break;
 		case INVENTORY:
-			renderWire(0.5F, 0.0F, 0.5F, 0.5F);
+			renderWire(0.5F, -1.5F, 0.5F, 1.5F);
 			break;
 		default:
 			break;
