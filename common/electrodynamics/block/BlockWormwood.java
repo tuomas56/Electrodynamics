@@ -27,9 +27,12 @@ import net.minecraftforge.common.IPlantable;
 
 public class BlockWormwood extends BlockFlower implements IPlantable {
 
+	public static final BiomeDictionary.Type[] WORMWOOD_VALID_BIOMES = new BiomeDictionary.Type[] { BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.JUNGLE, BiomeDictionary.Type.MOUNTAIN };
+	public static final BiomeDictionary.Type[] DRY_WORMWOOD_VALID_BIOMES = new BiomeDictionary.Type[] { BiomeDictionary.Type.DESERT, BiomeDictionary.Type.WASTELAND };
+	
 	public static final int GROWN_NORMAL = 7;
 	public static final int GROWN_DRIED = 9;
-	private static final int optAdd = 3;
+	public static final int optAdd = 3;
 
 	private Icon[] textures;
 
@@ -134,13 +137,7 @@ public class BlockWormwood extends BlockFlower implements IPlantable {
 			return 0;
 		return world.getBlockMetadata( x, y, z );
 	}
-
-
-
-
-	public static final BiomeDictionary.Type[] WORMWOOD_VALID_BIOMES = new BiomeDictionary.Type[] { BiomeDictionary.Type.PLAINS, BiomeDictionary.Type.SWAMP, BiomeDictionary.Type.HILLS, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.JUNGLE, BiomeDictionary.Type.MOUNTAIN };
-	public static final BiomeDictionary.Type[] DRY_WORMWOOD_VALID_BIOMES = new BiomeDictionary.Type[] { BiomeDictionary.Type.DESERT, BiomeDictionary.Type.WASTELAND };
-
+	
 	public static int getTypeForBiome(BiomeGenBase biome) {
 		List<BiomeDictionary.Type> biomeTypes = Arrays.asList( BiomeDictionary.getTypesForBiome( biome ) );
 		for( BiomeDictionary.Type type : WORMWOOD_VALID_BIOMES ) {
