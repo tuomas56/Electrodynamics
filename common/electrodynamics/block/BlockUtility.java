@@ -52,6 +52,17 @@ public class BlockUtility extends BlockContainer {
 		}
 	}
 	
+	public boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection side) {
+		TileEntityMachine tile = (TileEntityMachine) world.getBlockTileEntity(x, y, z);
+		
+		return (!(side == tile.rotation));
+    }
+	
+	@Override
+	public boolean isBlockNormalCube(World world, int x, int y, int z) {
+		return false;
+	}
+	
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
