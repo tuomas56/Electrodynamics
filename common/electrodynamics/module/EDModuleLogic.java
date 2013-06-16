@@ -6,8 +6,8 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import electrodynamics.block.BlockWire;
 import electrodynamics.block.EDBlocks;
-import electrodynamics.client.render.block.ItemBlockWireRenderer;
-import electrodynamics.client.render.block.TESRBlockWire;
+import electrodynamics.client.render.item.ItemBlockWireRenderer;
+import electrodynamics.client.render.tileentity.RenderBlockWire;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityWire;
@@ -16,6 +16,7 @@ public class EDModuleLogic extends EDModule {
 
 	@Override
 	public void preInit() {
+		//TODO Config block id
 		EDBlocks.blockRedWire = new BlockWire(3000);
 		GameRegistry.registerBlock(EDBlocks.blockRedWire, Strings.BLOCK_RED_WIRE_NAME);
 		EDLanguage.getInstance().registerItemStack(new ItemStack(EDBlocks.blockRedWire), Strings.BLOCK_RED_WIRE_NAME);
@@ -30,6 +31,6 @@ public class EDModuleLogic extends EDModule {
 	public void initClient() {
 		GameRegistry.registerTileEntity(TileEntityWire.class, "edTileEntityWire");
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockRedWire.blockID, new ItemBlockWireRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWire.class, new TESRBlockWire());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWire.class, new RenderBlockWire());
 	}
 }

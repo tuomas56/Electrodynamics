@@ -1,4 +1,4 @@
-package electrodynamics.client.render.block;
+package electrodynamics.client.render.tileentity;
 
 import java.util.Map.Entry;
 
@@ -12,10 +12,10 @@ import electrodynamics.client.model.ModelWire;
 import electrodynamics.tileentity.Connection;
 import electrodynamics.tileentity.TileEntityWire;
 
-public class TESRBlockWire extends TileEntitySpecialRenderer{
+public class RenderBlockWire extends TileEntitySpecialRenderer{
 	private final ModelWire model;
 	
-	public TESRBlockWire(){
+	public RenderBlockWire(){
 		this.model = new ModelWire();
 	}
 	
