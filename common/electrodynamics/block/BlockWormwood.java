@@ -38,6 +38,32 @@ public class BlockWormwood extends BlockFlower implements IPlantable {
 		this.setTickRandomly( true );
 		setCreativeTab( CreativeTabED.resource );
 	}
+	
+	public void fertilize(World world, int x, int y, int z){
+		int meta = world.getBlockMetadata(x, y, z) + MathHelper.getRandomIntegerInRange(world.rand, 2, 8);
+		
+		BiomeGenBase currentBiome = world.getBiomeGenForCoords(x, z);
+		
+		// Run checks
+		for(BiomeDictionary.Type type : this.WORMWOOD_VALID_BIOMES){
+			if(BiomeDictionary.isBiomeOfType(currentBiome, type)){
+				if(meta > 10){
+					meta = 10;
+				}
+			}
+		}
+		
+		for(BiomeDictionary.Type type : this.DRY_WORMWOOD_VALID_BIOMES){
+			if(BiomeDictionary.isBiomeOfType(currentBiome, type)){
+				if(meta > 9){
+					meta = 9;
+				}
+			}
+		}
+		
+		// Set the updated block
+		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+	}
 
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random random) {
