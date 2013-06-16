@@ -13,6 +13,7 @@ import electrodynamics.lib.client.FXType;
 import electrodynamics.module.ModuleManager;
 import electrodynamics.recipe.manager.CraftingManager;
 import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
 public class CommonProxy {
@@ -26,7 +27,6 @@ public class CommonProxy {
 		NetworkRegistry.instance().registerConnectionHandler(new ConnectionHandler());
 		
 		ModuleManager.preInit();
-		
 	}
 
 	public void init(FMLInitializationEvent event) {

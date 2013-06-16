@@ -3,6 +3,7 @@ package electrodynamics;
 import java.io.File;
 import java.lang.reflect.Field;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -13,15 +14,19 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.RelaunchLibraryManager;
 import electrodynamics.api.IEDApi;
 import electrodynamics.api.crafting.ICraftingManager;
+import electrodynamics.block.BlockWire;
+import electrodynamics.client.render.block.TESRBlockWire;
 import electrodynamics.configuration.ConfigurationHandler;
 import electrodynamics.core.CommonProxy;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.network.PacketHandler;
 import electrodynamics.recipe.manager.CraftingManager;
+import electrodynamics.tileentity.TileEntityWire;
 
 @Mod(modid = ModInfo.MOD_ID, name = ModInfo.GENERIC_MOD_ID, version = ModInfo.VERSION, dependencies = ModInfo.DEPENDENCIES)
 @NetworkMod(channels = { ModInfo.GENERIC_MOD_ID }, clientSideRequired = false, serverSideRequired = false, packetHandler = PacketHandler.class)

@@ -68,7 +68,7 @@ public class ItemTeslaModule extends Item implements IElMagModule {
 				list.add(string);
 			}
 		} else {
-			list.add(EDLanguage.getInstance().translate(Strings.MODULE_HELP_MESSAGE));
+		//	list.add(EDLanguage.getInstance().translate(Strings.MODULE_HELP_MESSAGE));
 		}
 	}
 	
