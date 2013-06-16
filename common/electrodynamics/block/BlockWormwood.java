@@ -40,16 +40,6 @@ public class BlockWormwood extends BlockFlower implements IPlantable {
 	}
 	
 	public void fertilize(World world, int x, int y, int z){
-		BiomeGenBase currentBiome = world.getBiomeGenForCoords(x, z);
-		
-		int meta = getNextGrowthStage(getTypeForBiome(currentBiome), world.getBlockMetadata(x, y, z));
-		
-		// Set the updated block
-		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
-	}
-
-	@Override
-	public void updateTick(World world, int x, int y, int z, Random random) {
 		int metadata = world.getBlockMetadata( x, y, z );
 		if( !isFullyGrown( metadata ) ) { // not fully grown
 			int type = getTypeForBiome( world.getBiomeGenForCoords( x, z ) );
@@ -58,6 +48,11 @@ public class BlockWormwood extends BlockFlower implements IPlantable {
 				world.setBlockMetadataWithNotify( x, y, z, nextStage, 2 );
 			}
 		}
+	}
+
+	@Override
+	public void updateTick(World world, int x, int y, int z, Random random) {
+		fertilize(world, x, y, z);
 		super.updateTick( world, x, y, z, random );
 	}
 
