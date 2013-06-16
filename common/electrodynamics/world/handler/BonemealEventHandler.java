@@ -19,11 +19,15 @@ public class BonemealEventHandler {
 		if (!e.world.isRemote) {
 			if (e.ID == BlockIDs.BLOCK_RUBBER_SAPLING_ID) {
 				(new WorldGenRubberTree(10, BiomeHelper.getBiomesForTypes(Type.PLAINS, Type.SWAMP, Type.JUNGLE))).grow(e.world, e.X, e.Y, e.Z, new Random());
+				e.setResult(Result.ALLOW);
 			} else if(e.ID == BlockIDs.BLOCK_WORMWOOD_ID){
-				((BlockWormwood) Block.blocksList[e.ID]).fertilize(e.world, e.X, e.Y, e.Z);
+				if (!BlockWormwood.isFullyGrown(e.world.getBlockMetadata(e.X, e.Y, e.Z))) {
+					((BlockWormwood) Block.blocksList[e.ID]).fertilize(e.world, e.X, e.Y, e.Z);
+					e.setResult(Result.ALLOW);
+				} else {
+					e.setResult(Result.DENY);
+				}
 			}
-			
-			e.setResult(Result.ALLOW);
 		}
 	}
 }
