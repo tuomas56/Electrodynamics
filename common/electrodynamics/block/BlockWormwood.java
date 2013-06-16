@@ -61,6 +61,7 @@ public class BlockWormwood extends BlockFlower implements IPlantable {
 			}
 		}
 		
+		// Set the updated block
 		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 	}
 
