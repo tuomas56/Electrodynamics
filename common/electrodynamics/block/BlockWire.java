@@ -16,7 +16,7 @@ import electrodynamics.tileentity.TileEntityWire;
 
 public class BlockWire extends BlockContainer{
 	public BlockWire(int id){
-		super(id, Material.iron);
+		super(id, Material.circuits);
 		this.setUnlocalizedName("edBlockWire");
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
@@ -60,11 +60,10 @@ public class BlockWire extends BlockContainer{
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int j, float k, float l, float m){
 		TileEntityWire wire = (TileEntityWire) world.getBlockTileEntity(x, y, z);
 		
-		System.out.println("Powered: " + wire.isPowered());
-		
 		return true;
 	}
 	
+	@Override
 	public int isProvidingWeakPower(IBlockAccess blockAccess, int x, int y, int z, int par5){
 		TileEntityWire wire = (TileEntityWire) blockAccess.getBlockTileEntity(x, y, z);
 		
@@ -78,15 +77,5 @@ public class BlockWire extends BlockContainer{
 	@Override
 	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player){
 		TileEntityWire wire = (TileEntityWire) world.getBlockTileEntity(x, y, z);
-		
-		System.out.println(wire.isPowered());
-	}
-	
-	private boolean isConnected(Entry<ForgeDirection, Connection> entry){
-		if(entry.getValue() != null){
-			return true;
-		} else{
-			return false;
-		}
 	}
 }
