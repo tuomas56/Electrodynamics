@@ -45,7 +45,7 @@ public class BlockWormwood extends BlockFlower implements IPlantable {
 		BiomeGenBase currentBiome = world.getBiomeGenForCoords(x, z);
 		
 		// Run checks
-		for(BiomeDictionary.Type type : this.WORMWOOD_VALID_BIOMES){
+		for(BiomeDictionary.Type type : WORMWOOD_VALID_BIOMES){
 			if(BiomeDictionary.isBiomeOfType(currentBiome, type)){
 				if(meta > 10){
 					meta = 10;
@@ -53,7 +53,7 @@ public class BlockWormwood extends BlockFlower implements IPlantable {
 			}
 		}
 		
-		for(BiomeDictionary.Type type : this.DRY_WORMWOOD_VALID_BIOMES){
+		for(BiomeDictionary.Type type : DRY_WORMWOOD_VALID_BIOMES){
 			if(BiomeDictionary.isBiomeOfType(currentBiome, type)){
 				if(meta > 9){
 					meta = 9;
