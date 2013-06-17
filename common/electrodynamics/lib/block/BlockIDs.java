@@ -76,6 +76,6 @@ public class BlockIDs {
 	
 	/* blockGasNitrogen */
 	public static int BLOCK_GAS_NITROGEN_ID;
-	public static final int BLOCK_GAS_NITROGEN_DEFAULT_ID = 508;
+	public static final int BLOCK_GAS_NITROGEN_DEFAULT_ID = 518;
 	
 }
