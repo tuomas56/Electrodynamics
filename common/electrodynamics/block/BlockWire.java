@@ -2,64 +2,77 @@ package electrodynamics.block;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import electrodynamics.core.CreativeTabED;
+import electrodynamics.tileentity.TileEntityRedWire;
 import electrodynamics.tileentity.TileEntityWire;
 
-public class BlockWire extends BlockContainer {
-	
-	public BlockWire(int id) {
+public class BlockWire extends BlockContainer{
+	public BlockWire(int id){
 		super(id, Material.circuits);
 		this.setUnlocalizedName("edBlockWire");
-		this.setCreativeTab(CreativeTabED.block);
+		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityWire();
+	public TileEntity createNewTileEntity(World world){
+		return new TileEntityRedWire();
 	}
-
+	
 	@Override
-	public int getRenderType() {
+	public int getRenderType(){
 		return RenderingRegistry.getNextAvailableRenderId();
 	}
 
+	
 	@Override
-	public int getRenderBlockPass() {
+	public int getRenderBlockPass(){
 		return 1;
 	}
-
+	
 	@Override
-	public boolean isOpaqueCube() {
+	public boolean isOpaqueCube(){
 		return false;
 	}
-
+	
 	@Override
-	public boolean renderAsNormalBlock() {
+	public boolean renderAsNormalBlock(){
 		return false;
 	}
-
+	
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, int neighborId) {
+	public void onNeighborBlockChange(World world, int x, int y, int z, int neighborId){
 		TileEntity tile = world.getBlockTileEntity(x, y, z);
-
-		if (tile instanceof TileEntityWire) {
-			((TileEntityWire) tile).updateEntity();
+		
+		if(tile instanceof TileEntityWire){
+			((TileEntityRedWire) tile).updateEntity();
 		}
 	}
-
+	
 	@Override
-	public int isProvidingWeakPower(IBlockAccess blockAccess, int x, int y, int z, int par5) {
-		TileEntityWire wire = (TileEntityWire) blockAccess.getBlockTileEntity(x, y, z);
-
-		if (wire.isPowered()) {
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int j, float k, float l, float m){
+		TileEntityRedWire wire = (TileEntityRedWire) world.getBlockTileEntity(x, y, z);
+		
+		return true;
+	}
+	
+	@Override
+	public int isProvidingWeakPower(IBlockAccess blockAccess, int x, int y, int z, int par5){
+		TileEntityRedWire wire = (TileEntityRedWire) blockAccess.getBlockTileEntity(x, y, z);
+		
+		if(wire.isPowered()){
 			return 15;
-		} else {
+		} else{
 			return 0;
 		}
 	}
-
+	
+	@Override
+	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player){
+		TileEntityRedWire wire = (TileEntityRedWire) world.getBlockTileEntity(x, y, z);
+	}
 }
