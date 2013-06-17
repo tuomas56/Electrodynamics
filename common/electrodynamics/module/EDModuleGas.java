@@ -1,6 +1,5 @@
 package electrodynamics.module;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import electrodynamics.block.BlockGas;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.lib.block.BlockIDs;
