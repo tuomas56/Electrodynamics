@@ -17,8 +17,8 @@ public class BlockGas extends Block {
 	
 	private Gas gas;
 	
-	public BlockGas(Gas gas) {
-		super(gas.id, Material.air);
+	public BlockGas(int id, Gas gas) {
+		super(id, Material.air);
 		setCreativeTab(CreativeTabED.block);
 		setTickRandomly(true);
 		setUnlocalizedName(gas.unlocalizedName);
