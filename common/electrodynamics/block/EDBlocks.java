@@ -23,5 +23,6 @@ public class EDBlocks {
 	public static Block blockStructureComponent;
 	public static Block blockRSSource;
 	public static Block blockUtility;
+	public static Block blockSignalDimmer;
 
 }

@@ -47,6 +47,7 @@ public class Strings {
 	public static final String BLOCK_TREETAP = "treetap.name";
 	public static final String BLOCK_STRUCTURE_COMPONENT = "structure.component";
 	public static final String BLOCK_UTILITY = "block.utility.name";
+	public static final String BLOCK_SIGNAL_DIMMER_NAME = "signal_dimmer.name";
 
 	/* Internal component names */
 	public static final String COMPONENT_FAN_BLADE = "component.fanBlade.name";
