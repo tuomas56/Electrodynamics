@@ -166,4 +166,15 @@ public final class ModelSignalDimmer extends ModelBase{
 		renderSwitchBase1(f);
 		renderSwitchBase2(f);
 	}
+	
+	public void renderAllButWires(float f){
+		renderSwitchBoxTop4(f);
+		renderSwitchBoxTop3(f);
+		renderSwitchBoxTop2(f);
+		renderSwitchBoxTop1(f);
+		renderSwitchBoxBottom(f);
+		renderSwitchTop(f);
+		renderSwitchBase1(f);
+		renderSwitchBase2(f);
+	}
 }

@@ -54,6 +54,6 @@ public class ItemBlockSignalDimmerRenderer implements IItemRenderer{
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(0.0F, 0.0F, 0.0F, 0.0F);
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture("/mods/electrodynamics/textures/misc/signalDimmer.png");
-		model.renderAll(0.0625F);
+		model.renderAllButWires(0.0625F);
 	}
 }
