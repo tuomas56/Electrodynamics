@@ -2,6 +2,8 @@ package electrodynamics.block;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.lib.block.Gas;
@@ -23,6 +25,7 @@ public class BlockGas extends Block {
 		setTickRandomly(true);
 		setUnlocalizedName(gas.unlocalizedName);
 		
+		GameRegistry.registerBlock(this, gas.unlocalizedName);
 		EDLanguage.getInstance().registerBlock(this);
 		
 		this.gas = gas;
