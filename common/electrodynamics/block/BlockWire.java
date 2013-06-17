@@ -2,12 +2,12 @@ package electrodynamics.block;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import electrodynamics.core.CreativeTabED;
 import electrodynamics.tileentity.TileConnection;
 import electrodynamics.tileentity.TileEntityRedWire;
 
@@ -15,7 +15,8 @@ public class BlockWire extends BlockContainer{
 	public BlockWire(int id){
 		super(id, Material.circuits);
 		this.setUnlocalizedName("edBlockWire");
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(CreativeTabED.block);
+		setBlockBounds(0F, 0F, 0F, 1F, .15F, 1F);
 	}
 
 	@Override
