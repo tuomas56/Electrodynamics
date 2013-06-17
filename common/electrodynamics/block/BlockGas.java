@@ -1,34 +1,25 @@
 package electrodynamics.block;
 
+import java.util.List;
 import java.util.Random;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
-import electrodynamics.core.CreativeTabED;
-import electrodynamics.core.lang.EDLanguage;
-import electrodynamics.lib.block.Gas;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import electrodynamics.core.CreativeTabED;
+import electrodynamics.lib.block.Gas;
 
 public class BlockGas extends Block {
 
 	private Icon[] textures;
 	
-	private Gas gas;
-	
-	public BlockGas(int id, Gas gas) {
+	public BlockGas(int id) {
 		super(id, Material.air);
 		setCreativeTab(CreativeTabED.block);
 		setTickRandomly(true);
-		setUnlocalizedName(gas.unlocalizedName);
-		
-		GameRegistry.registerBlock(this, gas.unlocalizedName);
-		EDLanguage.getInstance().registerBlock(this);
-		
-		this.gas = gas;
 	}
 
 	public boolean renderAsNormalBlock() {
@@ -54,9 +45,17 @@ public class BlockGas extends Block {
 		world.setBlock(x, y + 1, z, id, meta, 3);
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void getSubBlocks(int id, CreativeTabs tab, List list) {
+		for (Gas gas : Gas.values()) {
+			list.add(gas.toItemStack());
+		}
+	}
+	
 	@Override
 	public Icon getIcon(int side, int metadata) {
-		return textures[this.gas.ordinal()];
+		return textures[metadata];
 	}
 	
 	@Override
