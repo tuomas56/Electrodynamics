@@ -34,9 +34,9 @@ public class BlockIDs {
 	public static int BLOCK_LITHIUM_CLAY_ID;
 	public static final int BLOCK_LITHIUM_CLAY_DEFAULT_ID = 507;
 
-	/* blockGas */
-	public static int BLOCK_GAS_ID;
-	public static final int BLOCK_GAS_DEFAULT_ID = 508;
+	/* blockGasC02 */
+	public static int BLOCK_GAS_CO2_ID;
+	public static final int BLOCK_GAS_CO2_DEFAULT_ID = 508;
 
 	/* blockStorage */
 	public static int BLOCK_STORAGE_ID;
@@ -69,5 +69,13 @@ public class BlockIDs {
 	/* blockUtility */
 	public static int BLOCK_UTILITY_ID;
 	public static final int BLOCK_UTILITY_DEFAULT_ID = 516;
+
+	/* blockGasNatural */
+	public static int BLOCK_GAS_NATURAL_ID;
+	public static final int BLOCK_GAS_NATURAL_DEFAULT_ID = 517;
+	
+	/* blockGasNitrogen */
+	public static int BLOCK_GAS_NITROGEN_ID;
+	public static final int BLOCK_GAS_NITROGEN_DEFAULT_ID = 508;
 	
 }

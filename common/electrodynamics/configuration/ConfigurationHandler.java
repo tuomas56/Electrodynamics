@@ -2,6 +2,7 @@ package electrodynamics.configuration;
 
 import electrodynamics.core.EDLogger;
 import electrodynamics.lib.block.BlockIDs;
+import electrodynamics.lib.block.Gas;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.lib.item.ItemIDs;
 import net.minecraftforge.common.Configuration;
@@ -38,7 +39,9 @@ public class ConfigurationHandler {
 			BlockIDs.BLOCK_DECORATIVE_ID = config.getBlock( Strings.BLOCK_DECORATIVE, BlockIDs.BLOCK_DECORATIVE_DEFAULT_ID ).getInt( BlockIDs.BLOCK_DECORATIVE_DEFAULT_ID );
 			BlockIDs.BLOCK_WORMWOOD_ID = config.getBlock( Strings.BLOCK_WORMWOOD, BlockIDs.BLOCK_WORMWOOD_DEFAULT_ID ).getInt( BlockIDs.BLOCK_WORMWOOD_DEFAULT_ID );
 			BlockIDs.BLOCK_LITHIUM_CLAY_ID = config.getBlock( Strings.BLOCK_LITHIUM_CLAY, BlockIDs.BLOCK_LITHIUM_CLAY_DEFAULT_ID ).getInt( BlockIDs.BLOCK_LITHIUM_CLAY_DEFAULT_ID );
-			BlockIDs.BLOCK_GAS_ID = config.getBlock( Strings.BLOCK_GAS, BlockIDs.BLOCK_GAS_DEFAULT_ID ).getInt( BlockIDs.BLOCK_GAS_DEFAULT_ID );
+			BlockIDs.BLOCK_GAS_CO2_ID = config.getBlock( Gas.CO2.unlocalizedName, BlockIDs.BLOCK_GAS_CO2_DEFAULT_ID ).getInt( BlockIDs.BLOCK_GAS_CO2_DEFAULT_ID );
+			BlockIDs.BLOCK_GAS_NATURAL_ID = config.getBlock( Gas.NATURAL_UNREFINED.unlocalizedName, BlockIDs.BLOCK_GAS_NATURAL_DEFAULT_ID ).getInt( BlockIDs.BLOCK_GAS_NATURAL_DEFAULT_ID );
+			BlockIDs.BLOCK_GAS_NITROGEN_ID = config.getBlock( Gas.N.unlocalizedName, BlockIDs.BLOCK_GAS_NITROGEN_DEFAULT_ID ).getInt( BlockIDs.BLOCK_GAS_NITROGEN_DEFAULT_ID );
 			BlockIDs.BLOCK_STORAGE_ID = config.getBlock( Strings.BLOCK_STORAGE, BlockIDs.BLOCK_STORAGE_DEFAULT_ID ).getInt( BlockIDs.BLOCK_STORAGE_DEFAULT_ID );
 			BlockIDs.BLOCK_RUBBER_WOOD_ID = config.getBlock( Strings.BLOCK_RUBBER_WOOD, BlockIDs.BLOCK_RUBBER_WOOD_DEFAULT_ID ).getInt( BlockIDs.BLOCK_RUBBER_WOOD_DEFAULT_ID );
 			BlockIDs.BLOCK_RUBBER_LEAVES_ID = config.getBlock( Strings.BLOCK_RUBBER_LEAF, BlockIDs.BLOCK_RUBBER_LEAVES_DEFAULT_ID ).getInt( BlockIDs.BLOCK_RUBBER_LEAVES_DEFAULT_ID );

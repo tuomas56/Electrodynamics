@@ -12,7 +12,9 @@ public class EDBlocks {
 	public static Block blockDecorative;
 	public static Block blockWormwood;
 	public static Block blockLithiumClay;
-	public static Block blockGas;
+	public static Block blockGasCO2;
+	public static Block blockGasNatural;
+	public static Block blockGasNitrogen;
 	public static Block blockStorage;
 	public static Block blockRubberWood;
 	public static Block blockRubberLeaves;
