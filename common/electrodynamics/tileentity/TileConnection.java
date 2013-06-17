@@ -3,6 +3,7 @@ package electrodynamics.tileentity;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -36,9 +37,26 @@ public class TileConnection extends TileEntity implements Connection{
 	protected TileConnection(boolean isPowered){
 		this.isPowered = isPowered;
 		this.connections = new HashMap<ForgeDirection, Connection>();
-		this.dummyConnectionsList = new LinkedList<Integer>();
 	}
 
+	{
+		this.dummyConnectionsList = new LinkedList<Integer>();
+		
+		dummyConnectionsList.add(Block.lever.blockID);
+		dummyConnectionsList.add(Block.redstoneLampIdle.blockID);
+		dummyConnectionsList.add(Block.redstoneLampActive.blockID);
+		dummyConnectionsList.add(Block.redstoneComparatorActive.blockID);
+		dummyConnectionsList.add(Block.redstoneComparatorIdle.blockID);
+		dummyConnectionsList.add(Block.pistonBase.blockID);
+		dummyConnectionsList.add(Block.pistonStickyBase.blockID);
+		dummyConnectionsList.add(Block.redstoneWire.blockID);
+		dummyConnectionsList.add(Block.redstoneRepeaterActive.blockID);
+		dummyConnectionsList.add(Block.redstoneRepeaterIdle.blockID);
+		dummyConnectionsList.add(Block.chestTrapped.blockID);
+		dummyConnectionsList.add(Block.daylightSensor.blockID);
+		dummyConnectionsList.add(Block.commandBlock.blockID);
+	}
+	
 	@Override
 	public HashMap<ForgeDirection, Connection> allConnections(){
 		return this.connections;
