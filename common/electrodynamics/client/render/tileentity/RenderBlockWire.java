@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import electrodynamics.client.model.ModelWire;
 import electrodynamics.tileentity.Connection;
-import electrodynamics.tileentity.TileEntityWire;
+import electrodynamics.tileentity.TileConnection;
 
 public class RenderBlockWire extends TileEntitySpecialRenderer{
 	private final ModelWire model;
@@ -32,7 +32,7 @@ public class RenderBlockWire extends TileEntitySpecialRenderer{
 	}
 	
 	private void renderSides(TileEntity tile){
-		TileEntityWire wire = (TileEntityWire) tile;
+		TileConnection wire = (TileConnection) tile;
 		
 		for(Entry<ForgeDirection, Connection> entry : wire.allConnections().entrySet()){
 			if(isConnected(entry)){

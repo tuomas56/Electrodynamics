@@ -8,8 +8,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import electrodynamics.tileentity.TileConnection;
 import electrodynamics.tileentity.TileEntityRedWire;
-import electrodynamics.tileentity.TileEntityWire;
 
 public class BlockWire extends BlockContainer{
 	public BlockWire(int id){
@@ -48,25 +48,29 @@ public class BlockWire extends BlockContainer{
 	public void onNeighborBlockChange(World world, int x, int y, int z, int neighborId){
 		TileEntity tile = world.getBlockTileEntity(x, y, z);
 		
-		if(tile instanceof TileEntityWire){
-			((TileEntityRedWire) tile).updateEntity();
+		if(tile instanceof TileConnection){
+			((TileConnection) tile).updateEntity();
 		}
 	}
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int j, float k, float l, float m){
-		TileEntityRedWire wire = (TileEntityRedWire) world.getBlockTileEntity(x, y, z);
+		TileConnection wire = (TileConnection) world.getBlockTileEntity(x, y, z);
 		
 		return true;
 	}
 	
 	@Override
 	public int isProvidingWeakPower(IBlockAccess blockAccess, int x, int y, int z, int par5){
-		TileEntityRedWire wire = (TileEntityRedWire) blockAccess.getBlockTileEntity(x, y, z);
+		TileConnection wire = (TileConnection) blockAccess.getBlockTileEntity(x, y, z);
 		
-		if(wire.isPowered()){
-			return 15;
-		} else{
+		if (wire instanceof TileEntityRedWire) {
+			if(wire.isPowered()){
+				return 15;
+			} else{
+				return 0;
+			}
+		} else {
 			return 0;
 		}
 	}
