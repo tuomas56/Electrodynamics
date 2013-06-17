@@ -41,7 +41,8 @@ public class TileConnection extends TileEntity implements Connection{
 
 	{
 		this.dummyConnectionsList = new LinkedList<Integer>();
-		
+
+		dummyConnectionsList.add(Block.blockRedstone.blockID);
 		dummyConnectionsList.add(Block.lever.blockID);
 		dummyConnectionsList.add(Block.redstoneLampIdle.blockID);
 		dummyConnectionsList.add(Block.redstoneLampActive.blockID);
