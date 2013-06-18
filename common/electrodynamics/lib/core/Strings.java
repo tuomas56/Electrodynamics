@@ -159,6 +159,7 @@ public class Strings {
 	public static final String MACHINE_BASIC_KILN = "machine.basicKiln.name";
 	public static final String MACHINE_CONVEYOR_BELT = "machine.conveyor.belt";
 	public static final String MACHINE_STRUCTURE_PLACE_HOLDER = "machine.structure.place.holder";
+	public static final String MACHINE_CONVERTER_BLOCK = "machine.converter.block";
 
 	/* Internal table names */
 	public static final String BASIC_TABLE = "table.basic.name";

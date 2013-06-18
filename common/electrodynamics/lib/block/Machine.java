@@ -7,12 +7,14 @@ import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.machine.TileEntityBasicKiln;
 import electrodynamics.tileentity.machine.TileEntityBasicSieve;
 import electrodynamics.tileentity.machine.TileEntitySinteringOven;
+import electrodynamics.tileentity.machine.utilty.TileEntityConverter;
 
 public enum Machine {
 
 	SINTERING_FURNACE(Strings.MACHINE_SINTERING_OVEN, "sinteringOven", TileEntitySinteringOven.class),
 	BASIC_SIEVE(Strings.MACHINE_BASIC_SIEVE, "basicSieve", TileEntityBasicSieve.class),
-	BASIC_KILN(Strings.MACHINE_BASIC_KILN, "basicKiln", TileEntityBasicKiln.class);
+	BASIC_KILN(Strings.MACHINE_BASIC_KILN, "basicKiln", TileEntityBasicKiln.class),
+	CONVERTER(Strings.MACHINE_CONVERTER_BLOCK, "converter", TileEntityConverter.class);
 	
 	public String unlocalizedName;
 	public String textureFileForParticle;

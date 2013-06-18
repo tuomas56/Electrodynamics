@@ -40,6 +40,7 @@ import electrodynamics.tileentity.machine.TileEntityBasicSieve;
 import electrodynamics.tileentity.machine.TileEntitySinteringOven;
 import electrodynamics.tileentity.machine.TileEntityTable;
 import electrodynamics.tileentity.machine.utilty.TileEntityBlockDeployer;
+import electrodynamics.tileentity.machine.utilty.TileEntityConverter;
 import electrodynamics.tileentity.structure.TileEntityConveyorBelt;
 import electrodynamics.tileentity.structure.TileEntityHatch;
 import electrodynamics.tileentity.structure.TileEntityMobGrinder;
@@ -197,6 +198,7 @@ public class EDModuleMachine extends EDModule {
 		GameRegistry.registerTileEntity(TileEntityValve.class, Strings.STRUCTURE_COMPONENT_MACHINE_VALVE);
 		GameRegistry.registerTileEntity(TileEntityHatch.class, Strings.STRUCTURE_COMPONENT_MACHINE_HATCH);
 		GameRegistry.registerTileEntity(TileEntityBlockDeployer.class, Strings.UTILITY_BLOCK_DEPLOYER);
+		GameRegistry.registerTileEntity(TileEntityConverter.class, Strings.MACHINE_CONVERTER_BLOCK);
 		
 		CraftingManager.getInstance().tableManager = new RecipeManagerTable();
 		CraftingManager.getInstance().tableManager.initRecipes();
@@ -243,6 +245,7 @@ public class EDModuleMachine extends EDModule {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBasicKiln.class, new RenderBasicKiln());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStructure.class, new RenderTileStructure());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockDeployer.class, new RenderBlockDeployer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityConverter.class, new RenderBlockConverter());
 		
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockTable.blockID, new RenderItemTable());
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockMachine.blockID, new RenderItemMachine());
