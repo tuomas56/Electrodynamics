@@ -3,6 +3,8 @@ package electrodynamics;
 import java.io.File;
 import java.lang.reflect.Field;
 
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -38,6 +40,8 @@ public class Electrodynamics implements IEDApi {
 	public CraftingManager craftingManager;
 	public EDLanguage languageManager;
 
+	public static Material gas = new Material(MapColor.airColor);
+	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
 		Electrodynamics.instance.configFolder = new File(event.getModConfigurationDirectory(), ModInfo.GENERIC_MOD_ID);
