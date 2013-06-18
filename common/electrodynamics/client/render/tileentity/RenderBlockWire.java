@@ -43,7 +43,7 @@ public class RenderBlockWire extends TileEntitySpecialRenderer{
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glScalef(1.0F, -1.0F, -1.0F);
 		adjustWireConnectionsForRender(tile);
-		model.renderFrontWire(0.0625F, 5);
+		model.renderBottomWire(0.0625F, 5);
 		GL11.glPopMatrix();
 	}
 	
@@ -55,16 +55,16 @@ public class RenderBlockWire extends TileEntitySpecialRenderer{
 		switch(entry.getKey())
 		{
 		case NORTH:
-			model.renderFrontWire(scale, 1);
+			model.renderBottomWire(scale, directionalCallMapBottom.get(entry.getKey()));
 			break;
 		case SOUTH:
-			model.renderFrontWire(scale, 2);
+			model.renderBottomWire(scale, directionalCallMapBottom.get(entry.getKey()));
 			break;
 		case WEST:
-			model.renderFrontWire(scale, 3);
+			model.renderBottomWire(scale, directionalCallMapBottom.get(entry.getKey()));
 			break;
 		case EAST:
-			model.renderFrontWire(scale, 4);
+			model.renderBottomWire(scale, directionalCallMapBottom.get(entry.getKey()));
 			break;
 		default:
 			break;
