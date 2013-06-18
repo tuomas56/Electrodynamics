@@ -31,7 +31,7 @@ public final class ItemBlockWireRenderer implements IItemRenderer{
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data){
 		GL11.glPushMatrix();
-		GL11.glDisable(GL11.GL_LIGHTING);
+		// GL11.glDisable(GL11.GL_LIGHTING);
 		
 		switch(type)
 		{
@@ -48,7 +48,7 @@ public final class ItemBlockWireRenderer implements IItemRenderer{
 			break;
 		}
 		
-		GL11.glEnable(GL11.GL_LIGHTING);
+		// GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 	}
 	
@@ -57,6 +57,6 @@ public final class ItemBlockWireRenderer implements IItemRenderer{
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(0.0F, 0.0F, 0.0F, 0.0F);
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture("/mods/electrodynamics/textures/misc/redAlloyWire.png");
-		model.renderAll(0.0625F);
+		model.renderBottomWireAll();
 	}
 }

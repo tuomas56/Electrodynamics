@@ -10,9 +10,10 @@ import org.lwjgl.opengl.GL11;
 
 import electrodynamics.client.model.ModelWire;
 import electrodynamics.tileentity.Connection;
-import electrodynamics.tileentity.TileConnection;
+import electrodynamics.tileentity.TileEntityRedWire;
 
 public class RenderBlockWire extends TileEntitySpecialRenderer{
+	private final float scale = 0.0625F;
 	private final ModelWire model;
 	
 	public RenderBlockWire(){
@@ -25,43 +26,45 @@ public class RenderBlockWire extends TileEntitySpecialRenderer{
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glScalef(1.0F, -1.0F, -1.0F);
-		model.renderCenter(0.0265F);
-		renderSides(tile);
+		adjustWireConnectionsForRender(tile);
+		model.renderBottomWire(0.0625F, 5);
 		GL11.glPopMatrix();
-	}
-	
-	private void renderSides(TileEntity tile){
-		TileConnection wire = (TileConnection) tile;
-		
-		for(Entry<ForgeDirection, Connection> entry : wire.allConnections().entrySet()){
-			if(isConnected(entry)){
-				renderSide(entry.getKey());
-			} else{
-				continue;
-			}
-		}
 	}
 	
 	private boolean isConnected(Entry<ForgeDirection, Connection> entry){
 		return entry.getValue() != null;
 	}
 	
-	private void renderSide(ForgeDirection direction){
-		switch(direction)
+	private void renderForgeDirection(Entry<ForgeDirection, Connection> entry){
+		switch(entry.getKey())
 		{
-		case EAST:
-			model.renderEast(0.0625F);
-			break;
-		case WEST:
-			model.renderWest(0.0625F);
-			break;
 		case NORTH:
-			model.renderNorth(0.0625F);
+			model.renderBottomWire(scale, 4);
 			break;
 		case SOUTH:
-			model.renderSouth(0.0625F);
+			model.renderBottomWire(scale, 2);
+			break;
+		case WEST:
+			model.renderBottomWire(scale, 3);
+			break;
+		case EAST:
+			model.renderBottomWire(scale, 1);
+			break;
 		default:
 			break;
+		}
+	}
+	
+	private void adjustWireConnectionsForRender(TileEntity tile){
+		TileEntityRedWire wire = (TileEntityRedWire) tile;
+		
+		for(Entry<ForgeDirection, Connection> connection : wire.allConnections().entrySet()){
+			if(isConnected(connection)){
+				renderForgeDirection(connection);
+				continue;
+			} else{
+				continue;
+			}
 		}
 	}
 }
