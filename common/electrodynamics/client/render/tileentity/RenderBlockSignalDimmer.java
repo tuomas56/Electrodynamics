@@ -27,7 +27,7 @@ public class RenderBlockSignalDimmer extends TileEntitySpecialRenderer{
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glScalef(1.0F, -1.0F, -1.0F);
 		GL11.glRotatef(0.0F, 0.0F, 0.0F, 0.0F);
-		model.renderAllButWires(0.0625F);
+		model.renderAll(0.0625F);
 		// attuneForConnections(dimmer);
 		GL11.glPopMatrix();
 	}
