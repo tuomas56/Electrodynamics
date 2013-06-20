@@ -7,12 +7,12 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import electrodynamics.block.BlockSignalDimmer;
 import electrodynamics.block.BlockWire;
 import electrodynamics.block.EDBlocks;
+import electrodynamics.block.item.ItemBlockRedWire;
 import electrodynamics.client.render.item.ItemBlockSignalDimmerRenderer;
 import electrodynamics.client.render.item.ItemBlockWireRenderer;
 import electrodynamics.client.render.tileentity.RenderBlockSignalDimmer;
 import electrodynamics.client.render.tileentity.RenderBlockWire;
 import electrodynamics.core.lang.EDLanguage;
-import electrodynamics.item.ItemRedWire;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityRedWire;
@@ -23,7 +23,7 @@ public class EDModuleLogic extends EDModule{
 	public void preInit(){
 		EDBlocks.blockRedWire = new BlockWire(BlockIDs.BLOCK_RED_WIRE_ID);
 		EDBlocks.blockSignalDimmer = new BlockSignalDimmer(3001); // Change this to a configurable ID. Look at the BlockIDs class + ConfigurationHandler.class
-		GameRegistry.registerBlock(EDBlocks.blockRedWire, ItemRedWire.class, Strings.BLOCK_RED_WIRE_NAME);
+		GameRegistry.registerBlock(EDBlocks.blockRedWire, ItemBlockRedWire.class, Strings.BLOCK_RED_WIRE_NAME);
 		GameRegistry.registerBlock(EDBlocks.blockSignalDimmer, Strings.BLOCK_SIGNAL_DIMMER_NAME);
 		LanguageRegistry.addName(EDBlocks.blockSignalDimmer, EDLanguage.getInstance().translate("tile." + Strings.BLOCK_SIGNAL_DIMMER_NAME));
 		LanguageRegistry.addName(EDBlocks.blockRedWire, EDLanguage.getInstance().translate("tile." + Strings.BLOCK_RED_WIRE_NAME));
