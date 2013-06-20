@@ -340,13 +340,13 @@ public class ModelWire extends ModelBase{
 			backWire2.render(f);
 			break;
 		case 3:
-			backWire2.render(f);
+			backWire3.render(f);
 			break;
 		case 4:
 			backWire4.render(f);
 			break;
 		case 5:
-			backWire4.render(f);
+			backWire5.render(f);
 			break;
 		default:
 			break;

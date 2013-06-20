@@ -12,6 +12,7 @@ public class TileConnection extends TileEntity implements Connection{
 	private final HashMap<ForgeDirection, Connection> connections;
 	private boolean isPowered;
 	private final LinkedList<Integer> dummyConnectionsList;
+	private int orientation;
 	
 	/**
 	 * Index #1: East
@@ -32,6 +33,14 @@ public class TileConnection extends TileEntity implements Connection{
 	
 	protected TileConnection(){
 		this(false);
+	}
+	
+	public int getOrientation(){
+		return this.orientation;
+	}
+	
+	public void setOrientation(int orientation){
+		this.orientation = orientation;
 	}
 	
 	protected TileConnection(boolean isPowered){
