@@ -6,8 +6,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.oredict.OreDictionary;
-import electrodynamics.lib.block.Ore;
 import electrodynamics.tileentity.machine.TileEntityMachine;
 
 public class TileEntityConverter extends TileEntityMachine {
