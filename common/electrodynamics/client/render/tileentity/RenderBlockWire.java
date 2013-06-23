@@ -1,5 +1,12 @@
 package electrodynamics.client.render.tileentity;
 
+import static net.minecraftforge.common.ForgeDirection.DOWN;
+import static net.minecraftforge.common.ForgeDirection.EAST;
+import static net.minecraftforge.common.ForgeDirection.NORTH;
+import static net.minecraftforge.common.ForgeDirection.SOUTH;
+import static net.minecraftforge.common.ForgeDirection.UP;
+import static net.minecraftforge.common.ForgeDirection.WEST;
+
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -12,8 +19,6 @@ import org.lwjgl.opengl.GL11;
 import electrodynamics.client.model.ModelWire;
 import electrodynamics.tileentity.Connection;
 import electrodynamics.tileentity.TileEntityRedWire;
-
-import static net.minecraftforge.common.ForgeDirection.*;
 
 public class RenderBlockWire extends TileEntitySpecialRenderer{
 	private final float scale = 0.0625F;
@@ -39,32 +44,38 @@ public class RenderBlockWire extends TileEntitySpecialRenderer{
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glScalef(1.0F, -1.0F, -1.0F);
-		renderOrientation(((TileEntityRedWire) tile).getOrientation());
+		renderOrientation(oridnal.get(((TileEntityRedWire) tile).getOrientation()), 5);
 		GL11.glPopMatrix();
 	}
 	
-	private void renderOrientation(int side){
-		ForgeDirection dir = oridnal.get(side);
-
+	private void renderConnections(TileEntity tile, int orientation){
+		for(Entry<ForgeDirection, Connection> entry : ((TileEntityRedWire) tile).allConnections().entrySet()){
+			if(isConnected(entry)){
+				renderOrientation(entry.getKey(), orientation);
+			}
+		}
+	}
+	
+	private void renderOrientation(ForgeDirection dir, int side){
 		switch(dir)
 		{
 		case UP:
-			model.renderTopWire(0.0625F, 5);
+			model.renderTopWire(0.0625F, side);
 			break;
 		case DOWN:
-			model.renderBottomWire(0.0625F, 5);
+			model.renderBottomWire(0.0625F, side);
 			break;
 		case WEST:
-			model.renderLeftWire(0.0625F, 5);
+			model.renderLeftWire(0.0625F, side);
 			break;
 		case EAST:
-			model.renderRightWire(0.0625F, 5);
+			model.renderRightWire(0.0625F, side);
 			break;
 		case NORTH:
-			model.renderFrontWire(0.0625F, 5);
+			model.renderFrontWire(0.0625F, side);
 			break;
 		case SOUTH:
-			model.renderBackWire(0.0625F, 5);
+			model.renderBackWire(0.0625F, side);
 			break;
 		default:
 			break;
