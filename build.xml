@@ -1,74 +1,135 @@
 <?xml version="1.0" ?> 
-<project name="Electrodynamics">
-	
-	<property file="build.properties" />
-	<property file="version.properties" />
-	
-	<target name="clean">
-		<delete file="${dir.forge}\mcp\src\minecraft\mcmod.info" />
-		<delete dir="${dir.forge}\mcp\src\minecraft\${dir.src.root}" />
-		<delete dir="${dir.forge}\mcp\reobf\minecraft" />
+<project name="Electrodynamics" default="version" basedir=".">
+	<property file="build_info.properties"/>
+	<property name="build.number" value="${build.major.number}.${build.minor.number}.${build.revision.number}"/>
+	<property name="data.package" value=""/>
+
+	<target name="version">
+		<echo>${build.number}</echo>
 	</target>
-	
-	<target name="build">
-		<copy todir="${dir.forge}\mcp\src\minecraft">
-			<fileset dir="${dir.source}\${dir.src}\" />
+
+	<target name="setup">
+		<mkdir dir="${dropbox.dir}"/>
+	</target>
+
+	<target name="finalizeMajor">
+		<antcall target="buildMajor"/>
+		<antcall target="zipSrc"/>
+		<antcall target="updateDB"/>
+	</target>
+
+	<target name="finalizeMinor">
+		<antcall target="buildMinor"/>
+		<antcall target="zipSrc"/>
+		<antcall target="updateDB"/>
+	</target>
+
+	<target name="finalizeRevision">
+		<antcall target="buildRevision"/>
+		<antcall target="zipSrc"/>
+		<antcall target="updateDB"/>
+	</target>
+
+	<target name="updateDB">
+		<copy todir="${dropbox.dir}">
+			<fileset dir="${build.output.dir}"/>
 		</copy>
 	</target>
-	
-	<target name="replace_tokens">
-		<replace dir="${dir.forge}\mcp\src\minecraft\" token="@VERSION@" value="${release.mod.version}" />
-		<replace dir="${dir.forge}\mcp\src\minecraft\" token="@MCVERSION@" value="${release.minecraft.version}" />
+
+	<target name="buildMajor">
+		<antcall target="majorUpdate"/>
+		<antcall target="swapVersion"/>
+		<antcall target="compile"/>
+		<antcall target="reobf"/>
+		<antcall target="jarUniversal"/>
+		<antcall target="swapVersionBack"/>
 	</target>
 
-	<target name="recompile">
-		<exec dir="${dir.forge}\mcp" executable="cmd" os="Windows 7">
-			<arg line="/c recompile.bat" />
-		</exec>
-		<exec dir="${dir.forge}\mcp" executable="cmd" os="Windows 8">
-			<arg line="/c recompile.bat" />
-		</exec>
-		<exec dir="${dir.forge}\mcp" executable="bash" os="Linux">
-			<arg line="recompile.sh" />
-		</exec>
-		<exec dir="${dir.forge}\mcp" executable="bash" os="Mac OS X">
-			<arg line="recompile.sh" />
-		</exec>
+	<target name="buildMinor">
+		<antcall target="minorUpdate"/>
+		<antcall target="swapVersion"/>
+		<antcall target="compile"/>
+		<antcall target="reobf"/>
+		<antcall target="jarUniversal"/>
+		<antcall target="swapVersionBack"/>
 	</target>
 
-	<target name="reobfuscate_srg">
-		<exec dir="${dir.forge}\mcp" executable="cmd" os="Windows 7">
-			<arg line="/c reobfuscate_srg.bat" />
-		</exec>
-		<exec dir="${dir.forge}\mcp" executable="cmd" os="Windows 8">
-			<arg line="/c reobfuscate_srg.bat" />
-		</exec>
-		<exec dir="${dir.forge}\mcp" executable="bash" os="Linux">
-			<arg line="reobfuscate_srg.sh" />
-		</exec>
-		<exec dir="${dir.forge}\mcp" executable="bash" os="Mac OS X">
-			<arg line="reobfuscate_srg.sh" />
-		</exec>
+	<target name="buildRevision">
+		<antcall target="revisionUpdate"/>
+		<antcall target="swapVersion"/>
+		<antcall target="compile"/>
+		<antcall target="reobf"/>
+		<antcall target="jarUniversal"/>
+		<antcall target="swapVersionBack"/>
 	</target>
-	
-	<target name="release_srg">
-		<!-- Prep for the release -->
-		<antcall target="clean" />
-		<antcall target="build" />
-		<antcall target="replace_tokens" />
-		<antcall target="recompile" />		
-		<antcall target="reobfuscate_srg" />
-		
-		<!-- Build the jar -->
-		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
-		<jar destfile="${dir.share}\${release.minecraft.version}\${release.mod.version}\${release.mod.name}-universal-${release.mod.version}.jar">
-			<fileset dir="${dir.forge}\mcp\src\minecraft\${dir.src.root}\"	includes="mcmod.info" />
-			<fileset dir="${dir.forge}\mcp\reobf\minecraft" />
-			<fileset dir="${dir.source}\${dir.rsc}" />
+
+	<target name="jarUniversal">
+		<jar destfile="${build.output.dir}/Electrodynamics_${build.number}_(Universal).jar">
+			<fileset dir="${build.input.dir}"/>
+			<fileset dir="${build.input.textures.dir"/>
+
+			<manifest>
+				<attribute name="Built-By" value="Electrodynamics Team (ANT Auto Build)"/>
+				<attribute name="Implementation-Vendor" value="Electrodynamics Team"/>
+				<attribute name="Implementation-Title" value="${ant.project.name}"/>
+				<attribute name="Implementation-Version" value="${build.number}"/>
+			</manifest>
 		</jar>
-		
-		<!-- Clean up the MCP source now that we are done -->
-		<antcall target="clean" />
 	</target>
 
+	<target name="zipSrc">
+		<zip destfile="${build.output.dir}/Electrodynamics_${build.number}_(SRC).zip">
+			<fileset dir="${build.src.dir}"/>
+			<fileset dir="${build.src.textures.dir}"/>
+		</zip>
+	</target>
+
+	<target name="compile">
+		<exec dir="${mcp.dir}" executable="sh" osfamily="unix">
+			<arg value="recompile.sh"/>
+		</exec>
+
+		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows">
+			<arg value="recompile.bat"/>
+		</exec>
+	</target>
+
+	<target name="reobf">
+		<exec dir="${mcp.dir}" executable="sh" osfamily="unix">
+			<arg value="reobfuscate.sh"/>
+		</exec>
+
+		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows">
+			<arg value="reobfuscate.bat"/>
+		</exec>
+	</target>
+
+	<target name="majorUpdate">
+		<propertyfile file="build_info.properties">
+			<entry key="build.major.number" type="int" operation="+" value="1" pattern="00"/>
+			<entry key="build.minor.number" type="int" value="0" pattern="00"/>
+			<entry key="build.revision.number" type="int" value="0" pattern="00"/>
+		</propertyfile>
+	</target>
+
+	<target name="minorUpdate">
+		<propertyfile file="build_info.properties">
+			<entry key="build.minor.number" type="int" operation="+" value="1" pattern="00"/>
+			<entry key="build.revision.number" type="int" value="0" pattern="00"/>
+		</propertyfile>
+	</target>
+
+	<target name="revisionUpdate">
+		<propertyfile file="build_info.properties">
+			<entry key="build.revision.number" type="int" operation="+" value="1" pattern="00"/>
+		</propertyfile>
+	</target>
+
+	<target name="swapVersion">
+		<replace file="${data.package}/" token="@VERSION@" value="${build.number}"/>
+	</target>
+
+	<target name="swapVersionBack">
+		<replace file="${data.pacakge}/" token="${build.number}" value="@VERSION@"/>
+	</target>
 </project>
