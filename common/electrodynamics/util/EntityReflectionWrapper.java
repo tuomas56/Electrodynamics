@@ -2,7 +2,7 @@ package electrodynamics.util;
 
 import java.lang.reflect.Method;
 
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import electrodynamics.Electrodynamics;
 import electrodynamics.core.EDLogger;
 
@@ -14,15 +14,15 @@ public class EntityReflectionWrapper {
 	public static final String OBF_DEATH_SOUND = "func_70673_aS";
 	public static final String DEATH_SOUND = "getDeathSound";
 	
-	private EntityLiving entity;
+	private EntityLivingBase entity;
 	
-	public EntityReflectionWrapper(EntityLiving entity) {
+	public EntityReflectionWrapper(EntityLivingBase entity) {
 		this.entity = entity;
 	}
 	
 	public int getMainDropID() {
 		try {
-			Method dropID = EntityLiving.class.getDeclaredMethod(Electrodynamics.instance.obfuscated == true ? OBF_DROP_ID : DROP_ID, new Class[0]);
+			Method dropID = EntityLivingBase.class.getDeclaredMethod(Electrodynamics.instance.obfuscated == true ? OBF_DROP_ID : DROP_ID, new Class[0]);
 			dropID.setAccessible(true);
 			return ((Integer)dropID.invoke(this.entity, new Object[0])).intValue();
 		} catch(Exception ex) {
@@ -35,7 +35,7 @@ public class EntityReflectionWrapper {
 	
 	public String getDeathSound() {
 		try {
-			Method deathSound = EntityLiving.class.getDeclaredMethod(Electrodynamics.instance.obfuscated == true ? OBF_DEATH_SOUND : DEATH_SOUND, new Class[0]);
+			Method deathSound = EntityLivingBase.class.getDeclaredMethod(Electrodynamics.instance.obfuscated == true ? OBF_DEATH_SOUND : DEATH_SOUND, new Class[0]);
 			deathSound.setAccessible(true);
 			return ((String)deathSound.invoke(this.entity, new Object[0]));
 		} catch(Exception ex) {

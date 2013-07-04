@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
@@ -15,7 +16,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.relauncher.RelaunchLibraryManager;
+import cpw.mods.fml.relauncher.CoreModManager;
 import electrodynamics.api.IEDApi;
 import electrodynamics.api.crafting.ICraftingManager;
 import electrodynamics.configuration.ConfigurationHandler;
@@ -42,14 +43,14 @@ public class Electrodynamics implements IEDApi {
 
 	public static Material gas = new Material(MapColor.airColor);
 	
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		Electrodynamics.instance.configFolder = new File(event.getModConfigurationDirectory(), ModInfo.GENERIC_MOD_ID);
 		ConfigurationHandler.handleConfig(new File(configFolder, ModInfo.GENERIC_MOD_ID + ".cfg"));
 
 		try {
 			Field deobfBool;
-			deobfBool = RelaunchLibraryManager.class.getDeclaredField("deobfuscatedEnvironment");
+			deobfBool = CoreModManager.class.getDeclaredField("deobfuscatedEnvironment");
 			deobfBool.setAccessible(true);
 			obfuscated = !deobfBool.getBoolean(Boolean.class);
 		} catch (Exception e) {
@@ -59,12 +60,12 @@ public class Electrodynamics implements IEDApi {
 		proxy.preInit(event);
 	}
 
-	@Init
+	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.init(event);
 	}
 
-	@PostInit
+	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		proxy.postInit(event);
 	}

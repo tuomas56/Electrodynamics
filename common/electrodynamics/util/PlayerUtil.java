@@ -3,7 +3,7 @@ package electrodynamics.util;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,11 +29,11 @@ public class PlayerUtil {
 		return head;
 	}
 	
-	public static ForgeDirection determine3DOrientation_F(World world, int x, int y, int z, EntityLiving entity) {
+	public static ForgeDirection determine3DOrientation_F(World world, int x, int y, int z, EntityLivingBase entity) {
 		return (ForgeDirection.getOrientation(determine3DOrientation_I(world, x, y, z, entity)));
 	}
 	
-	public static int determine3DOrientation_I(World world, int x, int y, int z, EntityLiving entity) {
+	public static int determine3DOrientation_I(World world, int x, int y, int z, EntityLivingBase entity) {
 		if (MathHelper.abs((float) entity.posX - (float) x) < 2.0F && MathHelper.abs((float) entity.posZ - (float) z) < 2.0F) {
 			double d0 = entity.posY + 1.82D - (double) entity.yOffset;
 

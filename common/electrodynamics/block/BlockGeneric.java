@@ -1,15 +1,15 @@
 package electrodynamics.block;
 
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import electrodynamics.tileentity.TileEntityGeneric;
-import electrodynamics.util.BlockUtil;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,10 +18,10 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import electrodynamics.tileentity.TileEntityGeneric;
+import electrodynamics.util.BlockUtil;
 
 
 public abstract class BlockGeneric extends BlockContainer {
@@ -75,7 +75,7 @@ public abstract class BlockGeneric extends BlockContainer {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving living, ItemStack itemStack) {
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase living, ItemStack itemStack) {
 		// set the front side to the metadata
 		ForgeDirection front = BlockUtil.getSideFacingEntity( living, x, z );
 		int metadata = front.ordinal();

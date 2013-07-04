@@ -6,6 +6,7 @@ import java.util.Random;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -53,7 +54,7 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 			for (Entity entity : entities) {
 				if (entity instanceof EntityLiving) {
 					collectDropsFromEntity((EntityLiving) entity);
-					entity.attackEntityFrom(new DamageSourceBlock(), ((EntityLiving)entity).getHealth());
+					entity.attackEntityFrom(new DamageSourceBlock(), ((EntityLivingBase)entity).func_110143_aJ());
 				} else if (entity instanceof EntityItem) {
 					ItemStack stack = ((EntityItem)entity).getEntityItem();
 					boolean flag = false;
@@ -79,8 +80,8 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 		}
 	}
 	
-	private void collectDropsFromEntity(EntityLiving entity) {
-		if (entity.getHealth() > 0) {
+	private void collectDropsFromEntity(EntityLivingBase entity) {
+		if (entity.func_110143_aJ() > 0) {
 			if (!(entity instanceof EntityPlayer)) {
 				EntityReflectionWrapper erw = new EntityReflectionWrapper(entity);
 				int count = new Random().nextInt(3);
