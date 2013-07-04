@@ -45,7 +45,6 @@ public class RenderBlockOre extends BlockRenderer implements ISimpleBlockRenderi
 		GL11.glPopMatrix();
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 		int bb = setBrightness(world, x, y, z, block);
