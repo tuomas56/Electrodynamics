@@ -33,4 +33,18 @@ public class StringUtil {
 		return strings;
 	}
 
+	public static String condenseStringArray(String[] array, char splitter) {
+		StringBuilder sb = new StringBuilder();
+		for (int i=0; i<array.length; i++) {
+			String string = array[i];
+			
+			sb.append(string);
+			if (i != array.length - 1) {
+				sb.append(splitter);
+				sb.append(" ");
+			}
+		}
+		return sb.toString();
+	}
+	
 }
