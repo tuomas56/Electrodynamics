@@ -88,7 +88,7 @@ public class ItemTray extends Item implements IInventoryItem {
 	}
 
 	public static enum TrayType {
-		OVEN_TRAY("tool/sinteringTray", GuiHandler.GuiType.TRAY), KILN_TRAY ("tool/kilnTray", GuiHandler.GuiType.TRAY_KILN);
+		OVEN_TRAY("tool/sinteringTray", GuiHandler.GuiType.METAL_TRAY), KILN_TRAY ("tool/kilnTray", GuiHandler.GuiType.KILN_TRAY);
 
 		TrayType(String textureFile, GuiHandler.GuiType guiType) {
 			this.textureFile = textureFile;

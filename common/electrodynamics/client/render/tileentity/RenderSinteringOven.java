@@ -20,7 +20,7 @@ import electrodynamics.client.model.ModelMetalTray;
 import electrodynamics.client.model.ModelSinteringOven;
 import electrodynamics.client.render.util.RenderUtil;
 import electrodynamics.item.ItemIngot;
-import electrodynamics.lib.client.Models;
+import electrodynamics.lib.client.Textures;
 import electrodynamics.tileentity.machine.TileEntityMachine;
 import electrodynamics.tileentity.machine.TileEntitySinteringOven;
 import electrodynamics.util.InventoryUtil;
@@ -69,7 +69,7 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 			}
 		}
 
-		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_SINT_FURNACE);
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.SINTERING_FURNACE.resource);
 
 		modelSinteringOven.rotateDoor(((TileEntitySinteringOven)tile).doorAngle);
 		modelSinteringOven.renderAll(0.0625F);
@@ -90,7 +90,7 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 		GL11.glTranslated(0, -0.5, 0);
 		GL11.glRotatef(90, 0, 1, 0);
 		
-		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_METAL_TRAY);
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.METAL_TRAY.resource);
 		modelMetalTray.render(0.0625F);
 
 		if (inv != null && inv.length > 0) {
@@ -148,16 +148,16 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 		GL11.glRotatef(90, 0, 1, 0);
 		GL11.glTranslated(-.218, 0, -.09);
 		
-		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_INGOT);
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.INGOT.resource);
 		this.modelIngot.render(0.0625F);
 	}
 	
 	public void renderChicken(World world, ItemStack stack) {
 		if (chickenEasterEgg) {
 			if (stack.getItem() == Item.chickenRaw) {
-				Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_CHICKEN);
+				Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.CHICKEN_RAW.resource);
 			} else if (stack.getItem() == Item.chickenCooked) {
-				Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_CHICKEN_COOKED);
+				Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.CHICKEN_COOKED.resource);
 			}
 			
 			this.modelChicken.render(0.0625F);

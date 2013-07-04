@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import electrodynamics.client.fx.FXLightningBoltCommon.Segment;
+import electrodynamics.lib.client.Textures;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.util.EDVector3;
 
@@ -197,8 +198,8 @@ public class FXLightningBolt extends EntityFX {
 			tessellator.draw();
 		GL11.glPushMatrix();
 
-		Minecraft.getMinecraft().renderEngine.bindTexture(ModInfo.RESOURCES_BASE + "/misc/bolt_small.png");
-
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.LIGHTNING_BOLT.resource);
+		
 		GL11.glDepthMask(false);
 		GL11.glEnable(3042);
 

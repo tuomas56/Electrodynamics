@@ -10,7 +10,7 @@ import electrodynamics.client.model.ModelMobGrinder;
 import electrodynamics.client.model.ModelSinteringFurnace;
 import electrodynamics.client.model.ModelTechne;
 import electrodynamics.lib.block.StructureComponent;
-import electrodynamics.lib.client.Models;
+import electrodynamics.lib.client.Textures;
 import electrodynamics.mbs.MultiBlockStructure;
 import electrodynamics.tileentity.structure.TileEntityStructure;
 
@@ -40,7 +40,7 @@ public class RenderTileStructure extends TileEntitySpecialRenderer {
 				
 				GL11.glTranslated(x + .5, y + .5, z + .5);
 				
-				Minecraft.getMinecraft().renderEngine.bindTexture(component.getModelTexture());
+				Minecraft.getMinecraft().func_110434_K().func_110577_a(component.getModelTexture());
 				component.applyGLTransformations((byte) 0, structure);
 				if (component.alternativeRender()) {
 					component.getModel().render(0.0625F);
@@ -67,7 +67,7 @@ public class RenderTileStructure extends TileEntitySpecialRenderer {
 					this.mobGrinderBladeRotation = 0;
 				}
 				
-				Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_MOB_GRINDER);
+				Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.MOB_GRINDER_CLEAN.resource);
 				
 				GL11.glTranslated(.5, 1.5, .5);
 				GL11.glRotatef(180, 1, 0, 0);
@@ -79,7 +79,7 @@ public class RenderTileStructure extends TileEntitySpecialRenderer {
 				GL11.glColor4f(1, 1, 1, 1);
 				this.mobGrinder.render(0.0625F);
 			} else if (mbs.getUID().equals("SintFurnace")) {
-				Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_SINT_OVEN);
+				Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.SINTERING_OVEN.resource);
 				
 				GL11.glTranslated(.5, 1.5, .5);
 				GL11.glRotatef(180, 1, 0, 0);

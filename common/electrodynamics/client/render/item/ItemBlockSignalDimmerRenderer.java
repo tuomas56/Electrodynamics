@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 
 import electrodynamics.client.model.ModelSignalDimmer;
+import electrodynamics.lib.client.Textures;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
@@ -53,7 +54,7 @@ public class ItemBlockSignalDimmerRenderer implements IItemRenderer{
 		GL11.glScalef(scale, scale, scale);
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(0.0F, 0.0F, 0.0F, 0.0F);
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture("/mods/electrodynamics/textures/misc/signalDimmer.png");
+		FMLClientHandler.instance().getClient().func_110434_K().func_110577_a(Textures.SIGNAL_DIMMER.resource);
 		model.renderAllButWires(0.0625F);
 	}
 }

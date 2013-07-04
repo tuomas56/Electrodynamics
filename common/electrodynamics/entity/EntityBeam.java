@@ -5,8 +5,9 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntity;
@@ -17,6 +18,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import electrodynamics.lib.client.Textures;
 import electrodynamics.lib.core.ModInfo;
 
 //TODO Improve
@@ -195,7 +197,7 @@ public class EntityBeam extends Entity {
 	
 	@SideOnly(Side.CLIENT)
 	public void renderParticle(Tessellator tessellator, float f, float f1, float f2, float f3, float f4, float f5) {
-		EntityLiving renderentity = ModLoader.getMinecraftInstance().renderViewEntity;
+		EntityLivingBase renderentity = Minecraft.getMinecraft().renderViewEntity;
 		int visibleDistance = 50;
 		if (!ModLoader.getMinecraftInstance().gameSettings.fancyGraphics) visibleDistance = 25;
 		if (renderentity.getDistance(this.posX, this.posY, this.posZ) > visibleDistance) this.particleMaxAge = 0;
@@ -217,7 +219,7 @@ public class EntityBeam extends Entity {
 		if ((this.pulse) && (this.particleMaxAge - this.particleAge <= 4)) {
 			op = 0.4F - (4 - (this.particleMaxAge - this.particleAge)) * 0.1F;
 		}
-		Minecraft.getMinecraft().renderEngine.bindTexture(ModInfo.RESOURCES_BASE + "/misc/beam1.png");
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.BEAM.resource);
 
 		GL11.glTexParameterf(3553, 10242, 10497.0F);
 		GL11.glTexParameterf(3553, 10243, 10497.0F);
@@ -276,7 +278,7 @@ public class EntityBeam extends Entity {
 
 		GL11.glPopMatrix();
 
-		Minecraft.getMinecraft().renderEngine.bindTexture("/particles.png");
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(new ResourceLocation("/particles.png"));
 		tessellator.startDrawingQuads();
 		this.prevSize = size;
 	}

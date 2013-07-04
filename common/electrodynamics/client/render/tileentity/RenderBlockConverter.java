@@ -19,8 +19,6 @@ public class RenderBlockConverter extends TileEntitySpecialRenderer {
 	}
 	
 	public void renderModel(TileEntityConverter tile, double x, double y, double z) {
-		Minecraft.getMinecraft().renderEngine.resetBoundTexture();
-		
 		if( ((TileEntityMachine) tile).rotation != null ) {
 			switch( ((TileEntityMachine) tile).rotation ) {
 				case SOUTH:

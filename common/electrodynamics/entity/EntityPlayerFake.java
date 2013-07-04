@@ -2,13 +2,16 @@ package electrodynamics.entity;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 
 public class EntityPlayerFake extends EntityPlayer {
+	
+	public static final String USERNAME = "[Electrodynamics]";
+			
 	public EntityPlayerFake(World par1World) {
-		super(par1World);
-		this.username = "[Electrodynamics]";
+		super(par1World, USERNAME);
 		this.addedToChunk = true;
 	}
 
@@ -37,5 +40,10 @@ public class EntityPlayerFake extends EntityPlayer {
 
 	public double getDistance(double x, double y, double z) {
 		return 0.0D;
+	}
+
+	@Override
+	public void func_110122_a(ChatMessageComponent chatmessagecomponent) {
+		// Something something chat?
 	}
 }

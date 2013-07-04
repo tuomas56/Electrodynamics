@@ -2,6 +2,7 @@ package electrodynamics.core.handler;
 
 import electrodynamics.client.gui.GuiTrayKiln;
 import electrodynamics.inventory.container.ContainerTrayKiln;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -13,19 +14,20 @@ import electrodynamics.client.gui.GuiTray;
 import electrodynamics.interfaces.IInventoryItem;
 import electrodynamics.inventory.container.ContainerTeslaModule;
 import electrodynamics.inventory.container.ContainerTray;
+import electrodynamics.lib.client.Textures;
 import electrodynamics.lib.core.ModInfo;
 
 public class GuiHandler implements IGuiHandler {
 
 	public enum GuiType {
-		TRAY("/gui/trap.png"),
-		TESLA_MODULE(ModInfo.RESOURCE_DIR + "/textures/gui/teslaModule.png"),
-		TRAY_KILN(ModInfo.RESOURCE_DIR + "/textures/gui/kilnTray.png");
+		METAL_TRAY(Textures.GUI_METAL_TRAY),
+		TESLA_MODULE(Textures.GUI_TESLA_MODULE),
+		KILN_TRAY(Textures.GUI_KILN_TRAY);
 		
-		public String guiFile;
+		public Textures texture;
 		
-		private GuiType(String guiFile) {
-			this.guiFile = guiFile;
+		private GuiType(Textures texture) {
+			this.texture = texture;
 		}
 	}
 	
@@ -48,13 +50,13 @@ public class GuiHandler implements IGuiHandler {
 		ItemStack held = player.inventory.getCurrentItem();
 		
 		switch(type) {
-			case TRAY: {
+			case METAL_TRAY: {
 				return side == Side.SERVER ? new ContainerTray(player, ((IInventoryItem)held.getItem()).getInventory(held)) : new GuiTray(player, new ContainerTray(player, ((IInventoryItem)held.getItem()).getInventory(held)));
 			}
 			case TESLA_MODULE:  {
 				return side == Side.SERVER ? new ContainerTeslaModule(player, ((IInventoryItem)held.getItem()).getInventory(held)) : new GuiTeslaModule(player, new ContainerTeslaModule(player, ((IInventoryItem)held.getItem()).getInventory(held)));
 			}
-			case TRAY_KILN:
+			case KILN_TRAY:
 				return side == Side.SERVER ? new ContainerTrayKiln(player, ((IInventoryItem)held.getItem()).getInventory(held)) : new GuiTrayKiln(player, new ContainerTrayKiln(player, ((IInventoryItem)held.getItem()).getInventory(held)));
 		}
 		

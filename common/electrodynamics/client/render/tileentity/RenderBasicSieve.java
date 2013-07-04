@@ -7,7 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 import electrodynamics.client.model.ModelBasicSieve;
-import electrodynamics.lib.client.Models;
+import electrodynamics.lib.client.Textures;
 import electrodynamics.tileentity.machine.TileEntityBasicSieve;
 import electrodynamics.tileentity.machine.TileEntityMachine;
 
@@ -46,7 +46,7 @@ public class RenderBasicSieve extends TileEntitySpecialRenderer {
 				break;
 			}
 
-			Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_BASIC_SIEVE);
+			Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.BASIC_SIEVE.resource);
 
 			modelBasicSieve.render(0.0625F);
 		}

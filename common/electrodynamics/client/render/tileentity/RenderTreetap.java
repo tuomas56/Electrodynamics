@@ -2,6 +2,7 @@ package electrodynamics.client.render.tileentity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
@@ -11,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 import electrodynamics.client.model.ModelLatexBucket;
 import electrodynamics.client.model.ModelTreeTap;
 import electrodynamics.client.render.util.LiquidRenderer;
-import electrodynamics.lib.client.Models;
+import electrodynamics.lib.client.Textures;
 import electrodynamics.tileentity.TileEntityTreetap;
 
 public class RenderTreetap extends TileEntitySpecialRenderer {
@@ -53,7 +54,7 @@ public class RenderTreetap extends TileEntitySpecialRenderer {
 			default: break;
 		}
 
-		Minecraft.getMinecraft().renderEngine.bindTexture(Models.TEX_TREETAP);
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.TREETAP.resource);
 		modelTreetap.render(0.0625F);
 		
 		if (tile.hasBucket) {
@@ -76,8 +77,8 @@ public class RenderTreetap extends TileEntitySpecialRenderer {
 		GL11.glTranslated(0, -0.84, 0);
 		GL11.glRotatef(90, 0, 1, 0);
 		
-		String texture = (tile.liquidAmount == 1000 ? Models.TEX_BUCKET_FULL : Models.TEX_BUCKET);
-		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+		ResourceLocation texture = (tile.liquidAmount == 1000 ? Textures.BUCKET_LATEX.resource : Textures.BUCKET.resource);
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(texture);
 		modelBucket.render(0.0625F);
 		GL11.glPopMatrix();
 	}
@@ -87,8 +88,8 @@ public class RenderTreetap extends TileEntitySpecialRenderer {
 		if (displayList != null) {
 			GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
 		
-			bindTextureByName(LiquidRenderer.getLiquidSheet(liquid));
-
+			Minecraft.getMinecraft().func_110434_K().func_110577_a(LiquidRenderer.getLiquidSheetResource(liquid));
+			
 			GL11.glPushMatrix();
 			GL11.glRotatef(90, 0, 1, 0);
 			GL11.glRotatef(15, 0, 0, 1);
@@ -113,7 +114,7 @@ public class RenderTreetap extends TileEntitySpecialRenderer {
 		if (displayList != null) {
 			GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
 			
-			bindTextureByName(LiquidRenderer.getLiquidSheet(liquid));
+			Minecraft.getMinecraft().func_110434_K().func_110577_a(LiquidRenderer.getLiquidSheetResource(liquid));
 			GL11.glPushMatrix();
 			
 			GL11.glEnable(GL11.GL_CULL_FACE);

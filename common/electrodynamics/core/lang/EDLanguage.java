@@ -72,7 +72,9 @@ public class EDLanguage {
 	}
 	
 	public String translate(String tag) {
-		return translate(tag, StringTranslate.getInstance().getCurrentLanguage());
+		// Localization is currently broken until I can figure out how the current language is stored
+//		return translate(tag, StringTranslate.getInstance().getCurrentLanguage());
+		return "";
 	}
 	
 	public String translate(String tag, String lang) {

@@ -10,9 +10,11 @@
 package electrodynamics.client.render.util;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
@@ -78,7 +80,7 @@ public class RenderEntityBlock extends Render {
 		World world = entity.worldObj;
 		BlockInterface util = new BlockInterface();
 		util.texture = entity.texture;
-		loadTexture("/terrain.png");
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(new ResourceLocation("/terrain.png"));
 
 		for (int iBase = 0; iBase < entity.iSize; ++iBase) {
 			for (int jBase = 0; jBase < entity.jSize; ++jBase) {
@@ -205,5 +207,11 @@ public class RenderEntityBlock extends Render {
 		if (doTessellating) {
 			tessellator.draw();
 		}
+	}
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		// I have no idea what this is for
+		return null;
 	}
 }

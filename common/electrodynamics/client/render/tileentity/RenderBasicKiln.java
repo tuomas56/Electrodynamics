@@ -1,18 +1,22 @@
 package electrodynamics.client.render.tileentity;
 
-import electrodynamics.client.model.ModelBasicKiln;
-import electrodynamics.client.model.ModelKilnTray;
-import electrodynamics.client.render.util.RenderUtil;
-import electrodynamics.lib.client.Models;
-import electrodynamics.tileentity.machine.TileEntityBasicKiln;
-import electrodynamics.tileentity.machine.TileEntityMachine;
+import javax.swing.text.TabExpander;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
 import org.lwjgl.opengl.GL11;
+
+import electrodynamics.client.model.ModelBasicKiln;
+import electrodynamics.client.model.ModelKilnTray;
+import electrodynamics.client.render.util.RenderUtil;
+import electrodynamics.lib.client.Textures;
+import electrodynamics.tileentity.machine.TileEntityBasicKiln;
+import electrodynamics.tileentity.machine.TileEntityMachine;
 
 public class RenderBasicKiln extends TileEntitySpecialRenderer {
 
@@ -54,7 +58,7 @@ public class RenderBasicKiln extends TileEntitySpecialRenderer {
 
 		TileEntityBasicKiln kiln = (TileEntityBasicKiln) tile;
 
-		Minecraft.getMinecraft().renderEngine.bindTexture( Models.TEX_BASIC_KILN );
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.BASIC_KILN.resource);
 		modelKiln.rotateDoor( kiln.doorAngle );
 		modelKiln.render( 0.0625F );
 
@@ -108,7 +112,7 @@ public class RenderBasicKiln extends TileEntitySpecialRenderer {
 //		GL11.glRotatef( 0.0f, 0, 1, 0 );
 //		GL11.glScaled( 1.0f, 1.0f, 1.0f );
 
-		Minecraft.getMinecraft().renderEngine.bindTexture( Models.TEX_KILN_TRAY );
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.KILN_TRAY.resource);
 		modelTray.renderAll( 0.0625F );
 
 		GL11.glRotatef( 270, 0, 1, 0 );

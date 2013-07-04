@@ -9,6 +9,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.client.model.ModelWire;
+import electrodynamics.lib.client.Textures;
 
 @SideOnly(Side.CLIENT)
 public final class ItemBlockWireRenderer implements IItemRenderer{
@@ -56,7 +57,7 @@ public final class ItemBlockWireRenderer implements IItemRenderer{
 		GL11.glScalef(scale, scale, scale);
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(0.0F, 0.0F, 0.0F, 0.0F);
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture("/mods/electrodynamics/textures/misc/redAlloyWire.png");
+		FMLClientHandler.instance().getClient().func_110434_K().func_110577_a(Textures.RED_WIRE.resource);
 		model.renderBottomWireAll();
 	}
 }

@@ -3,6 +3,7 @@ package electrodynamics.client.render.entity;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 
 import org.lwjgl.opengl.GL11;
@@ -13,7 +14,7 @@ public class RenderBeam extends Render {
 
 	@Override
 	public void doRender(Entity entity, double d0, double d1, double d2, float f, float f0) {
-        float f1 = ActiveRenderInfo.rotationX;
+		float f1 = ActiveRenderInfo.rotationX;
         float f2 = ActiveRenderInfo.rotationZ;
         float f3 = ActiveRenderInfo.rotationYZ;
         float f4 = ActiveRenderInfo.rotationXY;
@@ -31,6 +32,12 @@ public class RenderBeam extends Render {
         tessellator.draw();
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
+	}
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		// I have no idea what this is for...
+		return null;
 	}
 
 }

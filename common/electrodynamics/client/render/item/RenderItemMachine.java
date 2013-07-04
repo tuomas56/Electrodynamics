@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import electrodynamics.client.model.ModelBasicSieve;
 import electrodynamics.client.model.ModelSinteringOven;
-import electrodynamics.lib.client.Models;
+import electrodynamics.lib.client.Textures;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
@@ -111,7 +111,7 @@ public class RenderItemMachine implements IItemRenderer {
 	}
 
 	private void renderFurnace(float x, float y, float z) {
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Models.TEX_SINT_FURNACE);
+		FMLClientHandler.instance().getClient().func_110434_K().func_110577_a(Textures.SINTERING_OVEN.resource);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180, 1, 0, 0);
@@ -121,7 +121,7 @@ public class RenderItemMachine implements IItemRenderer {
 	}
 	
 	private void renderSieve(float x, float y, float z) {
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Models.TEX_BASIC_SIEVE);
+		FMLClientHandler.instance().getClient().func_110434_K().func_110577_a(Textures.BASIC_SIEVE.resource);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180, 1, 0, 0);
@@ -131,7 +131,7 @@ public class RenderItemMachine implements IItemRenderer {
 	}
 
 	private void renderKiln(float x, float y, float z) {
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Models.TEX_BASIC_KILN);
+		FMLClientHandler.instance().getClient().func_110434_K().func_110577_a(Textures.SINTERING_FURNACE.resource);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180, 1, 0, 0);

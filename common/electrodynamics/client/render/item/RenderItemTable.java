@@ -6,7 +6,8 @@ import cpw.mods.fml.client.FMLClientHandler;
 import electrodynamics.client.model.ModelStoneTable;
 import electrodynamics.client.model.ModelTable;
 import electrodynamics.client.model.ModelWoodTable;
-import electrodynamics.lib.client.Models;
+import electrodynamics.lib.client.Textures;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
@@ -14,8 +15,7 @@ public class RenderItemTable implements IItemRenderer {
 
 	private ModelTable[] tables = new ModelTable[2];
 	
-	private String[] textures = new String[] {Models.TEX_TABLE_WOOD, Models.TEX_TABLE_STONE};
-	
+	private ResourceLocation[] textures = new ResourceLocation[] {Textures.TABLE_WOOD.resource, Textures.TABLE_STONE.resource};
 
 	public RenderItemTable() {
 		tables[0] = new ModelWoodTable();
@@ -60,7 +60,7 @@ public class RenderItemTable implements IItemRenderer {
 	}
 
 	private void renderTable(byte type, float x, float y, float z) {
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(textures[type]);
+		FMLClientHandler.instance().getClient().func_110434_K().func_110577_a(textures[type]);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180, 1, 0, 0);

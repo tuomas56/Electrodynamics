@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemMinecart;
@@ -17,14 +18,14 @@ import electrodynamics.client.model.ModelStoneTable;
 import electrodynamics.client.model.ModelTable;
 import electrodynamics.client.model.ModelWoodTable;
 import electrodynamics.client.render.util.RenderUtil;
-import electrodynamics.lib.client.Models;
+import electrodynamics.lib.client.Textures;
 import electrodynamics.tileentity.machine.TileEntityTable;
 
 public class RenderTable extends TileEntitySpecialRenderer {
 
 	private ModelTable[] tables = new ModelTable[2];
 	
-	private String[] textures = new String[] { Models.TEX_TABLE_WOOD, Models.TEX_TABLE_STONE };
+	private ResourceLocation[] textures = new ResourceLocation[] {Textures.TABLE_WOOD.resource, Textures.TABLE_STONE.resource};
 
 	public RenderTable() {
 		tables[0] = new ModelWoodTable();
@@ -98,7 +99,7 @@ public class RenderTable extends TileEntitySpecialRenderer {
 		
 		byte type = (byte)tile.worldObj.getBlockMetadata(tile.xCoord, tile.yCoord, tile.zCoord);
 
-		Minecraft.getMinecraft().renderEngine.bindTexture(textures[type]);
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(textures[type]);
 		tables[type].render(0.0625F);
 		
 		renderTableContentsAt((TileEntityTable)tile);

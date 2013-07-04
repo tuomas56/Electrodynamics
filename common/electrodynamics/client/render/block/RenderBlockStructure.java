@@ -28,7 +28,7 @@ public class RenderBlockStructure implements ISimpleBlockRenderingHandler {
 		StructureComponent component = StructureComponent.values()[metadata];
 
 		if (component.getModel() != null) {
-			Minecraft.getMinecraft().renderEngine.bindTexture(component.getModelTexture());
+			Minecraft.getMinecraft().func_110434_K().func_110577_a(component.getModelTexture());
 			component.applyGLTransformations((byte) 1, null);
 			if (component.alternativeRender()) {
 				component.getModel().render(0.0625F);

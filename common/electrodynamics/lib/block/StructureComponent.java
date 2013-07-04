@@ -1,6 +1,7 @@
 package electrodynamics.lib.block;
 
 import electrodynamics.tileentity.structure.TileEntityMobGrinder;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -11,7 +12,7 @@ import electrodynamics.block.EDBlocks;
 import electrodynamics.block.SubBlock;
 import electrodynamics.client.model.ModelMobGrinder;
 import electrodynamics.client.model.ModelTechne;
-import electrodynamics.lib.client.Models;
+import electrodynamics.lib.client.Textures;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityGeneric;
@@ -124,8 +125,8 @@ public enum StructureComponent implements SubBlock {
 		}
 		
 		@Override
-		public String getModelTexture() {
-			return Models.TEX_MOB_GRINDER;
+		public ResourceLocation getModelTexture() {
+			return Textures.MOB_GRINDER_CLEAN.resource;
 		}
 
 		@Override
@@ -204,9 +205,8 @@ public enum StructureComponent implements SubBlock {
 	}
 	/**
 	 * Texture to be applied to rendered model
-	 * @return Complete path to model texture, starting with /mods/electrodynamics/
 	 */
-	public String getModelTexture() {
+	public ResourceLocation getModelTexture() {
 		return null;
 	}
 	/**

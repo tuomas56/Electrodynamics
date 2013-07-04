@@ -12,6 +12,7 @@ import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.GLAllocation;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
@@ -87,6 +88,10 @@ public class LiquidRenderer {
 			throw new LiquidTextureException(liquid);
 		}
 		return icon;
+	}
+	
+	public static ResourceLocation getLiquidSheetResource(LiquidStack liquid) {
+		return new ResourceLocation(getLiquidSheet(liquid));
 	}
 	
 	public static String getLiquidSheet(LiquidStack liquid) {
