@@ -22,4 +22,9 @@ public class EDAddonThermalExpansion extends EDAddon {
 		return new String[] {"ThermalExpansion"};
 	}
 
+	@Override
+	public String[] getSupportedMCVersions() {
+		return new String[] {"1.5.0", "1.5.1", "1.5.2"};
+	}
+	
 }

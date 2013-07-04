@@ -12,4 +12,6 @@ public abstract class EDAddon {
 	
 	public abstract String[] getModDependencies();
 	
+	public abstract String[] getSupportedMCVersions();
+	
 }

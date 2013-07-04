@@ -7,11 +7,13 @@ import java.util.Map;
 
 import cpw.mods.fml.common.Loader;
 
+import net.minecraft.crash.CallableMinecraftVersion;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 import electrodynamics.Electrodynamics;
 import electrodynamics.addons.computercraft.EDAddonComputerCraft;
 import electrodynamics.core.EDLogger;
+import electrodynamics.util.StringUtil;
 
 public class AddonManager {
 
@@ -60,8 +62,12 @@ public class AddonManager {
 				
 				if (instance != null) {
 					if (allDependenciesSatisfied(instance.getModDependencies())) {
-						loadedAddons.add(addon);
-						EDLogger.info("Loading addon " + addon.toString());
+						if (mcVersionDependencySatisfied(instance.getSupportedMCVersions())) {
+							loadedAddons.add(addon);
+							EDLogger.info("Loading addon " + addon.toString());
+						} else {
+							EDLogger.warn("Addon " + addon.toString() + " is meant for MC versions [" + StringUtil.condenseStringArray(instance.getSupportedMCVersions(), ',') + "] Skipping.");
+						}
 					} else {
 						EDLogger.warn("Tried to load addon " + addon.toString() + " but not all of its dependencies could be found. Skipping.");
 					}
@@ -82,6 +88,18 @@ public class AddonManager {
 		}
 		
 		return true;
+	}
+	
+	private static boolean mcVersionDependencySatisfied(String[] mcVersions) {
+		String mcVersion = new CallableMinecraftVersion(null).minecraftVersion();
+		
+		for (String version : mcVersions) {
+			if (mcVersion.equalsIgnoreCase(version)) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	/** Called during main mod's PostInit state on server*/

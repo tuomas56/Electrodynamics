@@ -29,5 +29,10 @@ public class EDAddonComputerCraft extends EDAddon {
 	public String[] getModDependencies() {
 		return new String[] {"ComputerCraft"};
 	}
+
+	@Override
+	public String[] getSupportedMCVersions() {
+		return new String[] {"1.5.0", "1.5.1", "1.5.2"};
+	}
 	
 }
