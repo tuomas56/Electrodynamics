@@ -43,7 +43,7 @@ public class EntityPlayerFake extends EntityPlayer {
 	}
 
 	@Override
-	public void func_110122_a(ChatMessageComponent chatmessagecomponent) {
+	public void sendChatToPlayer(ChatMessageComponent chatmessagecomponent) {
 		// Something something chat?
 	}
 }

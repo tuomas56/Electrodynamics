@@ -15,7 +15,7 @@ public class CoreUtils {
 	}
 	
 	public static ResourceLocation getResource(String path) {
-		return new ResourceLocation(ModInfo.GENERIC_MOD_ID, path);
+		return new ResourceLocation(ModInfo.GENERIC_MOD_ID.toLowerCase(), path);
 	}
 	
 }

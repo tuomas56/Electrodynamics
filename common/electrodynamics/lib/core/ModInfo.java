@@ -8,7 +8,7 @@ public class ModInfo {
 	public static final String DEPENDENCIES = "required-after:Forge@[7.8.0.684,)";
 	public static final String VERSION = "@VERSION@";
 
-	public static final String RESOURCE_DIR = "/mods/" + GENERIC_MOD_ID.toLowerCase();
+	public static final String RESOURCE_DIR = "/assets/" + GENERIC_MOD_ID.toLowerCase();
 	public static final String ICON_PREFIX = GENERIC_MOD_ID.toLowerCase()+":";
 	
 	public static final String RESOURCES_BASE = RESOURCE_DIR + "/textures"; 
