@@ -33,6 +33,6 @@ public abstract class GuiElectrodynamics extends GuiContainer {
 	@Override
 	protected abstract void drawGuiContainerBackgroundLayer(float f, int i, int j);
 
-	public abstract void initModules(ModuleManager manager);
+	public void initModules(ModuleManager manager) {};
 	
 }
