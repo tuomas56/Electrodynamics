@@ -1,6 +1,5 @@
 package electrodynamics.client.gui.module;
 
-import scala.collection.parallel.ParIterableLike.Min;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import electrodynamics.client.render.util.RenderUtil;

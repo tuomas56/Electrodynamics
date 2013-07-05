@@ -20,7 +20,7 @@ import electrodynamics.lib.core.ModInfo;
 
 public class EDLanguage {
 
-	public static final String LANG_DIR = "/mods/" + ModInfo.GENERIC_MOD_ID.toLowerCase() + "/lang/";
+	public static final String LANG_DIR = "/assets/" + ModInfo.GENERIC_MOD_ID.toLowerCase() + "/lang/";
 	
 	public boolean errorShown = false;
 	

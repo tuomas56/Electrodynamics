@@ -39,6 +39,7 @@ import electrodynamics.client.render.block.RenderBlockDecorative;
 import electrodynamics.client.render.block.RenderBlockOre;
 import electrodynamics.client.render.block.RenderBlockStructure;
 import electrodynamics.client.render.tileentity.RenderTreetap;
+import electrodynamics.core.EDLogger;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.block.Decorative;
@@ -124,6 +125,7 @@ public class EDModuleWorld extends EDModule {
 
 		MinecraftForge.addGrassSeed( new ItemStack(EDItems.itemWormSeed), 5 );
 		
+		FluidRegistry.registerFluid(new Fluid("Latex"));
 		FluidContainerRegistry.registerFluidContainer(new Fluid("Latex"), new ItemStack(EDItems.itemLatexBucket), FluidContainerRegistry.EMPTY_BUCKET);
 		
 		GameRegistry.registerTileEntity(TileEntityTreetap.class, Strings.BLOCK_TREETAP);
@@ -170,8 +172,12 @@ public class EDModuleWorld extends EDModule {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void initClient() {
-		Fluid latex = FluidRegistry.getFluid("Latex");
-		latex.setIcons(EDItems.itemLiquidLatex.getIconFromDamage(0));
+		if (FluidRegistry.isFluidRegistered("Latex")) {
+			Fluid latex = FluidRegistry.getFluid("Latex");
+			latex.setIcons(EDItems.itemLiquidLatex.getIconFromDamage(0));
+		} else {
+			EDLogger.warn("Tried to assign a texture to Liquid Latex, but the fluid hasn't been registered. This is a bug, so please report this!");
+		}
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreetap.class, new RenderTreetap());
 		
