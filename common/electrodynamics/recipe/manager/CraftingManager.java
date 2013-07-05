@@ -3,6 +3,7 @@ package electrodynamics.recipe.manager;
 import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.liquids.LiquidStack;
 import electrodynamics.Electrodynamics;
 import electrodynamics.api.crafting.ICraftingManager;
@@ -44,7 +45,7 @@ public class CraftingManager implements ICraftingManager {
 	}
 
 	@Override
-	public void registerGrindingRecipe(ItemStack input, ArrayList<ItemStack> itemOutput, LiquidStack liquidOutput) {
+	public void registerGrindingRecipe(ItemStack input, ArrayList<ItemStack> itemOutput, FluidStack liquidOutput) {
 		grindManager.registerRecipe(new RecipeGrinder(input, itemOutput, liquidOutput));
 	}
 

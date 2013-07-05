@@ -2,49 +2,50 @@ package electrodynamics.tileentity.structure;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.liquids.ILiquidTank;
-import net.minecraftforge.liquids.ITankContainer;
-import net.minecraftforge.liquids.LiquidStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidHandler;
 
-public class TileEntityValve extends TileEntityStructure implements ITankContainer {
+public class TileEntityValve extends TileEntityStructure implements IFluidHandler {
 
-	/* ITANKCONTAINER */
+	/* IFLUIDHANDLER */
 	@Override
-	public int fill(ForgeDirection from, LiquidStack resource, boolean doFill) {
-		return fill(0, resource, doFill);
+	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+		return getCentralTank().fill(from, resource, doFill);
 	}
 
 	@Override
-	public int fill(int tankIndex, LiquidStack resource, boolean doFill) {
-		return getCentralTank() != null ? getCentralTank().fill(resource, doFill) : 0;
+	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+		return getCentralTank().drain(from, resource, doDrain);
 	}
 
 	@Override
-	public LiquidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		return drain(0, maxDrain, doDrain);
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+		return getCentralTank().drain(from, maxDrain, doDrain);
 	}
 
 	@Override
-	public LiquidStack drain(int tankIndex, int maxDrain, boolean doDrain) {
-		return getCentralTank() != null ? getCentralTank().drain(maxDrain, doDrain) : null;
+	public boolean canFill(ForgeDirection from, Fluid fluid) {
+		return getCentralTank().canFill(from, fluid);
 	}
 
 	@Override
-	public ILiquidTank[] getTanks(ForgeDirection direction) { // CAN BE NULL
-		return new ILiquidTank[] {getCentralTank()};
+	public boolean canDrain(ForgeDirection from, Fluid fluid) {
+		return getCentralTank().canDrain(from, fluid);
 	}
 
 	@Override
-	public ILiquidTank getTank(ForgeDirection direction, LiquidStack type) { // CAN BE NULL
-		return getTanks(direction)[0];
+	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+		return getCentralTank().getTankInfo(from);
 	}
-
-	private ILiquidTank getCentralTank() {
+	
+	private IFluidHandler getCentralTank() {
 		if (this.isValidStructure()) {
 			TileEntityStructure central = this.getCentralTileEntity();
 			
-			if (central instanceof ITankContainer) {
-				return ((ITankContainer)central).getTanks(ForgeDirection.UNKNOWN)[0];
+			if (central instanceof IFluidHandler) {
+				return ((IFluidHandler)central);
 			}
 		}
 		

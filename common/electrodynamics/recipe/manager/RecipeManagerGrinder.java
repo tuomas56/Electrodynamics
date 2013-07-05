@@ -6,6 +6,11 @@ import java.util.Arrays;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
+import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
 import net.minecraftforge.liquids.LiquidDictionary;
 import electrodynamics.recipe.RecipeGrinder;
 
@@ -30,7 +35,7 @@ public class RecipeManagerGrinder {
 	}
 	
 	public void initRecipes() {
-		registerRecipe(new RecipeGrinder(new ItemStack(Block.cactus), Arrays.asList(new ItemStack[] {new ItemStack(Item.dyePowder)}), LiquidDictionary.getLiquid("Water", 25)));
+		registerRecipe(new RecipeGrinder(new ItemStack(Block.cactus), Arrays.asList(new ItemStack[] {new ItemStack(Item.dyePowder)}), new FluidStack(FluidRegistry.WATER, 25)));
 	}
 	
 }

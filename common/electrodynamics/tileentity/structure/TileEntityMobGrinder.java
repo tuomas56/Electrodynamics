@@ -15,6 +15,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.ITankContainer;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
@@ -31,11 +37,11 @@ import electrodynamics.util.InventoryUtil;
 import electrodynamics.util.LiquidUtil;
 import electrodynamics.util.PlayerUtil;
 
-public class TileEntityMobGrinder extends TileEntityStructure implements ITankContainer, IInventory {
+public class TileEntityMobGrinder extends TileEntityStructure implements IFluidHandler, IInventory {
 
 	public InventoryWrapperStack inventoryWrapper = new InventoryWrapperStack();
 	
-	public LiquidTank tank = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME);
+	public FluidTank tank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME);
 	
 	@Override
 	public void updateEntity() {
@@ -186,7 +192,7 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 
 		this.inventoryWrapper = new InventoryWrapperStack();
 		this.inventoryWrapper.getStack().addAll(Arrays.asList(InventoryUtil.readItemsFromNBT("Items", nbt)));
-		this.tank.setLiquid(LiquidUtil.readLiquidFromNBT("Liquid", nbt));
+		this.tank.setFluid(FluidStack.loadFluidStackFromNBT(nbt));
 	}
 	
 	@Override
@@ -194,7 +200,7 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 		super.writeToNBT(nbt);
 		
 		InventoryUtil.writeItemsToNBT("Items", nbt, this.inventoryWrapper.getStack().toArray(new ItemStack[this.inventoryWrapper.getStack().size()]));
-		LiquidUtil.writeLiquidToNBT("Liquid", nbt, tank.getLiquid());
+		tank.getFluid().writeToNBT(nbt);
 	}
 	
 	@Override
@@ -202,35 +208,35 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 		return false;
 	}
 
-	/* ITANKCONTAINER */
+	/* IFLUIDHANDLER */
 	@Override
-	public int fill(ForgeDirection from, LiquidStack resource, boolean doFill) {
-		return fill(0, resource, doFill);
+	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+		return 0;
 	}
 
 	@Override
-	public int fill(int tankIndex, LiquidStack resource, boolean doFill) {
-		return this.tank.fill(resource, doFill);
+	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+		return tank.drain(resource.amount, doDrain);
 	}
 
 	@Override
-	public LiquidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		return drain(0, maxDrain, doDrain);
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+		return tank.drain(maxDrain, doDrain);
+	}
+	
+	@Override
+	public boolean canFill(ForgeDirection from, Fluid fluid) {
+		return false;
 	}
 
 	@Override
-	public LiquidStack drain(int tankIndex, int maxDrain, boolean doDrain) {
-		return this.tank.drain(maxDrain, doDrain);
+	public boolean canDrain(ForgeDirection from, Fluid fluid) {
+		return true;
 	}
 
 	@Override
-	public ILiquidTank[] getTanks(ForgeDirection direction) {
-		return new ILiquidTank[] {this.tank};
-	}
-
-	@Override
-	public ILiquidTank getTank(ForgeDirection direction, LiquidStack type) {
-		return getTanks(direction)[0];
+	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+		return new FluidTankInfo[] {tank.getInfo()};
 	}
 
 	/* IINVENTORY */

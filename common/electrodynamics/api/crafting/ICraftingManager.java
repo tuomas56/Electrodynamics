@@ -3,6 +3,7 @@ package electrodynamics.api.crafting;
 import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.liquids.LiquidStack;
 import electrodynamics.api.crafting.util.TableRecipeType;
 import electrodynamics.api.crafting.util.WeightedRecipeOutput;
@@ -25,6 +26,6 @@ public interface ICraftingManager {
 	
 	/** Registers a grinding recipe. Stack-size of input/output is assumed to be one 
 	 *  itemOutput OR liquidOutput can be null, but not both */
-	public void registerGrindingRecipe(ItemStack input, ArrayList<ItemStack> itemOutput, LiquidStack liquidOutput);
+	public void registerGrindingRecipe(ItemStack input, ArrayList<ItemStack> itemOutput, FluidStack liquidOutput);
 	
 }

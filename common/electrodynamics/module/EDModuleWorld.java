@@ -10,6 +10,9 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.liquids.LiquidContainerData;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
@@ -121,9 +124,8 @@ public class EDModuleWorld extends EDModule {
 
 		MinecraftForge.addGrassSeed( new ItemStack(EDItems.itemWormSeed), 5 );
 		
-		LiquidDictionary.getOrCreateLiquid("Latex", new LiquidStack(EDItems.itemLiquidLatex, LiquidContainerRegistry.BUCKET_VOLUME));
-		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(new LiquidStack(EDItems.itemLiquidLatex, LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(EDItems.itemLiquidLatex), new ItemStack(Item.bucketEmpty)));
-
+		FluidContainerRegistry.registerFluidContainer(new Fluid("Latex"), new ItemStack(EDItems.itemLatexBucket), FluidContainerRegistry.EMPTY_BUCKET);
+		
 		GameRegistry.registerTileEntity(TileEntityTreetap.class, Strings.BLOCK_TREETAP);
 		
 		FurnaceRecipes.smelting().addSmelting(BlockIDs.BLOCK_DECORATIVE_ID, 3, new ItemStack(EDBlocks.blockDecorative, 1, 0), 0F);
@@ -168,9 +170,8 @@ public class EDModuleWorld extends EDModule {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void initClient() {
-		LiquidStack latex = LiquidDictionary.getCanonicalLiquid("Latex");
-		latex.setTextureSheet("/gui/items.png");
-		latex.setRenderingIcon(EDItems.itemLiquidLatex.getIconFromDamage(0));
+		Fluid latex = FluidRegistry.getFluid("Latex");
+		latex.setIcons(EDItems.itemLiquidLatex.getIconFromDamage(0));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreetap.class, new RenderTreetap());
 		
