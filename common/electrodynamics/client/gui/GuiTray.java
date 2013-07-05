@@ -11,7 +11,7 @@ import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.inventory.container.ContainerTray;
 import electrodynamics.lib.core.Strings;
 
-public class GuiTray extends GuiContainer {
+public class GuiTray extends GuiElectrodynamics {
 
 	public EntityPlayer player;
 	

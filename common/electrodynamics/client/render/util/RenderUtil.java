@@ -1,6 +1,11 @@
 package electrodynamics.client.render.util;
 
+import java.util.Iterator;
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -10,6 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 public class RenderUtil {
 
@@ -100,6 +106,96 @@ public class RenderUtil {
 		}
 		
 		tess.draw();
+	}
+	
+	public static void drawTooltip(String[] text, int x, int y, int guiWidth, int guiHeight, FontRenderer font) {
+		if (text != null && text.length > 0) {
+			GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+			RenderHelper.disableStandardItemLighting();
+			GL11.glDisable(GL11.GL_LIGHTING);
+			GL11.glDisable(GL11.GL_DEPTH_TEST);
+			int maxWidth = 0;
+
+			for (String string : text) {
+				if (font.getStringWidth(string) > maxWidth) {
+					maxWidth = font.getStringWidth(string);
+				}
+			}
+			
+			int i1 = x + 12;
+			int j1 = y - 12;
+			int k1 = 8;
+
+			if (text.length > 1) {
+				k1 += 2 + (text.length - 1) * 10;
+			}
+
+			if (i1 + maxWidth > guiWidth) {
+				i1 -= 28 + maxWidth;
+			}
+
+			if (j1 + k1 + 6 > guiHeight) {
+				j1 = guiHeight - k1 - 6;
+			}
+
+			int l1 = -267386864;
+			drawGradientRect(i1 - 3, j1 - 4, i1 + maxWidth + 3, j1 - 3, l1, l1);
+			drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + maxWidth + 3, j1 + k1 + 4, l1, l1);
+			drawGradientRect(i1 - 3, j1 - 3, i1 + maxWidth + 3, j1 + k1 + 3, l1, l1);
+			drawGradientRect(i1 - 4, j1 - 3, i1 - 3, j1 + k1 + 3, l1, l1);
+			drawGradientRect(i1 + maxWidth + 3, j1 - 3, i1 + maxWidth + 4, j1 + k1 + 3, l1, l1);
+			int i2 = 1347420415;
+			int j2 = (i2 & 16711422) >> 1 | i2 & -16777216;
+			drawGradientRect(i1 - 3, j1 - 3 + 1, i1 - 3 + 1, j1 + k1 + 3 - 1, i2, j2);
+			drawGradientRect(i1 + maxWidth + 2, j1 - 3 + 1, i1 + maxWidth + 3, j1 + k1 + 3 - 1, i2, j2);
+			drawGradientRect(i1 - 3, j1 - 3, i1 + maxWidth + 3, j1 - 3 + 1, i2, i2);
+			drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + maxWidth + 3, j1 + k1 + 3, j2, j2);
+
+			for (int k2 = 0; k2 < text.length; ++k2) {
+				String s1 = (String) text[k2];
+				font.drawStringWithShadow(s1, i1, j1, -1);
+
+				if (k2 == 0) {
+					j1 += 2;
+				}
+
+				j1 += 10;
+			}
+
+			GL11.glEnable(GL11.GL_LIGHTING);
+			GL11.glEnable(GL11.GL_DEPTH_TEST);
+			RenderHelper.enableStandardItemLighting();
+			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+		}
+	}
+	
+	public static void drawGradientRect(int x, int y, int w, int h, int color1, int color2) {
+		float f0 = (float) (color1 >> 24 & 255) / 255.0F;
+		float f1 = (float) (color1 >> 16 & 255) / 255.0F;
+		float f2 = (float) (color1 >> 8 & 255) / 255.0F;
+		float f3 = (float) (color1 & 255) / 255.0F;
+		float f4 = (float) (color2 >> 24 & 255) / 255.0F;
+		float f5 = (float) (color2 >> 16 & 255) / 255.0F;
+		float f6 = (float) (color2 >> 8 & 255) / 255.0F;
+		float f7 = (float) (color2 & 255) / 255.0F;
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_ALPHA_TEST);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glShadeModel(GL11.GL_SMOOTH);
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+		tessellator.setColorRGBA_F(f1, f2, f3, f0);
+		tessellator.addVertex((double) w, (double) y, (double) 1.0D);
+		tessellator.addVertex((double) x, (double) y, (double) 1.0D);
+		tessellator.setColorRGBA_F(f5, f6, f7, f4);
+		tessellator.addVertex((double) x, (double) h, (double) 1.0D);
+		tessellator.addVertex((double) w, (double) h, (double) 1.0D);
+		tessellator.draw();
+		GL11.glShadeModel(GL11.GL_FLAT);
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 	
 }

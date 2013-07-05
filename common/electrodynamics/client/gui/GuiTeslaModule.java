@@ -1,6 +1,5 @@
 package electrodynamics.client.gui;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -10,7 +9,7 @@ import electrodynamics.api.tool.IElMagModule;
 import electrodynamics.core.handler.GuiHandler;
 import electrodynamics.inventory.container.ContainerTeslaModule;
 
-public class GuiTeslaModule extends GuiContainer {
+public class GuiTeslaModule extends GuiElectrodynamics {
 
 	public EntityPlayer player;
 	

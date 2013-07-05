@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
-public class GuiTrayKiln extends GuiContainer {
+public class GuiTrayKiln extends GuiElectrodynamics {
 
 	public EntityPlayer player;
 
