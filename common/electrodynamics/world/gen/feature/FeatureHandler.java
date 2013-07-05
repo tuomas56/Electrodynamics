@@ -40,11 +40,15 @@ public class FeatureHandler {
 	public void prepareFeatures() {
 		Configuration config = getConfig();
 		
+		// Ore
 		FeatureOreGen.registerFeatureOreGen(config, FeatureType.ORE_CHALCOPYRITE, Ore.CHALCOPYRITE, 8, 6, 16, 64);
 		FeatureOreGen.registerFeatureOreGen(config, FeatureType.ORE_COBALTITE, Ore.COBALTITE, 8, 4, 32, 78);
 		FeatureOreGen.registerFeatureOreGen(config, FeatureType.ORE_GALENA, Ore.GALENA, 4, 2, 16, 32);
 		FeatureOreGen.registerFeatureOreGen(config, FeatureType.ORE_MAGNETITE, Ore.MAGNETITE, 12, 6, 16, 32);
 		FeatureOreGen.registerFeatureOreGen(config, FeatureType.ORE_NICKEL, Ore.NICKEL, 8, 6, 16, 64);
+		
+		// Gas
+		registerFeature(FeatureType.GAS_POCKET, new FeatureGasPocket());
 		
 		for (FeatureType feature : FeatureType.values()) {
 			if (isEnabled(config, feature)) {
@@ -96,6 +100,7 @@ public class FeatureHandler {
 		ORE_GALENA,
 		ORE_MAGNETITE,
 		ORE_NICKEL,
+		GAS_POCKET
 	}
 	
 }

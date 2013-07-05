@@ -13,6 +13,15 @@ import java.util.Random;
 
 public class BlockUtil {
 
+	public static int getBlockOnSide(World world, int x, int y, int z, ForgeDirection side) {
+		int[] coords = getCoordsOnSide(world, x, y, z, side);
+		return world.getBlockId(coords[0], coords[1], coords[2]);
+	}
+	
+	public static int[] getCoordsOnSide(World world, int x, int y, int z, ForgeDirection side) {
+		return new int[] {x + side.offsetX, y + side.offsetY, z + side.offsetZ};
+	}
+	
 	/**
 	 * Determines which side of the block is facing the specified entity, by using angles.
 	 * Will only look around in the XZ-plane.
