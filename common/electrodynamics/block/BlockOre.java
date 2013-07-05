@@ -89,7 +89,9 @@ public class BlockOre extends Block {
 			textures[i] = registry.registerIcon(Ore.get(i).getTextureFile());
 		}
 		
+		//TODO Fix this!
 		voidstoneTexture = registry.registerIcon(Ore.VOIDSTONE.getTextureFile() + "Effect");
+		
 		oreTransparency = registry.registerIcon(ModInfo.ICON_PREFIX + "world/ore/oreTransparent");
 	}
 

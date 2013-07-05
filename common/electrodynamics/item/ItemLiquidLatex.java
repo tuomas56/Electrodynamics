@@ -22,6 +22,7 @@ public class ItemLiquidLatex extends Item {
 	
 	@Override
 	public void registerIcons(IconRegister register) {
+		//TODO Fix this!
 		this.texture = register.registerIcon(ModInfo.ICON_PREFIX + "misc/liquidLatex");
 	}
 	
