@@ -131,7 +131,7 @@ public class RenderItemMachine implements IItemRenderer {
 	}
 
 	private void renderKiln(float x, float y, float z) {
-		FMLClientHandler.instance().getClient().func_110434_K().func_110577_a(Textures.SINTERING_FURNACE.resource);
+		FMLClientHandler.instance().getClient().func_110434_K().func_110577_a(Textures.BASIC_KILN.resource);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180, 1, 0, 0);
