@@ -10,3 +10,5 @@ build.properties
 
 # Windows image cache #
 Thumbs.db
+
+.DS_Store
