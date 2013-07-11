@@ -156,9 +156,6 @@
 		<copy todir="${mc.src.dir}">
 			<fileset dir="${teapi.dir}" />
 		</copy>
-		<copy todir="${mc.src.dir}">
-			<fileset dir="${src.dir}/dummy" />
-		</copy>
 		<echo message="All apis and sources copied" />
 
 		<!-- Refresh MD5 -->
