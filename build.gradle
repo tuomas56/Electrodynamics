@@ -1,9 +1,27 @@
 import groovy.json.JsonSlurper
 import groovy.io.FileType
 
+// If no tasks defined, run a test build
+defaultTasks 'build'
+
 // Directories
-def dirSrc = "."
-def dirWorkspace = "."
+def dirSrc = ""
+def dirWorkspace = ""
+
+// Catches commandline argument -Psrc=
+try {
+	dirSrc = "$src"
+} catch(Exception ex) {
+	dirSrc = "."
+}
+
+// Catches commandline argument -Pworkspace=
+try {
+	dirWorkspace = "$workspace"
+} catch(Exception ex) {
+	dirWorkspace = "."
+}
+
 def dirBuild = dirWorkspace + "/build"
 def dirDownload = dirWorkspace + "/download"
 def dirLib = dirWorkspace + "/lib"
@@ -23,10 +41,10 @@ def versionForge = "7.8.1.738"
 
 // Libraries
 def downloadURL = "http://192.249.63.186/lib"
-def fileMCP = versionMC + "/mcp-" + versionMCP + ".zip"
-def fileForge = versionMC + "/forge-" + versionForge + ".zip"
-def downloadMCP = downloadURL + "/" + fileMCP
-def downloadForge = downloadURL + "/" + fileForge
+def fileMCP = "/mcp-" + versionMCP + ".zip"
+def fileForge = "/forge-" + versionForge + ".zip"
+def downloadMCP = downloadURL + "/" + versionMC + fileMCP
+def downloadForge = downloadURL + "/" + versionMC + fileForge
 
 // BEGIN HELPER METHODS
 
@@ -214,8 +232,8 @@ task packJAR << {
 
 task setup << {
 	cleanWorkspace.execute()
-	downloadFiles.execute()
-	extractFiles.execute()
+	downloadCoreFiles.execute()
+	extractCoreFiles.execute()
 	grantPermissions.execute()
 	println "*==BEGIN FORGE INSTALL==*"
 	installForge.execute()
