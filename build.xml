@@ -21,15 +21,15 @@
 	<property name="mod.version" value="0.1.3" />
 	<property name="mod.build" value="${buildspecs.build_number}" />
 	<property name="mod.version.full" value="${mod.version}.${mod.build}" />
-	<property name="version.mcp" value="751" />
-	<property name="version.forge" value="7.8.1.738" />
+	<property name="version.mcp" value="804" />
+	<property name="version.forge" value="9.10.0.789" />
 	<property name="version.chickencore" value="0.8.7" />
 	<property name="version.nei" value="1.5.2.27" />
 	<property name="version.teapi" value="2.4.6.0" />
 	<property name="version.ccapi" value="1.53" />
 
 	<!-- Servers -->
-	<property name="download.root" value="http://dl.dropboxusercontent.com/u/46144650" />
+	<property name="download.root" value="https://dl.dropboxusercontent.com/u/243207/lib/" />
 	<property name="download.mcp" value="mcp-${version.mcp}.zip" />
 	<property name="download.forge" value="forge-${version.forge}.zip" />
 	<property name="download.chickencore" value="chickencore-${version.chickencore}.zip" />
