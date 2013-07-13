@@ -36,9 +36,6 @@
 	<property name="download.teapi" value="teapi-${version.teapi}.zip" />
 	<property name="download.ccapi" value="ccapi-${version.ccapi}.zip" />
 
-
-
-
 	<target name="cleanoldworkspace">
 		<delete dir="${mc.src.dir}\electrodynamics" />
 		<delete dir="${mcp.dir}\reobf\minecraft" />
@@ -50,19 +47,17 @@
 		</propertyfile>
 	</target>
 
-
 	<target name="fullfilesetup">
 		<!-- Download files -->
 		<mkdir dir="${download.dir}" />
 		<get src="${download.root}/${download.mcp}" dest="${download.dir}" usetimestamp="True" />
 		<get src="${download.root}/${download.forge}" dest="${download.dir}" usetimestamp="True" />
-		<get src="${download.root}/${download.chickencore}" dest="${download.dir}" usetimestamp="True" />
-		<get src="${download.root}/${download.nei}" dest="${download.dir}" usetimestamp="True" />
+		<!-- <get src="${download.root}/${download.chickencore}" dest="${download.dir}" usetimestamp="True" />
+		<get src="${download.root}/${download.nei}" dest="${download.dir}" usetimestamp="True" /> -->
 		<get src="${download.root}/${download.teapi}" dest="${download.dir}" usetimestamp="True" />
 		<get src="${download.root}/${download.ccapi}" dest="${download.dir}" usetimestamp="True" />
 
 		<echo message="Download finished" />
-
 
 		<!-- Unzip files -->
 		<!-- mcp -->
@@ -78,17 +73,17 @@
 			</fileset>
 		</unzip>
 		<!-- chickencore -->
-		<unzip dest="${chickencore.dir}" failOnEmptyArchive="true">
+		<!-- <unzip dest="${chickencore.dir}" failOnEmptyArchive="true">
 			<fileset dir="${download.dir}">
 				<include name="${download.chickencore}" />
 			</fileset>
-		</unzip>
+		</unzip> -->
 		<!-- nei -->
-		<unzip dest="${nei.dir}" failOnEmptyArchive="true">
+		<!-- <unzip dest="${nei.dir}" failOnEmptyArchive="true">
 			<fileset dir="${download.dir}">
 				<include name="${download.nei}" />
 			</fileset>
-		</unzip>
+		</unzip> -->
 		<!-- Computer Craft api -->
 		<unzip dest="${ccapi.dir}" failOnEmptyArchive="true">
 			<fileset dir="${download.dir}">
@@ -124,7 +119,7 @@
 		<echo message="Initial Forge Setup complete" />
 
 		<!-- Setup Chickenbones mods -->
-		<mkdir dir="${forge.dir}/accesstransformers" />
+		<!-- <mkdir dir="${forge.dir}/accesstransformers" />
 		<mkdir dir="${mcp.dir}/jars/coremods" />
 		<delete dir="${mcp.dir}\src" />
 		<copy file="${chickencore.dir}/codechickencore_at.cfg" todir="${forge.dir}/accesstransformers">
@@ -141,7 +136,7 @@
 		<exec dir="${forge.dir}" executable="sh" osfamily="unix" failonerror="true">
 			<arg value="install.sh" />
 		</exec>
-		<echo message="Chickenbones Forge Setup Complete" />
+		<echo message="Chickenbones Forge Setup Complete" /> -->
 
 		<!-- Copy files that will be hashed with MD5 -->
 		<copy todir="${mc.src.dir}">
