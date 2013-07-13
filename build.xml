@@ -212,12 +212,12 @@
 	<!-- Always call one of the 3 below. -->
 
 	<!-- Set up initial mcp space. -->
-	<target name="initialsetup">
+	<target name="setup">
 		<antcall target="fullfilesetup" />
 	</target>
 
 	<!-- Build a jar for release, normally run by Jenkins. -->
-	<target name="quickbuild">
+	<target name="jenkins">
 		<antcall target="cleanoldworkspace" />
 		<antcall target="increment_build_number" />
 		<antcall target="copymodsrc" />
@@ -230,7 +230,7 @@
 
 
 	<!-- Build a quick test release without increasing version number. -->
-	<target name="testbuild">
+	<target name="build">
 		<antcall target="cleanoldworkspace" />
 		<antcall target="copymodsrc" />
 		<antcall target="injectdata" />
@@ -240,5 +240,11 @@
 		<antcall target="cleanoldworkspace" />
 	</target>
 
+	<!-- Builds a quick test release & creates a fresh workspace -->
+	<target name="initial_build">
+		<antcall target="setup" />
+		<antcall target="build" />
+	</target>
+	
 </project>
 
