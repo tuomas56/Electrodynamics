@@ -1,0 +1,247 @@
+import groovy.json.JsonSlurper
+import groovy.io.FileType
+
+// Directories
+def dirSrc = "."
+def dirWorkspace = "."
+def dirBuild = dirWorkspace + "/build"
+def dirDownload = dirWorkspace + "/download"
+def dirLib = dirWorkspace + "/lib"
+def dirMCP = dirBuild + "/mcp"
+def dirForge = dirMCP + "/forge"
+def dirMCSource = dirMCP + "/src/minecraft"
+def dirJar = dirBuild + "/dist"
+def dirUnpack = dirBuild = "/unpack"
+
+// Versions
+def versionMC = "1.5.2"
+def versionMod = "0.1.3"
+def versionBuild = "0"
+def versionFull = versionMod + "." + versionBuild
+def versionMCP = "751"
+def versionForge = "7.8.1.738"
+
+// Libraries
+def downloadURL = "http://192.249.63.186/lib"
+def fileMCP = versionMC + "/mcp-" + versionMCP + ".zip"
+def fileForge = versionMC + "/forge-" + versionForge + ".zip"
+def downloadMCP = downloadURL + "/" + fileMCP
+def downloadForge = downloadURL + "/" + fileForge
+
+// BEGIN HELPER METHODS
+
+String[] getLibraryInfo(File file) {
+	def jsonSlurper = new JsonSlurper()
+	def result = jsonSlurper.parse(new FileReader(file))
+	
+	return [result.name, result.mcVersion, result.filename]
+}
+
+// END HELPER METHODS
+
+task cleanWorkspace(type: Delete) << {
+	delete dirMCSource + "/electrodynamics", dirMCP + "/reobf/minecraft", dirUnpack, dirJar
+	
+	println "Workspace cleaned"
+}
+
+task downloadCoreFiles << {
+	File downloadDir = new File(dirDownload)
+	downloadDir.mkdirs()
+	
+	if ((new File(dirDownload + "/" + fileMCP)).exists()) {
+		println "MCP already downloaded. Skipping."
+	} else {
+		println "Downloading MCP"
+		ant.get(src:downloadMCP, dest:dirDownload, verbose:true, usetimestamp:true)
+	}
+	
+	if ((new File(dirDownload + "/" + fileForge)).exists()) {
+		println "Forge already downloaded. Skipping."
+	} else {
+		println "Downloading Forge"
+		ant.get(src:downloadForge, dest:dirDownload, verbose:true, usetimestamp:true)
+	}
+	
+	println "Core downloads finished."
+}
+
+task extractCoreFiles << {
+	println "Extracting MCP"
+	copy {
+		from zipTree(file(dirDownload + "/" + fileMCP))
+		into file(dirMCP)
+	}
+	
+	println "Extracting Forge"
+	copy {
+		from zipTree(file(dirDownload + "/" + fileForge))
+		into file(dirMCP)
+	}
+	
+	println "MCP & Forge extracted"
+}
+
+task downloadAndExtractLibraryFiles << {
+	def libList = []
+
+	File libDir = new File(dirLib)
+	libDir.mkdirs()
+
+	println "Scanning for library files."
+	
+	libDir.eachFileRecurse(FileType.FILES) { file ->
+		libList << file
+	}
+	
+	if (libList.size() > 0) {
+		libList.each {
+			String[] info = getLibraryInfo(it)
+			println "Found library: " + info[0]
+			
+			if ((new File(dirDownload + "/" + info[2])).exists()) {
+				println info[0] + " already downloaded. Skipping."
+			} else {
+				println "Downloading " + info[0]
+				ant.get(src:downloadURL + "/" + info[1] + "/" + info[2], dest:dirDownload, verbose:true, usetimestamp:true)
+			}
+			
+			println "Unpacking " + info[0]
+			
+			copy {
+				from zipTree(file(dirDownload + "/" + info[2]))
+				into file(dirUnpack)
+			}
+		}
+	} else {
+		println "No library files found."
+	}
+}
+
+task copyLibraryFiles << {
+	println "Copying libraries into MCP source directory"
+	
+	copy {
+		from file(dirUnpack)
+		into file(dirMCSource)
+	}
+}
+
+task refreshMD5(type:Exec) {
+	workingDir dirMCP	
+	
+	if (System.properties['os.name'].toLowerCase().contains('windows')) {
+		// Windows
+		commandLine 'cmd', '/c', 'updateMD5.bat', '-f' 
+	} else {
+		// Unix
+		commandLine './updateMD5.sh', '-f'
+	}
+}
+
+task grantPermissions << {
+	ant.chmod(file:dirMCP + "/updatemd5.sh", perm:"+x")
+	ant.chmod(file:dirMCP + "/updatemcp.sh", perm:"+x")
+	ant.chmod(file:dirMCP + "/recompile.sh", perm:"+x")
+	ant.chmod(file:dirMCP + "/reobfuscate_srg.sh", perm:"+x")
+	ant.chmod(file:dirForge + "/install.sh", perm:"+x")
+	ant.chmod(file:dirMCP + "/runtime/bin/astyle-osx", perm:"+x")
+	ant.chmod(file:dirMCP + "/runtime/bin/jad-osx", perm:"+x")
+	
+	println "(Unix) Permissions set"
+}
+
+task installForge(type:Exec) {
+	workingDir dirForge	
+	
+	if (System.properties['os.name'].toLowerCase().contains('windows')) {
+		// Windows
+		commandLine 'cmd', '/c', 'install.cmd' 
+	} else {
+		// Unix
+		commandLine './install.sh'
+	}
+}
+
+task copyModSRC << {
+	println "Copying mod source"
+	
+	copy {
+		from dirSrc + "/common"
+		into dirMCSource
+	}
+}
+
+task recompile(type:Exec) {
+	workingDir dirMCP	
+	
+	if (System.properties['os.name'].toLowerCase().contains('windows')) {
+		// Windows
+		commandLine 'cmd', '/c', 'recompile.bat' 
+	} else {
+		// Unix
+		commandLine './recompile.sh'
+	}
+}
+
+task reobfuscate(type:Exec) {
+	workingDir dirMCP	
+	
+	if (System.properties['os.name'].toLowerCase().contains('windows')) {
+		// Windows
+		commandLine 'cmd', '/c', 'reobfuscate_srg.bat' 
+	} else {
+		// Unix
+		commandLine './reobfuscate_srg.sh'
+	}
+}
+
+task packJAR << {
+	println "Packing JAR"
+	
+	File jarDir = new File(dirJar)
+	jarDir.mkdirs()
+		
+	def archiveName = "Electrodynamics-" + versionFull + ".jar"
+		
+	ant.jar(destfile: dirJar + "/" + archiveName) {
+		fileset(dir: dirMCP + "/reobf/minecraft")
+		fileset(dir: dirSrc + "/resources")
+	}
+	
+	println "JAR packed; Can be found @ " + dirJar + "/" + archiveName
+}
+
+task setup << {
+	cleanWorkspace.execute()
+	downloadFiles.execute()
+	extractFiles.execute()
+	grantPermissions.execute()
+	println "*==BEGIN FORGE INSTALL==*"
+	installForge.execute()
+	println "*==BEGIN FORGE INSTALL==*"
+}
+
+task build << {
+	cleanWorkspace.execute()
+	downloadAndExtractLibraryFiles.execute()
+	copyLibraryFiles.execute()
+	println "*==BEGIN MD5 REFRESH==*"
+	refreshMD5.execute()
+	println "*==END MD5 REFRESH==*"
+	copyModSRC.execute()
+	println "*==BEGIN RECOMPILE/REOBFUSCATE==*"
+	recompile.execute()
+	reobfuscate.execute()
+	println "*==END RECOMPILE/REOBFUSCATE==*"
+	packJAR.execute()
+}
+
+task jenkins << {
+	// Gets build number from Jenkins
+	ext.env = System.getenv()
+    ext.buildNumber = env.BUILD_NUMBER?.toInteger()
+	versionBuild = $buildNumber
+	
+	build.execute()
+}

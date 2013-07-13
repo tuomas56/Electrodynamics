@@ -8,6 +8,10 @@
 # To ignore dev files #
 build.properties
 build/
+download/
+unpack/
+lib/
+.gradle/
 
 # Windows image cache #
 Thumbs.db
