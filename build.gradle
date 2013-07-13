@@ -258,8 +258,7 @@ task build << {
 task jenkins << {
 	// Gets build number from Jenkins
 	ext.env = System.getenv()
-    ext.buildNumber = env.BUILD_NUMBER?.toInteger()
-	versionBuild = $buildNumber
+	versionBuild = env.BUILD_NUMBER?.toInteger()
 	
 	build.execute()
 }
