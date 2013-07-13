@@ -25,8 +25,8 @@ try {
 def dirBuild = dirWorkspace + "/build"
 def dirDownload = dirWorkspace + "/download"
 def dirLib = dirWorkspace + "/lib"
-def dirMCP = dirBuild + "/mcp"
-def dirForge = dirMCP + "/forge"
+def dirForge = dirWorkspace + "/forge"
+def dirMCP = dirForge + "/mcp"
 def dirMCSource = dirMCP + "/src/minecraft"
 def dirJar = dirBuild + "/dist"
 def dirUnpack = dirBuild = "/unpack"
@@ -67,12 +67,12 @@ task downloadCoreFiles << {
 	File downloadDir = new File(dirDownload)
 	downloadDir.mkdirs()
 	
-	if ((new File(dirDownload + "/" + fileMCP)).exists()) {
-		println "MCP already downloaded. Skipping."
-	} else {
-		println "Downloading MCP"
-		ant.get(src:downloadMCP, dest:dirDownload, verbose:true, usetimestamp:true)
-	}
+	// if ((new File(dirDownload + "/" + fileMCP)).exists()) {
+		// println "MCP already downloaded. Skipping."
+	// } else {
+		// println "Downloading MCP"
+		// ant.get(src:downloadMCP, dest:dirDownload, verbose:true, usetimestamp:true)
+	// }
 	
 	if ((new File(dirDownload + "/" + fileForge)).exists()) {
 		println "Forge already downloaded. Skipping."
@@ -85,11 +85,11 @@ task downloadCoreFiles << {
 }
 
 task extractCoreFiles << {
-	println "Extracting MCP"
-	copy {
-		from zipTree(file(dirDownload + "/" + fileMCP))
-		into file(dirMCP)
-	}
+	// println "Extracting MCP"
+	// copy {
+		// from zipTree(file(dirDownload + "/" + fileMCP))
+		// into file(dirMCP)
+	// }
 	
 	println "Extracting Forge"
 	copy {
@@ -97,7 +97,7 @@ task extractCoreFiles << {
 		into file(dirMCP)
 	}
 	
-	println "MCP & Forge extracted"
+	println "Forge extracted"
 }
 
 task downloadAndExtractLibraryFiles << {
