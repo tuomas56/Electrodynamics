@@ -10,6 +10,15 @@ This mod is not to be used in any modpacks until a stable release is available. 
 
 [Alpha v0.1.2] (https://www.dropbox.com/s/o6868wowwxottih/Electrodynamics-Alpha-0.1.2.jar?dl=1 "Direct Download")
 
+#Compiling
+//TODO Freshen this bit up
+
+For most users, simply install ant, pull the most recent code, and run ant initial_build.
+
+If you need to have the code build in a directory other than the working directory, run ant [target] -Dsrc.dir=[dir]
+
+Valid targets are setup, jenkins, build, and initial_build. You can look through the script to figure out what these actually do.
+
 #Main Development Team
 
 CyanideX, dmillerw, Xhamolk_, Mrabow, Hawkye, Odiefrom.
