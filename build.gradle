@@ -24,7 +24,7 @@ try {
 
 def dirBuild = dirWorkspace + "/build"
 def dirDownload = dirWorkspace + "/download"
-def dirLib = dirWorkspace + "/lib"
+def dirLib = dirSrc + "/lib"
 def dirMCP = dirWorkspace + "/forge/mcp"
 def dirForge = dirMCP + "/forge"
 def dirMCSource = dirMCP + "/src/minecraft"
