@@ -10,7 +10,6 @@ build.properties
 build/
 download/
 unpack/
-lib/
 .gradle/
 
 # Windows image cache #
