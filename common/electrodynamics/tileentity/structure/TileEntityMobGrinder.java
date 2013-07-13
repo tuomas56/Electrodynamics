@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -21,6 +23,7 @@ import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.liquids.LiquidTank;
 import electrodynamics.core.CoreUtils;
 import electrodynamics.core.misc.DamageSourceBlock;
+import electrodynamics.interfaces.IRedstoneUser;
 import electrodynamics.inventory.wrapper.InventoryWrapperStack;
 import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.recipe.RecipeGrinder;
@@ -30,16 +33,18 @@ import electrodynamics.util.InventoryUtil;
 import electrodynamics.util.LiquidUtil;
 import electrodynamics.util.PlayerUtil;
 
-public class TileEntityMobGrinder extends TileEntityStructure implements ITankContainer, IInventory {
+public class TileEntityMobGrinder extends TileEntityStructure implements ITankContainer, IInventory, IRedstoneUser {
 
 	public InventoryWrapperStack inventoryWrapper = new InventoryWrapperStack();
 	
 	public LiquidTank tank = new LiquidTank(LiquidContainerRegistry.BUCKET_VOLUME);
 	
+	public boolean active = false;
+	
 	@Override
 	public void updateEntity() {
 		if (CoreUtils.isServer(worldObj)) {
-			if (this.isValidStructure() && this.isCentralTileEntity()) {
+			if (this.isValidStructure() && this.isCentralTileEntity() && this.active == true) {
 				collectEntities();
 			}
 		}
@@ -186,6 +191,7 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 		this.inventoryWrapper = new InventoryWrapperStack();
 		this.inventoryWrapper.getStack().addAll(Arrays.asList(InventoryUtil.readItemsFromNBT("Items", nbt)));
 		this.tank.setLiquid(LiquidUtil.readLiquidFromNBT("Liquid", nbt));
+		this.active = nbt.getBoolean("active");
 	}
 	
 	@Override
@@ -194,6 +200,7 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 		
 		InventoryUtil.writeItemsToNBT("Items", nbt, this.inventoryWrapper.getStack().toArray(new ItemStack[this.inventoryWrapper.getStack().size()]));
 		LiquidUtil.writeLiquidToNBT("Liquid", nbt, tank.getLiquid());
+		nbt.setBoolean("active", this.active);
 	}
 	
 	@Override
@@ -291,6 +298,16 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 	@Override
 	public boolean isStackValidForSlot(int slot, ItemStack stack) {
 		return this.inventoryWrapper.isStackValidForSlot(slot, stack);
+	}
+
+	@Override
+	public void updateSignalStrength(int strength) {
+		this.active = strength > 0;
+	}
+
+	@Override
+	public int getSignalStrength() {
+		return this.active == true ? 15 : 0;
 	}
 
 }

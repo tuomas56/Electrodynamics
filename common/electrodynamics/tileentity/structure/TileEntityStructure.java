@@ -3,8 +3,10 @@ package electrodynamics.tileentity.structure;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import electrodynamics.interfaces.IRedstoneUser;
 import electrodynamics.mbs.MBSManager;
 import electrodynamics.mbs.MultiBlockStructure;
+import electrodynamics.network.packet.PacketUpdateRedstone;
 import electrodynamics.tileentity.TileEntityGeneric;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -69,6 +71,19 @@ public abstract class TileEntityStructure extends TileEntityGeneric {
 
 	public abstract boolean onBlockActivatedBy(EntityPlayer player, int side, float xOff, float yOff, float zOff);
 
+	public void onBlockUpdate() {
+		TileEntityStructure centralTE = getCentralTileEntity();
+		
+		if (centralTE != null && centralTE instanceof IRedstoneUser && this.isValidStructure()) {
+			((IRedstoneUser)centralTE).updateSignalStrength(this.worldObj.getStrongestIndirectPower(xCoord, yCoord, zCoord));
+			PacketUpdateRedstone packet = new PacketUpdateRedstone();
+			packet.x = centralTE.xCoord;
+			packet.y = centralTE.yCoord;
+			packet.z = centralTE.zCoord;
+			packet.strength = this.worldObj.getStrongestIndirectPower(xCoord, yCoord, zCoord);
+		}
+	}
+	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT( nbt );

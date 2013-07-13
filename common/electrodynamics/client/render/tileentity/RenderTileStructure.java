@@ -9,9 +9,11 @@ import org.lwjgl.opengl.GL11;
 import electrodynamics.client.model.ModelMobGrinder;
 import electrodynamics.client.model.ModelSinteringFurnace;
 import electrodynamics.client.model.ModelTechne;
+import electrodynamics.interfaces.IRedstoneUser;
 import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.lib.client.Models;
 import electrodynamics.mbs.MultiBlockStructure;
+import electrodynamics.tileentity.structure.TileEntityMobGrinder;
 import electrodynamics.tileentity.structure.TileEntityStructure;
 
 public class RenderTileStructure extends TileEntitySpecialRenderer {
@@ -61,6 +63,7 @@ public class RenderTileStructure extends TileEntitySpecialRenderer {
 		MultiBlockStructure mbs = structure.getMBS();
 		if (mbs != null) {
 			if (mbs.getUID().equals("MobGrinder")) {
+				//TODO Disable rotation if grinder is off
 				this.mobGrinderBladeRotation++;
 				
 				if (this.mobGrinderBladeRotation > 360) {
