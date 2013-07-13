@@ -157,16 +157,21 @@ task refreshMD5(type:Exec) {
 	}
 }
 
-task grantPermissions << {
+task grantForgePermissions << {
+	ant.chmod(file:dirForge + "/install.sh", perm:"+x")
+	
+	println "(Unix) Forge file permissions set"
+}
+
+task grantMCPPermissions << {
 	ant.chmod(file:dirMCP + "/updatemd5.sh", perm:"+x")
 	ant.chmod(file:dirMCP + "/updatemcp.sh", perm:"+x")
 	ant.chmod(file:dirMCP + "/recompile.sh", perm:"+x")
 	ant.chmod(file:dirMCP + "/reobfuscate_srg.sh", perm:"+x")
-	ant.chmod(file:dirForge + "/install.sh", perm:"+x")
 	ant.chmod(file:dirMCP + "/runtime/bin/astyle-osx", perm:"+x")
 	ant.chmod(file:dirMCP + "/runtime/bin/jad-osx", perm:"+x")
 	
-	println "(Unix) Permissions set"
+	println "(Unix) MCP file permissions set"
 }
 
 task installForge(type:Exec) {
@@ -234,9 +239,10 @@ task setup << {
 	cleanWorkspace.execute()
 	downloadCoreFiles.execute()
 	extractCoreFiles.execute()
-	grantPermissions.execute()
+	grantForgePermissions.execute()
 	println "*==BEGIN FORGE INSTALL==*"
 	installForge.execute()
+	grantMCPPermissions.execute()
 	println "*==BEGIN FORGE INSTALL==*"
 }
 
