@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 
-<project name="Electrodynamics" basedir="../" default="">
+<project name="Electrodynamics" basedir="." default="">
 	<!-- Directories -->
 	<property name="src.dir" value="Electrodynamics" />
 	<property name="build.dir" value="build" />
