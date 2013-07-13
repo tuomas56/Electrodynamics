@@ -5,8 +5,11 @@
 *.war
 *.ear
 
-# To ignore dev changes to properties file #
+# To ignore dev files #
 build.properties
+build/
 
 # Windows image cache #
 Thumbs.db
+
+.DS_Store

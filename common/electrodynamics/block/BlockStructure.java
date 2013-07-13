@@ -66,6 +66,11 @@ public class BlockStructure extends BlockGeneric implements IAcceptsTool {
 	
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int neighborID) {
+		TileEntityStructure tile = (TileEntityStructure) world.getBlockTileEntity( x, y, z );
+		if( tile != null ) {
+			tile.onBlockUpdate();
+		}
+		
 		Block block = Block.blocksList[neighborID];
 		if( block != null && block instanceof BlockStructure ) {
 			scheduleUpdate( world, x, y, z, false );

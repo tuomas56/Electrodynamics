@@ -1,74 +1,250 @@
-<?xml version="1.0" ?> 
-<project name="Electrodynamics">
+<?xml version="1.0" ?>
+
+<project name="Electrodynamics" default="">
 	
-	<property file="build.properties" />
-	<property file="version.properties" />
+	<!-- Directories -->
+	<property name="src.dir" value="." />
+	<property name="build.dir" value="${src.dir}/build" />
+	<property name="download.dir" value="${src.dir}/download" />
+	<property name="mcp.dir" value="${build.dir}/mcp" />
+	<property name="forge.dir" value="${mcp.dir}/forge" />
+	<property name="mc.src.dir" value="${mcp.dir}/src/minecraft" />
+	<property name="jar.dir" value="${build.dir}/dist" />
+	<property name="chickencore.dir" value="${build.dir}/unpack/chickencore" />
+	<property name="nei.dir" value="${build.dir}/unpack/nei" />
+	<property name="teapi.dir" value="${build.dir}/unpack/teapi" />
+	<property name="ccapi.dir" value="${build.dir}/unpack/ccapi" />
+
+	<!-- Versioning -->
+	<property file="${src.dir}/buildspecs.properties" prefix="buildspecs" />
+	<property name="mc.version" value="1.5.2" />
+	<property name="mod.version" value="0.1.3" />
+	<property name="mod.build" value="${buildspecs.build_number}" />
+	<property name="mod.version.full" value="${mod.version}.${mod.build}" />
+	<property name="version.mcp" value="751" />
+	<property name="version.forge" value="7.8.1.738" />
+	<property name="version.chickencore" value="0.8.7" />
+	<property name="version.nei" value="1.5.2.27" />
+	<property name="version.teapi" value="2.4.6.0" />
+	<property name="version.ccapi" value="1.53" />
+
+	<!-- Servers -->
+	<property name="download.root" value="http://dl.dropboxusercontent.com/u/46144650" />
+	<property name="download.mcp" value="mcp-${version.mcp}.zip" />
+	<property name="download.forge" value="forge-${version.forge}.zip" />
+	<property name="download.chickencore" value="chickencore-${version.chickencore}.zip" />
+	<property name="download.nei" value="nei-${version.nei}.zip" />
+	<property name="download.teapi" value="teapi-${version.teapi}.zip" />
+	<property name="download.ccapi" value="ccapi-${version.ccapi}.zip" />
 	
-	<target name="clean">
-		<delete file="${dir.forge}\mcp\src\minecraft\mcmod.info" />
-		<delete dir="${dir.forge}\mcp\src\minecraft\${dir.src.root}" />
-		<delete dir="${dir.forge}\mcp\reobf\minecraft" />
+	<target name="cleanoldworkspace">
+		<echo message="${mc.src.dir}" />
+		<delete dir="${mc.src.dir}\electrodynamics" />
+		<delete dir="${mcp.dir}\reobf\minecraft" />
 	</target>
-	
-	<target name="build">
-		<copy todir="${dir.forge}\mcp\src\minecraft">
-			<fileset dir="${dir.source}\${dir.src}\" />
+
+	<target name="increment_build_number">
+		<propertyfile file="${src.dir}/buildspecs.properties">
+			<entry key="build_number" type="int" operation="+" default="1" />
+		</propertyfile>
+	</target>
+
+	<target name="fullfilesetup">
+		<!-- Download files -->
+		<mkdir dir="${download.dir}" />
+		<get src="${download.root}/${download.mcp}" dest="${download.dir}" usetimestamp="True" />
+		<get src="${download.root}/${download.forge}" dest="${download.dir}" usetimestamp="True" />
+		<!-- <get src="${download.root}/${download.chickencore}" dest="${download.dir}" usetimestamp="True" />
+		<get src="${download.root}/${download.nei}" dest="${download.dir}" usetimestamp="True" /> -->
+		<get src="${download.root}/${download.teapi}" dest="${download.dir}" usetimestamp="True" />
+		<get src="${download.root}/${download.ccapi}" dest="${download.dir}" usetimestamp="True" />
+
+		<echo message="Download finished" />
+
+		<!-- Unzip files -->
+		<!-- mcp -->
+		<unzip dest="${mcp.dir}" failOnEmptyArchive="true">
+			<fileset dir="${download.dir}">
+				<include name="${download.mcp}" />
+			</fileset>
+		</unzip>
+		<!-- forge -->
+		<unzip dest="${mcp.dir}" failOnEmptyArchive="true">
+			<fileset dir="${download.dir}">
+				<include name="${download.forge}" />
+			</fileset>
+		</unzip>
+		<!-- chickencore -->
+		<!-- <unzip dest="${chickencore.dir}" failOnEmptyArchive="true">
+			<fileset dir="${download.dir}">
+				<include name="${download.chickencore}" />
+			</fileset>
+		</unzip> -->
+		<!-- nei -->
+		<!-- <unzip dest="${nei.dir}" failOnEmptyArchive="true">
+			<fileset dir="${download.dir}">
+				<include name="${download.nei}" />
+			</fileset>
+		</unzip> -->
+		<!-- Computer Craft api -->
+		<unzip dest="${ccapi.dir}" failOnEmptyArchive="true">
+			<fileset dir="${download.dir}">
+				<include name="${download.ccapi}" />
+			</fileset>
+		</unzip>
+		<!-- Thermal Expansion api -->
+		<unzip dest="${teapi.dir}" failOnEmptyArchive="true">
+			<fileset dir="${download.dir}">
+				<include name="${download.teapi}" />
+			</fileset>
+		</unzip>
+
+		<echo message="All Files Unpacked" />
+
+		<!-- Grant permissions -->
+		<chmod file="${mcp.dir}/updatemd5.sh" perm="+x" />
+		<chmod file="${mcp.dir}/updatemcp.sh" perm="+x" />
+		<chmod file="${mcp.dir}/recompile.sh" perm="+x" />
+		<chmod file="${mcp.dir}/reobfuscate_srg.sh" perm="+x" />
+		<chmod file="${forge.dir}/install.sh" perm="+x" />
+		<chmod file="${mcp.dir}/runtime/bin/astyle-osx" perm="+x" />
+		<chmod file="${mcp.dir}/runtime/bin/jad-osx" perm="+x" />
+		<echo message="Permissions set" />
+
+		<!-- Install forge -->
+		<exec dir="${forge.dir}" executable="cmd" osfamily="windows" failonerror="true">
+			<arg line="/c install.cmd" />
+		</exec>
+		<exec dir="${forge.dir}" executable="sh" osfamily="unix" failonerror="true">
+			<arg value="install.sh" />
+		</exec>
+		<echo message="Initial Forge Setup complete" />
+
+		<!-- Setup Chickenbones mods -->
+		<!-- <mkdir dir="${forge.dir}/accesstransformers" />
+		<mkdir dir="${mcp.dir}/jars/coremods" />
+		<delete dir="${mcp.dir}\src" />
+		<copy file="${chickencore.dir}/codechickencore_at.cfg" todir="${forge.dir}/accesstransformers">
+		</copy>
+		<copy file="${chickencore.dir}/CodeChickenCore_dummy.jar" todir="${mcp.dir}/jars/coremods">
+		</copy>
+		<copy file="${nei.dir}/nei_at.cfg" todir="${forge.dir}/accesstransformers">
+		</copy>
+		<copy file="${nei.dir}/NotEnoughItems_dummy.jar" todir="${mcp.dir}/jars/coremods">
+		</copy>
+		<exec dir="${forge.dir}" executable="cmd" osfamily="windows" failonerror="true">
+			<arg line="/c install.cmd" />
+		</exec>
+		<exec dir="${forge.dir}" executable="sh" osfamily="unix" failonerror="true">
+			<arg value="install.sh" />
+		</exec>
+		<echo message="Chickenbones Forge Setup Complete" /> -->
+
+		<!-- Copy files that will be hashed with MD5 -->
+		<copy todir="${mc.src.dir}">
+			<fileset dir="${chickencore.dir}" />
+		</copy>
+		<copy todir="${mc.src.dir}">
+			<fileset dir="${nei.dir}" />
+		</copy>
+		<copy todir="${mc.src.dir}">
+			<fileset dir="${ccapi.dir}" />
+		</copy>
+		<copy todir="${mc.src.dir}">
+			<fileset dir="${teapi.dir}" />
+		</copy>
+		<echo message="All apis and sources copied" />
+
+		<!-- Refresh MD5 -->
+		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">
+			<arg line="/c updatemd5.bat -f --client" />
+		</exec>
+		<exec dir="${mcp.dir}" executable="sh" osfamily="unix" failonerror="true">
+			<arg line="updatemd5.sh -f --client" />
+		</exec>
+		<echo message="Regenerated MD5s" />
+
+	</target>
+
+	<target name="copymodsrc">
+		<!-- Delete PR source in build space -->
+		<delete dir="${mc.src.dir}/electrodynamics" />
+
+		<!-- Copy PR source -->
+		<copy todir="${mc.src.dir}">
+			<fileset dir="${src.dir}/common" />
 		</copy>
 	</target>
-	
-	<target name="replace_tokens">
-		<replace dir="${dir.forge}\mcp\src\minecraft\" token="@VERSION@" value="${release.mod.version}" />
-		<replace dir="${dir.forge}\mcp\src\minecraft\" token="@MCVERSION@" value="${release.minecraft.version}" />
+
+	<target name="injectdata">
+		<!-- Replace Tokens-->
+		<replace dir="${mc.src.dir}" token="@VERSION@" value="${build.release.mod.version}" />
+		<replace dir="${mc.src.dir}" token="@BUILD_NUMBER@" value="${build.build_number}" />
 	</target>
 
 	<target name="recompile">
-		<exec dir="${dir.forge}\mcp" executable="cmd" os="Windows 7">
+		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows">
 			<arg line="/c recompile.bat" />
 		</exec>
-		<exec dir="${dir.forge}\mcp" executable="cmd" os="Windows 8">
-			<arg line="/c recompile.bat" />
-		</exec>
-		<exec dir="${dir.forge}\mcp" executable="bash" os="Linux">
-			<arg line="recompile.sh" />
-		</exec>
-		<exec dir="${dir.forge}\mcp" executable="bash" os="Mac OS X">
+		<exec dir="${mcp.dir}" executable="bash" osfamily="unix">
 			<arg line="recompile.sh" />
 		</exec>
 	</target>
 
-	<target name="reobfuscate_srg">
-		<exec dir="${dir.forge}\mcp" executable="cmd" os="Windows 7">
+	<target name="reobfuscate">
+		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows">
 			<arg line="/c reobfuscate_srg.bat" />
 		</exec>
-		<exec dir="${dir.forge}\mcp" executable="cmd" os="Windows 8">
-			<arg line="/c reobfuscate_srg.bat" />
-		</exec>
-		<exec dir="${dir.forge}\mcp" executable="bash" os="Linux">
+		<exec dir="${mcp.dir}" executable="bash" osfamily="unix">
 			<arg line="reobfuscate_srg.sh" />
 		</exec>
-		<exec dir="${dir.forge}\mcp" executable="bash" os="Mac OS X">
-			<arg line="reobfuscate_srg.sh" />
-		</exec>
+	</target>
+
+	<target name="packjar">
+		<!-- Build the jar -->
+		<mkdir dir="${jar.dir}" />
+		<jar destfile="${jar.dir}/Electrodynamics-${mc.version}-${mod.version.full}.jar">
+			<fileset dir="${mcp.dir}\reobf\minecraft" />
+			<fileset dir="${src.dir}\resources" />
+		</jar>
+	</target>
+
+	<!-- Always call one of the 3 below. -->
+
+	<!-- Set up initial mcp space. -->
+	<target name="setup">
+		<antcall target="fullfilesetup" />
+	</target>
+
+	<!-- Build a jar for release, normally run by Jenkins. -->
+	<target name="jenkins">
+		<antcall target="cleanoldworkspace" />
+		<antcall target="increment_build_number" />
+		<antcall target="copymodsrc" />
+		<antcall target="injectdata" />
+		<antcall target="recompile" />
+		<antcall target="reobfuscate" />
+		<antcall target="packjar" />
+		<antcall target="cleanoldworkspace" />
+	</target>
+
+
+	<!-- Build a quick test release without increasing version number. -->
+	<target name="build">
+		<antcall target="cleanoldworkspace" />
+		<antcall target="copymodsrc" />
+		<antcall target="injectdata" />
+		<antcall target="recompile" />
+		<antcall target="reobfuscate" />
+		<antcall target="packjar" />
+		<antcall target="cleanoldworkspace" />
+	</target>
+
+	<!-- Builds a quick test release & creates a fresh workspace -->
+	<target name="initial_build">
+		<antcall target="setup" />
+		<antcall target="build" />
 	</target>
 	
-	<target name="release_srg">
-		<!-- Prep for the release -->
-		<antcall target="clean" />
-		<antcall target="build" />
-		<antcall target="replace_tokens" />
-		<antcall target="recompile" />		
-		<antcall target="reobfuscate_srg" />
-		
-		<!-- Build the jar -->
-		<mkdir dir="${dir.share}\${release.minecraft.version}\${release.mod.version}" />
-		<jar destfile="${dir.share}\${release.minecraft.version}\${release.mod.version}\${release.mod.name}-universal-${release.mod.version}.jar">
-			<fileset dir="${dir.forge}\mcp\src\minecraft\${dir.src.root}\"	includes="mcmod.info" />
-			<fileset dir="${dir.forge}\mcp\reobf\minecraft" />
-			<fileset dir="${dir.source}\${dir.rsc}" />
-		</jar>
-		
-		<!-- Clean up the MCP source now that we are done -->
-		<antcall target="clean" />
-	</target>
-
 </project>
+
