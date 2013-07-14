@@ -27,7 +27,7 @@ public enum PacketTypeHandler {
 	SOUND(PacketSound.class),
 	MBS_INIT(PacketInitializeMBS.class),
 	MBS_INVALIDATE(PacketInvalidateMBS.class),
-	REDSTONE_STRENGTH(PacketUpdateRedstone.class);
+	CLIENT_DATA(PacketClientData.class);
 	
 	private Class<? extends PacketED> clazz;
 	

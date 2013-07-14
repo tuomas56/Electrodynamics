@@ -26,6 +26,7 @@ import electrodynamics.core.misc.DamageSourceBlock;
 import electrodynamics.interfaces.IRedstoneUser;
 import electrodynamics.inventory.wrapper.InventoryWrapperStack;
 import electrodynamics.lib.block.StructureComponent;
+import electrodynamics.network.packet.PacketClientData;
 import electrodynamics.recipe.RecipeGrinder;
 import electrodynamics.recipe.manager.CraftingManager;
 import electrodynamics.util.EntityReflectionWrapper;
@@ -303,6 +304,7 @@ public class TileEntityMobGrinder extends TileEntityStructure implements ITankCo
 	@Override
 	public void updateSignalStrength(int strength) {
 		this.active = strength > 0;
+		sendDataToClient("active", (byte)(this.active == true ? 1 : 0));
 	}
 
 	@Override

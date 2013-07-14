@@ -1,16 +1,20 @@
 package electrodynamics.tileentity.structure;
 
 
+import java.util.HashMap;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.AxisAlignedBB;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.interfaces.IRedstoneUser;
 import electrodynamics.mbs.MBSManager;
 import electrodynamics.mbs.MultiBlockStructure;
-import electrodynamics.network.packet.PacketUpdateRedstone;
+import electrodynamics.network.PacketUtils;
+import electrodynamics.network.packet.PacketClientData;
 import electrodynamics.tileentity.TileEntityGeneric;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
 
 public abstract class TileEntityStructure extends TileEntityGeneric {
 
@@ -76,11 +80,6 @@ public abstract class TileEntityStructure extends TileEntityGeneric {
 		
 		if (centralTE != null && centralTE instanceof IRedstoneUser && this.isValidStructure()) {
 			((IRedstoneUser)centralTE).updateSignalStrength(this.worldObj.getStrongestIndirectPower(xCoord, yCoord, zCoord));
-			PacketUpdateRedstone packet = new PacketUpdateRedstone();
-			packet.x = centralTE.xCoord;
-			packet.y = centralTE.yCoord;
-			packet.z = centralTE.zCoord;
-			packet.strength = this.worldObj.getStrongestIndirectPower(xCoord, yCoord, zCoord);
 		}
 	}
 	
@@ -115,16 +114,28 @@ public abstract class TileEntityStructure extends TileEntityGeneric {
 		return this.INFINITE_EXTENT_AABB;
     }
 	
+	public void sendDataToClient(String key, Object data) {
+		PacketClientData packet = new PacketClientData(xCoord, yCoord, zCoord, key, data);
+		PacketUtils.sendToPlayers(packet.makePacket(), this);
+	}
+	
 	public static TileEntityStructure createNewPlaceHolderTE() {
 		return new TileStructurePlaceHolder();
 	}
 
 	public static class TileStructurePlaceHolder extends TileEntityStructure {
 
+		public HashMap<String, Object> fakeDataMappings = new HashMap<String, Object>();
+
+		public void readClientData(String key, Object value) {
+			fakeDataMappings.put(key, value);
+		}
+		
 		@Override
 		public boolean onBlockActivatedBy(EntityPlayer player, int side, float xOff, float yOff, float zOff) {
 			return false;
 		}
+		
 	}
 
 }
