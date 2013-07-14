@@ -161,10 +161,10 @@ task refreshMD5(type:Exec) {
 	
 	if (System.properties['os.name'].toLowerCase().contains('windows')) {
 		// Windows
-		commandLine 'cmd', '/c', 'updateMD5.bat', '-f' 
+		commandLine 'cmd', '/c', 'updatemd5.bat', '-f' 
 	} else {
 		// Unix
-		commandLine './updateMD5.sh', '-f'
+		commandLine './updatemd5.sh', '-f'
 	}
 }
 
