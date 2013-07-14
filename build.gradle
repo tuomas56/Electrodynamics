@@ -191,7 +191,7 @@ task installForge(type:Exec) {
 		if (runUser == "") {
 			commandLine './install.sh'
 		} else {
-			commandLine 'runuser', '-l', runUser, '-c', './install.sh'
+			commandLine '/bin/su', '-', runUser, '-c', './install.sh'
 		}
 	}
 }
