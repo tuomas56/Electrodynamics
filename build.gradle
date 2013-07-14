@@ -24,8 +24,8 @@ try {
 
 def dirBuild = dirWorkspace + "/build"
 def dirDownload = dirWorkspace + "/download"
-def dirLib = dirSrc + "/lib"
-def dirMCP = dirWorkspace + "/forge/mcp"
+def dirLib = dirWorkspace + "/lib"
+def dirMCP = dirBuild + "/mcp"
 def dirForge = dirMCP + "/forge"
 def dirMCSource = dirMCP + "/src/minecraft"
 def dirJar = dirBuild + "/dist"
@@ -67,12 +67,12 @@ task downloadCoreFiles << {
 	File downloadDir = new File(dirDownload)
 	downloadDir.mkdirs()
 	
-	// if ((new File(dirDownload + "/" + fileMCP)).exists()) {
-		// println "MCP already downloaded. Skipping."
-	// } else {
-		// println "Downloading MCP"
-		// ant.get(src:downloadMCP, dest:dirDownload, verbose:true, usetimestamp:true)
-	// }
+	if ((new File(dirDownload + "/" + fileMCP)).exists()) {
+		println "MCP already downloaded. Skipping."
+	} else {
+		println "Downloading MCP"
+		ant.get(src:downloadMCP, dest:dirDownload, verbose:true, usetimestamp:true)
+	}
 	
 	if ((new File(dirDownload + "/" + fileForge)).exists()) {
 		println "Forge already downloaded. Skipping."
@@ -85,11 +85,11 @@ task downloadCoreFiles << {
 }
 
 task extractCoreFiles << {
-	// println "Extracting MCP"
-	// copy {
-		// from zipTree(file(dirDownload + "/" + fileMCP))
-		// into file(dirMCP)
-	// }
+	println "Extracting MCP"
+	copy {
+		from zipTree(file(dirDownload + "/" + fileMCP))
+		into file(dirMCP)
+	}
 	
 	println "Extracting Forge"
 	copy {
@@ -97,7 +97,7 @@ task extractCoreFiles << {
 		into file(dirMCP)
 	}
 	
-	println "Forge extracted"
+	println "MCP & Forge extracted"
 }
 
 task downloadAndExtractLibraryFiles << {
@@ -157,21 +157,16 @@ task refreshMD5(type:Exec) {
 	}
 }
 
-task grantForgePermissions << {
-	ant.chmod(file:dirForge + "/install.sh", perm:"+x")
-	
-	println "(Unix) Forge file permissions set"
-}
-
-task grantMCPPermissions << {
+task grantPermissions << {
 	ant.chmod(file:dirMCP + "/updatemd5.sh", perm:"+x")
 	ant.chmod(file:dirMCP + "/updatemcp.sh", perm:"+x")
 	ant.chmod(file:dirMCP + "/recompile.sh", perm:"+x")
 	ant.chmod(file:dirMCP + "/reobfuscate_srg.sh", perm:"+x")
+	ant.chmod(file:dirForge + "/install.sh", perm:"+x")
 	ant.chmod(file:dirMCP + "/runtime/bin/astyle-osx", perm:"+x")
 	ant.chmod(file:dirMCP + "/runtime/bin/jad-osx", perm:"+x")
 	
-	println "(Unix) MCP file permissions set"
+	println "(Unix) Permissions set"
 }
 
 task installForge(type:Exec) {
@@ -239,10 +234,9 @@ task setup << {
 	cleanWorkspace.execute()
 	downloadCoreFiles.execute()
 	extractCoreFiles.execute()
-	grantForgePermissions.execute()
+	grantPermissions.execute()
 	println "*==BEGIN FORGE INSTALL==*"
 	installForge.execute()
-	grantMCPPermissions.execute()
 	println "*==BEGIN FORGE INSTALL==*"
 }
 
@@ -264,8 +258,7 @@ task build << {
 task jenkins << {
 	// Gets build number from Jenkins
 	ext.env = System.getenv()
-    ext.buildNumber = env.BUILD_NUMBER?.toInteger()
-	versionBuild = $buildNumber
+	versionBuild = env.BUILD_NUMBER?.toInteger()
 	
 	build.execute()
 }
