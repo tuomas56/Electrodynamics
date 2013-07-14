@@ -169,7 +169,7 @@ task grantPermissions << {
 	println "(Unix) Permissions set"
 }
 
-task patchMCP {
+task patchMCP << {
 	println "[EDX] Patching commands.py"
 	
 	ant.get(src:"http://192.249.63.186/patch/commands.py", dest:dirDownload)
