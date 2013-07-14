@@ -246,16 +246,20 @@ task packJAR << {
 }
 
 task setup << {
-	cleanWorkspace.execute()
-	downloadCoreFiles.execute()
-	extractCoreFiles.execute()
-	// Unix specific
-	if (!System.properties['os.name'].toLowerCase().contains('windows')) {
-		grantPermissions.execute()
+	if (System.properties['os.name'].toLowerCase().contains('windows')) {
+		cleanWorkspace.execute()
+		downloadCoreFiles.execute()
+		extractCoreFiles.execute()
+		// Unix specific
+		if (!System.properties['os.name'].toLowerCase().contains('windows')) {
+			grantPermissions.execute()
+		}
+		println "*==BEGIN FORGE INSTALL==*"
+		installForge.execute()
+		println "*==BEGIN FORGE INSTALL==*"
+	} else {
+		println "CURRENTLY BROKEN ON UNIX SYSTEMS!"
 	}
-	println "*==BEGIN FORGE INSTALL==*"
-	installForge.execute()
-	println "*==BEGIN FORGE INSTALL==*"
 }
 
 task build << {
