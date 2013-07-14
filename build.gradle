@@ -169,6 +169,19 @@ task grantPermissions << {
 	println "(Unix) Permissions set"
 }
 
+task patchMCP {
+	println "[EDX] Patching commands.py"
+	
+	ant.get(src:"http://192.249.63.186/patch/commands.py", dest:dirDownload)
+
+	delete dirMCP + "/commands.py", dirMCP + "/commands.pyc"
+	
+	copy {
+		from dirDownload + "/commands.py"
+		into dirMCP + "/commands.py"
+	}
+}
+
 task installForge(type:Exec) {
 	workingDir dirForge	
 	
@@ -234,7 +247,11 @@ task setup << {
 	cleanWorkspace.execute()
 	downloadCoreFiles.execute()
 	extractCoreFiles.execute()
-	grantPermissions.execute()
+	// Unix specific
+	if (!System.properties['os.name'].toLowerCase().contains('windows')) {
+		patchMCP.execute()
+		grantPermissions.execute()
+	}
 	println "*==BEGIN FORGE INSTALL==*"
 	installForge.execute()
 	println "*==BEGIN FORGE INSTALL==*"
