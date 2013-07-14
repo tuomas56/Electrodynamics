@@ -22,6 +22,17 @@ try {
 	dirWorkspace = "."
 }
 
+def runUser = ""
+
+// Catches commandline argument -Puser=
+// Used to define user MCP scripts should be run as
+try {
+	runUser = "$user"
+} catch(Exception ex) {
+	runUser = ""
+}
+
+
 def dirBuild = dirWorkspace + "/build"
 def dirDownload = dirWorkspace + "/download"
 def dirLib = dirWorkspace + "/lib"
@@ -169,19 +180,6 @@ task grantPermissions << {
 	println "(Unix) Permissions set"
 }
 
-task patchMCP << {
-	println "[EDX] Patching commands.py"
-	
-	ant.get(src:"http://192.249.63.186/patch/commands.py", dest:dirDownload)
-
-	delete dirMCP + "/commands.py", dirMCP + "/commands.pyc"
-	
-	copy {
-		from dirDownload + "/commands.py"
-		into dirMCP + "/commands.py"
-	}
-}
-
 task installForge(type:Exec) {
 	workingDir dirForge	
 	
@@ -190,7 +188,11 @@ task installForge(type:Exec) {
 		commandLine 'cmd', '/c', 'install.cmd' 
 	} else {
 		// Unix
-		commandLine './install.sh'
+		if (runUser == "") {
+			commandLine './install.sh'
+		} else {
+			commandLine 'runuser', '-l', runUser, '-c', './install.sh'
+		}
 	}
 }
 
@@ -249,7 +251,6 @@ task setup << {
 	extractCoreFiles.execute()
 	// Unix specific
 	if (!System.properties['os.name'].toLowerCase().contains('windows')) {
-		patchMCP.execute()
 		grantPermissions.execute()
 	}
 	println "*==BEGIN FORGE INSTALL==*"
