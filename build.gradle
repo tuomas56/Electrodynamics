@@ -22,16 +22,6 @@ try {
 	dirWorkspace = "."
 }
 
-def runUser = ""
-
-// Catches commandline argument -Puser=
-// Used to define user MCP scripts should be run as
-try {
-	runUser = "$user"
-} catch(Exception ex) {
-	runUser = ""
-}
-
 def dirBuild = dirWorkspace + "/build"
 def dirDownload = dirWorkspace + "/download"
 def dirLib = dirSrc + "/lib"
@@ -187,11 +177,7 @@ task installForge(type:Exec) {
 		commandLine 'cmd', '/c', 'install.cmd' 
 	} else {
 		// Unix
-		if (runUser == "") {
-			commandLine './install.sh'
-		} else {
-			commandLine '/bin/su', '-', runUser, '-c', './install.sh'
-		}
+		commandLine './install.sh'
 	}
 }
 
@@ -245,20 +231,16 @@ task packJAR << {
 }
 
 task setup << {
-	if (System.properties['os.name'].toLowerCase().contains('windows')) {
-		cleanWorkspace.execute()
-		downloadCoreFiles.execute()
-		extractCoreFiles.execute()
-		// Unix specific
-		if (!System.properties['os.name'].toLowerCase().contains('windows')) {
-			grantPermissions.execute()
-		}
-		println "*==BEGIN FORGE INSTALL==*"
-		installForge.execute()
-		println "*==BEGIN FORGE INSTALL==*"
-	} else {
-		println "CURRENTLY BROKEN ON UNIX SYSTEMS!"
+	cleanWorkspace.execute()
+	downloadCoreFiles.execute()
+	extractCoreFiles.execute()
+	// Unix specific
+	if (!System.properties['os.name'].toLowerCase().contains('windows')) {
+		grantPermissions.execute()
 	}
+	println "*==BEGIN FORGE INSTALL==*"
+	installForge.execute()
+	println "*==BEGIN FORGE INSTALL==*"
 }
 
 task build << {
