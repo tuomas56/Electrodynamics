@@ -158,7 +158,7 @@ task refreshMD5(type:Exec) {
 }
 
 task grantForgePermissions << {
-	ant.chmod(file:dirWorkspace + "/install.sh", perm:"+x")
+	ant.chmod(file:dirForge + "/install.sh", perm:"+x")
 	
 	println "(Unix) Forge file permissions set"
 }
