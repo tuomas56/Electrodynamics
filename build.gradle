@@ -32,10 +32,9 @@ try {
 	runUser = ""
 }
 
-
 def dirBuild = dirWorkspace + "/build"
 def dirDownload = dirWorkspace + "/download"
-def dirLib = dirWorkspace + "/lib"
+def dirLib = dirSrc + "/lib"
 def dirMCP = dirBuild + "/mcp"
 def dirForge = dirMCP + "/forge"
 def dirMCSource = dirMCP + "/src/minecraft"
