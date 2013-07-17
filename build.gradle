@@ -104,7 +104,9 @@ task downloadAndExtractLibraryFiles << {
 	def libList = []
 
 	File libDir = new File(dirLib)
+	File unpackDir = new File(dirUnpack)
 	libDir.mkdirs()
+	unpackDir.mkdirs()
 
 	println "Scanning for library files."
 	
