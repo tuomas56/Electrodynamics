@@ -66,11 +66,14 @@ public class RenderTileStructure extends TileEntitySpecialRenderer {
 					TileStructurePlaceHolder ph = (TileStructurePlaceHolder) structure;
 
 					if (ph.fakeDataMappings.containsKey("active")) {
-						if ((byte)ph.fakeDataMappings.get("active") > 0) {
-							this.mobGrinderBladeRotation++;
-							
-							if (this.mobGrinderBladeRotation > 360) {
-								this.mobGrinderBladeRotation = 0;
+						Object data = ph.fakeDataMappings.get("active");
+						if (data instanceof Byte) {
+							if (((Byte) data).byteValue() > 0) {
+								this.mobGrinderBladeRotation++;
+								
+								if (this.mobGrinderBladeRotation > 360) {
+									this.mobGrinderBladeRotation = 0;
+								}
 							}
 						}
 					}
