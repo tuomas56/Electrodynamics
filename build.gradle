@@ -126,12 +126,12 @@ task downloadAndExtractLibraryFiles << {
 				ant.get(src:downloadURL + "/" + info[1] + "/" + info[2], dest:dirDownload, verbose:true, usetimestamp:true)
 			}
 			
-			println "Unpacking " + info[0]
+			// println "Unpacking " + info[0]
 			
-			copy {
-				from zipTree(file(dirDownload + "/" + info[2]))
-				into file(dirUnpack)
-			}
+			// copy {
+				// from zipTree(file(dirDownload + "/" + info[2]))
+				// into file(dirUnpack)
+			// }
 		}
 	} else {
 		println "No library files found."
