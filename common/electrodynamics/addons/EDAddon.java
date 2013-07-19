@@ -2,16 +2,12 @@ package electrodynamics.addons;
 
 public abstract class EDAddon {
 
-	public void init() {
-		
+	public boolean init() {
+		return true;
 	}
 	
 	public void initClient() {
 		
 	}
-	
-	public abstract String[] getModDependencies();
-	
-	public abstract String[] getSupportedMCVersions();
 	
 }

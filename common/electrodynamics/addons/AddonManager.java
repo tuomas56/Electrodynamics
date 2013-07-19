@@ -61,15 +61,11 @@ public class AddonManager {
 				EDAddon instance = addons.get(addon);
 				
 				if (instance != null) {
-					if (allDependenciesSatisfied(instance.getModDependencies())) {
-						if (mcVersionDependencySatisfied(instance.getSupportedMCVersions())) {
-							loadedAddons.add(addon);
-							EDLogger.info("Loading addon " + addon.toString());
-						} else {
-							EDLogger.warn("Addon " + addon.toString() + " is meant for MC versions [" + StringUtil.condenseStringArray(instance.getSupportedMCVersions(), ',') + "] Skipping.");
-						}
+					if (instance.init()) {
+						loadedAddons.add(addon);
+						EDLogger.info("Loading addon " + addon.toString());
 					} else {
-						EDLogger.warn("Tried to load addon " + addon.toString() + " but not all of its dependencies could be found. Skipping.");
+						EDLogger.warn("Failed to load addon " + addon.toString());
 					}
 				} else {
 					EDLogger.warn("Addon " + addon.toString() + " is missing a mapping!");
@@ -78,28 +74,6 @@ public class AddonManager {
 		}
 		
 		config.save();
-	}
-	
-	private static boolean allDependenciesSatisfied(String[] dependencies) {
-		for (String depends : dependencies) {
-			if (!Loader.isModLoaded(depends)) {
-				return false;
-			}
-		}
-		
-		return true;
-	}
-	
-	private static boolean mcVersionDependencySatisfied(String[] mcVersions) {
-		String mcVersion = new CallableMinecraftVersion(null).minecraftVersion();
-		
-		for (String version : mcVersions) {
-			if (mcVersion.equalsIgnoreCase(version)) {
-				return true;
-			}
-		}
-		
-		return false;
 	}
 	
 	/** Called during main mod's PostInit state on server*/
@@ -127,17 +101,7 @@ public class AddonManager {
 	private static boolean isEnabled(Configuration config, Addon addon) {
 		StringBuilder sb = new StringBuilder();
 		EDAddon instance = forceGetAddon(addon);
-		
-		for (String add : instance.getModDependencies()) {
-			sb.append(add.toString());
-			sb.append(", ");
-		}
-		
-		String dependencies = sb.toString();
-		dependencies = dependencies.substring(0, dependencies.length());
-		
 		Property moduleEnabled = config.get(CATEGORY_ADDONS, addon.toString(), true);
-		moduleEnabled.comment = "DEPENDENCIES: " + dependencies;
 		return moduleEnabled.getBoolean(true);
 	}
 	
