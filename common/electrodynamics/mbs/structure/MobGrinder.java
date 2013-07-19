@@ -18,6 +18,7 @@ public class MobGrinder extends MultiBlockStructure {
 
 	public static final int VALVE_COUNT = 1;
 	public static final int HATCH_COUNT = 1;
+	public static final int RS_COUNT = 1;
 	
 	public MobGrinder() {
 		super(UID, makePattern());
@@ -47,6 +48,7 @@ public class MobGrinder extends MultiBlockStructure {
 
 		int valveCount = 0;
 		int hatchCount = 0;
+		int rsCount = 0;
 		
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
@@ -62,12 +64,16 @@ public class MobGrinder extends MultiBlockStructure {
 						} else if (component == StructureComponent.HATCH) {
 							hatchCount++;
 						}
+					} else if (key == 'c') {
+						if (component == StructureComponent.RS_CONDUCTOR) {
+							rsCount++;
+						}
 					}
 				}
 			}
 		}
 
-		if (valveCount == VALVE_COUNT && hatchCount == HATCH_COUNT) {
+		if (valveCount == VALVE_COUNT && hatchCount == HATCH_COUNT && rsCount >= RS_COUNT) {
 			return c;
 		}
 		
@@ -91,7 +97,7 @@ public class MobGrinder extends MultiBlockStructure {
 
 
 		Map<Character, StructureBlock> mappings = new HashMap<Character, StructureBlock>();
-		mappings.put('c', matchAny(StructureComponent.MACHINE_FRAME)); // casing
+		mappings.put('c', matchAny(StructureComponent.MACHINE_FRAME, StructureComponent.RS_CONDUCTOR)); // casing, redstone control
 		mappings.put('b', matchAny(StructureComponent.MOB_GRINDER_BLADE)); // blade
 		mappings.put('o', matchAny(StructureComponent.VALVE, StructureComponent.HATCH)); // output
 		

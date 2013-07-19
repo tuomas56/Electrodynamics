@@ -75,13 +75,7 @@ public abstract class TileEntityStructure extends TileEntityGeneric {
 
 	public abstract boolean onBlockActivatedBy(EntityPlayer player, int side, float xOff, float yOff, float zOff);
 
-	public void onBlockUpdate() {
-		TileEntityStructure centralTE = getCentralTileEntity();
-		
-		if (centralTE != null && centralTE instanceof IRedstoneUser && this.isValidStructure()) {
-			((IRedstoneUser)centralTE).updateSignalStrength(this.worldObj.getStrongestIndirectPower(xCoord, yCoord, zCoord));
-		}
-	}
+	public void onBlockUpdate() {}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
@@ -135,7 +129,7 @@ public abstract class TileEntityStructure extends TileEntityGeneric {
 		public boolean onBlockActivatedBy(EntityPlayer player, int side, float xOff, float yOff, float zOff) {
 			return false;
 		}
-		
+
 	}
 
 }
