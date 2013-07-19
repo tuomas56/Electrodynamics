@@ -11,7 +11,7 @@ import net.minecraft.crash.CallableMinecraftVersion;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 import electrodynamics.Electrodynamics;
-import electrodynamics.addons.computercraft.EDAddonComputerCraft;
+//import electrodynamics.addons.computercraft.EDAddonComputerCraft;
 import electrodynamics.core.EDLogger;
 import electrodynamics.util.StringUtil;
 
