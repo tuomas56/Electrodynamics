@@ -9,12 +9,11 @@ import org.lwjgl.opengl.GL11;
 import electrodynamics.client.model.ModelMobGrinder;
 import electrodynamics.client.model.ModelSinteringFurnace;
 import electrodynamics.client.model.ModelTechne;
-import electrodynamics.interfaces.IRedstoneUser;
 import electrodynamics.lib.block.StructureComponent;
 import electrodynamics.lib.client.Textures;
 import electrodynamics.mbs.MultiBlockStructure;
-import electrodynamics.tileentity.structure.TileEntityMobGrinder;
 import electrodynamics.tileentity.structure.TileEntityStructure;
+import electrodynamics.tileentity.structure.TileEntityStructure.TileStructurePlaceHolder;
 
 public class RenderTileStructure extends TileEntitySpecialRenderer {
 
@@ -63,11 +62,21 @@ public class RenderTileStructure extends TileEntitySpecialRenderer {
 		MultiBlockStructure mbs = structure.getMBS();
 		if (mbs != null) {
 			if (mbs.getUID().equals("MobGrinder")) {
-				//TODO Disable rotation if grinder is off
-				this.mobGrinderBladeRotation++;
-				
-				if (this.mobGrinderBladeRotation > 360) {
-					this.mobGrinderBladeRotation = 0;
+				if (structure instanceof TileStructurePlaceHolder) {
+					TileStructurePlaceHolder ph = (TileStructurePlaceHolder) structure;
+
+					if (ph.fakeDataMappings.containsKey("active")) {
+						Object data = ph.fakeDataMappings.get("active");
+						if (data instanceof Byte) {
+							if (((Byte) data).byteValue() > 0) {
+								this.mobGrinderBladeRotation++;
+								
+								if (this.mobGrinderBladeRotation > 360) {
+									this.mobGrinderBladeRotation = 0;
+								}
+							}
+						}
+					}
 				}
 				
 				Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.MOB_GRINDER_CLEAN.resource);

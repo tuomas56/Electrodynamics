@@ -180,6 +180,7 @@ public class Strings {
 	public static final String STRUCTURE_COMPONENT_MACHINE_FRAME = "structure.component.machine.frame.name";
 	public static final String STRUCTURE_COMPONENT_MACHINE_VALVE = "structure.component.machine.valve.name";
 	public static final String STRUCTURE_COMPONENT_MACHINE_HATCH = "structure.component.machine.hatch.name";
+	public static final String STRUCTURE_COMPONENT_MACHINE_RS_CONDUCTOR = "structure.component.machine.rs_conductor";
 	public static final String STRUCTURE_COMPONENT_FURNACE_HEATER = "structure.component.furnace.heater.name";
 	public static final String STRUCTURE_COMPONENT_FURNACE_GAUGE = "structure.component.furnace.gauge.name";
 	public static final String STRUCTURE_COMPONENT_FURNACE_VENT = "structure.component.furnace.vent.name";

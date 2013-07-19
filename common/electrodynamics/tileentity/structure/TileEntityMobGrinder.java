@@ -23,16 +23,12 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import net.minecraftforge.liquids.ILiquidTank;
-import net.minecraftforge.liquids.ITankContainer;
-import net.minecraftforge.liquids.LiquidContainerRegistry;
-import net.minecraftforge.liquids.LiquidStack;
-import net.minecraftforge.liquids.LiquidTank;
 import electrodynamics.core.CoreUtils;
 import electrodynamics.core.misc.DamageSourceBlock;
 import electrodynamics.interfaces.IRedstoneUser;
 import electrodynamics.inventory.wrapper.InventoryWrapperStack;
 import electrodynamics.lib.block.StructureComponent;
+import electrodynamics.network.packet.PacketClientData;
 import electrodynamics.recipe.RecipeGrinder;
 import electrodynamics.recipe.manager.CraftingManager;
 import electrodynamics.util.EntityReflectionWrapper;
@@ -310,6 +306,7 @@ public class TileEntityMobGrinder extends TileEntityStructure implements IFluidH
 	@Override
 	public void updateSignalStrength(int strength) {
 		this.active = strength > 0;
+		sendDataToClient("active", (byte)(this.active == true ? 1 : 0));
 	}
 
 	@Override

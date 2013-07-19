@@ -5,6 +5,8 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
@@ -57,6 +59,29 @@ public class BlockUtility extends BlockContainer {
 		
 		return (!(side == tile.rotation));
     }
+	
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
+		if (world.isRemote) return true;
+		
+		TileEntity tile = world.getBlockTileEntity(x, y, z);
+		
+		if (tile instanceof TileEntityMachine) {
+			((TileEntityMachine)tile).onBlockActivated(player);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public void breakBlock(World world, int x, int y, int z, int id, int meta) {
+		TileEntity tile = world.getBlockTileEntity(x, y, z);
+		
+		if (tile instanceof TileEntityMachine) {
+			((TileEntityMachine)tile).onBlockBreak();
+		}
+		
+		super.breakBlock(world, x, y, z, id, meta);
+	}
 	
 	@Override
 	public boolean isBlockNormalCube(World world, int x, int y, int z) {

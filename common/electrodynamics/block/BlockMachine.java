@@ -17,7 +17,7 @@ import electrodynamics.core.CreativeTabED;
 import electrodynamics.core.EDLogger;
 import electrodynamics.lib.block.Machine;
 import electrodynamics.tileentity.machine.TileEntityMachine;
-import electrodynamics.tileentity.machine.utilty.TileEntityConverter;
+import electrodynamics.tileentity.structure.TileEntityStructure;
 import electrodynamics.util.PlayerUtil;
 
 public class BlockMachine extends BlockContainer {
@@ -49,18 +49,6 @@ public class BlockMachine extends BlockContainer {
 		return false;
 	}
 
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
-		TileEntityMachine tile = (TileEntityMachine) par1World.getBlockTileEntity(par2, par3, par4);
-		if( tile != null ) {
-			if (tile instanceof TileEntityConverter) {
-				return null;
-			}
-		}
-		
-		return super.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
-	}
-	
 	@Override
 	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityLiving, ItemStack itemStack) {
 		TileEntity tile = world.getBlockTileEntity(i, j, k);

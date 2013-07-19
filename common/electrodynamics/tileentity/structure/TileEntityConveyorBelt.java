@@ -34,5 +34,4 @@ public class TileEntityConveyorBelt extends TileEntityStructure {
 		return worldObj.getEntitiesWithinAABB( entity, aabb );
 	}
 
-
 }
