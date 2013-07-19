@@ -127,7 +127,7 @@ public class TileEntityActuator extends TileEntityInventoryWrapper implements IS
 			ItemStack current = player.getCurrentEquippedItem();
 			
 			if (current.getItem() instanceof ITool && ((ITool)current.getItem()).getToolType() == ToolType.HAMMER) {
-				player.sendChatToPlayer("Actuator mode changed: " + EnumChatFormatting.RED + switchMode().toString());
+				player.addChatMessage("Actuator mode changed: " + EnumChatFormatting.RED + switchMode().toString());
 			}
 		}
 	}
