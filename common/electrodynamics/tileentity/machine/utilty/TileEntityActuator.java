@@ -1,5 +1,8 @@
 package electrodynamics.tileentity.machine.utilty;
 
+import java.util.Random;
+
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -16,6 +19,7 @@ import electrodynamics.api.tool.ToolType;
 import electrodynamics.core.CoreUtils;
 import electrodynamics.inventory.InventoryLimited;
 import electrodynamics.tileentity.TileEntityInventoryWrapper;
+import electrodynamics.util.BlockUtil;
 import electrodynamics.util.ItemUtil;
 
 public class TileEntityActuator extends TileEntityInventoryWrapper implements ISidedInventory {
@@ -71,38 +75,48 @@ public class TileEntityActuator extends TileEntityInventoryWrapper implements IS
 	
 	private void update() {
 		ItemStack stack = this.getStackInSlot(0);
-		int[] offsetCoords = this.getOffsetCoords();
+		int[] offsetCoords = getOffsetCoords();
 		
 		if (stack != null && getBlockInFront() == 0 && (this.mode == Mode.DEFAULT.ordinal() || this.mode == Mode.PLACE.ordinal())) { // Place block
-			this.worldObj.setBlock(offsetCoords[0], offsetCoords[1], offsetCoords[2], stack.itemID, stack.getItemDamage(), 3);
-
-			TileEntity tile = this.worldObj.getBlockTileEntity(offsetCoords[0], offsetCoords[1], offsetCoords[2]);
-
-			if (tile != null) {
-				tile.readFromNBT(this.tileEntityData);
-				this.tileEntityData = null;
-			}
-			
-			this.setInventorySlotContents(0, null);
-			sendBlockUpdate();
+			placeBlock(offsetCoords);
 		} else if (stack == null && getBlockInFront() > 0 && (this.mode == Mode.DEFAULT.ordinal() || this.mode == Mode.BREAK.ordinal())) { // Pickup block
-			int id = this.worldObj.getBlockId(offsetCoords[0], offsetCoords[1], offsetCoords[2]);
-			int meta = this.worldObj.getBlockMetadata(offsetCoords[0], offsetCoords[1], offsetCoords[2]);
-			ItemStack picked = new ItemStack(id, 1, meta);
-
-			TileEntity tile = this.worldObj.getBlockTileEntity(offsetCoords[0], offsetCoords[1], offsetCoords[2]);
-
-			if (tile != null) {
-				NBTTagCompound nbt = new NBTTagCompound();
-				tile.writeToNBT(nbt);
-				this.tileEntityData = nbt;
-				tile.invalidate();
-			}
-			
-			this.worldObj.setBlockToAir(offsetCoords[0], offsetCoords[1], offsetCoords[2]);
-			this.setInventorySlotContents(0, picked);
-			sendBlockUpdate();
+			breakBlock(offsetCoords);
 		}
+	}
+	
+	private void breakBlock(int[] coords) {
+		ItemStack stack = this.getStackInSlot(0);
+		int id = this.worldObj.getBlockId(coords[0], coords[1], coords[2]);
+		int meta = this.worldObj.getBlockMetadata(coords[0], coords[1], coords[2]);
+		ItemStack picked = new ItemStack(id, 1, meta);
+
+		TileEntity tile = this.worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
+
+		if (tile != null) {
+			NBTTagCompound nbt = new NBTTagCompound();
+			tile.writeToNBT(nbt);
+			this.tileEntityData = nbt;
+			tile.invalidate();
+		}
+		
+		this.worldObj.setBlockToAir(coords[0], coords[1], coords[2]);
+		this.setInventorySlotContents(0, picked);
+		sendBlockUpdate();
+	}
+	
+	private void placeBlock(int[] coords) {
+		ItemStack stack = this.getStackInSlot(0);
+		this.worldObj.setBlock(coords[0], coords[1], coords[2], stack.itemID, stack.getItemDamage(), 3);
+
+		TileEntity tile = this.worldObj.getBlockTileEntity(coords[0], coords[1], coords[2]);
+
+		if (tile != null) {
+			tile.readFromNBT(this.tileEntityData);
+			this.tileEntityData = null;
+		}
+		
+		this.setInventorySlotContents(0, null);
+		sendBlockUpdate();
 	}
 	
 	@Override
@@ -115,6 +129,24 @@ public class TileEntityActuator extends TileEntityInventoryWrapper implements IS
 			if (current.getItem() instanceof ITool && ((ITool)current.getItem()).getToolType() == ToolType.HAMMER) {
 				player.sendChatToPlayer("Actuator mode changed: " + EnumChatFormatting.RED + switchMode().toString());
 			}
+		}
+	}
+	
+	@Override
+	public void onBlockBreak() {
+		if (this.getStackInSlot(0) != null) {
+			//Incoming, most hackish way for dropping stored block contents ever!
+			int id = this.getStackInSlot(0).itemID;
+			int meta = this.getStackInSlot(0).getItemDamage();
+			BlockUtil.dropItemFromBlock(this.worldObj, this.xCoord, this.yCoord, this.zCoord, this.getStackInSlot(0), new Random());
+		
+			this.invalidate();
+			this.worldObj.setBlockToAir(this.xCoord, this.yCoord, this.zCoord);
+			
+			placeBlock(new int[] {this.xCoord, this.yCoord, this.zCoord});
+			
+			Block.blocksList[id].breakBlock(this.worldObj, this.xCoord, this.yCoord, this.zCoord, 0, meta);
+			this.worldObj.setBlockToAir(this.xCoord, this.yCoord, this.zCoord);
 		}
 	}
 	
