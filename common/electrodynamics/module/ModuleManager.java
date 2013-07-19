@@ -198,7 +198,7 @@ public class ModuleManager {
 //		LOGIC,
 		LASER,
 		MACHINE,
-		GAS,
+//		GAS,
 		ELMAG;
 	}
 	
