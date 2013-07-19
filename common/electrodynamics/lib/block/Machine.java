@@ -13,6 +13,7 @@ public enum Machine {
 	SINTERING_FURNACE(Strings.MACHINE_SINTERING_OVEN, "sinteringOven", TileEntitySinteringOven.class),
 	BASIC_SIEVE(Strings.MACHINE_BASIC_SIEVE, "basicSieve", TileEntityBasicSieve.class),
 	BASIC_KILN(Strings.MACHINE_BASIC_KILN, "basicKiln", TileEntityBasicKiln.class);	
+	
 	public String unlocalizedName;
 	public String textureFileForParticle;
 	

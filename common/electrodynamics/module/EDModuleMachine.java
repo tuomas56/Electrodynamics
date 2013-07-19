@@ -39,7 +39,7 @@ import electrodynamics.tileentity.machine.TileEntityBasicKiln;
 import electrodynamics.tileentity.machine.TileEntityBasicSieve;
 import electrodynamics.tileentity.machine.TileEntitySinteringOven;
 import electrodynamics.tileentity.machine.TileEntityTable;
-import electrodynamics.tileentity.machine.utilty.TileEntityBlockDeployer;
+import electrodynamics.tileentity.machine.utilty.TileEntityActuator;
 import electrodynamics.tileentity.structure.TileEntityConveyorBelt;
 import electrodynamics.tileentity.structure.TileEntityHatch;
 import electrodynamics.tileentity.structure.TileEntityMobGrinder;
@@ -197,7 +197,7 @@ public class EDModuleMachine extends EDModule {
 		GameRegistry.registerTileEntity(TileEntityMobGrinder.class, "edxMobGrinder");
 		GameRegistry.registerTileEntity(TileEntityValve.class, Strings.STRUCTURE_COMPONENT_MACHINE_VALVE);
 		GameRegistry.registerTileEntity(TileEntityHatch.class, Strings.STRUCTURE_COMPONENT_MACHINE_HATCH);
-		GameRegistry.registerTileEntity(TileEntityBlockDeployer.class, Strings.UTILITY_BLOCK_DEPLOYER);
+		GameRegistry.registerTileEntity(TileEntityActuator.class, Strings.UTILITY_BLOCK_DEPLOYER);
 		GameRegistry.registerTileEntity(TileEntityRedstoneConductor.class, Strings.STRUCTURE_COMPONENT_MACHINE_RS_CONDUCTOR);
 		
 		CraftingManager.getInstance().tableManager = new RecipeManagerTable();
@@ -244,7 +244,7 @@ public class EDModuleMachine extends EDModule {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBasicSieve.class, new RenderBasicSieve());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBasicKiln.class, new RenderBasicKiln());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStructure.class, new RenderTileStructure());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockDeployer.class, new RenderBlockDeployer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityActuator.class, new RenderBlockDeployer());
 		
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockTable.blockID, new RenderItemTable());
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockMachine.blockID, new RenderItemMachine());
