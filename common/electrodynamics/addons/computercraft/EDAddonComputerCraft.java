@@ -18,18 +18,13 @@ public class EDAddonComputerCraft extends EDAddon {
 	public static boolean canFormMBS = true;
 	public static boolean canTakeFromTable = true;
 	
-	public boolean init() {
-		if (Loader.isModLoaded("ComputerCraft")) {
-			Configuration config = new Configuration(new File(Electrodynamics.instance.configFolder, ModInfo.GENERIC_MOD_ID + ".cfg"));
-			EDAddonComputerCraft.canUseTable = config.get(CATEGORY_CC, "canUseTable", true, "Can the turtle smash items via smashing table.").getBoolean(true);
-			EDAddonComputerCraft.canFormMBS = config.get(CATEGORY_CC, "canFormMBS", true, "Can the turtle form multi-block structures.").getBoolean(true);
-			EDAddonComputerCraft.canTakeFromTable = config.get(CATEGORY_CC, "canUseTable", true, "Will the turtle automatically take the smashing result from the table.").getBoolean(true);
+	public void init() {
+		Configuration config = new Configuration(new File(Electrodynamics.instance.configFolder, ModInfo.GENERIC_MOD_ID + ".cfg"));
+		EDAddonComputerCraft.canUseTable = config.get(CATEGORY_CC, "canUseTable", true, "Can the turtle smash items via smashing table.").getBoolean(true);
+		EDAddonComputerCraft.canFormMBS = config.get(CATEGORY_CC, "canFormMBS", true, "Can the turtle form multi-block structures.").getBoolean(true);
+		EDAddonComputerCraft.canTakeFromTable = config.get(CATEGORY_CC, "canUseTable", true, "Will the turtle automatically take the smashing result from the table.").getBoolean(true);
 			
-			TurtleAPI.registerUpgrade(new TurtleHammer());
-			return true;
-		} else {
-			return false;
-		}
+		TurtleAPI.registerUpgrade(new TurtleHammer());
 	}
 
 }
