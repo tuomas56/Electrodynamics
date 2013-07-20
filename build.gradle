@@ -29,7 +29,7 @@ def dirMCP = dirBuild + "/mcp"
 def dirForge = dirMCP + "/forge"
 def dirMCSource = dirMCP + "/src/minecraft"
 def dirJar = dirBuild + "/dist"
-def dirUnpack = dirBuild = "/unpack"
+def dirUnpack = dirBuild + "/unpack"
 
 // Versions
 def versionMC = "1.5.2"
@@ -41,10 +41,10 @@ def versionForge = "7.8.1.738"
 
 // Libraries
 def downloadURL = "http://192.249.63.186/lib"
-def fileMCP = "/mcp-" + versionMCP + ".zip"
-def fileForge = "/forge-" + versionForge + ".zip"
-def downloadMCP = downloadURL + "/" + versionMC + fileMCP
-def downloadForge = downloadURL + "/" + versionMC + fileForge
+def fileMCP = "mcp-" + versionMCP + ".zip"
+def fileForge = "forge-" + versionForge + ".zip"
+def downloadMCP = downloadURL + "/" + versionMC + "/" + fileMCP
+def downloadForge = downloadURL + "/" + versionMC + "/" + fileForge
 
 // BEGIN HELPER METHODS
 
@@ -57,8 +57,33 @@ String[] getLibraryInfo(File file) {
 
 // END HELPER METHODS
 
-task cleanWorkspace(type: Delete) << {
-	delete dirMCSource + "/electrodynamics", dirMCP + "/reobf/minecraft", dirUnpack, dirJar
+task cleanWorkspace << {
+	// BEGINNING OF SRC FOLDER CLEAN
+	def ignoreFile = new File(dirSrc + "/.srcignore")
+	def fileList = []
+	
+	ignoreFile.eachLine() {
+		fileList.add(it)
+	}
+	
+	def sourceDir = new File(dirMCSource)
+	sourceDir.eachFile {
+		if (!fileList.contains(it.name)) {
+			println "Deleting " + it.name
+			if (it.directory) {
+				it.deleteDir()
+			} else {
+				it.delete()
+			}
+		} else {
+			println "Ignoring " + it.name
+		}
+	}
+	// END OF SRC FOLDER CLEAN
+	
+	ant.delete(dir: dirMCP + "/reobf/minecraft")
+	ant.delete(dir: dirUnpack)
+	ant.delete(dir: dirJar)
 	
 	println "Workspace cleaned"
 }
@@ -126,12 +151,12 @@ task downloadAndExtractLibraryFiles << {
 				ant.get(src:downloadURL + "/" + info[1] + "/" + info[2], dest:dirDownload, verbose:true, usetimestamp:true)
 			}
 			
-			// println "Unpacking " + info[0]
+			println "Unpacking " + info[0]
 			
-			// copy {
-				// from zipTree(file(dirDownload + "/" + info[2]))
-				// into file(dirUnpack)
-			// }
+			copy {
+				from zipTree(file(dirDownload + "/" + info[2]))
+				into file(dirUnpack)
+			}
 		}
 	} else {
 		println "No library files found."
