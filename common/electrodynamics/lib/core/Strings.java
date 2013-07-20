@@ -159,7 +159,6 @@ public class Strings {
 	public static final String MACHINE_BASIC_KILN = "machine.basicKiln.name";
 	public static final String MACHINE_CONVEYOR_BELT = "machine.conveyor.belt";
 	public static final String MACHINE_STRUCTURE_PLACE_HOLDER = "machine.structure.place.holder";
-	public static final String MACHINE_CONVERTER_BLOCK = "machine.converter.block";
 
 	/* Internal table names */
 	public static final String BASIC_TABLE = "table.basic.name";
@@ -187,7 +186,7 @@ public class Strings {
 	public static final String STRUCTURE_COMPONENT_MOB_GRINDER_BLADE = "structure.component.mob_grinder.blade.name";
 
 	/* Internal utility block names */
-	public static final String UTILITY_BLOCK_DEPLOYER = "utility.block_deployer.name";
+	public static final String UTILITY_BLOCK_DEPLOYER = "utility.actuator.name";
 	
 	/* Internal gas names */
 	public static final String GAS_AIR_CLEAN = "gas.air.clean.name";

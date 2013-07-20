@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 import electrodynamics.client.render.util.RenderUtil;
 import electrodynamics.tileentity.machine.utilty.TileEntityActuator;
 
-public class RenderBlockDeployer extends TileEntitySpecialRenderer {
+public class RenderActuator extends TileEntitySpecialRenderer {
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partial) {
