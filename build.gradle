@@ -32,12 +32,12 @@ def dirJar = dirBuild + "/dist"
 def dirUnpack = dirBuild + "/unpack"
 
 // Versions
-def versionMC = "1.5.2"
+def versionMC = "1.6.2"
 def versionMod = "0.1.3"
 def versionBuild = "0"
 def versionFull = versionMod + "." + versionBuild
-def versionMCP = "751"
-def versionForge = "7.8.1.738"
+def versionMCP = "805"
+def versionForge = "9.10.0.789"
 
 // Libraries
 def downloadURL = "http://192.249.63.186/lib"
