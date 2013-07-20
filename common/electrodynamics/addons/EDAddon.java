@@ -2,8 +2,8 @@ package electrodynamics.addons;
 
 public abstract class EDAddon {
 
-	public boolean init() {
-		return true;
+	public void init() {
+
 	}
 	
 	public void initClient() {
