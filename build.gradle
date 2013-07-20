@@ -258,7 +258,6 @@ task packJAR << {
 }
 
 task setup << {
-	cleanWorkspace.execute()
 	downloadCoreFiles.execute()
 	extractCoreFiles.execute()
 	// Unix specific
