@@ -3,6 +3,7 @@ package electrodynamics.addons.computercraft;
 import java.io.File;
 
 import cpw.mods.fml.common.Loader;
+import dan200.turtle.api.TurtleAPI;
 
 import net.minecraftforge.common.Configuration;
 import electrodynamics.Electrodynamics;

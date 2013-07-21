@@ -1,8 +1,8 @@
 package electrodynamics.core;
 
-import electrodynamics.lib.core.ModInfo;
-import net.minecraft.client.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import electrodynamics.lib.core.ModInfo;
 
 public class CoreUtils {
 

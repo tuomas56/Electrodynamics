@@ -86,8 +86,8 @@ public class TileEntityHatch extends TileEntityStructure implements IInventory, 
 	}
 
 	@Override
-	public boolean isStackValidForSlot(int slot, ItemStack stack) {
-		return getCentralInventory().isStackValidForSlot(slot, stack);
+	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+		return getCentralInventory().isItemValidForSlot(slot, stack);
 	}
 
 	public IInventory getCentralInventory() {

@@ -1,5 +1,9 @@
 package electrodynamics.client.render.item;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer;
+
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -7,9 +11,6 @@ import electrodynamics.client.model.ModelStoneTable;
 import electrodynamics.client.model.ModelTable;
 import electrodynamics.client.model.ModelWoodTable;
 import electrodynamics.lib.client.Textures;
-import net.minecraft.client.resources.ResourceLocation;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.IItemRenderer;
 
 public class RenderItemTable implements IItemRenderer {
 

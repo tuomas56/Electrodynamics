@@ -11,7 +11,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
 import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
-import net.minecraftforge.liquids.LiquidDictionary;
 import electrodynamics.recipe.RecipeGrinder;
 
 public class RecipeManagerGrinder {

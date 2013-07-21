@@ -1,9 +1,8 @@
 package electrodynamics.lib.block;
 
-import electrodynamics.tileentity.structure.TileEntityMobGrinder;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -18,6 +17,7 @@ import electrodynamics.lib.core.Strings;
 import electrodynamics.tileentity.TileEntityGeneric;
 import electrodynamics.tileentity.structure.TileEntityConveyorBelt;
 import electrodynamics.tileentity.structure.TileEntityHatch;
+import electrodynamics.tileentity.structure.TileEntityMobGrinder;
 import electrodynamics.tileentity.structure.TileEntityRedstoneConductor;
 import electrodynamics.tileentity.structure.TileEntityStructure;
 import electrodynamics.tileentity.structure.TileEntityValve;

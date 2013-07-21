@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.liquids.LiquidStack;
 import electrodynamics.Electrodynamics;
 import electrodynamics.api.crafting.ICraftingManager;
 import electrodynamics.api.crafting.util.TableRecipeType;

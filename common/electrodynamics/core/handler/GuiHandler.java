@@ -1,8 +1,5 @@
 package electrodynamics.core.handler;
 
-import electrodynamics.client.gui.GuiTrayKiln;
-import electrodynamics.inventory.container.ContainerTrayKiln;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -11,11 +8,12 @@ import cpw.mods.fml.relauncher.Side;
 import electrodynamics.Electrodynamics;
 import electrodynamics.client.gui.GuiTeslaModule;
 import electrodynamics.client.gui.GuiTray;
+import electrodynamics.client.gui.GuiTrayKiln;
 import electrodynamics.interfaces.IInventoryItem;
 import electrodynamics.inventory.container.ContainerTeslaModule;
 import electrodynamics.inventory.container.ContainerTray;
+import electrodynamics.inventory.container.ContainerTrayKiln;
 import electrodynamics.lib.client.Textures;
-import electrodynamics.lib.core.ModInfo;
 
 public class GuiHandler implements IGuiHandler {
 

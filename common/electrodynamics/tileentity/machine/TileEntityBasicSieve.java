@@ -221,7 +221,7 @@ public class TileEntityBasicSieve extends TileEntityMachine {
 		}
 
 		@Override
-		public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+		public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 			return isValidItem( itemstack );
 		}
 	}

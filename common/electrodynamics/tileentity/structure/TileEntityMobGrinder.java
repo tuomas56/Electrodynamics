@@ -299,8 +299,8 @@ public class TileEntityMobGrinder extends TileEntityStructure implements IFluidH
 	}
 
 	@Override
-	public boolean isStackValidForSlot(int slot, ItemStack stack) {
-		return this.inventoryWrapper.isStackValidForSlot(slot, stack);
+	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+		return this.inventoryWrapper.isItemValidForSlot(slot, stack);
 	}
 
 	@Override

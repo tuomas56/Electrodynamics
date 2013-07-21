@@ -77,7 +77,6 @@ public class ComponentContainer extends Component {
 			comp.writeToNBT(nbt);
 	}
 	
-	@SuppressWarnings("unused")
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) 
 	{

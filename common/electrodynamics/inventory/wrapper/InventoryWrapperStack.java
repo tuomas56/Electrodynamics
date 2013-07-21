@@ -75,7 +75,7 @@ public class InventoryWrapperStack implements IInventory {
 	}
 
 	@Override
-	public boolean isStackValidForSlot(int slot, ItemStack stack) {
+	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		return false;
 	}
 	

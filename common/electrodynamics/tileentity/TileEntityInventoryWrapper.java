@@ -70,8 +70,8 @@ public abstract class TileEntityInventoryWrapper extends TileEntityMachine imple
 	}
 
 	@Override
-	public boolean isStackValidForSlot(int slot, ItemStack stack) {
-		return this.inventory.isStackValidForSlot(slot, stack);
+	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+		return this.inventory.isItemValidForSlot(slot, stack);
 	}
 	
 	@Override

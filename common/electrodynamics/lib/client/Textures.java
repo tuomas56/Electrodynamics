@@ -1,8 +1,7 @@
 package electrodynamics.lib.client;
 
-import net.minecraft.client.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 import electrodynamics.core.CoreUtils;
-import electrodynamics.lib.core.ModInfo;
 
 /** Handles all textures not related to blocks or items */
 
