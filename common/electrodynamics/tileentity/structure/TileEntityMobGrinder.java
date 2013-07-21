@@ -193,7 +193,7 @@ public class TileEntityMobGrinder extends TileEntityStructure implements IFluidH
 
 		this.inventoryWrapper = new InventoryWrapperStack();
 		this.inventoryWrapper.getStack().addAll(Arrays.asList(InventoryUtil.readItemsFromNBT("Items", nbt)));
-		this.tank.setFluid(FluidStack.loadFluidStackFromNBT(nbt));
+		this.tank.readFromNBT(nbt);
 		this.active = nbt.getBoolean("active");
 	}
 	
@@ -202,7 +202,7 @@ public class TileEntityMobGrinder extends TileEntityStructure implements IFluidH
 		super.writeToNBT(nbt);
 		
 		InventoryUtil.writeItemsToNBT("Items", nbt, this.inventoryWrapper.getStack().toArray(new ItemStack[this.inventoryWrapper.getStack().size()]));
-		tank.getFluid().writeToNBT(nbt);
+		tank.writeToNBT(nbt);
 		nbt.setBoolean("active", this.active);
 	}
 	
