@@ -1,6 +1,7 @@
 package electrodynamics.block;
 
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -15,6 +16,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.core.EDLogger;
+import electrodynamics.interfaces.IClientDisplay;
 import electrodynamics.lib.block.Machine;
 import electrodynamics.tileentity.machine.TileEntityMachine;
 import electrodynamics.tileentity.structure.TileEntityStructure;
@@ -124,6 +126,14 @@ public class BlockMachine extends BlockContainer {
 
 	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z);
+	}
+	
+	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+		TileEntity tile = world.getBlockTileEntity(x, y, z);
+		
+		if (tile instanceof IClientDisplay) {
+			((IClientDisplay)tile).onRandomDisplayTick(random);
+		}
 	}
 	
 }

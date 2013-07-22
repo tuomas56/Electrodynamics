@@ -74,10 +74,6 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 		modelSinteringOven.rotateDoor(((TileEntitySinteringOven)tile).doorAngle);
 		modelSinteringOven.renderAll(0.0625F);
 
-		if (((TileEntitySinteringOven)tile).burning) {
-			renderFire(tile.worldObj, tile.xCoord, tile.yCoord, tile.zCoord, ((TileEntityMachine)tile).rotation.ordinal());
-		}
-		
 		if (((TileEntitySinteringOven)tile).trayInventory != null) {
 			renderTray(tile.worldObj, ((TileEntitySinteringOven)tile).trayInventory.inventory);
 		}
@@ -178,18 +174,6 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 			
 			Minecraft.getMinecraft().gameSettings.fancyGraphics = fancy;
 		}
-	}
-	
-	public void renderFire(World world, int x, int y, int z, int rotation) {
-		Random rand = new Random();
-		
-        float f = (float)x + 0.5F;
-        float f1 = (float)y + 0.0F + rand.nextFloat() * 6.0F / 16.0F;
-        float f2 = (float)z + 0.5F;
-        float f4 = rand.nextFloat() * 0.6F - 0.3F;
-
-        world.spawnParticle("smoke", f - (f4 / 2) + f4, f1, f2 - (f4 / 2) + f4, 0D, 0D, 0D);
-        world.spawnParticle("flame", f - (f4 / 2) + f4, f1, f2 - (f4 / 2) + f4, 0D, 0D, 0D);
 	}
 	
 }

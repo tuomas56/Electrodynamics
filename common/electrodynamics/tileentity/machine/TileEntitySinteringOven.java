@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
 import electrodynamics.core.CoreUtils;
+import electrodynamics.interfaces.IClientDisplay;
 import electrodynamics.inventory.InventoryItem;
 import electrodynamics.item.EDItems;
 import electrodynamics.recipe.RecipeSinteringOven;
@@ -21,7 +22,7 @@ import electrodynamics.util.BlockUtil;
 import electrodynamics.util.InventoryUtil;
 import electrodynamics.util.ItemUtil;
 
-public class TileEntitySinteringOven extends TileEntityMachine {
+public class TileEntitySinteringOven extends TileEntityMachine implements IClientDisplay {
 
 	public final float ROTATIONAL_MAX = 1.5F;
 	
@@ -310,6 +311,21 @@ public class TileEntitySinteringOven extends TileEntityMachine {
 		// Give the outputs
 		for( ItemStack output : recipe.itemOutputs ) {
 			InventoryUtil.addToInventory( trayInventory, output.copy() );
+		}
+	}
+
+	@Override
+	public void onRandomDisplayTick(Random random) {
+		if (this.burning) {
+			Random rand = new Random();
+			
+	        float f = (float)this.xCoord + 0.5F;
+	        float f1 = (float)this.yCoord + 0.0F + rand.nextFloat() * 6.0F / 16.0F;
+	        float f2 = (float)this.zCoord + 0.5F;
+	        float f4 = rand.nextFloat() * 0.6F - 0.3F;
+
+	        this.worldObj.spawnParticle("smoke", f - (f4 / 2) + f4, f1, f2 - (f4 / 2) + f4, 0D, 0D, 0D);
+	        this.worldObj.spawnParticle("flame", f - (f4 / 2) + f4, f1, f2 - (f4 / 2) + f4, 0D, 0D, 0D);
 		}
 	}
 
