@@ -91,7 +91,7 @@ public class RenderTileStructure extends TileEntitySpecialRenderer {
 				GL11.glColor4f(1, 1, 1, 1);
 				this.mobGrinder.render(0.0625F);
 			} else if (mbs.getUID().equals("SintFurnace")) {
-				Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.SINTERING_OVEN.resource);
+				Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.SINTERING_FURNACE.resource);
 				
 				GL11.glTranslated(.5, 1.5, .5);
 				GL11.glRotatef(180, 1, 0, 0);

@@ -69,7 +69,7 @@ public class RenderSinteringOven extends TileEntitySpecialRenderer {
 			}
 		}
 
-		Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.SINTERING_FURNACE.resource);
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(Textures.SINTERING_OVEN.resource);
 
 		modelSinteringOven.rotateDoor(((TileEntitySinteringOven)tile).doorAngle);
 		modelSinteringOven.renderAll(0.0625F);
