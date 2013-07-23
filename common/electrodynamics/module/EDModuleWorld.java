@@ -103,10 +103,6 @@ public class EDModuleWorld extends EDModule {
 		GameRegistry.registerItem(EDItems.itemLatexBucket, Strings.ITEM_LATEX_BUCKET);
 		EDLanguage.getInstance().registerItem(EDItems.itemLatexBucket);
 		
-		EDItems.itemLiquidLatex = new ItemLiquidLatex(ItemIDs.ITEM_LIQUID_LATEX_ID).setUnlocalizedName(Strings.ITEM_LIQUID_LATEX);
-		GameRegistry.registerItem(EDItems.itemLiquidLatex, Strings.ITEM_LIQUID_LATEX);
-		EDLanguage.getInstance().registerItem(EDItems.itemLiquidLatex);
-
 		EDItems.itemWormSeed = new ItemSeed(ItemIDs.ITEM_WORMSEED_ID).setUnlocalizedName(Strings.ITEM_SEED_WORMSEED);
 		GameRegistry.registerItem(EDItems.itemWormSeed, Strings.ITEM_SEED_WORMSEED);
 		EDLanguage.getInstance().registerItem(EDItems.itemWormSeed);
@@ -168,13 +164,6 @@ public class EDModuleWorld extends EDModule {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void initClient() {
-		if (FluidRegistry.isFluidRegistered("Latex")) {
-			Fluid latex = FluidRegistry.getFluid("Latex");
-			latex.setIcons(EDItems.itemLiquidLatex.getIconFromDamage(0));
-		} else {
-			EDLogger.warn("Tried to assign a texture to Liquid Latex, but the fluid hasn't been registered. This is a bug, so please report this!");
-		}
-		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTreetap.class, new RenderTreetap());
 		
 		RenderingRegistry.registerBlockHandler(new RenderBlockOre());

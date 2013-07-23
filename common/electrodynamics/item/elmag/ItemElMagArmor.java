@@ -102,7 +102,7 @@ public class ItemElMagArmor extends ItemArmor implements IInventoryItem, IKeybou
 	
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
-		return ModInfo.RESOURCES_BASE + "/armor/" + armorType.renderFile;
+		return ModInfo.GENERIC_MOD_ID.toLowerCase() + ":textures/armor/" + armorType.renderFile;
 	}
 	
 	@Override

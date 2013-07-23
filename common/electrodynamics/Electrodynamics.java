@@ -5,6 +5,8 @@ import java.lang.reflect.Field;
 
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.minecart.MinecartCollisionEvent;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
@@ -21,6 +23,7 @@ import electrodynamics.api.IEDApi;
 import electrodynamics.api.crafting.ICraftingManager;
 import electrodynamics.configuration.ConfigurationHandler;
 import electrodynamics.core.CommonProxy;
+import electrodynamics.core.handler.IconHandler;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.network.PacketHandler;
@@ -57,6 +60,8 @@ public class Electrodynamics implements IEDApi {
 			e.printStackTrace();
 		}
 
+		MinecraftForge.EVENT_BUS.register(IconHandler.getInstance());
+		
 		proxy.preInit(event);
 	}
 

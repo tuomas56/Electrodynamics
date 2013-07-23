@@ -7,12 +7,11 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Properties;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
-
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StringTranslate;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import electrodynamics.Electrodynamics;
 import electrodynamics.configuration.ConfigurationSettings;
 import electrodynamics.core.EDLogger;
@@ -72,9 +71,7 @@ public class EDLanguage {
 	}
 	
 	public String translate(String tag) {
-		// Localization is currently broken until I can figure out how the current language is stored
-//		return translate(tag, StringTranslate.getInstance().getCurrentLanguage());
-		return "";
+		return translate(tag, Minecraft.getMinecraft().func_135016_M().func_135041_c().func_135034_a());
 	}
 	
 	public String translate(String tag, String lang) {

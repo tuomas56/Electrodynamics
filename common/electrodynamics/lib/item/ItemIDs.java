@@ -62,10 +62,6 @@ public class ItemIDs {
 	public static int ITEM_LATEX_BUCKET_ID;
 	public static final int ITEM_LATEX_BUCKET_DEFAULT_ID = 5114;
 	
-	/* itemLiquidLatex */
-	public static int ITEM_LIQUID_LATEX_ID;
-	public static final int ITEM_LIQUID_LATEX_DEFAULT_ID = 5115;
-	
 	/* itemModule */
 	public static int ITEM_ELMAG_MODULE_ID;
 	public static final int ITEM_ELMAG_MODULE_DEFAULT_ID = 5116;
@@ -74,7 +70,6 @@ public class ItemIDs {
 	public static int ITEM_TRAY_KILN_ID;
 	public static final int ITEM_TRAY_KILN_DEFAULT_ID = 5117;
 
-	
 	/* itemRedstoneEmitter */
 	public static int ITEM_REDSTONE_EMITTER_ID;
 	public static final int ITEM_REDSTONE_EMITTER_DEFAULT_ID = 5118;

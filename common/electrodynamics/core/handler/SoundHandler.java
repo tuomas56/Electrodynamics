@@ -42,42 +42,4 @@ public class SoundHandler {
 		}
 	}
 
-//	@SideOnly(Side.CLIENT)
-//	private File extractAndLoadResource(Minecraft mc, String resName) throws Exception {
-//		File resourceDir = new File(Minecraft.getMinecraftDir(), "resources");
-//		File resDestDir = new File(resourceDir, ModInfo.GENERIC_MOD_ID.toLowerCase());
-//
-//		if (!resDestDir.exists()) {
-//			resDestDir.mkdirs();
-//		}
-//		
-//		File blockSoundDir = new File(resDestDir, "block");
-//		if (!blockSoundDir.exists()) {
-//			blockSoundDir.mkdir();
-//		}
-//		
-//		File resDest = new File(resDestDir, resName);
-//		
-//		if (!resDest.exists()) {
-//			resDest.createNewFile();
-//			
-//			InputStream fileIn = Electrodynamics.class.getResourceAsStream(Sound.SOUND_BASE + resName);
-//			BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream(resDest));
-//			
-//			byte[] fileBuffer = new byte[1024];
-//			for (int i=0; (i = fileIn.read(fileBuffer))>= 0;) {
-//				fileOut.write(fileBuffer, 0, i);
-//			}
-//			
-//			fileIn.close();
-//			fileOut.close();
-//		}
-//		
-//		if (resDest.length() < 3L) {
-//			throw new IOException();
-//		}
-//		
-//		return resDest;
-//	}
-
 }
