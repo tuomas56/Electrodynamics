@@ -5,6 +5,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.network.Player;
@@ -19,22 +21,19 @@ public class PacketClientData extends PacketED {
 	public int y;
 	public int z;
 	
-	public String dataKey;
-	
-	public Object dataValue;
+	public NBTTagCompound nbt;
 	
 	public PacketClientData() {
 		super(PacketTypeHandler.CLIENT_DATA, false);
 	}
 
-	public PacketClientData(int x, int y, int z, String dataKey, Object dataValue) {
+	public PacketClientData(int x, int y, int z, NBTTagCompound nbt) {
 		super(PacketTypeHandler.CLIENT_DATA, false);
 		
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		this.dataKey = dataKey;
-		this.dataValue = dataValue;
+		this.nbt = nbt;
 	}
 
 	@Override
@@ -42,8 +41,7 @@ public class PacketClientData extends PacketED {
 		this.x = data.readInt();
 		this.y = data.readInt();
 		this.z = data.readInt();
-		this.dataKey = data.readUTF();
-		this.dataValue = readObject(data);
+		this.nbt = CompressedStreamTools.read(data);
 	}
 
 	@Override
@@ -51,8 +49,7 @@ public class PacketClientData extends PacketED {
 		dos.writeInt(this.x);
 		dos.writeInt(this.y);
 		dos.writeInt(this.z);
-		dos.writeUTF(this.dataKey);
-		writeObject(this.dataValue, dos);
+		CompressedStreamTools.write(this.nbt, dos);
 	}
 
 	@Override
@@ -61,45 +58,9 @@ public class PacketClientData extends PacketED {
 			TileEntity tile = ((EntityPlayer)player).worldObj.getBlockTileEntity(x, y, z);
 			
 			if (tile != null && tile instanceof TileStructurePlaceHolder) {
-				((TileStructurePlaceHolder)tile).readClientData(dataKey, dataValue);
+				((TileStructurePlaceHolder)tile).readClientData(this.nbt);
 			}
 		}
-	}
-	
-	public static void writeObject(Object object, DataOutputStream dos) throws IOException {
-		if (object instanceof String) {
-			dos.writeByte(0);
-			dos.writeUTF(object.toString());
-		} else if (object instanceof Byte) {
-			dos.writeByte(1);
-			dos.writeByte(((Byte) object).byteValue());
-		} else if (object instanceof Integer) {
-			dos.writeByte(2);
-			dos.writeInt(((Integer) object).intValue());
-		} else if (object instanceof Float) {
-			dos.writeByte(3);
-			dos.writeFloat(((Float) object).floatValue());
-		} else if (object instanceof Double) {
-			dos.writeByte(4);
-			dos.writeDouble(((Double) object).doubleValue());
-		}
-	}
-	
-	public static Object readObject(DataInputStream data) throws IOException {
-		ObjectType type = ObjectType.values()[data.readByte()];
-		
-		switch(type) {
-			case DOUBLE: return data.readDouble();
-			case FLOAT: return data.readFloat();
-			case INTEGER: return data.readInt();
-			case BYTE: return data.readByte();
-			case STRING: return data.readUTF();
-			default: return null;
-		}
-	}
-	
-	private static enum ObjectType {
-		STRING, BYTE, INTEGER, FLOAT, DOUBLE;
 	}
 	
 }

@@ -107,8 +107,8 @@ public abstract class TileEntityStructure extends TileEntityGeneric {
 		return this.INFINITE_EXTENT_AABB;
     }
 	
-	public void sendDataToClient(String key, Object data) {
-		PacketClientData packet = new PacketClientData(xCoord, yCoord, zCoord, key, data);
+	public void sendDataToClient(NBTTagCompound nbt) {
+		PacketClientData packet = new PacketClientData(xCoord, yCoord, zCoord, nbt);
 		PacketUtils.sendToPlayers(packet.makePacket(), this);
 	}
 	
@@ -118,10 +118,10 @@ public abstract class TileEntityStructure extends TileEntityGeneric {
 
 	public static class TileStructurePlaceHolder extends TileEntityStructure {
 
-		public HashMap<String, Object> fakeDataMappings = new HashMap<String, Object>();
-
-		public void readClientData(String key, Object value) {
-			fakeDataMappings.put(key, value);
+		public NBTTagCompound clientNBT;
+		
+		public void readClientData(NBTTagCompound nbt) {
+			this.clientNBT = nbt;
 		}
 		
 		@Override

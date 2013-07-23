@@ -306,7 +306,9 @@ public class TileEntityMobGrinder extends TileEntityStructure implements IFluidH
 	@Override
 	public void updateSignalStrength(int strength) {
 		this.active = strength > 0;
-		sendDataToClient("active", (byte)(this.active == true ? 1 : 0));
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setBoolean("active", this.active);
+		sendDataToClient(nbt);
 	}
 
 	@Override
