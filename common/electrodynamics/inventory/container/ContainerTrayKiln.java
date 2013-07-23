@@ -7,19 +7,10 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerTrayKiln extends Container {
-
-	public InventoryItem inventory;
-
-	public EntityPlayer activePlayer;
-
-	public int activeSlot;
+public class ContainerTrayKiln extends ContainerInventory {
 
 	public ContainerTrayKiln(EntityPlayer player, InventoryItem inventory) {
-		this.inventory = inventory;
-		inventory.parentContainer = this;
-		this.activePlayer = player;
-		this.activeSlot = InventoryUtil.getActiveSlot(player.inventory.currentItem, inventory);
+		super(player, inventory);
 		
 		// Tray Inventory
 		for (int i = 0; i < 2; ++i) {
@@ -48,24 +39,6 @@ public class ContainerTrayKiln extends Container {
 		for (int i = 0; i < 9; ++i) {
 			this.addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 142));
 		}
-	}
-	
-	@Override
-	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return true;
-	}
-
-	public void onCraftGuiClosed(EntityPlayer player) {
-		if (!player.worldObj.isRemote) {
-			this.activePlayer.setCurrentItemOrArmor(0, this.inventory.parent);
-			this.activePlayer.inventory.onInventoryChanged();
-		}
-	}
-	
-	@Override
-	public ItemStack slotClick(int slot, int x, int y, EntityPlayer player) {
-		if (slot == this.activeSlot) return null;
-		return super.slotClick(slot, x, y, player);
 	}
 	
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {

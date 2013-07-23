@@ -7,19 +7,10 @@ import net.minecraft.item.ItemStack;
 import electrodynamics.inventory.InventoryItem;
 import electrodynamics.util.InventoryUtil;
 
-public class ContainerTray extends Container {
+public class ContainerTray extends ContainerInventory {
 
-	public InventoryItem inventory;
-	
-	public EntityPlayer activePlayer;
-	
-	public int activeSlot;
-	
 	public ContainerTray(EntityPlayer player, InventoryItem inventory) {
-		this.inventory = inventory;
-		inventory.parentContainer = this;
-		this.activePlayer = player;
-		this.activeSlot = InventoryUtil.getActiveSlot(player.inventory.currentItem, inventory);
+		super(player, inventory);
 		
 		// Tray Inventory
 		for (int i = 0; i < 3; ++i) {
@@ -38,24 +29,6 @@ public class ContainerTray extends Container {
 		for (int i = 0; i < 9; ++i) {
 			this.addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 142));
 		}
-	}
-	
-	@Override
-	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return true;
-	}
-
-	public void onCraftGuiClosed(EntityPlayer player) {
-		if (!player.worldObj.isRemote) {
-			this.activePlayer.setCurrentItemOrArmor(0, this.inventory.parent);
-			this.activePlayer.inventory.onInventoryChanged();
-		}
-	}
-	
-	@Override
-	public ItemStack slotClick(int slot, int x, int y, EntityPlayer player) {
-		if (slot == this.activeSlot) return null;
-		return super.slotClick(slot, x, y, player);
 	}
 	
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
