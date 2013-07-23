@@ -1,6 +1,7 @@
 package electrodynamics.client.render.tileentity;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -9,6 +10,8 @@ import org.lwjgl.opengl.GL11;
 
 import electrodynamics.client.model.ModelLatexBucket;
 import electrodynamics.client.model.ModelTreeTap;
+import electrodynamics.client.render.util.RenderUtil;
+import electrodynamics.core.handler.IconHandler;
 import electrodynamics.lib.client.Textures;
 import electrodynamics.tileentity.TileEntityTreetap;
 
@@ -56,7 +59,12 @@ public class RenderTreetap extends TileEntitySpecialRenderer {
 		
 		if (tile.hasBucket) {
 			renderBucket(tile);
-			//TODO New liquid renderer
+			if (tile.liquidAmount > 0) {
+				GL11.glPushMatrix();
+				GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5);
+				RenderUtil.drawIcon(0, 0, IconHandler.getInstance().registeredIcons.get("misc.liquidLatex"), 16, 16);
+				GL11.glPopMatrix();
+			}
 		}
 		
 		GL11.glEnable(GL11.GL_LIGHTING);

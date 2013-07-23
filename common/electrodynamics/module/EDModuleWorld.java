@@ -36,6 +36,7 @@ import electrodynamics.client.render.block.RenderBlockOre;
 import electrodynamics.client.render.block.RenderBlockStructure;
 import electrodynamics.client.render.tileentity.RenderTreetap;
 import electrodynamics.core.EDLogger;
+import electrodynamics.core.handler.IconHandler;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.lib.block.BlockIDs;
 import electrodynamics.lib.block.Decorative;
@@ -112,13 +113,16 @@ public class EDModuleWorld extends EDModule {
 	public void init() {
 		MinecraftForge.EVENT_BUS.register(new BonemealEventHandler());
 
+		Fluid latex = new Fluid("Latex").setIcons(IconHandler.getInstance().registeredIcons.get("misc.liquidLatex"));
+		
+		if (FluidRegistry.registerFluid(latex)) {
+			FluidContainerRegistry.registerFluidContainer(latex, new ItemStack(EDItems.itemLatexBucket));
+		}
+		
 		// Wormwood
 		GameRegistry.registerWorldGenerator(new WorldGenWormwood());
 
 		MinecraftForge.addGrassSeed( new ItemStack(EDItems.itemWormSeed), 5 );
-		
-		FluidRegistry.registerFluid(new Fluid("Latex"));
-		FluidContainerRegistry.registerFluidContainer(new Fluid("Latex"), new ItemStack(EDItems.itemLatexBucket), FluidContainerRegistry.EMPTY_BUCKET);
 		
 		GameRegistry.registerTileEntity(TileEntityTreetap.class, Strings.BLOCK_TREETAP);
 		
