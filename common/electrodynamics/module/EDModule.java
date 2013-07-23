@@ -2,6 +2,8 @@ package electrodynamics.module;
 
 import java.util.EnumSet;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import electrodynamics.module.ModuleManager.Module;
 
 public abstract class EDModule {
@@ -18,14 +20,17 @@ public abstract class EDModule {
 		
 	}
 
+	@SideOnly(Side.CLIENT)
 	public void preInitClient() {
 		
 	}
 	
+	@SideOnly(Side.CLIENT)
 	public void initClient() {
 		
 	}
 	
+	@SideOnly(Side.CLIENT)
 	public void postInitClient() {
 		
 	}

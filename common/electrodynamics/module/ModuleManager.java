@@ -5,6 +5,9 @@ import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Map;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 import electrodynamics.Electrodynamics;
@@ -114,18 +117,21 @@ public class ModuleManager {
 	}
 	
 	/* CLIENT METHODS */
+	@SideOnly(Side.CLIENT)
 	public static void preInitClient() {
 		for (Module module : loadedModules) {
 			preInitClient(module);
 		}
 	}
 	
+	@SideOnly(Side.CLIENT)
 	public static void initClient() {
 		for (Module module : loadedModules) {
 			initClient(module);
 		}
 	}
 	
+	@SideOnly(Side.CLIENT)
 	public static void postInitClient() {
 		for (Module module : loadedModules) {
 			postInitClient(module);

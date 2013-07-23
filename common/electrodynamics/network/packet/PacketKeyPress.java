@@ -9,30 +9,36 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
-import electrodynamics.control.IKeyBoundServer;
+import electrodynamics.control.IKeybound;
+import electrodynamics.control.IKeybound.Type;
 import electrodynamics.network.PacketTypeHandler;
 
 public class PacketKeyPress extends PacketED {
 
-	public String key;
+	public int key;
+	
+	public Type type;
 	
 	public PacketKeyPress() {
 		super(PacketTypeHandler.KEY, false);
 	}
 
-	public PacketKeyPress(String key) {
+	public PacketKeyPress(int key, Type type) {
 		super(PacketTypeHandler.KEY, false);
 		this.key = key;
+		this.type = type;
 	}
 
 	@Override
 	public void writeData(DataOutputStream data) throws IOException {
-		data.writeUTF(key);
+		data.writeInt(key);
+		data.writeByte(type.ordinal());
 	}
 	
 	@Override
 	public void readData(DataInputStream dos) throws IOException {
-		this.key = dos.readUTF();
+		this.key = dos.readInt();
+		this.type = Type.values()[dos.readByte()];
 	}
 	
 	@Override
@@ -41,14 +47,27 @@ public class PacketKeyPress extends PacketED {
 		
 		EntityPlayer playerEntity = (EntityPlayer)player;
 		
-		//If held item handles key press
-		if (playerEntity.getCurrentEquippedItem() != null && playerEntity.getCurrentEquippedItem().getItem() instanceof IKeyBoundServer) {
-			((IKeyBoundServer)playerEntity.getCurrentEquippedItem().getItem()).doKeybindingAction(playerEntity, playerEntity.getCurrentEquippedItem(), key);
+		if (playerEntity.getCurrentEquippedItem() != null) {
+			ItemStack current = playerEntity.getCurrentEquippedItem();
+			
+			if (current.getItem() instanceof IKeybound) {
+				Type type = ((IKeybound)current.getItem()).getType();
+				
+				if (type == this.type || type == Type.BOTH) {
+					((IKeybound)current.getItem()).onKeypress(playerEntity, current, key);
+				}
+			}
 		}
 		
 		for (ItemStack armor : playerEntity.inventory.armorInventory) {
-			if (armor != null && armor.getItem() instanceof IKeyBoundServer) {
-				((IKeyBoundServer)armor.getItem()).doKeybindingAction(playerEntity, armor, key);
+			if (armor != null) {
+				if (armor.getItem() instanceof IKeybound) {
+					Type type = ((IKeybound)armor.getItem()).getType();
+					
+					if (type == this.type || type == Type.BOTH) {
+						((IKeybound)armor.getItem()).onKeypress(playerEntity, armor, key);
+					}
+				}
 			}
 		}
 	}

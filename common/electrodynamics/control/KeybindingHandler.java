@@ -9,6 +9,8 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.relauncher.Side;
+import electrodynamics.control.IKeybound.Type;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.network.PacketTypeHandler;
 import electrodynamics.network.packet.PacketKeyPress;
@@ -31,22 +33,32 @@ public class KeybindingHandler extends KeyBindingRegistry.KeyHandler {
 				EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 				
 				if (player != null) {
-					ItemStack currentItem = player.getCurrentEquippedItem();
-					
-					if (currentItem != null) {
-						if (currentItem.getItem() instanceof IKeyBoundServer) {
-							PacketDispatcher.sendPacketToServer(PacketTypeHandler.fillPacket(new PacketKeyPress(key.keyDescription)));
-						} else if (currentItem.getItem() instanceof IKeyBoundClient) {
-							((IKeyBoundClient)currentItem.getItem()).doKeybindingAction(player, currentItem, key.keyDescription);
+					if (player.getCurrentEquippedItem() != null) {
+						ItemStack currentItem = player.getCurrentEquippedItem();
+						
+						if (currentItem.getItem() instanceof IKeybound) {
+							IKeybound keybound = (IKeybound) currentItem.getItem();
+							
+							if (keybound.getType() == Type.HELD || keybound.getType() == Type.BOTH) {
+								if (keybound.getSide() == Side.SERVER) {
+									PacketDispatcher.sendPacketToServer(PacketTypeHandler.fillPacket(new PacketKeyPress(key.keyCode, keybound.getType())));
+								} else if (keybound.getSide() == Side.CLIENT) {
+									keybound.onKeypress(player, currentItem, key.keyCode);
+								}
+							}
 						}
 					}
 
 					for (ItemStack armor : player.inventory.armorInventory) {
 						if (armor != null) {
-							if (armor.getItem() instanceof IKeyBoundServer) {
-								PacketDispatcher.sendPacketToServer(PacketTypeHandler.fillPacket(new PacketKeyPress(key.keyDescription)));
-							} else if (armor.getItem() instanceof IKeyBoundClient) {
-								((IKeyBoundClient)armor.getItem()).doKeybindingAction(player, armor, key.keyDescription);
+							IKeybound keybound = (IKeybound) armor.getItem();
+							
+							if (keybound.getType() == Type.HELD || keybound.getType() == Type.BOTH) {
+								if (keybound.getSide() == Side.SERVER) {
+									PacketDispatcher.sendPacketToServer(PacketTypeHandler.fillPacket(new PacketKeyPress(key.keyCode, keybound.getType())));
+								} else if (keybound.getSide() == Side.CLIENT) {
+									keybound.onKeypress(player, armor, key.keyCode);
+								}
 							}
 						}
 					}

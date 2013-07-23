@@ -1,21 +1,31 @@
 package electrodynamics.module;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import electrodynamics.Electrodynamics;
 import electrodynamics.client.render.handler.XRayOverlayHandler;
+import electrodynamics.core.PlayerTicker;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.item.EDItems;
-import electrodynamics.item.ItemTeslaModule;
+import electrodynamics.item.ItemArmorModule;
 import electrodynamics.item.elmag.ItemElMagArmor;
 import electrodynamics.lib.core.Strings;
+import electrodynamics.lib.item.ArmorModule;
 import electrodynamics.lib.item.ItemIDs;
-import electrodynamics.lib.item.TeslaModule;
 
 public class EDModuleElMag extends EDModule {
 
 	public void preInit() {
+		TickRegistry.registerTickHandler(new PlayerTicker(), Side.SERVER);
+		
+		// Keybindings
+		Electrodynamics.proxy.setKeyBinding("Backtrack", Keyboard.KEY_B, false);
+		
 		EDItems.itemTeslaHelm = new ItemElMagArmor(ItemIDs.ITEM_ELMAG_HELM_ID, 0).setUnlocalizedName(Strings.ITEM_ELMAG_HAT_NAME);
 		GameRegistry.registerItem(EDItems.itemTeslaHelm, Strings.ITEM_ELMAG_HAT_NAME);
 		EDLanguage.getInstance().registerItem(EDItems.itemTeslaHelm);
@@ -32,9 +42,9 @@ public class EDModuleElMag extends EDModule {
 		GameRegistry.registerItem(EDItems.itemTeslaBoots, Strings.ITEM_ELMAG_BOOTS_NAME);
 		EDLanguage.getInstance().registerItem(EDItems.itemTeslaBoots);
 	
-		EDItems.itemTeslaModule = new ItemTeslaModule(ItemIDs.ITEM_ELMAG_MODULE_ID).setUnlocalizedName(Strings.ITEM_ELMAG_MODULE);
+		EDItems.itemTeslaModule = new ItemArmorModule(ItemIDs.ITEM_ELMAG_MODULE_ID).setUnlocalizedName(Strings.ITEM_ELMAG_MODULE);
 		GameRegistry.registerItem(EDItems.itemTeslaModule, Strings.ITEM_ELMAG_MODULE);
-		for (TeslaModule module : TeslaModule.values()) {
+		for (ArmorModule module : ArmorModule.values()) {
 			EDLanguage.getInstance().registerItemStack(module.toItemStack(), module.unlocalizedName);
 		}
 	}

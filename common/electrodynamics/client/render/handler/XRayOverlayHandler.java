@@ -13,7 +13,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 import org.lwjgl.opengl.GL11;
 
 import electrodynamics.client.render.util.RenderUtil;
-import electrodynamics.lib.item.TeslaModule;
+import electrodynamics.lib.item.ArmorModule;
 
 public class XRayOverlayHandler {
 
@@ -25,7 +25,7 @@ public class XRayOverlayHandler {
 		Entity entity = event.context.mc.renderViewEntity;
 		EntityPlayer player = (EntityPlayer)entity;
 		
-		if (TeslaModule.XRAY.hasModule(player)) {
+		if (ArmorModule.XRAY.hasModule(player)) {
 			RenderUtil.translateToWorldCoords(entity, event.partialTicks);
 			renderEntityHighlight(entity, event.partialTicks);
 		}

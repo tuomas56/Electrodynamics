@@ -2,13 +2,16 @@ package electrodynamics.item.elmag;
 
 import java.util.List;
 
-import electrodynamics.api.tool.IElMagModule;
+import cpw.mods.fml.relauncher.Side;
+
+import electrodynamics.api.tool.IArmorModule;
+import electrodynamics.control.IKeybound;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.core.handler.GuiHandler;
 import electrodynamics.interfaces.IInventoryItem;
 import electrodynamics.inventory.InventoryItem;
 import electrodynamics.lib.core.ModInfo;
-import electrodynamics.lib.item.TeslaModule;
+import electrodynamics.lib.item.ArmorModule;
 import electrodynamics.util.MathUtil;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
@@ -19,7 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class ItemElMagArmor extends ItemArmor implements IInventoryItem {
+public class ItemElMagArmor extends ItemArmor implements IInventoryItem, IKeybound {
 
 	public ArmorType armorType;
 	
@@ -40,7 +43,7 @@ public class ItemElMagArmor extends ItemArmor implements IInventoryItem {
 		InventoryItem inv = this.getInventory(stack);
 		
 		if (inv != null && inv.getStackInSlot(0) != null) {
-			list.add(((IElMagModule)inv.getStackInSlot(0).getItem()).getModuleName(inv.getStackInSlot(0)));
+			list.add(((IArmorModule)inv.getStackInSlot(0).getItem()).getModuleName(inv.getStackInSlot(0)));
 		}
 	}
 	
@@ -68,7 +71,27 @@ public class ItemElMagArmor extends ItemArmor implements IInventoryItem {
 		ItemStack module = inv.getStackInSlot(0);
 		
 		if (inv != null && module != null) {
-			((IElMagModule)module.getItem()).onArmorTick(TeslaModule.get(module.getItemDamage()), world, player, itemStack);
+			((IArmorModule)module.getItem()).onArmorTick(ArmorModule.get(module.getItemDamage()), world, player, itemStack);
+		}
+	}
+	
+	@Override
+	public Side getSide() {
+		return Side.SERVER;
+	}
+
+	@Override
+	public Type getType() {
+		return Type.BOTH;
+	}
+
+	@Override
+	public void onKeypress(EntityPlayer player, ItemStack stack, int key) {
+		InventoryItem inv = this.getInventory(stack);
+		ItemStack module = inv.getStackInSlot(0);
+		
+		if (inv != null && module != null) {
+			((IArmorModule)module.getItem()).onKeypress(ArmorModule.get(module.getItemDamage()), player, stack, key);
 		}
 	}
 	
@@ -106,5 +129,5 @@ public class ItemElMagArmor extends ItemArmor implements IInventoryItem {
 	public InventoryItem getInventory(ItemStack stack) {
 		return new InventoryItem(2, stack);
 	}
-	
+
 }

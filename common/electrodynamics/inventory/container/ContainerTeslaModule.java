@@ -6,7 +6,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import electrodynamics.api.tool.IElMagModule;
+import electrodynamics.api.tool.IArmorModule;
 import electrodynamics.inventory.InventoryItem;
 import electrodynamics.util.InventoryUtil;
 
@@ -99,8 +99,8 @@ public class ContainerTeslaModule extends Container {
 		
 		@Override
 		public boolean isItemValid(ItemStack stack) {
-			if (stack.getItem() instanceof IElMagModule) {
-				for (int type : ((IElMagModule)stack.getItem()).validArmorTypes(stack)) {
+			if (stack.getItem() instanceof IArmorModule) {
+				for (int type : ((IArmorModule)stack.getItem()).validArmorTypes(stack)) {
 					if (type == this.armorType) {
 						return true;
 					}

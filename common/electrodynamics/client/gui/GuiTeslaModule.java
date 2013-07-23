@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
-import electrodynamics.api.tool.IElMagModule;
+import electrodynamics.api.tool.IArmorModule;
 import electrodynamics.core.handler.GuiHandler;
 import electrodynamics.inventory.container.ContainerTeslaModule;
 
@@ -26,7 +26,7 @@ public class GuiTeslaModule extends GuiElectrodynamics {
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		if (this.inventorySlots.getSlot(0).getHasStack()) {
 			ItemStack stack = this.inventorySlots.getSlot(0).getStack();
-			IElMagModule module = (IElMagModule) stack.getItem();
+			IArmorModule module = (IArmorModule) stack.getItem();
 			
 			this.fontRenderer.drawString(module.getModuleName(stack), 8 + 16 + 4, 8, 4210752);
 			this.fontRenderer.drawSplitString(module.getModuleDescription(stack), 8, 8 + 16 + 4, 160, 4210752);
