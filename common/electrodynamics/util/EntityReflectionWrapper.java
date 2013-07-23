@@ -2,6 +2,7 @@ package electrodynamics.util;
 
 import java.lang.reflect.Method;
 
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import electrodynamics.Electrodynamics;
 import electrodynamics.core.EDLogger;
@@ -22,12 +23,12 @@ public class EntityReflectionWrapper {
 	
 	public int getMainDropID() {
 		try {
-			Method dropID = EntityLivingBase.class.getDeclaredMethod(Electrodynamics.instance.obfuscated == true ? OBF_DROP_ID : DROP_ID, new Class[0]);
+			Method dropID = EntityLiving.class.getDeclaredMethod(Electrodynamics.instance.obfuscated == true ? OBF_DROP_ID : DROP_ID, new Class[0]);
 			dropID.setAccessible(true);
 			return ((Integer)dropID.invoke(this.entity, new Object[0])).intValue();
 		} catch(Exception ex) {
 			EDLogger.warn("Failed to get method " + DROP_ID + " from Entity " + this.entity.getEntityName());
-			EDLogger.warn("Reason: " + ex.getLocalizedMessage());
+			ex.printStackTrace();
 		}
 		
 		return 0;
@@ -35,12 +36,12 @@ public class EntityReflectionWrapper {
 	
 	public String getDeathSound() {
 		try {
-			Method deathSound = EntityLivingBase.class.getDeclaredMethod(Electrodynamics.instance.obfuscated == true ? OBF_DEATH_SOUND : DEATH_SOUND, new Class[0]);
+			Method deathSound = EntityLiving.class.getDeclaredMethod(Electrodynamics.instance.obfuscated == true ? OBF_DEATH_SOUND : DEATH_SOUND, new Class[0]);
 			deathSound.setAccessible(true);
 			return ((String)deathSound.invoke(this.entity, new Object[0]));
 		} catch(Exception ex) {
 			EDLogger.warn("Failed to get method " + DEATH_SOUND + " from Entity " + this.entity.getEntityName());
-			EDLogger.warn("Reason: " + ex.getLocalizedMessage());
+			ex.printStackTrace();
 		}
 		
 		return "";
