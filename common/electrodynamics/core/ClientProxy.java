@@ -30,7 +30,7 @@ public class ClientProxy extends CommonProxy {
 		Electrodynamics.instance.showOptifineError = (FMLClientHandler.instance().hasOptifine()) && !(new File(Electrodynamics.instance.configFolder, "optifineErrorShown.flag").exists());
 
 		// Sound handler registration
-		MinecraftForge.EVENT_BUS.register(new SoundHandler());
+//		MinecraftForge.EVENT_BUS.register(new SoundHandler());
 		
 		ModuleManager.preInitClient();
 	}
@@ -77,7 +77,7 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	public void handleSoundPacket(String sound, double x, double y, double z) {
-		FMLClientHandler.instance().getClient().theWorld.playSound(x, y, z, sound, 1F, 1F, false);
+//		FMLClientHandler.instance().getClient().theWorld.playSound(x, y, z, sound, 1F, 1F, false);
 	}
 	
 	public void handleSFXPacket(int sfx, double x, double y, double z) {
