@@ -138,20 +138,22 @@ public abstract class MultiBlockStructure {
 			if( worldBlock != null ) {
 				tile = worldBlock.getTileEntity();
 				if( tile != null && tile instanceof TileEntityStructure ) {
-					((TileEntityStructure) tile).validateStructure( this, rotation, x, y, z );
+					if (!((TileEntityStructure)tile).isValidStructure()) {
+						((TileEntityStructure) tile).validateStructure( this, rotation, x, y, z );
 
-					if (((TileEntityStructure)tile).isCentralTileEntity()) {
-						if (replacement != null) {
-							int subID = ((TileEntityStructure)tile).getSubBlock();
-							replacement.setSubBlock( subID );
-							
-							WorldCoordinate central = getCentralCoordinate(chunk, rotation);
-							tile.worldObj.setBlockTileEntity(central.x, central.y, central.z, replacement);
-							((TileEntityStructure)worldBlock.getTileEntity()).validateStructure( this, rotation, x, y, z );
+						if (((TileEntityStructure)tile).isCentralTileEntity()) {
+							if (replacement != null) {
+								int subID = ((TileEntityStructure)tile).getSubBlock();
+								replacement.setSubBlock( subID );
+								
+								WorldCoordinate central = getCentralCoordinate(chunk, rotation);
+								tile.worldObj.setBlockTileEntity(central.x, central.y, central.z, replacement);
+								((TileEntityStructure)worldBlock.getTileEntity()).validateStructure( this, rotation, x, y, z );
+							}
 						}
+						
+						((World)chunk.getBlockAccess()).markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
 					}
-					
-					((World)chunk.getBlockAccess()).markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
 				}
 			}
 		}
