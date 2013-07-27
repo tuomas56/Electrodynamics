@@ -3,12 +3,17 @@ package electrodynamics.tileentity.machine.energy;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import electrodynamics.entity.EntityBeam;
 import electrodynamics.lib.block.EnergyProduction;
 import electrodynamics.tileentity.TileEntityEDRoot;
 import electrodynamics.util.BlockUtil;
@@ -49,14 +54,17 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 			currAngle -= 0.01;
 			currAngle = (float) (Math.round(currAngle * 100.0) / 100.0);
 		}
-	}
-	
+	}	
+
 	@Override
 	public void updateEntityServer() {
 		this.setAngle = -(float) (Math.round(calculateAngle() * 100.0) / 100.0);
 		
 		if (this.setAngle > 0.45 || this.setAngle < -0.45 || !this.worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)) {
-			this.setAngle = 0;
+			if (this.setAngle != 0) {
+				this.setAngle = 0;
+				sendAngleUpdate();
+			}
 		}
 		
 		if (this.setAngle != this.prevSetAngle) {
@@ -86,6 +94,34 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 			}
 		}
 		return worldTime;
+	}
+	
+	private Vec3 getBlockVector() {
+		return Vec3.fakePool.getVecFromPool(xCoord + 0.5, yCoord + 1.5, zCoord + 0.5);
+	}
+	
+	private Vec3 getPanelFaceVector() {
+		float yaw = this.setAngle != 0 ? (this.setAngle > 0 && this.setAngle <= 0.45 ? -90 : 0) : (this.setAngle < 0 && this.setAngle >= -0.45 ? 90 : 0);
+
+		float f1 = MathHelper.cos(yaw * 0.017453292F - (float)Math.PI);
+		float f2 = MathHelper.sin(yaw * 0.017453292F - (float)Math.PI);
+		float f3 = -MathHelper.cos(this.setAngle * 0.017453292F);
+		float f4 = MathHelper.sin(this.setAngle * 0.017453292F);
+        return this.worldObj.getWorldVec3Pool().getVecFromPool((double)(f2 * f3), (double)f4, (double)(f1 * f3));
+	}
+	
+	public Vec3 getPanelFaceCoords() {
+		final float RANGE = 10F;
+		
+		Vec3 base = getBlockVector();
+		Vec3 face = getPanelFaceVector();
+		Vec3 look = base.addVector(face.xCoord + RANGE, face.yCoord + RANGE, face.zCoord);
+	
+		return look;
+	}
+	
+	public MovingObjectPosition getPanelFaceBlock() {
+		return this.worldObj.rayTraceBlocks_do_do(getBlockVector(), getPanelFaceCoords(), false, true);
 	}
 	
 	@Override
