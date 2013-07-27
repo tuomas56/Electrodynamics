@@ -44,6 +44,7 @@ public class ModuleManager {
 		registerModule(Module.MACHINE, new EDModuleMachine());
 //		registerModule(Module.GAS,  new EDModuleGas());
 		registerModule(Module.ELMAG, new EDModuleElMag());
+		registerModule(Module.ENERGY, new EDModuleEnergy());
 		
 		Configuration config = new Configuration(new File(Electrodynamics.instance.configFolder, MODULE_CONFIG_FILE));
 		config.load();
@@ -205,7 +206,8 @@ public class ModuleManager {
 		LASER,
 		MACHINE,
 //		GAS,
-		ELMAG;
+		ELMAG,
+		ENERGY;
 	}
 	
 }

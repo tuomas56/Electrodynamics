@@ -12,6 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -21,6 +22,10 @@ import org.lwjgl.opengl.GL12;
 public class RenderUtil {
 
 	public static final double OFFSET_CONSTANT = 0.01;
+	
+	public static void bindTexture(ResourceLocation file) {
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(file);
+	}
 	
 	public static void renderEntityItem(World world, ItemStack stack, boolean forceFancy) {
 		if (stack != null) {

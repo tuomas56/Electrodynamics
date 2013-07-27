@@ -70,4 +70,8 @@ public class BlockIDs {
 	public static int BLOCK_UTILITY_ID;
 	public static final int BLOCK_UTILITY_DEFAULT_ID = 516;
 
+	/* blockEnergy */
+	public static int BLOCK_ENERGY_ID;
+	public static final int BLOCK_ENERGY_DEFAULT_ID = 517;
+	
 }

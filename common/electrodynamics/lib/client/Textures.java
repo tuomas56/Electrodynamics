@@ -26,6 +26,7 @@ public enum Textures {
 	MOB_GRINDER_BLOODY("models/textures/mobGrinder_blood.png"),
 	SIGNAL_DIMMER("textures/misc/signalDimmer.png"), // Move this texture to the models texture folder
 	RED_WIRE("textures/misc/redAlloyWire.png"), // This one too
+	SOLAR_PANEL("models/textures/solarPanel.png"),
 	
 	/* GUI Textures */
 	GUI_METAL_TRAY(new ResourceLocation("textures/gui/container/dispenser.png")),

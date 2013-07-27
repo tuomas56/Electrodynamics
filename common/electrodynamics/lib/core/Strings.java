@@ -48,7 +48,8 @@ public class Strings {
 	public static final String BLOCK_STRUCTURE_COMPONENT = "structure.component";
 	public static final String BLOCK_UTILITY = "block.utility.name";
 	public static final String BLOCK_SIGNAL_DIMMER_NAME = "signal_dimmer.name";
-
+	public static final String BLOCK_ENERGY = "block.energy.name";
+	
 	/* Internal component names */
 	public static final String COMPONENT_FAN_BLADE = "component.fanBlade.name";
 	public static final String COMPONENT_MAGNET = "component.magnet.name";
@@ -162,6 +163,9 @@ public class Strings {
 	public static final String MACHINE_CONVEYOR_BELT = "machine.conveyor.belt";
 	public static final String MACHINE_STRUCTURE_PLACE_HOLDER = "machine.structure.place.holder";
 
+	/* Internal energy production machine names */
+	public static final String ENERGY_SOLAR_PANEL = "energy.solarPanel.name";
+	
 	/* Internal table names */
 	public static final String BASIC_TABLE = "table.basic.name";
 	public static final String SMASH_TABLE = "table.smash.name";

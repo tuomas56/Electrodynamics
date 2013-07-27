@@ -22,5 +22,6 @@ public class EDBlocks {
 	public static Block blockRSSource;
 	public static Block blockUtility;
 	public static Block blockSignalDimmer;
-
+	public static Block blockEnergy;
+	
 }

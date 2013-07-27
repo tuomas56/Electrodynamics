@@ -1,0 +1,70 @@
+package electrodynamics.client.render.item;
+
+import electrodynamics.client.model.ModelBasicKiln;
+import electrodynamics.lib.block.Machine;
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import electrodynamics.client.model.ModelBasicSieve;
+import electrodynamics.client.model.ModelSinteringOven;
+import electrodynamics.client.model.ModelSolarPanel;
+import electrodynamics.client.render.util.RenderUtil;
+import electrodynamics.lib.client.Textures;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.IItemRenderer;
+
+public class RenderItemEnergy implements IItemRenderer {
+
+	private ModelSolarPanel solarPanel;
+	
+	public RenderItemEnergy() {
+		this.solarPanel = new ModelSolarPanel();
+	}
+	
+	@Override
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+		return true;
+	}
+
+	@Override
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+		return true;
+	}
+
+	@Override
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		switch(type) {
+		case ENTITY: {
+			renderSolarPanel(0F, 1F, 0F);
+			break;
+		}
+
+		case EQUIPPED: {
+			renderSolarPanel(1.0F, 1.0F, 1.0F);
+			break;
+		}
+
+		case EQUIPPED_FIRST_PERSON: {
+			renderSolarPanel(1.0F, 2.0F, 1.0F);
+			break;
+		}
+
+		case INVENTORY: {
+			renderSolarPanel(0F, 1F, 0F);
+			break;
+		}
+
+		default: break;
+	}
+	}
+
+	private void renderSolarPanel(float x, float y, float z) {
+		RenderUtil.bindTexture(Textures.SOLAR_PANEL.resource);
+		GL11.glPushMatrix();
+		GL11.glTranslatef(x, y, z);
+		GL11.glRotatef(180, 1, 0, 0);
+		solarPanel.render(0.0625F);
+		GL11.glPopMatrix();
+	}
+	
+}
