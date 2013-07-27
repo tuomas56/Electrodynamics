@@ -69,6 +69,19 @@ public class ModelSolarPanel extends ModelTechne {
 		solarPanelPipe2.render(f5);
 	}
 
+	public void renderPipe(float scale) {
+		solarPanelPipeConnector.render(scale);
+		solarPanelPipeConnector2.render(scale);
+		solarPanelPipe.render(scale);
+		solarPanelPipe2.render(scale);
+	}
+	
+	public void renderPanel(float scale) {
+		solarPanel.render(scale);
+		solarPanelBottom.render(scale);
+		solarPanelConnector.render(scale);
+	}
+	
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;

@@ -29,9 +29,16 @@ public class RenderSolarPanel extends TileEntitySpecialRenderer {
 		
 		RenderUtil.bindTexture(Textures.SOLAR_PANEL.resource);
 		
-		this.solarPanel.rotatePanel(0, 0, ((TileEntitySolarPanel)tileentity).currAngle);
+		float rotation = ((TileEntitySolarPanel)tileentity).currAngle * 100;
 		
-		this.solarPanel.render(0.0625F);
+		GL11.glTranslatef(0, 0.75F, 0);
+		GL11.glRotatef(rotation, 0, 0, 1);
+		GL11.glTranslatef(0, -0.75F, 0);
+		this.solarPanel.renderPanel(0.0625F);
+		GL11.glTranslatef(0, 0.75F, 0);
+		GL11.glRotatef(-rotation, 0, 0, 1);
+		GL11.glTranslatef(0, -0.75F, 0);
+		this.solarPanel.renderPipe(0.0625F);
 		
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
