@@ -15,10 +15,12 @@ public class BlockUtil {
 
 	public static int getBlockOnSide(World world, int x, int y, int z, ForgeDirection side) {
 		int[] coords = getCoordsOnSide(world, x, y, z, side);
+		if (coords == null) return 0;
 		return world.getBlockId(coords[0], coords[1], coords[2]);
 	}
 	
 	public static int[] getCoordsOnSide(World world, int x, int y, int z, ForgeDirection side) {
+		if (side == null) return null;
 		return new int[] {x + side.offsetX, y + side.offsetY, z + side.offsetZ};
 	}
 	

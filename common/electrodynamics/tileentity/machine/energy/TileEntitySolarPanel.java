@@ -1,11 +1,17 @@
 package electrodynamics.tileentity.machine.energy;
 
+import java.util.Random;
+
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
+import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import electrodynamics.lib.block.EnergyProduction;
 import electrodynamics.tileentity.TileEntityEDRoot;
+import electrodynamics.util.BlockUtil;
 
 public class TileEntitySolarPanel extends TileEntityEDRoot {
 
@@ -17,6 +23,23 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 	private float prevSetAngle = 0.0F;
 	public float setAngle;
 
+	public ForgeDirection attached;
+	
+	@Override
+	public void onBlockAdded(ForgeDirection side) {
+		this.attached = side;
+		//TODO: Reeeender
+	}
+
+	@Override
+	public void onNeighborUpdate() {
+		if (BlockUtil.getBlockOnSide(worldObj, xCoord, yCoord, zCoord, attached) == 0 || this.attached == null) {
+			BlockUtil.dropItemFromBlock(worldObj, xCoord, yCoord, zCoord, EnergyProduction.SOLAR_PANEL.toItemStack(), new Random());
+			this.invalidate();
+			this.worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+		}
+	}
+	
 	@Override
 	public void updateEntityClient() {
 		if (currAngle < setAngle) {
@@ -63,6 +86,20 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 			}
 		}
 		return worldTime;
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		
+		nbt.setByte("attach", (byte) this.attached.ordinal());
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		
+		this.attached = ForgeDirection.VALID_DIRECTIONS[nbt.getByte("attach")];
 	}
 	
 	@Override

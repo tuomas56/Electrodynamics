@@ -60,8 +60,6 @@ public class Electrodynamics implements IEDApi {
 			e.printStackTrace();
 		}
 
-		MinecraftForge.EVENT_BUS.register(IconHandler.getInstance());
-		
 		proxy.preInit(event);
 	}
 

@@ -16,6 +16,7 @@ import electrodynamics.addons.AddonManager;
 import electrodynamics.client.fx.FXLightningBolt;
 import electrodynamics.control.KeyBindingHelper;
 import electrodynamics.control.KeybindingHandler;
+import electrodynamics.core.handler.IconHandler;
 import electrodynamics.core.handler.SoundHandler;
 import electrodynamics.lib.client.FXType;
 import electrodynamics.module.ModuleManager;
@@ -31,6 +32,9 @@ public class ClientProxy extends CommonProxy {
 
 		// Sound handler registration
 //		MinecraftForge.EVENT_BUS.register(new SoundHandler());
+		
+		// Icon handler
+		MinecraftForge.EVENT_BUS.register(IconHandler.getInstance());
 		
 		ModuleManager.preInitClient();
 	}

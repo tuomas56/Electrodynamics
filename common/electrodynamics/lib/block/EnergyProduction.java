@@ -25,7 +25,7 @@ public enum EnergyProduction {
 	}
 	
 	public ItemStack toItemStack() {
-		return new ItemStack(BlockIDs.BLOCK_MACHINE_ID, 1, this.ordinal());
+		return new ItemStack(BlockIDs.BLOCK_ENERGY_ID, 1, this.ordinal());
 	}
 	
 	public String getTextureFile() {

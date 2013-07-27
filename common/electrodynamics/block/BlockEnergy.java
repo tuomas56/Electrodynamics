@@ -19,6 +19,7 @@ import electrodynamics.core.EDLogger;
 import electrodynamics.interfaces.IClientDisplay;
 import electrodynamics.lib.block.EnergyProduction;
 import electrodynamics.lib.block.Machine;
+import electrodynamics.tileentity.TileEntityEDRoot;
 import electrodynamics.tileentity.machine.TileEntityMachine;
 import electrodynamics.tileentity.structure.TileEntityStructure;
 import electrodynamics.util.PlayerUtil;
@@ -52,6 +53,15 @@ public class BlockEnergy extends BlockContainer {
 		return false;
 	}
 
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, int id) {
+		TileEntity tile = world.getBlockTileEntity(x, y, z);
+		
+		if (tile != null && tile instanceof TileEntityEDRoot) {
+			((TileEntityEDRoot)tile).onNeighborUpdate();
+		}
+	}
+	
 	@Override
 	public TileEntity createTileEntity(World world, int meta) {
 		try {
