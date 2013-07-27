@@ -9,15 +9,16 @@ import electrodynamics.tileentity.TileEntityEDRoot;
 
 public class TileEntitySolarPanel extends TileEntityEDRoot {
 
+	@SideOnly(Side.CLIENT)
 	private float prevCurrAngle = 0.0F;
+	@SideOnly(Side.CLIENT)
 	public float currAngle = 0.0F;
+	
 	private float prevSetAngle = 0.0F;
 	public float setAngle;
-	
+
 	@Override
-	public void updateEntity() {
-		if (FMLCommonHandler.instance().getEffectiveSide().isClient()) return;
-		
+	public void updateEntityClient() {
 		if (currAngle < setAngle) {
 			currAngle += 0.01;
 			currAngle = (float) (Math.round(currAngle * 100.0) / 100.0);
@@ -25,14 +26,17 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 			currAngle -= 0.01;
 			currAngle = (float) (Math.round(currAngle * 100.0) / 100.0);
 		}
-		
+	}
+	
+	@Override
+	public void updateEntityServer() {
 		this.setAngle = -(float) (Math.round(calculateAngle() * 100.0) / 100.0);
 		
 		if (this.setAngle > 0.45 || this.setAngle < -0.45 || !this.worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)) {
 			this.setAngle = 0;
 		}
 		
-		if (this.setAngle != this.prevSetAngle || this.currAngle != this.prevCurrAngle) {
+		if (this.setAngle != this.prevSetAngle) {
 			sendAngleUpdate();
 		}
 	}
@@ -65,8 +69,6 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 	public void onDescriptionPacket(NBTTagCompound nbt) {
 		super.onDescriptionPacket(nbt);
 
-		this.prevCurrAngle = currAngle;
-		this.currAngle = nbt.getFloat("currAngle");
 		this.prevSetAngle = setAngle;
 		this.setAngle = nbt.getFloat("setAngle");
 	}
@@ -75,18 +77,12 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 	public void getDescriptionForClient(NBTTagCompound nbt) {
 		super.getDescriptionForClient(nbt);
 		
-		nbt.setFloat("currAngle", this.currAngle);
 		nbt.setFloat("setAngle", this.setAngle);
 	}
 	
 	@Override
 	public void onUpdatePacket(NBTTagCompound nbt) {
 		super.onUpdatePacket(nbt);
-		
-		if (nbt.hasKey("currAngle")) {
-			this.prevCurrAngle = currAngle;
-			this.currAngle = nbt.getFloat("currAngle");
-		}
 		
 		if (nbt.hasKey("setAngle")) {
 			this.prevSetAngle = setAngle;
@@ -96,7 +92,6 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 	
 	private void sendAngleUpdate() {
 		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setFloat("currAngle", this.currAngle);
 		nbt.setFloat("setAngle", this.setAngle);
 		sendUpdatePacket(nbt);
 	}
