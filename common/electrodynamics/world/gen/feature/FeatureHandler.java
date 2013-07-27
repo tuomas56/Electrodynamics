@@ -51,7 +51,7 @@ public class FeatureHandler {
 		registerFeature(FeatureType.GAS_POCKET, new FeatureGasPocket());
 		
 		// Limestone
-		
+		registerFeature(FeatureType.LIMESTONE, new FeatureLimestone("Limestone"));
 		
 		for (FeatureType feature : FeatureType.values()) {
 			if (isEnabled(config, feature)) {
