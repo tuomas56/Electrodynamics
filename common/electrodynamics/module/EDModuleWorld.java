@@ -48,7 +48,6 @@ import electrodynamics.tileentity.TileEntityTreetap;
 import electrodynamics.util.BiomeHelper;
 import electrodynamics.world.gen.WorldGenBlock;
 import electrodynamics.world.gen.WorldGenClay;
-import electrodynamics.world.gen.WorldGenLimestone;
 import electrodynamics.world.gen.WorldGenNear;
 import electrodynamics.world.gen.WorldGenRubberTree;
 import electrodynamics.world.gen.WorldGenWormwood;
@@ -143,8 +142,6 @@ public class EDModuleWorld extends EDModule {
 		//MinecraftForge.TERRAIN_GEN_BUS.register(new electrodynamics.world.handler.CreateDecoratorHandler());
 		// Wolframite
 		GameRegistry.registerWorldGenerator(new WorldGenNear(BlockIDs.BLOCK_ORE_ID, Ore.WOLFRAMITE.ordinal(), 4, 4).setTarget(Block.lavaStill.blockID, 0).setYValues(6, 16));
-		// Limestone
-		GameRegistry.registerWorldGenerator(new WorldGenLimestone(BlockIDs.BLOCK_DECORATIVE_ID, 10));
 		// Voidstone
 		GameRegistry.registerWorldGenerator(new WorldGenBlock(BlockIDs.BLOCK_ORE_ID, Ore.VOIDSTONE.ordinal(), 1, 10) {
 			@Override

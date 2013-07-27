@@ -7,16 +7,17 @@ import electrodynamics.util.BlockUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.ForgeDirection;
 
 public class FeatureGasPocket extends FeatureBase {
 
 	public FeatureGasPocket() {
-		super("Gas Pocket", false);
+		super("Gas Pocket");
 	}
 
 	@Override
-	public boolean generateFeature(Random random, int chunkX, int chunkZ, World world, boolean newGeneration) {
+	public void generateFeature(Random random, int chunkX, int chunkZ, World world, boolean newGeneration) {
 		int x = (chunkX * 16) + random.nextInt(16);
 		int y = random.nextInt(64);
 		int z = (chunkZ * 16) + random.nextInt(16);
@@ -30,7 +31,7 @@ public class FeatureGasPocket extends FeatureBase {
 			}
 		}
 		
-		return false;
+		return;
 	}
 
 	private boolean generateGasPod(World world, int x, int y, int z) {
@@ -81,6 +82,11 @@ public class FeatureGasPocket extends FeatureBase {
 		x += side.offsetX;
 		y += side.offsetY;
 		z += side.offsetZ;
+	}
+
+	@Override
+	public void handleConfig(Configuration config) {
+		
 	}
 	
 }

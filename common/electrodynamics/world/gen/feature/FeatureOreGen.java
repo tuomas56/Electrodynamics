@@ -19,7 +19,7 @@ public class FeatureOreGen extends FeatureBase {
 	
 	public static void registerFeatureOreGen(Configuration config, FeatureType type, Ore ore, int clusterSize, int count, int minY, int maxY) {
 		int[] generationData = getOreGenerationSettings(config, type, ore, clusterSize, count, minY, maxY);
-		FeatureHandler.getInstance().registerFeature(type, new FeatureOreGen("ORE_" + ore.toString(), new WorldGenOre(ore.toItemStack(), generationData[0]), generationData[1], generationData[2], generationData[3], false));
+		FeatureHandler.getInstance().registerFeature(type, new FeatureOreGen("ORE_" + ore.toString(), new WorldGenOre(ore.toItemStack(), generationData[0]), generationData[1], generationData[2], generationData[3]));
 	}
 	
 	private static int[] getOreGenerationSettings(Configuration config, FeatureType type, Ore ore, int clusterSize, int count, int minY, int maxY) {
@@ -31,8 +31,8 @@ public class FeatureOreGen extends FeatureBase {
 		return new int[] {featureClusterSize.getInt(clusterSize), featureGenCount.getInt(count), featureMinimumY.getInt(minY), featureMaximumY.getInt(maxY)};
 	}
 	
-	public FeatureOreGen(String name, WorldGenerator worldGenerator, int count, int minY, int maxY, boolean regenerate) {
-		super(name, regenerate);
+	public FeatureOreGen(String name, WorldGenerator worldGenerator, int count, int minY, int maxY) {
+		super(name);
 		
 		this.worldGenerator = worldGenerator;
 		this.count = count;
@@ -41,9 +41,9 @@ public class FeatureOreGen extends FeatureBase {
 	}
 
 	@Override
-	public boolean generateFeature(Random random, int chunkX, int chunkZ, World world, boolean newGeneration) {
-		if (!newGeneration && !regenerate) {
-			return false;
+	public void generateFeature(Random random, int chunkX, int chunkZ, World world, boolean newGeneration) {
+		if (!newGeneration) {
+			return;
 		}
 		
 		int blockX = chunkX * 16;
@@ -54,7 +54,7 @@ public class FeatureOreGen extends FeatureBase {
 			boolean onList = validBiomes.contains(biomeName);
 			
 			if (type == 1 && !onList || type == 2 && onList) {
-				return false;
+				return;
 			}
 		}
 		
@@ -65,7 +65,13 @@ public class FeatureOreGen extends FeatureBase {
 			worldGenerator.generate(world, random, x, y, z);
 		}
 		
-		return true;
+		return;
+	}
+
+	@Override
+	public void handleConfig(Configuration config) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -1,26 +1,26 @@
-package electrodynamics.world.gen;
+package electrodynamics.world.gen.feature;
 
 import java.util.Random;
+
+import electrodynamics.block.EDBlocks;
+import electrodynamics.lib.block.Decorative;
+import electrodynamics.world.gen.feature.FeatureHandler.FeatureType;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.chunk.IChunkProvider;
-import cpw.mods.fml.common.IWorldGenerator;
+import net.minecraftforge.common.Configuration;
 
-public class WorldGenLimestone implements IWorldGenerator {
-
-	public int blockID;
+public class FeatureLimestone extends FeatureBase {
 
 	public int radius;
-
-	public WorldGenLimestone(int id, int num) {
-		this.blockID = id;
-		this.radius = num;
+	
+	public FeatureLimestone(String name) {
+		super(name);
 	}
 
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+	public void generateFeature(Random random, int chunkX, int chunkZ, World world, boolean newGeneration) {
 		if (world.getWorldInfo().getTerrainType() == WorldType.FLAT) {
 			return;
 		}
@@ -47,7 +47,7 @@ public class WorldGenLimestone implements IWorldGenerator {
 									int j2 = world.getBlockId(i1, i2, j1);
 
 									if (j2 == Block.dirt.blockID || j2 == Block.stone.blockID) {
-										world.setBlock(i1, i2, j1, this.blockID, 0, 2);
+										world.setBlock(i1, i2, j1, Decorative.LIMESTONE.ordinal(), 0, 2);
 									}
 								}
 							}
@@ -58,4 +58,8 @@ public class WorldGenLimestone implements IWorldGenerator {
 		}
 	}
 
+	public void handleConfig(Configuration config) {
+		this.radius = config.get(FeatureHandler.getFeatureCategory(FeatureType.LIMESTONE), "radius", 25).getInt(25);
+	}
+	
 }
