@@ -23,6 +23,7 @@ public class GuiTeslaModule extends GuiElectrodynamics {
 		this.player = player;
 	}
 
+	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		if (this.inventorySlots.getSlot(0).getHasStack()) {
 			ItemStack stack = this.inventorySlots.getSlot(0).getStack();
@@ -33,6 +34,7 @@ public class GuiTeslaModule extends GuiElectrodynamics {
 		}
 	}
 
+	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.func_110434_K().func_110577_a(GuiHandler.GuiType.TESLA_MODULE.texture.resource);

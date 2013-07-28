@@ -1,6 +1,7 @@
 package electrodynamics.recipe.vanilla;
 
 import electrodynamics.item.EDItems;
+import electrodynamics.item.ItemPowerTool;
 import electrodynamics.item.ItemRedstoneEmitter;
 import electrodynamics.util.InventoryUtil;
 import net.minecraft.block.Block;
@@ -32,7 +33,7 @@ public class IRecipeRedstoneEmitter implements IRecipe {
 		ItemStack[] inv = InventoryUtil.getInvArrayFromInventory(inventory);
 		ItemStack remote = InventoryUtil.getFirstOccuranceOf(inv, new ItemStack(EDItems.itemRedstoneEmitter, 1, OreDictionary.WILDCARD_VALUE));
 		int numOfRedstone = InventoryUtil.getAmountInInventory(inv, new ItemStack(Item.redstone)) + (InventoryUtil.getAmountInInventory(inv, new ItemStack(Block.blockRedstone)) * 9);
-		int newPowerLevel = ItemRedstoneEmitter.getCharge(remote) + numOfRedstone;
+		int newPowerLevel = ItemPowerTool.getCharge(remote) + numOfRedstone;
 		
 		return ItemRedstoneEmitter.getRemote(newPowerLevel);
 	}

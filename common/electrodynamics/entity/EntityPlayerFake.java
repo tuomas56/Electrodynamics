@@ -18,10 +18,12 @@ public class EntityPlayerFake extends EntityPlayer {
 	public void sendChatToPlayer(String msg) {
 	}
 
+	@Override
 	public boolean canCommandSenderUseCommand(int id, String msg) {
 		return false;
 	}
 
+	@Override
 	public ChunkCoordinates getPlayerCoordinates() {
 		return null;
 	}
@@ -31,13 +33,16 @@ public class EntityPlayerFake extends EntityPlayer {
 		this.inventory.setInventorySlotContents(0, stack);
 	}
 
+	@Override
 	public void openGui(Object mod, int id, World world, int x, int y, int z) {
 	}
 
+	@Override
 	public double getDistanceSq(double x, double y, double z) {
 		return 0.0D;
 	}
 
+	@Override
 	public double getDistance(double x, double y, double z) {
 		return 0.0D;
 	}

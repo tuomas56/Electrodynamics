@@ -24,6 +24,7 @@ public class BlockRubberSapling extends BlockSapling {
 		setCreativeTab(CreativeTabED.resource);
 	}
 	
+	@Override
 	public void markOrGrowMarked(World world, int x, int y, int z, Random random) {
 		int l = world.getBlockMetadata(x, y, z);
 

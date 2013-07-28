@@ -23,7 +23,8 @@ public class WorldGenClayPatched extends WorldGenerator
         this.numberOfBlocks = par1;
     }
 
-    public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
+    @Override
+	public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
         if (par1World.getBlockMaterial(par3, par4, par5) != Material.water)
         {

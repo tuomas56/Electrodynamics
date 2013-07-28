@@ -46,7 +46,7 @@ public class EDLanguage {
 	}
 	
 	private void loadDefaultLanguage(String lang) {
-		Properties langFile = new Properties((Properties) this.languageMapping.get(lang));
+		Properties langFile = new Properties(this.languageMapping.get(lang));
 		InputStreamReader reader = null;
 		
 		try {
@@ -77,7 +77,7 @@ public class EDLanguage {
 	public String translate(String tag, String lang) {
 		if (languageMapping.containsKey(lang)) {
 			try {
-				return ((Properties)languageMapping.get(lang)).getProperty(tag);
+				return languageMapping.get(lang).getProperty(tag);
 			} catch(Exception ex) {
 				printLanguageError(lang, tag);
 				return lang + ": " + tag;

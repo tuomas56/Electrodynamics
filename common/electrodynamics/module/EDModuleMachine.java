@@ -250,10 +250,12 @@ public class EDModuleMachine extends EDModule {
 		MinecraftForgeClient.registerItemRenderer(EDBlocks.blockMachine.blockID, new RenderItemMachine());
 	}
 
+	@Override
 	public EnumSet<Module> dependencies() {
 		return EnumSet.of(Module.CORE, Module.WORLD);
 	}
 
+	@Override
 	public void postInit() {
 		// Register TickHandler for MBS validation.
 		TickRegistry.registerTickHandler(TickHandlerMBS.instance(), Side.SERVER);

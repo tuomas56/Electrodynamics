@@ -25,6 +25,7 @@ public class WorldCoordinate {
 		return new WorldCoordinate( access, x + deltaX, y + deltaY, z + deltaZ );
 	}
 	
+	@Override
 	public String toString() {
 		return ("World Coordinates: " + x + ":" + y + ":" + z);
 	}

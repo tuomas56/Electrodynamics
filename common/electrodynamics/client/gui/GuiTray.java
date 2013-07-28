@@ -1,6 +1,5 @@
 package electrodynamics.client.gui;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.StatCollector;
 
@@ -24,12 +23,14 @@ public class GuiTray extends GuiElectrodynamics {
 		this.player = player;
 	}
 
+	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		String s = EDLanguage.getInstance().translate(Strings.GUI_TRAY);
 		this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
 		this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
 	}
 
+	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.func_110434_K().func_110577_a(GuiHandler.GuiType.METAL_TRAY.texture.resource);

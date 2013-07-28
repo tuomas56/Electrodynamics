@@ -5,7 +5,6 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -54,12 +53,14 @@ public class BlockUtility extends BlockContainer {
 		}
 	}
 	
+	@Override
 	public boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection side) {
 		TileEntityMachine tile = (TileEntityMachine) world.getBlockTileEntity(x, y, z);
 		
 		return (!(side == tile.rotation));
     }
 	
+	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
 		if (world.isRemote) return true;
 		
@@ -73,6 +74,7 @@ public class BlockUtility extends BlockContainer {
 		return false;
 	}
 	
+	@Override
 	public void breakBlock(World world, int x, int y, int z, int id, int meta) {
 		TileEntity tile = world.getBlockTileEntity(x, y, z);
 		
@@ -98,6 +100,7 @@ public class BlockUtility extends BlockContainer {
 		return RenderBlockUtility.renderID;
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int side) {
 		TileEntityMachine tile = (TileEntityMachine) world.getBlockTileEntity(x, y, z);
@@ -114,6 +117,7 @@ public class BlockUtility extends BlockContainer {
 		}
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side, int meta) {
 		ForgeDirection sideDir = ForgeDirection.getOrientation(side);
@@ -127,6 +131,7 @@ public class BlockUtility extends BlockContainer {
 		}
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister register) {
 		this.textures = new Icon[UtilityBlock.values().length][3];
@@ -144,6 +149,7 @@ public class BlockUtility extends BlockContainer {
 	}
 	
 	/* IGNORE */
+	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return null;
 	}

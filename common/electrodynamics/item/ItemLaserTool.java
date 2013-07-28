@@ -43,6 +43,7 @@ public abstract class ItemLaserTool extends ItemPowerTool {
 		return stack;
 	}
 	
+	@Override
 	public void onUsingItemTick(ItemStack stack, EntityPlayer player, int count) {
 		String id = "BEAM: " + player.username;
 		
@@ -60,6 +61,7 @@ public abstract class ItemLaserTool extends ItemPowerTool {
 		}
     }
 	
+	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int count) {
 		String id = "BEAM: " + player.username;
 		

@@ -38,7 +38,7 @@ public class XRayOverlayHandler {
 		GL11.glDisable(GL11.GL_LIGHTING);
 		
 		World world = entity.worldObj;
-		int range = (int) (24 / 2);
+		int range = 24 / 2;
 		
 		List<Entity> nearbyEntities = world.getEntitiesWithinAABBExcludingEntity(entity, entity.boundingBox.expand(range, range, range));
 

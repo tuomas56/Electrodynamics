@@ -77,10 +77,12 @@ public class BlockWormwood extends BlockFlower implements IPlantable {
 		return ItemIDs.ITEM_COMPONENT_ID;
 	}
 
+	@Override
 	public void breakBlock(World world, int x, int y, int z, int id, int meta) {
 		dropBlockAsItem(world, x, y, z, id, meta);
 	}
 	
+	@Override
 	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int id, int metadata) {
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		int type = getTypeForBiome( world.getBiomeGenForCoords( x, z ) );
@@ -99,6 +101,7 @@ public class BlockWormwood extends BlockFlower implements IPlantable {
 		return ret;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister icon) {
 		textures = new Icon[10];
@@ -115,6 +118,7 @@ public class BlockWormwood extends BlockFlower implements IPlantable {
 		textures[9] = icon.registerIcon( ModInfo.ICON_PREFIX + "world/plant/plantWormwood_7_dry_2" );
 	}
 
+	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubBlocks(int id, CreativeTabs tab, List list) {
 		list.add( new ItemStack( id, 1, GROWN_NORMAL ) );

@@ -46,6 +46,7 @@ public class BlockTreetap extends BlockContainer {
 		return true;
 	}
 
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
 		TileEntityTreetap tile = (TileEntityTreetap) world.getBlockTileEntity(x, y, z);
 		
@@ -76,7 +77,7 @@ public class BlockTreetap extends BlockContainer {
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		TileEntityTreetap tile = (TileEntityTreetap) world.getBlockTileEntity(x, y, z);
 
-		if (tile != null && tile instanceof TileEntityTreetap) {
+		if (tile != null) {
 			tile.tick();
 		}
 	}
@@ -96,6 +97,7 @@ public class BlockTreetap extends BlockContainer {
 		return false;
 	}
 
+	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new TileEntityTreetap();
 	}

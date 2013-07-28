@@ -35,6 +35,7 @@ public class BlockTable extends BlockContainer implements IAcceptsTool {
 		setBlockBounds(0, 0, 0, 1, 0.87F, 1);
 	}
 
+	@Override
 	public int damageDropped(int damage) {
 		return damage;
 	}
@@ -66,6 +67,7 @@ public class BlockTable extends BlockContainer implements IAcceptsTool {
 		return super.getLightValue(world, x, y, z);
 	}
 	
+	@Override
 	public void breakBlock(World world, int x, int y, int z, int i1, int i2) {
 		TileEntityTable table = (TileEntityTable) world.getBlockTileEntity(x, y, z);
 
@@ -100,14 +102,17 @@ public class BlockTable extends BlockContainer implements IAcceptsTool {
 		}
 	}
 
+	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new TileEntityTable();
 	}
 
+	@Override
 	public int idPicked(World world, int x, int y, int z) {
 		return this.blockID;
 	}
 
+	@Override
 	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z);
 	}

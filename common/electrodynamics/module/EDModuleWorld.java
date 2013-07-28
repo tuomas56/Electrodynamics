@@ -35,7 +35,6 @@ import electrodynamics.client.render.block.RenderBlockDecorative;
 import electrodynamics.client.render.block.RenderBlockOre;
 import electrodynamics.client.render.block.RenderBlockStructure;
 import electrodynamics.client.render.tileentity.RenderTreetap;
-import electrodynamics.core.EDLogger;
 import electrodynamics.core.handler.IconHandler;
 import electrodynamics.core.lang.EDLanguage;
 import electrodynamics.lib.block.BlockIDs;

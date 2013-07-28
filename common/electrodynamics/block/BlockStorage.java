@@ -21,6 +21,7 @@ public class BlockStorage extends Block {
 		setCreativeTab(CreativeTabED.resource);
 	}
 	
+	@Override
 	public int damageDropped(int damage) {
 		return damage;
 	}
@@ -48,10 +49,12 @@ public class BlockStorage extends Block {
 	}
 	
 	
+	@Override
 	public int idPicked(World world, int x, int y, int z) {
 		return this.blockID;
 	}
 
+	@Override
 	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z);
 	}

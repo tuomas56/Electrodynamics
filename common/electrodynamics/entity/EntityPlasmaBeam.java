@@ -9,6 +9,7 @@ public class EntityPlasmaBeam extends EntityBeam {
 		super(world, x, y, z, x + 1, y, z, age);
 	}
 
+	@Override
 	public void onUpdate() {
 		super.onUpdate();
 		

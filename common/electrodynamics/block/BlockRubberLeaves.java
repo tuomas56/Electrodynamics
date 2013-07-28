@@ -31,14 +31,17 @@ public class BlockRubberLeaves extends BlockLeaves {
 		setCreativeTab(CreativeTabED.resource);
 	}
 
+	@Override
 	public int idDropped(int i, Random d, int k) {
 		return BlockIDs.BLOCK_RUBBER_SAPLING_ID;
 	}
 
+	@Override
 	public int quantityDropped(Random rand) {
 		return rand.nextInt(30) == 0 ? 1 : 0;
 	}
 	
+	@Override
 	public int damageDropped(int meta) {
 		return 0;
 	}
@@ -94,6 +97,7 @@ public class BlockRubberLeaves extends BlockLeaves {
 		list.add(new ItemStack(id, 1, 0));
 	}
 
+	@Override
 	public int getFlammability(IBlockAccess world, int x, int y, int z, int metadata, ForgeDirection face) {
 		return 150;
 	}

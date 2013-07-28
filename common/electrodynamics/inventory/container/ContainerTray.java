@@ -1,11 +1,9 @@
 package electrodynamics.inventory.container;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import electrodynamics.inventory.InventoryItem;
-import electrodynamics.util.InventoryUtil;
 
 public class ContainerTray extends ContainerInventory {
 
@@ -31,6 +29,7 @@ public class ContainerTray extends ContainerInventory {
 		}
 	}
 	
+	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		if (par2 == this.activeSlot) return null;
 		

@@ -102,7 +102,7 @@ public class FXLightningBoltCommon {
 		this.segments = new ArrayList<Segment>();
 		Segment prev = null;
 		for (Iterator<Segment> iterator = oldsegments.iterator(); iterator.hasNext();) {
-			Segment segment = (Segment) iterator.next();
+			Segment segment = iterator.next();
 			prev = segment.prev;
 			EDVector3 subsegment = segment.diff.copy().scale(1.0F / splits);
 			BoltPoint[] newpoints = new BoltPoint[splits + 1];
@@ -157,11 +157,11 @@ public class FXLightningBoltCommon {
 		int lastactiveseg = 0;
 		float splitresistance = 0.0F;
 		for (Iterator<Segment> iterator = this.segments.iterator(); iterator.hasNext();) {
-			Segment segment = (Segment) iterator.next();
+			Segment segment = iterator.next();
 			if (segment.splitno > lastsplitcalc) {
 				lastactivesegment.put(Integer.valueOf(lastsplitcalc), Integer.valueOf(lastactiveseg));
 				lastsplitcalc = segment.splitno;
-				lastactiveseg = ((Integer) lastactivesegment.get(this.splitparents.get(Integer.valueOf(segment.splitno)))).intValue();
+				lastactiveseg = lastactivesegment.get(this.splitparents.get(Integer.valueOf(segment.splitno))).intValue();
 				splitresistance = lastactiveseg >= segment.segmentno ? 0.0F : 50.0F;
 			}
 			if (splitresistance < 40.0F * segment.light) {
@@ -171,13 +171,13 @@ public class FXLightningBoltCommon {
 
 		lastactivesegment.put(Integer.valueOf(lastsplitcalc), Integer.valueOf(lastactiveseg));
 		lastsplitcalc = 0;
-		lastactiveseg = ((Integer) lastactivesegment.get(Integer.valueOf(0))).intValue();
+		lastactiveseg = lastactivesegment.get(Integer.valueOf(0)).intValue();
 		Segment segment;
 		for (Iterator<Segment> iterator = this.segments.iterator(); iterator.hasNext(); segment.calcEndDiffs()) {
-			segment = (Segment) iterator.next();
+			segment = iterator.next();
 			if (lastsplitcalc != segment.splitno) {
 				lastsplitcalc = segment.splitno;
-				lastactiveseg = ((Integer) lastactivesegment.get(Integer.valueOf(segment.splitno))).intValue();
+				lastactiveseg = lastactivesegment.get(Integer.valueOf(segment.splitno)).intValue();
 			}
 			if (segment.segmentno > lastactiveseg) {
 				iterator.remove();
@@ -252,6 +252,7 @@ public class FXLightningBoltCommon {
 			}
 		}
 
+		@Override
 		public String toString() {
 			return this.startpoint.point.toString() + " " + this.endpoint.point.toString();
 		}
@@ -273,6 +274,7 @@ public class FXLightningBoltCommon {
 	public class SegmentLightSorter implements Comparator<Segment> {
 		final FXLightningBoltCommon this$0;
 
+		@Override
 		public int compare(FXLightningBoltCommon.Segment o1, FXLightningBoltCommon.Segment o2) {
 			return Float.compare(o2.light, o1.light);
 		}
@@ -285,6 +287,7 @@ public class FXLightningBoltCommon {
 	public class SegmentSorter implements Comparator<Segment> {
 		final FXLightningBoltCommon this$0;
 
+		@Override
 		public int compare(FXLightningBoltCommon.Segment o1, FXLightningBoltCommon.Segment o2) {
 			int comp = Integer.valueOf(o1.splitno).compareTo(Integer.valueOf(o2.splitno));
 			if (comp == 0) {

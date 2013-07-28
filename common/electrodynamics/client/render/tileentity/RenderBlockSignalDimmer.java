@@ -1,14 +1,11 @@
 package electrodynamics.client.render.tileentity;
 
-import java.util.Map.Entry;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
 import electrodynamics.client.model.ModelSignalDimmer;
 import electrodynamics.lib.client.Textures;
-import electrodynamics.tileentity.Connection;
 import electrodynamics.tileentity.TileEntitySignalDimmer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;

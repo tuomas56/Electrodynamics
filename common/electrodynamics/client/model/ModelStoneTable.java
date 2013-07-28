@@ -46,6 +46,7 @@ public class ModelStoneTable extends ModelTable {
 		stone.mirror = true;
 	}
 
+	@Override
 	public void render(float f5) {
 		leg1.render(f5);
 		leg2.render(f5);

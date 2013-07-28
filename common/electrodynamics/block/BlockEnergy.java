@@ -1,28 +1,19 @@
 package electrodynamics.block;
 
 import java.util.List;
-import java.util.Random;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import electrodynamics.core.CreativeTabED;
 import electrodynamics.core.EDLogger;
-import electrodynamics.interfaces.IClientDisplay;
 import electrodynamics.lib.block.EnergyProduction;
 import electrodynamics.lib.block.Machine;
 import electrodynamics.tileentity.TileEntityEDRoot;
-import electrodynamics.tileentity.machine.TileEntityMachine;
-import electrodynamics.tileentity.structure.TileEntityStructure;
-import electrodynamics.util.PlayerUtil;
 
 public class BlockEnergy extends BlockContainer {
 	
@@ -34,6 +25,7 @@ public class BlockEnergy extends BlockContainer {
 		setCreativeTab(CreativeTabED.block);
 	}
 
+	@Override
 	public int damageDropped(int damage) {
 		return damage;
 	}
@@ -99,10 +91,12 @@ public class BlockEnergy extends BlockContainer {
 		return textures[meta];
 	}
 	
+	@Override
 	public int idPicked(World world, int x, int y, int z) {
 		return this.blockID;
 	}
 
+	@Override
 	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z);
 	}

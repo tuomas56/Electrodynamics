@@ -24,6 +24,7 @@ public class ItemBlockTreetap extends ItemBlock {
 		setHasSubtypes(true);
 	}
 	
+	@Override
 	public Icon getIconFromDamage(int meta) {
 		return texture;
 	}
@@ -50,6 +51,7 @@ public class ItemBlockTreetap extends ItemBlock {
 		return true;
 	}
 	
+	@Override
 	public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
 		ForgeDirection sideForge = ForgeDirection.getOrientation(side);
 		int xOrig = x - sideForge.offsetX;

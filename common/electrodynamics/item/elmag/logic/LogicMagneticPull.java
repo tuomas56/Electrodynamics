@@ -38,7 +38,7 @@ public class LogicMagneticPull implements IArmorLogic {
 
 					double d0 = 8.0D;
 					double d1 = (player.posX - item.posX) / d0;
-					double d2 = (player.posY + (double) player.getEyeHeight() - item.posY) / d0;
+					double d2 = (player.posY + player.getEyeHeight() - item.posY) / d0;
 					double d3 = (player.posZ - item.posZ) / d0;
 					double d4 = Math.sqrt(d1 * d1 + d2 * d2 + d3 * d3);
 					double d5 = 1.0D - d4;

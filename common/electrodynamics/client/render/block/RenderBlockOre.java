@@ -67,10 +67,12 @@ public class RenderBlockOre extends BlockRenderer implements ISimpleBlockRenderi
 	    return true;
 	}
 
+	@Override
 	public boolean shouldRender3DInInventory() {
 		return true;
 	}
 
+	@Override
 	public int getRenderId() {
 		return renderID;
 	}

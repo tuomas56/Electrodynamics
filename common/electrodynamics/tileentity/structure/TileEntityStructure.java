@@ -1,14 +1,10 @@
 package electrodynamics.tileentity.structure;
 
-import java.util.HashMap;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import electrodynamics.interfaces.IRedstoneUser;
 import electrodynamics.mbs.MBSManager;
 import electrodynamics.mbs.MultiBlockStructure;
 import electrodynamics.network.PacketUtils;
@@ -101,6 +97,7 @@ public abstract class TileEntityStructure extends TileEntityGeneric {
 		nbt.setTag( "structure", tag );
 	}
 
+	@Override
 	@SuppressWarnings("static-access")
 	@SideOnly(Side.CLIENT)
     public AxisAlignedBB getRenderBoundingBox() {

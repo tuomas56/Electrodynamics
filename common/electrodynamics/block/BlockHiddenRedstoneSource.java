@@ -34,10 +34,12 @@ public class BlockHiddenRedstoneSource extends BlockContainer {
 		return -1;
 	}
 	
+	@Override
 	public boolean canProvidePower() {
 		return true;
 	}
 
+	@Override
 	public int isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int side) {
 		return 15;
 	}

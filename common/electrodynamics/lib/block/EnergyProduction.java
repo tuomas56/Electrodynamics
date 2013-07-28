@@ -4,9 +4,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import electrodynamics.lib.core.ModInfo;
 import electrodynamics.lib.core.Strings;
-import electrodynamics.tileentity.machine.TileEntityBasicKiln;
-import electrodynamics.tileentity.machine.TileEntityBasicSieve;
-import electrodynamics.tileentity.machine.TileEntitySinteringOven;
 import electrodynamics.tileentity.machine.energy.TileEntitySolarPanel;
 
 public enum EnergyProduction {

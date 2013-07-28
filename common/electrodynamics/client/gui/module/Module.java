@@ -1,7 +1,6 @@
 package electrodynamics.client.gui.module;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import electrodynamics.client.render.util.RenderUtil;
 
 public class Module {

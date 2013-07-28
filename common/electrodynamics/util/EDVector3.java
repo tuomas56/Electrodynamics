@@ -134,7 +134,8 @@ public class EDVector3
     return EDMatrix4.rotationMat(angle, axis).translate(this);
   }
 
-  public String toString()
+  @Override
+public String toString()
   {
     return "[" + this.x + "," + this.y + "," + this.z + "]";
   }
@@ -169,7 +170,8 @@ public class EDVector3
     return MathHelper.sqrt_double(var2 * var2 + var4 * var4 + var6 * var6);
   }
 
-  public boolean equals(Object obj)
+  @Override
+public boolean equals(Object obj)
   {
     if ((obj instanceof EDVector3)) {
       EDVector3 comp = (EDVector3)obj;

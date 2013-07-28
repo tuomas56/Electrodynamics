@@ -38,6 +38,7 @@ public class ModelTreeTap extends ModelTechne {
 		setRotation(tapHook, 0.2617994F, 0F, 0F);
 	}
 
+	@Override
 	public void render(float f5) {
 		tapBottom.render(f5);
 		tapSide1.render(f5);

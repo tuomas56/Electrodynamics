@@ -7,8 +7,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import electrodynamics.lib.block.EnergyProduction;
-import electrodynamics.lib.block.Machine;
-import electrodynamics.tileentity.TileConnection;
 import electrodynamics.tileentity.TileEntityEDRoot;
 
 public class ItemBlockEnergy extends ItemBlock {
@@ -43,6 +41,7 @@ public class ItemBlockEnergy extends ItemBlock {
 		return true;
 	}
 	
+	@Override
 	public boolean canPlaceItemBlockOnSide(World world, int x, int y, int z, int side, EntityPlayer player, ItemStack stack) {
 		if (stack.getItemDamage() == EnergyProduction.SOLAR_PANEL.ordinal()) {
 			ForgeDirection sideForge = ForgeDirection.getOrientation(side);

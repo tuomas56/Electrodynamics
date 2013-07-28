@@ -59,6 +59,7 @@ public class ModelSolarPanel extends ModelTechne {
 		setRotation(solarPanelPipe2, 0F, 0F, 1.570796F);
 	}
 
+	@Override
 	public void render(float f5) {
 		solarPanelPipeConnector2.render(f5);
 		solarPanel.render(f5);

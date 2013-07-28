@@ -2,7 +2,6 @@ package electrodynamics.world.gen.feature;
 
 import java.util.Random;
 
-import electrodynamics.block.EDBlocks;
 import electrodynamics.lib.block.Decorative;
 import electrodynamics.world.gen.feature.FeatureHandler.FeatureType;
 
@@ -58,6 +57,7 @@ public class FeatureLimestone extends FeatureBase {
 		}
 	}
 
+	@Override
 	public void handleConfig(Configuration config) {
 		this.radius = config.get(FeatureHandler.getFeatureCategory(FeatureType.LIMESTONE), "radius", 25).getInt(25);
 	}

@@ -2,7 +2,6 @@ package electrodynamics.addons.computercraft;
 
 import java.io.File;
 
-import cpw.mods.fml.common.Loader;
 import dan200.turtle.api.TurtleAPI;
 
 import net.minecraftforge.common.Configuration;
@@ -18,6 +17,7 @@ public class EDAddonComputerCraft extends EDAddon {
 	public static boolean canFormMBS = true;
 	public static boolean canTakeFromTable = true;
 	
+	@Override
 	public void init() {
 		Configuration config = new Configuration(new File(Electrodynamics.instance.configFolder, ModInfo.GENERIC_MOD_ID + ".cfg"));
 		EDAddonComputerCraft.canUseTable = config.get(CATEGORY_CC, "canUseTable", true, "Can the turtle smash items via smashing table.").getBoolean(true);

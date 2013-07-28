@@ -31,7 +31,7 @@ public class EntityRenderUtil {
 	}
 	
 	public static float handleRotationFloat(EntityLiving living, float partial) {
-        return (float)living.ticksExisted + partial;
+        return living.ticksExisted + partial;
     }
 	
 }

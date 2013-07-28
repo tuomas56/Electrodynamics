@@ -52,6 +52,7 @@ public class ModelChicken extends ModelTechne {
 		setRotation(chickenLegRight, 0.1745329F, 0.3490659F, 0F);
 	}
 
+	@Override
 	public void render(float f5) {
 		chicken.render(f5);
 		chickenWingRight.render(f5);

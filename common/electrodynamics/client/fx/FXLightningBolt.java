@@ -15,7 +15,6 @@ import org.lwjgl.opengl.GL11;
 
 import electrodynamics.client.fx.FXLightningBoltCommon.Segment;
 import electrodynamics.lib.client.Textures;
-import electrodynamics.lib.core.ModInfo;
 import electrodynamics.util.EDVector3;
 
 public class FXLightningBolt extends EntityFX {
@@ -111,6 +110,7 @@ public class FXLightningBolt extends EntityFX {
 		this.main.multiplier = m;
 	}
 
+	@Override
 	public void onUpdate() {
 		this.main.onUpdate();
 		if (this.main.particleAge >= this.main.particleMaxAge) {
@@ -137,7 +137,7 @@ public class FXLightningBolt extends EntityFX {
 
 		int renderlength = (int) ((this.main.particleAge + partialframe + (int) (this.main.length * 3.0F)) / (int) (this.main.length * 3.0F) * this.main.numsegments0);
 		for (Iterator<Segment> iterator = this.main.segments.iterator(); iterator.hasNext();) {
-			FXLightningBoltCommon.Segment rendersegment = (FXLightningBoltCommon.Segment) iterator.next();
+			FXLightningBoltCommon.Segment rendersegment = iterator.next();
 			if (rendersegment.segmentno <= renderlength) {
 				float width = 0.03F * (getRelativeViewVector(rendersegment.startpoint.point).length() / 10.0F + 1.0F) * (1.0F + rendersegment.light) * 0.5F;
 				if (width > 0.05F)
@@ -185,6 +185,7 @@ public class FXLightningBolt extends EntityFX {
 		}
 	}
 
+	@Override
 	public void renderParticle(Tessellator tessellator, float partialframe, float cosyaw, float cospitch, float sinyaw, float sinsinpitch, float cossinpitch) {
 		EntityPlayer renderentity = ModLoader.getMinecraftInstance().thePlayer;
 		int visibleDistance = 100;

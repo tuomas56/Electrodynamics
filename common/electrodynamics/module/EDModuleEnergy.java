@@ -1,12 +1,9 @@
 package electrodynamics.module;
 
-import net.minecraft.tileentity.TileEntityRecordPlayer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import electrodynamics.block.BlockEnergy;
-import electrodynamics.block.BlockGas;
 import electrodynamics.block.EDBlocks;
 import electrodynamics.block.item.ItemBlockEnergy;
 import electrodynamics.client.render.item.RenderItemEnergy;

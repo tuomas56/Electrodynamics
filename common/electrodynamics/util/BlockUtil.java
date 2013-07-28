@@ -53,12 +53,12 @@ public class BlockUtil {
 			float f = random.nextFloat() * 0.9F + 0.1F;
 			float f1 = random.nextFloat() * 0.9F + 0.1F;
 			float f2 = random.nextFloat() * 0.9F + 0.1F;
-			EntityItem entityitem = new EntityItem( world, (double) ((float) x + f), (double) ((float) y + 1.1F + f1), (double) ((float) z + f2), stack );
+			EntityItem entityitem = new EntityItem( world, x + f, y + 1.1F + f1, z + f2, stack );
 
 			float f3 = 0.05F;
-			entityitem.motionX = (double) ((float) random.nextGaussian() * f3);
-			entityitem.motionY = (double) ((float) random.nextGaussian() * f3 + 0.1F);
-			entityitem.motionZ = (double) ((float) random.nextGaussian() * f3);
+			entityitem.motionX = (float) random.nextGaussian() * f3;
+			entityitem.motionY = (float) random.nextGaussian() * f3 + 0.1F;
+			entityitem.motionZ = (float) random.nextGaussian() * f3;
 			if( stack.hasTagCompound() ) {
 				entityitem.getEntityItem().setTagCompound( (NBTTagCompound) stack.getTagCompound().copy() );
 			}
@@ -80,7 +80,7 @@ public class BlockUtil {
 	 */
 	public static void spawnExperienceOrbs(World world, int x, int y, int z, float experience) {
 		int exp = MathHelper.floor_float( experience );
-		if( exp < MathHelper.ceiling_float_int( experience ) && (float) Math.random() < experience - (float) exp ) {
+		if( exp < MathHelper.ceiling_float_int( experience ) && (float) Math.random() < experience - exp ) {
 			exp++;
 		}
 

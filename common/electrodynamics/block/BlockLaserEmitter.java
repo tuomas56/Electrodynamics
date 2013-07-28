@@ -52,6 +52,7 @@ public class BlockLaserEmitter extends BlockContainer {
 		return true;
 	}
 	
+	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new TileEntityLaserEmitter();
 	}

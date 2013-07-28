@@ -75,6 +75,7 @@ public class ModelSinteringFurnace extends ModelTechne {
 		setRotation(ovenTop, 0F, 0F, 0F);
 	}
 
+	@Override
 	public void render(float f5) {
 		ovenBase.render(f5);
 		frontRight.render(f5);

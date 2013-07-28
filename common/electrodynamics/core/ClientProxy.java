@@ -17,7 +17,6 @@ import electrodynamics.client.fx.FXLightningBolt;
 import electrodynamics.control.KeyBindingHelper;
 import electrodynamics.control.KeybindingHandler;
 import electrodynamics.core.handler.IconHandler;
-import electrodynamics.core.handler.SoundHandler;
 import electrodynamics.lib.client.FXType;
 import electrodynamics.module.ModuleManager;
 
@@ -67,6 +66,7 @@ public class ClientProxy extends CommonProxy {
 		KeyBindingRegistry.registerKeyBinding(new KeybindingHandler());
 	}
 
+	@Override
 	public void handleFXPacket(FXType type, double x, double y, double z, int[] extraInfo) {
 		switch (type) {
 			case BLOCK_BREAK: {
@@ -80,10 +80,12 @@ public class ClientProxy extends CommonProxy {
 		}
 	}
 	
+	@Override
 	public void handleSoundPacket(String sound, double x, double y, double z) {
 //		FMLClientHandler.instance().getClient().theWorld.playSound(x, y, z, sound, 1F, 1F, false);
 	}
 	
+	@Override
 	public void handleSFXPacket(int sfx, double x, double y, double z) {
 		FMLClientHandler.instance().getClient().theWorld.playAuxSFX(sfx, (int)x, (int)y, (int)z, 0);
 	}
@@ -102,17 +104,18 @@ public class ClientProxy extends CommonProxy {
 		Random rand = new Random();
 		
 		for (int l = 0; l < short1; ++l) {
-			double d6 = (double) l / ((double) short1 - 1.0D);
+			double d6 = l / (short1 - 1.0D);
 			float f = (rand.nextFloat() - 0.5F) * 0.2F;
 			float f1 = (rand.nextFloat() - 0.5F) * 0.2F;
 			float f2 = (rand.nextFloat() - 0.5F) * 0.2F;
-			double d7 = x + (x - x) * d6 + (rand.nextDouble() - 0.5D) * (double) .2 * 2.0D;
-			double d8 = y + (y - y) * d6 + rand.nextDouble() * (double) .2;
-			double d9 = z + (z - z) * d6 + (rand.nextDouble() - 0.5D) * (double) .2 * 2.0D;
-			FMLClientHandler.instance().getClient().theWorld.spawnParticle("portal", d7, d8, d9, (double) f, (double) f1, (double) f2);
+			double d7 = x + (x - x) * d6 + (rand.nextDouble() - 0.5D) * .2 * 2.0D;
+			double d8 = y + (y - y) * d6 + rand.nextDouble() * .2;
+			double d9 = z + (z - z) * d6 + (rand.nextDouble() - 0.5D) * .2 * 2.0D;
+			FMLClientHandler.instance().getClient().theWorld.spawnParticle("portal", d7, d8, d9, f, f1, f2);
 		}
 	}
 	
+	@Override
 	public void addLightningFX(World world, double x1, double y1, double z1, double x, double y, double z, long seed, int duration) {
 		FXLightningBolt bolt = new FXLightningBolt(world, x1, y1, z1, x, y, z, seed, duration);
 		bolt.defaultFractal();

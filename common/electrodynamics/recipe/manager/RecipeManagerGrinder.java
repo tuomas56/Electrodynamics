@@ -6,11 +6,8 @@ import java.util.Arrays;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
-import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
 import electrodynamics.recipe.RecipeGrinder;
 
 public class RecipeManagerGrinder {

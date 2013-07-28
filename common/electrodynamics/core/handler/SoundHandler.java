@@ -1,19 +1,8 @@
 package electrodynamics.core.handler;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import electrodynamics.Electrodynamics;
 import electrodynamics.core.EDLogger;
-import electrodynamics.lib.client.Sound;
 import electrodynamics.lib.core.ModInfo;
 
 public class SoundHandler {

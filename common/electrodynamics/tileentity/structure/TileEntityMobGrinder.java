@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -28,12 +26,10 @@ import electrodynamics.core.misc.DamageSourceBlock;
 import electrodynamics.interfaces.IRedstoneUser;
 import electrodynamics.inventory.wrapper.InventoryWrapperStack;
 import electrodynamics.lib.block.StructureComponent;
-import electrodynamics.network.packet.PacketClientData;
 import electrodynamics.recipe.RecipeGrinder;
 import electrodynamics.recipe.manager.CraftingManager;
 import electrodynamics.util.EntityReflectionWrapper;
 import electrodynamics.util.InventoryUtil;
-import electrodynamics.util.LiquidUtil;
 import electrodynamics.util.PlayerUtil;
 
 public class TileEntityMobGrinder extends TileEntityStructure implements IFluidHandler, IInventory, IRedstoneUser {

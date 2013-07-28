@@ -4,11 +4,6 @@ import java.util.ArrayList;
 
 import cpw.mods.fml.common.Loader;
 
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
-import electrodynamics.Electrodynamics;
-import electrodynamics.core.EDLogger;
-import electrodynamics.util.StringUtil;
 import electrodynamics.addons.computercraft.EDAddonComputerCraft;
 import electrodynamics.addons.thermalexpansion.EDAddonThermalExpansion;
 

@@ -11,10 +11,12 @@ public class ItemBlockGas extends ItemBlock {
 		setHasSubtypes(true);
 	}
 
+	@Override
 	public int getMetadata(int metadata) {
 		return metadata;
 	}
 
+	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
 		return Gas.get(itemstack.getItemDamage()).unlocalizedName;
 	}

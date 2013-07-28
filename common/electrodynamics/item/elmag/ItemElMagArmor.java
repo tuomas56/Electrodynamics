@@ -66,6 +66,7 @@ public class ItemElMagArmor extends ItemArmor implements IInventoryItem, IKeybou
 		return stack;
 	}
 	
+	@Override
 	public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack itemStack) {
 		InventoryItem inv = this.getInventory(itemStack);
 		ItemStack module = inv.getStackInSlot(0);

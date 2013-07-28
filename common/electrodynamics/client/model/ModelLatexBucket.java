@@ -66,6 +66,7 @@ public class ModelLatexBucket extends ModelTechne {
 		setRotation(handleRight, 0F, 0F, 0F);
 	}
 
+	@Override
 	public void render(float f5) {
 		bucketBottom.render(f5);
 		bucketBack.render(f5);

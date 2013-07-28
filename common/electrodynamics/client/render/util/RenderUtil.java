@@ -1,8 +1,5 @@
 package electrodynamics.client.render.util;
 
-import java.util.Iterator;
-import java.util.List;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.RenderHelper;
@@ -158,7 +155,7 @@ public class RenderUtil {
 			drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + maxWidth + 3, j1 + k1 + 3, j2, j2);
 
 			for (int k2 = 0; k2 < text.length; ++k2) {
-				String s1 = (String) text[k2];
+				String s1 = text[k2];
 				font.drawStringWithShadow(s1, i1, j1, -1);
 
 				if (k2 == 0) {
@@ -176,14 +173,14 @@ public class RenderUtil {
 	}
 	
 	public static void drawGradientRect(int x, int y, int w, int h, int color1, int color2) {
-		float f0 = (float) (color1 >> 24 & 255) / 255.0F;
-		float f1 = (float) (color1 >> 16 & 255) / 255.0F;
-		float f2 = (float) (color1 >> 8 & 255) / 255.0F;
-		float f3 = (float) (color1 & 255) / 255.0F;
-		float f4 = (float) (color2 >> 24 & 255) / 255.0F;
-		float f5 = (float) (color2 >> 16 & 255) / 255.0F;
-		float f6 = (float) (color2 >> 8 & 255) / 255.0F;
-		float f7 = (float) (color2 & 255) / 255.0F;
+		float f0 = (color1 >> 24 & 255) / 255.0F;
+		float f1 = (color1 >> 16 & 255) / 255.0F;
+		float f2 = (color1 >> 8 & 255) / 255.0F;
+		float f3 = (color1 & 255) / 255.0F;
+		float f4 = (color2 >> 24 & 255) / 255.0F;
+		float f5 = (color2 >> 16 & 255) / 255.0F;
+		float f6 = (color2 >> 8 & 255) / 255.0F;
+		float f7 = (color2 & 255) / 255.0F;
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
@@ -192,11 +189,11 @@ public class RenderUtil {
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
 		tessellator.setColorRGBA_F(f1, f2, f3, f0);
-		tessellator.addVertex((double) w, (double) y, (double) 1.0D);
-		tessellator.addVertex((double) x, (double) y, (double) 1.0D);
+		tessellator.addVertex(w, y, 1.0D);
+		tessellator.addVertex(x, y, 1.0D);
 		tessellator.setColorRGBA_F(f5, f6, f7, f4);
-		tessellator.addVertex((double) x, (double) h, (double) 1.0D);
-		tessellator.addVertex((double) w, (double) h, (double) 1.0D);
+		tessellator.addVertex(x, h, 1.0D);
+		tessellator.addVertex(w, h, 1.0D);
 		tessellator.draw();
 		GL11.glShadeModel(GL11.GL_FLAT);
 		GL11.glDisable(GL11.GL_BLEND);
@@ -207,10 +204,10 @@ public class RenderUtil {
 	public static void drawIcon(int par1, int par2, Icon par3Icon, int par4, int par5) {
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + par5), (double)0, (double)par3Icon.getMinU(), (double)par3Icon.getMaxV());
-        tessellator.addVertexWithUV((double)(par1 + par4), (double)(par2 + par5), (double)0, (double)par3Icon.getMaxU(), (double)par3Icon.getMaxV());
-        tessellator.addVertexWithUV((double)(par1 + par4), (double)(par2 + 0), (double)0, (double)par3Icon.getMaxU(), (double)par3Icon.getMinV());
-        tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + 0), (double)0, (double)par3Icon.getMinU(), (double)par3Icon.getMinV());
+        tessellator.addVertexWithUV(par1 + 0, par2 + par5, 0, par3Icon.getMinU(), par3Icon.getMaxV());
+        tessellator.addVertexWithUV(par1 + par4, par2 + par5, 0, par3Icon.getMaxU(), par3Icon.getMaxV());
+        tessellator.addVertexWithUV(par1 + par4, par2 + 0, 0, par3Icon.getMaxU(), par3Icon.getMinV());
+        tessellator.addVertexWithUV(par1 + 0, par2 + 0, 0, par3Icon.getMinU(), par3Icon.getMinV());
         tessellator.draw();
     }
 	

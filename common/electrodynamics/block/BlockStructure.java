@@ -96,11 +96,13 @@ public class BlockStructure extends BlockGeneric implements IAcceptsTool {
 		return RenderBlockStructure.renderID;
 	}
 
+	@Override
 	public boolean isOpaqueCube() {
         return false;
     }
 
-    public boolean renderAsNormalBlock() {
+    @Override
+	public boolean renderAsNormalBlock() {
         return false;
     }
 	
@@ -125,10 +127,12 @@ public class BlockStructure extends BlockGeneric implements IAcceptsTool {
 		TickHandlerMBS.instance().scheduleTask( world, x, y, z, doValidate );
 	}
 
+	@Override
 	public int idPicked(World world, int x, int y, int z) {
 		return this.blockID;
 	}
 
+	@Override
 	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z);
 	}

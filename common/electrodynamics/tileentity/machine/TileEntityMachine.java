@@ -27,11 +27,13 @@ public abstract class TileEntityMachine extends TileEntityEDRoot {
 		nbt.setByte("direction", (byte) rotation.ordinal());
 	}
 	
+	@Override
 	public void onUpdatePacket(NBTTagCompound nbt) {
 		if(nbt.hasKey("direction"))
 			rotation = ForgeDirection.VALID_DIRECTIONS[nbt.getByte("direction")];
 	}
 	
+	@Override
 	public void onDescriptionPacket(NBTTagCompound nbt) {
 		rotation = ForgeDirection.VALID_DIRECTIONS[nbt.getByte("direction")];
 	}

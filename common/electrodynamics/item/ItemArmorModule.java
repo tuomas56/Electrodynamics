@@ -62,6 +62,7 @@ public class ItemArmorModule extends Item implements IArmorModule {
 		}
 	}
 	
+	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		return ArmorModule.get(stack.getItemDamage()).unlocalizedName;
 	}

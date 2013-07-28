@@ -46,10 +46,12 @@ public class RenderBlockDecorative extends BlockRenderer implements ISimpleBlock
 	    return true;
 	}
 
+	@Override
 	public boolean shouldRender3DInInventory() {
 		return true;
 	}
 
+	@Override
 	public int getRenderId() {
 		return renderID;
 	}

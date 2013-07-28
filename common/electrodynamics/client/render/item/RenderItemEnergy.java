@@ -1,12 +1,7 @@
 package electrodynamics.client.render.item;
 
-import electrodynamics.client.model.ModelBasicKiln;
-import electrodynamics.lib.block.Machine;
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import electrodynamics.client.model.ModelBasicSieve;
-import electrodynamics.client.model.ModelSinteringOven;
 import electrodynamics.client.model.ModelSolarPanel;
 import electrodynamics.client.render.util.RenderUtil;
 import electrodynamics.lib.client.Textures;

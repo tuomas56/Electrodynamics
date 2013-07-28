@@ -20,10 +20,12 @@ public class BlockGas extends Block {
 		setTickRandomly(true);
 	}
 
+	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
 
+	@Override
 	public int getRenderBlockPass() {
 		return 1;
 	}

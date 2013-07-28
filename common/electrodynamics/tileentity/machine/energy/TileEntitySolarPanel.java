@@ -2,18 +2,13 @@ package electrodynamics.tileentity.machine.energy;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import electrodynamics.entity.EntityBeam;
 import electrodynamics.lib.block.EnergyProduction;
 import electrodynamics.tileentity.TileEntityEDRoot;
 import electrodynamics.util.BlockUtil;
@@ -107,7 +102,7 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 		float f2 = MathHelper.sin(yaw * 0.017453292F - (float)Math.PI);
 		float f3 = -MathHelper.cos(this.setAngle * 0.017453292F);
 		float f4 = MathHelper.sin(this.setAngle * 0.017453292F);
-        return this.worldObj.getWorldVec3Pool().getVecFromPool((double)(f2 * f3), (double)f4, (double)(f1 * f3));
+        return this.worldObj.getWorldVec3Pool().getVecFromPool(f2 * f3, f4, f1 * f3);
 	}
 	
 	public Vec3 getPanelFaceCoords() {

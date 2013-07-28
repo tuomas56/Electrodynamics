@@ -31,10 +31,12 @@ public class BlockRubberWood extends Block {
 		setCreativeTab(CreativeTabED.resource);
 	}
 	
+	@Override
 	public int quantityDropped(Random rand) {
 		return 1;
 	}
 
+	@Override
 	public int idDropped(int par1, Random par2Random, int par3) {
 		return BlockIDs.BLOCK_RUBBER_WOOD_ID;
 	}
@@ -87,10 +89,12 @@ public class BlockRubberWood extends Block {
 		return true;
 	}
 	
+	@Override
 	public int getFlammability(IBlockAccess world, int x, int y, int z, int metadata, ForgeDirection face) {
 		return 150;
 	}
 	
+	@Override
 	public Icon getIcon(int side, int meta) {
 		if (side == 0 || side == 1) {
 			return textures[0];
@@ -103,6 +107,7 @@ public class BlockRubberWood extends Block {
 		return textures[1];
 	}
 	
+	@Override
 	public void registerIcons(IconRegister register) {
 		textures = new Icon[3];
 		

@@ -26,10 +26,11 @@ public class ItemSledgeHammer extends ItemHammer {
 		texture = register.registerIcon(ModInfo.ICON_PREFIX + "tool/sledgeHammer");
 	}
 
+	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 		final int KNOCKBACK = 2;
 		
-		entity.addVelocity((double)(-MathHelper.sin(player.rotationYaw * (float)Math.PI / 180.0F) * (float)KNOCKBACK * 0.5F), 0.2D, (double)(MathHelper.cos(player.rotationYaw * (float)Math.PI / 180.0F) * (float)KNOCKBACK * 0.5F));
+		entity.addVelocity(-MathHelper.sin(player.rotationYaw * (float)Math.PI / 180.0F) * KNOCKBACK * 0.5F, 0.2D, MathHelper.cos(player.rotationYaw * (float)Math.PI / 180.0F) * KNOCKBACK * 0.5F);
 		return false;
 	}
 	

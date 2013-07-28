@@ -20,6 +20,7 @@ import electrodynamics.lib.item.ItemIDs;
 
 public class EDModuleElMag extends EDModule {
 
+	@Override
 	public void preInit() {
 		TickRegistry.registerTickHandler(new PlayerTicker(), Side.SERVER);
 		
@@ -49,10 +50,12 @@ public class EDModuleElMag extends EDModule {
 		}
 	}
 	
+	@Override
 	public void init() {
 		
 	}
 	
+	@Override
 	public void postInit() {
 		
 	}

@@ -2,8 +2,6 @@ package electrodynamics.client.render.tileentity;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Vec3;
-
 import org.lwjgl.opengl.GL11;
 
 import electrodynamics.client.model.ModelSolarPanel;

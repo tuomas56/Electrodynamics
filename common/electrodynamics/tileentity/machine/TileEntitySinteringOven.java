@@ -319,9 +319,9 @@ public class TileEntitySinteringOven extends TileEntityMachine implements IClien
 		if (this.burning) {
 			Random rand = new Random();
 			
-	        float f = (float)this.xCoord + 0.5F;
-	        float f1 = (float)this.yCoord + 0.0F + rand.nextFloat() * 6.0F / 16.0F;
-	        float f2 = (float)this.zCoord + 0.5F;
+	        float f = this.xCoord + 0.5F;
+	        float f1 = this.yCoord + 0.0F + rand.nextFloat() * 6.0F / 16.0F;
+	        float f2 = this.zCoord + 0.5F;
 	        float f4 = rand.nextFloat() * 0.6F - 0.3F;
 
 	        this.worldObj.spawnParticle("smoke", f - (f4 / 2) + f4, f1, f2 - (f4 / 2) + f4, 0D, 0D, 0D);

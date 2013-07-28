@@ -31,6 +31,7 @@ public class ModelIngot extends ModelTechne {
 		setRotation(ingotLeft, 0.2792527F, 0F, 0F);
 	}
 
+	@Override
 	public void render(float f5) {
 		ingotRight.render(f5);
 		ingotBody.render(f5);

@@ -11,10 +11,12 @@ public class ItemBlockStorage extends ItemBlock {
 		setHasSubtypes(true);
 	}
 
+	@Override
 	public int getMetadata(int metadata) {
 		return metadata;
 	}
 
+	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
 		return Storage.get(itemstack.getItemDamage()).unlocalizedName;
 	}

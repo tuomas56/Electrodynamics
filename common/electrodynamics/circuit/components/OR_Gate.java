@@ -11,6 +11,7 @@ public class OR_Gate extends Component {
 		this.pin_id_write = new int[1];
 	}
 	
+	@Override
 	public void onUpdate(ComponentContainer parent)
 	{
 		boolean input_pin[] = parent.readPin(this.pin_id_read);

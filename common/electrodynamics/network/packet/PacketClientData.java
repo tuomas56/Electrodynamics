@@ -11,7 +11,6 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
-import electrodynamics.interfaces.IRedstoneUser;
 import electrodynamics.network.PacketTypeHandler;
 import electrodynamics.tileentity.structure.TileEntityStructure.TileStructurePlaceHolder;
 

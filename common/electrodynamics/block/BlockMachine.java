@@ -11,7 +11,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import electrodynamics.core.CreativeTabED;
@@ -19,7 +18,6 @@ import electrodynamics.core.EDLogger;
 import electrodynamics.interfaces.IClientDisplay;
 import electrodynamics.lib.block.Machine;
 import electrodynamics.tileentity.machine.TileEntityMachine;
-import electrodynamics.tileentity.structure.TileEntityStructure;
 import electrodynamics.util.PlayerUtil;
 
 public class BlockMachine extends BlockContainer {
@@ -32,6 +30,7 @@ public class BlockMachine extends BlockContainer {
 		setCreativeTab(CreativeTabED.block);
 	}
 
+	@Override
 	public int damageDropped(int damage) {
 		return damage;
 	}
@@ -70,6 +69,7 @@ public class BlockMachine extends BlockContainer {
 		}
 	}
 
+	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hX, float hY, float hZ) {
 		if (world.isRemote) return true;
 		
@@ -83,6 +83,7 @@ public class BlockMachine extends BlockContainer {
 		return false;
 	}
 	
+	@Override
 	public void breakBlock(World world, int x, int y, int z, int id, int meta) {
 		TileEntity tile = world.getBlockTileEntity(x, y, z);
 		
@@ -120,14 +121,17 @@ public class BlockMachine extends BlockContainer {
 		return textures[meta];
 	}
 	
+	@Override
 	public int idPicked(World world, int x, int y, int z) {
 		return this.blockID;
 	}
 
+	@Override
 	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z);
 	}
 	
+	@Override
 	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
 		TileEntity tile = world.getBlockTileEntity(x, y, z);
 		

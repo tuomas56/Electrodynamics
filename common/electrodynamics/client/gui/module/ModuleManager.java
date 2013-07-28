@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import electrodynamics.client.gui.GuiElectrodynamics;
-import electrodynamics.client.gui.module.Module.MouseState;
 import electrodynamics.core.EDLogger;
 
 public class ModuleManager {

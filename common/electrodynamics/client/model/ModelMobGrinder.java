@@ -493,6 +493,7 @@ public class ModelMobGrinder extends ModelTechne {
 		setRotation(pipeClamp2, 0F, -1.570796F, 0F);
 	}
 
+	@Override
 	public void render(float f5) {
 		bladeH1.render(f5);
 		bladeC1.render(f5);

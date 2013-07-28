@@ -11,10 +11,12 @@ public class ItemBlockOre extends ItemBlock {
 		setUnlocalizedName("ncOre");
 	}
 
+	@Override
 	public int getMetadata(int metadata) {
 		return metadata;
 	}
 
+	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
 		return Ore.get(itemstack.getItemDamage()).unlocalizedName;
 	}

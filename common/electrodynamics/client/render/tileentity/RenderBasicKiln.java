@@ -1,7 +1,5 @@
 package electrodynamics.client.render.tileentity;
 
-import javax.swing.text.TabExpander;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemBlock;

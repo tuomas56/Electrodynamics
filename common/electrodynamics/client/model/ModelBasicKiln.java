@@ -65,6 +65,7 @@ public class ModelBasicKiln extends ModelTechne {
 		kilnDoor.mirror = true;
 	}
 
+	@Override
 	public void render(float f5) {
 		kilnRight.render( f5 );
 		kilnLeft.render( f5 );

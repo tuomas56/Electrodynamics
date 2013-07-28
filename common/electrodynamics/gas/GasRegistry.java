@@ -4,12 +4,8 @@ import java.util.HashMap;
 
 import net.minecraftforge.fluids.FluidContainerRegistry;
 
-import com.google.common.collect.FluentIterable;
-
 import electrodynamics.block.EDBlocks;
 import electrodynamics.core.EDLogger;
-import electrodynamics.core.lang.EDLanguage;
-import electrodynamics.util.LiquidUtil;
 
 public class GasRegistry {
 

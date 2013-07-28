@@ -40,6 +40,7 @@ public class CreativeTabED extends CreativeTabs {
 		return this;
 	}
 	
+	@Override
 	public ItemStack getIconItemStack() {
 		return new ItemStack(itemID, 1, itemMeta);
 	}

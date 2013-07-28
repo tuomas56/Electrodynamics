@@ -22,18 +22,22 @@ public class BlockLithiumClay extends Block {
 		setCreativeTab(CreativeTabED.resource);
 	}
 
+	@Override
 	public Icon getIcon(int side, int meta) {
 		return texture;
 	}
 	
+	@Override
 	public int idDropped(int par1, Random par2Random, int par3) {
 		return ItemIDs.ITEM_COMPONENT_ID + 256;
 	}
 
+	@Override
 	public int damageDropped(int damage) {
 		return Component.LITHIUM_CLAY_WET.ordinal();
 	}
 	
+	@Override
 	public int quantityDropped(Random par1Random) {
 		return 1;
 	}

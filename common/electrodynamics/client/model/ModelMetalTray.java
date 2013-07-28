@@ -45,6 +45,7 @@ public class ModelMetalTray extends ModelTechne {
 		setRotation(traySide4, 0F, 0F, 0F);
 	}
 
+	@Override
 	public void render(float f5) {
 		traySide1.render(f5);
 		trayBase.render(f5);
