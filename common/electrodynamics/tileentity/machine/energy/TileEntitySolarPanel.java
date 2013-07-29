@@ -3,7 +3,6 @@ package electrodynamics.tileentity.machine.energy;
 import java.util.Random;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.common.ForgeDirection;
@@ -16,13 +15,15 @@ import electrodynamics.util.BlockUtil;
 public class TileEntitySolarPanel extends TileEntityEDRoot {
 
 	@SideOnly(Side.CLIENT)
-	private float prevCurrAngle = 0.0F;
+	public float vertOffset = 0.0F;
 	@SideOnly(Side.CLIENT)
 	public float currAngle = 0.0F;
 	
-	private float prevSetAngle = 0.0F;
 	public float setAngle;
 
+	private boolean prevPanelDisabled;
+	public boolean panelDisabled = false;
+	
 	public ForgeDirection attached;
 	
 	@Override
@@ -42,28 +43,58 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 	
 	@Override
 	public void updateEntityClient() {
-		if (currAngle < setAngle) {
-			currAngle += 0.01;
-			currAngle = (float) (Math.round(currAngle * 100.0) / 100.0);
-		} else if (currAngle > setAngle) {
-			currAngle -= 0.01;
-			currAngle = (float) (Math.round(currAngle * 100.0) / 100.0);
+		if (!this.panelDisabled) {
+			this.setAngle = -(float) (Math.round(calculateAngle() * 100.0) / 100.0);
+
+			if (this.setAngle > 0.45F)  {
+				this.setAngle = 0.45F;
+			}
+			
+			if (this.setAngle < -0.45F) {
+				this.setAngle = -0.45F;
+			}
+		} else {
+			this.setAngle = 0;
+		}
+		
+		if (this.vertOffset == 0) {
+			if (currAngle < setAngle) {
+				currAngle += 0.01;
+				currAngle = (float) (Math.round(currAngle * 100.0) / 100.0);
+			} else if (currAngle > setAngle) {
+				currAngle -= 0.01;
+				currAngle = (float) (Math.round(currAngle * 100.0) / 100.0);
+			}
+		}
+		
+		if (this.currAngle == 0) {
+			if (panelDisabled) {
+				if (this.vertOffset <= 0.20F) {
+					this.vertOffset += 0.01F;
+					this.vertOffset = (float) (Math.round(vertOffset * 100.0) / 100.0);
+				}
+			} else {
+				if (this.vertOffset > 0) {
+					this.vertOffset -= 0.01F;
+					this.vertOffset = (float) (Math.round(vertOffset * 100.0) / 100.0);
+				}
+			}
 		}
 	}	
 
 	@Override
 	public void updateEntityServer() {
-		this.setAngle = -(float) (Math.round(calculateAngle() * 100.0) / 100.0);
-		
-		if (this.setAngle > 0.45 || this.setAngle < -0.45 || !this.worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)) {
-			if (this.setAngle != 0) {
-				this.setAngle = 0;
-				sendAngleUpdate();
-			}
+		if (!this.worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || !this.worldObj.isDaytime() || this.worldObj.isRaining() || this.worldObj.isThundering()) {
+			this.prevPanelDisabled = this.panelDisabled;
+			this.panelDisabled = true;
+		} else {
+			this.prevPanelDisabled = this.panelDisabled;
+			this.panelDisabled = false;
 		}
 		
-		if (this.setAngle != this.prevSetAngle) {
-			sendAngleUpdate();
+		if (this.panelDisabled != this.prevPanelDisabled) {
+			sendStateUpdate();
+			this.prevPanelDisabled = this.panelDisabled;
 		}
 	}
 	
@@ -96,13 +127,17 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 	}
 	
 	private Vec3 getPanelFaceVector() {
-		float yaw = this.setAngle != 0 ? (this.setAngle > 0 && this.setAngle <= 0.45 ? -90 : 0) : (this.setAngle < 0 && this.setAngle >= -0.45 ? 90 : 0);
+		float yaw = -this.setAngle != 0 ? (this.setAngle > 0 && this.setAngle <= 0.45 ? -90 : 0) : (this.setAngle < 0 && this.setAngle >= -0.45 ? 90 : 0);
 
-		float f1 = MathHelper.cos(yaw * 0.017453292F - (float)Math.PI);
-		float f2 = MathHelper.sin(yaw * 0.017453292F - (float)Math.PI);
-		float f3 = -MathHelper.cos(this.setAngle * 0.017453292F);
-		float f4 = MathHelper.sin(this.setAngle * 0.017453292F);
-        return this.worldObj.getWorldVec3Pool().getVecFromPool(f2 * f3, f4, f1 * f3);
+		double pitchRad = Math.toRadians(this.setAngle);
+		double yawRad = Math.toRadians(yaw);
+		
+		double sinPitch = Math.sin(pitchRad);
+		double cosPitch = Math.cos(pitchRad);
+		double sinYaw = Math.sin(yawRad);
+		double cosYaw = Math.sin(yawRad);
+		
+		return Vec3.fakePool.getVecFromPool(-cosPitch * sinYaw, sinPitch, -cosPitch * cosYaw);
 	}
 	
 	public Vec3 getPanelFaceCoords() {
@@ -110,7 +145,7 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 		
 		Vec3 base = getBlockVector();
 		Vec3 face = getPanelFaceVector();
-		Vec3 look = base.addVector(face.xCoord + RANGE, face.yCoord + RANGE, face.zCoord);
+		Vec3 look = base.addVector(face.xCoord * RANGE, face.yCoord * RANGE, face.zCoord * RANGE);
 	
 		return look;
 	}
@@ -137,7 +172,6 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 	public void onDescriptionPacket(NBTTagCompound nbt) {
 		super.onDescriptionPacket(nbt);
 
-		this.prevSetAngle = setAngle;
 		this.setAngle = nbt.getFloat("setAngle");
 	}
 	
@@ -153,14 +187,23 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 		super.onUpdatePacket(nbt);
 		
 		if (nbt.hasKey("setAngle")) {
-			this.prevSetAngle = setAngle;
 			this.setAngle = nbt.getFloat("setAngle");
+		}
+		
+		if (nbt.hasKey("state")) {
+			this.panelDisabled = nbt.getBoolean("state");
 		}
 	}
 	
 	private void sendAngleUpdate() {
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setFloat("setAngle", this.setAngle);
+		sendUpdatePacket(nbt);
+	}
+
+	private void sendStateUpdate() {
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setBoolean("state", this.panelDisabled);
 		sendUpdatePacket(nbt);
 	}
 	

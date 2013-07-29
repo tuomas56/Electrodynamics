@@ -2,6 +2,7 @@ package electrodynamics.client.render.tileentity;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+
 import org.lwjgl.opengl.GL11;
 
 import electrodynamics.client.model.ModelSolarPanel;
@@ -29,11 +30,14 @@ public class RenderSolarPanel extends TileEntitySpecialRenderer {
 		RenderUtil.bindTexture(Textures.SOLAR_PANEL.resource);
 		
 		float rotation = ((TileEntitySolarPanel)tileentity).currAngle * 100;
+		float vertOffset = ((TileEntitySolarPanel)tileentity).vertOffset;
 		
 		GL11.glTranslatef(0, 0.75F, 0);
 		GL11.glRotatef(rotation, 0, 0, 1);
 		GL11.glTranslatef(0, -0.75F, 0);
+		GL11.glTranslated(0, vertOffset, 0);
 		this.solarPanel.renderPanel(0.0625F);
+		GL11.glTranslated(0, -vertOffset, 0);
 		GL11.glTranslatef(0, 0.75F, 0);
 		GL11.glRotatef(-rotation, 0, 0, 1);
 		GL11.glTranslatef(0, -0.75F, 0);
