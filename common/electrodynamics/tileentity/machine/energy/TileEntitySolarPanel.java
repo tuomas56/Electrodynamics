@@ -84,7 +84,7 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 
 	@Override
 	public void updateEntityServer() {
-		if (!this.worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || (this.worldObj.getWorldTime() >= 12500 && this.worldObj.getWorldTime() <= 23500) || this.worldObj.isRaining() || this.worldObj.isThundering()) {
+		if (!this.worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord) || (getWorldTime() >= 12500) || this.worldObj.isRaining() || this.worldObj.isThundering()) {
 			this.prevPanelDisabled = this.panelDisabled;
 			this.panelDisabled = true;
 		} else {
