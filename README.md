@@ -13,7 +13,7 @@ This mod is not to be used in any modpacks until a stable release is available. 
 #Compiling
 //TODO Freshen this bit up
 
-For most users, simply install ant, pull the most recent code, and run ant initial_build.
+For most users, simply install gradle 1.6, pull the most recent code, and run setup.bat or setup.sh. Then to build run gradle build
 
 If you need to have the code build in a directory other than the working directory, run ant [target] -Dsrc.dir=[dir]
 
