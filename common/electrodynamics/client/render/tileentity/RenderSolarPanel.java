@@ -2,6 +2,7 @@ package electrodynamics.client.render.tileentity;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
@@ -32,6 +33,8 @@ public class RenderSolarPanel extends TileEntitySpecialRenderer {
 		float rotation = ((TileEntitySolarPanel)tileentity).currAngle * 100;
 		float vertOffset = ((TileEntitySolarPanel)tileentity).vertOffset;
 		
+		ForgeDirection attachedSide = ((TileEntitySolarPanel)tileentity).attached;
+		
 		GL11.glTranslatef(0, 0.75F, 0);
 		GL11.glRotatef(rotation, 0, 0, 1);
 		GL11.glTranslatef(0, -0.75F, 0);
@@ -42,9 +45,66 @@ public class RenderSolarPanel extends TileEntitySpecialRenderer {
 		GL11.glRotatef(-rotation, 0, 0, 1);
 		GL11.glTranslatef(0, -0.75F, 0);
 		this.solarPanel.renderPipe(0.0625F);
+
+		GL11.glTranslatef(0, 1F, 0);
+		GLRotation[] rotations = getGLRotations(attachedSide);
+		if (rotations != null && rotations.length > 0) {
+			for (GLRotation glRotation : getGLRotations(attachedSide)) {
+				glRotation.apply();
+			}
+		}
+		GL11.glTranslatef(0, -1F, 0);
+		this.solarPanel.renderPipeBase(0.0625F);
 		
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
+	}
+	
+	private GLRotation[] getGLRotations(ForgeDirection dir) {
+		GLRotation[] rotations = null;
+		
+		if (dir != null) {
+			switch(dir) {
+			case EAST: {
+				rotations = new GLRotation[] {new GLRotation(-90, 0, 0, 1)};
+				break;
+			}
+			case WEST: {
+				rotations = new GLRotation[] {new GLRotation(90, 0, 0, 1)};
+				break;
+			}
+			case NORTH: {
+				rotations = new GLRotation[] {new GLRotation(90, 1, 0, 0)};
+				break;
+			}
+			case SOUTH: {
+				rotations = new GLRotation[] {new GLRotation(-90, 1, 0, 0)};
+				break;
+			}
+			default: break;
+			}
+		}
+		
+		return rotations;
+	}
+	
+	private class GLRotation {
+		public int x;
+		public int y;
+		public int z;
+		
+		public float angle;
+		
+		public GLRotation(float angle, int x, int y, int z) {
+			this.angle = angle;
+			this.x = x;
+			this.y = y;
+			this.z = z;
+		}
+		
+		public void apply() {
+			GL11.glRotatef(angle, x, y, z);
+		}
 	}
 	
 }

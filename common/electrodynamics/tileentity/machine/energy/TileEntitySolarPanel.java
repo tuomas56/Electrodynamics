@@ -173,6 +173,7 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 		super.onDescriptionPacket(nbt);
 
 		this.setAngle = nbt.getFloat("setAngle");
+		readFromNBT(nbt);
 	}
 	
 	@Override
@@ -180,6 +181,7 @@ public class TileEntitySolarPanel extends TileEntityEDRoot {
 		super.getDescriptionForClient(nbt);
 		
 		nbt.setFloat("setAngle", this.setAngle);
+		writeToNBT(nbt);
 	}
 	
 	@Override
